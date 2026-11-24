@@ -5992,6 +5992,8 @@ const app = {
             <a href="tel:${sup.phone}" class="btn-map-call">
               <i class="fa-solid fa-phone"></i>
             </a>
+            ${sup.website ? `<a href="${sup.website}" target="_blank" rel="noopener noreferrer" class="btn-map-call" title="Website"><i class="fa-solid fa-globe"></i></a>` : ""}
+            ${sup.facebook ? `<a href="${sup.facebook}" target="_blank" rel="noopener noreferrer" class="btn-map-call" title="Facebook" style="background:#1877f2;"><i class="fa-brands fa-facebook"></i></a>` : ""}
           </div>
         </div>
       `;
