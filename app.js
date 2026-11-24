@@ -3430,19 +3430,35 @@ const app = {
     return true;
   },
 
-  // In-Memory Data Immutability Shield (Prevents extensions/injected scripts from mutating core data)
+  // Recursive Deep Freeze Utility
+  deepFreeze(obj) {
+    if (!obj || typeof obj !== 'object' || Object.isFrozen(obj)) return obj;
+    try {
+      Object.keys(obj).forEach(key => {
+        const prop = obj[key];
+        if (prop && typeof prop === 'object') {
+          this.deepFreeze(prop);
+        }
+      });
+      return Object.freeze(obj);
+    } catch (e) {
+      return obj;
+    }
+  },
+
+  // In-Memory Deep Immutability Shield (Recursively locks core data so child properties cannot be mutated)
   freezeCoreData() {
     try {
       if (typeof Object.freeze === 'function') {
-        if (this.categoriesData) Object.freeze(this.categoriesData);
-        if (this.suppliers) Object.freeze(this.suppliers);
-        if (this.collabPosts) Object.freeze(this.collabPosts);
-        if (this.i18n) Object.freeze(this.i18n);
+        if (this.categoriesData) this.deepFreeze(this.categoriesData);
+        if (this.suppliers) this.deepFreeze(this.suppliers);
+        if (this.collabPosts) this.deepFreeze(this.collabPosts);
+        if (this.i18n) this.deepFreeze(this.i18n);
         if (typeof window !== 'undefined') {
-          if (window.dataRetailCourses) Object.freeze(window.dataRetailCourses);
-          if (window.dataMachineCourses) Object.freeze(window.dataMachineCourses);
-          if (window.dataIndustrialCourses) Object.freeze(window.dataIndustrialCourses);
-          if (window.dataAudioLibrary) Object.freeze(window.dataAudioLibrary);
+          if (window.dataRetailCourses) this.deepFreeze(window.dataRetailCourses);
+          if (window.dataMachineCourses) this.deepFreeze(window.dataMachineCourses);
+          if (window.dataIndustrialCourses) this.deepFreeze(window.dataIndustrialCourses);
+          if (window.dataAudioLibrary) this.deepFreeze(window.dataAudioLibrary);
         }
       }
     } catch (e) {
