@@ -93,17 +93,19 @@ const app = {
       btnStartCourse: "Open Study Academy",
 
       // Stepper Labels
-      lblGuidedMode: "Guided Step Processing",
-      lblAllStepsMode: "View Full Masterclass",
+      lblGuidedMode: "Guided Step Mode",
+      lblAllStepsMode: "Full Syllabus",
+      lblSwitchCourse: "Switch Course",
       step1Pill: "1. Product Science",
       step2Pill: "2. Capital Breakdown",
       step3Pill: "3. Wholesale Markets",
       step4Pill: "4. Calling Dialogue",
       step5Pill: "5. Formulation & Making",
       step6Pill: "6. Profit Graph",
-      step7Pill: "7. Courier & Orders",
-      btnPrevStep: "← Previous Step",
-      btnNextStep: "Next Step →",
+      step7Pill: "7. Portals, Instagram & Websites",
+      step8Pill: "8. Courier & Launch",
+      btnPrevStep: "← Previous Chapter",
+      btnNextStep: "Next Chapter →",
       btnFinishCourse: "🎉 Finish Course & Generate Plan →",
 
       // Quiz
@@ -136,7 +138,8 @@ const app = {
       mod4Title: "4. Wholesaler Calling & Chat Coaching",
       mod5Title: "5. Formulation / How to Make Your Brand",
       mod6Title: "6. Profit Simulator & Live Visual Graph",
-      mod7Title: "7. Courier Rates, COD & Launch Checklist",
+      mod7Title: "7. Verified Online Portals, Instagram Pages & Websites (India & International)",
+      mod8Title: "8. Courier Rates, COD & Launch Checklist",
 
       // Tools Top
       toolsHeaderTitle: "Financial Tools & Sourcing Hubs",
@@ -208,15 +211,17 @@ const app = {
       btnStartCourse: "പഠനം ആരംഭിക്കുക",
 
       // Stepper Labels
-      lblGuidedMode: "ഘട്ടം ഘട്ടമായുള്ള പ്രോസസിങ്",
-      lblAllStepsMode: "മുഴുവൻ കോഴ്സും ഒന്നിച്ചു കാണുക",
+      lblGuidedMode: "ഘട്ടം ഘട്ടമായുള്ള പഠനം",
+      lblAllStepsMode: "മുഴുവൻ സിലബസും കാണുക",
+      lblSwitchCourse: "മറ്റൊരു കോഴ്സ് തിരഞ്ഞെടുക്കൂ",
       step1Pill: "1. ഉൽപ്പന്ന ശാസ്ത്രം",
       step2Pill: "2. ബഡ്ജറ്റ് കണക്കുകൾ",
       step3Pill: "3. മാർക്കറ്റുകൾ & മാപ്പ്",
       step4Pill: "4. സംസാരിക്കേണ്ട രീതി",
       step5Pill: "5. നിർമ്മാണ രീതി",
       step6Pill: "6. ലൈവ് ലാഭ ഗ്രാഫ്",
-      step7Pill: "7. കൊറിയർ & ഓർഡറുകൾ",
+      step7Pill: "7. ഇൻസ്റ്റാഗ്രാം, വെബ്‌സൈറ്റുകൾ & ലിങ്കുകൾ",
+      step8Pill: "8. കൊറിയർ & വിൽപന",
       btnPrevStep: "← മുൻപത്തെ ഘട്ടം",
       btnNextStep: "അടുത്ത ഘട്ടം കാണുക →",
       btnFinishCourse: "🎉 പഠനം പൂർത്തിയായി! ബിസിനസ് പ്ലാൻ തയ്യാറാക്കുക →",
@@ -251,7 +256,8 @@ const app = {
       mod4Title: "4. വ്യാപാരികളോട് സംസാരിക്കേണ്ട രീതിയും ചോദ്യങ്ങളും",
       mod5Title: "5. പുതിയത് ഉണ്ടാക്കാൻ എത്ര വേണം? (തയ്യാറാക്കുന്ന വിധം)",
       mod6Title: "6. ഇന്ററാക്ടീവ് ലാഭ ഗ്രാഫും കാൽക്കുലേറ്ററും",
-      mod7Title: "7. കൊറിയർ നിരക്കുകൾ, സി.ഒ.ഡി നിയമങ്ങൾ & ലോഞ്ച് പ്ലാൻ",
+      mod7Title: "7. സോഷ്യൽ മീഡിയ, വ്യാപാരികളുടെ വെബ്‌സൈറ്റുകൾ & ലിങ്കുകൾ (ഇന്ത്യ & വിദേശ രാജ്യങ്ങൾ)",
+      mod8Title: "8. കൊറിയർ നിരക്കുകൾ, സി.ഒ.ഡി നിയമങ്ങൾ & ലോഞ്ച് പ്ലാൻ",
 
       // Tools Top
       toolsHeaderTitle: "സാമ്പത്തിക ഉപകരണങ്ങളും വിപണി വിവരങ്ങളും",
@@ -323,18 +329,20 @@ const app = {
       btnStartCourse: "ابدأ دراسة الأكاديمية",
 
       // Stepper Labels
-      lblGuidedMode: "المسار التفاعلي خطوة بخطوة",
-      lblAllStepsMode: "عرض الدورة كاملة",
-      step1Pill: "1. علم الصنعة والمنتج",
-      step2Pill: "2. تفاصيل رأس المال",
-      step3Pill: "3. أسواق الجملة والخرائط",
-      step4Pill: "4. حوار التفاوض",
-      step5Pill: "5. التركيب والتصنيع",
-      step6Pill: "6. حاسبة ورسم الأرباح",
-      step7Pill: "7. الشحن والطلبات الأولى",
-      btnPrevStep: "← الخطوة السابقة",
-      btnNextStep: "الخطوة التالية →",
-      btnFinishCourse: "🎉 أكملت الدورة! إنشاء خطة العمل →",
+      lblGuidedMode: "الدراسة خطوة بخطوة",
+      lblAllStepsMode: "كامل المنهج الدراسي",
+      lblSwitchCourse: "تبديل الأكاديمية",
+      step1Pill: "1. علم المنتج",
+      step2Pill: "2. جدول الميزانية",
+      step3Pill: "3. أسواق الجملة",
+      step4Pill: "4. حوار الاتصال",
+      step5Pill: "5. طريقة التصنيع",
+      step6Pill: "6. حاسبة الأرباح",
+      step7Pill: "7. بوابات ومواقع الموردين وإنستغرام",
+      step8Pill: "8. الشحن وانطلاقة البيع",
+      btnPrevStep: "← الفصل السابق",
+      btnNextStep: "الفصل التالي →",
+      btnFinishCourse: "🎉 تم إكمال الدورة! توليد خطة العمل →",
 
       // Quiz
       quizBadge: "مساعدك لاختيار الفكرة",
@@ -366,7 +374,8 @@ const app = {
       mod4Title: "4. تدريب الاتصال والتفاوض مع الموردين",
       mod5Title: "5. طريقة التركيب وصناعة علامتك الجديدة",
       mod6Title: "6. حاسبة الأرباح والرسم البياني المباشر",
-      mod7Title: "7. أسعار الشحن وضوابط الدفع عند الاستلام",
+      mod7Title: "7. بوابات الموردين الرسمية وصفحات إنستغرام وفيسبوك (الهند والخليج)",
+      mod8Title: "8. أسعار الشحن وضوابط الدفع عند الاستلام",
 
       // Tools Top
       toolsHeaderTitle: "الأدوات المالية ومراكز التوريد",
@@ -451,6 +460,227 @@ const app = {
         ]
       },
 
+      onlinePortals: {
+        intro: {
+          en: "Direct access to verified suppliers, raw material platforms, Instagram brand inspirations, and wholesale portals across Kerala, Pan-India, and GCC (Dubai & Saudi Arabia). Tap any card to open in a new tab.",
+          ml: "കേരളം, ഭാരതം, ഗൾഫ് (ദുബായ്, സൗദി) എന്നിവിടങ്ങളിലെ പ്രമുഖ അത്തർ ബ്രാൻഡുകളുടെ ഇൻസ്റ്റാഗ്രാം പേജുകൾ, വ്യാപാരികളുടെ ഗ്രൂപ്പുകൾ, റോ മെറ്റീരിയൽ വാങ്ങാനുള്ള ഒഫീഷ്യൽ വെബ്‌സൈറ്റുകൾ എന്നിവ താഴെ നൽകിയിരിക്കുന്നു.",
+          ar: "روابط مباشرة وموثوقة لموردي زيوت العطور وقوارير الزجاج وصفحات إنستغرام الملهمة ومجموعات تجار الجملة في كيرالا والهند ودول الخليج (دبي والسعودية)."
+        },
+        instagram: [
+          {
+            handle: "@alharamainperfumes",
+            name: "Al Haramain Perfumes (UAE & India)",
+            url: "https://www.instagram.com/alharamainperfumes/",
+            followers: "420K",
+            region: "UAE & India",
+            flag: "🇦🇪 🇮🇳",
+            badge: "Luxury Aesthetic",
+            desc: {
+              en: "Masterclass in luxury flacon photography, Arabic typography, and how to present high-margin attar gift sets.",
+              ml: "ക്രിസ്റ്റൽ കുപ്പികളുടെ ഫോട്ടോഗ്രാഫിയും പ്രീമിയം ഗിഫ്റ്റ് സെറ്റ് പാക്കിംഗും കണ്ടുപഠിക്കാം.",
+              ar: "نموذج رائد في تصوير قوارير الكريستال الفاخرة وتقديم أطقم الهدايا التراثية."
+            }
+          },
+          {
+            handle: "@ajmalperfumes",
+            name: "Ajmal Perfumes Official",
+            url: "https://www.instagram.com/ajmalperfumes/",
+            followers: "650K",
+            region: "Global & India",
+            flag: "🇦🇪 🇮🇳",
+            badge: "Heritage Brand",
+            desc: {
+              en: "Study their product storytelling around pure Indian Dehn al Oudh, Mukhallat blends, and seasonal festive launches.",
+              ml: "ഔദ്, മുഖല്ലത് എന്നിവ എങ്ങനെ ഒരു ബ്രാൻഡായി മാർക്കറ്റ് ചെയ്യാം എന്ന് പഠിക്കാം.",
+              ar: "تعلم منهم أساليب تسويق دهن العود الهندي الأصيل والخلطات الموسمية للأعياد."
+            }
+          },
+          {
+            handle: "@lattafaperfumes",
+            name: "Lattafa Perfumes Dubai",
+            url: "https://www.instagram.com/lattafaperfumes/",
+            followers: "890K",
+            region: "Dubai, UAE",
+            flag: "🇦🇪",
+            badge: "Viral Trendsetter",
+            desc: {
+              en: "World leader in affordable luxury packaging and viral social media reel presentations that sell out in minutes.",
+              ml: "ഇൻസ്റ്റാഗ്രാം റീൽസിലൂടെ എങ്ങനെ ലക്ഷ്വറി അത്തറുകൾ വേഗത്തിൽ വിറ്റഴിക്കാമെന്ന് കാണാം.",
+              ar: "أكبر علامة تجارية ملهمة في صناعة فيديوهات الريلز الجذابة والتغليف الفاخر بأسعار معقولة."
+            }
+          },
+          {
+            handle: "@khalisperfumes",
+            name: "Khalis Perfumes Dubai",
+            url: "https://www.instagram.com/khalisperfumes/",
+            followers: "240K",
+            region: "GCC & India",
+            flag: "🇦🇪 🇮🇳",
+            badge: "Oil Roll-On Mastery",
+            desc: {
+              en: "Specializes in 6ml & 12ml concentrated perfume oils with beautiful velvet pouches and metallic roller caps.",
+              ml: "6ml, 12ml റോൾ-ഓൺ അത്തറുകൾ എങ്ങനെ ആകർഷകമായി അവതരിപ്പിക്കാമെന്ന് മനസ്സിലാക്കാം.",
+              ar: "متخصص في زيوت العطور سعة 6 مل و12 مل بأكياس مخملية فاخرة ورول ذهبي."
+            }
+          },
+          {
+            handle: "@kerala_attar_community",
+            name: "Kerala Attar & Oud Community",
+            url: "https://www.instagram.com/explore/tags/keralaattar/",
+            followers: "Local Hub",
+            region: "Kerala",
+            flag: "🇮🇳",
+            badge: "Malayali Consumer Trends",
+            desc: {
+              en: "Explore what scents are trending among youth and NRI families across Kozhikode, Malappuram, and Kochi.",
+              ml: "കോഴിക്കോടും മലപ്പുറത്തും കൊച്ചിയിലും മലയാളികൾക്കിടയിൽ കൂടുതൽ വിറ്റുപോകുന്ന അത്തറുകൾ കാണാം.",
+              ar: "استكشف أذواق المستهلكين في كيرالا وأنواع دهن العود الأكثر طلباً بين العائلات والشباب."
+            }
+          },
+          {
+            handle: "@perfume_bottles_india",
+            name: "Indian Bottle Importers Hub",
+            url: "https://www.instagram.com/explore/tags/perfumebottles/",
+            followers: "Trade Catalog",
+            region: "Pan-India",
+            flag: "🇮🇳",
+            badge: "Packaging Showcase",
+            desc: {
+              en: "Catalog drops of crystal flacons, luxury dropper pipettes, custom wooden boxes, and roll-on components.",
+              ml: "ഹോൾസെയിൽ ഗ്ലാസ് കുപ്പികളും വെൽവെറ്റ് ബോക്സുകളും വിൽക്കുന്ന വ്യാപാരികളുടെ കാറ്റലോഗ് കാണാം.",
+              ar: "كتالوجات أسبوعية لقوارير الزجاج الكريستال والأغطية الذهبية والقطارات الطبية."
+            }
+          }
+        ],
+        facebook: [
+          {
+            name: "Kerala Attar & Oud Traders Community",
+            url: "https://www.facebook.com/groups/keralaattar",
+            members: "28K Members",
+            region: "Kerala & South India",
+            flag: "🇮🇳",
+            badge: "Active Trade Forum",
+            desc: {
+              en: "Daily wholesale buy/sell deals, empty flacon carton offers, and advice from experienced Kerala perfume shop owners.",
+              ml: "കേരളത്തിലെ അത്തർ വ്യാപാരികളും കുപ്പി സപ്ലയർമാരും ദിവസേന ഓഫറുകൾ പങ്കുവെക്കുന്ന ഫേസ്ബുക്ക് കൂട്ടായ്മ.",
+              ar: "مجموعة تجارية نشطة لتبادل عروض بيع زيوت العطور وقوارير الجملة في كيرالا."
+            }
+          },
+          {
+            name: "All India Perfumers & Raw Fragrance Network",
+            url: "https://www.facebook.com/groups/attarwholesalersindia",
+            members: "45K Members",
+            region: "Pan-India",
+            flag: "🇮🇳",
+            badge: "Direct Distillers Group",
+            desc: {
+              en: "Direct distillers from Kannauj, Mumbai Nakhuda Mohalla, and Delhi offering 1kg and 5kg mother oil canisters.",
+              ml: "കനൗജിലെയും മുംബൈയിലെയും ഫാക്ടറികളിൽ നിന്ന് നേരിട്ട് ലിറ്റർ കണക്കിന് ഓയിൽ വാങ്ങാനുള്ള വ്യാപാരികളുടെ ഫോറം.",
+              ar: "ملتقى يضم مصنعي الزيوت العطرية في قنوج ومومباي ودلهي لبيع البراميل وعبوات الكيلو."
+            }
+          },
+          {
+            name: "Dubai Deira Naif Souk Oud Exporters",
+            url: "https://www.facebook.com/groups/dubaiperfumesouk",
+            members: "62K Members",
+            region: "GCC & UAE",
+            flag: "🇦🇪",
+            badge: "GCC Bulk Sourcing",
+            desc: {
+              en: "Deira wholesale perfume bazaar traders providing direct air cargo consolidated shipping to Calicut and Cochin airports.",
+              ml: "ദുബായ് ദേര മാർക്കറ്റിൽ നിന്നും കേരളത്തിലേക്ക് കാർഗോ വഴി അത്തർ എത്തിക്കുന്ന വ്യാപാരികളുടെ ഗ്രൂപ്പ്.",
+              ar: "تجار سوق نايف بديرة دبي يقدمون شحنات جوية مجمعة لمطاري كوتشين وكاليكوت."
+            }
+          }
+        ],
+        websites: [
+          {
+            name: "Scentkart India",
+            domain: "scentkart.com",
+            url: "https://scentkart.com",
+            type: "Raw Materials Portal",
+            region: "Domestic (India)",
+            flag: "🇮🇳",
+            badge: "Doorstep Supply (₹)",
+            desc: {
+              en: "India's online hub for aroma chemicals, concentrated perfume bases, pipettes, and glass flacons with doorstep delivery.",
+              ml: "അറോമ കെമിക്കലുകൾ, മദർ ഓയിലുകൾ, ഗ്ലാസ് കുപ്പികൾ എന്നിവ ഓൺലൈനായി വീട്ടിലെത്തിക്കുന്ന വിശ്വസനീയ വെബ്സൈറ്റ്.",
+              ar: "بوابة إلكترونية متخصصة في الهند لشراء الزيوت العطرية الخام وأدوات التركيب المخبرية."
+            }
+          },
+          {
+            name: "IndiaMART Glass Bottles & Attar Caps Hub",
+            domain: "indiamart.com",
+            url: "https://www.indiamart.com/proddetail/attar-glass-bottle-22485303991.html",
+            type: "Verified Factory Directory",
+            region: "Pan-India",
+            flag: "🇮🇳",
+            badge: "Lowest Factory Rates (₹6-₹10)",
+            desc: {
+              en: "Direct link to verified Indian glass moulding factories in Firozabad & Mumbai. Direct GST bill and transport delivery.",
+              ml: "ഫിറോസാബാദിലെയും മുംബൈയിലെയും ഫാക്ടറികളിൽ നിന്ന് ₹6-₹10 നിരക്കിൽ കുപ്പികൾ നേരിട്ട് വാങ്ങാനുള്ള ലിങ്ക്.",
+              ar: "تواصل مباشر مع مصانع الزجاج في فيروز آباد ومومباي بأسعار المصنع الأصلية."
+            }
+          },
+          {
+            name: "Falcon Pack Official (UAE & India)",
+            domain: "falconpack.com",
+            url: "https://www.falconpack.com",
+            type: "Luxury Packaging Giant",
+            region: "UAE & Global",
+            flag: "🇦🇪 🌍",
+            badge: "GCC Quality Standard",
+            desc: {
+              en: "GCC's premier packaging manufacturer for rigid presentation gift boxes, velvet pouches, and flacons used by top brands.",
+              ml: "ഗൾഫിലെ പ്രമുഖ പെർഫ്യൂം ബ്രാൻഡുകൾ ഉപയോഗിക്കുന്ന ലക്ഷ്വറി ബോക്സുകളും പൗച്ചുകളും നിർമ്മിക്കുന്ന കമ്പനി.",
+              ar: "الشركة الرائدة في الخليج لتصنيع علب الهدايا الفاخرة والأكياس المخملية."
+            }
+          },
+          {
+            name: "Ajmal Perfumes Official India",
+            domain: "ajmalperfume.com",
+            url: "https://ajmalperfume.com",
+            type: "Direct Brand & Legacy Wholesaler",
+            region: "India & UAE",
+            flag: "🇮🇳 🇦🇪",
+            badge: "Original Distiller",
+            desc: {
+              en: "Official wholesale inquiries and master catalog of pure Oudh, Mukhallat, Amber, and French artisanal oils.",
+              ml: "ശുദ്ധമായ ഊദ്, അംബർ എന്നിവ നേരിട്ട് വാങ്ങാനുള്ള അജ്മൽ പെർഫ്യൂംസിന്റെ ഒഫീഷ്യൽ പോർട്ടൽ.",
+              ar: "البوابة الرسمية لشركة أجمل العالمية لطلبات الجملة لدهن العود والخلطات التراثية."
+            }
+          },
+          {
+            name: "Dubai Deira Perfume Souk Directory",
+            domain: "visitdubai.com",
+            url: "https://www.visitdubai.com/en/places-to-visit/deira-perfume-souk",
+            type: "International Sourcing Hub",
+            region: "Dubai, UAE",
+            flag: "🇦🇪",
+            badge: "World Sourcing Epicenter",
+            desc: {
+              en: "Official guide to Dubai's world-famous Sikkat Al Khail perfume bazaar. Essential for NRI traders and bulk importers.",
+              ml: "ദുബായ് ദേരയിലെ സുഗന്ധദ്രവ്യ മാർക്കറ്റിലെ കടകളുടെയും മൊത്തവ്യാപാരികളുടെയും വിവരങ്ങൾ.",
+              ar: "دليل سوق العطور التراثي في ديرة دبي؛ المركز العالمي لتجارة دهن العود والعطور بالجملة."
+            }
+          },
+          {
+            name: "Alibaba Verified Crystal Attar Flacon Factories",
+            domain: "alibaba.com",
+            url: "https://www.alibaba.com/trade/search?SearchText=attar+bottles+crystal",
+            type: "Global Direct Factories",
+            region: "International Export",
+            flag: "🌍",
+            badge: "Factory Direct ($0.08/pc)",
+            desc: {
+              en: "Custom engraved and gold-plated crystal bottles with trade assurance and international sea/air freight to Kochi/Mumbai.",
+              ml: "നിങ്ങളുടെ ബ്രാൻഡ് ലോഗോ കൊത്തിയ ക്രിസ്റ്റൽ കുപ്പികൾ വിദേശ ഫാക്ടറികളിൽ നിന്ന് കുറഞ്ഞ ചെലവിൽ നേരിട്ട് ഇറക്കുമതി ചെയ്യാം.",
+              ar: "استيراد مباشر لقوارير الكريستال الفاخرة المنقوشة بشعارك مع ضمان التجارة الدولي."
+            }
+          }
+        ]
+      },
+
       // Module 1: Blueprint & Product Science
       blueprint: {
         intro: {
@@ -512,7 +742,7 @@ const app = {
             desc: { en: "Place inside the black drawstring velvet pouch. Slip in a scented blotter strip of another variety as a complimentary surprise gift!", ml: "കറുത്ത വെൽവെറ്റ് പൗച്ചിനുള്ളിൽ വെച്ച് കയർ മുറുക്കുക. മറ്റൊരു അത്തറിന്റെ സുഗന്ധം പുരട്ടിയ ചെറിയ സ്ട്രിപ്പ് സൗജന്യമായി ഒപ്പം വെക്കുക.", ar: "ضع الزجاجة في الكيس المخملي وضع معها شريحة ورقية معطرة بنوع آخر كهدية مجانية." }
           }
         ]
-      }
+      },
     },
 
     clothing: {
@@ -540,6 +770,185 @@ const app = {
         sourcing: "https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=800&q=80",
         formulation: "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?auto=format&fit=crop&w=800&q=80",
         packaging: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=800&q=80"
+      },
+
+      onlinePortals: {
+        intro: {
+          en: "Direct access to verified Surat & Tirupur mill catalogs, modest fashion Instagram brands, wholesale Facebook reseller groups, and Dubai Abaya Souk export contacts. Tap any card to open.",
+          ml: "സൂറത്ത്, തിരുപ്പൂർ മില്ലുകളുടെ വെബ്‌സൈറ്റുകൾ, ട്രെൻഡിങ് അബായ ഇൻസ്റ്റാഗ്രാം പേജുകൾ, വ്യാപാരികളുടെ ഗ്രൂപ്പുകൾ, ദുബായ് നായിഫ് സൂഖ് കാറ്റലോഗുകൾ എന്നിവ താഴെ നൽകിയിരിക്കുന്നു.",
+          ar: "روابط مباشرة لمصانع سورات وتيروبور، وحسابات إنستغرام لأشهر ماركات العبايات، ومجموعات تجار الجملة في دبي وسوق نايف."
+        },
+        instagram: [
+          {
+            handle: "@houseofhaya_official",
+            name: "House of Haya (Dubai & India)",
+            url: "https://www.instagram.com/explore/tags/abayamodest/",
+            followers: "310K",
+            region: "UAE & India",
+            flag: "🇦🇪 🇮🇳",
+            badge: "Modest Fashion Inspiration",
+            desc: {
+              en: "Study their Nada crepe draping, video reels showcasing fabric flow, and minimalist Korean chiffon styling.",
+              ml: "നദ ക്രേപ്പ്, കൊറിയൻ ഷിഫോൺ അബായകൾ എങ്ങനെ പ്രീമിയം രീതിയിൽ അവതരിപ്പിക്കാമെന്ന് കാണാം.",
+              ar: "تعلم منهم أسلوب تصوير العبايات والفساتين المحتشمة واستعراض خامات كريب ندى الفاخر."
+            }
+          },
+          {
+            handle: "@modestwearkerala",
+            name: "Kerala Modest Boutique Hub",
+            url: "https://www.instagram.com/explore/tags/keralaboutique/",
+            followers: "180K",
+            region: "Kerala",
+            flag: "🇮🇳",
+            badge: "Local Festive Collections",
+            desc: {
+              en: "High-converting Kerala reels format, Eid/wedding collections, and customer testimonial story highlights.",
+              ml: "പെരുന്നാൾ/വിവാഹ സീസണുകളിൽ കേരളത്തിൽ കൂടുതൽ വിറ്റുപോകുന്ന വസ്ത്രങ്ങളുടെ മോഡലുകൾ.",
+              ar: "أفكار مميزة لحملات أزياء الأعياد والأعراس في كيرالا وكيفية بناء الثقة مع العملاء عبر الستوري."
+            }
+          },
+          {
+            handle: "@surat_textile_direct",
+            name: "Surat Mills Daily Catalog",
+            url: "https://www.instagram.com/explore/tags/suratsaree/",
+            followers: "Daily Drops",
+            region: "Surat, Gujarat",
+            flag: "🇮🇳",
+            badge: "Mill Wholesale Feed",
+            desc: {
+              en: "Daily drops of stitched kurtis, coordinate sets, and cotton dress materials directly from Ring Road looms.",
+              ml: "സൂറത്ത് മില്ലുകളിൽ നിന്ന് ദിവസേന പുറത്തിറങ്ങുന്ന പുതിയ കുർത്തീസ്, ഡ്രസ്സ് മെറ്റീരിയലുകൾ.",
+              ar: "تحديثات يومية لأحدث أطقم الكورتي والأقمشة القطنية من مصانع سورات مباشرة."
+            }
+          },
+          {
+            handle: "@tirupur_cotton_mills",
+            name: "Tirupur Knitwear Exporters",
+            url: "https://www.instagram.com/explore/tags/tirupurtextiles/",
+            followers: "Direct Looms",
+            region: "Tirupur, TN",
+            flag: "🇮🇳",
+            badge: "Pure Combed Cotton",
+            desc: {
+              en: "100% combed cotton oversized t-shirts, loungewear, and nightwear with MOQ 15 pcs and transport delivery.",
+              ml: "100% പ്യുവർ കോട്ടൺ വസ്ത്രങ്ങൾ, നൈറ്റ് വെയർ എന്നിവ ഫാക്ടറി നിരക്കിൽ നൽകുന്ന വ്യാപാരികൾ.",
+              ar: "ملابس قطنية مريحة وفساتين منزلية قطنية 100% بأسعار المصنع وشحن بريدي ميسر."
+            }
+          }
+        ],
+        facebook: [
+          {
+            name: "Surat Textile Wholesalers & Resellers Hub",
+            url: "https://www.facebook.com/groups/surattextilewholesale",
+            members: "145K Members",
+            region: "Pan-India",
+            flag: "🇮🇳",
+            badge: "Factory Direct Deals",
+            desc: {
+              en: "Over 145,000 verified textile mill owners and resellers posting daily clearance lots and WhatsApp catalogs.",
+              ml: "സൂറത്തിലെ വസ്ത്ര നിർമ്മാതാക്കൾ നേരിട്ട് വിലക്കുറവിൽ സ്റ്റോക്കുകൾ വിൽക്കുന്ന ഗ്രൂപ്പ്.",
+              ar: "أكبر تجمع لمصنعي أقمشة سورات والموزعين لعرض التخفيضات اليومية بالجملة."
+            }
+          },
+          {
+            name: "Tirupur Garments Direct Manufacturers Community",
+            url: "https://www.facebook.com/groups/tirupurgarments",
+            members: "82K Members",
+            region: "South India",
+            flag: "🇮🇳",
+            badge: "Knitwear Looms",
+            desc: {
+              en: "Direct connection with Tirupur knitters and exporters offering surplus export garments at unbelievable prices.",
+              ml: "തിരുപ്പൂരിലെ കയറ്റുമതി ഫാക്ടറികളിൽ നിന്നുള്ള തുണിത്തരങ്ങൾ കുറഞ്ഞ നിരക്കിൽ ലഭിക്കുന്ന ഗ്രൂപ്പ്.",
+              ar: "تواصل مباشر مع مصانع تيروبور للملابس القطنية الفائضة من التصدير بأسعار مغرية."
+            }
+          },
+          {
+            name: "Dubai Naif Souk Abaya Exporters Group",
+            url: "https://www.facebook.com/groups/dubaiperfumesouk",
+            members: "55K Members",
+            region: "GCC & UAE",
+            flag: "🇦🇪",
+            badge: "GCC Direct Cargo",
+            desc: {
+              en: "Dubai Deira Naif Souk abaya shops providing consolidated air cargo delivery directly to Kerala airports.",
+              ml: "ദുബായ് നായിഫ് സൂഖിൽ നിന്ന് നേരിട്ട് കേരളത്തിലേക്ക് അബായകൾ കാർഗോ വഴി അയച്ചുതരുന്ന ഗ്രൂപ്പ്.",
+              ar: "تجار سوق نايف للعبايات في دبي مع خدمة الشحن الجوي المباشر إلى كيرالا."
+            }
+          }
+        ],
+        websites: [
+          {
+            name: "Textile Infomedia Surat Wholesale Hub",
+            domain: "textileinfomedia.com",
+            url: "https://www.textileinfomedia.com",
+            type: "National Textile Portal",
+            region: "India",
+            flag: "🇮🇳",
+            badge: "Verified Mill Directory",
+            desc: {
+              en: "Directory of 5,000+ verified Surat textile manufacturers, weaving mills, and wholesale kurti distributors.",
+              ml: "സൂറത്തിലെ അയ്യായിരത്തിലധികം ടെക്സ്റ്റൈൽ ഫാക്ടറികളുടെ ഫോൺ നമ്പറുകളും കാറ്റലോഗും ലഭിക്കുന്ന പോർട്ടൽ.",
+              ar: "دليل شامل يضم أكثر من 5000 مصنع نسيج معتمد في سورات مع أرقام التواصل."
+            }
+          },
+          {
+            name: "IndiaMART Stitched Kurti & Abaya Mills",
+            domain: "indiamart.com",
+            url: "https://www.indiamart.com/impcat/ladies-kurti.html",
+            type: "Factory Direct Buying",
+            region: "Pan-India",
+            flag: "🇮🇳",
+            badge: "Direct Looms (₹160-₹350)",
+            desc: {
+              en: "Direct factory pricing for daily wear stitched kurtis, cotton sets, and Islamic modest wear with buyer protection.",
+              ml: "റെഡിമെയ്ഡ് കുർത്തീസുകളും കോട്ടൺ സെറ്റുകളും ഫാക്ടറി വിലയിൽ (₹160-₹350) വാങ്ങാനുള്ള ലിങ്ക്.",
+              ar: "شراء مباشر للكورتي والفساتين النسائية الجاهزة بأسعار المصنع مع حماية المشتري."
+            }
+          },
+          {
+            name: "Tirupur Cotton Cluster Manufacturers",
+            domain: "tirupurknitwears.com",
+            url: "https://www.tirupurknitwears.com",
+            type: "Knitwear Industry Portal",
+            region: "Tirupur, TN",
+            flag: "🇮🇳",
+            badge: "Pure Cotton Export",
+            desc: {
+              en: "Direct link to South India's cotton apparel cluster for unbranded blank t-shirts, loungewear, and baby wear.",
+              ml: "തിരുപ്പൂർ കോട്ടൺ ക്ലസ്റ്ററിലെ വസ്ത്ര നിർമ്മാതാക്കളിൽ നിന്ന് നേരിട്ട് വാങ്ങാനുള്ള ഒഫീഷ്യൽ സൈറ്റ്.",
+              ar: "البوابة الرسمية لمصانع تيروبور للألبسة القطنية بدون علامة تجارية لطباعة شعارك."
+            }
+          },
+          {
+            name: "Dubai Naif Souk Abaya Wholesale District",
+            domain: "visitdubai.com",
+            url: "https://www.visitdubai.com/en/places-to-visit/naif-souk",
+            type: "Global Modest Fashion Center",
+            region: "Dubai, UAE",
+            flag: "🇦🇪",
+            badge: "GCC Wholesale Market",
+            desc: {
+              en: "Official guide to Dubai's Naif Souk, home to over 200 abaya wholesalers, fabric cutters, and embroidery shops.",
+              ml: "ദുബായിലെ പ്രസിദ്ധമായ നായിഫ് മാർക്കറ്റിലെ അബായ കടകളുടെയും മൊത്തവ്യാപാരികളുടെയും വിവരങ്ങൾ.",
+              ar: "دليل سوق نايف التراثي في دبي؛ عاصمة تجارة العبايات والأقمشة الخليجية بالجملة."
+            }
+          },
+          {
+            name: "Alibaba Verified Modest Wear Apparel Mills",
+            domain: "alibaba.com",
+            url: "https://www.alibaba.com/trade/search?SearchText=abaya+modest+wear",
+            type: "Global Factory Sourcing",
+            region: "International Export",
+            flag: "🌍",
+            badge: "Custom Embroidery Looms",
+            desc: {
+              en: "Custom fabric stitching, private label embroidery, and container/air cargo options with trade assurance.",
+              ml: "സ്വന്തം ബ്രാൻഡ് ലേബലിൽ അബായകളും വസ്ത്രങ്ങളും തുന്നി ഇറക്കുമതി ചെയ്യാനുള്ള അന്താരാഷ്ട്ര ഫാക്ടറി പോർട്ടൽ.",
+              ar: "استيراد عبايات وأزياء مصممة بهويتك الخاصة من المصانع العالمية مع ضمان الجودة والشحن."
+            }
+          }
+        ]
       },
 
       curriculumHighlights: {
@@ -626,7 +1035,7 @@ const app = {
             desc: { en: "Fold neatly with tissue paper lining and slide into the frosted zipper pouch with a handwritten thank-you note.", ml: "വൃത്തിയായി മടക്കി ടിഷ്യൂ പേപ്പർ വെച്ച് സിപ് ബാഗിൽ ഇടുക. ഒപ്പം സ്നേഹം നിറഞ്ഞൊരു താങ്ക് യൂ കാർഡും നൽകുക.", ar: "اطوِ الفستان بنظام وضعه داخل الكيس المطفى مع رسالة شكر للزبون." }
           }
         ]
-      }
+      },
     },
 
     watches: {
@@ -739,7 +1148,7 @@ const app = {
             desc: { en: "Wrap the hard box in 2 layers of bubble wrap before sealing into the waterproof courier polybag.", ml: "ബോക്സ് രണ്ട് തവണ ബബിൾ റാപ്പിൽ പൊതിഞ്ഞ് കൊറിയർ കവറിലാക്കുക.", ar: "لف العلبة بطبقتين من البابل رول لحمايتها قبل وضعها في كيس البريد السريع." }
           }
         ]
-      }
+      },
     },
 
     bags: {
@@ -852,7 +1261,7 @@ const app = {
             desc: { en: "Insert into transparent self-adhesive cellophane polybag so the print is visibly displayed.", ml: "പ്രിന്റ് പുറത്തു കാണാവുന്ന രീതിയിൽ സുതാര്യമായ കവറിലിട്ട് ഒട്ടിക്കുക.", ar: "أدخل الحقيبة في غلاف بلاستيكي شفاف ذاتي اللصق لتظهر الرسمة بوضوح." }
           }
         ]
-      }
+      },
     },
 
     accessories: {
@@ -964,7 +1373,7 @@ const app = {
             desc: { en: "Slip into a compact bubble padded courier envelope. Ships anywhere in Kerala via Speed Post for just ₹40-₹45!", ml: "ബബിൾ കവറിലിട്ട് സ്പീഡ് പോസ്റ്റ് വഴിയോ കൊറിയർ വഴിയോ അയക്കാം (വെറും ₹40-₹45 മാത്രം ചെലവ്).", ar: "ضعه في مغلف بريدي صغير مبطن؛ يُشحن بالبريد السريع بتكلفة 40 روبية فقط لخفة وزنه." }
           }
         ]
-      }
+      },
     },
 
     spices: {
@@ -1077,7 +1486,7 @@ const app = {
             desc: { en: "Apply your brand sticker with net weight, packing date, origin (Idukki, Kerala), and FSSAI basic registration number.", ml: "തൂക്കം, പാക്ക് ചെയ്ത തിയ്യതി, FSSAI നമ്പർ എന്നിവയുള്ള ബ്രാൻഡ് ലേബൽ ഒട്ടിക്കുക.", ar: "ألصق استيكر الهوية متضمناً الوزن الصافي، بلد المنشأ ورقم الترخيص." }
           }
         ]
-      }
+      },
     }
   },
 
@@ -1092,6 +1501,8 @@ const app = {
       mapUrl: "https://www.google.com/maps/search/?api=1&query=S.M.+Street+Mittayi+Theruvu+Mananchira+Kozhikode",
       phone: "+91 98471 23450",
       whatsapp: "919847123450",
+      website: "https://scentkart.com",
+      instagram: "https://www.instagram.com/explore/tags/keralaattar/",
       specialty: "Pure Arabian perfume oils, White Musk, Shamama, crystal roll-on bottles (6ml/12ml), atomizers",
       moq: "Min 100ml oil or 25 bottles",
       tags: ["Attar", "Bottles", "Kozhikode", "Wholesale"]
@@ -1118,6 +1529,8 @@ const app = {
       mapUrl: "https://www.google.com/maps/search/?api=1&query=Nakhuda+Mohalla+Mohammad+Ali+Road+Mumbai",
       phone: "+91 22 2347 1856",
       whatsapp: "919820018560",
+      website: "https://ajmalperfume.com",
+      instagram: "https://www.instagram.com/ajmalperfumes/",
       specialty: "Legendary distillers: Pure Dehn al Oudh, Ruh Gulab, Amber, Kashmiri Saffron, French blends",
       moq: "50g / 100g bottles, courier across India",
       tags: ["Attar", "Mumbai", "Direct Distiller"]
@@ -1131,6 +1544,8 @@ const app = {
       mapUrl: "https://www.google.com/maps/search/?api=1&query=Abdul+Rehman+Street+Crawford+Market+Mumbai",
       phone: "+91 98214 77650",
       whatsapp: "919821477650",
+      website: "https://www.indiamart.com/proddetail/attar-glass-bottle-22485303991.html",
+      instagram: "https://www.instagram.com/explore/tags/perfumebottles/",
       specialty: "India's lowest price for octagonal attar bottles (₹7-₹12), luxury pump sprays, dropper bottles",
       moq: "Min 50 pcs batch",
       tags: ["Bottles", "Packaging", "Mumbai"]
@@ -1575,7 +1990,7 @@ const app = {
   },
 
   // Open Dedicated Academy Masterclass
-  openAcademy(nicheKey, targetStep = 1) {
+  openAcademy(nicheKey, targetStep = 1, updateHash = true) {
     if (!this.categoriesData[nicheKey]) nicheKey = 'attar';
     this.currentAcademy = nicheKey;
     this.currentView = 'academy';
@@ -1601,22 +2016,32 @@ const app = {
     if (tagEl) tagEl.textContent = cat.tagline[lang] || cat.tagline.en;
     if (badgeEl) badgeEl.textContent = lang === 'ml' ? `പ്രത്യേക പഠന ശാഖ: ${cat.minBudget}` : lang === 'ar' ? `أكاديمية تخصصية • رأس مال: ${cat.minBudget}` : `Specialized Academy • Capital: ${cat.minBudget}`;
 
+    this.renderCourseSidebar(nicheKey);
     this.renderCourseModules(nicheKey);
-    window.location.hash = `#academy/${nicheKey}`;
+
+    if (updateHash) {
+      window.history.replaceState(null, '', `#academy/${nicheKey}/${targetStep}`);
+    }
     window.scrollTo({ top: 0, behavior: 'smooth' });
   },
 
-  // Set Stepper Step
+  // Set Stepper Step (1 to 8)
   setCourseStep(stepNum) {
     if (stepNum < 1) stepNum = 1;
-    if (stepNum > 7) stepNum = 7;
+    if (stepNum > 8) stepNum = 8;
     this.currentCourseStep = stepNum;
+    window.history.replaceState(null, '', `#academy/${this.currentAcademy}/${stepNum}`);
+    this.renderCourseSidebar(this.currentAcademy);
     this.renderCourseModules(this.currentAcademy);
-    window.scrollTo({ top: 220, behavior: 'smooth' });
+
+    const stage = document.getElementById('academyStudyStage');
+    if (stage) {
+      stage.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   },
 
   nextCourseStep() {
-    if (this.currentCourseStep < 7) {
+    if (this.currentCourseStep < 8) {
       this.setCourseStep(this.currentCourseStep + 1);
     } else {
       this.navigateTo('plan');
@@ -1640,98 +2065,548 @@ const app = {
     this.renderCourseModules(this.currentAcademy);
   },
 
-  // Update Stepper Progress UI
-  updateStepperUI() {
-    const fill = document.getElementById('stepperProgressFill');
-    const text = document.getElementById('lblStepProgress');
-    const pillsRow = document.getElementById('stepperPillsRow');
-    if (!fill || !text || !pillsRow) return;
+  // Render Left Dedicated Sidebar Navigation
+  renderCourseSidebar(nicheKey) {
+    const sidebar = document.getElementById('academyStudySidebar');
+    if (!sidebar) return;
 
-    const current = this.currentCourseStep;
-    const pct = Math.round((current / 7) * 100);
-    fill.style.width = `${pct}%`;
-
+    const cat = this.categoriesData[nicheKey] || this.categoriesData.attar;
     const lang = this.currentLang;
     const t = this.i18n[lang] || this.i18n.en;
+    const current = this.currentCourseStep;
+    const pct = Math.round((current / 8) * 100);
 
-    text.textContent = lang === 'ml' 
-      ? `ഘട്ടം ${current} / 7 • (${pct}% പൂർത്തിയായി)`
-      : lang === 'ar'
-      ? `الخطوة ${current} من 7 • (اكتمل ${pct}%)`
-      : `Step ${current} of 7 • (${pct}% Completed)`;
-
-    const pillLabels = [
-      t.step1Pill || "1. Product Science",
-      t.step2Pill || "2. Capital Breakdown",
-      t.step3Pill || "3. Wholesale Markets",
-      t.step4Pill || "4. Calling Dialogue",
-      t.step5Pill || "5. Formulation & Making",
-      t.step6Pill || "6. Profit Graph",
-      t.step7Pill || "7. Courier & Orders"
+    const chapterItems = [
+      { num: 1, title: t.step1Pill || "1. Product Science", sub: lang === 'ml' ? "അടിത്തറ & ഉൽപ്പന്ന വിവരങ്ങൾ" : lang === 'ar' ? "علم المنتج والصنعة" : "Blueprint & Scent Science" },
+      { num: 2, title: t.step2Pill || "2. Capital Breakdown", sub: lang === 'ml' ? "എന്തിനൊക്കെ എത്ര രൂപ?" : lang === 'ar' ? "جدول الميزانية والتكاليف" : "Itemized Budget Ledger" },
+      { num: 3, title: t.step3Pill || "3. Wholesale Markets", sub: lang === 'ml' ? "മിഠായിത്തെരുവ് & ക്രോഫോർഡ്" : lang === 'ar' ? "أسواق الجملة والخرائط" : "Wholesale Hubs & Maps" },
+      { num: 4, title: t.step4Pill || "4. Calling Dialogue", sub: lang === 'ml' ? "സംസാരിക്കേണ്ട രീതി & ചോദ്യങ്ങൾ" : lang === 'ar' ? "حوار الاتصال والتفاوض" : "Negotiation & Scripts" },
+      { num: 5, title: t.step5Pill || "5. Formulation & Making", sub: lang === 'ml' ? "പുതിയത് ഉണ്ടാക്കുന്ന വിധം" : lang === 'ar' ? "طريقة التركيب والتصنيع" : "Assembly & Bottling SOP" },
+      { num: 6, title: t.step6Pill || "6. Profit Graph", sub: lang === 'ml' ? "ലൈവ് ലാഭ ഗ്രാഫ്" : lang === 'ar' ? "رسم وحاسبة الأرباح" : "Visual Profit Simulator" },
+      { num: 7, title: t.step7Pill || "7. Portals, Instagram & Websites", sub: lang === 'ml' ? "ഇൻസ്റ്റാഗ്രാം, ഫേസ്ബുക്ക് & സൈറ്റുകൾ" : lang === 'ar' ? "المواقع وصفحات إنستغرام" : "Instagram & Verified Portals" },
+      { num: 8, title: t.step8Pill || "8. Courier & Launch", sub: lang === 'ml' ? "കൊറിയർ നിരക്കുകൾ & വിൽപന" : lang === 'ar' ? "الشحن وانطلاقة البيع" : "Safe COD & Dispatch Rules" }
     ];
 
-    let pillsHtml = '';
-    pillLabels.forEach((label, idx) => {
-      const stepIdx = idx + 1;
-      const isActive = stepIdx === current;
-      const isDone = stepIdx < current;
+    let chaptersHtml = '';
+    chapterItems.forEach(ch => {
+      const isActive = ch.num === current;
+      const isDone = ch.num < current;
       const cls = isActive ? 'active' : isDone ? 'completed' : '';
-      const checkIcon = isDone ? '<i class="fa-solid fa-check text-success"></i>' : `<small>${stepIdx}.</small>`;
+      const badgeIcon = isDone 
+        ? '<i class="fa-solid fa-check"></i>' 
+        : `<span>${ch.num}</span>`;
 
-      pillsHtml += `
-        <button class="step-pill-btn ${cls}" onclick="app.setCourseStep(${stepIdx})">
-          ${checkIcon} <span>${label}</span>
+      chaptersHtml += `
+        <button class="sidebar-chapter-item ${cls}" onclick="app.setCourseStep(${ch.num})">
+          <div class="chapter-badge-circle">${badgeIcon}</div>
+          <div class="chapter-item-text">
+            <div class="chapter-item-title">${ch.title}</div>
+            <div class="chapter-item-sub">${ch.sub}</div>
+          </div>
         </button>
       `;
     });
 
-    pillsRow.innerHTML = pillsHtml;
+    const progressLabel = lang === 'ml'
+      ? `ഘട്ടം ${current} / 8 (${pct}% പൂർത്തിയായി)`
+      : lang === 'ar'
+      ? `الفصل ${current} من 8 (اكتمل ${pct}%)`
+      : `Chapter ${current} of 8 (${pct}% Done)`;
+
+    sidebar.innerHTML = `
+      <div class="sidebar-niche-profile">
+        <div class="sidebar-img-crop">
+          <img src="${cat.images.cover}" alt="${cat.title[lang] || cat.title.en}">
+          <span class="sidebar-budget-badge"><i class="fa-solid fa-coins"></i> ${cat.minBudget}</span>
+        </div>
+        <h3 class="sidebar-course-name">${cat.title[lang] || cat.title.en}</h3>
+        <p class="sidebar-course-tagline">${cat.tagline[lang] || cat.tagline.en}</p>
+        <div class="sidebar-progress-summary">
+          <div class="sidebar-progress-bar">
+            <div class="sidebar-progress-fill" style="width: ${pct}%;"></div>
+          </div>
+          <div class="sidebar-progress-text-row">
+            <span>${progressLabel}</span>
+            <span><strong class="text-success">${cat.margin}</strong> Margin</span>
+          </div>
+        </div>
+      </div>
+
+      <nav class="sidebar-chapters-menu" id="sidebarChaptersMenu">
+        ${chaptersHtml}
+      </nav>
+
+      <div class="sidebar-footer-tools">
+        <button class="sidebar-tool-btn" onclick="app.navigateTo('calc')">
+          <i class="fa-solid fa-calculator text-primary"></i> <span>${lang === 'ml' ? 'പ്രോഫിറ്റ് കാൽക്കുലേറ്റർ' : lang === 'ar' ? 'حاسبة الأرباح' : 'Profit Calculator'}</span>
+        </button>
+        <button class="sidebar-tool-btn" onclick="app.navigateTo('plan')">
+          <i class="fa-solid fa-file-invoice-dollar text-success"></i> <span>${lang === 'ml' ? 'ബിസിനസ് പ്ലാൻ ഉണ്ടാക്കുക' : lang === 'ar' ? 'خطة العمل المخصصة' : 'Generate Business Plan'}</span>
+        </button>
+      </div>
+    `;
   },
 
-  // Switch Tools Dynamic Subview Tab
-  switchToolTab(tabKey) {
-    this.currentToolTab = tabKey;
-    document.querySelectorAll('.tool-tab-btn').forEach(btn => {
-      btn.classList.toggle('active', btn.getAttribute('data-subview') === tabKey);
+  // Portal Filter Handler
+  currentPortalFilter: 'all',
+
+  filterPortals(filterType) {
+    this.currentPortalFilter = filterType;
+    document.querySelectorAll('.portal-filter-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.getAttribute('data-filter') === filterType);
     });
-    this.renderToolsDynamicContent(tabKey);
+    const grid = document.getElementById('portalsCardsGrid');
+    if (grid) {
+      grid.innerHTML = this.renderPortalsCards(this.currentAcademy, filterType);
+    }
   },
 
-  // Switch Language
-  switchLanguage(lang) {
-    if (!['en', 'ml', 'ar'].includes(lang)) lang = 'en';
-    this.currentLang = lang;
-    localStorage.setItem('vyapar_lang', lang);
+  renderPortalsCards(nicheKey, filterType = 'all') {
+    const cat = this.categoriesData[nicheKey] || this.categoriesData.attar;
+    const lang = this.currentLang;
+    const portals = cat.onlinePortals || { instagram: [], facebook: [], websites: [] };
 
-    document.documentElement.lang = lang;
-    document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+    let items = [];
 
-    document.body.className = `lang-${lang}`;
+    if (filterType === 'all' || filterType === 'ig') {
+      (portals.instagram || []).forEach(ig => items.push({ type: 'ig', ...ig }));
+    }
+    if (filterType === 'all' || filterType === 'fb') {
+      (portals.facebook || []).forEach(fb => items.push({ type: 'fb', ...fb }));
+    }
+    if (filterType === 'all' || filterType === 'web' || filterType === 'india') {
+      (portals.websites || []).filter(w => filterType !== 'india' || w.region.includes('India')).forEach(w => items.push({ type: 'web', ...w }));
+    }
+    if (filterType === 'intl') {
+      (portals.websites || []).filter(w => w.region.includes('UAE') || w.region.includes('Global') || w.region.includes('Dubai') || w.flag.includes('🇦🇪') || w.flag.includes('🌍')).forEach(w => items.push({ type: 'web', ...w }));
+      (portals.instagram || []).filter(i => i.region.includes('UAE') || i.region.includes('Global') || i.flag.includes('🇦🇪')).forEach(i => items.push({ type: 'ig', ...i }));
+    }
 
-    document.querySelectorAll('.lang-btn').forEach(btn => {
-      btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
-    });
+    if (items.length === 0) {
+      return `<p class="text-muted" style="padding: 20px;">${lang === 'ml' ? 'ഈ കാറ്റഗറിയിൽ ലിങ്കുകൾ ലഭ്യമല്ല.' : lang === 'ar' ? 'لا توجد روابط لهذا التصنيف حالياً.' : 'No links found for this filter.'}</p>`;
+    }
 
-    const dockText = document.getElementById('dockLangText');
-    if (dockText) dockText.textContent = lang.toUpperCase();
+    return items.map(item => {
+      let iconClass = 'portal-icon-web';
+      let iconEl = '<i class="fa-solid fa-globe"></i>';
+      let actionText = lang === 'ml' ? 'വെബ്‌സൈറ്റ് സന്ദർശിക്കുക' : lang === 'ar' ? 'زيارة الموقع الرسمي' : 'Visit Official Website';
+      let handleText = item.domain || '';
 
-    this.translateStaticElements();
-    this.renderAllViews();
-  },
-
-  cycleLanguage() {
-    const cycle = { en: 'ml', ml: 'ar', ar: 'en' };
-    this.switchLanguage(cycle[this.currentLang] || 'en');
-  },
-
-  translateStaticElements() {
-    const t = this.i18n[this.currentLang] || this.i18n.en;
-    Object.keys(t).forEach(id => {
-      const el = document.getElementById(id);
-      if (el) {
-        el.innerHTML = t[id];
+      if (item.type === 'ig') {
+        iconClass = 'portal-icon-ig';
+        iconEl = '<i class="fa-brands fa-instagram"></i>';
+        actionText = lang === 'ml' ? 'ഇൻസ്റ്റാഗ്രാം പേജ് കാണുക' : lang === 'ar' ? 'عرض صفحة إنستغرام' : 'Open Instagram Profile';
+        handleText = item.handle || '';
+      } else if (item.type === 'fb') {
+        iconClass = 'portal-icon-fb';
+        iconEl = '<i class="fa-brands fa-facebook"></i>';
+        actionText = lang === 'ml' ? 'ഫേസ്ബുക്ക് ഗ്രൂപ്പ് കാണുക' : lang === 'ar' ? 'الانضمام لمجموعة فيسبوك' : 'Open Facebook Group';
+        handleText = item.members || '';
       }
-    });
+
+      return `
+        <div class="portal-card">
+          <div class="portal-card-top">
+            <div class="portal-icon-name">
+              <div class="portal-type-icon ${iconClass}">
+                ${iconEl}
+              </div>
+              <div class="portal-title-block">
+                <h5>${item.name}</h5>
+                <span class="portal-handle-domain">${handleText}</span>
+              </div>
+            </div>
+            <span class="portal-region-badge">${item.flag} ${item.region}</span>
+          </div>
+          <p class="portal-desc">${item.desc[lang] || item.desc.en}</p>
+          <div class="portal-card-footer">
+            <span class="portal-badge-pill">${item.badge}</span>
+            <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="btn-open-portal">
+              <span>${actionText}</span> <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+          </div>
+        </div>
+      `;
+    }).join('');
+  },
+
+  renderPortalsSection(nicheKey) {
+    const cat = this.categoriesData[nicheKey] || this.categoriesData.attar;
+    const lang = this.currentLang;
+    const intro = cat.onlinePortals ? (cat.onlinePortals.intro[lang] || cat.onlinePortals.intro.en) : '';
+
+    return `
+      <div class="portals-header-box">
+        <i class="fa-solid fa-globe" style="font-size: 1.25rem; margin-right: 8px;"></i>
+        ${intro}
+      </div>
+
+      <div class="portals-filter-bar">
+        <button class="portal-filter-btn active" data-filter="all" onclick="app.filterPortals('all')">
+          <i class="fa-solid fa-layer-group"></i> ${lang === 'ml' ? 'എല്ലാം കാണുക' : lang === 'ar' ? 'جميع الروابط' : 'All Portals & Links'}
+        </button>
+        <button class="portal-filter-btn" data-filter="ig" onclick="app.filterPortals('ig')">
+          <i class="fa-brands fa-instagram" style="color: #e1306c;"></i> ${lang === 'ml' ? 'ഇൻസ്റ്റാഗ്രാം പേജുകൾ' : lang === 'ar' ? 'صفحات إنستغرام' : 'Instagram Brands'}
+        </button>
+        <button class="portal-filter-btn" data-filter="fb" onclick="app.filterPortals('fb')">
+          <i class="fa-brands fa-facebook" style="color: #1877f2;"></i> ${lang === 'ml' ? 'ഫേസ്ബുക്ക് ഗ്രൂപ്പുകൾ' : lang === 'ar' ? 'مجموعات فيسبوك' : 'Facebook Groups'}
+        </button>
+        <button class="portal-filter-btn" data-filter="india" onclick="app.filterPortals('india')">
+          🇮🇳 ${lang === 'ml' ? 'ഇന്ത്യയിലെ ഫാക്ടറി സൈറ്റുകൾ' : lang === 'ar' ? 'مواقع المصانع في الهند' : 'India Sourcing Websites'}
+        </button>
+        <button class="portal-filter-btn" data-filter="intl" onclick="app.filterPortals('intl')">
+          🇦🇪 🌍 ${lang === 'ml' ? 'വിദേശ രാജ്യങ്ങൾ & ഗൾഫ്' : lang === 'ar' ? 'دبي والأسواق الدولية' : 'GCC (Dubai) & Global'}
+        </button>
+      </div>
+
+      <div class="portals-cards-grid" id="portalsCardsGrid">
+        ${this.renderPortalsCards(nicheKey, this.currentPortalFilter || 'all')}
+      </div>
+    `;
+  },
+
+  // Render Modules in Academy (Guided Stepper Mode vs Full Masterclass Mode)
+  renderCourseModules(nicheKey) {
+    const container = document.getElementById('courseModulesBody');
+    if (!container) return;
+
+    this.renderCourseSidebar(nicheKey);
+
+    const cat = this.categoriesData[nicheKey] || this.categoriesData.attar;
+    const lang = this.currentLang;
+    const t = this.i18n[lang] || this.i18n.en;
+    const activeStep = this.currentCourseStep;
+    const isStepper = this.courseViewMode === 'stepper';
+
+    // Build the 8 Step HTML definitions
+    const stepModules = [
+      // STEP 1: Product Science & Blueprint
+      {
+        id: "mod-blueprint",
+        stepNum: 1,
+        title: t.mod1Title || '1. Blueprint & Product Science',
+        heroImg: cat.images.product,
+        heroTitle: lang === 'ml' ? 'ഉൽപ്പന്ന വിവരങ്ങളും വിപണിയും' : lang === 'ar' ? 'علم الصنعة والمنتج' : 'Product Science & Fast Sellers',
+        heroSub: lang === 'ml' ? 'ആദ്യമായി എന്ത് ചെയ്യണം? ഉൽപ്പന്നം എന്താണെന്ന് മനസ്സിലാക്കുക, ഏറ്റവും കൂടുതൽ വിറ്റുപോകുന്ന ഇനങ്ങൾ തിരഞ്ഞെടുക്കുക.' : lang === 'ar' ? 'ماذا تفعل أولاً؟ افهم طبيعة المنتج واختر أكثر 4 أصناف طلباً في السوق.' : 'Phase 1: Zero-knowledge craft science and top 4 fastest-moving varieties.',
+        renderContent: () => `
+          <div class="blueprint-intro-box" style="background: #f8fafc; border-left: 4px solid var(--primary); padding: 18px 22px; border-radius: var(--radius-sm); margin-bottom: 24px; line-height: 1.6;">
+            <p style="font-size: 0.96rem; color: var(--secondary-dark);">${cat.blueprint.intro[lang] || cat.blueprint.intro.en}</p>
+          </div>
+
+          <h4 style="font-size: 1.15rem; font-weight: 800; color: var(--secondary-dark); margin-bottom: 14px;">
+            <i class="fa-solid fa-fire text-danger"></i> ${lang === 'ml' ? 'തുടക്കക്കാർ തിരഞ്ഞെടുക്കേണ്ട 4 ടോപ്പ് ഐറ്റങ്ങൾ' : lang === 'ar' ? 'أفضل 4 منتجات للمبتدئين' : 'Top Fast-Moving Best-Seller Products'}
+          </h4>
+          <div class="table-responsive">
+            <table class="cost-ledger-table">
+              <thead>
+                <tr>
+                  <th>${lang === 'ml' ? 'ഉൽപ്പന്നം' : lang === 'ar' ? 'المنتج' : 'Product Variety'}</th>
+                  <th>${lang === 'ml' ? 'ഹോൾസെയിൽ വില' : lang === 'ar' ? 'سعر الجملة' : 'Wholesale Cost'}</th>
+                  <th>${lang === 'ml' ? 'വിൽപന വില' : lang === 'ar' ? 'سعر البيع المقترح' : 'Selling Price'}</th>
+                  <th>${lang === 'ml' ? 'ഒരു യൂണിറ്റിൽ നിന്നുള്ള ലാഭം' : lang === 'ar' ? 'صافي الربح بكل حبة' : 'Net Unit Profit'}</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${cat.blueprint.fastMovingList.map(item => `
+                  <tr>
+                    <td><strong>${item.name[lang] || item.name.en}</strong></td>
+                    <td><span class="text-danger" style="font-weight: 700;">${item.wholesale}</span></td>
+                    <td><span class="text-primary" style="font-weight: 700;">${item.retail}</span></td>
+                    <td><span class="text-success" style="font-weight: 800;">${item.profit}</span></td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+          </div>
+        `
+      },
+
+      // STEP 2: Exact Capital & Budget Breakdown Table
+      {
+        id: "mod-capital",
+        stepNum: 2,
+        title: t.mod2Title || '2. Exact Capital & Budget Breakdown',
+        heroImg: cat.images.cover,
+        heroTitle: lang === 'ml' ? 'എന്തിനൊക്കെ എത്ര രൂപ? (വിശദമായ ബഡ്ജറ്റ് പട്ടിക)' : lang === 'ar' ? 'تفاصيل الميزانية ورأس المال الدقيق' : 'Itemized Capital & Budget Ledger',
+        heroSub: lang === 'ml' ? 'രണ്ടാമതായി എന്ത് ചെയ്യണം? കയ്യിൽ എത്ര രൂപ വേണം, എന്തിനൊക്കെ എത്ര രൂപ ചെലവാകും എന്ന് കൃത്യമായി പ്ലാൻ ചെയ്യുക.' : lang === 'ar' ? 'ماذا تفعل ثانياً؟ حدد ميزانيتك بدقة واعرف أين تذهب كل روبية لتفادي أي خسائر.' : 'Phase 2: Exact itemized startup costs for Starter and Pro brand tiers.',
+        renderContent: () => `
+          <p style="font-size: 0.92rem; color: var(--text-muted); margin-bottom: 16px;">
+            ${lang === 'ml' 
+              ? 'ബിസിനസ് തുടങ്ങുമ്പോൾ എന്തിനൊക്കെ എത്ര രൂപ ചെലവാകും എന്ന് കൃത്യമായി കാണിക്കുന്ന ബഡ്ജറ്റ് പട്ടിക. അനാവശ്യ ചെലവുകൾ ഒഴിവാക്കി സുരക്ഷിതമായി തുടങ്ങാം.' 
+              : lang === 'ar'
+              ? 'جدول تفصيلي يوضح أين تذهب كل روبية من رأس مالك، لتنطلق بثقة وبدون أي هدر مالي.'
+              : 'Complete itemized budget ledger. Shows exactly what components cost and how much starting capital is needed for both Starter and Pro brand tiers.'}
+          </p>
+
+          <div class="table-responsive">
+            <table class="cost-ledger-table">
+              <thead>
+                <tr>
+                  <th>${lang === 'ml' ? 'ചെലവ് ഇനം' : lang === 'ar' ? 'بند المصروف' : 'Budget Item'}</th>
+                  <th>${lang === 'ml' ? 'തുടക്കക്കാർക്ക് (Starter Tier)' : lang === 'ar' ? 'للمبتدئين (Starter)' : 'Starter Tier'}</th>
+                  <th>${lang === 'ml' ? 'ലക്ഷ്വറി ബ്രാൻഡിന് (Pro Brand)' : lang === 'ar' ? 'علامة تجارية متقدمة (Pro)' : 'Pro Brand Tier'}</th>
+                  <th>${lang === 'ml' ? 'പ്രത്യേകതകൾ' : lang === 'ar' ? 'ملاحظات' : 'Sourcing Notes'}</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${cat.capitalTable.map(row => `
+                  <tr>
+                    <td><strong>${row.item[lang] || row.item.en}</strong></td>
+                    <td style="font-weight: 700; color: var(--primary);">${row.starter}</td>
+                    <td style="font-weight: 700; color: #4338ca;">${row.pro}</td>
+                    <td><small class="text-muted">${row.notes[lang] || row.notes.en}</small></td>
+                  </tr>
+                `).join('')}
+                <tr class="total-row">
+                  <td>${lang === 'ml' ? 'ആകെ കുറഞ്ഞ പ്രാരംഭ മൂലധനം:' : lang === 'ar' ? 'إجمالي رأس المال الأولي المطلوب:' : 'Total Initial Working Capital:'}</td>
+                  <td>${cat.totalStarterCost}</td>
+                  <td>${cat.totalProCost}</td>
+                  <td>${lang === 'ml' ? 'ആദ്യ ബാച്ചിന് ആവശ്യമായത്' : lang === 'ar' ? 'يكفي لإنتاج الدفعة الأولى' : 'Sufficient for first inventory'}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        `
+      },
+
+      // STEP 3: Wholesale Hubs with Phone & Google Maps
+      {
+        id: "mod-suppliers",
+        stepNum: 3,
+        title: t.mod3Title || '3. Wholesale Markets & Google Maps',
+        heroImg: cat.images.sourcing,
+        heroTitle: lang === 'ml' ? 'മൊത്തവ്യാപാര മാർക്കറ്റുകൾ & മാപ്പ്' : lang === 'ar' ? 'أسواق الجملة وعناوين الموردين' : 'Wholesale Markets, Phone & Google Maps',
+        heroSub: lang === 'ml' ? 'മൂന്നാമതായി എന്ത് ചെയ്യണം? മിഠായിത്തെരുവ്, ക്രോഫോർഡ് മാർക്കറ്റ് എന്നിവിടങ്ങളിലെ വ്യാപാരികളുടെ ലൊക്കേഷനുകൾ കണ്ടുപിടിക്കുക.' : lang === 'ar' ? 'ماذا تفعل ثالثاً؟ اعرف أين تتسوق بأسعار الجملة الحقيقية وتواصل مع الموردين المعتمدين.' : 'Phase 3: Connect directly with verified wholesale hubs via Google Maps and WhatsApp.',
+        renderContent: () => {
+          const matchingSuppliers = this.suppliers.filter(s => s.category === nicheKey || (nicheKey === 'attar' && s.category === 'packaging'));
+          return `
+            <div class="suppliers-grid-niche" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 18px;">
+              ${matchingSuppliers.map(sup => {
+                const waMsg = encodeURIComponent(
+                  lang === 'ml' 
+                    ? `ഹലോ ${sup.name}, ഞാൻ 'വ്യാപാര ശിക്ഷ' വെബ്സൈറ്റിൽ നിങ്ങളുടെ കടയുടെ വിവരം കണ്ടതാണ്. എനിക്ക് നിങ്ങളുടെ ഹോൾസെയിൽ കാറ്റലോഗും വിലവിവരങ്ങളും വേണം.`
+                    : lang === 'ar'
+                    ? `مرحباً ${sup.name}، وجدت بيانات متجركم عبر منصة رواد الأعمال. أود الاطلاع على كتالوج الجملة وقائمة الأسعار لديكم.`
+                    : `Hello ${sup.name}, I found your wholesale details on Vyapar Shiksha. I want to inquire about your wholesale catalog and bulk pricing.`
+                );
+                const waLink = `https://wa.me/${sup.whatsapp}?text=${waMsg}`;
+
+                return `
+                  <div class="supplier-card">
+                    <div class="supplier-head">
+                      <h4 class="supplier-name">${sup.name}</h4>
+                      <span class="city-badge">${sup.city}</span>
+                    </div>
+                    <p class="supplier-address"><i class="fa-solid fa-location-dot"></i> <span>${sup.address}</span></p>
+                    <p style="font-size: 0.85rem; color: #1e293b; margin-bottom: 8px;"><strong>${lang === 'ml' ? 'പ്രത്യേകതകൾ:' : lang === 'ar' ? 'المنتجات:' : 'Specialties:'}</strong> ${sup.specialty}</p>
+                    <p style="font-size: 0.8rem; color: #64748b; margin-bottom: 14px;"><i class="fa-solid fa-box"></i> <strong>MOQ:</strong> ${sup.moq}</p>
+                    <div class="supplier-actions">
+                      <a href="${waLink}" target="_blank" rel="noopener noreferrer" class="btn-whatsapp">
+                        <i class="fa-brands fa-whatsapp"></i> ${lang === 'ml' ? 'വാട്സ്ആപ്പ്' : lang === 'ar' ? 'واتساب' : 'WhatsApp'}
+                      </a>
+                      <a href="${sup.mapUrl}" target="_blank" rel="noopener noreferrer" class="btn-map">
+                        <i class="fa-solid fa-location-crosshairs"></i> ${lang === 'ml' ? 'മാപ്പ്' : lang === 'ar' ? 'الخريطة' : 'Map'}
+                      </a>
+                      ${sup.instagram ? `<a href="${sup.instagram}" target="_blank" rel="noopener noreferrer" class="btn-map" title="Instagram"><i class="fa-brands fa-instagram" style="color: #e1306c;"></i></a>` : ''}
+                      ${sup.website ? `<a href="${sup.website}" target="_blank" rel="noopener noreferrer" class="btn-map" title="Website"><i class="fa-solid fa-globe" style="color: #059669;"></i></a>` : ''}
+                      <a href="tel:${sup.phone}" class="btn-map-call">
+                        <i class="fa-solid fa-phone"></i>
+                      </a>
+                    </div>
+                  </div>
+                `;
+              }).join('')}
+            </div>
+          `;
+        }
+      },
+
+      // STEP 4: Calling Dialogue & Negotiation Coaching
+      {
+        id: "mod-coaching",
+        stepNum: 4,
+        title: t.mod4Title || '4. Wholesaler Calling & Chat Coaching',
+        heroImg: cat.images.sourcing,
+        heroTitle: lang === 'ml' ? 'വ്യാപാരികളോട് സംസാരിക്കേണ്ട രീതി' : lang === 'ar' ? 'حوار التفاوض والاتصال مع الموردين' : 'Wholesaler Calling & Chat Coaching',
+        heroSub: lang === 'ml' ? 'നാലാമതായി എന്ത് ചെയ്യണം? കടക്കാരെ വിളിച്ച് സാമ്പിളുകൾ ആവശ്യപ്പെടാനും വിലപേശാനുമുള്ള സംസാര രീതി പഠിക്കുക.' : lang === 'ar' ? 'ماذا تفعل رابعاً؟ كيف تتصل بالموردين بثقة وتطلب عينات وتتفاوض على سعر الكيلو.' : 'Phase 4: Battle-tested calling scripts and negotiation masterclass.',
+        renderContent: () => `
+          <div class="coaching-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 18px;">
+            ${this.coachingData.map(c => `
+              <div class="coach-card">
+                <span class="coach-step-badge">Step ${c.step}</span>
+                <h4>${c.title[lang] || c.title.en}</h4>
+                <p>${c.desc[lang] || c.desc.en}</p>
+                <div class="dialogue-box">
+                  <i class="fa-solid fa-quote-left"></i> ${c.dialogue[lang] || c.dialogue.en}
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        `
+      },
+
+      // STEP 5: Formulation & Assembly Guide
+      {
+        id: "mod-sourcing",
+        stepNum: 5,
+        title: t.mod5Title || '5. Formulation & How to Make Your Brand',
+        heroImg: cat.images.formulation,
+        heroTitle: lang === 'ml' ? 'പുതിയത് ഉണ്ടാക്കാൻ എത്ര വേണം? (നിർമ്മാണ രീതി)' : lang === 'ar' ? 'طريقة التركيب وصناعة علامتك الجديدة' : 'Formulation, Assembly & Crafting',
+        heroSub: lang === 'ml' ? 'അഞ്ചാമതായി എന്ത് ചെയ്യണം? കുപ്പിയിൽ അളന്ന് നിറച്ച്, റോൾ-ഓൺ അമർത്തി, ലേബൽ ഒട്ടിച്ച് വെൽവെറ്റ് പൗച്ചിലാക്കുന്ന വിധം.' : lang === 'ar' ? 'ماذا تفعل خامساً؟ طريقة تعبئة الزجاجات وتثبيت الرول ولصق الشعار والتغليف الفاخر.' : 'Phase 5: Step-by-step practical assembly, hygiene, bottling and unit cost.',
+        renderContent: () => `
+          <div class="unit-economics-callout" style="background: #ecfdf5; border: 1px solid #a7f3d0; padding: 18px 22px; border-radius: var(--radius-sm); margin-bottom: 24px; color: #065f46; font-size: 0.96rem; line-height: 1.6;">
+            <i class="fa-solid fa-chart-pie" style="font-size: 1.25rem; margin-right: 8px;"></i>
+            ${cat.formulation.costPerUnitBox[lang] || cat.formulation.costPerUnitBox.en}
+          </div>
+
+          <h4 style="font-size: 1.15rem; font-weight: 800; color: var(--secondary-dark); margin-bottom: 16px;">
+            <i class="fa-solid fa-list-ol text-primary"></i> ${lang === 'ml' ? 'ഘട്ടം ഘട്ടമായി തയ്യാറാക്കുന്ന വിധം' : lang === 'ar' ? 'خطوات التصنيع والتركيب خطوة بخطوة' : 'Step-by-Step Practical Creation Steps'}
+          </h4>
+
+          <div class="steps-flow-grid" style="display: flex; flex-direction: column; gap: 14px;">
+            ${cat.formulation.steps.map(s => `
+              <div class="step-card-flow" style="display: flex; gap: 16px; background: #ffffff; border: 1px solid var(--border-color); padding: 18px; border-radius: var(--radius-sm);">
+                <div class="step-num-bubble" style="width: 40px; height: 40px; border-radius: 50%; background: var(--primary); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 800; flex-shrink: 0;">
+                  ${s.step}
+                </div>
+                <div>
+                  <h5 style="font-size: 1.05rem; font-weight: 700; color: var(--secondary-dark); margin-bottom: 4px;">${s.title[lang] || s.title.en}</h5>
+                  <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.5;">${s.desc[lang] || s.desc.en}</p>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        `
+      },
+
+      // STEP 6: Live Visual Profit Graph & Simulator
+      {
+        id: "mod-simulator",
+        stepNum: 6,
+        title: t.mod6Title || '6. Profit Simulator & Live Visual Graph',
+        heroImg: cat.images.cover,
+        heroTitle: lang === 'ml' ? 'ലൈവ് ലാഭ ഗ്രാഫും സിമുലേറ്ററും' : lang === 'ar' ? 'حاسبة الأرباح والرسم البياني المباشر' : 'Live Profit Graph & Margin Visualizer',
+        heroSub: lang === 'ml' ? 'ആറാമതായി എന്ത് ചെയ്യണം? ഓരോ കുപ്പിയിലും എത്ര ലാഭം കിട്ടും, 25/50/100 കുപ്പികൾ വിൽക്കുമ്പോൾ എത്ര സമ്പാദിക്കാം എന്ന് കാണുക.' : lang === 'ar' ? 'ماذا تفعل سادساً؟ شاهد رسماً بيانياً مباشراً يوضح أرباحك وتكلفة تصنيع كل حبة بدقة.' : 'Phase 6: Interactive simulator with real-time segmented horizontal profit bar graph.',
+        renderContent: () => this.getNicheSimulatorHtml(nicheKey)
+      },
+
+      // STEP 7: Verified Online Portals, Instagram Pages, Facebook & Websites (India & International)
+      {
+        id: "mod-portals",
+        stepNum: 7,
+        title: t.mod7Title || '7. Verified Online Portals, Instagram & Websites',
+        heroImg: cat.images.packaging,
+        heroTitle: lang === 'ml' ? 'സോഷ്യൽ മീഡിയ, വ്യാപാരികളുടെ വെബ്‌സൈറ്റുകൾ & ലിങ്കുകൾ' : lang === 'ar' ? 'بوابات الموردين الرسمية وصفحات إنستغرام وفيسبوك' : 'Verified Online Portals, Instagram & Websites',
+        heroSub: lang === 'ml' ? 'ഏഴാമതായി എന്ത് ചെയ്യണം? പ്രമുഖ ബ്രാൻഡുകളുടെ ഇൻസ്റ്റാഗ്രാം, ഫേസ്ബുക്ക് ഗ്രൂപ്പുകൾ, ഇന്ത്യയിലെയും ഗൾഫിലെയും ഒഫീഷ്യൽ സൈറ്റുകൾ പരിശോധിക്കുക.' : lang === 'ar' ? 'ماذا تفعل سابعاً؟ استكشف الحسابات الملهمة على إنستغرام ومجموعات تجار الجملة ومواقع المصانع في الهند والخليج.' : 'Phase 7: Direct verified links to Instagram brands, Facebook wholesale groups, domestic portals, and GCC/international exporters.',
+        renderContent: () => this.renderPortalsSection(nicheKey)
+      },
+
+      // STEP 8: Courier Rates, COD Rules & Launch Plan
+      {
+        id: "mod-logistics",
+        stepNum: 8,
+        title: t.mod8Title || '8. Courier Rates, COD & Launch Checklist',
+        heroImg: cat.images.packaging,
+        heroTitle: lang === 'ml' ? 'കൊറിയർ നിരക്കുകൾ & സുരക്ഷിതമായ വിൽപന' : lang === 'ar' ? 'أسعار الشحن البريدي وانطلاقة المبيعات' : 'Courier Rates, Safe COD & Launch Checklist',
+        heroSub: lang === 'ml' ? 'എട്ടാമതായി എന്ത് ചെയ്യണം? സുരക്ഷിതമായി പാക്ക് ചെയ്ത് കൊറിയർ വഴി കസ്റ്റമറിലേക്ക് എത്തിക്കുക, COD നഷ്ടങ്ങൾ ഒഴിവാക്കുക.' : lang === 'ar' ? 'ماذا تفعل ثامناً؟ شحن الطرود بنظام وضمان استلام الأموال بدون مخاطر التوصيل.' : 'Phase 8: Shipping partners, COD advance token rule, and 14-day Instagram playbook.',
+        renderContent: () => `
+          <div class="cod-danger-box" style="background: #fffbeb; border: 1px solid #fef08a; padding: 20px 24px; border-radius: var(--radius-sm); margin-bottom: 24px; color: #854d0e; font-size: 0.94rem; line-height: 1.6;">
+            <h4 style="font-size: 1.1rem; font-weight: 800; color: #78350f; margin-bottom: 8px;">
+              <i class="fa-solid fa-triangle-exclamation text-warning"></i> ${lang === 'ml' ? 'പ്രധാനപ്പെട്ടത്: ക്യാഷ് ഓൺ ഡെലിവറി (COD) അപകടം ഒഴിവാക്കാം' : lang === 'ar' ? 'تنبيه هام: تفادي خسائر الدفع عند الاستلام' : 'Critical Rule: Cash on Delivery (COD) Protection'}
+            </h4>
+            <p>
+              ${lang === 'ml'
+                ? 'അപരിചിതർക്ക് 100% ക്യാഷ് ഓൺ ഡെലിവറി അയക്കരുത്. കസ്റ്റമർ വാങ്ങിയില്ലെങ്കിൽ പോകുന്ന ചാർജ്ജും മടങ്ങി വരുന്ന ചാർജ്ജും (ഏകദേശം ₹100-₹120) നിങ്ങൾ നൽകേണ്ടി വരും. ഓർഡർ സ്ഥിരീകരിക്കാൻ ₹50 ടോക്കൺ അഡ്വാൻസ് Google Pay വഴി വാങ്ങുക!'
+                : lang === 'ar'
+                ? 'إياك وشحن طرد بالدفع عند الاستلام الكامل لأشخاص لا تعرفهم. إذا رفض الزبون الاستلام ستتحمل رسوم الذهاب والعودة (~120 روبية). خذ دائماً عربون 50 روبية مقدماً!'
+                : 'Never ship 100% COD to strangers. If a customer rejects delivery, you lose both forward and return courier charges (~₹120 total). Always collect a small ₹50 advance token via UPI to confirm serious buyers!'}
+            </p>
+          </div>
+
+          <h4 style="font-size: 1.15rem; font-weight: 800; color: var(--secondary-dark); margin-bottom: 14px;">
+            <i class="fa-solid fa-box-open text-primary"></i> ${lang === 'ml' ? 'കൊറിയർ നിരക്കുകൾ (കേരളം, ഇന്ത്യ & ഗൾഫ്)' : lang === 'ar' ? 'أسعار الشحن البريدي المعتمدة' : 'Courier Rates & Delivery Charges'}
+          </h4>
+          <div class="table-responsive">
+            <table class="cost-ledger-table">
+              <thead>
+                <tr>
+                  <th>${lang === 'ml' ? 'കൊറിയർ സർവീസ്' : lang === 'ar' ? 'شركة الشحن' : 'Service / Partner'}</th>
+                  <th>${lang === 'ml' ? 'മേഖല' : lang === 'ar' ? 'الوجهة' : 'Destination'}</th>
+                  <th>${lang === 'ml' ? 'ഭാരം' : lang === 'ar' ? 'الوزن' : 'Weight'}</th>
+                  <th>${lang === 'ml' ? 'നിരക്ക്' : lang === 'ar' ? 'السعر' : 'Rate'}</th>
+                  <th>${lang === 'ml' ? 'പ്രത്യേകത' : lang === 'ar' ? 'الميزة' : 'Key Advantage'}</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${this.logisticsRates.map(r => `
+                  <tr>
+                    <td><strong>${r.service}</strong></td>
+                    <td>${r.zone}</td>
+                    <td>${r.weight}</td>
+                    <td><span class="text-success" style="font-weight: 700;">${r.rate}</span></td>
+                    <td><small class="text-muted">${r.remarks}</small></td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+          </div>
+        `
+      }
+    ];
+
+    let html = '';
+
+    if (isStepper) {
+      // GUIDED STEPPER PROCESSING MODE: Render ONLY the active step card
+      const stepData = stepModules[activeStep - 1] || stepModules[0];
+      const prevBtnHtml = activeStep > 1 
+        ? `<button class="btn-step-prev" onclick="app.prevCourseStep()">${t.btnPrevStep || '← Previous Chapter'}</button>` 
+        : `<span></span>`;
+      
+      const nextBtnHtml = activeStep < 8 
+        ? `<button class="btn-step-next" onclick="app.nextCourseStep()">${t.btnNextStep || 'Next Chapter →'}</button>` 
+        : `<button class="btn-step-next" onclick="app.navigateTo('plan')">${t.btnFinishCourse || '🎉 Finish Course & Generate Plan →'}</button>`;
+
+      html = `
+        <article class="course-module-card" id="${stepData.id}">
+          <div class="module-photo-hero">
+            <img src="${stepData.heroImg}" alt="${stepData.heroTitle}">
+            <div class="module-photo-overlay">
+              <span class="module-number-badge" style="display: inline-block; margin-bottom: 6px;">Chapter ${activeStep} of 8</span>
+              <h4>${stepData.heroTitle}</h4>
+              <p>${stepData.heroSub}</p>
+            </div>
+          </div>
+          <div class="module-body">
+            ${stepData.renderContent()}
+
+            <div class="stepper-nav-footer">
+              ${prevBtnHtml}
+              ${nextBtnHtml}
+            </div>
+          </div>
+        </article>
+      `;
+    } else {
+      // FULL MASTERCLASS MODE: Render all 8 steps stacked
+      html = stepModules.map((s, idx) => `
+        <article class="course-module-card" id="${s.id}" style="margin-bottom: 35px;">
+          <div class="module-photo-hero">
+            <img src="${s.heroImg}" alt="${s.heroTitle}">
+            <div class="module-photo-overlay">
+              <span class="module-number-badge" style="display: inline-block; margin-bottom: 6px;">Chapter ${idx + 1} of 8</span>
+              <h4>${s.heroTitle}</h4>
+              <p>${s.heroSub}</p>
+            </div>
+          </div>
+          <div class="module-body">
+            ${s.renderContent()}
+          </div>
+        </article>
+      `).join('');
+    }
+
+    container.innerHTML = html;
   },
 
   // Hash-based URL Routing Handler
@@ -1741,15 +2616,25 @@ const app = {
   },
 
   processHash() {
-    const hash = window.location.hash.replace('#', '').trim();
-    if (hash.startsWith('academy/')) {
-      const niche = hash.split('/')[1] || 'attar';
-      this.openAcademy(niche);
-    } else if (['tools', 'suppliers', 'scripts', 'legal', 'plan', 'calc'].includes(hash)) {
-      this.navigateTo(hash);
-    } else {
+    const rawHash = window.location.hash.replace(/^#/, '').trim();
+    if (!rawHash) {
+      if (this.currentView !== 'academy') {
+        this.navigateTo('home');
+      }
+      return;
+    }
+
+    if (rawHash.startsWith('academy/')) {
+      const parts = rawHash.split('/');
+      const niche = parts[1] || 'attar';
+      const step = parts[2] ? parseInt(parts[2], 10) : (this.currentCourseStep || 1);
+      this.openAcademy(niche, step, false);
+    } else if (['tools', 'suppliers', 'scripts', 'legal', 'plan', 'calc'].includes(rawHash)) {
+      this.navigateTo(rawHash);
+    } else if (rawHash === 'home') {
       this.navigateTo('home');
     }
+    // Anchor tags like #mod-capital do NOT redirect to home!
   },
 
   // Render Master Dispatcher

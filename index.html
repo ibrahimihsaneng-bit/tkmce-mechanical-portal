@@ -60,7 +60,7 @@
       </a>
 
       <!-- Navigation Links -->
-      <nav class="nav-menu" id="navMenu">
+      <nav class="nav-menu" id="mainNavLinks">
         <a href="#home" class="nav-item active-nav" id="navHome" onclick="app.navigateTo('home')"><i class="fa-solid fa-house"></i> Home</a>
         
         <!-- Academies Dropdown Menu -->
@@ -334,48 +334,80 @@
        VIEW 2: DEDICATED BUSINESS ACADEMY (Complete Standalone Study Course)
        ========================================================================= -->
   <main class="page-view" id="viewAcademy" style="display: none;">
-    <!-- Course Header Banner & Progress Bar -->
+    <!-- Course Header Banner & Fast Switcher -->
     <section class="course-header-banner" id="courseHeaderBanner">
       <div class="container course-header-content">
-        <button class="btn-back-hub" onclick="app.navigateTo('home')">
-          <i class="fa-solid fa-arrow-left"></i> <span id="lblBackToHub">Back to Academies Overview</span>
-        </button>
+        <div class="course-header-top-flex">
+          <button class="btn-back-hub" onclick="app.navigateTo('home')">
+            <i class="fa-solid fa-arrow-left"></i> <span id="lblBackToHub">Back to All Academies</span>
+          </button>
+
+          <div class="course-header-actions">
+            <!-- Fast Academy Switcher dropdown -->
+            <div class="nav-dropdown" id="academySwitcherDropdown">
+              <button class="nav-drop-btn" id="btnSwitchAcademy">
+                <i class="fa-solid fa-arrow-right-arrow-left"></i> <span id="lblSwitchCourse">Switch Course</span> <i class="fa-solid fa-chevron-down"></i>
+              </button>
+              <div class="dropdown-menu-box" id="academySwitcherMenu">
+                <a href="javascript:void(0)" class="drop-link" onclick="app.openAcademy('attar')">
+                  <i class="fa-solid fa-bottle-droplet text-amber"></i> 
+                  <div><strong id="dropAttarQuick">Attar & Perfumes</strong><small>₹3k - ₹12k • Kozhikode & Mumbai</small></div>
+                </a>
+                <a href="javascript:void(0)" class="drop-link" onclick="app.openAcademy('clothing')">
+                  <i class="fa-solid fa-shirt text-purple"></i> 
+                  <div><strong id="dropClothingQuick">Dresses & Boutique</strong><small>₹10k - ₹35k • Surat & Tirupur</small></div>
+                </a>
+                <a href="javascript:void(0)" class="drop-link" onclick="app.openAcademy('watches')">
+                  <i class="fa-solid fa-clock text-blue"></i> 
+                  <div><strong id="dropWatchQuick">Fashion Watches</strong><small>₹8k - ₹20k • Mumbai & Delhi</small></div>
+                </a>
+                <a href="javascript:void(0)" class="drop-link" onclick="app.openAcademy('bags')">
+                  <i class="fa-solid fa-bag-shopping text-emerald"></i> 
+                  <div><strong id="dropBagQuick">Canvas Totes & Bags</strong><small>₹5k - ₹18k • Dharavi & Cotton</small></div>
+                </a>
+                <a href="javascript:void(0)" class="drop-link" onclick="app.openAcademy('accessories')">
+                  <i class="fa-solid fa-ring text-amber"></i> 
+                  <div><strong id="dropRingQuick">Anti-Tarnish Jewelry</strong><small>₹2.5k - ₹8k • Mumbai & Jaipur</small></div>
+                </a>
+                <a href="javascript:void(0)" class="drop-link" onclick="app.openAcademy('spices')">
+                  <i class="fa-solid fa-leaf text-success"></i> 
+                  <div><strong id="dropSpicesQuick">Kerala Spices & Honey</strong><small>₹6k - ₹25k • Idukki & Wayanad</small></div>
+                </a>
+              </div>
+            </div>
+
+            <div class="course-mode-toggle">
+              <button class="mode-toggle-btn active" id="btnModeStepper" onclick="app.toggleCourseViewMode('stepper')">
+                <i class="fa-solid fa-shoe-prints"></i> <span id="lblGuidedMode">Guided Step Mode</span>
+              </button>
+              <button class="mode-toggle-btn" id="btnModeAll" onclick="app.toggleCourseViewMode('all')">
+                <i class="fa-solid fa-list"></i> <span id="lblAllStepsMode">Full Syllabus</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
         <div class="course-title-wrap">
           <span class="course-badge-pill" id="courseBadgeNiche">Specialized Faculty</span>
           <h1 class="course-main-title" id="courseMainTitle">Attar & Artisanal Perfumes Masterclass</h1>
           <p class="course-main-tagline" id="courseMainTagline">Complete practical study course: from ₹3,000 capital to building an aesthetic brand.</p>
         </div>
-        
-        <!-- Processing Stepper & Mode Switcher -->
-        <div class="course-stepper-wrap" id="courseStepperContainer">
-          <div class="stepper-header-flex">
-            <div class="stepper-progress-text" id="stepperProgressText">
-              <i class="fa-solid fa-graduation-cap"></i> <span id="lblStepProgress">Step 1 of 7 • Getting Started (14% Complete)</span>
-            </div>
-            <div class="course-mode-toggle">
-              <button class="mode-toggle-btn active" id="btnModeStepper" onclick="app.toggleCourseViewMode('stepper')">
-                <i class="fa-solid fa-shoe-prints"></i> <span id="lblGuidedMode">Guided Step Processing</span>
-              </button>
-              <button class="mode-toggle-btn" id="btnModeAll" onclick="app.toggleCourseViewMode('all')">
-                <i class="fa-solid fa-list"></i> <span id="lblAllStepsMode">View Full Masterclass</span>
-              </button>
-            </div>
-          </div>
-          
-          <div class="stepper-progress-track">
-            <div class="stepper-progress-fill" id="stepperProgressFill" style="width: 14%;"></div>
-          </div>
-
-          <div class="stepper-pills-row" id="stepperPillsRow">
-            <!-- Dynamically populated 7 step pills -->
-          </div>
-        </div>
       </div>
     </section>
 
-    <!-- Course Modules Container -->
-    <div class="container course-modules-body" id="courseModulesBody">
-      <!-- Rendered dynamically for selected academy -->
+    <!-- TWO-COLUMN WORKSPACE: DEDICATED STUDY SIDEBAR + MAIN STUDY CONTENT -->
+    <div class="container academy-workspace-layout">
+      <!-- DEDICATED STUDY SIDEBAR -->
+      <aside class="academy-study-sidebar" id="academyStudySidebar">
+        <!-- Rendered dynamically by app.js: Course Cover, Progress Bar & 8 Study Chapters Navigation -->
+      </aside>
+
+      <!-- MAIN STUDY STAGE (Active Chapter Content) -->
+      <section class="academy-study-stage" id="academyStudyStage">
+        <div id="courseModulesBody">
+          <!-- Rendered dynamically for selected academy -->
+        </div>
+      </section>
     </div>
   </main>
 
