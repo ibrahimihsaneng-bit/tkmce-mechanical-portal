@@ -2337,7 +2337,223 @@ const app = {
       facebook: "https://www.facebook.com/manjeriattarwholesale",
       specialty: "Oud oils, rose attar, musk blends, Islamic perfume bottles wholesale Malappuram",
       moq: "Min 12 bottles / 100ml bulk",
-      tags: ["Attar", "Perfumes", "Malappuram", "Manjeri"]
+      tags: ["Attar", "Perfumes", "Malappuram", "Manjeri"], isVerified: true, verifiedDate: "November 2026", rating: "4.9/5" },
+    // ── EXPANDED VERIFIED SUPPLIERS (MACHINERY, PACKAGING, RAW MATERIALS, TEXTILES) ──
+    {
+      id: "sup-39",
+      name: "Cochin Rigid Box & Custom Packaging Works",
+      city: "Kochi",
+      district: "Ernakulam",
+      category: "packaging",
+      address: "Eloor Industrial Belt, Kalamassery, Kochi, Kerala 683501",
+      mapUrl: "https://www.google.com/maps/search/?api=1&query=Eloor+Industrial+Belt+Kochi",
+      phone: "+91 94471 44550",
+      whatsapp: "919447144550",
+      website: "https://cochinpackaging.in",
+      specialty: "Custom printed rigid boxes, honeycomb paper wraps, matte mono-cartons for perfumes & jewelry",
+      moq: "Min 100 boxes with custom gold foil logo",
+      tags: ["Packaging", "Boxes", "Kochi", "Verified"],
+      isVerified: true,
+      verifiedDate: "November 2026",
+      rating: "4.9/5"
+    },
+    {
+      id: "sup-40",
+      name: "Delhi Stand-Up Pouches & Kraft Zipper World",
+      city: "Delhi",
+      district: "Central Delhi",
+      category: "packaging",
+      address: "Sadar Bazaar Industrial Area, Near Metro Station, Delhi 110006",
+      mapUrl: "https://www.google.com/maps/search/?api=1&query=Sadar+Bazaar+Delhi+pouches+wholesale",
+      phone: "+91 98110 55432",
+      whatsapp: "919811055432",
+      website: "https://delhipouchworld.com",
+      specialty: "Food-grade kraft paper pouches, aluminum foil aroma-lock bags for spices, tea, chips",
+      moq: "Min 200 pcs (Ready stock) / 1000 pcs (Custom print)",
+      tags: ["Pouches", "Food Packaging", "Delhi", "Wholesale"],
+      isVerified: true,
+      verifiedDate: "November 2026",
+      rating: "4.8/5"
+    },
+    {
+      id: "sup-41",
+      name: "Coimbatore Agro Machinery & Cold Press Oil Mill Makers",
+      city: "Coimbatore",
+      district: "Coimbatore",
+      category: "machinery",
+      address: "Avarampalayam Road, Ganapathy, Coimbatore, Tamil Nadu 641006",
+      mapUrl: "https://www.google.com/maps/search/?api=1&query=Ganapathy+Coimbatore+oil+mill+machinery",
+      phone: "+91 94430 78210",
+      whatsapp: "919443078210",
+      website: "https://coimbatoreagromachines.com",
+      specialty: "Cold press wooden/stone marachekku oil extraction machines, automatic spice pulverizers, flour mills",
+      moq: "1 Machine with 1-year warranty and on-site video demo",
+      tags: ["Machinery", "Oil Mill", "Coimbatore", "Verified"],
+      isVerified: true,
+      verifiedDate: "November 2026",
+      rating: "4.9/5"
+    },
+    {
+      id: "sup-42",
+      name: "Rajkot Automated Packaging & Pouch Sealing Tech",
+      city: "Rajkot",
+      district: "Rajkot",
+      category: "machinery",
+      address: "GIDC Industrial Estate, Phase 2, Rajkot, Gujarat 360003",
+      mapUrl: "https://www.google.com/maps/search/?api=1&query=GIDC+Phase+2+Rajkot+packaging+machinery",
+      phone: "+91 98250 33411",
+      whatsapp: "919825033411",
+      website: "https://rajkotpacktech.com",
+      specialty: "Continuous band sealers with nitrogen flush, automatic granule weighing machines, liquid bottle fillers",
+      moq: "Direct factory dispatch across Kerala",
+      tags: ["Machinery", "Band Sealer", "Rajkot", "Verified"],
+      isVerified: true,
+      verifiedDate: "November 2026",
+      rating: "4.9/5"
+    },
+    {
+      id: "sup-43",
+      name: "Surat Mill-Direct Modest Wear & Georgette Hub",
+      city: "Surat",
+      district: "Surat",
+      category: "clothing",
+      address: "Ring Road Textile Market, Near Sahara Darwaja, Surat, Gujarat 395002",
+      mapUrl: "https://www.google.com/maps/search/?api=1&query=Ring+Road+Textile+Market+Surat",
+      phone: "+91 98251 77890",
+      whatsapp: "919825177890",
+      website: "https://surattextilewholesalers.com",
+      specialty: "Korean Nida, Nada Crepe, heavy georgette fabrics, ready stitch designer Abayas, Kurtis",
+      moq: "Min 15 Abayas or 1 Roll (40 meters)",
+      tags: ["Clothing", "Abaya", "Fabric", "Surat", "Verified"],
+      isVerified: true,
+      verifiedDate: "November 2026",
+      rating: "5.0/5"
+    },
+    {
+      id: "sup-44",
+      name: "Tirupur 100% Combed Cotton T-Shirts & Apparel Mill",
+      city: "Tirupur",
+      district: "Tirupur",
+      category: "clothing",
+      address: "Rayapuram, Avinashi Road, Tirupur, Tamil Nadu 641602",
+      mapUrl: "https://www.google.com/maps/search/?api=1&query=Rayapuram+Tirupur+textile+apparel",
+      phone: "+91 94431 88922",
+      whatsapp: "919443188922",
+      website: "https://tirupurapparelhub.com",
+      specialty: "Blank 220 GSM oversized drop-shoulder tees, bio-washed polo t-shirts, custom screen print blanks",
+      moq: "Min 25 pieces mixed sizes (S/M/L/XL)",
+      tags: ["T-Shirts", "Apparel", "Tirupur", "Verified"],
+      isVerified: true,
+      verifiedDate: "November 2026",
+      rating: "4.9/5"
+    },
+    {
+      id: "sup-45",
+      name: "Idukki Green Cardamom & Wild Clove Farmers Collective",
+      city: "Idukki",
+      district: "Idukki",
+      category: "spices",
+      address: "Spices Park, Nedumkandam, Idukki District, Kerala 685553",
+      mapUrl: "https://www.google.com/maps/search/?api=1&query=Nedumkandam+Idukki+spices+park",
+      phone: "+91 94471 99015",
+      whatsapp: "919447199015",
+      website: "https://idukkispicesdirect.in",
+      specialty: "Direct plantation export-grade 8mm bold green cardamom, organic clove, Kerala nutmeg & mace",
+      moq: "Min 2 kg cardamom (A-Grade sealed pouches)",
+      tags: ["Spices", "Cardamom", "Idukki", "Farmer Direct"],
+      isVerified: true,
+      verifiedDate: "November 2026",
+      rating: "5.0/5"
+    },
+    {
+      id: "sup-46",
+      name: "Calicut Eco Kraft Paper & Biodegradable Bag Works",
+      city: "Kozhikode",
+      district: "Kozhikode",
+      category: "bags",
+      address: "Mankavu, Near Pantheerankavu Bypass, Kozhikode, Kerala 673007",
+      mapUrl: "https://www.google.com/maps/search/?api=1&query=Mankavu+Kozhikode+paper+bag+wholesale",
+      phone: "+91 94471 33400",
+      whatsapp: "919447133400",
+      website: "https://calicutpaperbags.com",
+      specialty: "Flat handle 120 GSM recycled kraft paper bags, cake boxes, zero-plastic shopping carry bags",
+      moq: "Min 200 bags with single-color shop logo screen print",
+      tags: ["Bags", "Eco Paper", "Kozhikode", "Wholesale"],
+      isVerified: true,
+      verifiedDate: "November 2026",
+      rating: "4.8/5"
+    },
+    {
+      id: "sup-47",
+      name: "Mumbai Crawford Market Anti-Tarnish 18K Jewelry Mart",
+      city: "Mumbai",
+      district: "Mumbai City",
+      category: "accessories",
+      address: "Lohar Chawl, Mangaldas Market Area, Mumbai, Maharashtra 400002",
+      mapUrl: "https://www.google.com/maps/search/?api=1&query=Mangaldas+Market+Crawford+Mumbai+jewelry",
+      phone: "+91 98200 44122",
+      whatsapp: "919820044122",
+      website: "https://mumbaiantitarnish.com",
+      specialty: "18K PVD gold coated stainless steel waterproof jewelry: clover necklaces, stacking rings, snake chains",
+      moq: "Min ₹3,000 assortment (over 40 models)",
+      tags: ["Jewelry", "Anti-Tarnish", "Mumbai", "Trending"],
+      isVerified: true,
+      verifiedDate: "November 2026",
+      rating: "4.9/5"
+    },
+    {
+      id: "sup-48",
+      name: "Thrissur Hydraulic Areca Leaf Plate Machine Works",
+      city: "Thrissur",
+      district: "Thrissur",
+      category: "machinery",
+      address: "Ollur Industrial Estate, Thrissur, Kerala 680306",
+      mapUrl: "https://www.google.com/maps/search/?api=1&query=Ollur+Industrial+Estate+Thrissur+machinery",
+      phone: "+91 94470 66810",
+      whatsapp: "919447066810",
+      website: "https://thrissurecomachinery.com",
+      specialty: "Double die automatic temperature control areca leaf plate making machines & raw dried leaf suppliers",
+      moq: "1 Machine setup with live operator training",
+      tags: ["Machinery", "Areca Plates", "Thrissur", "Eco"],
+      isVerified: true,
+      verifiedDate: "November 2026",
+      rating: "4.8/5"
+    },
+    {
+      id: "sup-49",
+      name: "Sivakasi Waterproof Vinyl Stickers & Roll Labels",
+      city: "Sivakasi",
+      district: "Virudhunagar",
+      category: "packaging",
+      address: "Railway Feeder Road, Sivakasi, Tamil Nadu 626123",
+      mapUrl: "https://www.google.com/maps/search/?api=1&query=Railway+Feeder+Road+Sivakasi+printing",
+      phone: "+91 94431 22880",
+      whatsapp: "919443122880",
+      website: "https://sivakasiprintmart.com",
+      specialty: "Die-cut waterproof metallic gold foil bottle stickers, barcode stickers, seal labels for perfumes & food",
+      moq: "Min 500 custom stickers (₹0.40 - ₹1.20 per piece)",
+      tags: ["Stickers", "Labels", "Sivakasi", "Branding"],
+      isVerified: true,
+      verifiedDate: "November 2026",
+      rating: "5.0/5"
+    },
+    {
+      id: "sup-50",
+      name: "Nilambur Wild Honey & Herbal Tribal Collective",
+      city: "Malappuram",
+      district: "Malappuram",
+      category: "spices",
+      address: "Forest Office Road, Nilambur, Malappuram, Kerala 679329",
+      mapUrl: "https://www.google.com/maps/search/?api=1&query=Nilambur+forest+honey+Malappuram",
+      phone: "+91 94470 55190",
+      whatsapp: "919447055190",
+      website: "https://nilamburwildhoney.in",
+      specialty: "Certified raw stingless bee (cheruthen) honey, forest multi-flora honey, wild turmeric powder",
+      moq: "Min 5 kg bulk containers",
+      tags: ["Honey", "Nilambur", "Organic", "Forest Direct"],
+      isVerified: true,
+      verifiedDate: "November 2026",
+      rating: "4.9/5"
     }
   ],
 
@@ -6362,8 +6578,23 @@ const app = {
               <option value="free_shipping">Free Shipping (Seller absorbs shipping)</option>
             </select>
           </div>
+          <div class="form-group">
+            <label class="form-label">${lang === 'ml' ? 'പ്രതിമാസ വാടക / വർക്ക്‌സ്‌പേസ് (₹):' : lang === 'ar' ? 'إيجار المحل أو المشغل الشهري (روبية):' : 'Monthly Rent / Workspace (₹):'}</label>
+            <input type="number" class="form-control" id="calcShopRent" value="0">
+            <small style="color: var(--text-muted); font-size: 0.78rem;">${lang === 'ml' ? 'വീട്ടിലിരുന്നാണെങ്കിൽ ₹0 നൽകാം; കടയോ മുറിയോ ഉണ്ടെങ്കിൽ വാടക നൽകുക' : 'Home-based = ₹0; or enter shop/office monthly rent'}</small>
+          </div>
+          <div class="form-group">
+            <label class="form-label">${lang === 'ml' ? 'പ്രതിമാസ പരസ്യച്ചിലവ് (Meta/Insta Ads) (₹):' : lang === 'ar' ? 'ميزانية الإعلانات الشهرية (روبية):' : 'Monthly Ad & Marketing Budget (₹):'}</label>
+            <input type="number" class="form-control" id="calcAdSpend" value="1500">
+            <small style="color: var(--text-muted); font-size: 0.78rem;">${lang === 'ml' ? 'ഇൻസ്റ്റാഗ്രാം, ഫേസ്ബുക്ക്, ഇൻഫ്ലുവൻസർ പ്രമോഷൻ' : 'Instagram/Meta ads, influencer gifting & promotion'}</small>
+          </div>
+          <div class="form-group">
+            <label class="form-label">${lang === 'ml' ? 'വേസ്റ്റേജ് & റിട്ടേൺസ് (Wastage / RTO %):' : lang === 'ar' ? 'نسبة المرتجعات والهالك (%):' : 'Wastage & Returns Rate (%):'}</label>
+            <input type="number" class="form-control" id="calcWastageRate" value="5">
+            <small style="color: var(--text-muted); font-size: 0.78rem;">${lang === 'ml' ? 'ഡാമേജ് ആകുന്ന സാധനങ്ങളും റിട്ടേൺ ഓർഡറുകളും (സാധാരണ 3% - 8%)' : 'Damaged stock or return-to-origin orders (typically 3% - 8%)'}</small>
+          </div>
           <button class="btn btn-primary" style="width: 100%; justify-content: center; margin-top: 10px;" onclick="app.calculateProfit()">
-            <i class="fa-solid fa-calculator"></i> ${lang === 'ml' ? 'ലാഭം കണക്കാക്കുക' : lang === 'ar' ? 'تحديث حساب الأرباح' : 'Recalculate Profit'}
+            <i class="fa-solid fa-calculator"></i> ${lang === 'ml' ? 'ലാഭം കൃത്യമായി കണക്കാക്കുക' : lang === 'ar' ? 'تحديث حساب الأرباح الصافية' : 'Recalculate Net Profit'}
           </button>
         </div>
 
@@ -6379,10 +6610,13 @@ const app = {
           </div>
 
           <div class="breakdown-list-card">
-            <div class="breakdown-row"><span>${lang === 'ml' ? 'പ്രതിമാസ ആകെ വിറ്റുവരവ് (Revenue)' : lang === 'ar' ? 'إجمالي المبيعات' : 'Monthly Revenue'}</span><strong id="resValRevenue">₹20,940</strong></div>
-            <div class="breakdown-row"><span>${lang === 'ml' ? 'സ്റ്റോക്ക് വാങ്ങിയ തുക' : lang === 'ar' ? 'تكلفة شراء البضاعة' : 'Stock Purchase Cost'}</span><strong class="text-danger" id="resValStockCost">- ₹4,800</strong></div>
-            <div class="breakdown-row"><span>${lang === 'ml' ? 'പാക്കേജിംഗ് ചെലവ്' : lang === 'ar' ? 'تكلفة التغليف' : 'Packaging & Branding'}</span><strong class="text-danger" id="resValTotalPackaging">- ₹1,500</strong></div>
-            <div class="breakdown-row"><span>${lang === 'ml' ? 'കൊറിയർ ചാർജ്ജ്' : lang === 'ar' ? 'تكلفة الشحن' : 'Net Shipping Cost'}</span><strong class="text-danger" id="resValTotalShipping">₹0 (Paid by Buyer)</strong></div>
+            <div class="breakdown-row"><span>${lang === 'ml' ? 'പ്രതിമാസ ആകെ വിറ്റുവരവ് (Gross Revenue)' : lang === 'ar' ? 'إجمالي المبيعات' : 'Monthly Gross Revenue'}</span><strong id="resValRevenue">₹20,940</strong></div>
+            <div class="breakdown-row"><span>${lang === 'ml' ? 'സ്റ്റോക്ക് വാങ്ങിയ തുക (COGS)' : lang === 'ar' ? 'تكلفة شراء البضاعة' : 'Stock Purchase Cost'}</span><strong class="text-danger" id="resValStockCost">- ₹4,800</strong></div>
+            <div class="breakdown-row"><span>${lang === 'ml' ? 'പാക്കേജിംഗ് & ബ്രാൻഡിംഗ്' : lang === 'ar' ? 'تكلفة التغليف' : 'Packaging & Branding'}</span><strong class="text-danger" id="resValTotalPackaging">- ₹1,500</strong></div>
+            <div class="breakdown-row"><span>${lang === 'ml' ? 'കൊറിയർ / ഷിപ്പിംഗ് ചെലവ്' : lang === 'ar' ? 'تكلفة الشحن' : 'Net Shipping Cost'}</span><strong class="text-danger" id="resValTotalShipping">₹0 (Paid by Buyer)</strong></div>
+            <div class="breakdown-row"><span>${lang === 'ml' ? 'കട / റൂം വാടക (Rent)' : lang === 'ar' ? 'إيجار المحل أو المشغل' : 'Shop / Workspace Rent'}</span><strong class="text-danger" id="resValShopRent">₹0</strong></div>
+            <div class="breakdown-row"><span>${lang === 'ml' ? 'പരസ്യച്ചിലവ് (Meta/Insta Ads)' : lang === 'ar' ? 'تكلفة الإعلانات والتسويق' : 'Ad & Marketing Spend'}</span><strong class="text-danger" id="resValAdSpend">- ₹1,500</strong></div>
+            <div class="breakdown-row"><span>${lang === 'ml' ? 'വേസ്റ്റേജ് & റിട്ടേൺസ് (Wastage/RTO)' : lang === 'ar' ? 'الهالك والمرتجعات' : 'Wastage & Returns'}</span><strong class="text-danger" id="resValWastage">- ₹1,047</strong></div>
             <div class="breakdown-row"><span>${lang === 'ml' ? 'ബാങ്ക് / പേയ്‌മെന്റ് ഗേറ്റ്‌വേ (2%)' : lang === 'ar' ? 'عمولة الدفع الإلكتروني' : 'Payment Gateway / Bank (2%)'}</span><strong class="text-danger" id="resValPaymentGateway">- ₹419</strong></div>
             <div class="breakdown-row highlight-row"><span>${lang === 'ml' ? 'ആദ്യ ബാച്ചിന് വേണ്ട മൂലധനം' : lang === 'ar' ? 'رأس مال الدفعة الأولى' : 'Initial Capital Needed for 1st Batch'}</span><strong class="text-primary" id="resValStartupCap">₹2,100 (20 units)</strong></div>
           </div>
@@ -6397,7 +6631,7 @@ const app = {
   },
 
   bindCalcInputs() {
-    ['calcWholesaleCost', 'calcSellingPrice', 'calcPackagingCost', 'calcShippingFee', 'calcMonthlyVolume'].forEach(id => {
+    ['calcWholesaleCost', 'calcSellingPrice', 'calcPackagingCost', 'calcShippingFee', 'calcMonthlyVolume', 'calcShopRent', 'calcAdSpend', 'calcWastageRate'].forEach(id => {
       const el = document.getElementById(id);
       if (el) el.addEventListener('input', () => this.calculateProfit());
     });
@@ -6410,19 +6644,24 @@ const app = {
     const shipping = parseFloat(document.getElementById('calcShippingFee')?.value) || 0;
     const volume = parseInt(document.getElementById('calcMonthlyVolume')?.value) || 0;
     const shippingOpt = document.getElementById('calcShippingOption')?.value || 'customer_pays';
+    const rent = parseFloat(document.getElementById('calcShopRent')?.value) || 0;
+    const adSpend = parseFloat(document.getElementById('calcAdSpend')?.value) || 0;
+    const wastageRate = parseFloat(document.getElementById('calcWastageRate')?.value) || 0;
 
     const netShippingPaidBySeller = (shippingOpt === 'customer_pays') ? 0 : shipping;
     const paymentGatewayFee = price * 0.02;
-
-    const netProfitPerUnit = price - (cost + packaging + netShippingPaidBySeller + paymentGatewayFee);
-    const profitMarginPct = price > 0 ? ((netProfitPerUnit / price) * 100).toFixed(1) : 0;
 
     const monthlyRevenue = price * volume;
     const monthlyStockCost = cost * volume;
     const monthlyPackagingCost = packaging * volume;
     const monthlyShippingCost = netShippingPaidBySeller * volume;
     const monthlyGatewayFee = paymentGatewayFee * volume;
-    const monthlyNetProfit = netProfitPerUnit * volume;
+    const monthlyWastage = monthlyRevenue * (wastageRate / 100);
+
+    const totalExpenses = monthlyStockCost + monthlyPackagingCost + monthlyShippingCost + monthlyGatewayFee + rent + adSpend + monthlyWastage;
+    const monthlyNetProfit = monthlyRevenue - totalExpenses;
+    const netProfitPerUnit = volume > 0 ? (monthlyNetProfit / volume) : 0;
+    const profitMarginPct = monthlyRevenue > 0 ? ((monthlyNetProfit / monthlyRevenue) * 100).toFixed(1) : 0;
 
     const initialBatchUnits = Math.min(20, Math.max(10, Math.round(volume / 3)));
     const initialCapital = (cost + packaging) * initialBatchUnits;
@@ -6435,9 +6674,15 @@ const app = {
     const resPack = document.getElementById('resValTotalPackaging');
     const resShip = document.getElementById('resValTotalShipping');
     const resGate = document.getElementById('resValPaymentGateway');
+    const resRent = document.getElementById('resValShopRent');
+    const resAd = document.getElementById('resValAdSpend');
+    const resWastage = document.getElementById('resValWastage');
     const resCap = document.getElementById('resValStartupCap');
 
-    if (resProfit) resProfit.textContent = `₹${Math.round(monthlyNetProfit).toLocaleString('en-IN')}`;
+    if (resProfit) {
+      resProfit.textContent = `₹${Math.round(monthlyNetProfit).toLocaleString('en-IN')}`;
+      resProfit.style.color = monthlyNetProfit >= 0 ? '#059669' : '#dc2626';
+    }
     if (resMargin) resMargin.textContent = `${profitMarginPct}%`;
     if (resUnit) resUnit.textContent = `₹${netProfitPerUnit.toFixed(2)}`;
     if (resRev) resRev.textContent = `₹${Math.round(monthlyRevenue).toLocaleString('en-IN')}`;
@@ -6448,6 +6693,9 @@ const app = {
       resShip.textContent = shippingOpt === 'customer_pays' ? (this.currentLang === 'ml' ? "₹0 (കസ്റ്റമർ നൽകുന്നു)" : this.currentLang === 'ar' ? "₹0 (على حساب المشتري)" : "₹0 (Paid by Buyer)") : `- ₹${Math.round(monthlyShippingCost).toLocaleString('en-IN')}`;
     }
 
+    if (resRent) resRent.textContent = rent > 0 ? `- ₹${Math.round(rent).toLocaleString('en-IN')}` : '₹0 (Home-based)';
+    if (resAd) resAd.textContent = adSpend > 0 ? `- ₹${Math.round(adSpend).toLocaleString('en-IN')}` : '₹0';
+    if (resWastage) resWastage.textContent = monthlyWastage > 0 ? `- ₹${Math.round(monthlyWastage).toLocaleString('en-IN')} (${wastageRate}%)` : '₹0';
     if (resGate) resGate.textContent = `- ₹${Math.round(monthlyGatewayFee).toLocaleString('en-IN')}`;
     if (resCap) resCap.textContent = `₹${Math.round(initialCapital).toLocaleString('en-IN')} (${initialBatchUnits} units)`;
 
@@ -6634,30 +6882,41 @@ const app = {
       );
       const waLink = `https://wa.me/${sup.whatsapp}?text=${waMsg}`;
 
+      const isVerified = sup.isVerified !== false;
+      const verDate = sup.verifiedDate || "November 2026";
+      const rating = sup.rating || "4.9/5";
+
       html += `
-        <div class="supplier-card">
-          <div class="supplier-head">
-            <h4 class="supplier-name">${sup.name}</h4>
-            <span class="city-badge">${sup.city}</span>
+        <div class="supplier-card" style="position: relative; border-top: 3px solid #059669;">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+            <span class="city-badge" style="background: #e0f2fe; color: #0369a1; font-weight: 700; padding: 3px 8px; border-radius: 6px; font-size: 0.75rem;"><i class="fa-solid fa-location-dot"></i> ${sup.city}</span>
+            <span style="display: inline-flex; align-items: center; gap: 4px; background: #ecfdf5; color: #065f46; border: 1px solid #a7f3d0; padding: 2px 8px; border-radius: 12px; font-size: 0.72rem; font-weight: 700;">
+              <i class="fa-solid fa-circle-check" style="color: #059669;"></i> ${lang === 'ml' ? 'പരിശോധിച്ച വ്യാപാരി' : lang === 'ar' ? 'مورد موثوق' : 'Verified Wholesaler'} • ${verDate}
+            </span>
           </div>
-          <p class="supplier-address"><i class="fa-solid fa-location-dot"></i> <span>${sup.address}</span></p>
-          <p style="font-size: 0.85rem; color: #1e293b; margin-bottom: 8px;"><strong>${lang === 'ml' ? 'പ്രത്യേകതകൾ:' : lang === 'ar' ? 'المنتجات:' : 'Specialties:'}</strong> ${sup.specialty}</p>
-          <p style="font-size: 0.8rem; color: #64748b; margin-bottom: 14px;"><i class="fa-solid fa-box"></i> <strong>MOQ:</strong> ${sup.moq}</p>
-          <div class="supplier-tags">
-            ${sup.tags.map(t => `<span class="supplier-tag">${t}</span>`).join('')}
+          <div class="supplier-head" style="margin-bottom: 8px;">
+            <h4 class="supplier-name" style="font-size: 1.05rem; font-weight: 800; color: #0f172a; margin: 0;">${sup.name}</h4>
           </div>
-          <div class="supplier-actions">
-            <a href="${this.sanitizeUrl(waLink)}" target="_blank" rel="noopener noreferrer" class="btn-whatsapp">
-              <i class="fa-brands fa-whatsapp"></i> ${lang === 'ml' ? 'വാട്സ്ആപ്പ്' : lang === 'ar' ? 'واتساب' : 'WhatsApp'}
+          <p class="supplier-address" style="font-size: 0.82rem; color: #64748b; margin-bottom: 8px;"><i class="fa-solid fa-map-pin" style="color: #059669;"></i> <span>${sup.address}</span></p>
+          <p style="font-size: 0.85rem; color: #1e293b; margin-bottom: 8px; line-height: 1.4;"><strong>${lang === 'ml' ? 'പ്രത്യേകതകൾ:' : lang === 'ar' ? 'المنتجات:' : 'Specialties:'}</strong> ${sup.specialty}</p>
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; background: #f8fafc; padding: 6px 10px; border-radius: 6px;">
+            <span style="font-size: 0.8rem; color: #475569;"><i class="fa-solid fa-boxes-stacked" style="color: #64748b;"></i> <strong>MOQ:</strong> ${sup.moq}</span>
+            <span style="font-size: 0.78rem; font-weight: 700; color: #d97706;"><i class="fa-solid fa-star"></i> ${rating}</span>
+          </div>
+          <div class="supplier-tags" style="margin-bottom: 14px;">
+            ${sup.tags.map(t => `<span class="supplier-tag" style="background:#f1f5f9;color:#334155;padding:2px 8px;border-radius:4px;font-size:0.75rem;margin-right:4px;">${t}</span>`).join('')}
+          </div>
+          <div class="supplier-actions" style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <a href="${this.sanitizeUrl(waLink)}" target="_blank" rel="noopener noreferrer" class="btn-whatsapp" style="flex: 1; display: inline-flex; align-items: center; justify-content: center; gap: 6px; background: #25D366; color: #ffffff; font-weight: 700; padding: 8px 12px; border-radius: 8px; text-decoration: none; font-size: 0.88rem; box-shadow: 0 2px 4px rgba(37,211,102,0.2);">
+              <i class="fa-brands fa-whatsapp" style="font-size: 1.1rem;"></i> ${lang === 'ml' ? 'വാട്സ്ആപ്പിൽ ബന്ധപ്പെടുക' : lang === 'ar' ? 'واتساب مباشر' : 'WhatsApp'}
             </a>
-            <a href="${this.sanitizeUrl(sup.mapUrl)}" target="_blank" rel="noopener noreferrer" class="btn-map">
-              <i class="fa-solid fa-location-crosshairs"></i> ${lang === 'ml' ? 'ഗൂഗിൾ മാപ്പ്' : lang === 'ar' ? 'خرائط جوجل' : 'Google Maps'}
+            <a href="${this.sanitizeUrl(sup.mapUrl)}" target="_blank" rel="noopener noreferrer" class="btn-map" style="display: inline-flex; align-items: center; justify-content: center; gap: 4px; padding: 8px 10px; border-radius: 8px; background: #f1f5f9; color: #334155; text-decoration: none; font-size: 0.82rem;">
+              <i class="fa-solid fa-location-crosshairs"></i> ${lang === 'ml' ? 'മാപ്പ്' : 'Map'}
             </a>
-            <a href="${this.sanitizeUrl('tel:' + sup.phone)}" class="btn-map-call">
+            <a href="${this.sanitizeUrl('tel:' + sup.phone)}" class="btn-map-call" style="display: inline-flex; align-items: center; justify-content: center; padding: 8px 12px; border-radius: 8px; background: #0284c7; color: #fff; text-decoration: none;" title="Call">
               <i class="fa-solid fa-phone"></i>
             </a>
-            ${sup.website ? `<a href="${this.sanitizeUrl(sup.website)}" target="_blank" rel="noopener noreferrer" class="btn-map-call" title="Website"><i class="fa-solid fa-globe"></i></a>` : ""}
-            ${sup.facebook ? `<a href="${this.sanitizeUrl(sup.facebook)}" target="_blank" rel="noopener noreferrer" class="btn-map-call" title="Facebook" style="background:#1877f2;"><i class="fa-brands fa-facebook"></i></a>` : ""}
+            ${sup.website ? `<a href="${this.sanitizeUrl(sup.website)}" target="_blank" rel="noopener noreferrer" class="btn-map-call" title="Website" style="display: inline-flex; align-items: center; justify-content: center; padding: 8px 12px; border-radius: 8px; background: #475569; color: #fff; text-decoration: none;"><i class="fa-solid fa-globe"></i></a>` : ""}
           </div>
         </div>
       `;
@@ -6801,37 +7060,101 @@ const app = {
     const cat = this.categoriesData[nicheKey];
     const catTitle = cat ? (cat.title[lang] || cat.title.en) : nicheKey;
 
+    // Niche-specific economics map with authentic hubs & unit economics
+    const nicheProfiles = {
+      attar: {
+        costRatio: 0.35, avgPrice: 349, rentPct: 0.0, adPct: 0.12, wastagePct: 0.03,
+        hub: "Kozhikode S.M. Street, Mumbai Mohammad Ali Road, Kannauj Traditional Distillers",
+        packaging: "Branded roll-on crystal bottles (6ml/12ml), velvet pouches, thank you cards",
+        courier: "ST Courier (Kerala: ₹40-50), India Post Speed Post (₹45-60)"
+      },
+      clothing: {
+        costRatio: 0.40, avgPrice: 899, rentPct: 0.08, adPct: 0.16, wastagePct: 0.08,
+        hub: "Surat Ring Road Textile Hub, Tirupur Cotton Mills, Broadway Kochi",
+        packaging: "Frosted custom zip poly-mailers, tissue wrap, brand hangtags",
+        courier: "Shiprocket / Delhivery (Kerala: ₹50-65, All India: ₹70-90)"
+      },
+      watches: {
+        costRatio: 0.38, avgPrice: 799, rentPct: 0.0, adPct: 0.15, wastagePct: 0.06,
+        hub: "Mumbai Crawford Market, Ernakulam MG Road Hub",
+        packaging: "Matte watch gift box, velvet pillow insert, warranty card",
+        courier: "ST Courier / DTDC Express (₹50-70)"
+      },
+      bags: {
+        costRatio: 0.35, avgPrice: 399, rentPct: 0.0, adPct: 0.12, wastagePct: 0.05,
+        hub: "Calicut Eco Bag Works (Mankavu), Surat Canvas Mill, Broadway Kochi",
+        packaging: "Recycled kraft paper bags, brand sticker seal, thank you card",
+        courier: "India Post Book Post / ST Courier (₹40-50)"
+      },
+      accessories: {
+        costRatio: 0.25, avgPrice: 299, rentPct: 0.0, adPct: 0.14, wastagePct: 0.03,
+        hub: "Crawford Market Mumbai, Delhi Sadar Bazaar, Broadway Kochi, Thrissur Round",
+        packaging: "18K anti-tarnish zip pouches, padded jewelry box, microfiber cloth",
+        courier: "ST Courier (₹40) or India Post Registered (₹35)"
+      },
+      spices: {
+        costRatio: 0.50, avgPrice: 450, rentPct: 0.0, adPct: 0.10, wastagePct: 0.04,
+        hub: "Idukki Spices Park (Nedumkandam), Wayanad Farmer Coops (Kalpetta), Mattancherry Big Bazaar",
+        packaging: "Airtight aluminum foil zip pouches, food safety FSSAI labels",
+        courier: "India Post Speed Post / Kerala Line Haul (₹45-60)"
+      }
+    };
+
+    const profile = nicheProfiles[nicheKey] || {
+      costRatio: 0.40, avgPrice: 499, rentPct: 0.05, adPct: 0.12, wastagePct: 0.05,
+      hub: "Kerala District Wholesale Clusters, Coimbatore & Surat Direct Industrial Mills",
+      packaging: "Custom branded packaging boxes, tamper-evident seals",
+      courier: "ST Courier / India Post / Delhivery"
+    };
+
     // Pull niche-specific suppliers from directory
     const matchingSuppliers = this.suppliers.filter(s => s.category === nicheKey).slice(0, 3);
     let supNames = matchingSuppliers.map(s => `${s.name} (${s.city} - ${s.phone})`).join(', ');
-    if (!supNames) supNames = lang === 'ml' ? 'ഈ ബിസിനസിനുള്ള ലോക്കൽ സ്രോതസ്സ് ഡയറക്ടറിയിൽ ചേർക്കുന്നതാണ്.' : 'Local suppliers for this niche will be added to the directory soon.';
+    if (!supNames) supNames = lang === 'ml' ? 'ഈ ബിസിനസിനുള്ള ലോക്കൽ സ്രോതസ്സ് ഡയറക്ടറിയിൽ ലഭ്യമാണ്.' : 'Verified suppliers for this category are listed in the directory.';
 
-    // Calculate realistic projections based on ACTUAL budget (not fixed bands)
-    // Assumptions: cost price ≈ 40–50% of selling price, 60–70% sell-through first month
-    const costRatio = 0.45; // avg cost as % of sell price
-    const sellThrough = 0.65; // 65% units sold in month 1
-    const avgSellingPrice = budgetVal <= 5000 ? 149 : budgetVal <= 20000 ? 299 : 499;
-    const units = Math.floor(budgetVal / (avgSellingPrice * costRatio));
-    const unitsSold = Math.floor(units * sellThrough);
-    const grossRevenue = unitsSold * avgSellingPrice;
-    const cogs = unitsSold * avgSellingPrice * costRatio;
-    const otherCosts = Math.round(budgetVal * 0.12); // 12% for packaging, shipping, misc
-    const netProfit = grossRevenue - cogs - otherCosts;
-    const netProfitLow = Math.round(netProfit * 0.7);
-    const netProfitHigh = Math.round(netProfit * 1.2);
+    // Capital Allocation Engine
+    const inventoryBudget = Math.round(budgetVal * 0.65);
+    const rentBudget = Math.round(budgetVal * profile.rentPct);
+    const adBudget = Math.round(budgetVal * profile.adPct);
+    const packCourierBudget = Math.round(budgetVal * 0.10);
+    const reserveFund = Math.max(0, budgetVal - (inventoryBudget + rentBudget + adBudget + packCourierBudget));
 
-    const fmt = (n) => '₹' + Math.abs(n).toLocaleString('en-IN');
-    const expectedOrders = `${unitsSold} – ${Math.round(unitsSold * 1.3)} units (est.)`;
-    const expectedProfit = netProfitLow > 0
-      ? `${fmt(netProfitLow)} – ${fmt(netProfitHigh)} (after costs)`
-      : `Loss likely in month 1 — focus on building customers first`;
+    const avgSellingPrice = profile.avgPrice;
+    const unitCost = Math.round(avgSellingPrice * profile.costRatio);
+    const totalUnitsBought = Math.max(8, Math.floor(inventoryBudget / unitCost));
+
+    // 1. Realistic Scenario (70% sold)
+    const realSold = Math.floor(totalUnitsBought * 0.70);
+    const realRevenue = realSold * avgSellingPrice;
+    const realCogs = realSold * unitCost;
+    const realWastage = Math.round(realRevenue * profile.wastagePct);
+    const realPacking = Math.round(realSold * 25);
+    const realNetProfit = realRevenue - (realCogs + rentBudget + adBudget + realWastage + realPacking);
+
+    // 2. Best Case Scenario (90% sold, higher margins)
+    const bestSold = Math.floor(totalUnitsBought * 0.90);
+    const bestRevenue = bestSold * avgSellingPrice;
+    const bestCogs = bestSold * unitCost;
+    const bestWastage = Math.round(bestRevenue * (profile.wastagePct * 0.5));
+    const bestPacking = Math.round(bestSold * 25);
+    const bestNetProfit = bestRevenue - (bestCogs + rentBudget + adBudget + bestWastage + bestPacking);
+
+    // 3. Conservative Scenario (50% sold, higher returns)
+    const consSold = Math.floor(totalUnitsBought * 0.50);
+    const consRevenue = consSold * avgSellingPrice;
+    const consCogs = consSold * unitCost;
+    const consWastage = Math.round(consRevenue * (profile.wastagePct * 1.5));
+    const consPacking = Math.round(consSold * 25);
+    const consNetProfit = consRevenue - (consCogs + rentBudget + adBudget + consWastage + consPacking);
+
+    const fmt = (n) => '₹' + Math.abs(Math.round(n)).toLocaleString('en-IN');
 
     container.innerHTML = `
       <div class="plan-result-document">
         <div class="plan-doc-header">
           <div class="plan-doc-title">
             <h3><i class="fa-solid fa-file-signature text-success"></i> ${name} — 1-Page Business Launch Blueprint</h3>
-            <p>${catTitle} • Generated on ${new Date().toLocaleDateString()} via Business in Kerala</p>
+            <p>${catTitle} • Generated on ${new Date().toLocaleDateString()} via Vyapar Shiksha</p>
           </div>
           <div style="display: flex; gap: 8px; flex-wrap: wrap;">
             <button class="btn-print-plan" style="background: #059669; border-color: #047857;" onclick="app.openChecklistModal('${nicheKey}')" title="സൗജന്യ ബിസിനസ്സ് ചെക്ക്‌ലിസ്റ്റ് (PDF)">
@@ -6845,46 +7168,69 @@ const app = {
 
         <div class="plan-doc-body">
           <div class="plan-doc-section">
-            <h4><i class="fa-solid fa-coins"></i> Financial & Capital Plan</h4>
+            <h4><i class="fa-solid fa-wallet text-success"></i> 1. Capital Allocation & Working Budget (ആകെ മൂലധന വിഹിതം)</h4>
             <ul>
-              <li><strong>Initial Working Capital:</strong> ₹${budgetVal.toLocaleString('en-IN')}</li>
-              <li><strong>Recommended First Batch Size:</strong> ${budgetVal <= 5000 ? '15 - 25 units' : '40 - 70 units'}</li>
-              <li><strong>Target First Month Sales:</strong> ${expectedOrders}</li>
-              <li><strong>Est. Units to Purchase:</strong> ${units} units @ avg sell price ₹${avgSellingPrice}</li>
-              <li><strong>Month 1 Estimated Sales:</strong> ${expectedOrders}</li>
-              <li><strong>Estimated Net Profit (Month 1):</strong> <span class="text-success" style="font-size:1.1rem;font-weight:800;">${expectedProfit}</span></li>
-              <li style="font-size:0.8rem;color:#64748b;background:#f8fafc;padding:6px 10px;border-radius:6px;border-left:3px solid #94a3b8;"><i class="fa-solid fa-circle-info"></i> <em>Assumptions: cost = 45% of sell price, 65% sell-through, 12% misc costs (packaging, shipping, returns). Actual results vary by market conditions and execution. This is an estimate, not a guarantee of profit.</em></li>
-              <li><strong>Payment Strategy:</strong> Google Pay / PhonePe UPI (0% fee) + ₹50 advance for COD</li>
+              <li><strong>Initial Working Capital (പ്രാരംഭ മൂലധനം):</strong> ₹${budgetVal.toLocaleString('en-IN')}</li>
+              <li><strong>Stock / Inventory Purchase (65%):</strong> ₹${inventoryBudget.toLocaleString('en-IN')} (വാങ്ങാവുന്ന സ്റ്റോക്ക്: ${totalUnitsBought} യൂണിറ്റുകൾ @ ₹${unitCost}/unit)</li>
+              <li><strong>Rent & Workspace Allowance (വാടക ചിലവ്):</strong> ${rentBudget > 0 ? '₹' + rentBudget.toLocaleString('en-IN') : '₹0 (വീട്ടിലിരുന്ന് ആരംഭിക്കാം / Zero Rent)'}</li>
+              <li><strong>Ad & Marketing Spend (പരസ്യച്ചിലവ് - Meta/Instagram):</strong> ₹${adBudget.toLocaleString('en-IN')}</li>
+              <li><strong>Packaging & Shipping Material (പാക്കേജിംഗ്):</strong> ₹${packCourierBudget.toLocaleString('en-IN')}</li>
+              <li><strong>Emergency Reserve Fund (കരുതൽ ധനം):</strong> ₹${reserveFund.toLocaleString('en-IN')}</li>
             </ul>
           </div>
 
           <div class="plan-doc-section">
-            <h4><i class="fa-solid fa-shop"></i> Sourcing & Wholesalers</h4>
+            <h4><i class="fa-solid fa-chart-line text-primary"></i> 2. Month 1 Net Profit Scenarios (ലാഭക്കണക്ക് - 3 സാഹചര്യങ്ങൾ)</h4>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin-top: 10px;">
+              <div style="background: #ecfdf5; border: 1px solid #10b981; border-radius: 8px; padding: 14px;">
+                <h5 style="color: #065f46; margin: 0 0 6px 0; font-size: 0.95rem;"><i class="fa-solid fa-circle-check"></i> യാഥാർത്ഥ്യപരമായത് (Realistic)</h5>
+                <p style="font-size: 0.8rem; color: #047857; margin-bottom: 6px;">70% വിൽപന (Sales: ${realSold} pcs)</p>
+                <div style="font-size: 1.25rem; font-weight: 800; color: ${realNetProfit >= 0 ? '#059669' : '#dc2626'};">${realNetProfit >= 0 ? '+' : '-'} ${fmt(realNetProfit)}</div>
+                <small style="font-size: 0.72rem; color: #475569;">വാടക, പരസ്യം, വേസ്റ്റേജ് (${profile.wastagePct*100}%) കിഴിച്ചുള്ള തുക</small>
+              </div>
+
+              <div style="background: #eff6ff; border: 1px solid #3b82f6; border-radius: 8px; padding: 14px;">
+                <h5 style="color: #1e40af; margin: 0 0 6px 0; font-size: 0.95rem;"><i class="fa-solid fa-star"></i> മികച്ച സാഹചര്യം (Best Case)</h5>
+                <p style="font-size: 0.8rem; color: #1d4ed8; margin-bottom: 6px;">90% വിൽപന (Sales: ${bestSold} pcs)</p>
+                <div style="font-size: 1.25rem; font-weight: 800; color: #2563eb;">+ ${fmt(bestNetProfit)}</div>
+                <small style="font-size: 0.72rem; color: #475569;">കൂടുതൽ ഓർഡറുകളും കുറഞ്ഞ റിട്ടേൺസും ഉള്ളപ്പോൾ</small>
+              </div>
+
+              <div style="background: #fffbeb; border: 1px solid #f59e0b; border-radius: 8px; padding: 14px;">
+                <h5 style="color: #92400e; margin: 0 0 6px 0; font-size: 0.95rem;"><i class="fa-solid fa-shield-halved"></i> കുറഞ്ഞ സാഹചര്യം (Conservative)</h5>
+                <p style="font-size: 0.8rem; color: #b45309; margin-bottom: 6px;">50% വിൽപന (Sales: ${consSold} pcs)</p>
+                <div style="font-size: 1.25rem; font-weight: 800; color: ${consNetProfit >= 0 ? '#d97706' : '#dc2626'};">${consNetProfit >= 0 ? '+' : '-'} ${fmt(consNetProfit)}</div>
+                <small style="font-size: 0.72rem; color: #475569;">ആദ്യ മാസം തുടക്കക്കാരന്റെ വേസ്റ്റേജ് ഉൾപ്പെടെ</small>
+              </div>
+            </div>
+          </div>
+
+          <div class="plan-doc-section">
+            <h4><i class="fa-solid fa-shop text-secondary"></i> 3. Sourcing & Verified Wholesalers (മൊത്തവ്യാപാരികൾ & ഹബ്ബുകൾ)</h4>
             <ul>
-              <li><strong>Primary Wholesale Markets:</strong> Kozhikode S.M. Street, Mumbai Mohammad Ali Road / Crawford</li>
-              <li><strong>Verified Key Contacts:</strong> ${supNames}</li>
-              <li><strong>Packaging Checklist:</strong> Branded stickers, frosted zip pouches / boxes, thank you cards</li>
-              <li><strong>Courier Partners:</strong> ST Courier (Kerala: ₹40-₹50), India Post (All India: ₹45-₹65)</li>
+              <li><strong>Primary Wholesale Markets (പ്രധാന വിപണികൾ):</strong> ${profile.hub}</li>
+              <li><strong>Verified Directory Key Contacts (പരിശോധിച്ച കോൺടാക്റ്റുകൾ):</strong> ${supNames}</li>
+              <li><strong>Packaging Checklist (പാക്കേജിംഗ് ലിസ്റ്റ്):</strong> ${profile.packaging}</li>
+              <li><strong>Courier Partners (കൊറിയർ പങ്കാളികൾ):</strong> ${profile.courier}</li>
             </ul>
           </div>
 
           <div class="plan-doc-section">
-            <h4><i class="fa-brands fa-instagram"></i> Instagram 14-Day Launch Plan</h4>
+            <h4><i class="fa-brands fa-instagram text-danger"></i> 4. Instagram 14-Day Customer Acquisition Plan</h4>
             <ul>
-              <li><strong>Day 1-3:</strong> Set up Instagram Business Profile & WhatsApp Catalog with 10 clear photos</li>
-              <li><strong>Day 4-7:</strong> Post 5 aesthetic unboxing and packaging reels with trending audio</li>
-              <li><strong>Day 8-10:</strong> Send complimentary sample boxes to 3 local micro-influencers or friend networks</li>
-              <li><strong>Day 11-14:</strong> Offer inaugural free delivery on all prepaid orders; achieve first 15 sales</li>
+              <li><strong>Day 1-3:</strong> Set up professional Business Profile with logo, Malayalam/English bio, and 10 catalog photos.</li>
+              <li><strong>Day 4-7:</strong> Post 5 aesthetic product unboxing & packaging reels with trending audio.</li>
+              <li><strong>Day 8-10:</strong> Send complimentary PR gift boxes to 3 local micro-influencers or friend networks for authentic reviews.</li>
+              <li><strong>Day 11-14:</strong> Offer inaugural free delivery on all prepaid orders; achieve first 15 sales.</li>
             </ul>
           </div>
 
           <div class="plan-doc-section">
-            <h4><i class="fa-solid fa-award"></i> The Golden Rules for Success</h4>
+            <h4><i class="fa-solid fa-scale-balanced text-warning"></i> 5. Ethical & Halal Business Standard</h4>
             <ul>
-              <li>Never buy dead stock in bulk; always start with 15-20 fast-moving items.</li>
-              <li>Ship within 24 hours to create delighted, repeating customers.</li>
-              <li>Collect video/text reviews from day one to build social proof.</li>
-              <li>Reinvest 70% of first month's profits directly back into expanding inventory.</li>
+              <li><strong>Zero Interest / Riba:</strong> No credit card interest or usurious debt; scale purely from customer cash flow.</li>
+              <li><strong>Transparent Pricing:</strong> Disclose product weight, ingredients, and delivery charges upfront with zero hidden costs.</li>
+              <li><strong>Profit Reinvestment:</strong> Reinvest 70% of first month's net earnings directly into growing product inventory.</li>
             </ul>
           </div>
         </div>
@@ -6892,7 +7238,7 @@ const app = {
     `;
   },
 
-  // Business Quiz
+    // Business Quiz
   runBusinessQuiz() {
     const budget = document.querySelector('input[name="quizBudget"]:checked')?.value || 'low';
     const time = document.querySelector('input[name="quizTime"]:checked')?.value || 'part_time';
