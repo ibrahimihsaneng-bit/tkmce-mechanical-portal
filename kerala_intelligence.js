@@ -136,7 +136,7 @@ const keralaIntel = {
               </p>
             </div>
             <div class="kerala-header-actions">
-              <button class="btn btn-outline text-white" onclick="keralaIntel.printDistrictReport()">
+              <button class="btn" style="background: rgba(255,255,255,0.2) !important; border: 1.5px solid rgba(255,255,255,0.6) !important; color: #ffffff !important; font-weight: 700; border-radius: 10px;" onclick="keralaIntel.printDistrictReport()">
                 <i class="fa-solid fa-print"></i> <span>${lang === 'ml' ? 'ജില്ലാ റിപ്പോർട്ട് പ്രിന്റ്' : 'Print District Report'}</span>
               </button>
               <button class="btn btn-success" onclick="keralaIntel.switchViewTab('checklist')">
