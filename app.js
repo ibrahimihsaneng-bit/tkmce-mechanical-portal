@@ -4163,6 +4163,42 @@ const app = {
     }
   },
 
+  // Gradients for all 30 course header banners
+  categoryHeaderGradients: {
+    attar: "linear-gradient(135deg, #064e3b 0%, #047857 100%)",
+    clothing: "linear-gradient(135deg, #831843 0%, #be185d 100%)",
+    watches: "linear-gradient(135deg, #1e1b4b 0%, #4338ca 100%)",
+    bags: "linear-gradient(135deg, #7c2d12 0%, #c2410c 100%)",
+    accessories: "linear-gradient(135deg, #042f2e 0%, #0f766e 100%)",
+    spices: "linear-gradient(135deg, #14532d 0%, #15803d 100%)",
+    electronics: "linear-gradient(135deg, #0c4a6e 0%, #0284c7 100%)",
+    cookware: "linear-gradient(135deg, #7c2d12 0%, #ea580c 100%)",
+    footwear: "linear-gradient(135deg, #451a03 0%, #92400e 100%)",
+    cosmetics: "linear-gradient(135deg, #064e3b 0%, #059669 100%)",
+
+    mach_paperbag: "linear-gradient(135deg, #78350f 0%, #d97706 100%)",
+    mach_coldpress: "linear-gradient(135deg, #14532d 0%, #16a34a 100%)",
+    mach_agarbatti: "linear-gradient(135deg, #4c1d95 0%, #7c3aed 100%)",
+    mach_spisegrind: "linear-gradient(135deg, #7f1d1d 0%, #dc2626 100%)",
+    mach_foilcontainer: "linear-gradient(135deg, #1e293b 0%, #475569 100%)",
+    mach_detergent: "linear-gradient(135deg, #075985 0%, #0284c7 100%)",
+    mach_icepopsicle: "linear-gradient(135deg, #831843 0%, #db2777 100%)",
+    mach_notebook: "linear-gradient(135deg, #312e81 0%, #4f46e5 100%)",
+    mach_slipper: "linear-gradient(135deg, #7c2d12 0%, #ea580c 100%)",
+    mach_tissue: "linear-gradient(135deg, #134e4a 0%, #0d9488 100%)",
+
+    ind_mangopulp: "linear-gradient(135deg, #78350f 0%, #d97706 100%)",
+    ind_coconutoil: "linear-gradient(135deg, #064e3b 0%, #059669 100%)",
+    ind_iqffrozen: "linear-gradient(135deg, #0c4a6e 0%, #0284c7 100%)",
+    ind_spicextr: "linear-gradient(135deg, #581c87 0%, #9333ea 100%)",
+    ind_vacuumchips: "linear-gradient(135deg, #713f12 0%, #ca8a04 100%)",
+    ind_bottledwater: "linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%)",
+    ind_cashewplant: "linear-gradient(135deg, #78350f 0%, #b45309 100%)",
+    ind_arecaplate: "linear-gradient(135deg, #14532d 0%, #16a34a 100%)",
+    ind_dairyplant: "linear-gradient(135deg, #1e40af 0%, #3b82f6 100%)",
+    ind_biodryer: "linear-gradient(135deg, #7c2d12 0%, #ea580c 100%)"
+  },
+
   // Render Homepage Faculty Cards Grid with Real Photography
   renderFacultyCards() {
     const grid = document.getElementById('facultyCardsGrid');
@@ -4200,6 +4236,8 @@ const app = {
         tierPill = `<span class="card-tier-pill tier-retail"><i class="fa-solid fa-store"></i> ${lang === 'ml' ? '1. ചെറുകിട വ്യാപാരം' : lang === 'ar' ? 'تجارة تجزئة ومشاريع' : 'Tier 1: Retail & Trading'}</span>`;
       }
 
+      const headerBg = this.categoryHeaderGradients[cat.id] || "linear-gradient(135deg, #1e293b 0%, #334155 100%)";
+
       html += `
         <div class="faculty-card tier-${cat.tier || 'retail'}">
           <div class="faculty-card-cover">
@@ -4207,13 +4245,13 @@ const app = {
             <span class="cover-badge"><i class="fa-solid fa-coins"></i> ${cat.minBudget}</span>
             ${tierPill}
           </div>
-          <div class="faculty-header ${cat.headerClass || ''}">
-            <div class="faculty-icon-wrap">
+          <div class="faculty-header ${cat.headerClass || ''}" style="background: ${headerBg} !important; color: #ffffff !important; padding: 22px 24px; display: flex; align-items: flex-start; gap: 16px;">
+            <div class="faculty-icon-wrap" style="width: 48px; height: 48px; border-radius: 12px; background: rgba(255,255,255,0.22) !important; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; color: #ffffff !important; flex-shrink: 0; box-shadow: 0 2px 8px rgba(0,0,0,0.15);">
               <i class="fa-solid ${cat.icon}"></i>
             </div>
-            <div class="faculty-title-text">
-              <h3>${title}</h3>
-              <p>${tagline}</p>
+            <div class="faculty-title-text" style="color: #ffffff !important;">
+              <h3 style="color: #ffffff !important; font-size: 1.25rem; font-weight: 800; margin-bottom: 4px; text-shadow: 0 1px 2px rgba(0,0,0,0.2);">${title}</h3>
+              <p style="color: rgba(255,255,255,0.92) !important; font-size: 0.82rem; line-height: 1.4; margin: 0;">${tagline}</p>
             </div>
           </div>
           <div class="faculty-body">
