@@ -71,7 +71,18 @@ const app = {
         : lang === 'ar'
         ? "سيتم تفعيل رابط مجموعة الواتساب قريباً من قبل الإدارة بعد الإنشاء."
         : "This WhatsApp group link will be active shortly once updated by the admin.";
-      alert(msg);
+      // Show inline toast instead of blocking alert
+      const toastId = 'wa-coming-toast';
+      let toast = document.getElementById(toastId);
+      if (!toast) {
+        toast = document.createElement('div');
+        toast.id = toastId;
+        toast.style.cssText = 'position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:#1a1a2e;color:#fff;padding:12px 20px;border-radius:12px;font-size:0.9rem;z-index:9999;box-shadow:0 4px 20px rgba(0,0,0,0.3);border-left:4px solid #f59e0b;max-width:320px;text-align:center;';
+        document.body.appendChild(toast);
+      }
+      toast.innerHTML = '<i class="fa-solid fa-clock" style="color:#f59e0b;margin-right:8px;"></i>' + msg;
+      toast.style.display = 'block';
+      setTimeout(() => { if(toast) toast.style.display='none'; }, 4000);
     }
   },
 
@@ -170,7 +181,7 @@ const app = {
       heroDesc: "A structured micro-business academy for beginners. Dedicated study courses for Attar, Modest Wear, Watches, Bags, and Rings: initial capital requirements, formulation guides, verified wholesale hubs with phone numbers & Google Maps, live profit graphs, and supplier negotiation scripts.",
       statFaculties: "Dedicated Academies",
       statMinInvest: "Min. Initial Investment",
-      statMargin: "Realistic Profit Margin",
+      statMargin: "Realistic Markup on Cost",
       statLang: "EN • മലയാളം • العربية",
       btnExploreNiches: "Explore Business Academies",
       btnTakeQuiz: "Find Which Business Fits You",
@@ -659,7 +670,7 @@ const app = {
         ar: "أكاديمية دهن العود والعطور الزيتية الخالصة"
       },
       tagline: {
-        en: "Highest profit margin (80% - 250%) in Kerala & India. Start with just ₹3,000.",
+        en: "Profit markup on cost (80% - 250%) in Kerala & India. Start with just ₹3,000.",
         ml: "കേരളത്തിൽ ഏറ്റവും ഉയർന്ന ലാഭം നൽകുന്ന സംരംഭം. ₹3,000 ഉണ്ടെങ്കിൽ തുടങ്ങാം.",
         ar: "أعلى هامش ربحي في كيرالا والهند (80% إلى 250%). انطلق برأس مال 3,000 روبية فقط."
       },
@@ -6114,22 +6125,50 @@ const app = {
   },
 
   generatePersonalPlan() {
-    const name = document.getElementById('planFounderName')?.value || 'Entrepreneur';
+    const name = (document.getElementById('planFounderName')?.value || '').trim() || 'Entrepreneur';
     const nicheKey = document.getElementById('planNicheSelect')?.value || 'attar';
-    const budgetVal = parseInt(document.getElementById('planBudget')?.value) || 10000;
+    const rawBudget = parseInt(document.getElementById('planBudget')?.value);
     const container = document.getElementById('planOutputArea');
     if (!container) return;
+
+    // Validate budget — must be > 0
+    if (!rawBudget || rawBudget < 1000) {
+      container.innerHTML = `<div style="background:#fef3c7;border:1px solid #f59e0b;padding:16px;border-radius:10px;text-align:center;">
+        <i class="fa-solid fa-triangle-exclamation" style="color:#f59e0b;font-size:1.5rem;"></i>
+        <p style="margin-top:8px;font-weight:600;">Please enter a starting budget of at least ₹1,000 to generate a plan.</p>
+      </div>`;
+      return;
+    }
+    const budgetVal = rawBudget;
 
     const lang = this.currentLang;
     const cat = this.categoriesData[nicheKey];
     const catTitle = cat ? (cat.title[lang] || cat.title.en) : nicheKey;
 
+    // Pull niche-specific suppliers from directory
     const matchingSuppliers = this.suppliers.filter(s => s.category === nicheKey).slice(0, 3);
     let supNames = matchingSuppliers.map(s => `${s.name} (${s.city} - ${s.phone})`).join(', ');
-    if (!supNames) supNames = "Kozhikode S.M. Street & Mumbai Crawford Market";
+    if (!supNames) supNames = lang === 'ml' ? 'ഈ ബിസിനസിനുള്ള ലോക്കൽ സ്രോതസ്സ് ഡയറക്ടറിയിൽ ചേർക്കുന്നതാണ്.' : 'Local suppliers for this niche will be added to the directory soon.';
 
-    const expectedOrders = budgetVal <= 5000 ? "30 - 45 orders" : budgetVal <= 20000 ? "60 - 100 orders" : "150 - 250 orders";
-    const expectedProfit = budgetVal <= 5000 ? "₹8,000 - ₹14,000" : budgetVal <= 20000 ? "₹22,000 - ₹38,000" : "₹50,000 - ₹90,000";
+    // Calculate realistic projections based on ACTUAL budget (not fixed bands)
+    // Assumptions: cost price ≈ 40–50% of selling price, 60–70% sell-through first month
+    const costRatio = 0.45; // avg cost as % of sell price
+    const sellThrough = 0.65; // 65% units sold in month 1
+    const avgSellingPrice = budgetVal <= 5000 ? 149 : budgetVal <= 20000 ? 299 : 499;
+    const units = Math.floor(budgetVal / (avgSellingPrice * costRatio));
+    const unitsSold = Math.floor(units * sellThrough);
+    const grossRevenue = unitsSold * avgSellingPrice;
+    const cogs = unitsSold * avgSellingPrice * costRatio;
+    const otherCosts = Math.round(budgetVal * 0.12); // 12% for packaging, shipping, misc
+    const netProfit = grossRevenue - cogs - otherCosts;
+    const netProfitLow = Math.round(netProfit * 0.7);
+    const netProfitHigh = Math.round(netProfit * 1.2);
+
+    const fmt = (n) => '₹' + Math.abs(n).toLocaleString('en-IN');
+    const expectedOrders = `${unitsSold} – ${Math.round(unitsSold * 1.3)} units (est.)`;
+    const expectedProfit = netProfitLow > 0
+      ? `${fmt(netProfitLow)} – ${fmt(netProfitHigh)} (after costs)`
+      : `Loss likely in month 1 — focus on building customers first`;
 
     container.innerHTML = `
       <div class="plan-result-document">
@@ -6150,7 +6189,10 @@ const app = {
               <li><strong>Initial Working Capital:</strong> ₹${budgetVal.toLocaleString('en-IN')}</li>
               <li><strong>Recommended First Batch Size:</strong> ${budgetVal <= 5000 ? '15 - 25 units' : '40 - 70 units'}</li>
               <li><strong>Target First Month Sales:</strong> ${expectedOrders}</li>
-              <li><strong>Projected Monthly Net Profit:</strong> <span class="text-success" style="font-size: 1.1rem; font-weight: 800;">${expectedProfit}</span></li>
+              <li><strong>Est. Units to Purchase:</strong> ${units} units @ avg sell price ₹${avgSellingPrice}</li>
+              <li><strong>Month 1 Estimated Sales:</strong> ${expectedOrders}</li>
+              <li><strong>Estimated Net Profit (Month 1):</strong> <span class="text-success" style="font-size:1.1rem;font-weight:800;">${expectedProfit}</span></li>
+              <li style="font-size:0.8rem;color:#64748b;background:#f8fafc;padding:6px 10px;border-radius:6px;border-left:3px solid #94a3b8;"><i class="fa-solid fa-circle-info"></i> <em>Assumptions: cost = 45% of sell price, 65% sell-through, 12% misc costs (packaging, shipping, returns). Actual results vary by market conditions and execution. This is an estimate, not a guarantee of profit.</em></li>
               <li><strong>Payment Strategy:</strong> Google Pay / PhonePe UPI (0% fee) + ₹50 advance for COD</li>
             </ul>
           </div>
@@ -6307,7 +6349,7 @@ const app = {
     });
 
     const toggle = document.getElementById('mobileToggle');
-    const menu = document.getElementById('navMenu');
+    const menu = document.getElementById('mainNavLinks');
     if (toggle && menu) {
       toggle.addEventListener('click', () => {
         menu.classList.toggle('active');
