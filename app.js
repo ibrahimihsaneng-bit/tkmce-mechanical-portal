@@ -2678,18 +2678,24 @@ const app = {
         };
       }
     }
+    this.initSecurityConsoleWarning();
     this.detectLanguage();
     this.switchLanguage(this.currentLang);
     this.handleHashRouting();
     this.bindEvents();
     this.renderFloatingAudioDock();
+    this.freezeCoreData();
   },
 
   detectLanguage() {
-    const saved = localStorage.getItem('vyapar_lang');
-    if (saved && ['en', 'ml', 'ar'].includes(saved)) {
-      this.currentLang = saved;
-    } else {
+    try {
+      const saved = localStorage.getItem('vyapar_lang');
+      if (saved && typeof saved === 'string' && ['en', 'ml', 'ar'].includes(saved.trim())) {
+        this.currentLang = saved.trim();
+      } else {
+        this.currentLang = 'en';
+      }
+    } catch (e) {
       this.currentLang = 'en';
     }
   },
@@ -3389,6 +3395,73 @@ const app = {
       .replace(/>/g, '&gt;')
       .replace(/"/g, '&quot;')
       .replace(/'/g, '&#39;');
+  },
+
+  // Secure URL & Protocol Sanitizer (Prevents javascript:, data:, vbscript: injection)
+  sanitizeUrl(url) {
+    if (!url || typeof url !== 'string') return '#';
+    const clean = url.trim();
+    if (/^(javascript|data|vbscript|file):/i.test(clean)) return '#';
+    if (/^(https?:\/\/|tel:\+?[0-9\s\-]{7,15}|mailto:[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/i.test(clean)) {
+      return clean.replace(/["'<>]/g, '');
+    }
+    return '#';
+  },
+
+  // Client-Side Anti-DDoS / Anti-Loop Rate Limiter
+  checkRateLimit(actionName, maxAttempts = 30, windowMs = 60000) {
+    if (!this._rateLimitMap) this._rateLimitMap = {};
+    const now = Date.now();
+    if (!this._rateLimitMap[actionName]) {
+      this._rateLimitMap[actionName] = { count: 1, resetAt: now + windowMs };
+      return true;
+    }
+    const record = this._rateLimitMap[actionName];
+    if (now > record.resetAt) {
+      record.count = 1;
+      record.resetAt = now + windowMs;
+      return true;
+    }
+    record.count++;
+    if (record.count > maxAttempts) {
+      console.warn('Security Alert: Rate limit exceeded for ' + actionName);
+      return false;
+    }
+    return true;
+  },
+
+  // In-Memory Data Immutability Shield (Prevents extensions/injected scripts from mutating core data)
+  freezeCoreData() {
+    try {
+      if (typeof Object.freeze === 'function') {
+        if (this.categoriesData) Object.freeze(this.categoriesData);
+        if (this.suppliers) Object.freeze(this.suppliers);
+        if (this.collabPosts) Object.freeze(this.collabPosts);
+        if (this.i18n) Object.freeze(this.i18n);
+        if (typeof window !== 'undefined') {
+          if (window.dataRetailCourses) Object.freeze(window.dataRetailCourses);
+          if (window.dataMachineCourses) Object.freeze(window.dataMachineCourses);
+          if (window.dataIndustrialCourses) Object.freeze(window.dataIndustrialCourses);
+          if (window.dataAudioLibrary) Object.freeze(window.dataAudioLibrary);
+        }
+      }
+    } catch (e) {
+      // Graceful fallback
+    }
+  },
+
+  // Self-XSS Console Warning Defense (Blocks social engineering attacks)
+  initSecurityConsoleWarning() {
+    try {
+      console.log(
+        "%c🛑 ജാഗ്രത / SECURITY WARNING!", 
+        "color: #ef4444; font-size: 26px; font-weight: 900; background: #0f172a; padding: 6px 12px; border-radius: 6px; border: 2px solid #ef4444;"
+      );
+      console.log(
+        "%cഇതൊരു ബ്രൗസർ ഡെവലപ്പർ ഫീച്ചറാണ്. മറ്റാരെങ്കിലും പറയുന്നത് കേട്ട് ഇവിടെ കോഡുകൾ കോപ്പി-പേസ്റ്റ് ചെയ്യരുത്. അത് നിങ്ങളുടെ സ്വകാര്യതയെയും അക്കൗണ്ടിനെയും ബാധിച്ചേക്കാം.\n\nThis browser console is intended for developers. Do NOT copy-paste unknown code here. Pasting code here can compromise your security.",
+        "color: #1e293b; font-size: 12px; font-weight: 600; line-height: 1.6;"
+      );
+    } catch (e) {}
   },
 
   formatAudioTime(sec) {
@@ -4676,17 +4749,17 @@ const app = {
                       <p style="font-size: 0.85rem; color: #1e293b; margin-bottom: 8px;"><strong>${lang === 'ml' ? 'പ്രത്യേകതകൾ:' : lang === 'ar' ? 'المنتجات:' : 'Specialties:'}</strong> ${sup.specialty || cat.title.en}</p>
                       <p style="font-size: 0.8rem; color: #64748b; margin-bottom: 14px;"><i class="fa-solid fa-phone"></i> <strong>Phone:</strong> ${sup.phone}</p>
                       <div class="supplier-actions">
-                        <a href="${waLink}" target="_blank" rel="noopener noreferrer" class="btn-whatsapp">
+                        <a href="${this.sanitizeUrl(waLink)}" target="_blank" rel="noopener noreferrer" class="btn-whatsapp">
                           <i class="fa-brands fa-whatsapp"></i> ${lang === 'ml' ? 'വാട്സ്ആപ്പ്' : lang === 'ar' ? 'واتساب' : 'WhatsApp'}
                         </a>
-                        <a href="${sup.mapUrl}" target="_blank" rel="noopener noreferrer" class="btn-map">
+                        <a href="${this.sanitizeUrl(sup.mapUrl)}" target="_blank" rel="noopener noreferrer" class="btn-map">
                           <i class="fa-solid fa-location-crosshairs"></i> ${lang === 'ml' ? 'മാപ്പ്' : lang === 'ar' ? 'الخريطة' : 'Map'}
                         </a>
-                        <a href="tel:${sup.phone}" class="btn-map-call">
+                        <a href="${this.sanitizeUrl('tel:' + sup.phone)}" class="btn-map-call">
                           <i class="fa-solid fa-phone"></i>
                         </a>
-                        ${sup.website ? `<a href="${sup.website}" target="_blank" rel="noopener noreferrer" class="btn-map-call" title="Website"><i class="fa-solid fa-globe"></i></a>` : ""}
-                        ${sup.facebook ? `<a href="${sup.facebook}" target="_blank" rel="noopener noreferrer" class="btn-map-call" title="Facebook" style="background:#1877f2;"><i class="fa-brands fa-facebook"></i></a>` : ""}
+                        ${sup.website ? `<a href="${this.sanitizeUrl(sup.website)}" target="_blank" rel="noopener noreferrer" class="btn-map-call" title="Website"><i class="fa-solid fa-globe"></i></a>` : ""}
+                        ${sup.facebook ? `<a href="${this.sanitizeUrl(sup.facebook)}" target="_blank" rel="noopener noreferrer" class="btn-map-call" title="Facebook" style="background:#1877f2;"><i class="fa-brands fa-facebook"></i></a>` : ""}
                       </div>
                     </div>
                   `;
@@ -4721,15 +4794,15 @@ const app = {
                     <p style="font-size: 0.85rem; color: #1e293b; margin-bottom: 8px;"><strong>${lang === 'ml' ? 'പ്രത്യേകതകൾ:' : lang === 'ar' ? 'المنتجات:' : 'Specialties:'}</strong> ${sup.specialty}</p>
                     <p style="font-size: 0.8rem; color: #64748b; margin-bottom: 14px;"><i class="fa-solid fa-box"></i> <strong>MOQ:</strong> ${sup.moq}</p>
                     <div class="supplier-actions">
-                      <a href="${waLink}" target="_blank" rel="noopener noreferrer" class="btn-whatsapp">
+                      <a href="${this.sanitizeUrl(waLink)}" target="_blank" rel="noopener noreferrer" class="btn-whatsapp">
                         <i class="fa-brands fa-whatsapp"></i> ${lang === 'ml' ? 'വാട്സ്ആപ്പ്' : lang === 'ar' ? 'واتساب' : 'WhatsApp'}
                       </a>
-                      <a href="${sup.mapUrl}" target="_blank" rel="noopener noreferrer" class="btn-map">
+                      <a href="${this.sanitizeUrl(sup.mapUrl)}" target="_blank" rel="noopener noreferrer" class="btn-map">
                         <i class="fa-solid fa-location-crosshairs"></i> ${lang === 'ml' ? 'മാപ്പ്' : lang === 'ar' ? 'الخريطة' : 'Map'}
                       </a>
                       ${sup.instagram ? `<a href="${sup.instagram}" target="_blank" rel="noopener noreferrer" class="btn-map" title="Instagram"><i class="fa-brands fa-instagram" style="color: #e1306c;"></i></a>` : ''}
-                      ${sup.website ? `<a href="${sup.website}" target="_blank" rel="noopener noreferrer" class="btn-map" title="Website"><i class="fa-solid fa-globe" style="color: #059669;"></i></a>` : ''}
-                      <a href="tel:${sup.phone}" class="btn-map-call">
+                      ${sup.website ? `<a href="${this.sanitizeUrl(sup.website)}" target="_blank" rel="noopener noreferrer" class="btn-map" title="Website"><i class="fa-solid fa-globe" style="color: #059669;"></i></a>` : ''}
+                      <a href="${this.sanitizeUrl('tel:' + sup.phone)}" class="btn-map-call">
                         <i class="fa-solid fa-phone"></i>
                       </a>
                     </div>
@@ -5702,7 +5775,7 @@ const app = {
               <span><strong>Allotment:</strong> ${post.target}</span>
             </div>
           </div>
-          <a href="${waLink}" target="_blank" rel="noopener noreferrer" class="btn-collab-wa">
+          <a href="${this.sanitizeUrl(waLink)}" target="_blank" rel="noopener noreferrer" class="btn-collab-wa">
             <i class="fa-brands fa-whatsapp"></i> <span>${lang === 'ml' ? 'വാട്സ്ആപ്പിൽ സംസാരിക്കുക' : 'Connect on WhatsApp'}</span>
           </a>
         </div>
@@ -6155,17 +6228,17 @@ const app = {
             ${sup.tags.map(t => `<span class="supplier-tag">${t}</span>`).join('')}
           </div>
           <div class="supplier-actions">
-            <a href="${waLink}" target="_blank" rel="noopener noreferrer" class="btn-whatsapp">
+            <a href="${this.sanitizeUrl(waLink)}" target="_blank" rel="noopener noreferrer" class="btn-whatsapp">
               <i class="fa-brands fa-whatsapp"></i> ${lang === 'ml' ? 'വാട്സ്ആപ്പ്' : lang === 'ar' ? 'واتساب' : 'WhatsApp'}
             </a>
-            <a href="${sup.mapUrl}" target="_blank" rel="noopener noreferrer" class="btn-map">
+            <a href="${this.sanitizeUrl(sup.mapUrl)}" target="_blank" rel="noopener noreferrer" class="btn-map">
               <i class="fa-solid fa-location-crosshairs"></i> ${lang === 'ml' ? 'ഗൂഗിൾ മാപ്പ്' : lang === 'ar' ? 'خرائط جوجل' : 'Google Maps'}
             </a>
-            <a href="tel:${sup.phone}" class="btn-map-call">
+            <a href="${this.sanitizeUrl('tel:' + sup.phone)}" class="btn-map-call">
               <i class="fa-solid fa-phone"></i>
             </a>
-            ${sup.website ? `<a href="${sup.website}" target="_blank" rel="noopener noreferrer" class="btn-map-call" title="Website"><i class="fa-solid fa-globe"></i></a>` : ""}
-            ${sup.facebook ? `<a href="${sup.facebook}" target="_blank" rel="noopener noreferrer" class="btn-map-call" title="Facebook" style="background:#1877f2;"><i class="fa-brands fa-facebook"></i></a>` : ""}
+            ${sup.website ? `<a href="${this.sanitizeUrl(sup.website)}" target="_blank" rel="noopener noreferrer" class="btn-map-call" title="Website"><i class="fa-solid fa-globe"></i></a>` : ""}
+            ${sup.facebook ? `<a href="${this.sanitizeUrl(sup.facebook)}" target="_blank" rel="noopener noreferrer" class="btn-map-call" title="Facebook" style="background:#1877f2;"><i class="fa-brands fa-facebook"></i></a>` : ""}
           </div>
         </div>
       `;
@@ -6286,8 +6359,10 @@ const app = {
   },
 
   generatePersonalPlan() {
-    const rawName = (document.getElementById('planFounderName')?.value || '').trim() || 'Entrepreneur';
-    const name = this.escapeHtml(rawName.slice(0, 60));
+    if (!this.checkRateLimit('generatePlan', 40, 60000)) return;
+    const rawInput = document.getElementById('planFounderName')?.value || '';
+    const cleaned = rawInput.replace(/<[^>]*>?/gm, '').replace(/[\x00-\x1F\x7F]/g, '').trim().slice(0, 50);
+    const name = this.escapeHtml(cleaned || 'Entrepreneur');
     const nicheKey = document.getElementById('planNicheSelect')?.value || 'attar';
     const rawBudget = parseInt(document.getElementById('planBudget')?.value);
     const container = document.getElementById('planOutputArea');
