@@ -3,224 +3,94 @@
   <!-- Core Portal Pages -->
   <url>
     <loc>https://vyapar-shiksha.vercel.app/</loc>
-    <lastmod>2026-11-24</lastmod>
+    <lastmod>2026-11-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://vyapar-shiksha.vercel.app/tools</loc>
-    <lastmod>2026-11-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://vyapar-shiksha.vercel.app/suppliers</loc>
-    <lastmod>2026-11-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://vyapar-shiksha.vercel.app/plan</loc>
-    <lastmod>2026-11-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-  </url>
-
-  <!-- Tier 1: Retail & Micro Ventures (10 Academies) -->
-  <url>
-    <loc>https://vyapar-shiksha.vercel.app/academy/attar</loc>
-    <lastmod>2026-11-24</lastmod>
+    <loc>https://vyapar-shiksha.vercel.app/#tools</loc>
+    <lastmod>2026-11-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://vyapar-shiksha.vercel.app/academy/clothing</loc>
-    <lastmod>2026-11-24</lastmod>
+    <loc>https://vyapar-shiksha.vercel.app/#roadmap</loc>
+    <lastmod>2026-11-25</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://vyapar-shiksha.vercel.app/academy/watches</loc>
-    <lastmod>2026-11-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://vyapar-shiksha.vercel.app/academy/bags</loc>
-    <lastmod>2026-11-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://vyapar-shiksha.vercel.app/academy/accessories</loc>
-    <lastmod>2026-11-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://vyapar-shiksha.vercel.app/academy/spices</loc>
-    <lastmod>2026-11-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://vyapar-shiksha.vercel.app/academy/electronics</loc>
-    <lastmod>2026-11-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://vyapar-shiksha.vercel.app/academy/cookware</loc>
-    <lastmod>2026-11-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://vyapar-shiksha.vercel.app/academy/footwear</loc>
-    <lastmod>2026-11-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://vyapar-shiksha.vercel.app/academy/cosmetics</loc>
-    <lastmod>2026-11-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.85</priority>
   </url>
 
-  <!-- Tier 2: Automated Machinery Units (10 Academies) -->
+  <!-- 12 Halal Physical-Goods Trading Academies (Under ₹10,000) -->
   <url>
-    <loc>https://vyapar-shiksha.vercel.app/academy/mach_paperbag</loc>
-    <lastmod>2026-11-24</lastmod>
+    <loc>https://vyapar-shiksha.vercel.app/#academy/attar</loc>
+    <lastmod>2026-11-25</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
+    <priority>0.95</priority>
   </url>
   <url>
-    <loc>https://vyapar-shiksha.vercel.app/academy/mach_coldpress</loc>
-    <lastmod>2026-11-24</lastmod>
+    <loc>https://vyapar-shiksha.vercel.app/#academy/honey</loc>
+    <lastmod>2026-11-25</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
+    <priority>0.95</priority>
   </url>
   <url>
-    <loc>https://vyapar-shiksha.vercel.app/academy/mach_agarbatti</loc>
-    <lastmod>2026-11-24</lastmod>
+    <loc>https://vyapar-shiksha.vercel.app/#academy/dates</loc>
+    <lastmod>2026-11-25</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.95</priority>
   </url>
   <url>
-    <loc>https://vyapar-shiksha.vercel.app/academy/mach_spisegrind</loc>
-    <lastmod>2026-11-24</lastmod>
+    <loc>https://vyapar-shiksha.vercel.app/#academy/dryfruits</loc>
+    <lastmod>2026-11-25</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.95</priority>
   </url>
   <url>
-    <loc>https://vyapar-shiksha.vercel.app/academy/mach_foilcontainer</loc>
-    <lastmod>2026-11-24</lastmod>
+    <loc>https://vyapar-shiksha.vercel.app/#academy/spices</loc>
+    <lastmod>2026-11-25</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.95</priority>
   </url>
   <url>
-    <loc>https://vyapar-shiksha.vercel.app/academy/mach_detergent</loc>
-    <lastmod>2026-11-24</lastmod>
+    <loc>https://vyapar-shiksha.vercel.app/#academy/soaps</loc>
+    <lastmod>2026-11-25</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.95</priority>
   </url>
   <url>
-    <loc>https://vyapar-shiksha.vercel.app/academy/mach_icepopsicle</loc>
-    <lastmod>2026-11-24</lastmod>
+    <loc>https://vyapar-shiksha.vercel.app/#academy/candles</loc>
+    <lastmod>2026-11-25</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.95</priority>
   </url>
   <url>
-    <loc>https://vyapar-shiksha.vercel.app/academy/mach_notebook</loc>
-    <lastmod>2026-11-24</lastmod>
+    <loc>https://vyapar-shiksha.vercel.app/#academy/chips</loc>
+    <lastmod>2026-11-25</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.95</priority>
   </url>
   <url>
-    <loc>https://vyapar-shiksha.vercel.app/academy/mach_slipper</loc>
-    <lastmod>2026-11-24</lastmod>
+    <loc>https://vyapar-shiksha.vercel.app/#academy/halwa</loc>
+    <lastmod>2026-11-25</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.95</priority>
   </url>
   <url>
-    <loc>https://vyapar-shiksha.vercel.app/academy/mach_tissue</loc>
-    <lastmod>2026-11-24</lastmod>
+    <loc>https://vyapar-shiksha.vercel.app/#academy/chocolates</loc>
+    <lastmod>2026-11-25</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- Tier 3: Industrial Complexes (10 Academies) -->
-  <url>
-    <loc>https://vyapar-shiksha.vercel.app/academy/ind_mangopulp</loc>
-    <lastmod>2026-11-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
+    <priority>0.95</priority>
   </url>
   <url>
-    <loc>https://vyapar-shiksha.vercel.app/academy/ind_coconutoil</loc>
-    <lastmod>2026-11-24</lastmod>
+    <loc>https://vyapar-shiksha.vercel.app/#academy/herbaltea</loc>
+    <lastmod>2026-11-25</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
+    <priority>0.95</priority>
   </url>
   <url>
-    <loc>https://vyapar-shiksha.vercel.app/academy/ind_iqffrozen</loc>
-    <lastmod>2026-11-24</lastmod>
+    <loc>https://vyapar-shiksha.vercel.app/#academy/essentialoils</loc>
+    <lastmod>2026-11-25</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://vyapar-shiksha.vercel.app/academy/ind_spicextr</loc>
-    <lastmod>2026-11-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://vyapar-shiksha.vercel.app/academy/ind_vacuumchips</loc>
-    <lastmod>2026-11-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://vyapar-shiksha.vercel.app/academy/ind_bottledwater</loc>
-    <lastmod>2026-11-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://vyapar-shiksha.vercel.app/academy/ind_cashewplant</loc>
-    <lastmod>2026-11-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://vyapar-shiksha.vercel.app/academy/ind_arecaplate</loc>
-    <lastmod>2026-11-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://vyapar-shiksha.vercel.app/academy/ind_dairyplant</loc>
-    <lastmod>2026-11-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://vyapar-shiksha.vercel.app/academy/ind_biodryer</loc>
-    <lastmod>2026-11-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://vyapar-shiksha.vercel.app/academy/chocolates</loc>
-    <lastmod>2026-11-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://vyapar-shiksha.vercel.app/academy/candles</loc>
-    <lastmod>2026-11-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
+    <priority>0.95</priority>
   </url>
 </urlset>

@@ -89,19 +89,19 @@ const app = {
   // Trilingual Localization Dictionary
   i18n: {
     en: {
-      siteTitle: "BUSINESS IN KERALA",
-      siteSubtitle: "Practical Business Academy • India & Kerala",
-      topBarTagline: "Business in Kerala — Practical Academy for Micro-Entrepreneurs",
+      siteTitle: "VYAPAR SHIKSHA",
+      siteSubtitle: "Halal Physical-Goods Trading Academy • Under ₹10,000",
+      topBarTagline: "Vyapar Shiksha — Halal Physical-Goods Trading Academy (Inventory Reselling Under ₹10k)",
       langCurrentText: "Language:",
       
       // Header Nav
       navHome: "Home",
-      navAcademies: "Study Academies",
-      navAcademiesText: "30 Study Academies",
-      tierTabAll: "All Businesses (30)",
-      tierTabRetail: "1. Retail & Trading (10)",
-      tierTabMachine: "2. Machine Units (10)",
-      tierTabIndustrial: "3. Industrial Plants (10)",
+      navAcademies: "Trading Academies",
+      navAcademiesText: "Halal Trading Academies (≤ ₹10k)",
+      tierTabAll: "All Halal Trading Academies (12)",
+      tierTabUnder5k: "Micro-Starters (< ₹5,000)",
+      tierTabUnder10k: "Standard Inventory (₹5k - ₹10k)",
+      tierTabArchived: "Archived Units (Reference Only)",
 
       // Dropdown Navigation
       dropTier1Title: '<i class="fa-solid fa-store text-primary"></i> 1. Retail & Micro Ventures (₹3k - ₹25k)',
@@ -2880,13 +2880,37 @@ const app = {
   // Core Application Initialization
   init() {
     if (typeof window !== 'undefined') {
-      if (window.dataRetailCourses || window.dataMachineCourses || window.dataIndustrialCourses) {
-        this.categoriesData = {
-          ...(window.dataRetailCourses || this.categoriesData),
-          ...(window.dataMachineCourses || {}),
-          ...(window.dataIndustrialCourses || {})
-        };
-      }
+      this.activeTradingAcademies = {};
+      this.archivedCourses = {};
+
+      const rawRetail = window.dataRetailCourses || this.categoriesData || {};
+      const rawMachine = window.dataMachineCourses || {};
+      const rawIndustrial = window.dataIndustrialCourses || {};
+
+      // Validate every course against the Halal Physical Trading Schema
+      Object.keys(rawRetail).forEach(k => {
+        const course = rawRetail[k];
+        const val = (typeof window.validateTradingCourse === 'function')
+          ? window.validateTradingCourse(course)
+          : { isCompliant: true };
+        if (val.isCompliant) {
+          this.activeTradingAcademies[k] = course;
+        } else {
+          this.archivedCourses[k] = course;
+        }
+      });
+
+      // Safely archive manufacturing and industrial courses without permanent deletion
+      Object.keys(rawMachine).forEach(k => {
+        this.archivedCourses[k] = rawMachine[k];
+      });
+      Object.keys(rawIndustrial).forEach(k => {
+        this.archivedCourses[k] = rawIndustrial[k];
+      });
+
+      // Active catalog strictly contains verified Halal Physical Trading Academies
+      this.categoriesData = { ...this.activeTradingAcademies };
+
       if (window.dataAudioLibrary) {
         this.masterclassAudioLibrary = {
           ...this.masterclassAudioLibrary,
@@ -4711,6 +4735,96 @@ const app = {
   },
 
   // Render Modules in Academy (Guided Stepper Mode vs Full Masterclass Mode)
+
+  // Open Halal Commercial Eligibility Checklist Modal
+  openComplianceModal(categoryKey) {
+    const modal = document.getElementById('complianceModal');
+    const container = document.getElementById('complianceModalBody');
+    if (!modal || !container) return;
+
+    const lang = this.currentLang || 'ml';
+    const cat = categoryKey && (this.categoriesData[categoryKey] || (this.archivedCourses && this.archivedCourses[categoryKey]))
+      ? (this.categoriesData[categoryKey] || this.archivedCourses[categoryKey])
+      : null;
+    const catTitle = cat && cat.title ? (cat.title[lang] || cat.title.en) : null;
+
+    const standards = window.HALAL_TRADING_STANDARDS || {};
+    const pillars = standards.pillars || [];
+    const disclaimer = standards.scholarlyDisclaimer ? (standards.scholarlyDisclaimer[lang] || standards.scholarlyDisclaimer.en) : '';
+
+    let catHighlightHtml = '';
+    if (cat && cat.halalCompliance) {
+      catHighlightHtml = `
+        <div style="background: #ecfdf5; border: 1px solid #10b981; border-radius: 10px; padding: 16px; margin-bottom: 20px;">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+            <h4 style="margin: 0; color: #065f46; font-size: 1.05rem;">
+              <i class="fa-solid fa-circle-check text-success"></i> ${catTitle} — ${lang === 'ml' ? 'ഹലാൽ കച്ചവട യോഗ്യത' : 'Halal Trading Verification'}
+            </h4>
+            <span style="background: #dcfce7; color: #166534; font-size: 0.72rem; font-weight: 800; padding: 2px 8px; border-radius: 12px;">7/7 Pillars Passed</span>
+          </div>
+          <p style="margin: 0 0 6px 0; font-size: 0.85rem; color: #047857;"><strong>${lang === 'ml' ? 'കൈവശാവകാശം (Qabd Requirement):' : 'Physical Possession:'}</strong> ${cat.halalCompliance.possessionMethod[lang] || cat.halalCompliance.possessionMethod.en}</p>
+          <p style="margin: 0; font-size: 0.85rem; color: #047857;"><strong>${lang === 'ml' ? 'വ്യാജ വിരുദ്ധ നയം (Anti-Counterfeit):' : 'Anti-Counterfeit:'}</strong> ${cat.halalCompliance.antiCounterfeitPolicy[lang] || cat.halalCompliance.antiCounterfeitPolicy.en}</p>
+        </div>
+      `;
+    }
+
+    let pillarsHtml = '<div class="pillar-grid">';
+    pillars.forEach(p => {
+      pillarsHtml += `
+        <div class="pillar-card">
+          <div class="pillar-header">
+            <span class="pillar-title"><i class="fa-solid fa-scale-balanced text-success"></i> ${p.title[lang] || p.title.en}</span>
+            <span class="pillar-badge-pass"><i class="fa-solid fa-check"></i> Passed</span>
+          </div>
+          <p class="pillar-desc">${p.rule[lang] || p.rule.en}</p>
+        </div>
+      `;
+    });
+    pillarsHtml += '</div>';
+
+    container.innerHTML = `
+      ${catHighlightHtml}
+      <div style="margin-bottom: 14px;">
+        <h4 style="margin: 0 0 6px 0; color: #0f172a; font-size: 1.15rem; font-weight: 800;">
+          <i class="fa-solid fa-shield-halved text-success"></i> ${lang === 'ml' ? 'ഇസ്ലാമിക വാണിജ്യത്തിലെ 7 സുവർണ്ണ മാനദണ്ഡങ്ങൾ (7 Pillars)' : lang === 'ar' ? 'أركان التجارة الحلال السبعة في الفقه الإسلامي' : 'The 7 Golden Pillars of Halal Physical Trading'}
+        </h4>
+        <p style="margin: 0; font-size: 0.85rem; color: #64748b;">
+          ${lang === 'ml' ? 'ഹോൾസെയിൽ വാങ്ങി, സ്വന്തം കൈവശം സൂക്ഷിച്ചു (Qabd), സത്യസന്ധമായി റീട്ടെയിൽ വിൽക്കുന്ന ഭൗതിക ഉൽപ്പന്ന കച്ചവടങ്ങൾക്ക് നിർബന്ധമായും ഉണ്ടായിരിക്കേണ്ട നിബന്ധനകൾ.' : 'Mandatory operational standards for purchasing wholesale, taking actual possession (Qabd), and honest retail reselling under ₹10,000.'}
+        </p>
+      </div>
+
+      ${pillarsHtml}
+
+      <div class="compliance-disclaimer-box" style="margin-top: 18px; padding: 14px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px;">
+        <div style="display: flex; align-items: flex-start; gap: 8px;">
+          <i class="fa-solid fa-circle-info" style="font-size: 1.1rem; color: #64748b; margin-top: 2px;"></i>
+          <div>
+            <strong>${lang === 'ml' ? 'ശ്രദ്ധിക്കുക (പഠനാവശ്യങ്ങൾക്കുള്ള മാർഗ്ഗനിർദ്ദേശം):' : lang === 'ar' ? 'تنبيه شرعي هام:' : 'Educational Compliance Disclaimer:'}</strong>
+            <p style="margin: 4px 0 0 0; font-size: 0.82rem; color: #64748b;">${disclaimer}</p>
+          </div>
+        </div>
+      </div>
+    `;
+
+    modal.style.display = 'flex';
+  },
+
+  closeComplianceModal() {
+    const modal = document.getElementById('complianceModal');
+    if (modal) modal.style.display = 'none';
+  },
+
+  openScholarlyDisclaimer() {
+    this.openComplianceModal();
+  },
+
+  openArchivedCourse(key) {
+    if (this.archivedCourses && this.archivedCourses[key]) {
+      this.categoriesData[key] = this.archivedCourses[key];
+      this.openAcademy(key);
+    }
+  },
+
   renderCourseModules(nicheKey) {
     const container = document.getElementById('courseModulesBody');
     if (!container) return;
@@ -5389,7 +5503,7 @@ const app = {
     ind_biodryer: "linear-gradient(135deg, #7c2d12 0%, #ea580c 100%)"
   },
 
-  // Render Homepage Faculty Cards Grid with Real Photography
+  // Render Homepage Faculty Cards Grid with Halal Physical Trading Focus
   renderFacultyCards() {
     const grid = document.getElementById('facultyCardsGrid');
     if (!grid) return;
@@ -5398,46 +5512,94 @@ const app = {
     const t = this.i18n[lang] || this.i18n.en;
     let html = '';
 
-    const allKeys = Object.keys(this.categoriesData);
-    const filteredKeys = allKeys.filter(catKey => {
-      const cat = this.categoriesData[catKey];
-      const tier = cat.tier || 'retail';
-      if (this.currentTierFilter === 'all') return true;
-      return tier === this.currentTierFilter;
+    const isArchivedMode = this.currentTierFilter === 'archived';
+
+    if (isArchivedMode) {
+      // Archival Notice Banner
+      html += `
+        <div class="archived-courses-banner" style="grid-column: 1 / -1; background: #fffbeb; border: 1px solid #fcd34d; border-radius: 12px; padding: 20px; display: flex; gap: 16px; margin-bottom: 24px;">
+          <div class="archived-banner-icon" style="font-size: 2rem; color: #d97706;"><i class="fa-solid fa-box-archive"></i></div>
+          <div class="archived-banner-text">
+            <h4 style="margin: 0 0 6px 0; color: #92400e; font-size: 1.15rem; font-weight: 800;">${lang === 'ml' ? 'സൂക്ഷിച്ചിരിക്കുന്ന നിർമ്മാണ യൂണിറ്റുകൾ (Archived Manufacturing Units)' : lang === 'ar' ? 'الوحدات والمصانع المؤرشفة (للاطلاع الأكاديمي فقط)' : 'Archived Manufacturing & Industrial Units (Reference Only)'}</h4>
+            <p style="margin: 0; font-size: 0.88rem; color: #78350f; line-height: 1.5;">${lang === 'ml' ? 'വ്യാപാർ ശിക്ഷയുടെ പ്രധാന ശ്രദ്ധ ₹10,000-ൽ താഴെ തുടങ്ങാവുന്ന ഹലാൽ ഭൗതിക ഉൽപ്പന്ന കച്ചവടത്തിലായതിനാൽ, മെഷീൻ നിർമ്മാണ യൂണിറ്റുകളും വൻകിട ഇൻഡസ്ട്രിയൽ പ്ലാന്റുകളും പഠനാവശ്യങ്ങൾക്കായി ഇവിടെ സുരക്ഷിതമായി സൂക്ഷിച്ചിരിക്കുന്നു.' : lang === 'ar' ? 'نظراً لتركيز الأكاديمية الحصري على تجارة البضائع العينية الحلال برأس مال أقل من 10,000 روبية، فقد تم حفظ وحدات التصنيع والمصانع الكبرى هنا للاطلاع والدراسة فقط.' : 'In accordance with our exclusive focus on Halal Physical-Goods Inventory Trading under ₹10,000, manufacturing units and heavy industrial plants are preserved here for reference only.'}</p>
+          </div>
+        </div>
+      `;
+
+      const archKeys = Object.keys(this.archivedCourses || {});
+      archKeys.forEach(catKey => {
+        const cat = this.archivedCourses[catKey];
+        const title = cat.title ? (cat.title[lang] || cat.title.en) : catKey;
+        const tagline = cat.tagline ? (cat.tagline[lang] || cat.tagline.en) : '';
+
+        html += `
+          <div class="faculty-card tier-archived" style="opacity: 0.9; border: 1px solid #cbd5e1;">
+            <div class="faculty-card-cover">
+              <img src="${cat.images ? cat.images.cover : 'https://images.unsplash.com/photo-1542744094-3a31f272c490?auto=format&fit=crop&w=800&q=80'}" alt="${title}" loading="lazy">
+              <span class="cover-badge" style="background:#fef3c7;color:#92400e;"><i class="fa-solid fa-box-archive"></i> ${cat.minBudget || 'Archived'}</span>
+              <span class="card-tier-pill" style="background:#f1f5f9;color:#475569;"><i class="fa-solid fa-file-lines"></i> ${cat.tier === 'industrial' ? 'Industrial Plant' : 'Machine Unit'}</span>
+            </div>
+            <div class="faculty-header" style="background: linear-gradient(135deg, #475569 0%, #334155 100%) !important; color: #ffffff !important; padding: 18px 20px;">
+              <h3 style="color: #ffffff !important; font-size: 1.15rem; font-weight: 800; margin: 0 0 4px 0;">${title}</h3>
+              <p style="color: rgba(255,255,255,0.85) !important; font-size: 0.78rem; margin: 0;">${tagline}</p>
+            </div>
+            <div class="faculty-body">
+              <div style="background: #f8fafc; padding: 10px; border-radius: 6px; font-size: 0.78rem; color: #64748b; margin-bottom: 12px;">
+                <i class="fa-solid fa-circle-info"></i> ${lang === 'ml' ? 'നിർമ്മാണ കോഴ്സ്: റഫറൻസിനായി സൂക്ഷിച്ചിരിക്കുന്നു.' : 'Manufacturing Course: Preserved for archival reference.'}
+              </div>
+              <button class="btn-enter-faculty" onclick="app.openArchivedCourse('${catKey}')" style="background:#475569;">
+                <span>${lang === 'ml' ? 'റഫറൻസ് കാണുക' : 'View Archived Reference'}</span>
+                <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+        `;
+      });
+
+      grid.innerHTML = html;
+      return;
+    }
+
+    // ACTIVE HALAL PHYSICAL TRADING ACADEMIES (12 COURSES)
+    const activeKeys = Object.keys(this.activeTradingAcademies || this.categoriesData);
+    const filteredKeys = activeKeys.filter(catKey => {
+      const cat = (this.activeTradingAcademies || this.categoriesData)[catKey];
+      if (this.currentTierFilter === 'under5k') {
+        const rawBudget = String(cat.minBudget || '').replace(/,/g, '');
+        const num = parseInt((rawBudget.match(/\d+/g) || ['99999'])[0], 10);
+        return num <= 5000;
+      }
+      if (this.currentTierFilter === 'under10k') {
+        const rawBudget = String(cat.minBudget || '').replace(/,/g, '');
+        const num = parseInt((rawBudget.match(/\d+/g) || ['0'])[0], 10);
+        return num > 4000 && num <= 10000;
+      }
+      return true;
     });
 
     filteredKeys.forEach(catKey => {
-      const cat = this.categoriesData[catKey];
+      const cat = (this.activeTradingAcademies || this.categoriesData)[catKey];
       const title = cat.title ? (cat.title[lang] || cat.title.en) : catKey;
       const tagline = cat.tagline ? (cat.tagline[lang] || cat.tagline.en) : '';
       const highlights = (cat.curriculumHighlights && (cat.curriculumHighlights[lang] || cat.curriculumHighlights.en)) || [];
 
       let hlList = '';
       highlights.slice(0, 4).forEach(h => {
-        hlList += `<li><i class="fa-solid fa-circle-check"></i> <span>${h}</span></li>`;
+        hlList += `<li><i class="fa-solid fa-circle-check text-success"></i> <span>${h}</span></li>`;
       });
 
-      let tierPill = '';
-      if (cat.tier === 'industrial') {
-        tierPill = `<span class="card-tier-pill tier-industrial"><i class="fa-solid fa-industry"></i> ${lang === 'ml' ? '3. വൻകിട പ്ലാന്റ്' : lang === 'ar' ? 'مصنع صناعي متكامل' : 'Tier 3: Industrial Plant'}</span>`;
-      } else if (cat.tier === 'machine') {
-        tierPill = `<span class="card-tier-pill tier-machine"><i class="fa-solid fa-gears"></i> ${lang === 'ml' ? '2. മെഷീൻ നിർമ്മാണം' : lang === 'ar' ? 'وحدة تصنيع آلية' : 'Tier 2: Machine Unit'}</span>`;
-      } else {
-        tierPill = `<span class="card-tier-pill tier-retail"><i class="fa-solid fa-store"></i> ${lang === 'ml' ? '1. ചെറുകിട വ്യാപാരം' : lang === 'ar' ? 'تجارة تجزئة ومشاريع' : 'Tier 1: Retail & Trading'}</span>`;
-      }
-
-      const headerBg = this.categoryHeaderGradients[cat.id] || "linear-gradient(135deg, #1e293b 0%, #334155 100%)";
+      const headerBg = this.categoryHeaderGradients[cat.id] || "linear-gradient(135deg, #065f46 0%, #047857 100%)";
 
       html += `
-        <div class="faculty-card tier-${cat.tier || 'retail'}">
+        <div class="faculty-card tier-trading">
           <div class="faculty-card-cover">
-            <img src="${cat.images.cover}" alt="${title}" loading="lazy" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1542744094-3a31f272c490?auto=format&fit=crop&w=800&q=80';">
-            <span class="cover-badge"><i class="fa-solid fa-coins"></i> ${cat.minBudget}</span>
-            ${tierPill}
+            <img src="${cat.images ? cat.images.cover : ''}" alt="${title}" loading="lazy" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1542744094-3a31f272c490?auto=format&fit=crop&w=800&q=80';">
+            <span class="cover-badge" style="background:#065f46;color:#ffffff;"><i class="fa-solid fa-coins text-warning"></i> ${cat.minBudget}</span>
+            <span class="card-tier-pill" style="background:#ecfdf5;color:#065f46;border:1px solid #a7f3d0;"><i class="fa-solid fa-certificate"></i> Halal Trading</span>
           </div>
           <div class="faculty-header ${cat.headerClass || ''}" style="background: ${headerBg} !important; color: #ffffff !important; padding: 22px 24px; display: flex; align-items: flex-start; gap: 16px;">
             <div class="faculty-icon-wrap" style="width: 48px; height: 48px; border-radius: 12px; background: rgba(255,255,255,0.22) !important; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; color: #ffffff !important; flex-shrink: 0; box-shadow: 0 2px 8px rgba(0,0,0,0.15);">
-              <i class="fa-solid ${cat.icon}"></i>
+              <i class="fa-solid ${cat.icon || 'fa-box'}"></i>
             </div>
             <div class="faculty-title-text" style="color: #ffffff !important;">
               <h3 style="color: #ffffff !important; font-size: 1.25rem; font-weight: 800; margin-bottom: 4px; text-shadow: 0 1px 2px rgba(0,0,0,0.2);">${title}</h3>
@@ -5447,28 +5609,33 @@ const app = {
           <div class="faculty-body">
             <div class="faculty-metrics-strip">
               <div>
-                <small>${lang === 'ml' ? 'കുറഞ്ഞ ചെലവ്' : lang === 'ar' ? 'أقل رأس مال' : 'Min Budget'}</small>
+                <small>${lang === 'ml' ? 'പ്രാരംഭ മൂലധനം' : lang === 'ar' ? 'رأس مال البداية' : 'Pilot Budget'}</small>
                 <br><strong>${cat.minBudget}</strong>
               </div>
               <div>
-                <small>${lang === 'ml' ? 'ലാഭ ശതമാനം (Markup)' : lang === 'ar' ? 'نسبة الربح من التكلفة' : 'Profit Markup on Cost'}</small>
+                <small>${lang === 'ml' ? 'ലാഭ ശതമാനം (Markup)' : lang === 'ar' ? 'هامش الربح' : 'Profit Markup'}</small>
                 <br><strong class="text-success">${cat.margin}</strong>
               </div>
             </div>
+
+            <div style="background: #f0fdf4; border: 1px solid #bbf7d0; padding: 8px 12px; border-radius: 6px; font-size: 0.78rem; color: #166534; margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between;">
+              <span><i class="fa-solid fa-box text-success"></i> ${lang === 'ml' ? 'കൈവശാവകാശം (Qabd): നേരിട്ടുള്ള സ്റ്റോക്ക്' : 'Qabd: Actual Stock Possession'}</span>
+              <span style="font-weight: 800; color: #059669;">7/7 Pillars ✓</span>
+            </div>
+
             <ul class="faculty-curriculum-list">
               ${hlList}
             </ul>
-            <button class="btn-enter-faculty" onclick="app.openAcademy('${cat.id}')">
-              <i class="fa-solid fa-graduation-cap"></i> <span>${t.btnStartCourse || 'Open Study Academy'}</span> <i class="fa-solid fa-arrow-right"></i>
-            </button>
+            <div class="faculty-card-footer">
+              <button class="btn-enter-faculty" onclick="app.openAcademy('${cat.id}')">
+                <span>${t.btnStartCourse || 'Open Study Academy'}</span>
+                <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
           </div>
         </div>
       `;
     });
-
-    if (filteredKeys.length === 0) {
-      html = `<div style="grid-column: 1/-1; text-align: center; padding: 40px; color: #64748b;">${lang === 'ml' ? 'ഈ വിഭാഗത്തിൽ കോഴ്സുകൾ ലഭ്യമല്ല.' : 'No courses found in this category.'}</div>`;
-    }
 
     grid.innerHTML = html;
   },
@@ -6542,17 +6709,18 @@ const app = {
           <div class="form-group">
             <label class="form-label">${lang === 'ml' ? 'ബിസിനസ്സ് ഐഡിയ:' : lang === 'ar' ? 'فكرة المشروع:' : 'Select Business Idea:'}</label>
             <select class="form-control" id="calcCategory" onchange="app.populateCategoryDefaults(this.value); app.calculateProfit();">
-              <option value="attar">Attar & Perfumes (അത്തർ & പെർഫ്യൂം)</option>
-              <option value="clothing">Dresses & Modest Wear (വസ്ത്രങ്ങൾ & ബോട്ടിക്)</option>
-              <option value="watches">Fashion Watches (ഫാഷൻ വാച്ചുകൾ)</option>
-              <option value="bags">Canvas Totes & Bags (ബാഗുകൾ)</option>
-              <option value="accessories">Anti-Tarnish Jewelry (മോതിരങ്ങൾ & ആഭരണങ്ങൾ)</option>
-              <option value="spices">Kerala Spices & Honey (സുഗന്ധവ്യഞ്ജനങ്ങൾ)</option>
-              <option value="chocolates">Artisan Chocolates & Dates (ചോക്ലേറ്റുകൾ & ഈത്തപ്പഴം)</option>
+              <option value="attar">Attar & Concentrated Fragrance Oils (അത്തർ)</option>
+              <option value="honey">Forest Honey & Apiary Jars (പ്രകൃതിദത്ത തേൻ)</option>
+              <option value="dates">Saudi Premium Dates & Gift Boxes (പ്രീമിയം ഈന്തപ്പഴം)</option>
+              <option value="dryfruits">Roasted Dry Fruits & Nut Packs (ഡ്രൈ ഫ്രൂട്ട്സ് & നട്സ്)</option>
+              <option value="spices">Malabar Cardamom & Black Pepper (കേരള സുഗന്ധവ്യഞ്ജനങ്ങൾ)</option>
+              <option value="soaps">Organic Cold-Process Soaps (പ്രകൃതിദത്ത സോപ്പുകൾ)</option>
               <option value="candles">Aroma Soy Wax Candles (സുഗന്ധ മെഴുകുതിരികൾ)</option>
-                <option value="chocolates">Handcrafted Chocolates & Dates (ചോക്ലേറ്റ് & ഈത്തപ്പഴം)</option>
-                <option value="candles">Aroma Soy Wax Candles (സുഗന്ധ മെഴുകുതിരികൾ)</option>
-            </select>
+              <option value="chips">Pure Coconut Oil Banana Chips (നാടൻ നേന്ത്രക്കായ ചിപ്സ്)</option>
+              <option value="halwa">Authentic Calicut Halwa Cuts (കോഴിക്കോടൻ ഹൽവ ബോക്സ്)</option>
+              <option value="chocolates">Homemade Couverture Chocolates (ഹോംമെയ്ഡ് ചോക്ലേറ്റ്)</option>
+              <option value="herbaltea">Herbal Infusion & Green Teas (ഔഷധ ചായ & ഗ്രീൻ ടീ)</option>
+              <option value="essentialoils">Pure Steam-Distilled Essential Oils (എസൻഷ്യൽ ഓയിൽസ്)</option></select>
           </div>
           <div class="form-group">
             <label class="form-label">${lang === 'ml' ? 'ഒരു യൂണിറ്റിന്റെ ഹോൾസെയിൽ വില (₹):' : lang === 'ar' ? 'تكلفة شراء القطعة بالجملة (روبية):' : 'Wholesale Unit Cost (₹):'}</label>

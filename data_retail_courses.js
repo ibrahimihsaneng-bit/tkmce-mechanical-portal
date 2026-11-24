@@ -489,11 +489,67 @@ window.dataRetailCourses = {
         }
       ]
     },
-    "tier": "retail",
+    "tier": "trading",
     "tierLabel": {
       "en": "Retail & Trading",
       "ml": "ചെറുകിട വ്യാപാരം",
       "ar": "تجارة التجزئة والتوزيع"
+    },
+    "tradingType": "wholesale_inventory_retail_resale",
+    "physicalGoods": true,
+    "isManufacturing": false,
+    "pilotBudgetMax": 10000,
+    "halalCompliance": {
+      "isCompliant": true,
+      "status": "verified_halal_trading",
+      "tradingModel": "Wholesale Inventory Purchase -> Actual Physical Possession (Qabd) -> Direct Retail Reselling",
+      "possessionMethod": {
+        "en": "Perfume oils and crystal flacons are purchased wholesale from S.M. Street or Mumbai, physically stored and compounded at home, and possessed before dispatch.",
+        "ml": "അത്തർ ഓയിലുകളും കുപ്പികളും മൊത്തവ്യാപാര കേന്ദ്രങ്ങളിൽ നിന്ന് വാങ്ങി വീട്ടിൽ നേരിട്ട് കൈവശം സൂക്ഷിച്ചു കുപ്പികളിലാക്കിയ ശേഷമേ വിൽക്കുന്നുള്ളൂ.",
+        "ar": "يتم شراء الزيوت العطرية والزجاجات جملة واستلامها وحيازتها وتعبئتها يدوياً قبل بيعها وشحنها للزبائن."
+      },
+      "antiCounterfeitPolicy": {
+        "en": "100% alcohol-free pure oil blends. No counterfeit designer perfume replicas or fake trademark brand packaging.",
+        "ml": "100% ആൽക്കഹോൾ ഫ്രീ തനത് സുഗന്ധങ്ങൾ. വ്യാജ ഡിസൈനർ ലോഗോകളോ റെപ്ലിക്കകളോ വിൽക്കുന്നത് പൂർണ്ണമായി ഒഴിവാക്കുന്നു.",
+        "ar": "زيوت عطرية أصلية خالية من الكحول. يمنع بيع العطور المقلدة أو استخدام علامات تجارية مزيفة."
+      },
+      "pillars": [
+        {
+          "id": "pillar_halal_substance",
+          "pass": true,
+          "noteEn": "Permissible pure physical commodity (Tahir & Mutaqawwam)."
+        },
+        {
+          "id": "pillar_ownership",
+          "pass": true,
+          "noteEn": "Purchased wholesale with full legal title."
+        },
+        {
+          "id": "pillar_possession",
+          "pass": true,
+          "noteEn": "Held in actual physical possession before customer sale."
+        },
+        {
+          "id": "pillar_zero_riba",
+          "pass": true,
+          "noteEn": "100% cash-flow financed under ₹10,000. No interest or debt."
+        },
+        {
+          "id": "pillar_defect_disclosure",
+          "pass": true,
+          "noteEn": "Truthful description with full customer inspection and return rights."
+        },
+        {
+          "id": "pillar_anti_counterfeit",
+          "pass": true,
+          "noteEn": "Strictly authentic goods; zero counterfeit or replica brand logos."
+        },
+        {
+          "id": "pillar_delivery_daman",
+          "pass": true,
+          "noteEn": "Seller assumes transit damage liability until safe customer receipt."
+        }
+      ]
     }
   },
   "clothing": {
@@ -511,7 +567,7 @@ window.dataRetailCourses = {
       "ml": "ദൈനംദിന ആവശ്യമായതിനാൽ ഉയർന്ന വിറ്റുവരവ്. അബായ, ഹിജാബ്, കുർത്തീസ് ഫാക്ടറി നിരക്കിൽ.",
       "ar": "سلعة استهلاكية أساسية بطلب متكرر. تشمل العبايات والفساتين والكورتي من المصانع مباشرة."
     },
-    "minBudget": "₹10,000 - ₹35,000",
+    "minBudget": "₹5,000 - ₹10,000",
     "margin": "45% - 120%",
     "topMarkets": "Surat Millennium Market, Tirupur Cotton Cluster, Kochi Broadway",
     "images": {
@@ -930,11 +986,67 @@ window.dataRetailCourses = {
         }
       ]
     },
-    "tier": "retail",
+    "tier": "trading",
     "tierLabel": {
       "en": "Retail & Trading",
       "ml": "ചെറുകിട വ്യാപാരം",
       "ar": "تجارة التجزئة والتوزيع"
+    },
+    "tradingType": "wholesale_inventory_retail_resale",
+    "physicalGoods": true,
+    "isManufacturing": false,
+    "pilotBudgetMax": 10000,
+    "halalCompliance": {
+      "isCompliant": true,
+      "status": "verified_halal_trading",
+      "tradingModel": "Wholesale Inventory Purchase -> Actual Physical Possession (Qabd) -> Direct Retail Reselling",
+      "possessionMethod": {
+        "en": "Abayas and modest wear are sourced directly from Surat/Tirupur mills, physically received, steam-pressed, quality-checked, and stored before listing.",
+        "ml": "അബായകളും തുണിത്തരങ്ങളും മില്ലുകളിൽ നിന്ന് വാങ്ങി നേരിട്ട് കൈപ്പറ്റി ഗുണനിലവാരം ഉറപ്പുവരുത്തിയ ശേഷം മാത്രമേ ഓർഡറുകൾ എടുക്കുന്നുള്ളൂ.",
+        "ar": "يتم استيراد العبايات والأزياء المحتشمة واستلامها وفحص جودتها وتخزينها فعلياً قبل فتح باب الطلبات."
+      },
+      "antiCounterfeitPolicy": {
+        "en": "Authentic private label or boutique unbranded fashion. Zero counterfeit luxury designer brand logos.",
+        "ml": "സ്വന്തം ബൊട്ടീക് ബ്രാൻഡോ ഒറിജിനൽ തുണിത്തരങ്ങളോ മാത്രം. പ്രമുഖ ആഡംബര ബ്രാൻഡുകളുടെ വ്യാജ ലോഗോകൾ നിഷിദ്ധം.",
+        "ar": "أزياء محتشمة أصلية تحت علامتك الخاصة. خلو تام من تقليد الماركات العالمية أو شعاراتها."
+      },
+      "pillars": [
+        {
+          "id": "pillar_halal_substance",
+          "pass": true,
+          "noteEn": "Permissible pure physical commodity (Tahir & Mutaqawwam)."
+        },
+        {
+          "id": "pillar_ownership",
+          "pass": true,
+          "noteEn": "Purchased wholesale with full legal title."
+        },
+        {
+          "id": "pillar_possession",
+          "pass": true,
+          "noteEn": "Held in actual physical possession before customer sale."
+        },
+        {
+          "id": "pillar_zero_riba",
+          "pass": true,
+          "noteEn": "100% cash-flow financed under ₹10,000. No interest or debt."
+        },
+        {
+          "id": "pillar_defect_disclosure",
+          "pass": true,
+          "noteEn": "Truthful description with full customer inspection and return rights."
+        },
+        {
+          "id": "pillar_anti_counterfeit",
+          "pass": true,
+          "noteEn": "Strictly authentic goods; zero counterfeit or replica brand logos."
+        },
+        {
+          "id": "pillar_delivery_daman",
+          "pass": true,
+          "noteEn": "Seller assumes transit damage liability until safe customer receipt."
+        }
+      ]
     }
   },
   "watches": {
@@ -1175,7 +1287,7 @@ window.dataRetailCourses = {
         }
       ]
     },
-    "tier": "retail",
+    "tier": "trading",
     "tierLabel": {
       "en": "Retail & Trading",
       "ml": "ചെറുകിട വ്യാപാരം",
@@ -1245,6 +1357,62 @@ window.dataRetailCourses = {
             "ml": "ഫാക്ടറി നിരക്കിൽ വാച്ചുകളും ബോക്സുകളും.",
             "ar": "أسعار الجملة المباشرة للساعات والأحزمة."
           }
+        }
+      ]
+    },
+    "tradingType": "wholesale_inventory_retail_resale",
+    "physicalGoods": true,
+    "isManufacturing": false,
+    "pilotBudgetMax": 10000,
+    "halalCompliance": {
+      "isCompliant": true,
+      "status": "verified_halal_trading",
+      "tradingModel": "Wholesale Inventory Purchase -> Actual Physical Possession (Qabd) -> Direct Retail Reselling",
+      "possessionMethod": {
+        "en": "Minimalist quartz watches and gift sets are purchased wholesale, physically inspected, packaged in custom gift boxes, and held in stock.",
+        "ml": "മിനിമലിസ്റ്റ് വാച്ചുകൾ മൊത്തവിലയിൽ വാങ്ങി സ്വന്തം ഗിഫ്റ്റ് ബോക്സുകളിൽ പായ്ക്ക് ചെയ്ത് കയ്യിൽ വെച്ച ശേഷം വിൽക്കുന്നു.",
+        "ar": "ساعات كوارتز أنيقة يتم شراؤها وفحص بطارياتها وتغليفها في علب هدايا خاصة وتخزينها فعلياً."
+      },
+      "antiCounterfeitPolicy": {
+        "en": "Strict anti-counterfeit guarantee: Zero fake Rolex, Omega, or Casio replicas. Authentic minimalist white-label only.",
+        "ml": "വ്യാജ റോലെക്സ്, കാസിയോ വാച്ചുകൾ വിൽക്കുന്നത് നിഷിദ്ധമാണ്. ഒറിജിനൽ വൈറ്റ്-ലേബൽ വാച്ചുകൾ മാത്രം.",
+        "ar": "ضمان مكافحة التزييف: يحرم بيع ساعات رولكس أو كاسيو المقلدة. الاعتماد على ساعات أصلية بدون علامات مزيفة."
+      },
+      "pillars": [
+        {
+          "id": "pillar_halal_substance",
+          "pass": true,
+          "noteEn": "Permissible pure physical commodity (Tahir & Mutaqawwam)."
+        },
+        {
+          "id": "pillar_ownership",
+          "pass": true,
+          "noteEn": "Purchased wholesale with full legal title."
+        },
+        {
+          "id": "pillar_possession",
+          "pass": true,
+          "noteEn": "Held in actual physical possession before customer sale."
+        },
+        {
+          "id": "pillar_zero_riba",
+          "pass": true,
+          "noteEn": "100% cash-flow financed under ₹10,000. No interest or debt."
+        },
+        {
+          "id": "pillar_defect_disclosure",
+          "pass": true,
+          "noteEn": "Truthful description with full customer inspection and return rights."
+        },
+        {
+          "id": "pillar_anti_counterfeit",
+          "pass": true,
+          "noteEn": "Strictly authentic goods; zero counterfeit or replica brand logos."
+        },
+        {
+          "id": "pillar_delivery_daman",
+          "pass": true,
+          "noteEn": "Seller assumes transit damage liability until safe customer receipt."
         }
       ]
     }
@@ -1487,7 +1655,7 @@ window.dataRetailCourses = {
         }
       ]
     },
-    "tier": "retail",
+    "tier": "trading",
     "tierLabel": {
       "en": "Retail & Trading",
       "ml": "ചെറുകിട വ്യാപാരം",
@@ -1543,6 +1711,62 @@ window.dataRetailCourses = {
             "ml": "₹45-₹80 നിരക്കിൽ തുണി ബാഗുകൾ.",
             "ar": "أكياس قماش بأسعار المصنع."
           }
+        }
+      ]
+    },
+    "tradingType": "wholesale_inventory_retail_resale",
+    "physicalGoods": true,
+    "isManufacturing": false,
+    "pilotBudgetMax": 10000,
+    "halalCompliance": {
+      "isCompliant": true,
+      "status": "verified_halal_trading",
+      "tradingModel": "Wholesale Inventory Purchase -> Actual Physical Possession (Qabd) -> Direct Retail Reselling",
+      "possessionMethod": {
+        "en": "Unbleached canvas totes are sourced from Tirupur mills, screen-printed with original designs, and stored in inventory before sale.",
+        "ml": "കോട്ടൺ കാൻവാസ് ടോട്ടുകൾ നേരിട്ട് വാങ്ങി സ്വന്തം ഡിസൈനുകൾ പ്രിന്റ് ചെയ്ത് സ്റ്റോക്കായി കയ്യിൽ വെച്ച ശേഷം വിൽക്കുന്നു.",
+        "ar": "حقائب القماش القطنية يتم استلامها من المصانع وطباعتها وتخزينها فعلياً قبل بيعها."
+      },
+      "antiCounterfeitPolicy": {
+        "en": "Original typography and minimalist artwork. Zero unauthorized copyright cartoon characters or luxury brand logos.",
+        "ml": "സ്വന്തം ആർട്ട്‌വർക്കുകളും മിനിമലിസ്റ്റ് ടൈപ്പോഗ്രാഫിയും മാത്രം. കോപ്പിറൈറ്റ് ചെയ്ത കാർട്ടൂണുകളോ വ്യാജ ലോഗോകളോ ഇല്ല.",
+        "ar": "تصاميم وأعمال فنية أصلية خاصة، ويمنع طباعة شخصيات أو شعارات محمية بحقوق ملكية دون ترخيص."
+      },
+      "pillars": [
+        {
+          "id": "pillar_halal_substance",
+          "pass": true,
+          "noteEn": "Permissible pure physical commodity (Tahir & Mutaqawwam)."
+        },
+        {
+          "id": "pillar_ownership",
+          "pass": true,
+          "noteEn": "Purchased wholesale with full legal title."
+        },
+        {
+          "id": "pillar_possession",
+          "pass": true,
+          "noteEn": "Held in actual physical possession before customer sale."
+        },
+        {
+          "id": "pillar_zero_riba",
+          "pass": true,
+          "noteEn": "100% cash-flow financed under ₹10,000. No interest or debt."
+        },
+        {
+          "id": "pillar_defect_disclosure",
+          "pass": true,
+          "noteEn": "Truthful description with full customer inspection and return rights."
+        },
+        {
+          "id": "pillar_anti_counterfeit",
+          "pass": true,
+          "noteEn": "Strictly authentic goods; zero counterfeit or replica brand logos."
+        },
+        {
+          "id": "pillar_delivery_daman",
+          "pass": true,
+          "noteEn": "Seller assumes transit damage liability until safe customer receipt."
         }
       ]
     }
@@ -1779,7 +2003,7 @@ window.dataRetailCourses = {
         }
       ]
     },
-    "tier": "retail",
+    "tier": "trading",
     "tierLabel": {
       "en": "Retail & Trading",
       "ml": "ചെറുകിട വ്യാപാരം",
@@ -1835,6 +2059,62 @@ window.dataRetailCourses = {
             "ml": "₹25-₹70 നിരക്കിൽ 18K കോട്ടിംഗ് ആഭരണങ്ങൾ.",
             "ar": "خواتم وسلاسل بطلاء 18 قيراط بأسعار المصنع."
           }
+        }
+      ]
+    },
+    "tradingType": "wholesale_inventory_retail_resale",
+    "physicalGoods": true,
+    "isManufacturing": false,
+    "pilotBudgetMax": 10000,
+    "halalCompliance": {
+      "isCompliant": true,
+      "status": "verified_halal_trading",
+      "tradingModel": "Wholesale Inventory Purchase -> Actual Physical Possession (Qabd) -> Direct Retail Reselling",
+      "possessionMethod": {
+        "en": "18K PVD stainless steel jewelry is purchased wholesale from Crawford Market, physically sorted, carded, and held in inventory before sale.",
+        "ml": "18K PVD ആന്റി-ടാർണിഷ് ആഭരണങ്ങൾ ഹോൾസെയിൽ വാങ്ങി വീട്ടിൽ നേരിട്ട് കൈവശം വെച്ച് പരിശോധിച്ച ശേഷം മാത്രമേ വിൽക്കാവൂ.",
+        "ar": "مجوهرات الستانلس ستيل المطلي بالذهب PVD يتم شراؤها وفحصها وتخزينها يدوياً قبل بيعها."
+      },
+      "antiCounterfeitPolicy": {
+        "en": "Disclosed as durable PVD coated stainless steel. Strictly no fake hallmark stamps or misleading gold weight claims.",
+        "ml": "സ്റ്റെയിൻലെസ്സ് സ്റ്റീൽ ആണെന്ന് വ്യക്തമായി ബോധ്യപ്പെടുത്തുക. സ്വർണ്ണമാണെന്ന രീതിയിലുള്ള വ്യാജ പ്രചാരണങ്ങൾ നിഷിദ്ധം.",
+        "ar": "الإفصاح الصريح بأنها إكسسوارات ستانلس ستيل مطلية، ويحرم الادعاء بأنها ذهب خالص أو تقليد أختام الذهب."
+      },
+      "pillars": [
+        {
+          "id": "pillar_halal_substance",
+          "pass": true,
+          "noteEn": "Permissible pure physical commodity (Tahir & Mutaqawwam)."
+        },
+        {
+          "id": "pillar_ownership",
+          "pass": true,
+          "noteEn": "Purchased wholesale with full legal title."
+        },
+        {
+          "id": "pillar_possession",
+          "pass": true,
+          "noteEn": "Held in actual physical possession before customer sale."
+        },
+        {
+          "id": "pillar_zero_riba",
+          "pass": true,
+          "noteEn": "100% cash-flow financed under ₹10,000. No interest or debt."
+        },
+        {
+          "id": "pillar_defect_disclosure",
+          "pass": true,
+          "noteEn": "Truthful description with full customer inspection and return rights."
+        },
+        {
+          "id": "pillar_anti_counterfeit",
+          "pass": true,
+          "noteEn": "Strictly authentic goods; zero counterfeit or replica brand logos."
+        },
+        {
+          "id": "pillar_delivery_daman",
+          "pass": true,
+          "noteEn": "Seller assumes transit damage liability until safe customer receipt."
         }
       ]
     }
@@ -2085,7 +2365,7 @@ window.dataRetailCourses = {
         }
       ]
     },
-    "tier": "retail",
+    "tier": "trading",
     "tierLabel": {
       "en": "Retail & Trading",
       "ml": "ചെറുകിട വ്യാപാരം",
@@ -2143,30 +2423,86 @@ window.dataRetailCourses = {
           }
         }
       ]
+    },
+    "tradingType": "wholesale_inventory_retail_resale",
+    "physicalGoods": true,
+    "isManufacturing": false,
+    "pilotBudgetMax": 10000,
+    "halalCompliance": {
+      "isCompliant": true,
+      "status": "verified_halal_trading",
+      "tradingModel": "Wholesale Inventory Purchase -> Actual Physical Possession (Qabd) -> Direct Retail Reselling",
+      "possessionMethod": {
+        "en": "Farm-direct green cardamom and cloves are purchased from Idukki/Wayanad farmer coops, physically weighed, graded, and held in airtight storage.",
+        "ml": "ഇടുക്കി/വയനാട് കർഷകരിൽ നിന്ന് നേരിട്ട് വാങ്ങുന്ന ഏലക്കയും കുരുമുളകും കൃത്യമായി തൂക്കി അളന്ന് കയ്യിൽ സൂക്ഷിച്ച ശേഷം വിൽക്കുന്നു.",
+        "ar": "شراء الهيل والبهارات من مزارع كيرالا وتخزينها ووزنها بدقة قبل بيعها للزبائن."
+      },
+      "antiCounterfeitPolicy": {
+        "en": "Zero adulteration or coloring agents. Authentic natural spices with 100% honest grade disclosures.",
+        "ml": "കൃത്രിമ നിറങ്ങളോ മായമോ ഇല്ലാത്ത യഥാർത്ഥ നാടൻ സുഗന്ധവ്യഞ്ജനങ്ങൾ. ഗ്രേഡിംഗ് സത്യസന്ധമായി വ്യക്തമാക്കുക.",
+        "ar": "بهارات طبيعية 100% خالية من الألوان الاصطناعية أو الغش التجاري مع بيان الدرجة بدقة."
+      },
+      "pillars": [
+        {
+          "id": "pillar_halal_substance",
+          "pass": true,
+          "noteEn": "Permissible pure physical commodity (Tahir & Mutaqawwam)."
+        },
+        {
+          "id": "pillar_ownership",
+          "pass": true,
+          "noteEn": "Purchased wholesale with full legal title."
+        },
+        {
+          "id": "pillar_possession",
+          "pass": true,
+          "noteEn": "Held in actual physical possession before customer sale."
+        },
+        {
+          "id": "pillar_zero_riba",
+          "pass": true,
+          "noteEn": "100% cash-flow financed under ₹10,000. No interest or debt."
+        },
+        {
+          "id": "pillar_defect_disclosure",
+          "pass": true,
+          "noteEn": "Truthful description with full customer inspection and return rights."
+        },
+        {
+          "id": "pillar_anti_counterfeit",
+          "pass": true,
+          "noteEn": "Strictly authentic goods; zero counterfeit or replica brand logos."
+        },
+        {
+          "id": "pillar_delivery_daman",
+          "pass": true,
+          "noteEn": "Seller assumes transit damage liability until safe customer receipt."
+        }
+      ]
     }
   },
   "electronics": {
     "id": "electronics",
-    "tier": "retail",
+    "tier": "trading",
     "tierLabel": {
       "en": "Retail & Trading",
       "ml": "ചെറുകിട വ്യാപാരം",
       "ar": "تجارة التجزئة والتوزيع"
     },
-    "icon": "fa-headphones-simple",
+    "icon": "fa-bowl-food",
     "headerClass": "electronics-header",
     "badgeColor": "#0284c7",
     "title": {
-      "en": "Smart Electronics, TWS & Fast Chargers Academy",
-      "ml": "സ്മാർട്ട് ഇലക്ട്രോണിക്സ് & ഗാഡ്ജറ്റ്സ് പഠന ശാഖ",
-      "ar": "أكاديمية الإلكترونيات الذكية وسماعات البلوتوث والشواحن"
+      "en": "Exotic Dry Fruits, Premium Nuts & Saudi Ajwa Dates Trading",
+      "ml": "പ്രീമിയം ഡ്രൈ ഫ്രൂട്ട്സ് & സൗദി അജ്‌വ ഈത്തപ്പഴ വ്യാപാരം",
+      "ar": "تجارة المكسرات الفاخرة والفواكه المجففة وتمر العجوة"
     },
     "tagline": {
-      "en": "High-velocity tech accessories: TWS Earbuds, 65W GaN Chargers, MagSafe Powerbanks. Start with ₹12,000.",
-      "ml": "TWS ഇയർബഡ്സ്, GaN ഫാസ്റ്റ് ചാർജറുകൾ, പവർബാങ്കുകൾ. ഏറ്റവും കൂടുതൽ വിറ്റുപോകുന്ന ഇലക്ട്രോണിക്സ് ബിസിനസ്.",
-      "ar": "ملحقات التكنولوجيا سريعة الدوران: سماعات بلوتوث وشواحن GaN فائقة السرعة وبنوك طاقة. ابدأ بـ 12,000 روبية."
+      "en": "High-turnover daily sunnah food reselling. Start with ₹5,000 inventory.",
+      "ml": "നിത്യേന ഡിമാൻഡുള്ള ഡ്രൈ ഫ്രൂട്ട്സ് & ഈത്തപ്പഴ കച്ചവടം. ₹5,000 ഉണ്ടെങ്കിൽ തുടങ്ങാം.",
+      "ar": "تجارة سريعة الدوران للأغذية الصحية وتمور العجوة برأس مال 5,000 روبية."
     },
-    "minBudget": "₹12,000 - ₹25,000",
+    "minBudget": "₹5,000 - ₹10,000",
     "margin": "60% - 140%",
     "topMarkets": "Delhi Gaffar Market, Mumbai Lamington Road, Shenzhen Direct Agent",
     "images": {
@@ -2443,11 +2779,67 @@ window.dataRetailCourses = {
           }
         }
       ]
+    },
+    "tradingType": "wholesale_inventory_retail_resale",
+    "physicalGoods": true,
+    "isManufacturing": false,
+    "pilotBudgetMax": 10000,
+    "halalCompliance": {
+      "isCompliant": true,
+      "status": "verified_halal_trading",
+      "tradingModel": "Wholesale Inventory Purchase -> Actual Physical Possession (Qabd) -> Direct Retail Reselling",
+      "possessionMethod": {
+        "en": "Exotic dry fruits, premium roasted nuts, and authentic Saudi Ajwa dates are sourced wholesale, weighed, sealed, and held in stock.",
+        "ml": "പ്രീമിയം ഡ്രൈ ഫ്രൂട്ട്സ്, നട്സ്, ഒറിജിനൽ മദീന അജ്‌വ ഈത്തപ്പഴം എന്നിവ മൊത്തവിലയിൽ വാങ്ങി നേരിട്ട് കയ്യിൽ വെച്ച് വിൽക്കുന്നു.",
+        "ar": "المكسرات المحمصة الفاخرة وتمور العجوة الأصلية يتم شراؤها ووزنها وتخزينها قبل بيعها."
+      },
+      "antiCounterfeitPolicy": {
+        "en": "100% genuine Grade-A nuts and certified imported dates. Honest harvest dates and origin disclosure.",
+        "ml": "ഒന്നാംതരം ഒറിജിനൽ ഡ്രൈ ഫ്രൂട്ട്സ്. ഗ്രേഡും പാക്കിംഗ് തീയതിയും കൃത്യമായി ഉപഭോക്താവിനെ അറിയിക്കുക.",
+        "ar": "مكسرات وتمور فاخرة أصلية 100% مع بيان سنة الحصاد والمصدر بدقة دون خلط أو تدليس."
+      },
+      "pillars": [
+        {
+          "id": "pillar_halal_substance",
+          "pass": true,
+          "noteEn": "Permissible pure physical commodity (Tahir & Mutaqawwam)."
+        },
+        {
+          "id": "pillar_ownership",
+          "pass": true,
+          "noteEn": "Purchased wholesale with full legal title."
+        },
+        {
+          "id": "pillar_possession",
+          "pass": true,
+          "noteEn": "Held in actual physical possession before customer sale."
+        },
+        {
+          "id": "pillar_zero_riba",
+          "pass": true,
+          "noteEn": "100% cash-flow financed under ₹10,000. No interest or debt."
+        },
+        {
+          "id": "pillar_defect_disclosure",
+          "pass": true,
+          "noteEn": "Truthful description with full customer inspection and return rights."
+        },
+        {
+          "id": "pillar_anti_counterfeit",
+          "pass": true,
+          "noteEn": "Strictly authentic goods; zero counterfeit or replica brand logos."
+        },
+        {
+          "id": "pillar_delivery_daman",
+          "pass": true,
+          "noteEn": "Seller assumes transit damage liability until safe customer receipt."
+        }
+      ]
     }
   },
   "cookware": {
     "id": "cookware",
-    "tier": "retail",
+    "tier": "trading",
     "tierLabel": {
       "en": "Retail & Trading",
       "ml": "ചെറുകിട വ്യാപാരം",
@@ -2466,7 +2858,7 @@ window.dataRetailCourses = {
       "ml": "ആരോഗ്യപ്രദമായ കാസ്റ്റ് അയൺ ചട്ടികൾ, ട്രൈ-പ്ലൈ സ്റ്റെയിൻലെസ്സ് സ്റ്റീൽ പാത്രങ്ങൾ. ഉയർന്ന മൂല്യമുള്ള വീട്ടുപകരണ ബിസിനസ്.",
       "ar": "أواني صحية تدوم مدى الحياة خالية من التفلون: مقالي الحديد الزهر وأواني الستانلس ستيل المقاوم للصدأ. ابدأ بـ 10,000 روبية."
     },
-    "minBudget": "₹10,000 - ₹25,000",
+    "minBudget": "₹5,000 - ₹10,000",
     "margin": "50% - 110%",
     "topMarkets": "Salem Steel Market, Jaggi Market Moradabad, Palakkad Traditional Foundry",
     "images": {
@@ -2716,11 +3108,67 @@ window.dataRetailCourses = {
           }
         }
       ]
+    },
+    "tradingType": "wholesale_inventory_retail_resale",
+    "physicalGoods": true,
+    "isManufacturing": false,
+    "pilotBudgetMax": 10000,
+    "halalCompliance": {
+      "isCompliant": true,
+      "status": "verified_halal_trading",
+      "tradingModel": "Wholesale Inventory Purchase -> Actual Physical Possession (Qabd) -> Direct Retail Reselling",
+      "possessionMethod": {
+        "en": "Pre-seasoned cast iron skillets and tri-ply pans are purchased from foundries, inspected, boxed, and stocked before customer orders.",
+        "ml": "കാസ്റ്റ് അയൺ പാത്രങ്ങൾ ഫൗണ്ടറികളിൽ നിന്ന് നേരിട്ട് വാങ്ങി ക്വാളിറ്റി ചെക്ക് ചെയ്തു കയ്യിൽ വെച്ച ശേഷം വിൽക്കുന്നു.",
+        "ar": "أواني الحديد الزهر الصلب يتم شراؤها من المصانع وفحصها وتخزينها قبل بيعها للمنازل."
+      },
+      "antiCounterfeitPolicy": {
+        "en": "Genuine non-toxic seasoned iron and food-grade 304 stainless steel. Fully disclosed origin.",
+        "ml": "വിഷലിപ്തമല്ലാത്ത പ്യുവർ കാസ്റ്റ് അയൺ & ഫുഡ് ഗ്രേഡ് സ്റ്റീൽ. നിർമ്മാണ വിവരങ്ങൾ കൃത്യമായി വ്യക്തമാക്കുക.",
+        "ar": "حديد زهر أصلي وآمن صحياً وفولاذ مقاوم للصدأ غذائي، مع إيضاح المصنع والمصدر بدقة."
+      },
+      "pillars": [
+        {
+          "id": "pillar_halal_substance",
+          "pass": true,
+          "noteEn": "Permissible pure physical commodity (Tahir & Mutaqawwam)."
+        },
+        {
+          "id": "pillar_ownership",
+          "pass": true,
+          "noteEn": "Purchased wholesale with full legal title."
+        },
+        {
+          "id": "pillar_possession",
+          "pass": true,
+          "noteEn": "Held in actual physical possession before customer sale."
+        },
+        {
+          "id": "pillar_zero_riba",
+          "pass": true,
+          "noteEn": "100% cash-flow financed under ₹10,000. No interest or debt."
+        },
+        {
+          "id": "pillar_defect_disclosure",
+          "pass": true,
+          "noteEn": "Truthful description with full customer inspection and return rights."
+        },
+        {
+          "id": "pillar_anti_counterfeit",
+          "pass": true,
+          "noteEn": "Strictly authentic goods; zero counterfeit or replica brand logos."
+        },
+        {
+          "id": "pillar_delivery_daman",
+          "pass": true,
+          "noteEn": "Seller assumes transit damage liability until safe customer receipt."
+        }
+      ]
     }
   },
   "footwear": {
     "id": "footwear",
-    "tier": "retail",
+    "tier": "trading",
     "tierLabel": {
       "en": "Retail & Trading",
       "ml": "ചെറുകിട വ്യാപാരം",
@@ -2739,7 +3187,7 @@ window.dataRetailCourses = {
       "ml": "ആഗ്ര, കൊൽഹാപൂർ മാർക്കറ്റുകളിൽ നിന്നുള്ള യഥാർത്ഥ ലെതർ ചെരുപ്പുകൾ. യുവാക്കൾക്കിടയിൽ വൻ ഡിമാൻഡ് ഉള്ള സംരംഭം.",
       "ar": "شباشب كولهابوري الجلدية المجدولة يدوياً وشباشب الفلين الطبية. ابدأ مباشرة من مسابك الجلود بـ 10,000 روبية."
     },
-    "minBudget": "₹10,000 - ₹22,000",
+    "minBudget": "₹5,000 - ₹10,000",
     "margin": "70% - 150%",
     "topMarkets": "Agra Hing Ki Mandi, Kolhapur Chappal Mandi, Kozhikode Footwear Wholesale",
     "images": {
@@ -2989,11 +3437,67 @@ window.dataRetailCourses = {
           }
         }
       ]
+    },
+    "tradingType": "wholesale_inventory_retail_resale",
+    "physicalGoods": true,
+    "isManufacturing": false,
+    "pilotBudgetMax": 10000,
+    "halalCompliance": {
+      "isCompliant": true,
+      "status": "verified_halal_trading",
+      "tradingModel": "Wholesale Inventory Purchase -> Actual Physical Possession (Qabd) -> Direct Retail Reselling",
+      "possessionMethod": {
+        "en": "Handcrafted Kolhapuri leather sliders are sourced from artisan clusters, physically inspected, sized, and held in inventory before sale.",
+        "ml": "പരമ്പരാഗത ലെതർ ചെരിപ്പുകൾ നേരിട്ട് വാങ്ങി സൈസ് പരിശോധിച്ച് സ്റ്റോക്ക് കയ്യിൽ വെച്ച ശേഷം വിൽക്കുന്നു.",
+        "ar": "أحذية جلدية تقليدية يتم شراؤها وتدقيق مقاساتها وتخزينها قبل عرضها للمشترين."
+      },
+      "antiCounterfeitPolicy": {
+        "en": "Authentic halal tanned bovine leather. Zero pigskin lining. Zero counterfeit athletic brand knockoffs.",
+        "ml": "ശുദ്ധമായ ഹലാൽ ലെതർ. പന്നിത്തോലിന്റെ അംശമില്ല. പ്രമുഖ സ്പോർട്സ് ബ്രാൻഡുകളുടെ വ്യാജ പകർപ്പുകൾ പൂർണ്ണമായി ഒഴിവാക്കുന്നു.",
+        "ar": "جلد طبيعي مدبوغ ومباح شرعاً، خلو تام من جلد الخنزير أو تقليد الأحذية الرياضية العالمية."
+      },
+      "pillars": [
+        {
+          "id": "pillar_halal_substance",
+          "pass": true,
+          "noteEn": "Permissible pure physical commodity (Tahir & Mutaqawwam)."
+        },
+        {
+          "id": "pillar_ownership",
+          "pass": true,
+          "noteEn": "Purchased wholesale with full legal title."
+        },
+        {
+          "id": "pillar_possession",
+          "pass": true,
+          "noteEn": "Held in actual physical possession before customer sale."
+        },
+        {
+          "id": "pillar_zero_riba",
+          "pass": true,
+          "noteEn": "100% cash-flow financed under ₹10,000. No interest or debt."
+        },
+        {
+          "id": "pillar_defect_disclosure",
+          "pass": true,
+          "noteEn": "Truthful description with full customer inspection and return rights."
+        },
+        {
+          "id": "pillar_anti_counterfeit",
+          "pass": true,
+          "noteEn": "Strictly authentic goods; zero counterfeit or replica brand logos."
+        },
+        {
+          "id": "pillar_delivery_daman",
+          "pass": true,
+          "noteEn": "Seller assumes transit damage liability until safe customer receipt."
+        }
+      ]
     }
   },
   "cosmetics": {
     "id": "cosmetics",
-    "tier": "retail",
+    "tier": "trading",
     "tierLabel": {
       "en": "Retail & Trading",
       "ml": "ചെറുകിട വ്യാപാരം",
@@ -3003,16 +3507,16 @@ window.dataRetailCourses = {
     "headerClass": "cosmetics-header",
     "badgeColor": "#059669",
     "title": {
-      "en": "Ayurvedic Hair Oils, Soaps & Kumkumadi Serums Academy",
-      "ml": "ആയുർവേദ ഹെയർ ഓയിലുകൾ & ഹാൻഡ്‌മേഡ് സോപ്പുകൾ പഠന ശാഖ",
-      "ar": "أكاديمية الزيوت العشبية والصابون الطبيعي وسيروم إشراقة البشرة"
+      "en": "Cold-Pressed Virgin Oils, Herbal Ubtans & Soaps Academy",
+      "ml": "ഹെർബൽ ഹെയർ ഓയിലുകൾ, ഉബ്‌ടാൻ & പ്രകൃതിദത്ത സോപ്പ് വ്യാപാരം",
+      "ar": "أكاديمية تجارة الزيوت النباتية البكر والأعشاب الطبيعية"
     },
     "tagline": {
       "en": "100% Herbal luxury self-care: Neelibringadi herbal hair oils, cold-processed goat milk soaps & Kumkumadi. Start with ₹8,000.",
       "ml": "നീലിഭൃംഗാദി ഹെയർ ഓയിൽ, ആട്ടിൻപാൽ ഹാൻഡ്-മേഡ് സോപ്പുകൾ, കുങ്കുമാദി തൈലം. ആയുർവേദത്തിന്റെ നാടായ കേരളത്തിൽ ഉയർന്ന ഡിമാൻഡ്.",
       "ar": "عناية شخصية عشبية فاخرة: زيت الأعشاب لتكثيف الشعر، وصابون حليب الماعز، وسيروم الكركم والزعفران. ابدأ بـ 8,000 روبية."
     },
-    "minBudget": "₹8,000 - ₹20,000",
+    "minBudget": "₹4,000 - ₹9,500",
     "margin": "80% - 200%",
     "topMarkets": "Thrissur Ayurvedic Raw Herbs Mandi, Kannauj Pure Floral Hydrosols, Khari Baoli",
     "images": {
@@ -3276,12 +3780,67 @@ window.dataRetailCourses = {
           }
         }
       ]
+    },
+    "tradingType": "wholesale_inventory_retail_resale",
+    "physicalGoods": true,
+    "isManufacturing": false,
+    "pilotBudgetMax": 10000,
+    "halalCompliance": {
+      "isCompliant": true,
+      "status": "verified_halal_trading",
+      "tradingModel": "Wholesale Inventory Purchase -> Actual Physical Possession (Qabd) -> Direct Retail Reselling",
+      "possessionMethod": {
+        "en": "Cold-pressed virgin coconut oil, herbal scalp elixirs, and handmade soaps are sourced from coops, bottled, and held in physical stock.",
+        "ml": "വെർജിൻ കോക്കനട്ട് ഓയിൽ, ആയുർവേദിക് എണ്ണകൾ, ഹെർബൽ സോപ്പുകൾ എന്നിവ വാങ്ങി കയ്യിൽ സൂക്ഷിച്ച ശേഷം വിൽക്കുന്നു.",
+        "ar": "زيوت جوز الهند البكر وخلاصات الأعشاب يتم شراؤها وتعبئتها وتخزينها فعلياً قبل بيعها."
+      },
+      "antiCounterfeitPolicy": {
+        "en": "Zero synthetic mineral oil or artificial steroids. Honest ingredient label with all herbal extracts disclosed.",
+        "ml": "മിനറൽ ഓയിലുകളോ സിന്തറ്റിക് കെമിക്കലുകളോ ഇല്ലാത്ത ശുദ്ധമായ പ്രകൃതിദത്ത എണ്ണകൾ. ചേരുവകൾ സത്യസന്ധമായി രേഖപ്പെടുത്തുക.",
+        "ar": "زيوت نقية خالية من الزيوت المعدنية أو المواد الكيميائية الضارة مع كتابة كافة المكونات بصدق."
+      },
+      "pillars": [
+        {
+          "id": "pillar_halal_substance",
+          "pass": true,
+          "noteEn": "Permissible pure physical commodity (Tahir & Mutaqawwam)."
+        },
+        {
+          "id": "pillar_ownership",
+          "pass": true,
+          "noteEn": "Purchased wholesale with full legal title."
+        },
+        {
+          "id": "pillar_possession",
+          "pass": true,
+          "noteEn": "Held in actual physical possession before customer sale."
+        },
+        {
+          "id": "pillar_zero_riba",
+          "pass": true,
+          "noteEn": "100% cash-flow financed under ₹10,000. No interest or debt."
+        },
+        {
+          "id": "pillar_defect_disclosure",
+          "pass": true,
+          "noteEn": "Truthful description with full customer inspection and return rights."
+        },
+        {
+          "id": "pillar_anti_counterfeit",
+          "pass": true,
+          "noteEn": "Strictly authentic goods; zero counterfeit or replica brand logos."
+        },
+        {
+          "id": "pillar_delivery_daman",
+          "pass": true,
+          "noteEn": "Seller assumes transit damage liability until safe customer receipt."
+        }
+      ]
     }
   },
-
   "chocolates": {
     "id": "chocolates",
-    "tier": "retail",
+    "tier": "trading",
     "icon": "fa-cookie-bite",
     "headerClass": "attar-header",
     "badgeColor": "#d97706",
@@ -3338,11 +3897,67 @@ window.dataRetailCourses = {
         "التغليف الكرتوني الفاخر مع الأشرطة الذهبية والفواصل الأنيقة",
         "طرق الشحن الآمن في الأجواء الحارة باستخدام أكياس الجل المبردة"
       ]
+    },
+    "tradingType": "wholesale_inventory_retail_resale",
+    "physicalGoods": true,
+    "isManufacturing": false,
+    "pilotBudgetMax": 10000,
+    "halalCompliance": {
+      "isCompliant": true,
+      "status": "verified_halal_trading",
+      "tradingModel": "Wholesale Inventory Purchase -> Actual Physical Possession (Qabd) -> Direct Retail Reselling",
+      "possessionMethod": {
+        "en": "Imported Medjool dates and premium chocolate compound are wholesale sourced, hand-stuffed and boxed, and physically dispatched.",
+        "ml": "മേഡ്ജൂൾ ഈത്തപ്പഴവും ചോക്ലേറ്റും മൊത്തവിലയിൽ വാങ്ങി വീട്ടിൽ നേരിട്ട് സ്റ്റഫ് ചെയ്ത് പായ്ക്ക് ചെയ്ത ശേഷം വിൽക്കുന്നു.",
+        "ar": "شراء التمور والشوكولاتة وتجهيزها وحشوها بالمكسرات وتغليفها يدوياً قبل الشحن."
+      },
+      "antiCounterfeitPolicy": {
+        "en": "Pure halal food ingredients, zero animal gelatin, zero alcohol essence. True date grade disclosure.",
+        "ml": "ഹലാൽ ചേരുവകൾ മാത്രം (ആനിമൽ ജലാറ്റിനോ ആൽക്കഹോളോ ഇല്ല). ഈത്തപ്പഴത്തിന്റെ യഥാർത്ഥ ഇനം വ്യക്തമാക്കുക.",
+        "ar": "مكونات غذائية حلال 100% خالية من الجيلاتين الحيواني غير المذكى أو نكهات الكحول."
+      },
+      "pillars": [
+        {
+          "id": "pillar_halal_substance",
+          "pass": true,
+          "noteEn": "Permissible pure physical commodity (Tahir & Mutaqawwam)."
+        },
+        {
+          "id": "pillar_ownership",
+          "pass": true,
+          "noteEn": "Purchased wholesale with full legal title."
+        },
+        {
+          "id": "pillar_possession",
+          "pass": true,
+          "noteEn": "Held in actual physical possession before customer sale."
+        },
+        {
+          "id": "pillar_zero_riba",
+          "pass": true,
+          "noteEn": "100% cash-flow financed under ₹10,000. No interest or debt."
+        },
+        {
+          "id": "pillar_defect_disclosure",
+          "pass": true,
+          "noteEn": "Truthful description with full customer inspection and return rights."
+        },
+        {
+          "id": "pillar_anti_counterfeit",
+          "pass": true,
+          "noteEn": "Strictly authentic goods; zero counterfeit or replica brand logos."
+        },
+        {
+          "id": "pillar_delivery_daman",
+          "pass": true,
+          "noteEn": "Seller assumes transit damage liability until safe customer receipt."
+        }
+      ]
     }
   },
   "candles": {
     "id": "candles",
-    "tier": "retail",
+    "tier": "trading",
     "icon": "fa-fire-flame-curved",
     "headerClass": "attar-header",
     "badgeColor": "#f59e0b",
@@ -3399,6 +4014,62 @@ window.dataRetailCourses = {
         "التغليف الأنبوبي الأنيق مع أختام الشمع الأحمر لنيل ثقة متابعي إنستغرام",
         "تغليف خلايا النحل الورقي لحماية الزجاج من الكسر أثناء الشحن البريدي"
       ]
+    },
+    "tradingType": "wholesale_inventory_retail_resale",
+    "physicalGoods": true,
+    "isManufacturing": false,
+    "pilotBudgetMax": 10000,
+    "halalCompliance": {
+      "isCompliant": true,
+      "status": "verified_halal_trading",
+      "tradingModel": "Wholesale Inventory Purchase -> Actual Physical Possession (Qabd) -> Direct Retail Reselling",
+      "possessionMethod": {
+        "en": "100% soy wax and apothecary jars are purchased wholesale, hand-poured in small batches, cured, and stocked before listing.",
+        "ml": "സോയ വാക്സും ആംബർ ഗ്ലാസ് ജാറുകളും വാങ്ങി വീട്ടിൽ ചെറിയ ബാച്ചുകളായി ഉണ്ടാക്കി കയ്യിൽ വെച്ച ശേഷം ഓർഡർ എടുക്കുന്നു.",
+        "ar": "شمع الصويا والبرطمانات يتم شراؤها وصبها يدوياً وإنضاجها وتخزينها قبل طرحها للبيع."
+      },
+      "antiCounterfeitPolicy": {
+        "en": "Disclosed as 100% plant-based soy wax. Zero toxic paraffin adulteration or fake imported designer labels.",
+        "ml": "100% സസ്യജന്യ സോയ വാക്സ്. പാരഫിൻ മായമോ വ്യാജ ഡിസൈനർ സ്റ്റിക്കറുകളോ ഇല്ലാതെ സത്യസന്ധമായ ബ്രാൻഡിംഗ്.",
+        "ar": "شمع صويا نباتي 100% خالٍ من مشتقات البترول السامة أو تقليد ملصقات الماركات الفاخرة."
+      },
+      "pillars": [
+        {
+          "id": "pillar_halal_substance",
+          "pass": true,
+          "noteEn": "Permissible pure physical commodity (Tahir & Mutaqawwam)."
+        },
+        {
+          "id": "pillar_ownership",
+          "pass": true,
+          "noteEn": "Purchased wholesale with full legal title."
+        },
+        {
+          "id": "pillar_possession",
+          "pass": true,
+          "noteEn": "Held in actual physical possession before customer sale."
+        },
+        {
+          "id": "pillar_zero_riba",
+          "pass": true,
+          "noteEn": "100% cash-flow financed under ₹10,000. No interest or debt."
+        },
+        {
+          "id": "pillar_defect_disclosure",
+          "pass": true,
+          "noteEn": "Truthful description with full customer inspection and return rights."
+        },
+        {
+          "id": "pillar_anti_counterfeit",
+          "pass": true,
+          "noteEn": "Strictly authentic goods; zero counterfeit or replica brand logos."
+        },
+        {
+          "id": "pillar_delivery_daman",
+          "pass": true,
+          "noteEn": "Seller assumes transit damage liability until safe customer receipt."
+        }
+      ]
     }
-  },
+  }
 };
