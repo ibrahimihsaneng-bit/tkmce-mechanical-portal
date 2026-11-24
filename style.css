@@ -4281,108 +4281,262 @@ body.lang-ar .sidebar-audio-cta-btn {
 
 
 /* ==========================================================================
-   FLOATING PERSISTENT BACKGROUND AUDIO DOCK & ON/OFF POWER SWITCH
+   ULTRA-COMPACT FLOATING SIDE AUDIO CAPSULE & POPUP SPEED MENU
    ========================================================================== */
 
-/* Clearance at bottom of body so content is not obscured by floating dock */
+/* No heavy bottom body padding - screen remains 100% free and visible */
 body {
-  padding-bottom: 84px;
+  padding-bottom: 20px;
 }
 
-.floating-audio-dock {
+/* Floating Audio Side Dock - Pins neatly to bottom-left corner */
+.floating-audio-dock, .compact-audio-side-dock {
   position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 74px;
-  background: rgba(15, 23, 42, 0.96);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-top: 1px solid rgba(16, 185, 129, 0.4);
-  box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.45);
+  bottom: 24px;
+  left: 24px;
   z-index: 9999;
+  display: block;
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body.lang-ar .floating-audio-dock, 
+body.lang-ar .compact-audio-side-dock {
+  left: auto;
+  right: 24px;
+}
+
+/* Ultra-Compact Floating Side Capsule (~42px Height) */
+.audio-capsule {
+  background: rgba(15, 23, 42, 0.95);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(16, 185, 129, 0.45);
+  box-shadow: 0 8px 26px rgba(0, 0, 0, 0.45);
+  border-radius: 999px;
+  padding: 4px 8px;
   display: flex;
   align-items: center;
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+  cursor: default;
+  transition: all 0.25s ease;
 }
 
-.floating-audio-dock.dock-hidden {
-  transform: translateY(100%);
+.audio-capsule:hover {
+  border-color: rgba(52, 211, 153, 0.7);
+  box-shadow: 0 10px 30px rgba(16, 185, 129, 0.25);
 }
 
-.dock-inner-container {
-  width: 100%;
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 20px;
+/* Normal State Content inside Capsule */
+.capsule-normal-content {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 16px;
+  gap: 7px;
 }
 
-/* Left Section: Soundwave and Track Info */
-.dock-left-section {
+.capsule-play-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  border: none;
+  color: #ffffff;
   display: flex;
   align-items: center;
-  gap: 14px;
-  min-width: 240px;
-  max-width: 340px;
+  justify-content: center;
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.4);
 }
 
-.dock-soundwave {
+.capsule-play-btn:hover {
+  transform: scale(1.1);
+  background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+}
+
+/* Mini Soundwave */
+.capsule-soundwave {
   display: flex;
   align-items: flex-end;
-  gap: 3px;
-  height: 24px;
-  padding: 2px;
+  gap: 2px;
+  height: 15px;
+  padding: 1px;
 }
 
-.dock-soundwave .sw-bar {
-  width: 3px;
-  height: 6px;
+.capsule-soundwave .csw-bar {
+  width: 2px;
+  height: 4px;
   background: #64748b;
-  border-radius: 2px;
+  border-radius: 1px;
   transition: height 0.2s ease, background 0.2s ease;
 }
 
-.dock-soundwave.is-playing .sw-bar {
-  background: linear-gradient(180deg, #34d399, #10b981);
-  animation: dockSoundwaveBounce 0.8s ease-in-out infinite alternate;
+.capsule-soundwave.is-playing .csw-bar {
+  background: #34d399;
+  animation: cswBounce 0.75s ease-in-out infinite alternate;
 }
 
-.dock-soundwave.is-playing .sw-bar:nth-child(2) { animation-duration: 0.65s; animation-delay: 0.1s; }
-.dock-soundwave.is-playing .sw-bar:nth-child(3) { animation-duration: 0.9s; animation-delay: 0.2s; }
-.dock-soundwave.is-playing .sw-bar:nth-child(4) { animation-duration: 0.75s; animation-delay: 0.15s; }
-.dock-soundwave.is-playing .sw-bar:nth-child(5) { animation-duration: 0.85s; animation-delay: 0.25s; }
+.capsule-soundwave.is-playing .csw-bar:nth-child(2) { animation-duration: 0.6s; animation-delay: 0.1s; }
+.capsule-soundwave.is-playing .csw-bar:nth-child(3) { animation-duration: 0.85s; animation-delay: 0.2s; }
 
-@keyframes dockSoundwaveBounce {
-  0% { height: 4px; }
-  100% { height: 22px; }
+@keyframes cswBounce {
+  0% { height: 3px; }
+  100% { height: 14px; }
 }
 
-.dock-track-info {
+.capsule-time {
+  font-size: 0.76rem;
+  font-weight: 800;
+  color: #e2e8f0;
+  font-family: monospace;
+  letter-spacing: 0.5px;
+}
+
+/* Fast Speed Quick-Pill: Single Click Cycles Speed */
+.capsule-speed-pill {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: #34d399;
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 3px 7px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.capsule-speed-pill:hover {
+  background: rgba(16, 185, 129, 0.25);
+  border-color: #34d399;
+  color: #ffffff;
+}
+
+/* Capsule Mini Action Buttons (Menu, Minimize, Close) */
+.capsule-action-btn {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  border: none;
+  color: #94a3b8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.72rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.capsule-action-btn:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.08);
+}
+
+.capsule-action-btn.btn-min:hover {
+  color: #38bdf8;
+  background: rgba(56, 189, 248, 0.2);
+}
+
+.capsule-action-btn.btn-close:hover {
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.2);
+}
+
+/* Minimized Mode: Tiny 40px Circular Floating Bubble */
+.audio-capsule.is-minimized {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  padding: 0;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  background: linear-gradient(135deg, #091e17 0%, #0f172a 100%);
+  border: 2px solid #10b981;
+}
+
+.capsule-minimized-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  color: #34d399;
+  font-size: 1.1rem;
+}
+
+.mini-pulse-dot {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10b981;
+}
+
+.mini-pulse-dot.pulsing {
+  box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.4);
+  animation: pulseDot 1.2s infinite;
+}
+
+/* Expandable Side Menu Popup (Opens above Capsule) */
+.audio-side-menu-popup {
+  position: absolute;
+  bottom: 52px;
+  left: 0;
+  width: 280px;
+  max-width: 88vw;
+  background: rgba(15, 23, 42, 0.98);
+  border: 1px solid rgba(16, 185, 129, 0.45);
+  border-radius: 14px;
+  padding: 14px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 10000;
+  animation: popupSlideUp 0.22s ease-out;
+}
+
+body.lang-ar .audio-side-menu-popup {
+  left: auto;
+  right: 0;
+}
+
+@keyframes popupSlideUp {
+  from { opacity: 0; transform: translateY(12px) scale(0.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.asmp-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.asmp-title-info {
   display: flex;
   flex-direction: column;
   overflow: hidden;
 }
 
-.dock-category-pill {
+.asmp-cat-badge {
   font-size: 0.68rem;
   font-weight: 800;
   color: #34d399;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: flex;
-  align-items: center;
-  gap: 5px;
 }
 
-.dock-episode-title {
-  font-size: 0.84rem;
+.asmp-ep-name {
+  font-size: 0.8rem;
   font-weight: 700;
   color: #ffffff;
   white-space: nowrap;
@@ -4391,141 +4545,187 @@ body {
   line-height: 1.25;
 }
 
-/* Center Section: Controls & Progress Track */
-.dock-center-section {
-  flex: 1;
-  max-width: 580px;
+.asmp-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.asmp-btn-action {
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.08);
+  border: none;
+  color: #94a3b8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.72rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.asmp-btn-action:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.asmp-btn-action.asmp-btn-close:hover {
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.25);
+}
+
+/* Speed Controls Section: "അതിൽ സ്പീഡ് കൂട്ടാനുള്ള ഓപ്ഷൻ, അത് മാത്രം ചെയ്താൽ മതി" */
+.asmp-speed-section {
   display: flex;
   flex-direction: column;
+  gap: 6px;
+}
+
+.asmp-section-label {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #cbd5e1;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.asmp-speed-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 5px;
+  background: rgba(0, 0, 0, 0.35);
+  padding: 4px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.asmp-speed-btn {
+  background: none;
+  border: none;
+  color: #94a3b8;
+  padding: 5px 0;
+  font-size: 0.74rem;
+  font-weight: 700;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+.asmp-speed-btn:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.asmp-speed-btn.active {
+  background: var(--primary);
+  color: #ffffff;
+  font-weight: 800;
+  box-shadow: 0 2px 6px rgba(16, 185, 129, 0.4);
+}
+
+/* Power & Language Grid */
+.asmp-controls-grid {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  background: rgba(0, 0, 0, 0.25);
+  padding: 6px 10px;
+  border-radius: 8px;
+}
+
+.asmp-power-box {
+  display: flex;
   align-items: center;
   gap: 6px;
 }
 
-.dock-controls-row {
-  display: flex;
-  align-items: center;
-  gap: 12px;
+.asmp-small-label {
+  font-size: 0.68rem;
+  font-weight: 800;
+  color: #94a3b8;
 }
 
-.dock-btn-circle {
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  color: #ffffff;
-  border-radius: 50%;
-  cursor: pointer;
+.asmp-lang-box {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  gap: 4px;
+}
+
+.asmp-lang-chip {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #94a3b8;
+  padding: 3px 7px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  border-radius: 4px;
+  cursor: pointer;
   transition: all 0.2s ease;
 }
 
-.dock-btn-circle:hover {
-  background: rgba(255, 255, 255, 0.25);
-  transform: scale(1.06);
+.asmp-lang-chip:hover {
+  color: #ffffff;
 }
 
-.dock-btn-circle.dock-skip {
-  width: 32px;
-  height: 32px;
-  font-size: 0.72rem;
-  gap: 2px;
+.asmp-lang-chip.active {
+  background: var(--primary);
+  color: #ffffff;
+  border-color: #34d399;
 }
 
-.dock-btn-circle.dock-skip span {
-  font-size: 0.6rem;
-  font-weight: 800;
+/* Chapter Stepper Row */
+.asmp-nav-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 4px;
 }
 
-.dock-btn-circle.dock-play-main {
-  width: 42px;
-  height: 42px;
-  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+.asmp-nav-btn {
+  background: rgba(255, 255, 255, 0.08);
   border: none;
-  font-size: 1rem;
-  box-shadow: 0 2px 10px rgba(16, 185, 129, 0.4);
-}
-
-.dock-btn-circle.dock-play-main:hover {
-  background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
-  transform: scale(1.1);
-}
-
-.dock-time-display {
-  font-size: 0.74rem;
+  color: #cbd5e1;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.72rem;
   font-weight: 700;
-  color: #94a3b8;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  margin-left: 6px;
-}
-
-.dock-time-sep {
-  opacity: 0.5;
-}
-
-.dock-scrub-wrap {
-  width: 100%;
-  height: 6px;
-  background: rgba(255, 255, 255, 0.15);
-  border-radius: 999px;
   cursor: pointer;
-  position: relative;
-  transition: height 0.2s ease;
-}
-
-.dock-scrub-wrap:hover {
-  height: 8px;
-}
-
-.dock-scrub-progress {
-  height: 100%;
-  background: linear-gradient(90deg, #10b981, #34d399);
-  border-radius: 999px;
-  position: relative;
-  transition: width 0.1s linear;
-}
-
-/* Right Section: Explicit Power Switch & Quick Controls */
-.dock-right-section {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 5px;
+  transition: all 0.2s ease;
 }
 
-/* Prominent Audio Power Switch (ഓൺ / ഓഫ് സ്വിച്ച്) */
-.dock-power-switch-wrap, .ssh-power-wrap {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(0, 0, 0, 0.4);
-  padding: 5px 10px;
-  border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+.asmp-nav-btn:hover {
+  background: rgba(16, 185, 129, 0.3);
+  color: #ffffff;
 }
 
-.power-switch-label, .ssh-power-label {
+.asmp-nav-status {
   font-size: 0.72rem;
   font-weight: 800;
-  color: #cbd5e1;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  color: #34d399;
 }
 
+/* Common Power Switch Button Styles */
 .audio-power-toggle-btn {
-  width: 58px;
-  height: 26px;
+  width: 54px;
+  height: 24px;
   border-radius: 999px;
   border: none;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 2px 6px;
+  padding: 2px 5px;
   position: relative;
   transition: all 0.25s ease;
   font-weight: 800;
-  font-size: 0.68rem;
+  font-size: 0.65rem;
 }
 
 .audio-power-toggle-btn.state-off {
@@ -4535,17 +4735,17 @@ body {
 }
 
 .audio-power-toggle-btn.state-off .power-toggle-knob {
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
   background: #94a3b8;
   position: absolute;
   left: 4px;
-  transition: all 0.25s ease;
+  transition: transform 0.25s ease;
 }
 
 .audio-power-toggle-btn.state-off .power-toggle-text {
-  margin-left: 24px;
+  margin-left: 22px;
 }
 
 .audio-power-toggle-btn.state-on {
@@ -4556,72 +4756,193 @@ body {
 }
 
 .audio-power-toggle-btn.state-on .power-toggle-knob {
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
   background: #ffffff;
   position: absolute;
   right: 4px;
-  transition: all 0.25s ease;
+  transition: transform 0.25s ease;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .audio-power-toggle-btn.state-on .power-toggle-text {
-  margin-right: 24px;
+  margin-right: 22px;
 }
 
-/* Voice Lang Pills */
-.dock-lang-pills, .dock-speed-pills {
+/* Top Study Stage Header Bar */
+.study-stage-header-bar {
+  background: linear-gradient(135deg, #091e17 0%, #0f172a 100%);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+  margin-bottom: 22px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.15);
+}
+
+.study-stage-header-bar-inner {
   display: flex;
-  background: rgba(0, 0, 0, 0.35);
-  border-radius: 6px;
-  padding: 2px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
 }
 
-.dock-lang-btn, .dock-speed-btn {
-  background: none;
-  border: none;
-  color: #94a3b8;
-  padding: 4px 8px;
+.ssh-left {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ssh-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   font-size: 0.72rem;
+  font-weight: 800;
+  color: #34d399;
+  text-transform: uppercase;
+}
+
+.live-pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10b981;
+}
+
+.live-pulse-dot.pulsing {
+  animation: pulseDot 1.2s infinite;
+}
+
+@keyframes pulseDot {
+  0% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+  70% { transform: scale(1.1); box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+  100% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+
+.ssh-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0;
+}
+
+.ssh-sub {
+  font-size: 0.84rem;
+  color: #94a3b8;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ssh-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.ssh-power-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 5px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.ssh-power-label {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #cbd5e1;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.btn-ssh-action {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  border: none;
+  color: #ffffff;
+  padding: 8px 16px;
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
   font-weight: 700;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.dock-lang-btn:hover, .dock-speed-btn:hover {
-  color: #ffffff;
-}
-
-.dock-lang-btn.active, .dock-speed-btn.active {
-  background: var(--primary);
-  color: #ffffff;
-}
-
-.dock-btn-icon {
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  color: #ffffff;
-  width: 32px;
-  height: 32px;
-  border-radius: 6px;
   cursor: pointer;
   display: flex;
   align-items: center;
-  justify-content: center;
-  font-size: 0.85rem;
+  gap: 8px;
   transition: all 0.2s ease;
 }
 
-.dock-btn-icon:hover {
-  background: rgba(255, 255, 255, 0.2);
+.btn-ssh-action:hover {
+  background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+  transform: translateY(-1px);
 }
 
-.dock-btn-icon.dock-btn-stop:hover {
-  background: rgba(239, 68, 68, 0.2);
-  border-color: #ef4444;
+/* Chapter Audio Action Bar in Study Modules */
+.chapter-audio-action-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  border-left: 4px solid var(--primary);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.caa-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-chapter-audio-play {
+  background: linear-gradient(135deg, #065f46 0%, #047857 100%);
+  border: none;
+  color: #ffffff;
+  padding: 7px 14px;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+}
+
+.btn-chapter-audio-play:hover {
+  background: linear-gradient(135deg, #047857 0%, #059669 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(4, 120, 87, 0.3);
+}
+
+.btn-chapter-audio-play.is-playing {
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+}
+
+.caa-time {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #64748b;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.caa-badge {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--primary-dark);
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
 /* Floating Transcript Drawer */
@@ -4740,166 +5061,20 @@ body {
   margin: 0;
 }
 
-/* Top Study Stage Header Bar */
-.study-stage-header-bar {
-  background: linear-gradient(135deg, #091e17 0%, #0f172a 100%);
-  border: 1px solid rgba(16, 185, 129, 0.35);
-  border-radius: var(--radius-md);
-  padding: 16px 20px;
-  margin-bottom: 22px;
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.15);
-}
-
-.study-stage-header-bar-inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  flex-wrap: wrap;
-}
-
-.ssh-left {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.ssh-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.72rem;
-  font-weight: 800;
-  color: #34d399;
-  text-transform: uppercase;
-}
-
-.ssh-title {
-  font-size: 1.15rem;
-  font-weight: 800;
-  color: #ffffff;
-  margin: 0;
-}
-
-.ssh-sub {
-  font-size: 0.84rem;
-  color: #94a3b8;
-  margin: 0;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.ssh-right {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.btn-ssh-action {
-  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-  border: none;
-  color: #ffffff;
-  padding: 8px 16px;
-  border-radius: var(--radius-sm);
-  font-size: 0.85rem;
-  font-weight: 700;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  transition: all 0.2s ease;
-}
-
-.btn-ssh-action:hover {
-  background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
-  transform: translateY(-1px);
-}
-
-/* Chapter Audio Action Bar in Study Modules */
-.chapter-audio-action-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: #f1f5f9;
-  border: 1px solid #e2e8f0;
-  border-left: 4px solid var(--primary);
-  border-radius: var(--radius-sm);
-  padding: 10px 14px;
-  margin-bottom: 20px;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.caa-left {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.btn-chapter-audio-play {
-  background: linear-gradient(135deg, #065f46 0%, #047857 100%);
-  border: none;
-  color: #ffffff;
-  padding: 7px 14px;
-  border-radius: 999px;
-  font-size: 0.82rem;
-  font-weight: 700;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  transition: all 0.2s ease;
-}
-
-.btn-chapter-audio-play:hover {
-  background: linear-gradient(135deg, #047857 0%, #059669 100%);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 10px rgba(4, 120, 87, 0.3);
-}
-
-.btn-chapter-audio-play.is-playing {
-  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
-}
-
-.caa-time {
-  font-size: 0.78rem;
-  font-weight: 700;
-  color: #64748b;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-
-.caa-badge {
-  font-size: 0.78rem;
-  font-weight: 700;
-  color: var(--primary-dark);
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-/* Responsive adjustments */
+/* Mobile responsive adjustments */
 @media (max-width: 768px) {
-  .floating-audio-dock {
-    height: auto;
-    padding: 10px 0;
+  .floating-audio-dock, .compact-audio-side-dock {
+    bottom: 16px;
+    left: 14px;
   }
-  .dock-inner-container {
-    flex-direction: column;
-    gap: 8px;
+  body.lang-ar .floating-audio-dock,
+  body.lang-ar .compact-audio-side-dock {
+    left: auto;
+    right: 14px;
   }
-  .dock-left-section {
-    min-width: 100%;
-    justify-content: space-between;
-  }
-  .dock-center-section {
-    width: 100%;
-  }
-  .dock-right-section {
-    width: 100%;
-    justify-content: space-between;
+  .audio-side-menu-popup {
+    bottom: 48px;
+    width: 260px;
   }
   .study-stage-header-bar-inner {
     flex-direction: column;

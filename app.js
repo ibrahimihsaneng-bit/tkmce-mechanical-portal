@@ -2007,7 +2007,10 @@ const app = {
     oscillator: null,
     gainNode: null,
     isDrawerOpen: false,
-    isMinimized: false
+    isMenuOpen: false,
+    isMinimized: false,
+    isClosed: false,
+    longPressTimer: null
   },
 
   masterclassAudioLibrary: {
@@ -2650,6 +2653,8 @@ const app = {
   // Play a specific chapter episode from the syllabus note card without hijacking the screen!
   playChapterAudio(stepNum) {
     const state = this.audioMasterclassState;
+    state.isClosed = false;
+    state.isMinimized = false;
     const episodes = this.getAudioEpisodes();
     const epNum = Math.min(Math.max(1, stepNum), episodes.length);
     const targetEp = episodes.find(e => e.num === epNum) || episodes[0];
@@ -2661,10 +2666,8 @@ const app = {
 
     this.speakCurrentEpisode();
     this.startAudioProgressTimer();
+    this.renderFloatingAudioDock();
     this.updateAudioProgressUI();
-
-    const dock = document.getElementById('floatingAudioDock');
-    if (dock) dock.classList.remove('dock-hidden');
   },
 
   // Toggle Play / Pause in background
@@ -2859,100 +2862,231 @@ const app = {
     window.speechSynthesis.speak(utterance);
   },
 
-  // Render Persistent Floating Bottom Audio Dock
+  // Render Ultra-Compact Floating Side Audio Widget (Non-Intrusive & Minimal)
   renderFloatingAudioDock() {
     const dock = document.getElementById('floatingAudioDock');
     if (!dock) return;
 
     const state = this.audioMasterclassState;
+    if (state.isClosed) {
+      dock.style.display = 'none';
+      return;
+    }
+    dock.style.display = 'block';
+
     const lang = state.voiceLang || this.currentLang || 'ml';
     const cat = this.categoriesData[state.nicheKey] || this.categoriesData.attar;
     const episodes = this.getAudioEpisodes();
     const currentEp = episodes[state.currentEpisode - 1] || episodes[0];
-
     const formattedCurrentTime = this.formatAudioTime(state.currentTimeSec);
-    const formattedTotalTime = this.formatAudioTime(state.totalDurationSec);
-    const pct = ((state.currentTimeSec / state.totalDurationSec) * 100).toFixed(1);
     const catTitle = cat.title[lang] || cat.title.en;
 
     dock.innerHTML = `
-      <div class="dock-inner-container">
-        <!-- LEFT: Category Info & Mini Soundwave -->
-        <div class="dock-left-section">
-          <div class="dock-soundwave ${state.isPlaying ? 'is-playing' : ''}" id="dockSoundwave">
-            <span class="sw-bar"></span><span class="sw-bar"></span><span class="sw-bar"></span>
-            <span class="sw-bar"></span><span class="sw-bar"></span>
+      <!-- 1. EXPANDABLE SIDE MENU POPUP (Reveals on menu click or long-press) -->
+      <div class="audio-side-menu-popup ${state.isMenuOpen ? 'is-open' : ''}" id="audioSideMenuPopup" style="display: ${state.isMenuOpen ? 'flex' : 'none'};">
+        <div class="asmp-header">
+          <div class="asmp-title-info">
+            <span class="asmp-cat-badge"><i class="fa-solid fa-graduation-cap"></i> ${catTitle}</span>
+            <strong class="asmp-ep-name">${currentEp.title[lang] || currentEp.title.en}</strong>
           </div>
-          <div class="dock-track-info">
-            <div class="dock-category-pill" id="dockCategoryPill">
-              <i class="fa-solid fa-graduation-cap"></i> ${catTitle}
-            </div>
-            <div class="dock-episode-title" id="dockEpisodeTitle" title="${currentEp.title[lang] || currentEp.title.en}">
-              ${currentEp.title[lang] || currentEp.title.en}
-            </div>
+          <div class="asmp-header-actions">
+            <!-- Minimize Down Arrow ("ഡൗൺ ആരോ / തെക്ക് ആരോ") -->
+            <button class="asmp-btn-action" onclick="app.minimizeAudioWidget(event)" title="${lang === 'ml' ? 'ചെറുതാക്കുക (Minimize)' : 'Minimize'}">
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+            <!-- Close 'X' ("തെറ്റ് ഒഴിവാക്കാൻ") -->
+            <button class="asmp-btn-action asmp-btn-close" onclick="app.closeAudioWidget(event)" title="${lang === 'ml' ? 'ഓഡിയോ ക്ലോസ് ചെയ്യുക' : 'Close and Stop Audio'}">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
           </div>
         </div>
 
-        <!-- CENTER: Playback Controls & Progress Bar -->
-        <div class="dock-center-section">
-          <div class="dock-controls-row">
-            <button class="dock-btn-circle dock-skip" onclick="app.skipAudio(-15)" title="Rewind 15s">
-              <i class="fa-solid fa-rotate-left"></i> <span>-15s</span>
-            </button>
-            <button class="dock-btn-circle dock-play-main" id="dockBtnPlay" onclick="app.toggleAudioMasterclass()" title="${state.isPlaying ? 'Pause' : 'Play'}">
-              <i class="fa-solid ${state.isPlaying ? 'fa-pause' : 'fa-play'}" id="dockPlayIcon"></i>
-            </button>
-            <button class="dock-btn-circle dock-skip" onclick="app.skipAudio(15)" title="Forward 15s">
-              <i class="fa-solid fa-rotate-right"></i> <span>+15s</span>
-            </button>
-            <div class="dock-time-display">
-              <span id="dockTimeCurrent">${formattedCurrentTime}</span>
-              <span class="dock-time-sep">/</span>
-              <span id="dockTimeTotal">${formattedTotalTime}</span>
-            </div>
+        <!-- Speed Selector Row: "അതിൽ സ്പീഡ് കൂട്ടാനുള്ള ഓപ്ഷൻ, അത് മാത്രം ചെയ്താൽ മതി" -->
+        <div class="asmp-speed-section">
+          <div class="asmp-section-label">
+            <i class="fa-solid fa-gauge-high text-primary"></i>
+            <span>${lang === 'ml' ? 'കേൾക്കാനുള്ള വേഗത (Audio Speed):' : lang === 'ar' ? 'سرعة الصوت:' : 'Playback Speed:'}</span>
           </div>
-          <div class="dock-scrub-wrap" id="dockScrubTrack" onclick="app.seekAudioTrack(event)" title="Click to seek">
-            <div class="dock-scrub-progress" id="dockScrubBar" style="width: ${pct}%;"></div>
+          <div class="asmp-speed-grid">
+            <button class="asmp-speed-btn ${state.playbackRate === 1 ? 'active' : ''}" onclick="app.setAudioSpeed(1)">1.0x</button>
+            <button class="asmp-speed-btn ${state.playbackRate === 1.25 ? 'active' : ''}" onclick="app.setAudioSpeed(1.25)">1.25x</button>
+            <button class="asmp-speed-btn ${state.playbackRate === 1.5 ? 'active' : ''}" onclick="app.setAudioSpeed(1.5)">1.5x</button>
+            <button class="asmp-speed-btn ${state.playbackRate === 2 ? 'active' : ''}" onclick="app.setAudioSpeed(2)">2.0x</button>
           </div>
         </div>
 
-        <!-- RIGHT: Power Switch, Voice Lang, Speed & Drawer Toggle -->
-        <div class="dock-right-section">
-          <!-- EXPLICIT POWER SWITCH (ഓൺ / ഓഫ് സ്വിച്ച്) -->
-          <div class="dock-power-switch-wrap">
-            <span class="power-switch-label">${lang === 'ml' ? 'ഓഡിയോ സ്വിച്ച്:' : lang === 'ar' ? 'مفتاح الصوت:' : 'AUDIO:'}</span>
-            <button class="audio-power-toggle-btn ${state.isPoweredOn && state.isPlaying ? 'state-on' : 'state-off'}" id="dockAudioPowerSwitch" onclick="app.toggleAudioPowerSwitch()" title="${state.isPoweredOn && state.isPlaying ? 'Click to Turn Audio OFF' : 'Click to Turn Audio ON'}">
+        <!-- Power Switch & Voice Language -->
+        <div class="asmp-controls-grid">
+          <div class="asmp-power-box">
+            <span class="asmp-small-label">${lang === 'ml' ? 'പവർ:' : 'POWER:'}</span>
+            <button class="audio-power-toggle-btn ${state.isPoweredOn && state.isPlaying ? 'state-on' : 'state-off'}" id="popupAudioPowerSwitch" onclick="app.toggleAudioPowerSwitch()">
               <span class="power-toggle-knob"></span>
               <span class="power-toggle-text">${state.isPoweredOn && state.isPlaying ? 'ON' : 'OFF'}</span>
             </button>
           </div>
-
-          <!-- Voice Language Selector -->
-          <div class="dock-lang-pills">
-            <button class="dock-lang-btn ${lang === 'ml' ? 'active' : ''}" onclick="app.setAudioVoice('ml')" title="Malayalam Voice">ML</button>
-            <button class="dock-lang-btn ${lang === 'en' ? 'active' : ''}" onclick="app.setAudioVoice('en')" title="English Voice">EN</button>
-            <button class="dock-lang-btn ${lang === 'ar' ? 'active' : ''}" onclick="app.setAudioVoice('ar')" title="Arabic Voice">AR</button>
+          <div class="asmp-lang-box">
+            <button class="asmp-lang-chip ${lang === 'ml' ? 'active' : ''}" onclick="app.setAudioVoice('ml')" title="Malayalam">ML</button>
+            <button class="asmp-lang-chip ${lang === 'en' ? 'active' : ''}" onclick="app.setAudioVoice('en')" title="English">EN</button>
+            <button class="asmp-lang-chip ${lang === 'ar' ? 'active' : ''}" onclick="app.setAudioVoice('ar')" title="Arabic">AR</button>
           </div>
+        </div>
 
-          <!-- Speed Controls -->
-          <div class="dock-speed-pills">
-            <button class="dock-speed-btn ${state.playbackRate === 1 ? 'active' : ''}" onclick="app.setAudioSpeed(1)">1x</button>
-            <button class="dock-speed-btn ${state.playbackRate === 1.25 ? 'active' : ''}" onclick="app.setAudioSpeed(1.25)">1.25x</button>
-            <button class="dock-speed-btn ${state.playbackRate === 1.5 ? 'active' : ''}" onclick="app.setAudioSpeed(1.5)">1.5x</button>
-          </div>
-
-          <!-- Transcript Drawer Toggle -->
-          <button class="dock-btn-icon" id="dockBtnTranscript" onclick="app.toggleTranscriptDrawer()" title="${lang === 'ml' ? 'തത്സമയ വിവരണം' : 'Live Transcript'}">
-            <i class="fa-solid fa-scroll"></i>
+        <!-- Chapter Stepper -->
+        <div class="asmp-nav-row">
+          <button class="asmp-nav-btn" onclick="app.skipAudioEpisode(-1)" title="Previous Episode">
+            <i class="fa-solid fa-backward-step"></i> <span>Ep ${Math.max(1, state.currentEpisode - 1)}</span>
           </button>
-
-          <!-- Quick Turn Off Button -->
-          <button class="dock-btn-icon dock-btn-stop" onclick="app.turnAudioOff()" title="${lang === 'ml' ? 'ഓഡിയോ ഓഫ് ചെയ്യുക' : 'Turn Off Audio'}">
-            <i class="fa-solid fa-power-off text-danger"></i>
+          <span class="asmp-nav-status">Ep ${state.currentEpisode} of 6</span>
+          <button class="asmp-nav-btn" onclick="app.skipAudioEpisode(1)" title="Next Episode">
+            <span>Ep ${Math.min(6, state.currentEpisode + 1)}</span> <i class="fa-solid fa-forward-step"></i>
           </button>
         </div>
       </div>
+
+      <!-- 2. ULTRA-COMPACT FLOATING SIDE CAPSULE (~42px Height) -->
+      <div class="audio-capsule ${state.isMinimized ? 'is-minimized' : ''}" 
+           id="audioCapsule" 
+           onmousedown="app.handleCapsuleMouseDown(event)" 
+           onmouseup="app.handleCapsuleMouseUp(event)" 
+           ontouchstart="app.handleCapsuleTouchStart(event)" 
+           ontouchend="app.handleCapsuleTouchEnd(event)"
+           title="${lang === 'ml' ? 'മെനു കാണാൻ ക്ലിക്ക് ചെയ്യുക അല്ലെങ്കിൽ ഞെക്കിപ്പിടിക്കുക' : 'Click or Press & Hold for Menu'}">
+
+        <!-- Normal Compact State -->
+        <div class="capsule-normal-content" style="${state.isMinimized ? 'display: none;' : 'display: flex;'}">
+          <!-- Play / Pause Circular Icon -->
+          <button class="capsule-play-btn" onclick="app.toggleAudioMasterclass(event)" title="${state.isPlaying ? 'Pause' : 'Play'}">
+            <i class="fa-solid ${state.isPlaying ? 'fa-pause' : 'fa-play'}" id="capsulePlayIcon"></i>
+          </button>
+
+          <!-- Mini Animated Soundwave -->
+          <div class="capsule-soundwave ${state.isPlaying ? 'is-playing' : ''}" id="capsuleSoundwave">
+            <span class="csw-bar"></span>
+            <span class="csw-bar"></span>
+            <span class="csw-bar"></span>
+          </div>
+
+          <!-- Time text -->
+          <span class="capsule-time" id="capsuleTime">${formattedCurrentTime}</span>
+
+          <!-- Fast Speed Quick-Pill: click cycles 1x -> 1.25x -> 1.5x -> 2x -->
+          <button class="capsule-speed-pill" id="capsuleSpeedPill" onclick="app.cycleAudioSpeed(event)" title="Speed: ${state.playbackRate}x (Click to change)">
+            ${state.playbackRate}x
+          </button>
+
+          <!-- Menu Button (sliders icon) -->
+          <button class="capsule-action-btn" onclick="app.toggleSideMenu(event)" title="${lang === 'ml' ? 'മെനു ബാർ (സ്പീഡ് & സെറ്റിംഗ്സ്)' : 'Menu (Speed & Settings)'}">
+            <i class="fa-solid fa-sliders"></i>
+          </button>
+
+          <!-- Minimize Down Arrow ("തെക്ക് ആരോ / ഡൗൺ ആരോ") -->
+          <button class="capsule-action-btn btn-min" onclick="app.minimizeAudioWidget(event)" title="${lang === 'ml' ? 'ചെറുതാക്കുക (Minimize)' : 'Minimize to bubble'}">
+            <i class="fa-solid fa-chevron-down"></i>
+          </button>
+
+          <!-- Close 'X' Button ("തെറ്റ് ഒഴിവാക്കാൻ") -->
+          <button class="capsule-action-btn btn-close" onclick="app.closeAudioWidget(event)" title="${lang === 'ml' ? 'ഓഡിയോ ക്ലോസ് ചെയ്യുക' : 'Close and Stop Audio'}">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+
+        <!-- Minimized State: Tiny 38px floating bubble -->
+        <div class="capsule-minimized-content" style="${state.isMinimized ? 'display: flex;' : 'display: none;'}" onclick="app.restoreAudioWidget(event)" title="${lang === 'ml' ? 'ഓഡിയോ പ്ലെയർ തുറക്കുക' : 'Restore Audio Player'}">
+          <i class="fa-solid fa-headphones"></i>
+          <span class="mini-pulse-dot ${state.isPlaying ? 'pulsing' : ''}"></span>
+        </div>
+      </div>
     `;
+  },
+
+  // Cycle speed quickly on single click: 1x -> 1.25x -> 1.5x -> 2.0x -> 1x
+  cycleAudioSpeed(event) {
+    if (event) event.stopPropagation();
+    const speeds = [1, 1.25, 1.5, 2];
+    const currIdx = speeds.indexOf(this.audioMasterclassState.playbackRate);
+    const nextIdx = (currIdx + 1) % speeds.length;
+    this.setAudioSpeed(speeds[nextIdx]);
+  },
+
+  // Skip between episodes
+  skipAudioEpisode(delta) {
+    const state = this.audioMasterclassState;
+    const episodes = this.getAudioEpisodes();
+    const nextEpNum = Math.min(Math.max(1, state.currentEpisode + delta), episodes.length);
+    this.playAudioEpisode(nextEpNum);
+  },
+
+  // Toggle Popup Side Menu
+  toggleSideMenu(event) {
+    if (event) event.stopPropagation();
+    this.audioMasterclassState.isMenuOpen = !this.audioMasterclassState.isMenuOpen;
+    const popup = document.getElementById('audioSideMenuPopup');
+    if (popup) {
+      popup.style.display = this.audioMasterclassState.isMenuOpen ? 'flex' : 'none';
+      popup.classList.toggle('is-open', this.audioMasterclassState.isMenuOpen);
+    }
+  },
+
+  openSideMenu() {
+    this.audioMasterclassState.isMenuOpen = true;
+    const popup = document.getElementById('audioSideMenuPopup');
+    if (popup) {
+      popup.style.display = 'flex';
+      popup.classList.add('is-open');
+    }
+  },
+
+  // Minimize Audio Widget into tiny bubble ("തെക്ക് ആരോ കൊടുത്തിട്ട് അത് ഒഴിവാക്കാനും")
+  minimizeAudioWidget(event) {
+    if (event) event.stopPropagation();
+    this.audioMasterclassState.isMinimized = true;
+    this.audioMasterclassState.isMenuOpen = false;
+    this.renderFloatingAudioDock();
+  },
+
+  // Restore Minimized Audio Widget
+  restoreAudioWidget(event) {
+    if (event) event.stopPropagation();
+    this.audioMasterclassState.isMinimized = false;
+    this.renderFloatingAudioDock();
+  },
+
+  // Completely Close & Dismiss Audio Widget ("തെറ്റ് ഒഴിവാക്കാൻ")
+  closeAudioWidget(event) {
+    if (event) event.stopPropagation();
+    this.turnAudioOff();
+    this.audioMasterclassState.isClosed = true;
+    this.audioMasterclassState.isMenuOpen = false;
+    const dock = document.getElementById('floatingAudioDock');
+    if (dock) dock.style.display = 'none';
+  },
+
+  // Press-and-Hold / Long-Press Handlers ("ഞെക്കിപ്പിടിച്ചാൽ മാത്രം ഫങ്ക്ഷൻ പ്രവർത്തിക്കുന്ന രീതി")
+  handleCapsuleMouseDown(event) {
+    if (event.target.closest('button')) return;
+    this.startLongPressTimer();
+  },
+  handleCapsuleMouseUp(event) {
+    this.clearLongPressTimer();
+  },
+  handleCapsuleTouchStart(event) {
+    if (event.target.closest('button')) return;
+    this.startLongPressTimer();
+  },
+  handleCapsuleTouchEnd(event) {
+    this.clearLongPressTimer();
+  },
+  startLongPressTimer() {
+    this.clearLongPressTimer();
+    this.audioMasterclassState.longPressTimer = setTimeout(() => {
+      this.openSideMenu();
+    }, 400);
+  },
+  clearLongPressTimer() {
+    if (this.audioMasterclassState.longPressTimer) {
+      clearTimeout(this.audioMasterclassState.longPressTimer);
+      this.audioMasterclassState.longPressTimer = null;
+    }
   },
 
   // Render Top Quick-Bar in Study Stage (Unobtrusive & Clean)
@@ -3065,24 +3199,20 @@ const app = {
     const episodes = this.getAudioEpisodes();
     const currentEp = episodes[state.currentEpisode - 1] || episodes[0];
 
-    const timeCurrEl = document.getElementById('dockTimeCurrent');
-    const scrubBar = document.getElementById('dockScrubBar');
-    const epTitleEl = document.getElementById('dockEpisodeTitle');
-    const playIcon = document.getElementById('dockPlayIcon');
-    const soundwave = document.getElementById('dockSoundwave');
+    const timeCurrEl = document.getElementById('capsuleTime');
+    const playIcon = document.getElementById('capsulePlayIcon');
+    const soundwave = document.getElementById('capsuleSoundwave');
+    const speedPill = document.getElementById('capsuleSpeedPill');
 
     if (timeCurrEl) timeCurrEl.textContent = this.formatAudioTime(state.currentTimeSec);
-    if (scrubBar) {
-      const pct = ((state.currentTimeSec / state.totalDurationSec) * 100).toFixed(1);
-      scrubBar.style.width = `${pct}%`;
-    }
-    if (epTitleEl) epTitleEl.textContent = currentEp.title[lang] || currentEp.title.en;
-
     if (playIcon) {
       playIcon.className = `fa-solid ${state.isPlaying ? 'fa-pause' : 'fa-play'}`;
     }
     if (soundwave) {
       soundwave.classList.toggle('is-playing', state.isPlaying);
+    }
+    if (speedPill) {
+      speedPill.textContent = `${state.playbackRate}x`;
     }
 
     // Update Power Switch buttons across UI
