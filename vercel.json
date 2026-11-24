@@ -5,7 +5,9 @@
     { "source": "/plan", "destination": "/" },
     { "source": "/suppliers", "destination": "/" },
     { "source": "/tools", "destination": "/" },
-    { "source": "/calc", "destination": "/" }
+    { "source": "/calc", "destination": "/" },
+    { "source": "/kerala-intel", "destination": "/" },
+    { "source": "/kerala-intel/(.*)", "destination": "/" }
   ],
   "headers": [
     {

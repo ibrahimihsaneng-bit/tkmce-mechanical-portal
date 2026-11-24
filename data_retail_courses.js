@@ -3953,6 +3953,137 @@ window.dataRetailCourses = {
           "noteEn": "Seller assumes transit damage liability until safe customer receipt."
         }
       ]
+    },
+    "capitalTable": [
+      {
+        "item": {
+          "en": "Premium Compound Chocolate Slabs (Dark & Milk - 5kg)",
+          "ml": "പ്രീമിയം ചോക്ലേറ്റ് സ്ലാബുകൾ (ഡാർക്ക് & മിൽക്ക് - 5kg)",
+          "ar": "ألواح شوكولاتة خام فاخرة (داكنة وحليب - 5 كجم)"
+        },
+        "starter": "₹1,100",
+        "pro": "₹3,300 (15kg Bulk)",
+        "notes": {
+          "en": "Morde / 2M Cocoa from Kozhikode Valiyangadi",
+          "ml": "കോഴിക്കോട് വലിയങ്ങാടി അല്ലെങ്കിൽ എറണാകുളം മാർക്കറ്റ്",
+          "ar": "سوق كوزيكود أو إرناكولام بالجملة"
+        }
+      },
+      {
+        "item": {
+          "en": "Jumbo Medjool / Kalmi Dates & Premium Nuts (Almonds, Pistachio - 2kg)",
+          "ml": "ജംബോ ഈത്തപ്പഴവും പ്രീമിയം നട്സും (ബദാം, പിസ്ത - 2kg)",
+          "ar": "تمور مجدول وكالمي فاخرة ومكسرات محمصة (2 كجم)"
+        },
+        "starter": "₹1,200",
+        "pro": "₹3,600 (6kg Assorted Premium)",
+        "notes": {
+          "en": "Direct from Calicut Dry Fruit Wholesalers",
+          "ml": "കോഴിക്കോട് ഡ്രൈഫ്രൂട്ട്സ് മൊത്തവ്യാപാര കേന്ദ്രങ്ങൾ",
+          "ar": "مباشرة من تجار التمور في كاليكوت"
+        }
+      },
+      {
+        "item": {
+          "en": "Food-Grade Silicone Moulds (4 shapes) & Digital Food Thermometer",
+          "ml": "ഫുഡ്-ഗ്രേഡ് സിലിക്കൺ മോൾഡുകൾ & ഡിജിറ്റൽ തെർമോമീറ്റർ",
+          "ar": "قوالب سيليكون غذائية معتمدة وميزان حرارة رقمي"
+        },
+        "starter": "₹550",
+        "pro": "₹1,400 (Professional polycarbonate moulds)",
+        "notes": {
+          "en": "Essential for glossy tempering and festive shapes",
+          "ml": "മിനുസമുള്ള ചോക്ലേറ്റുകൾ ഉണ്ടാക്കാൻ അത്യാവശ്യം",
+          "ar": "أساسية للمعان الشوكولاتة وضبط الحرارة"
+        }
+      },
+      {
+        "item": {
+          "en": "Luxury Magnetic Rigid Gifting Boxes & Golden Cavity Inserts (25 pcs)",
+          "ml": "മാഗ്നറ്റിക് പ്രീമിയം ഗിഫ്റ്റ് ബോക്സുകളും കാവിറ്റി ട്രേകളും (25 എണ്ണം)",
+          "ar": "علب هدايا فاخرة بإغلاق مغناطيسي مع فواصل ذهبية (25 علبة)"
+        },
+        "starter": "₹750 (25 boxes @ ₹30/box)",
+        "pro": "₹2,800 (100 custom embossed boxes)",
+        "notes": {
+          "en": "Enables ₹350 - ₹600 retail price per gift box",
+          "ml": "ഉയർന്ന വിലയ്ക്ക് വിൽക്കാൻ സഹായിക്കുന്ന ലക്ഷ്വറി ബോക്സുകൾ",
+          "ar": "تسمح ببيع العلبة بسعر مضاعف 3 مرات"
+        }
+      },
+      {
+        "item": {
+          "en": "Golden Foil Wraps, Satin Ribbons & Halal Food-Grade Stickers",
+          "ml": "ഗോൾഡൻ ഫോയിൽ, സാറ്റിൻ റിബൺ & ഫുഡ് സേഫ്റ്റി ലേബലുകൾ",
+          "ar": "قصدير ذهبي غذائي وأشرطة ساتان وملصقات أمان"
+        },
+        "starter": "₹350",
+        "pro": "₹950",
+        "notes": {
+          "en": "Aesthetic finish that looks like a 5-star hotel gift",
+          "ml": "ഫൈവ് സ്റ്റാർ ഹോട്ടൽ ഗിഫ്റ്റ് ലുക്ക് നൽകുന്നു",
+          "ar": "تمنح مظهراً فندقياً فاخراً"
+        }
+      },
+      {
+        "item": {
+          "en": "Thermal Insulated Foil Bubble Bags & Reusable Ice Gel Packs",
+          "ml": "തെർമൽ ഇൻസുലേറ്റഡ് കവറുകളും ഐസ് ജെൽ പാക്കുകളും",
+          "ar": "أكياس عازلة للحرارة وأكياس جل مبرد للشحن"
+        },
+        "starter": "₹450 (Buffer for 20 safe shipments)",
+        "pro": "₹1,400 (Branded insulated boxes)",
+        "notes": {
+          "en": "Prevents melting even during Kerala summer courier transit",
+          "ml": "കേരളത്തിലെ ചൂടിലും ചോക്ലേറ്റ് ഉരുകാതെ സുരക്ഷിതമായി എത്തിക്കാൻ",
+          "ar": "تمنع ذوبان الشوكولاتة في حرارة الصيف أثناء الشحن"
+        }
+      },
+      {
+        "item": {
+          "en": "Emergency Courier & Transit Buffer",
+          "ml": "കൊറിയർ പാക്കിംഗ് ബഫർ ഫണ്ട്",
+          "ar": "احتياطي رسوم الشحن السريع"
+        },
+        "starter": "₹300",
+        "pro": "₹1,000",
+        "notes": {
+          "en": "Speed Post / Professional Couriers initial dispatch",
+          "ml": "ആദ്യ ഓർഡറുകൾ വേഗത്തിൽ അയക്കാനുള്ള ഫണ്ട്",
+          "ar": "لتغطية شحنات البريد السريع الأولى"
+        }
+      }
+    ],
+    "totalStarterCost": "₹4,700",
+    "totalProCost": "₹14,450",
+    "onlinePortals": {
+      "websites": [
+        {
+          "name": "BakersVille / Callebaut India Wholesale",
+          "domain": "bakersville.in",
+          "region": "India",
+          "flag": "🇮🇳",
+          "desc": "Official chocolate moulds, compound slabs, cocoa butter, and confectionery ingredients."
+        },
+        {
+          "name": "The Gourmet Store Kochi",
+          "domain": "thegourmetstore.in",
+          "region": "Kerala, India",
+          "flag": "🇮🇳",
+          "desc": "Kerala direct distributor for premium cocoa slabs, dry fruits, and chocolate gift packaging."
+        }
+      ],
+      "instagram": [
+        {
+          "name": "Artisan Chocolatier Kerala",
+          "handle": "@artisanchocolates.kerala",
+          "followers": "45K+",
+          "niche": "Gourmet Chocolates & Dates",
+          "region": "Kerala",
+          "flag": "🇮🇳",
+          "desc": "Benchmark Kerala artisanal brand packaging wedding date boxes for ₹650 to ₹1,800."
+        }
+      ]
     }
   },
   "candles": {
@@ -4068,6 +4199,137 @@ window.dataRetailCourses = {
           "id": "pillar_delivery_daman",
           "pass": true,
           "noteEn": "Seller assumes transit damage liability until safe customer receipt."
+        }
+      ]
+    },
+    "capitalTable": [
+      {
+        "item": {
+          "en": "100% Pure Natural Soy Wax Flakes (5kg bulk)",
+          "ml": "100% പ്രകൃതിദത്ത സോയ വാക്സ് പെല്ലറ്റുകൾ (5kg ബൾക്ക്)",
+          "ar": "رقائق شمع الصويا الطبيعي 100% (5 كجم جملة)"
+        },
+        "starter": "₹1,250",
+        "pro": "₹3,600 (15kg Bulk Bag)",
+        "notes": {
+          "en": "Sourced from Ernakulam Chemical Hub or Sadar Bazaar",
+          "ml": "എറണാകുളം കെമിക്കൽ മാർക്കറ്റ് അല്ലെങ്കിൽ ഡൽഹി സദർ ബസാർ",
+          "ar": "سوق إرناكولام أو سادار بازار في دلهي"
+        }
+      },
+      {
+        "item": {
+          "en": "IFRA-Certified Concentrated Fragrance Oils (Lavender, Oud, Vanilla - 300ml)",
+          "ml": "IFRA സർട്ടിഫൈഡ് സുഗന്ധ ഓയിലുകൾ (ലാവെൻഡർ, ഊദ്, വാനില - 300ml)",
+          "ar": "زيوت عطرية مركزة معتمدة للشموع (لافندر، عود، فانيلا)"
+        },
+        "starter": "₹850",
+        "pro": "₹2,600 (1 Liter Multi-pack)",
+        "notes": {
+          "en": "High scent throw formulation without toxic fumes",
+          "ml": "പുകയില്ലാതെ മുറി മുഴുവൻ സുഗന്ധം പരത്തുന്ന ഗ്രേഡ്",
+          "ar": "تضمن انتشار الرائحة بقوة دون أدخنة ضارة"
+        }
+      },
+      {
+        "item": {
+          "en": "Frosted Amber Glass Apothecary Jars with Cork/Bamboo Lids (25 pcs)",
+          "ml": "ആംബർ ഗ്ലാസ് ജാറുകളും ബാംബൂ അടപ്പുകളും (25 എണ്ണം)",
+          "ar": "برطمانات زجاجية كهرمانية فاخرة بأغطية خيزران (25 حبة)"
+        },
+        "starter": "₹700 (25 jars @ ₹28/jar)",
+        "pro": "₹2,600 (100 designer jars)",
+        "notes": {
+          "en": "Aesthetic warm glow trending on Instagram",
+          "ml": "ഇൻസ്റ്റാഗ്രാമിൽ ഏറെ ഡിമാൻഡുള്ള ആംബർ ലുക്ക്",
+          "ar": "مظهر جمالي كلاسيكي جذاب للبيع الإلكتروني"
+        }
+      },
+      {
+        "item": {
+          "en": "Eco Cotton & Crackling Wood Wicks + Metal Centering Holders",
+          "ml": "സ്മോക്ക്‌ലെസ്സ് കോട്ടൺ തിരികൾ & വുഡൻ തിരികൾ + ക്ലിപ്പുകൾ",
+          "ar": "فتائل قطنية خالية من الدخان وفتائل خشبية طقطاقة"
+        },
+        "starter": "₹300",
+        "pro": "₹850",
+        "notes": {
+          "en": "Clean burning without black soot marks",
+          "ml": "കരിയും പുകയും ഉണ്ടാവാതെ ശുദ്ധമായി കത്തുന്നു",
+          "ar": "احتراق نظيف بدون سواد أو رواسب كربونية"
+        }
+      },
+      {
+        "item": {
+          "en": "Stainless Steel Pouring Pitcher & Probe Thermometer",
+          "ml": "സ്റ്റെയിൻലെസ്സ് സ്റ്റീൽ വാക്സ് മെൽറ്റിംഗ് പിക്ചർ & തെർമോമീറ്റർ",
+          "ar": "وعاء صب من الستانلس ستيل وميزان حرارة مسباري"
+        },
+        "starter": "₹450",
+        "pro": "₹1,200",
+        "notes": {
+          "en": "Pour at exactly 65°C - 70°C for smooth candle surface",
+          "ml": "മിനുസമുള്ള സർഫേസ് കിട്ടാൻ കൃത്യമായ ചൂടിൽ ഒഴിക്കുക",
+          "ar": "للصب بدرجة حرارة مثالية تمنع التشققات"
+        }
+      },
+      {
+        "item": {
+          "en": "Aesthetic Kraft Cylinder Tube Packaging & Warning Labels (25 pcs)",
+          "ml": "ക്രാഫ്റ്റ് പേപ്പർ സിലിണ്ടർ ബോക്സുകളും സേഫ്റ്റി ലേബലുകളും",
+          "ar": "علب أسطوانية من ورق الكرافت الفاخر وملصقات تحذيرية"
+        },
+        "starter": "₹450",
+        "pro": "₹1,600 (Custom printed tubes)",
+        "notes": {
+          "en": "Luxury boutique appearance commanding ₹399 - ₹599 retail",
+          "ml": "₹399 മുതൽ ₹599 വരെ വിൽക്കാൻ സഹായിക്കുന്ന പാക്കേജിംഗ്",
+          "ar": "تضفي طابع البوتيك الفاخر وترفع سعر البيع"
+        }
+      },
+      {
+        "item": {
+          "en": "Honeycomb Cushioning Wrap & Courier Transit Reserve",
+          "ml": "ഹണികോമ്പ് പേപ്പർ റാപ്പും കൊറിയർ ബഫറും",
+          "ar": "ورق حماية خلايا النحل واحتياطي الشحن الآمن"
+        },
+        "starter": "₹400",
+        "pro": "₹1,200",
+        "notes": {
+          "en": "100% plastic-free eco packaging protection for glass jars",
+          "ml": "ഗ്ലാസ് പൊട്ടാതെ സുരക്ഷിതമായി അയക്കാൻ",
+          "ar": "حماية بيئية خالية من البلاستيك لمنع كسر الزجاج"
+        }
+      }
+    ],
+    "totalStarterCost": "₹4,400",
+    "totalProCost": "₹13,650",
+    "onlinePortals": {
+      "websites": [
+        {
+          "name": "Candle Science India / WaxCraft",
+          "domain": "waxcraft.in",
+          "region": "India",
+          "flag": "🇮🇳",
+          "desc": "Wholesale supplier of certified soy wax, fragrance oils, apothecary glassware, and crackling wood wicks."
+        },
+        {
+          "name": "Kochi Chemical Traders Hub",
+          "domain": "kochichem.com",
+          "region": "Kerala, India",
+          "flag": "🇮🇳",
+          "desc": "Direct wholesale distributor for paraffin-free natural plant waxes and glass containers in Ernakulam."
+        }
+      ],
+      "instagram": [
+        {
+          "name": "Aroma Soy Studio Kerala",
+          "handle": "@aromacandles.kerala",
+          "followers": "38K+",
+          "niche": "Handpoured Soy Candles",
+          "region": "Kerala",
+          "flag": "🇮🇳",
+          "desc": "Top trending aesthetic candle maker in Kerala retailing amber jar candles at ₹450 - ₹750."
         }
       ]
     }

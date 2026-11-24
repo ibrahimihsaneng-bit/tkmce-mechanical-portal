@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <!-- Core Portal Pages -->
   <url>
     <loc>https://vyapar-shiksha.vercel.app/</loc>
@@ -8,22 +9,22 @@
     <priority>1.0</priority>
   </url>
   <url>
+    <loc>https://vyapar-shiksha.vercel.app/#tools</loc>
+    <lastmod>2026-11-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
     <loc>https://vyapar-shiksha.vercel.app/#kerala-intel</loc>
     <lastmod>2026-11-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.98</priority>
   </url>
   <url>
-    <loc>https://vyapar-shiksha.vercel.app/#kerala-intel/kollam</loc>
-    <lastmod>2026-11-25</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.98</priority>
-  </url>
-  <url>
-    <loc>https://vyapar-shiksha.vercel.app/#tools</loc>
+    <loc>https://vyapar-shiksha.vercel.app/#pathways</loc>
     <lastmod>2026-11-25</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.90</priority>
   </url>
   <url>
     <loc>https://vyapar-shiksha.vercel.app/#roadmap</loc>
@@ -32,7 +33,7 @@
     <priority>0.85</priority>
   </url>
 
-  <!-- 12 Halal Physical-Goods Trading Academies (Under ₹10,000) -->
+  <!-- 12 Verified Halal Physical-Goods Trading Academies (Under ₹10,000) -->
   <url>
     <loc>https://vyapar-shiksha.vercel.app/#academy/attar</loc>
     <lastmod>2026-11-25</lastmod>
@@ -40,19 +41,25 @@
     <priority>0.95</priority>
   </url>
   <url>
-    <loc>https://vyapar-shiksha.vercel.app/#academy/honey</loc>
+    <loc>https://vyapar-shiksha.vercel.app/#academy/clothing</loc>
     <lastmod>2026-11-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
   </url>
   <url>
-    <loc>https://vyapar-shiksha.vercel.app/#academy/dates</loc>
+    <loc>https://vyapar-shiksha.vercel.app/#academy/watches</loc>
     <lastmod>2026-11-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
   </url>
   <url>
-    <loc>https://vyapar-shiksha.vercel.app/#academy/dryfruits</loc>
+    <loc>https://vyapar-shiksha.vercel.app/#academy/bags</loc>
+    <lastmod>2026-11-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>https://vyapar-shiksha.vercel.app/#academy/accessories</loc>
     <lastmod>2026-11-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
@@ -64,25 +71,25 @@
     <priority>0.95</priority>
   </url>
   <url>
-    <loc>https://vyapar-shiksha.vercel.app/#academy/soaps</loc>
+    <loc>https://vyapar-shiksha.vercel.app/#academy/electronics</loc>
     <lastmod>2026-11-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
   </url>
   <url>
-    <loc>https://vyapar-shiksha.vercel.app/#academy/candles</loc>
+    <loc>https://vyapar-shiksha.vercel.app/#academy/cookware</loc>
     <lastmod>2026-11-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
   </url>
   <url>
-    <loc>https://vyapar-shiksha.vercel.app/#academy/chips</loc>
+    <loc>https://vyapar-shiksha.vercel.app/#academy/footwear</loc>
     <lastmod>2026-11-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
   </url>
   <url>
-    <loc>https://vyapar-shiksha.vercel.app/#academy/halwa</loc>
+    <loc>https://vyapar-shiksha.vercel.app/#academy/cosmetics</loc>
     <lastmod>2026-11-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
@@ -94,15 +101,95 @@
     <priority>0.95</priority>
   </url>
   <url>
-    <loc>https://vyapar-shiksha.vercel.app/#academy/herbaltea</loc>
+    <loc>https://vyapar-shiksha.vercel.app/#academy/candles</loc>
     <lastmod>2026-11-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
   </url>
+
+  <!-- Kerala 14-District Trading Intelligence Pages -->
   <url>
-    <loc>https://vyapar-shiksha.vercel.app/#academy/essentialoils</loc>
+    <loc>https://vyapar-shiksha.vercel.app/#kerala-intel/kollam</loc>
+    <lastmod>2026-11-25</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.98</priority>
+  </url>
+  <url>
+    <loc>https://vyapar-shiksha.vercel.app/#kerala-intel/thiruvananthapuram</loc>
     <lastmod>2026-11-25</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.95</priority>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://vyapar-shiksha.vercel.app/#kerala-intel/alappuzha</loc>
+    <lastmod>2026-11-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://vyapar-shiksha.vercel.app/#kerala-intel/pathanamthitta</loc>
+    <lastmod>2026-11-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://vyapar-shiksha.vercel.app/#kerala-intel/kottayam</loc>
+    <lastmod>2026-11-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://vyapar-shiksha.vercel.app/#kerala-intel/idukki</loc>
+    <lastmod>2026-11-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://vyapar-shiksha.vercel.app/#kerala-intel/ernakulam</loc>
+    <lastmod>2026-11-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.92</priority>
+  </url>
+  <url>
+    <loc>https://vyapar-shiksha.vercel.app/#kerala-intel/thrissur</loc>
+    <lastmod>2026-11-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://vyapar-shiksha.vercel.app/#kerala-intel/palakkad</loc>
+    <lastmod>2026-11-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://vyapar-shiksha.vercel.app/#kerala-intel/malappuram</loc>
+    <lastmod>2026-11-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://vyapar-shiksha.vercel.app/#kerala-intel/kozhikode</loc>
+    <lastmod>2026-11-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.92</priority>
+  </url>
+  <url>
+    <loc>https://vyapar-shiksha.vercel.app/#kerala-intel/wayanad</loc>
+    <lastmod>2026-11-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://vyapar-shiksha.vercel.app/#kerala-intel/kannur</loc>
+    <lastmod>2026-11-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://vyapar-shiksha.vercel.app/#kerala-intel/kasaragod</loc>
+    <lastmod>2026-11-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
   </url>
 </urlset>
