@@ -671,21 +671,21 @@ const keralaIntel = {
         <div class="filter-group">
           <label><i class="fa-solid fa-location-dot"></i> District:</label>
           <select id="kfDistrict" class="form-control" onchange="keralaIntel.updateFilter('district', this.value)">
-            <option value="all">All 14 Districts (കേരളം മുഴുവൻ)</option>
-            <option value="kollam" selected>⭐ Kollam (കൊല്ലം) - Priority</option>
-            <option value="thiruvananthapuram">Thiruvananthapuram</option>
-            <option value="pathanamthitta">Pathanamthitta</option>
-            <option value="alappuzha">Alappuzha</option>
-            <option value="kottayam">Kottayam</option>
-            <option value="idukki">Idukki</option>
-            <option value="ernakulam">Ernakulam / Kochi</option>
-            <option value="thrissur">Thrissur</option>
-            <option value="palakkad">Palakkad</option>
-            <option value="malappuram">Malappuram</option>
-            <option value="kozhikode">Kozhikode</option>
-            <option value="wayanad">Wayanad</option>
-            <option value="kannur">Kannur</option>
-            <option value="kasaragod">Kasaragod</option>
+            <option value="all" ${this.filterState.district === 'all' ? 'selected' : ''}>All 14 Districts (കേരളം മുഴുവൻ)</option>
+            <option value="kollam" ${this.filterState.district === 'kollam' ? 'selected' : ''}>⭐ Kollam (കൊല്ലം) - Priority</option>
+            <option value="thiruvananthapuram" ${this.filterState.district === 'thiruvananthapuram' ? 'selected' : ''}>Thiruvananthapuram</option>
+            <option value="pathanamthitta" ${this.filterState.district === 'pathanamthitta' ? 'selected' : ''}>Pathanamthitta</option>
+            <option value="alappuzha" ${this.filterState.district === 'alappuzha' ? 'selected' : ''}>Alappuzha</option>
+            <option value="kottayam" ${this.filterState.district === 'kottayam' ? 'selected' : ''}>Kottayam</option>
+            <option value="idukki" ${this.filterState.district === 'idukki' ? 'selected' : ''}>Idukki</option>
+            <option value="ernakulam" ${this.filterState.district === 'ernakulam' ? 'selected' : ''}>Ernakulam / Kochi</option>
+            <option value="thrissur" ${this.filterState.district === 'thrissur' ? 'selected' : ''}>Thrissur</option>
+            <option value="palakkad" ${this.filterState.district === 'palakkad' ? 'selected' : ''}>Palakkad</option>
+            <option value="malappuram" ${this.filterState.district === 'malappuram' ? 'selected' : ''}>Malappuram</option>
+            <option value="kozhikode" ${this.filterState.district === 'kozhikode' ? 'selected' : ''}>Kozhikode</option>
+            <option value="wayanad" ${this.filterState.district === 'wayanad' ? 'selected' : ''}>Wayanad</option>
+            <option value="kannur" ${this.filterState.district === 'kannur' ? 'selected' : ''}>Kannur</option>
+            <option value="kasaragod" ${this.filterState.district === 'kasaragod' ? 'selected' : ''}>Kasaragod</option>
           </select>
         </div>
 
