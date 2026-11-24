@@ -16,7 +16,7 @@
   
   <!-- FontAwesome 6 Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link rel="stylesheet" href="style.css?v=20261124_08">
+  <link rel="stylesheet" href="style.css?v=20261124_09">
 </head>
 <body class="lang-en">
 
@@ -424,6 +424,11 @@
           </button>
 
           <div class="course-header-actions">
+            <!-- 1-Page Printable Action Cheatsheet -->
+            <button class="btn btn-outline" style="border-color: rgba(255,255,255,0.35); color: #ffffff; padding: 6px 14px; font-size: 0.82rem; border-radius: 999px;" onclick="app.printAcademyCheatsheet(app.currentAcademy)" title="Print 1-Page Business Blueprint">
+              <i class="fa-solid fa-print"></i> <span id="lblPrintCheatsheet">1-Page Action Plan</span>
+            </button>
+
             <!-- Fast Academy Switcher dropdown -->
             <div class="nav-dropdown" id="academySwitcherDropdown">
               <button class="nav-drop-btn" id="btnSwitchAcademy">
@@ -505,11 +510,13 @@
         <h2 class="section-title text-white" id="toolsHeaderTitle">Financial Tools & Sourcing Hubs</h2>
         <p class="section-subtitle text-light" id="toolsHeaderSub">Access our universal profit calculator, directory of 35+ verified wholesale hubs, and WhatsApp negotiation scripts.</p>
         <div class="tools-tab-buttons">
-          <button class="tool-tab-btn active" data-subview="calc" onclick="app.switchToolTab('calc')"><i class="fa-solid fa-calculator"></i> Profit Calculator</button>
-          <button class="tool-tab-btn" data-subview="suppliers" onclick="app.switchToolTab('suppliers')"><i class="fa-solid fa-store"></i> Wholesalers & Maps</button>
-          <button class="tool-tab-btn" data-subview="scripts" onclick="app.switchToolTab('scripts')"><i class="fa-brands fa-whatsapp"></i> WhatsApp Scripts</button>
-          <button class="tool-tab-btn" data-subview="legal" onclick="app.switchToolTab('legal')"><i class="fa-solid fa-scale-balanced"></i> GST & Banking</button>
-          <button class="tool-tab-btn" data-subview="plan" onclick="app.switchToolTab('plan')"><i class="fa-solid fa-file-invoice-dollar"></i> Business Plan</button>
+          <button class="tool-tab-btn active" data-subview="calc" onclick="app.switchToolTab('calc')"><i class="fa-solid fa-calculator"></i> <span id="toolTabCalc">Profit Calculator</span></button>
+          <button class="tool-tab-btn" data-subview="halalcalc" onclick="app.switchToolTab('halalcalc')"><i class="fa-solid fa-scale-balanced text-warning"></i> <span id="toolTabHalalCalc">Halal Profit & Zakat</span></button>
+          <button class="tool-tab-btn" data-subview="collab" onclick="app.switchToolTab('collab')"><i class="fa-solid fa-handshake text-success"></i> <span id="toolTabCollab">Raw Material & Machine Pooling</span></button>
+          <button class="tool-tab-btn" data-subview="suppliers" onclick="app.switchToolTab('suppliers')"><i class="fa-solid fa-store"></i> <span id="toolTabSuppliers">Wholesalers & Maps</span></button>
+          <button class="tool-tab-btn" data-subview="scripts" onclick="app.switchToolTab('scripts')"><i class="fa-brands fa-whatsapp"></i> <span id="toolTabScripts">WhatsApp Scripts</span></button>
+          <button class="tool-tab-btn" data-subview="legal" onclick="app.switchToolTab('legal')"><i class="fa-solid fa-shield-halved"></i> <span id="toolTabLegal">Halal Compliance & GST</span></button>
+          <button class="tool-tab-btn" data-subview="plan" onclick="app.switchToolTab('plan')"><i class="fa-solid fa-file-invoice-dollar"></i> <span id="toolTabPlan">Business Plan</span></button>
         </div>
       </div>
     </div>
@@ -713,10 +720,10 @@
     </div>
   </div>
 
-  <script src="data_retail_courses.js?v=20261124_08"></script>
-  <script src="data_machine_courses.js?v=20261124_08"></script>
-  <script src="data_industrial_courses.js?v=20261124_08"></script>
-  <script src="data_audio_library.js?v=20261124_08"></script>
-  <script src="app.js?v=20261124_08"></script>
+  <script src="data_retail_courses.js?v=20261124_09"></script>
+  <script src="data_machine_courses.js?v=20261124_09"></script>
+  <script src="data_industrial_courses.js?v=20261124_09"></script>
+  <script src="data_audio_library.js?v=20261124_09"></script>
+  <script src="app.js?v=20261124_09"></script>
 </body>
 </html>

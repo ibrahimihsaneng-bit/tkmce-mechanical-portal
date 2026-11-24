@@ -118,6 +118,16 @@ const app = {
       topCommunityText: "Halal Community",
       navPlanBuilder: "Generate Plan",
 
+      // Tool View Tabs
+      toolTabCalc: "Profit Calculator",
+      toolTabHalalCalc: "Halal Profit & Zakat",
+      toolTabCollab: "Raw Material & Machine Pooling",
+      toolTabSuppliers: "Wholesalers & Maps",
+      toolTabScripts: "WhatsApp Scripts",
+      toolTabLegal: "Halal Compliance & GST",
+      toolTabPlan: "Business Plan",
+      lblPrintCheatsheet: "1-Page Action Plan",
+
       // Halal Community Banner on Homepage
       halalBadgePill: "100% Interest-Free Halal Network",
       halalLivePill: "Vyapar Shiksha WhatsApp Community",
@@ -293,6 +303,16 @@ const app = {
       topCommunityText: "ഹലാൽ കൂട്ടായ്മ",
       navPlanBuilder: "പ്ലാൻ തയ്യാറാക്കുക",
 
+      // Tool View Tabs
+      toolTabCalc: "ലാഭ കാൽക്കുലേറ്റർ",
+      toolTabHalalCalc: "ഹലാൽ ലാഭം & സകാത്ത്",
+      toolTabCollab: "റോ മെറ്റീരിയൽ & മെഷിനറി പൂളിംഗ്",
+      toolTabSuppliers: "ഹോൾസെയിൽ & മാപ്പുകൾ",
+      toolTabScripts: "വാട്സ്ആപ്പ് സ്ക്രിപ്റ്റുകൾ",
+      toolTabLegal: "ഹലാൽ നിയമങ്ങളും GST യും",
+      toolTabPlan: "ബിസിനസ് പ്ലാൻ",
+      lblPrintCheatsheet: "1-പേജ് ആക്ഷൻ പ്ലാൻ",
+
       // Halal Community Banner on Homepage
       halalBadgePill: "100% പലിശരഹിത ഇസ്ലാമിക കൂട്ടായ്മ",
       halalLivePill: "വ്യാപാര ശിക്ഷ വാട്സ്ആപ്പ് കൂട്ടായ്മ",
@@ -467,6 +487,16 @@ const app = {
       navCommunityText: "المجتمع الحلال",
       topCommunityText: "المجتمع الحلال",
       navPlanBuilder: "خطة العمل",
+
+      // Tool View Tabs
+      toolTabCalc: "حاسبة الأرباح",
+      toolTabHalalCalc: "الأرباح الحلال والزكاة",
+      toolTabCollab: "شراكة المواد الخام والآلات",
+      toolTabSuppliers: "أسواق الجملة والخرائط",
+      toolTabScripts: "نماذج واتساب",
+      toolTabLegal: "الضوابط الشرعية ورخص العمل",
+      toolTabPlan: "خطة العمل",
+      lblPrintCheatsheet: "خطة العمل (صفحة واحدة)",
 
       // Halal Community Banner on Homepage
       halalBadgePill: "شبكة رواد الأعمال الحلال خالية من الفوائد 100%",
@@ -2106,14 +2136,20 @@ const app = {
     },
     {
       badge: "banking",
-      badgeText: { en: "SMART STEP", ml: "സ്മാർട്ട് ബാങ്കിംഗ്", ar: "إدارة مصرفية ذكية" },
-      title: { en: "Zero-Balance Current Account", ml: "സീറോ ബാലൻസ് ബാങ്ക് അക്കൗണ്ട്", ar: "حساب مصرفي تجاري بدون حد أدنى" },
-      desc: { en: "Keep business and personal funds separate. Use your Udyam certificate to open a zero-balance digital current account with ICICI, HDFC, or Federal Bank.", ml: "സ്വന്തം ആവശ്യങ്ങൾക്കുള്ള പണവും ബിസിനസ് പണവും വേർതിരിച്ചു വെക്കുക. ഉദ്യം സർട്ടിഫിക്കറ്റ് ഉപയോഗിച്ച് ഫെഡറൽ ബാങ്കിലോ ഐ.സി.ഐ.സി.ഐ-യിലോ കറന്റ് അക്കൗണ്ട് തുടങ്ങാം.", ar: "افصل أموال المشروع عن مصاريفك الشخصية. افتح حساباً جارياً رقمياً عبر شهادة Udyam بدون شروط رصيد معقدة." }
+      badgeText: { en: "100% HALAL", ml: "100% പലിശരഹിതം", ar: "معاملات خالية من الربا 100%" },
+      title: { en: "Interest-Free Halal Financial Management", ml: "പലിശരഹിത ഇസ്ലാമിക അക്കൗണ്ടിംഗ്", ar: "إدارة مالية إسلامية خالية من الربا" },
+      desc: { en: "Zero interest. Maintain a non-interest current account strictly for business funds separation. Never take conventional interest loans or compounding overdrafts. Fund expansion exclusively through personal savings or Mudarabah / Musharakah equity partnerships.", ml: "പലിശയില്ലാത്ത ഇടപാടുകൾ മാത്രം നടത്തുക. വ്യക്തിഗത പണവും ബിസിനസ് പണവും വേർതിരിച്ചു വെക്കാൻ പലിശയില്ലാത്ത കറന്റ് അക്കൗണ്ട് ഉപയോഗിക്കാം. ബാങ്ക് വായ്പകളോ പലിശയുള്ള ക്രെഡിറ്റ് കാർഡുകളോ പൂർണ്ണമായി ഒഴിവാക്കുക. പകരം മുളാരബ / മുശാറക ലാഭ-നഷ്ട പങ്കാളിത്തം വഴി നിക്ഷേപം കണ്ടെത്തുക.", ar: "تجنب القروض الربوية والفوائد البنكية نهائياً. استخدم حساباً تجارياً غير ربحي لفصل أموال المشروع عن المصاريف الشخصية. اعتمد عقود المضاربة والمشاركة الإسلامية لتمويل التوسع." }
+    },
+    {
+      badge: "recommended",
+      badgeText: { en: "ISLAMIC ETHICS", ml: "ഇസ്ലാമിക ബിസിനസ്സ് ചട്ടം", ar: "الأمانة التجارية" },
+      title: { en: "Amanah, Quality Disclosure & Honest Measures", ml: "അമാനത്ത്, അളവുതൂക്കങ്ങളിൽ കൃത്യത & സുതാര്യത", ar: "الأمانة والصدق في الكيل والميزان" },
+      desc: { en: "Honesty in trade is mandatory in Islam. Disclose fabric GSM, attar purity, or any defects openly. Digital scales prevent cheating in measures (Surah Al-Mutaffifin). Allah blesses truthful commerce.", ml: "ഉൽപ്പന്നങ്ങളുടെ മേന്മയും കുറവുകളും ഉപഭോക്താവിനോട് സത്യസന്ധമായി പറയുക. അളവിലും തൂക്കത്തിലും കൃത്യത പാലിക്കുക (സൂറത്തുൽ മുത്വഫ്ഫിഫീൻ). വഞ്ചനയും കള്ളവും ഇല്ലാത്ത കച്ചവടത്തിലാണ് അല്ലാഹുവിന്റെ ബറകത്ത് ഉണ്ടാവുക.", ar: "الصدق والأمانة هما أساس التجارة المباركة. بيان عيوب السلع بشفافية وتجنب الغش في الأوزان والمقاييس التزاماً بالهدي النبوي الشريف." }
     },
     {
       badge: "food",
-      badgeText: { en: "FOR SPICES & HONEY", ml: "ഭക്ഷണ സാധനങ്ങൾക്ക് മാത്രം", ar: "خاص بالأغذية والعسل والتوابل" },
-      title: { en: "FSSAI Basic Registration (₹100/yr)", ml: "FSSAI ഫുഡ് ലൈസൻസ് (വർഷത്തിൽ ₹100)", ar: "ترخيص سلامة الغذاء FSSAI السنوي (100 روبية)" },
+      badgeText: { en: "FOR SPICES & FOOD", ml: "ഭക്ഷണ സാധനങ്ങൾക്ക് മാത്രം", ar: "خاص بالأغذية والعسل والتوابل" },
+      title: { en: "FSSAI Basic Food Registration (₹100/yr)", ml: "FSSAI ഫുഡ് ലൈസൻസ് (വർഷത്തിൽ ₹100)", ar: "ترخيص سلامة الغذاء FSSAI السنوي (100 روبية)" },
       desc: { en: "Only required if selling consumable spices and honey. The basic home-kitchen registration (foscos.fssai.gov.in) costs only ₹100 per year and requires no commercial factory inspection.", ml: "തേൻ, ഏലക്ക തുടങ്ങിയ ഭക്ഷണ സാധനങ്ങൾ വിൽക്കാൻ മാത്രമേ ഇത് ആവശ്യമുള്ളൂ. foscos.fssai.gov.in എന്ന വെബ്സൈറ്റിലൂടെ വർഷത്തിൽ വെറും ₹100 ഫീസ് അടച്ച് വീട്ടിലിരുന്ന് തന്നെ രജിസ്റ്റർ ചെയ്യാം.", ar: "مطلوب فقط عند تجارة العسل والتوابل الصالحة للأكل. التسجيل البسيط عبر موقع foscos.fssai.gov.in برسم سنوي رمزي قدره 100 روبية فقط بدون لجان تفتيش." }
     }
   ],
@@ -2133,6 +2169,82 @@ const app = {
     { service: "Shiprocket / Delhivery", zone: "Pan-India (Metro cities)", weight: "Up to 500g", rate: "₹55 - ₹75", remarks: "Doorstep pickup & automated WhatsApp tracking" },
     { service: "India Post International EMS", zone: "GCC (UAE, Saudi, Qatar, Oman)", weight: "Up to 500g", rate: "₹850 - ₹1,200", remarks: "Best for alcohol-free attars, fabrics & spices" },
     { service: "Kerala Gulf Air Cargo", zone: "UAE & Saudi Air Cargo", weight: "Per Kg (Min 5kg)", rate: "₹800 - ₹1,100 / kg", remarks: "Very popular among Gulf NRI expatriates" }
+  ],
+
+  // Halal Collaboration & Sourcing Board Posts
+  collabPosts: [
+    {
+      id: "cp-1",
+      type: "raw",
+      badge: "badge-raw",
+      badgeText: "Raw Material Pooling",
+      location: "Kozhikode & Malappuram",
+      title: "Surat Nada Crepe & Chiffon Fabric 500m Bulk Group Buy",
+      desc: "5 modest wear boutique owners pooling to order 500 meters direct from Surat mill wholesale. Cost ₹115/m vs local retail ₹210/m. Delivery hub: Kozhikode S.M. Street.",
+      benefit: "Saves ₹95 per meter (45% discount)",
+      target: "Need 2 more partners (min 50m each)",
+      whatsappText: "Hello, I want to join the Surat Fabric Group Buy on Vyapar Shiksha."
+    },
+    {
+      id: "cp-2",
+      type: "raw",
+      badge: "badge-raw",
+      badgeText: "Raw Material Pooling",
+      location: "Ernakulam & Aluva",
+      title: "Kraft Paper Bag Roll (120 GSM) Truckload Sharing",
+      desc: "Co-purchasing 5-Ton Virgin Kraft Paper Reel direct from Tamil Nadu paper mill. Avoid middleman commission and split transport freight equally.",
+      benefit: "Saves ₹8/kg on reel cost & 50% freight",
+      target: "Splitting into 1-Ton allotments",
+      whatsappText: "Hello, I am interested in Kraft Paper Roll truckload sharing."
+    },
+    {
+      id: "cp-3",
+      type: "machine",
+      badge: "badge-mach",
+      badgeText: "Machine Co-Investment",
+      location: "Malappuram (Manjeri)",
+      title: "Commercial Spice Pulverizer & Pouch Packaging Unit",
+      desc: "Already have premises and FSSAI basic clearance. Seeking 50:50 Mudarabah partner with ₹1.5L investment for 10HP commercial spice pulverizer and nitrogen flushing packing machine.",
+      benefit: "Pure Halal equity profit split (agreed 50:50)",
+      target: "1 Investor / Managing Partner",
+      whatsappText: "Hello, I want to discuss the Spice Pulverizer Mudarabah Partnership."
+    },
+    {
+      id: "cp-4",
+      type: "raw",
+      badge: "badge-raw",
+      badgeText: "Raw Material Pooling",
+      location: "Kannur & Calicut",
+      title: "French Perfume Compounds & Crystal 12ml Flacons",
+      desc: "Ordering 500 pcs luxury crystal roll-on flacons and 5 kg French Grade-A perfume compounds direct from Mumbai Crawford Market importer with zero broker fees.",
+      benefit: "Unit cost ₹18/bottle vs ₹38 retail",
+      target: "Looking for 3 micro attar makers",
+      whatsappText: "Hello, I want to join the Perfume Flacons & Compounds Bulk Buy."
+    },
+    {
+      id: "cp-5",
+      type: "machine",
+      badge: "badge-mach",
+      badgeText: "Machine Co-Investment",
+      location: "Palakkad (Ottapalam)",
+      title: "Wood Press (Marachekku) Edible Oil Expeller Setup",
+      desc: "Looking for equity partner to purchase a 50kg/batch traditional wood-press oil extraction machine to supply pure coconut and sesame oil locally.",
+      benefit: "100% Halal Musharakah partnership",
+      target: "Capital Requirement: ₹2.2 Lakhs",
+      whatsappText: "Hello, I am interested in the Wood Press Oil Expeller Musharakah."
+    },
+    {
+      id: "cp-6",
+      type: "buyback",
+      badge: "badge-partner",
+      badgeText: "Finished Goods Supply",
+      location: "Kochi, Thrissur & Kottayam",
+      title: "Handmade Scented Candle & Agarbatti Distribution Help",
+      desc: "Small manufacturing unit producing 5,000 herbal agarbatti packs/month seeking retail boutique owners and supermarket suppliers for direct supply.",
+      benefit: "Wholesale margin 40% for resellers",
+      target: "Looking for 10 store partners",
+      whatsappText: "Hello, I want to stock your Agarbatti & Candles in my store."
+    }
   ],
 
   // Current Active Business Tier Filter ('all' | 'retail' | 'machine' | 'industrial')
@@ -2204,7 +2316,7 @@ const app = {
       vAcademy.style.display = 'block';
       this.updateNavActive('navAcademies');
       window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else if (['tools', 'suppliers', 'scripts', 'legal', 'plan', 'calc'].includes(viewName)) {
+    } else if (['tools', 'suppliers', 'scripts', 'legal', 'plan', 'calc', 'halalcalc', 'collab'].includes(viewName)) {
       this.currentView = 'tools';
       vTools.style.display = 'block';
       
@@ -4742,6 +4854,13 @@ const app = {
       container.innerHTML = this.getCalculatorToolHtml();
       this.bindCalcInputs();
       this.calculateProfit();
+    } else if (tabKey === 'halalcalc') {
+      container.innerHTML = this.getHalalCalcToolHtml();
+      this.calculateHalalPartnership();
+      this.calculateBusinessZakat();
+    } else if (tabKey === 'collab') {
+      container.innerHTML = this.getCollabToolHtml();
+      this.renderCollabCards('all');
     } else if (tabKey === 'suppliers') {
       container.innerHTML = this.getSuppliersToolHtml();
       this.renderDirectory();
@@ -4753,6 +4872,390 @@ const app = {
       container.innerHTML = this.getPlanToolHtml();
       this.generatePersonalPlan();
     }
+  },
+
+  // Halal Profit-Sharing & Business Zakat Calculator HTML
+  getHalalCalcToolHtml() {
+    const lang = this.currentLang;
+    return `
+      <div class="halal-calc-layout">
+        <!-- 1. Mudarabah & Musharakah Profit Sharing Calculator -->
+        <div class="halal-calc-card">
+          <h3 class="halal-calc-title">
+            <i class="fa-solid fa-handshake"></i>
+            <span>${lang === 'ml' ? 'മുളാരബ & മുശാറക ലാഭവിഹിത കാൽക്കുലേറ്റർ' : lang === 'ar' ? 'حاسبة تقاسم الأرباح (المضاربة والمشاركة)' : 'Mudarabah & Musharakah Profit Sharing'}</span>
+          </h3>
+          
+          <div class="form-group">
+            <label class="form-label">${lang === 'ml' ? 'പങ്കാളിത്ത രീതി (Partnership Model):' : lang === 'ar' ? 'نموذج الشراكة الشرعية:' : 'Islamic Partnership Model:'}</label>
+            <select class="form-control" id="hcalcModel" onchange="app.calculateHalalPartnership()">
+              <option value="mudarabah">${lang === 'ml' ? 'മുളാരബ (ഇൻവെസ്റ്റർ പണം നൽകുന്നു + സംരംഭകൻ അധ്വാനിക്കുന്നു)' : lang === 'ar' ? 'مضاربة (رأس المال من المستثمر + العمل والإدارة من الشريك)' : 'Mudarabah (Investor Capital + Managing Partner Work)'}</option>
+              <option value="musharakah">${lang === 'ml' ? 'മുശാറക (ഇരുവരും പണം നിക്ഷേപിക്കുന്നു & പ്രവർത്തിക്കുന്നു)' : lang === 'ar' ? 'مشاركة (كلا الشريكين يساهمان برأس المال)' : 'Musharakah (Both Partners Invest Capital)'}</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">${lang === 'ml' ? 'ഇൻവെസ്റ്റർ നിക്ഷേപിക്കുന്ന തുക (Investor Capital ₹):' : 'Investor Capital (₹):'}</label>
+            <input type="number" class="form-control" id="hcalcInvestCapital" value="50000" oninput="app.calculateHalalPartnership()">
+          </div>
+
+          <div class="form-group" id="hcalcWorkCapitalGroup" style="display: none;">
+            <label class="form-label">${lang === 'ml' ? 'വർക്കിംഗ് പാർട്ണറുടെ നിക്ഷേപം (Managing Partner Capital ₹):' : 'Managing Partner Capital (₹):'}</label>
+            <input type="number" class="form-control" id="hcalcWorkCapital" value="10000" oninput="app.calculateHalalPartnership()">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">
+              ${lang === 'ml' ? 'ലാഭവിഹിതം (സമ്മതിച്ച അനുപാതം):' : 'Agreed Profit Share Ratio:'} 
+              <strong id="hcalcRatioDisplay" class="text-primary">Investor 50% : Partner 50%</strong>
+            </label>
+            <input type="range" class="form-range" id="hcalcRatio" min="10" max="90" value="50" oninput="app.calculateHalalPartnership()">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">${lang === 'ml' ? 'പ്രതിമാസ മൊത്തം വിൽപന (Monthly Gross Sales ₹):' : 'Monthly Gross Sales (₹):'}</label>
+            <input type="number" class="form-control" id="hcalcRevenue" value="85000" oninput="app.calculateHalalPartnership()">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">${lang === 'ml' ? 'പ്രതിമാസ നേരിട്ടുള്ള ചെലവുകൾ (Direct Operational Costs ₹):' : 'Direct Monthly Costs (₹):'}</label>
+            <input type="number" class="form-control" id="hcalcExpenses" value="48000" oninput="app.calculateHalalPartnership()">
+          </div>
+
+          <div class="halal-result-badge">
+            <span class="res-label">${lang === 'ml' ? 'പ്രതിമാസ അറ്റാദായം (Net Distributable Profit):' : 'Monthly Net Profit:'}</span>
+            <span class="res-val" id="hcalcNetProfitDisplay">₹37,000</span>
+            <div class="halal-split-row">
+              <span>${lang === 'ml' ? 'ഇൻവെസ്റ്റർക്ക് ലഭിക്കുന്നത്:' : 'Investor Share:'} <strong id="hcalcInvestorShare">₹18,500</strong></span>
+              <span>${lang === 'ml' ? 'സംരംഭകന് ലഭിക്കുന്നത്:' : 'Managing Partner:'} <strong id="hcalcPartnerShare">₹18,500</strong></span>
+            </div>
+          </div>
+
+          <div class="halal-shariah-notice">
+            <h6><i class="fa-solid fa-scale-balanced"></i> ${lang === 'ml' ? 'ഇസ്ലാമിക ശരിയത്ത് നിയമം:' : 'Islamic Shariah Rule:'}</h6>
+            <p id="hcalcShariahRule">
+              ${lang === 'ml' ? 'മുളാരബയിൽ ലാഭം മുൻകൂട്ടി നിശ്ചയിച്ച ശതമാനത്തിൽ പങ്കിടുന്നു. വീഴ്ചകളില്ലാതെ ബിസിനസ്സിൽ നഷ്ടം സംഭവിച്ചാൽ ഇൻവെസ്റ്റർക്ക് മൂലധന നഷ്ടവും സംരംഭകന് അധ്വാന നഷ്ടവും സംഭവിക്കും. മുൻകൂട്ടി ഉറപ്പിച്ച പലിശയോ നിശ്ചിത റിട്ടേണോ വാഗ്ദാനം ചെയ്യുന്നത് ഹറാമാണ് (റീബ).' : 'In Mudarabah, profits are distributed according to the pre-agreed percentage. If an unexpected loss occurs without misconduct, the capital provider absorbs the financial loss, and the managing partner loses their time. Fixed guaranteed monthly returns are strictly prohibited (Riba).'}
+            </p>
+          </div>
+        </div>
+
+        <!-- 2. Business Trade Wealth Zakat Calculator -->
+        <div class="halal-calc-card">
+          <h3 class="halal-calc-title">
+            <i class="fa-solid fa-hand-holding-dollar"></i>
+            <span>${lang === 'ml' ? 'വ്യാപാര ചരക്കുകളുടെ സകാത്ത് കാൽക്കുലേറ്റർ' : lang === 'ar' ? 'حاسبة زكاة عروض التجارة' : 'Business Inventory & Trade Wealth Zakat'}</span>
+          </h3>
+
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 16px;">
+            ${lang === 'ml' ? 'ഒരു വർഷം പൂർത്തിയായ ബിസിനസ്സ് സ്റ്റോക്കിനും പണത്തിനും നൽകേണ്ട നിർബന്ധിത സകാത്ത് (2.5%) കണക്കാക്കുക.' : 'Calculate mandatory 2.5% Zakat on trade merchandise (Urud al-Tijarah) held for one lunar year.'}
+          </p>
+
+          <div class="form-group">
+            <label class="form-label">${lang === 'ml' ? 'കയ്യിലുള്ളതും ബാങ്കിലുള്ളതുമായ ബിസിനസ് പണം (Cash in Bank & Hand ₹):' : 'Cash & Bank Balance for Business (₹):'}</label>
+            <input type="number" class="form-control" id="zcalcCash" value="25000" oninput="app.calculateBusinessZakat()">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">${lang === 'ml' ? 'വിൽക്കാനുള്ള ചരക്കുകളുടെ ഇപ്പോഴത്തെ മാർക്കറ്റ് വില (Inventory Value ₹):' : 'Resale Value of Trade Inventory (₹):'}</label>
+            <input type="number" class="form-control" id="zcalcInventory" value="95000" oninput="app.calculateBusinessZakat()">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">${lang === 'ml' ? 'കസ്റ്റമേഴ്സിൽ നിന്ന് ഉറപ്പായും കിട്ടാനുള്ള കടങ്ങൾ (Good Receivables ₹):' : 'Collectable Customer Receivables (₹):'}</label>
+            <input type="number" class="form-control" id="zcalcReceivables" value="12000" oninput="app.calculateBusinessZakat()">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">${lang === 'ml' ? 'ഉടൻ കൊടുത്തു തീർക്കാനുള്ള ബില്ലുകൾ (Immediate Current Liabilities ₹):' : 'Immediate Supplier Debts Due Now (₹):'}</label>
+            <input type="number" class="form-control" id="zcalcDebts" value="15000" oninput="app.calculateBusinessZakat()">
+          </div>
+
+          <div class="halal-result-badge" style="background: linear-gradient(135deg, #1e3a8a 0%, #0369a1 100%);">
+            <span class="res-label">${lang === 'ml' ? 'സകാത്ത് നൽകേണ്ട ബാക്കി തുക (Net Zakatable Wealth):' : 'Net Zakatable Wealth:'}</span>
+            <span class="res-val" id="zcalcNetDisplay">₹1,17,000</span>
+            <div class="halal-split-row">
+              <span>${lang === 'ml' ? 'നിസ്വാബ് പരിധി (വെള്ളി 595 ഗ്രാം):' : 'Nisab Benchmark (Silver 595g):'} <strong>~₹65,000</strong></span>
+              <span id="zcalcStatusTag" class="text-warning"><strong>${lang === 'ml' ? 'സകാത്ത് നിർബന്ധം ✅' : 'Zakat Due ✅'}</strong></span>
+            </div>
+            <div class="halal-split-row" style="background: rgba(255,255,255,0.25); font-size: 0.95rem; font-weight: 800;">
+              <span>${lang === 'ml' ? 'നൽകേണ്ട സകാത്ത് തുക (2.5% Zakat Payable):' : 'Total 2.5% Zakat Due:'}</span>
+              <span id="zcalcPayableDisplay" class="text-white">₹2,925</span>
+            </div>
+          </div>
+
+          <div class="halal-shariah-notice" style="background: #eff6ff; border-color: #bfdbfe; color: #1e40af;">
+            <h6><i class="fa-solid fa-circle-info"></i> ${lang === 'ml' ? 'സകാത്ത് വിതരണ ചട്ടം:' : 'Distribution Guidelines:'}</h6>
+            <p>
+              ${lang === 'ml' ? 'വ്യക്തിഗത വീടോ ബിസിനസ്സ് ആവശ്യത്തിനുള്ള മെഷീനുകളോ ടൂളുകളോ സകാത്തിൽ ഉൾപ്പെടുത്തേണ്ടതില്ല. വിൽക്കാനുള്ള ഉൽപ്പന്നങ്ങൾക്കും പണത്തിനും മാത്രമേ സകാത്ത് ബാധകമാകൂ. അർഹരായ ദരിദ്രർക്കും അഗതികൾക്കും (ഫുഖറാഅ്, മസാകീൻ) മുൻഗണന നൽകി സകാത്ത് വിതരണം ചെയ്യുക.' : 'Fixed operational machinery, tools, vehicles, and equipment are exempt from Zakat. Only liquid funds and finished stock intended for resale are zakatable once they exceed the Nisab threshold for a full year.'}
+            </p>
+          </div>
+        </div>
+      </div>
+    `;
+  },
+
+  calculateHalalPartnership() {
+    const model = document.getElementById('hcalcModel')?.value || 'mudarabah';
+    const invCapital = parseFloat(document.getElementById('hcalcInvestCapital')?.value) || 0;
+    const workCapitalInput = document.getElementById('hcalcWorkCapital');
+    const workCapitalGroup = document.getElementById('hcalcWorkCapitalGroup');
+    const workCapital = (model === 'musharakah' && workCapitalInput) ? parseFloat(workCapitalInput.value) || 0 : 0;
+    
+    if (workCapitalGroup) {
+      workCapitalGroup.style.display = (model === 'musharakah') ? 'block' : 'none';
+    }
+
+    const ratioVal = parseInt(document.getElementById('hcalcRatio')?.value, 10) || 50;
+    const invRatio = ratioVal;
+    const partnerRatio = 100 - ratioVal;
+
+    const ratioDisplay = document.getElementById('hcalcRatioDisplay');
+    if (ratioDisplay) {
+      ratioDisplay.textContent = `Investor ${invRatio}% : Partner ${partnerRatio}%`;
+    }
+
+    const revenue = parseFloat(document.getElementById('hcalcRevenue')?.value) || 0;
+    const expenses = parseFloat(document.getElementById('hcalcExpenses')?.value) || 0;
+    const netProfit = Math.max(0, revenue - expenses);
+
+    const investorShare = Math.round((netProfit * invRatio) / 100);
+    const partnerShare = Math.round((netProfit * partnerRatio) / 100);
+
+    const netEl = document.getElementById('hcalcNetProfitDisplay');
+    const invEl = document.getElementById('hcalcInvestorShare');
+    const partEl = document.getElementById('hcalcPartnerShare');
+    const ruleEl = document.getElementById('hcalcShariahRule');
+
+    if (netEl) netEl.textContent = `₹${netProfit.toLocaleString('en-IN')}`;
+    if (invEl) invEl.textContent = `₹${investorShare.toLocaleString('en-IN')}`;
+    if (partEl) partEl.textContent = `₹${partnerShare.toLocaleString('en-IN')}`;
+
+    const lang = this.currentLang;
+    if (ruleEl) {
+      if (model === 'mudarabah') {
+        ruleEl.textContent = lang === 'ml'
+          ? 'മുളാരബയിൽ ലാഭം മുൻകൂട്ടി നിശ്ചയിച്ച ശതമാനത്തിൽ (ഉദാ: 50%:50%) പങ്കിടുന്നു. വീഴ്ചകളില്ലാതെ ബിസിനസ്സിൽ അവിചാരിത നഷ്ടം വന്നാൽ ഇൻവെസ്റ്റർക്ക് മൂലധന നഷ്ടവും സംരംഭകന് അധ്വാന നഷ്ടവും സംഭവിക്കും. മുൻകൂട്ടി ഉറപ്പിച്ച പലിശയോ നിശ്ചിത തുകയോ നൽകുന്നത് ഇസ്ലാമികമായി റീബ (പലിശ) ആകുന്നു.'
+          : 'Under Mudarabah, profits are shared strictly according to agreed percentage. If financial loss occurs without negligence, the investor loses capital and the working partner loses time/effort. Guaranteed fixed capital returns are prohibited (Riba).';
+      } else {
+        const totalCap = invCapital + workCapital;
+        const invCapPct = totalCap > 0 ? Math.round((invCapital / totalCap) * 100) : 50;
+        const partCapPct = 100 - invCapPct;
+        ruleEl.textContent = lang === 'ml'
+          ? `മുശാറകയിൽ ലാഭം ധാരണയായ അനുപാതത്തിൽ പങ്കിടാമെങ്കിലും, നഷ്ടം സംഭവിക്കുകയാണെങ്കിൽ ഓരോരുത്തരുടെയും മൂലധനത്തിന് ആനുപാതികമായി മാത്രമേ വഹിക്കാൻ പാടുള്ളൂ (ഇൻവെസ്റ്റർ ${invCapPct}%, സംരംഭകൻ ${partCapPct}%).`
+          : `Under Musharakah, while profits are shared on agreed terms, financial losses must be borne strictly in proportion to capital invested (Investor ${invCapPct}%, Partner ${partCapPct}%).`;
+      }
+    }
+  },
+
+  calculateBusinessZakat() {
+    const cash = parseFloat(document.getElementById('zcalcCash')?.value) || 0;
+    const inventory = parseFloat(document.getElementById('zcalcInventory')?.value) || 0;
+    const receivables = parseFloat(document.getElementById('zcalcReceivables')?.value) || 0;
+    const debts = parseFloat(document.getElementById('zcalcDebts')?.value) || 0;
+
+    const netZakatable = Math.max(0, (cash + inventory + receivables) - debts);
+    const nisabThreshold = 65000; // ~595 grams of silver benchmark in INR
+    const isDue = netZakatable >= nisabThreshold;
+    const zakatPayable = isDue ? Math.round(netZakatable * 0.025) : 0;
+
+    const netEl = document.getElementById('zcalcNetDisplay');
+    const statusEl = document.getElementById('zcalcStatusTag');
+    const payEl = document.getElementById('zcalcPayableDisplay');
+    const lang = this.currentLang;
+
+    if (netEl) netEl.textContent = `₹${netZakatable.toLocaleString('en-IN')}`;
+    if (payEl) payEl.textContent = `₹${zakatPayable.toLocaleString('en-IN')}`;
+
+    if (statusEl) {
+      if (isDue) {
+        statusEl.className = 'text-warning font-weight-bold';
+        statusEl.innerHTML = `<strong>${lang === 'ml' ? 'സകാത്ത് നിർബന്ധം ✅' : 'Zakat Due ✅'}</strong>`;
+      } else {
+        statusEl.className = 'text-light';
+        statusEl.innerHTML = `<span>${lang === 'ml' ? 'നിസ്വാബിൽ താഴെ (സകാത്ത് ബാധകമല്ല)' : 'Below Nisab'}</span>`;
+      }
+    }
+  },
+
+  // Halal Collaboration & Sourcing Board HTML
+  getCollabToolHtml() {
+    const lang = this.currentLang;
+    return `
+      <div>
+        <div class="collab-board-hero">
+          <div class="collab-hero-text">
+            <h3><i class="fa-solid fa-handshake text-warning"></i> ${lang === 'ml' ? 'ഹലാൽ ബിസിനസ് കൊളാബറേഷൻ & മെഷിനറി എക്സ്ചേഞ്ച്' : 'Halal Micro-Enterprise Collaboration Board'}</h3>
+            <p>${lang === 'ml' ? 'റോ മെറ്റീരിയലുകൾ ഒന്നിച്ചു വാങ്ങി 30% വരെ ചെലവ് കുറയ്ക്കാനും, മെഷീൻ പാർട്ണർഷിപ്പ് കണ്ടെത്താനും, ഉൽപ്പന്നങ്ങൾ പരസ്പരം വിപണനം ചെയ്യാനുമുള്ള സംരംഭക വേദി.' : 'Pool raw material orders from wholesale hubs to slash MOQ & freight, discover interest-free machinery partnerships, and trade finished goods ethically.'}</p>
+          </div>
+          <button class="btn-post-collab" onclick="app.openCollabPostModal()">
+            <i class="fa-brands fa-whatsapp"></i> <span>${lang === 'ml' ? 'പുതിയ റിക്വയർമെന്റ് നൽകുക' : 'Post Requirement'}</span>
+          </button>
+        </div>
+
+        <div class="collab-pills-bar">
+          <button class="collab-pill-btn active" onclick="app.filterCollabCards('all', this)">${lang === 'ml' ? 'എല്ലാം (All)' : 'All Posts'}</button>
+          <button class="collab-pill-btn" onclick="app.filterCollabCards('raw', this)">${lang === 'ml' ? 'റോ മെറ്റീരിയൽ പൂളിംഗ് (Raw Materials)' : 'Raw Material Group Buy'}</button>
+          <button class="collab-pill-btn" onclick="app.filterCollabCards('machine', this)">${lang === 'ml' ? 'മെഷിനറി & ഇൻവെസ്റ്റ്മെന്റ് (Machines)' : 'Machinery & Co-Investment'}</button>
+          <button class="collab-pill-btn" onclick="app.filterCollabCards('buyback', this)">${lang === 'ml' ? 'ബൈബാക്ക് & സപ്ലൈ (Buyback & Distribution)' : 'Buyback & Supply'}</button>
+        </div>
+
+        <div class="collab-card-grid" id="collabCardGrid">
+          <!-- Rendered dynamically -->
+        </div>
+      </div>
+    `;
+  },
+
+  renderCollabCards(filterType = 'all') {
+    const grid = document.getElementById('collabCardGrid');
+    if (!grid) return;
+    const lang = this.currentLang;
+
+    const posts = this.collabPosts || [];
+    const filtered = (filterType === 'all') ? posts : posts.filter(p => p.type === filterType);
+
+    if (filtered.length === 0) {
+      grid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 40px; color: #64748b;">${lang === 'ml' ? 'ഈ വിഭാഗത്തിൽ ലിസ്റ്റിംഗുകൾ ലഭ്യമല്ല.' : 'No active postings in this category.'}</div>`;
+      return;
+    }
+
+    grid.innerHTML = filtered.map(post => {
+      const waMsg = encodeURIComponent(`Hello, I saw your collaboration posting "${post.title}" on Vyapar Shiksha. I want to connect and discuss details.`);
+      const waLink = `https://wa.me/919847123450?text=${waMsg}`;
+      return `
+        <div class="collab-card">
+          <div>
+            <div class="collab-card-head">
+              <span class="collab-badge ${post.badge}">${post.badgeText}</span>
+              <span class="collab-location"><i class="fa-solid fa-location-dot"></i> ${post.location}</span>
+            </div>
+            <h4 class="collab-title">${post.title}</h4>
+            <p class="collab-desc">${post.desc}</p>
+            <div class="collab-stats-row">
+              <span><strong>Benefit:</strong> ${post.benefit}</span>
+              <span><strong>Allotment:</strong> ${post.target}</span>
+            </div>
+          </div>
+          <a href="${waLink}" target="_blank" class="btn-collab-wa">
+            <i class="fa-brands fa-whatsapp"></i> <span>${lang === 'ml' ? 'വാട്സ്ആപ്പിൽ സംസാരിക്കുക' : 'Connect on WhatsApp'}</span>
+          </a>
+        </div>
+      `;
+    }).join('');
+  },
+
+  filterCollabCards(type, btnEl) {
+    document.querySelectorAll('.collab-pill-btn').forEach(b => b.classList.remove('active'));
+    if (btnEl) btnEl.classList.add('active');
+    this.renderCollabCards(type);
+  },
+
+  openCollabPostModal() {
+    this.openCommunityModal();
+  },
+
+  printAcademyCheatsheet(categoryKey) {
+    if (!categoryKey) categoryKey = this.currentAcademy || 'attar';
+    const cat = this.categoriesData[categoryKey];
+    if (!cat) return;
+    const lang = this.currentLang;
+    
+    const printWindow = window.open('', '_blank');
+    if (!printWindow) {
+      window.print();
+      return;
+    }
+
+    const title = cat.title ? (cat.title[lang] || cat.title.en) : categoryKey;
+    const budget = cat.budget ? (cat.budget[lang] || cat.budget.en) : (cat.minBudget || '₹3,000');
+    const margin = cat.margin ? (cat.margin[lang] || cat.margin.en) : '40% - 150%';
+    const desc = cat.desc ? (cat.desc[lang] || cat.desc.en) : (cat.tagline ? (cat.tagline[lang] || cat.tagline.en) : '');
+
+    printWindow.document.write(`
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <title>Vyapar Shiksha - ${title} (1-Page Action Plan)</title>
+        <style>
+          body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; padding: 25px; color: #1e293b; line-height: 1.5; font-size: 13px; }
+          .header { border-bottom: 2px solid #047857; padding-bottom: 12px; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: flex-end; }
+          .header h1 { margin: 0; font-size: 20px; color: #047857; }
+          .header p { margin: 4px 0 0 0; font-size: 11px; color: #64748b; }
+          .stat-box { display: flex; gap: 12px; margin-bottom: 16px; }
+          .stat-card { background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 6px; padding: 10px 14px; flex: 1; }
+          .stat-card strong { display: block; font-size: 15px; color: #0f172a; }
+          .section { margin-bottom: 16px; }
+          .section h2 { font-size: 14px; color: #0f172a; border-bottom: 1px solid #e2e8f0; padding-bottom: 4px; margin-bottom: 8px; }
+          ul, ol { padding-left: 20px; margin: 6px 0; }
+          li { margin-bottom: 4px; }
+          .footer { margin-top: 25px; border-top: 1px solid #cbd5e1; padding-top: 8px; font-size: 10px; color: #64748b; text-align: center; }
+          @media print { body { padding: 0; } }
+        </style>
+      </head>
+      <body>
+        <div class="header">
+          <div>
+            <h1>VYAPAR SHIKSHA • 1-PAGE BUSINESS ACTION PLAN</h1>
+            <p>${title} | 100% Halal Ethics & Sourcing Blueprint</p>
+          </div>
+          <div style="text-align: right; font-size: 11px;">
+            <span>vyapar-shiksha.vercel.app</span>
+          </div>
+        </div>
+
+        <div class="stat-box">
+          <div class="stat-card">
+            <span>Minimum Capital:</span>
+            <strong>${budget}</strong>
+          </div>
+          <div class="stat-card">
+            <span>Target Profit Margin:</span>
+            <strong>${margin}</strong>
+          </div>
+          <div class="stat-card">
+            <span>Ethics Standard:</span>
+            <strong>100% Zero-Interest Halal</strong>
+          </div>
+        </div>
+
+        <div class="section">
+          <h2>1. Executive Summary & Value Proposition</h2>
+          <p>${desc}</p>
+        </div>
+
+        <div class="section">
+          <h2>2. 7-Day Launch Checklist</h2>
+          <ul>
+            <li><strong>Day 1:</strong> Finalize verified wholesale supplier contact from Vyapar Shiksha directory & confirm MOQ pricing.</li>
+            <li><strong>Day 2:</strong> Procure essential starter packaging materials, bottles/boxes, and a precision digital scale.</li>
+            <li><strong>Day 3:</strong> Test sample batch formulation & take aesthetic photos in clean natural sunlight.</li>
+            <li><strong>Day 4:</strong> Calculate exact unit production cost and set retail price with healthy 40%+ profit margin.</li>
+            <li><strong>Day 5:</strong> Broadcast launch status to WhatsApp circle with inaugural free courier delivery offer.</li>
+            <li><strong>Day 6:</strong> Fulfill first 10-15 orders promptly with same-day dispatch and tracking numbers.</li>
+            <li><strong>Day 7:</strong> Reinvest 70% of net profits back into wholesale stock to scale your product line.</li>
+          </ul>
+        </div>
+
+        <div class="section">
+          <h2>3. Islamic Ethical Trade Commitments</h2>
+          <ul>
+            <li>Zero Riba: No bank interest loans or compounded credit facilities.</li>
+            <li>Full Disclosure: State exact materials, fabric GSM, or aroma concentration truthfully to buyers.</li>
+            <li>Honest Weights: Calibrate digital weighing scales regularly (Surah Al-Mutaffifin).</li>
+          </ul>
+        </div>
+
+        <div class="footer">
+          Generated from Vyapar Shiksha • Practical Micro-Entrepreneurship Academy • Kerala & Pan-India
+        </div>
+
+        <script>
+          window.onload = function() { window.print(); }
+        </script>
+      </body>
+      </html>
+    `);
+    printWindow.document.close();
   },
 
   // Calculator Tool HTML
@@ -4964,21 +5467,51 @@ const app = {
             <option value="all">${lang === 'ml' ? 'എല്ലാ നഗരങ്ങളും' : lang === 'ar' ? 'جميع المدن' : 'All Cities'}</option>
             <option value="Kozhikode">Kozhikode (കോഴിക്കോട്)</option>
             <option value="Kochi">Kochi (കൊച്ചി)</option>
+            <option value="Malappuram">Malappuram (മലപ്പുറം)</option>
+            <option value="Palakkad">Palakkad (പാലക്കാട്)</option>
+            <option value="Coimbatore">Coimbatore (കോയമ്പത്തൂർ)</option>
             <option value="Mumbai">Mumbai (മുംബൈ)</option>
             <option value="Surat">Surat (സൂററ്റ്)</option>
             <option value="Tirupur">Tirupur (തിരുപ്പൂർ)</option>
             <option value="Delhi">Delhi (ഡൽഹി)</option>
             <option value="Jaipur">Jaipur (ജയ്പൂർ)</option>
             <option value="Kannauj">Kannauj (കണ്ണൗജ്)</option>
+            <option value="Ahmedabad">Ahmedabad & Rajkot</option>
           </select>
           <select class="dir-filter-select" id="filterCategory" onchange="app.renderDirectory()">
-            <option value="all">${lang === 'ml' ? 'എല്ലാ കാറ്റഗറിയും' : lang === 'ar' ? 'جميع التخصصات' : 'All Categories'}</option>
-            <option value="attar">Attar & Perfumes</option>
-            <option value="clothing">Dresses & Boutiques</option>
-            <option value="watches">Watches</option>
-            <option value="bags">Bags & Totes</option>
-            <option value="accessories">Rings & Jewelry</option>
-            <option value="spices">Kerala Spices & Honey</option>
+            <option value="all">${lang === 'ml' ? 'എല്ലാ കാറ്റഗറിയും (30 Academies)' : lang === 'ar' ? 'جميع التخصصات' : 'All Categories (30 Academies)'}</option>
+            <optgroup label="${lang === 'ml' ? '1. ചെറുകിട വ്യാപാരങ്ങൾ (Retail)' : '1. Retail & Micro Ventures'}">
+              <option value="attar">Attar & Perfumes</option>
+              <option value="clothing">Dresses & Boutiques</option>
+              <option value="watches">Watches</option>
+              <option value="bags">Bags & Totes</option>
+              <option value="accessories">Rings & Jewelry</option>
+              <option value="spices">Kerala Spices & Honey</option>
+              <option value="electronics">Mobile Accessories</option>
+              <option value="cookware">Cookware & Kitchen</option>
+              <option value="footwear">Footwear & Slippers</option>
+              <option value="cosmetics">Organic Cosmetics</option>
+            </optgroup>
+            <optgroup label="${lang === 'ml' ? '2. മെഷീൻ നിർമ്മാണ യൂണിറ്റുകൾ (Machines)' : '2. Machine Manufacturing'}">
+              <option value="mach_paperbag">Paper Bag Making Machine</option>
+              <option value="mach_coldpress">Wood Press Oil Expeller</option>
+              <option value="mach_spisegrind">Spice Pulverizer Machine</option>
+              <option value="mach_agarbatti">Automatic Agarbatti Machine</option>
+              <option value="mach_foilcont">Aluminium Foil Container</option>
+              <option value="mach_detergent">Detergent Powder Plant</option>
+              <option value="mach_petbottle">PET Bottle Blowing Unit</option>
+              <option value="mach_feedpellet">Animal Feed Pellet Mill</option>
+              <option value="mach_corrugated">Corrugated Box Making</option>
+              <option value="mach_iceblock">Commercial Ice Block Plant</option>
+            </optgroup>
+            <optgroup label="${lang === 'ml' ? '3. ഇൻഡസ്ട്രിയൽ പ്ലാന്റുകൾ (Industrial)' : '3. Industrial Plants'}">
+              <option value="ind_mangopulp">Mango Pulp Processing</option>
+              <option value="ind_coconutoil">Coconut Oil & VCO Mill</option>
+              <option value="ind_bottledwater">Packaged Drinking Water</option>
+              <option value="ind_ricemill">Automated Rice Mill</option>
+              <option value="ind_cattlefeed">Cattle Feed Plant</option>
+              <option value="ind_cashew">Cashew Processing Unit</option>
+            </optgroup>
           </select>
         </div>
         <div class="directory-grid" id="directoryList"></div>
