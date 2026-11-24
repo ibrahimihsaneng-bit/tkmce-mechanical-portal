@@ -4278,3 +4278,639 @@ body.lang-ar .sidebar-audio-cta-btn {
   font-size: 0.75rem;
   flex-shrink: 0;
 }
+
+
+/* ==========================================================================
+   FLOATING PERSISTENT BACKGROUND AUDIO DOCK & ON/OFF POWER SWITCH
+   ========================================================================== */
+
+/* Clearance at bottom of body so content is not obscured by floating dock */
+body {
+  padding-bottom: 84px;
+}
+
+.floating-audio-dock {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 74px;
+  background: rgba(15, 23, 42, 0.96);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-top: 1px solid rgba(16, 185, 129, 0.4);
+  box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.45);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.floating-audio-dock.dock-hidden {
+  transform: translateY(100%);
+}
+
+.dock-inner-container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+/* Left Section: Soundwave and Track Info */
+.dock-left-section {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 240px;
+  max-width: 340px;
+}
+
+.dock-soundwave {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 24px;
+  padding: 2px;
+}
+
+.dock-soundwave .sw-bar {
+  width: 3px;
+  height: 6px;
+  background: #64748b;
+  border-radius: 2px;
+  transition: height 0.2s ease, background 0.2s ease;
+}
+
+.dock-soundwave.is-playing .sw-bar {
+  background: linear-gradient(180deg, #34d399, #10b981);
+  animation: dockSoundwaveBounce 0.8s ease-in-out infinite alternate;
+}
+
+.dock-soundwave.is-playing .sw-bar:nth-child(2) { animation-duration: 0.65s; animation-delay: 0.1s; }
+.dock-soundwave.is-playing .sw-bar:nth-child(3) { animation-duration: 0.9s; animation-delay: 0.2s; }
+.dock-soundwave.is-playing .sw-bar:nth-child(4) { animation-duration: 0.75s; animation-delay: 0.15s; }
+.dock-soundwave.is-playing .sw-bar:nth-child(5) { animation-duration: 0.85s; animation-delay: 0.25s; }
+
+@keyframes dockSoundwaveBounce {
+  0% { height: 4px; }
+  100% { height: 22px; }
+}
+
+.dock-track-info {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.dock-category-pill {
+  font-size: 0.68rem;
+  font-weight: 800;
+  color: #34d399;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.dock-episode-title {
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: #ffffff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.25;
+}
+
+/* Center Section: Controls & Progress Track */
+.dock-center-section {
+  flex: 1;
+  max-width: 580px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.dock-controls-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.dock-btn-circle {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.dock-btn-circle:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: scale(1.06);
+}
+
+.dock-btn-circle.dock-skip {
+  width: 32px;
+  height: 32px;
+  font-size: 0.72rem;
+  gap: 2px;
+}
+
+.dock-btn-circle.dock-skip span {
+  font-size: 0.6rem;
+  font-weight: 800;
+}
+
+.dock-btn-circle.dock-play-main {
+  width: 42px;
+  height: 42px;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  border: none;
+  font-size: 1rem;
+  box-shadow: 0 2px 10px rgba(16, 185, 129, 0.4);
+}
+
+.dock-btn-circle.dock-play-main:hover {
+  background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+  transform: scale(1.1);
+}
+
+.dock-time-display {
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: #94a3b8;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: 6px;
+}
+
+.dock-time-sep {
+  opacity: 0.5;
+}
+
+.dock-scrub-wrap {
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 999px;
+  cursor: pointer;
+  position: relative;
+  transition: height 0.2s ease;
+}
+
+.dock-scrub-wrap:hover {
+  height: 8px;
+}
+
+.dock-scrub-progress {
+  height: 100%;
+  background: linear-gradient(90deg, #10b981, #34d399);
+  border-radius: 999px;
+  position: relative;
+  transition: width 0.1s linear;
+}
+
+/* Right Section: Explicit Power Switch & Quick Controls */
+.dock-right-section {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Prominent Audio Power Switch (ഓൺ / ഓഫ് സ്വിച്ച്) */
+.dock-power-switch-wrap, .ssh-power-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 5px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.power-switch-label, .ssh-power-label {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #cbd5e1;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.audio-power-toggle-btn {
+  width: 58px;
+  height: 26px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2px 6px;
+  position: relative;
+  transition: all 0.25s ease;
+  font-weight: 800;
+  font-size: 0.68rem;
+}
+
+.audio-power-toggle-btn.state-off {
+  background: #334155;
+  color: #94a3b8;
+  border: 1px solid #475569;
+}
+
+.audio-power-toggle-btn.state-off .power-toggle-knob {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #94a3b8;
+  position: absolute;
+  left: 4px;
+  transition: all 0.25s ease;
+}
+
+.audio-power-toggle-btn.state-off .power-toggle-text {
+  margin-left: 24px;
+}
+
+.audio-power-toggle-btn.state-on {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: #ffffff;
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+  border: 1px solid #34d399;
+}
+
+.audio-power-toggle-btn.state-on .power-toggle-knob {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #ffffff;
+  position: absolute;
+  right: 4px;
+  transition: all 0.25s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.audio-power-toggle-btn.state-on .power-toggle-text {
+  margin-right: 24px;
+}
+
+/* Voice Lang Pills */
+.dock-lang-pills, .dock-speed-pills {
+  display: flex;
+  background: rgba(0, 0, 0, 0.35);
+  border-radius: 6px;
+  padding: 2px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.dock-lang-btn, .dock-speed-btn {
+  background: none;
+  border: none;
+  color: #94a3b8;
+  padding: 4px 8px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.dock-lang-btn:hover, .dock-speed-btn:hover {
+  color: #ffffff;
+}
+
+.dock-lang-btn.active, .dock-speed-btn.active {
+  background: var(--primary);
+  color: #ffffff;
+}
+
+.dock-btn-icon {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  transition: all 0.2s ease;
+}
+
+.dock-btn-icon:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.dock-btn-icon.dock-btn-stop:hover {
+  background: rgba(239, 68, 68, 0.2);
+  border-color: #ef4444;
+}
+
+/* Floating Transcript Drawer */
+.floating-transcript-drawer {
+  position: fixed;
+  bottom: 82px;
+  right: 24px;
+  width: 440px;
+  max-width: 92vw;
+  max-height: 480px;
+  background: rgba(15, 23, 42, 0.98);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  border-radius: var(--radius-md);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(16px);
+  z-index: 9998;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: slideUpDrawer 0.25s ease-out;
+}
+
+@keyframes slideUpDrawer {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.transcript-drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: rgba(0, 0, 0, 0.4);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.transcript-drawer-header .td-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.transcript-drawer-header .td-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-td-download, .btn-td-close {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: #ffffff;
+  width: 28px;
+  height: 28px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  transition: all 0.2s ease;
+}
+
+.btn-td-download:hover { background: rgba(16, 185, 129, 0.3); }
+.btn-td-close:hover { background: rgba(239, 68, 68, 0.3); }
+
+.transcript-drawer-body {
+  padding: 14px 16px;
+  overflow-y: auto;
+  max-height: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.transcript-drawer-para {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.transcript-drawer-para:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.transcript-drawer-para.active {
+  background: rgba(16, 185, 129, 0.15);
+  border-color: #10b981;
+}
+
+.tdp-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+  font-size: 0.82rem;
+  color: #ffffff;
+}
+
+.tdp-time {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #34d399;
+}
+
+.tdp-text {
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: #cbd5e1;
+  margin: 0;
+}
+
+/* Top Study Stage Header Bar */
+.study-stage-header-bar {
+  background: linear-gradient(135deg, #091e17 0%, #0f172a 100%);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+  margin-bottom: 22px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.15);
+}
+
+.study-stage-header-bar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.ssh-left {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ssh-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #34d399;
+  text-transform: uppercase;
+}
+
+.ssh-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0;
+}
+
+.ssh-sub {
+  font-size: 0.84rem;
+  color: #94a3b8;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ssh-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.btn-ssh-action {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  border: none;
+  color: #ffffff;
+  padding: 8px 16px;
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+}
+
+.btn-ssh-action:hover {
+  background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+  transform: translateY(-1px);
+}
+
+/* Chapter Audio Action Bar in Study Modules */
+.chapter-audio-action-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  border-left: 4px solid var(--primary);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.caa-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-chapter-audio-play {
+  background: linear-gradient(135deg, #065f46 0%, #047857 100%);
+  border: none;
+  color: #ffffff;
+  padding: 7px 14px;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+}
+
+.btn-chapter-audio-play:hover {
+  background: linear-gradient(135deg, #047857 0%, #059669 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(4, 120, 87, 0.3);
+}
+
+.btn-chapter-audio-play.is-playing {
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+}
+
+.caa-time {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #64748b;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.caa-badge {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--primary-dark);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .floating-audio-dock {
+    height: auto;
+    padding: 10px 0;
+  }
+  .dock-inner-container {
+    flex-direction: column;
+    gap: 8px;
+  }
+  .dock-left-section {
+    min-width: 100%;
+    justify-content: space-between;
+  }
+  .dock-center-section {
+    width: 100%;
+  }
+  .dock-right-section {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .study-stage-header-bar-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .ssh-right {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .chapter-audio-action-bar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

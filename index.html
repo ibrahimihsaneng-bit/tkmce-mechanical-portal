@@ -404,9 +404,9 @@
 
       <!-- MAIN STUDY STAGE (Active Chapter Content) -->
       <section class="academy-study-stage" id="academyStudyStage">
-        <!-- 30-Minute Interactive Audio Masterclass Player Card -->
-        <div class="audio-masterclass-card" id="audioMasterclassCard">
-          <!-- Dynamically populated by app.js with live soundwave, voice switcher & read-along transcript -->
+        <!-- Top Compact Study Header & Background Audio Quick-Bar -->
+        <div class="study-stage-header-bar" id="studyStageHeaderBar">
+          <!-- Dynamically populated by app.js: Audio ON/OFF switch, Chapter audio quick play, and Syllabus status -->
         </div>
 
         <div id="courseModulesBody">
@@ -514,6 +514,12 @@
       <i class="fa-solid fa-graduation-cap"></i>
     </a>
   </div>
+
+  <!-- Persistent Floating Background Audio Dock -->
+  <div id="floatingAudioDock" class="floating-audio-dock"></div>
+
+  <!-- Floating Synchronized Read-Along Transcript Drawer -->
+  <div id="floatingTranscriptDrawer" class="floating-transcript-drawer" style="display: none;"></div>
 
   <script src="app.js"></script>
 </body>

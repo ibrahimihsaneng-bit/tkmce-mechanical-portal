@@ -1928,6 +1928,7 @@ const app = {
     this.handleHashRouting();
     this.bindEvents();
     this.renderAllViews();
+    this.renderFloatingAudioDock();
   },
 
   detectLanguage() {
@@ -1993,252 +1994,623 @@ const app = {
   // 30-MINUTE AUDIO MASTERCLASS STATE & ENGINE
   // =========================================================================
   audioMasterclassState: {
+    nicheKey: 'attar',
     isPlaying: false,
+    isPoweredOn: false,
     currentEpisode: 1,
     currentTimeSec: 0,
-    totalDurationSec: 1800, // 30 minutes = 1,800 seconds
+    totalDurationSec: 1800,
     playbackRate: 1.0,
     voiceLang: 'ml',
     timerInterval: null,
     audioCtx: null,
     oscillator: null,
-    gainNode: null
+    gainNode: null,
+    isDrawerOpen: false,
+    isMinimized: false
   },
 
-  masterclassAudioEpisodes: [
+  masterclassAudioLibrary: {
+  "attar": [
     {
-      num: 1,
-      startSec: 0,
-      endSec: 300,
-      timestamp: "00:00",
-      title: {
-        en: "1. Scent Science & Fast-Moving Fragrances (00:00 - 05:00)",
-        ml: "1. സുഗന്ധ ശാസ്ത്രവും അത്തറിന്റെ വിപണിയും (00:00 - 05:00)",
-        ar: "1. علم الصنعة والزيوت العطرية الأكثر طلباً (00:00 - 05:00)"
+      "num": 1,
+      "startSec": 0,
+      "endSec": 300,
+      "timestamp": "00:00",
+      "title": {
+        "en": "1. Scent Science & Fast-Moving Fragrances (00:00 - 05:00)",
+        "ml": "1. സുഗന്ധ ശാസ്ത്രവും അത്തറിന്റെ വിപണിയും (00:00 - 05:00)",
+        "ar": "1. علم الصنعة والزيوت العطرية الأكثر طلباً (00:00 - 05:00)"
       },
-      text: {
-        ml: "നമസ്കാരം, വ്യാപാര ശിക്ഷയിലേക്ക് സ്വാഗതം. ഇന്ന് നമ്മൾ പഠിക്കുന്നത് കേരളത്തിലും ഇന്ത്യയിലും ഗൾഫിലും ഏറ്റവും ഉയർന്ന ലാഭം തരുന്ന അത്തർ ബിസിനസ്സ് എങ്ങനെ വിജയകരമായി തുടങ്ങാം എന്നതാണ്. അത്തർ എന്നാൽ ആൽക്കഹോൾ ഒട്ടും ചേർക്കാത്ത ശുദ്ധമായ പ്രകൃതിദത്ത സുഗന്ധതൈലമാണ്. നിസ്കാരത്തിന് ഉപയോഗിക്കാം എന്നതും, 12 മുതൽ 24 മണിക്കൂർ വരെ സുഗന്ധം വസ്ത്രങ്ങളിൽ തങ്ങിനിൽക്കും എന്നതുമാണ് ഇതിന്റെ ഏറ്റവും വലിയ പ്രത്യേകത. തുടക്കക്കാർ തിരഞ്ഞെടുക്കേണ്ട 4 പ്രധാന മണങ്ങൾ: ഒന്ന് റോയൽ വൈറ്റ് മസ്ക്, രണ്ട് ശമാമത്തുൽ അംബർ, മൂന്ന് അറബിക് ഊദ് അൽ ശംസ്, നാല് സാവേജ് പോലുള്ള ഫ്രഞ്ച് ക്ലോണുകൾ. ഇവ വിപണിയിൽ അതിവേഗം വിറ്റുപോകുന്ന ഇനങ്ങളാണ്.",
-        en: "Welcome to Vyapar Shiksha. Today, we master how to launch a high-profit artisanal attar business in Kerala and India from home. Attar is 100% pure concentrated perfume oil extracted without alcohol. It is prayer-safe, skin-friendly, and lasts 12 to 24 hours. The top 4 fast-moving varieties every beginner should start with are Royal White Musk, Shamamatul Amber, Arabic Oudh Al Shams, and French Fresh Clones like Sauvage and Blue Ocean. These four fragrances command an immediate 70% repeat buying rate.",
-        ar: "مرحباً بكم في منصة رواد الأعمال. في هذه الدورة الصوتية نتعلم خطوة بخطوة كيف تؤسس مشروعاً ناجحاً ومربحاً لدهن العود والعطور الزيتية. دهن العود زيت نقي مركز 100% مستخلص بدون أي كحول، مما يجعله صالحاً للصلاة ولطيفاً على البشرة ويدوم فوّاحاً لأكثر من 24 ساعة. الأصناف الأربعة الأكثر مبيعاً للمبتدئين هي: المسك الأبيض الملكي، شمامة العنبر، عود الشمس الملكي، وبدائل العطور الفرنسية الفاخرة."
+      "text": {
+        "ml": "നമസ്കാരം, വ്യാപാര ശിക്ഷയിലേക്ക് സ്വാഗതം. ഇന്ന് നമ്മൾ പഠിക്കുന്നത് കേരളത്തിലും ഇന്ത്യയിലും ഗൾഫിലും ഏറ്റവും ഉയർന്ന ലാഭം തരുന്ന അത്തർ ബിസിനസ്സ് എങ്ങനെ വിജയകരമായി തുടങ്ങാം എന്നതാണ്. അത്തർ എന്നാൽ ആൽക്കഹോൾ ഒട്ടും ചേർക്കാത്ത ശുദ്ധമായ പ്രകൃതിദത്ത സുഗന്ധതൈലമാണ്. നിസ്കാരത്തിന് ഉപയോഗിക്കാം എന്നതും, 12 മുതൽ 24 മണിക്കൂർ വരെ സുഗന്ധം വസ്ത്രങ്ങളിൽ തങ്ങിനിൽക്കും എന്നതുമാണ് ഇതിന്റെ ഏറ്റവും വലിയ പ്രത്യേകത. തുടക്കക്കാർ തിരഞ്ഞെടുക്കേണ്ട 4 പ്രധാന മണങ്ങൾ: ഒന്ന് റോയൽ വൈറ്റ് മസ്ക്, രണ്ട് ശമാമത്തുൽ അംബർ, മൂന്ന് അറബിക് ഊദ് അൽ ശംസ്, നാല് സാവേജ് പോലുള്ള ഫ്രഞ്ച് ക്ലോണുകൾ. ഇവ വിപണിയിൽ അതിവേഗം വിറ്റുപോകുന്ന ഇനങ്ങളാണ്.",
+        "en": "Welcome to Vyapar Shiksha. Today, we master how to launch a high-profit artisanal attar business in Kerala and India from home. Attar is 100% pure concentrated perfume oil extracted without alcohol. It is prayer-safe, skin-friendly, and lasts 12 to 24 hours. The top 4 fast-moving varieties every beginner should start with are Royal White Musk, Shamamatul Amber, Arabic Oudh Al Shams, and French Fresh Clones like Sauvage and Blue Ocean. These four fragrances command an immediate 70% repeat buying rate.",
+        "ar": "مرحباً بكم في منصة رواد الأعمال. في هذه الدورة الصوتية نتعلم خطوة بخطوة كيف تؤسس مشروعاً ناجحاً ومربحاً لدهن العود والعطور الزيتية. دهن العود زيت نقي مركز 100% مستخلص بدون أي كحول، مما يجعله صالحاً للصلاة ولطيفاً على البشرة ويدوم فوّاحاً لأكثر من 24 ساعة. الأصناف الأربعة الأكثر مبيعاً للمبتدئين هي: المسك الأبيض الملكي، شمامة العنبر، عود الشمس الملكي، وبدائل العطور الفرنسية الفاخرة."
       }
     },
     {
-      num: 2,
-      startSec: 300,
-      endSec: 600,
-      timestamp: "05:00",
-      title: {
-        en: "2. Exact Capital & Budget Breakdown (05:00 - 10:00)",
-        ml: "2. എന്തിനൊക്കെ എത്ര രൂപ? പ്രാരംഭ ബഡ്ജറ്റ് (05:00 - 10:00)",
-        ar: "2. جدول الميزانية الدقيق وتكاليف البداية (05:00 - 10:00)"
+      "num": 2,
+      "startSec": 300,
+      "endSec": 600,
+      "timestamp": "05:00",
+      "title": {
+        "en": "2. Exact Capital & Budget Breakdown (05:00 - 10:00)",
+        "ml": "2. എന്തിനൊക്കെ എത്ര രൂപ? പ്രാരംഭ ബഡ്ജറ്റ് (05:00 - 10:00)",
+        "ar": "2. جدول الميزانية الدقيق وتكاليف البداية (05:00 - 10:00)"
       },
-      text: {
-        ml: "രണ്ടാമത്തെ ഘട്ടത്തിൽ നമ്മൾ നോക്കുന്നത് ഈ ബിസിനസ് തുടങ്ങാൻ കയ്യിൽ എത്ര രൂപ വേണം എന്നതാണ്. വെറും 3,100 രൂപ ഉണ്ടെങ്കിൽ വീട്ടിലിരുന്ന് നിങ്ങൾക്ക് ഈ ബിസിനസ്സ് തുടങ്ങാം. 500 മില്ലിലിറ്റർ മദർ ഓയിലിന് 1,500 രൂപ, 50 ഗ്ലാസ് റോൾ-ഓൺ കുപ്പികൾക്ക് 450 രൂപ, 50 പ്രീമിയം കറുത്ത വെൽവെറ്റ് പൗച്ചുകൾക്ക് 300 രൂപ, 100 വാട്ടർപ്രൂഫ് വിനൈൽ ബ്രാൻഡ് സ്റ്റിക്കറുകൾക്ക് 200 രൂപ, അളന്നെടുക്കാനുള്ള ഡ്രോപ്പർ പൈപ്പറ്റുകൾക്ക് 150 രൂപ, കൊറിയർ ബഫറിന് 500 രൂപ. ആകെ വെറും 3,100 രൂപ മാത്രം മതിയാകും നിങ്ങളുടെ ആദ്യ ബാച്ച് 50 കുപ്പികൾ മാർക്കറ്റിലിറക്കാൻ.",
-        en: "In Phase 2, we break down every single rupee needed to start. With just ₹3,100, you can start right from your study table. 500ml concentrated mother oil costs ₹1,500. 50 octagonal glass flacons cost ₹450 at ₹9 each. 50 black velvet drawstring pouches cost ₹300 at ₹6 each. 100 custom vinyl waterproof stickers cost ₹200. Medical pipettes cost ₹150, and ₹500 is your courier dispatch buffer. Total starting capital is just ₹3,100 to produce your first 50 retail bottles.",
-        ar: "في هذه المرحلة نستعرض بدقة رأس المال الأولي المطلوب. بمبلغ 3,100 روبية فقط يمكنك إطلاق مشروعك من منزلك. 500 مل زيوت عطرية خام بـ 1500 روبية، 50 زجاجة كريستال رول بـ 450 روبية بمعدل 9 روبيات للزجاجة، 50 كيساً مخملياً فاخراً بـ 300 روبية، 100 ملصق فينيل مقاوم للماء بشعارك بـ 200 روبية، وقطارات قياس بـ 150 روبية، ومبلغ 500 روبية احتياطي للشحن. الإجمالي 3100 روبية فقط."
+      "text": {
+        "ml": "രണ്ടാമത്തെ ഘട്ടത്തിൽ നമ്മൾ നോക്കുന്നത് ഈ ബിസിനസ് തുടങ്ങാൻ കയ്യിൽ എത്ര രൂപ വേണം എന്നതാണ്. വെറും 3,100 രൂപ ഉണ്ടെങ്കിൽ വീട്ടിലിരുന്ന് നിങ്ങൾക്ക് ഈ ബിസിനസ്സ് തുടങ്ങാം. 500 മില്ലിലിറ്റർ മദർ ഓയിലിന് 1,500 രൂപ, 50 ഗ്ലാസ് റോൾ-ഓൺ കുപ്പികൾക്ക് 450 രൂപ, 50 പ്രീമിയം കറുത്ത വെൽവെറ്റ് പൗച്ചുകൾക്ക് 300 രൂപ, 100 വാട്ടർപ്രൂഫ് വിനൈൽ ബ്രാൻഡ് സ്റ്റിക്കറുകൾക്ക് 200 രൂപ, അളന്നെടുക്കാനുള്ള ഡ്രോപ്പർ പൈപ്പറ്റുകൾക്ക് 150 രൂപ, കൊറിയർ ബഫറിന് 500 രൂപ. ആകെ വെറും 3,100 രൂപ മാത്രം മതിയാകും നിങ്ങളുടെ ആദ്യ ബാച്ച് 50 കുപ്പികൾ മാർക്കറ്റിലിറക്കാൻ.",
+        "en": "In Phase 2, we break down every single rupee needed to start. With just ₹3,100, you can start right from your study table. 500ml concentrated mother oil costs ₹1,500. 50 octagonal glass flacons cost ₹450 at ₹9 each. 50 black velvet drawstring pouches cost ₹300 at ₹6 each. 100 custom vinyl waterproof stickers cost ₹200. Medical pipettes cost ₹150, and ₹500 is your courier dispatch buffer. Total starting capital is just ₹3,100 to produce your first 50 retail bottles.",
+        "ar": "في هذه المرحلة نستعرض بدقة رأس المال الأولي المطلوب. بمبلغ 3,100 روبية فقط يمكنك إطلاق مشروعك من منزلك. 500 مل زيوت عطرية خام بـ 1500 روبية، 50 زجاجة كريستال رول بـ 450 روبية بمعدل 9 روبيات للزجاجة، 50 كيساً مخملياً فاخراً بـ 300 روبية، 100 ملصق فينيل مقاوم للماء بشعارك بـ 200 روبية، وقطارات قياس بـ 150 روبية، ومبلغ 500 روبية احتياطي للشحن. الإجمالي 3100 روبية فقط."
       }
     },
     {
-      num: 3,
-      startSec: 600,
-      endSec: 960,
-      timestamp: "10:00",
-      title: {
-        en: "3. Kozhikode & Mumbai Wholesale Markets (10:00 - 16:00)",
-        ml: "3. മിഠായിത്തെരുവും ക്രോഫോർഡ് മാർക്കറ്റും (10:00 - 16:00)",
-        ar: "3. أسواق الجملة في كاليكوت ومومباي ودبي (10:00 - 16:00)"
+      "num": 3,
+      "startSec": 600,
+      "endSec": 960,
+      "timestamp": "10:00",
+      "title": {
+        "en": "3. Kozhikode & Mumbai Wholesale Markets (10:00 - 16:00)",
+        "ml": "3. മിഠായിത്തെരുവും ക്രോഫോർഡ് മാർക്കറ്റും (10:00 - 16:00)",
+        "ar": "3. أسواق الجملة في كاليكوت ومومباي ودبي (10:00 - 16:00)"
       },
-      text: {
-        ml: "മൂന്നാമതായി സാധനങ്ങൾ എവിടെ നിന്ന് വാങ്ങണം എന്ന് മനസ്സിലാക്കാം. കേരളത്തിൽ കോഴിക്കോട് മിഠായിത്തെരുവും വലിയങ്ങാടിയുമാണ് ഏറ്റവും പ്രധാനപ്പെട്ട കേന്ദ്രങ്ങൾ. വലിയ അളവിൽ കുറഞ്ഞ നിരക്കിൽ വാങ്ങാൻ മുംബൈ മുഹമ്മദ് അലി റോഡിലെ നഖൂദ മൊഹല്ലയും ക്രോഫോർഡ് മാർക്കറ്റിലെ അബ്ദുൽ റഹ്മാൻ സ്ട്രീറ്റും സന്ദർശിക്കാം. ഇവിടെ വെറും 7 മുതൽ 9 രൂപയ്ക്ക് പ്രീമിയം ഒക്ടാഗണൽ ക്രിസ്റ്റൽ കുപ്പികൾ ലഭിക്കും. ഗൾഫിലുള്ളവർക്ക് ദുബായ് ദേരയിലെ നായിഫ് പെർഫ്യൂം സൂഖും അജ്മാൻ ഇൻഡസ്ട്രിയൽ ഏരിയയുമാണ് പ്രധാന സ്രോതസ്സുകൾ. ഇവിടങ്ങളിൽ നിന്ന് എയർ കാർഗോ വഴി നാട്ടിലേക്ക് നേരിട്ട് എത്തിക്കാം.",
-        en: "In Phase 3, we explore verified wholesale markets. In Kerala, Kozhikode S.M. Street and Valiyangadi Big Bazaar are the historical trading hubs for Arabian bases and roll-on bottles. For pan-India direct manufacturing rates, Mumbai's Nakhuda Mohalla on Mohammad Ali Road and Abdul Rehman Street near Crawford Market offer the lowest prices in India, where octagonal crystal bottles cost as low as ₹7 to ₹9. For GCC NRI entrepreneurs, Dubai Deira Naif Souk and Ajman Industrial Area offer direct container and air cargo wholesale lots.",
-        ar: "في هذه المرحلة نحدد أين تتسوق بالجملة الحقيقية. في كيرالا، يعد شارع إس إم وسوق فاليانغادي بكاليكوت المركزين الأكبر لموردي زيوت العطور. وللحصول على أسعار المصانع في الهند، توجه إلى سوق نخودا بشارع محمد علي وشارع عبد الرحمن بسوق كروفورد بمومباي، حيث تباع زجاجات الكريستال بـ 7 إلى 9 روبيات فقط. وفي دول الخليج، يعتبر سوق نايف بديرة دبي والمنطقة الصناعية بعجمان المركز العالمي الأكبر للتصدير."
+      "text": {
+        "ml": "മൂന്നാമതായി സാധനങ്ങൾ എവിടെ നിന്ന് വാങ്ങണം എന്ന് മനസ്സിലാക്കാം. കേരളത്തിൽ കോഴിക്കോട് മിഠായിത്തെരുവും വലിയങ്ങാടിയുമാണ് ഏറ്റവും പ്രധാനപ്പെട്ട കേന്ദ്രങ്ങൾ. വലിയ അളവിൽ കുറഞ്ഞ നിരക്കിൽ വാങ്ങാൻ മുംബൈ മുഹമ്മദ് അലി റോഡിലെ നഖൂദ മൊഹല്ലയും ക്രോഫോർഡ് മാർക്കറ്റിലെ അബ്ദുൽ റഹ്മാൻ സ്ട്രീറ്റും സന്ദർശിക്കാം. ഇവിടെ വെറും 7 മുതൽ 9 രൂപയ്ക്ക് പ്രീമിയം ഒക്ടാഗണൽ ക്രിസ്റ്റൽ കുപ്പികൾ ലഭിക്കും. ഗൾഫിലുള്ളവർക്ക് ദുബായ് ദേരയിലെ നായിഫ് പെർഫ്യൂം സൂഖും അജ്മാൻ ഇൻഡസ്ട്രിയൽ ഏരിയയുമാണ് പ്രധാന സ്രോതസ്സുകൾ. ഇവിടങ്ങളിൽ നിന്ന് എയർ കാർഗോ വഴി നാട്ടിലേക്ക് നേരിട്ട് എത്തിക്കാം.",
+        "en": "In Phase 3, we explore verified wholesale markets. In Kerala, Kozhikode S.M. Street and Valiyangadi Big Bazaar are the historical trading hubs for Arabian bases and roll-on bottles. For pan-India direct manufacturing rates, Mumbai's Nakhuda Mohalla on Mohammad Ali Road and Abdul Rehman Street near Crawford Market offer the lowest prices in India, where octagonal crystal bottles cost as low as ₹7 to ₹9. For GCC NRI entrepreneurs, Dubai Deira Naif Souk and Ajman Industrial Area offer direct container and air cargo wholesale lots.",
+        "ar": "في هذه المرحلة نحدد أين تتسوق بالجملة الحقيقية. في كيرالا، يعد شارع إس إم وسوق فاليانغادي بكاليكوت المركزين الأكبر لموردي زيوت العطور. وللحصول على أسعار المصانع في الهند، توجه إلى سوق نخودا بشارع محمد علي وشارع عبد الرحمن بسوق كروفورد بمومباي، حيث تباع زجاجات الكريستال بـ 7 إلى 9 روبيات فقط. وفي دول الخليج، يعتبر سوق نايف بديرة دبي والمنطقة الصناعية بعجمان المركز العالمي الأكبر للتصدير."
       }
     },
     {
-      num: 4,
-      startSec: 960,
-      endSec: 1260,
-      timestamp: "16:00",
-      title: {
-        en: "4. Wholesaler Calling & Negotiation Coaching (16:00 - 21:00)",
-        ml: "4. വ്യാപാരികളോട് സംസാരിക്കേണ്ട ചോദ്യങ്ങൾ (16:00 - 21:00)",
-        ar: "4. حوار الاتصال والتفاوض مع الموردين (16:00 - 21:00)"
+      "num": 4,
+      "startSec": 960,
+      "endSec": 1260,
+      "timestamp": "16:00",
+      "title": {
+        "en": "4. Wholesaler Calling & Negotiation Coaching (16:00 - 21:00)",
+        "ml": "4. വ്യാപാരികളോട് സംസാരിക്കേണ്ട ചോദ്യങ്ങൾ (16:00 - 21:00)",
+        "ar": "4. حوار الاتصال والتفاوض مع الموردين (16:00 - 21:00)"
       },
-      text: {
-        ml: "നാലാമതായി വ്യാപാരികളോട് എങ്ങനെ സംസാരിക്കണം എന്ന് നോക്കാം. കടക്കാരോട് ഒരിക്കലും എനിക്ക് 5 കുപ്പി തരൂ എന്ന് ചോദിക്കരുത്. 'എനിക്ക് കേരളത്തിൽ പുതിയ അത്തർ ബ്രാൻഡ് തുടങ്ങാനാണ്, എനിക്ക് നിങ്ങളുടെ 5 ടോപ്പ് സെല്ലിംഗ് ഇനങ്ങളുടെ 100ml മദർ ഓയിൽ സാമ്പിൾ വേണം, അടുത്ത ബാച്ചിൽ 5 കിലോ ബാരൽ എടുക്കുമ്പോൾ തരുന്ന അതേ ഹോൾസെയിൽ സ്ലാബ് റേറ്റ് ഇതിന് നൽകുമോ?' എന്ന് ചോദിക്കണം. ഓയിലിൽ വെള്ളമോ അനാവശ്യ കെമിക്കലുകളോ കലർന്നിട്ടില്ലെന്ന് ഉറപ്പാക്കാൻ വെള്ളക്കടലാസിൽ ഒരു തുള്ളി വീഴ്ത്തി നോക്കുക. എണ്ണക്കറ മാത്രം ബാക്കിയായാൽ അത് ശുദ്ധമായ മദർ ഓയിലാണ്.",
-        en: "In Phase 4, we master negotiation dialogue. Never ask a wholesaler for retail quantities. Always say: 'I am launching a new artisanal fragrance brand in Kerala. I need 100ml tester cuts of your top 5 fastest-moving mother oils. Will you extend your 5-kilo bulk slab rate to my initial testing lot?' To test oil purity, place a drop on white blotter paper: if it leaves a rich, concentrated, transparent fragrant sheen without water rings, it is pure undiluted concentrate.",
-        ar: "في هذه المرحلة نتقن حوار التفاوض الصوتي. إياك وأن تسأل المورد بأسلوب الزبون العادي. قل له بثقة: 'أنا أؤسس علامة تجارية جديدة للعطور في كيرالا، وأود الحصول على عينات 100 مل من أفضل 5 أصناف لديكم بسعر الجملة المخفض، مع وعد بالطلب ببراميل 5 كيلو مستقبلاً'. لاختبار نقاء الزيت، ضع قطرة على شريحة ورق بيضاء؛ إذا بقيت شفافة ذات فوحان قوي بدون دوائر مائية، فهو زيت مركز نقي 100%."
+      "text": {
+        "ml": "നാലാമതായി വ്യാപാരികളോട് എങ്ങനെ സംസാരിക്കണം എന്ന് നോക്കാം. കടക്കാരോട് ഒരിക്കലും എനിക്ക് 5 കുപ്പി തരൂ എന്ന് ചോദിക്കരുത്. 'എനിക്ക് കേരളത്തിൽ പുതിയ അത്തർ ബ്രാൻഡ് തുടങ്ങാനാണ്, എനിക്ക് നിങ്ങളുടെ 5 ടോപ്പ് സെല്ലിംഗ് ഇനങ്ങളുടെ 100ml മദർ ഓയിൽ സാമ്പിൾ വേണം, അടുത്ത ബാച്ചിൽ 5 കിലോ ബാരൽ എടുക്കുമ്പോൾ തരുന്ന അതേ ഹോൾസെയിൽ സ്ലാബ് റേറ്റ് ഇതിന് നൽകുമോ?' എന്ന് ചോദിക്കണം. ഓയിലിൽ വെള്ളമോ അനാവശ്യ കെമിക്കലുകളോ കലർന്നിട്ടില്ലെന്ന് ഉറപ്പാക്കാൻ വെള്ളക്കടലാസിൽ ഒരു തുള്ളി വീഴ്ത്തി നോക്കുക. എണ്ണക്കറ മാത്രം ബാക്കിയായാൽ അത് ശുദ്ധമായ മദർ ഓയിലാണ്.",
+        "en": "In Phase 4, we master negotiation dialogue. Never ask a wholesaler for retail quantities. Always say: 'I am launching a new artisanal fragrance brand in Kerala. I need 100ml tester cuts of your top 5 fastest-moving mother oils. Will you extend your 5-kilo bulk slab rate to my initial testing lot?' To test oil purity, place a drop on white blotter paper: if it leaves a rich, concentrated, transparent fragrant sheen without water rings, it is pure undiluted concentrate.",
+        "ar": "في هذه المرحلة نتقن حوار التفاوض الصوتي. إياك وأن تسأل المورد بأسلوب الزبون العادي. قل له بثقة: 'أنا أؤسس علامة تجارية جديدة للعطور في كيرالا، وأود الحصول على عينات 100 مل من أفضل 5 أصناف لديكم بسعر الجملة المخفض، مع وعد بالطلب ببراميل 5 كيلو مستقبلاً'. لاختبار نقاء الزيت، ضع قطرة على شريحة ورق بيضاء؛ إذا بقيت شفافة ذات فوحان قوي بدون دوائر مائية، فهو زيت مركز نقي 100%."
       }
     },
     {
-      num: 5,
-      startSec: 1260,
-      endSec: 1500,
-      timestamp: "21:00",
-      title: {
-        en: "5. Formulation, Bottling & Unit Cost SOP (21:00 - 25:00)",
-        ml: "5. കുപ്പി നിറയ്ക്കലും നിർമ്മാണ രീതിയും (21:00 - 25:00)",
-        ar: "5. طريقة التعبئة والتركيب والتغليف الفاخر (21:00 - 25:00)"
+      "num": 5,
+      "startSec": 1260,
+      "endSec": 1500,
+      "timestamp": "21:00",
+      "title": {
+        "en": "5. Formulation, Bottling & Unit Cost SOP (21:00 - 25:00)",
+        "ml": "5. കുപ്പി നിറയ്ക്കലും നിർമ്മാണ രീതിയും (21:00 - 25:00)",
+        "ar": "5. طريقة التعبئة والتركيب والتغليف الفاخر (21:00 - 25:00)"
       },
-      text: {
-        ml: "അഞ്ചാമതായി കുപ്പി നിറയ്ക്കുന്ന വിധം. നിങ്ങളുടെ വർക്കിംഗ് ടേബിൾ പൂർണ്ണമായും ഉണങ്ങിയതാണെന്ന് ഉറപ്പാക്കുക. അത്തറിൽ ഒരു തുള്ളി വെള്ളം വീണാൽ പോലും അതിന്റെ സുഗന്ധം നഷ്ടപ്പെടും. 5ml ഡ്രോപ്പർ പൈപ്പറ്റ് ഉപയോഗിച്ച് കൃത്യമായി 6ml ഓയിൽ എടുത്ത് കുപ്പിയിലേക്ക് ഒഴിക്കുക. തുടർന്ന് റോൾ-ഓൺ ബോൾ അമർത്തി ഉറപ്പിക്കുക. മൈക്രോഫൈബർ തുണി കൊണ്ട് കുപ്പി തുടച്ച് വിരലടയാളങ്ങൾ മാറ്റിയ ശേഷം നടുവിലായി നിങ്ങളുടെ ബ്രാൻഡ് ലോഗോ ഒട്ടിക്കുക. തുടർന്ന് കറുത്ത വെൽവെറ്റ് പൗച്ചിലേക്ക് ഇടുക. ഒരു കുപ്പിയുടെ മൊത്തം ചെലവ് വെറും 33 രൂപ 80 പൈസ മാത്രമാണ്!",
-        en: "In Phase 5, we execute practical bottling SOP. Ensure your workspace is 100% dry; moisture clouds fragrance oils. Use a 5ml graduated pipette to draw exactly 6ml and dispense smoothly into the flacon. Press-fit the roller ball plug with a clean click. Wipe the exterior with a microfiber cloth to remove fingerprint grease, then align your waterproof vinyl label. Place inside the black velvet pouch. The exact finished cost of this luxury bottle is just ₹33.80!",
-        ar: "في هذه المرحلة نطبق خطوات التصنيع العملي. تأكد من جفاف طاولة العمل تماماً فالرطوبة تفسد نقاء الزيت. استخدم قطارة مدرجة 5 مل لسحب 6 مل وتعبئتها بهدوء في الزجاجة. ثبت بكرة الرول بقوة حتى تسمع صوت استقرارها ثم امسح الزجاجة بقطعة قماش ناعمة والصق شعارك في المنتصف، وضعها في الكيس المخملي الأسود. التكلفة الإجمالية لهذه الزجاجة الفاخرة لا تتجاوز 33.80 روبية فقط!"
+      "text": {
+        "ml": "അഞ്ചാമതായി കുപ്പി നിറയ്ക്കുന്ന വിധം. നിങ്ങളുടെ വർക്കിംഗ് ടേബിൾ പൂർണ്ണമായും ഉണങ്ങിയതാണെന്ന് ഉറപ്പാക്കുക. അത്തറിൽ ഒരു തുള്ളി വെള്ളം വീണാൽ പോലും അതിന്റെ സുഗന്ധം നഷ്ടപ്പെടും. 5ml ഡ്രോപ്പർ പൈപ്പറ്റ് ഉപയോഗിച്ച് കൃത്യമായി 6ml ഓയിൽ എടുത്ത് കുപ്പിയിലേക്ക് ഒഴിക്കുക. തുടർന്ന് റോൾ-ഓൺ ബോൾ അമർത്തി ഉറപ്പിക്കുക. മൈക്രോഫൈബർ തുണി കൊണ്ട് കുപ്പി തുടച്ച് വിരലടയാളങ്ങൾ മാറ്റിയ ശേഷം നടുവിലായി നിങ്ങളുടെ ബ്രാൻഡ് ലോഗോ ഒട്ടിക്കുക. തുടർന്ന് കറുത്ത വെൽവെറ്റ് പൗച്ചിലേക്ക് ഇടുക. ഒരു കുപ്പിയുടെ മൊത്തം ചെലവ് വെറും 33 രൂപ 80 പൈസ മാത്രമാണ്!",
+        "en": "In Phase 5, we execute practical bottling SOP. Ensure your workspace is 100% dry; moisture clouds fragrance oils. Use a 5ml graduated pipette to draw exactly 6ml and dispense smoothly into the flacon. Press-fit the roller ball plug with a clean click. Wipe the exterior with a microfiber cloth to remove fingerprint grease, then align your waterproof vinyl label. Place inside the black velvet pouch. The exact finished cost of this luxury bottle is just ₹33.80!",
+        "ar": "في هذه المرحلة نطبق خطوات التصنيع العملي. تأكد من جفاف طاولة العمل تماماً فالرطوبة تفسد نقاء الزيت. استخدم قطارة مدرجة 5 مل لسحب 6 مل وتعبئتها بهدوء في الزجاجة. ثبت بكرة الرول بقوة حتى تسمع صوت استقرارها ثم امسح الزجاجة بقطعة قماش ناعمة والصق شعارك في المنتصف، وضعها في الكيس المخملي الأسود. التكلفة الإجمالية لهذه الزجاجة الفاخرة لا تتجاوز 33.80 روبية فقط!"
       }
     },
     {
-      num: 6,
-      startSec: 1500,
-      endSec: 1800,
-      timestamp: "25:00",
-      title: {
-        en: "6. Profit Margins, Social Selling & Safe COD (25:00 - 30:00)",
-        ml: "6. ലാഭവിഹിതവും ഓൺലൈൻ വിപണനവും (25:00 - 30:00)",
-        ar: "6. حساب الأرباح والتسويق والشحن البريدي (25:00 - 30:00)"
+      "num": 6,
+      "startSec": 1500,
+      "endSec": 1800,
+      "timestamp": "25:00",
+      "title": {
+        "en": "6. Profit Margins, Social Selling & Safe COD (25:00 - 30:00)",
+        "ml": "6. ലാഭവിഹിതവും ഓൺലൈൻ വിപണനവും (25:00 - 30:00)",
+        "ar": "6. حساب الأرباح والتسويق والشحن البريدي (25:00 - 30:00)"
       },
-      text: {
-        ml: "അവസാനമായി ലാഭക്കണക്കുകളും വിപണന തന്ത്രങ്ങളും. 34 രൂപ ചിലവായ 6ml കുപ്പി ഇൻസ്റ്റാഗ്രാമിൽ 249 രൂപയ്ക്കാണ് വിൽക്കുന്നത്. ഒരു കുപ്പിയിൽ നിന്നുള്ള അറ്റാദായം 215 രൂപയാണ്! മാസം 50 കുപ്പികൾ വിറ്റാൽ 10,750 രൂപയും, 100 കുപ്പികൾ വിറ്റാൽ 21,500 രൂപയും ലാഭം ലഭിക്കും. പ്രധാനപ്പെട്ട ഒരു നിയമം: അപരിചിതർക്ക് ക്യാഷ് ഓൺ ഡെലിവറി അയക്കുമ്പോൾ ഓർഡർ സ്ഥിരീകരിക്കാൻ 50 രൂപ അഡ്വാൻസ് ടോക്കൺ ഗൂഗിൾ പേ വഴി വാങ്ങുക. ഇല്ലെങ്കിൽ പാഴ്സൽ തിരിച്ചുവരുമ്പോൾ കൊറിയർ ചാർജ്ജ് നിങ്ങൾക്ക് നഷ്ടമാകും. ഇന്ത്യ പോസ്റ്റ് സ്പീഡ് പോസ്റ്റ് വഴി കേരളത്തിൽ 35 രൂപയ്ക്ക് സുരക്ഷിതമായി എത്തിക്കാം.",
-        en: "Finally, in Phase 6, we analyze profit margins and sales execution. A bottle costing ₹34 sells on Instagram for ₹249 to ₹349, netting over ₹215 pure profit per bottle. Selling just 50 bottles a month generates ₹10,750 net income, and 100 bottles yields ₹21,500 pure profit. Critical Rule: Never ship 100% Cash on Delivery to strangers without taking a ₹50 advance token via UPI, protecting you against return courier losses. Use India Post Speed Post for safe ₹35 delivery across Kerala.",
-        ar: "ختاماً، في المرحلة السادسة، نحلل هوامش الأرباح وقواعد البيع الآمن. الزجاجة التي كلفتك 34 روبية تباع عبر الإنترنت بـ 249 إلى 349 روبية، بصافي ربح يفوق 215 روبية بكل حبة. بيع 50 زجاجة شهرياً يمنحك 10,750 روبية، وبيع 100 حبة يمنحك 21,500 روبية ربحاً صافياً. قاعدة ذهبية: لا تشحن أبداً بنظام الدفع عند الاستلام الكامل للغرباء دون أخذ عربون 50 روبية مقدماً عبر تطبيق الدفع لحماية نفسك من رسوم الإرجاع. استخدم البريد السريع بتكلفة 35 روبية فقط داخل كيرالا."
+      "text": {
+        "ml": "അവസാനമായി ലാഭക്കണക്കുകളും വിപണന തന്ത്രങ്ങളും. 34 രൂപ ചിലവായ 6ml കുപ്പി ഇൻസ്റ്റാഗ്രാമിൽ 249 രൂപയ്ക്കാണ് വിൽക്കുന്നത്. ഒരു കുപ്പിയിൽ നിന്നുള്ള അറ്റാദായം 215 രൂപയാണ്! മാസം 50 കുപ്പികൾ വിറ്റാൽ 10,750 രൂപയും, 100 കുപ്പികൾ വിറ്റാൽ 21,500 രൂപയും ലാഭം ലഭിക്കും. പ്രധാനപ്പെട്ട ഒരു നിയമം: അപരിചിതർക്ക് ക്യാഷ് ഓൺ ഡെലിവറി അയക്കുമ്പോൾ ഓർഡർ സ്ഥിരീകരിക്കാൻ 50 രൂപ അഡ്വാൻസ് ടോക്കൺ ഗൂഗിൾ പേ വഴി വാങ്ങുക. ഇല്ലെങ്കിൽ പാഴ്സൽ തിരിച്ചുവരുമ്പോൾ കൊറിയർ ചാർജ്ജ് നിങ്ങൾക്ക് നഷ്ടമാകും. ഇന്ത്യ പോസ്റ്റ് സ്പീഡ് പോസ്റ്റ് വഴി കേരളത്തിൽ 35 രൂപയ്ക്ക് സുരക്ഷിതമായി എത്തിക്കാം.",
+        "en": "Finally, in Phase 6, we analyze profit margins and sales execution. A bottle costing ₹34 sells on Instagram for ₹249 to ₹349, netting over ₹215 pure profit per bottle. Selling just 50 bottles a month generates ₹10,750 net income, and 100 bottles yields ₹21,500 pure profit. Critical Rule: Never ship 100% Cash on Delivery to strangers without taking a ₹50 advance token via UPI, protecting you against return courier losses. Use India Post Speed Post for safe ₹35 delivery across Kerala.",
+        "ar": "ختاماً، في المرحلة السادسة، نحلل هوامش الأرباح وقواعد البيع الآمن. الزجاجة التي كلفتك 34 روبية تباع عبر الإنترنت بـ 249 إلى 349 روبية، بصافي ربح يفوق 215 روبية بكل حبة. بيع 50 زجاجة شهرياً يمنحك 10,750 روبية، وبيع 100 حبة يمنحك 21,500 روبية ربحاً صافياً. قاعدة ذهبية: لا تشحن أبداً بنظام الدفع عند الاستلام الكامل للغرباء دون أخذ عربون 50 روبية مقدماً عبر تطبيق الدفع لحماية نفسك من رسوم الإرجاع. استخدم البريد السريع بتكلفة 35 روبية فقط داخل كيرالا."
       }
     }
   ],
+  "clothing": [
+    {
+      "num": 1,
+      "startSec": 0,
+      "endSec": 300,
+      "timestamp": "00:00",
+      "title": {
+        "en": "1. Fabric Science & Fast-Moving Modest Cuts (00:00 - 05:00)",
+        "ml": "1. തുണിത്തരങ്ങളും അബായ മോഡലുകളും (00:00 - 05:00)",
+        "ar": "1. أنواع الأقمشة الفاخرة وقصات العبايات الأكثر طلباً (00:00 - 05:00)"
+      },
+      "text": {
+        "ml": "നമസ്കാരം, വസ്ത്ര-അബായ ബിസിനസ്സ് മാസ്റ്റർക്ലാസിലേക്ക് സ്വാഗതം. കേരളത്തിലും ഗൾഫിലും ഏറ്റവും കൂടുതൽ ഡിമാൻഡുള്ള ഒരു മേഖലയാണിത്. ഇതിൽ ഏറ്റവും പ്രധാനം ശരിയായ തുണി തിരഞ്ഞെടുക്കലാണ്. 140 GSM ഒറിജിനൽ കൊറിയൻ നിദ ഫാബ്രിക് ആണ് അബായകൾക്ക് ഏറ്റവും ഉത്തമം. ചുളിവുകൾ വീഴാത്ത സൂം ക്രീപ്പ്, ഒഴുക്കുള്ള ക്രങ്കിൾ ഷിഫോൺ എന്നിവയാണ് മറ്റ് പ്രിയങ്കരമായ തുണികൾ. തുടക്കക്കാർക്ക് വിൽക്കാൻ ഏറ്റവും അനുയോജ്യമായ 4 ഡിസൈനുകൾ: ഒന്ന് ക്ലാസിക് ബ്ലാക്ക് ദുബായ് കിമോണോ, രണ്ട് ഫ്രണ്ട്-ഓപ്പൺ കാഷ്വൽ അബായ, മൂന്ന് ലളിതമായ ലിനൻ കുർത്തികൾ, നാല് പേസ്റ്റൽ ടിയേർഡ് മാക്സി ഡ്രസ്സുകൾ.",
+        "en": "Welcome to the Modest Wear & Clothing Masterclass. In Kerala and the GCC, modest fashion commands an evergreen year-round demand. Fabric choice defines your brand reputation. Original 140 GSM Korean Nida is the gold standard for premium abayas due to its lightweight drape and opaque matte finish. Wrinkle-free Zoom crepe and breathable crinkle chiffon are the secondary staples. The top 4 fast-moving cuts for beginners are: Classic Black Dubai Kimono, Front-Open Casual Abayas, Daily Linen Kurtis, and Pastel Tiered Maxi Dresses.",
+        "ar": "أهلاً بكم في ماستر كلاس تجارة العبايات والأزياء المحتشمة. هذا القطاع يتميز بطلب دائم ومستمر على مدار العام في كيرالا والخليج. جودة القماش هي أساس نجاحك؛ قماش كوري ندى الأصلي بوزن 140 غرام هو الخيار الأول لجاذبيته وخفته وثباته. يليه قماش زوم المقاوم للتجعد وشيفون الكرينكل الفاخر. أفضل 4 موديلات مبيعاً للمبتدئين: كيمونو دبي الأسود الكلاسيكي، العباية المفتوحة العملية، فساتين اللينين اليومية، والموديل الطبقات العصري."
+      }
+    },
+    {
+      "num": 2,
+      "startSec": 300,
+      "endSec": 600,
+      "timestamp": "05:00",
+      "title": {
+        "en": "2. Exact Capital & Inventory Budget (05:00 - 10:00)",
+        "ml": "2. പ്രാരംഭ ഇൻവെന്ററിയും ബഡ്ജറ്റും (05:00 - 10:00)",
+        "ar": "2. رأس مال البداية وميزانية أول دفعة (05:00 - 10:00)"
+      },
+      "text": {
+        "ml": "രണ്ടാമത്തെ ഭാഗത്ത് നമ്മൾ വസ്ത്ര ബിസിനസ്സ് തുടങ്ങാനുള്ള ബഡ്ജറ്റ് പരിശോധിക്കുന്നു. 15,000 രൂപ ഉണ്ടെങ്കിൽ നിങ്ങൾക്ക് 30 പീസ് റെഡിമെയ്ഡ് അബായകളുടെയും വസ്ത്രങ്ങളുടെയും ആദ്യ സ്റ്റോക്ക് ഇറക്കാം. 30 അബായകൾക്ക് ശരാശരി 400 രൂപ നിരക്കിൽ 12,000 രൂപ. 100 പ്രീമിയം സാറ്റിൻ ബ്രാൻഡ് ടാഗുകൾക്കും വാഷ് കെയർ ലേബലുകൾക്കും 600 രൂപ. തുണി പൊതിയുന്ന ബട്ടർ പേപ്പറിന് 200 രൂപ. സുരക്ഷിതമായി അയക്കാനുള്ള പോളിമെയ്‌ലർ ബാഗുകൾക്ക് 400 രൂപ. കൊറിയർ ബഫറിന് 1,800 രൂപ. ആകെ 15,000 രൂപ കൊണ്ട് നിങ്ങൾക്ക് ഇൻസ്റ്റാഗ്രാം വഴി സ്വന്തം ബ്രാൻഡ് തുടങ്ങാം.",
+        "en": "In Phase 2, we break down your startup budget. With ₹15,000, you can launch with a curated 30-piece starter inventory. 30 ready-to-wear boutique abayas at an average ₹400 wholesale cost requires ₹12,000. 100 woven satin neck tags and wash-care labels cost ₹600. Branded translucent butter paper wrapping costs ₹200. Waterproof courier poly-mailers cost ₹400. A ₹1,800 reserve buffer covers upfront postal dispatches. Total capital is ₹15,000 to launch your online boutique.",
+        "ar": "في هذه المرحلة نستعرض ميزانية البداية. بمبلغ 15,000 روبية تستطيع تدشين متجرك الإلكتروني بـ 30 قطعة جاهزة. 30 عباية بسعر جملة 400 روبية للقطعة تكلف 12,000 روبية. 100 بطاقة ماركة قماشية من الساتان بـ 600 روبية، ورق زبدة فاخر لتغليف القطع بـ 200 روبية، أكياس شحن بريدية محكمة بـ 400 روبية، ومبلغ 1800 روبية احتياطي للشحن. الإجمالي 15,000 روبية فقط لتأسيس علامتك الخاصة."
+      }
+    },
+    {
+      "num": 3,
+      "startSec": 600,
+      "endSec": 960,
+      "timestamp": "10:00",
+      "title": {
+        "en": "3. Direct Wholesale Sourcing Hubs (10:00 - 16:00)",
+        "ml": "3. സൂറത്ത്, തിരുപ്പൂർ, കോഴിക്കോട് മാർക്കറ്റുകൾ (10:00 - 16:00)",
+        "ar": "3. أسواق الجملة الكبرى: سورات وتيروبور ودبي (10:00 - 16:00)"
+      },
+      "text": {
+        "ml": "മൂന്നാമതായി തുണിത്തരങ്ങൾ ഏറ്റവും കുറഞ്ഞ വിലയ്ക്ക് എവിടെ കിട്ടും എന്ന് നോക്കാം. ഇന്ത്യയിലെ ഏറ്റവും വലിയ തുണി മാർക്കറ്റ് ഗുജറാത്തിലെ സൂറത്ത് റിംഗ് റോഡിലുള്ള മില്ലേനിയം മാർക്കറ്റും ജപ്പാൻ മാർക്കറ്റുമാണ്. ഇവിടെ ഒരു അബായ വെറും 350 മുതൽ 450 രൂപയ്ക്ക് ലഭിക്കും. കോട്ടൺ വസ്ത്രങ്ങൾക്ക് തമിഴ്നാട്ടിലെ തിരുപ്പൂർ ആണ് ഏറ്റവും മികച്ച കേന്ദ്രം. കേരളത്തിൽ നേരിട്ട് കണ്ട് വാങ്ങാൻ കോഴിക്കോട് മാവൂർ റോഡിലും കൊച്ചി ബ്രോഡ്‌വേയിലും ഉള്ള മൊത്തവിതരണക്കാരെ സമീപിക്കാം. ഗൾഫിലുള്ളവർക്ക് ദുബായ് ദേരയിലെ നായിഫ് അബായ സൂഖും അജ്മാനുമാണ് മികച്ച ഉറവിടങ്ങൾ.",
+        "en": "In Phase 3, we map verified wholesale hubs. Gujarat's Surat Ring Road—specifically Millennium Market and Japan Market—is India's capital for synthetic crepe and finished abayas, offering factory rates between ₹350 and ₹450 per piece. For premium knitwear and cotton loungewear, Tirupur in Tamil Nadu provides direct mill pricing. Within Kerala, Kozhikode Mavoor Road and Ernakulam Broadway host authorized master distributors. In the UAE, Dubai Deira Naif Abaya Souk provides direct container export pricing.",
+        "ar": "في هذه المرحلة نحدد مراكز الشراء بالجملة. يعتبر شارع الحزام بسورات في ولاية غوجارات، وتحديداً سوق ميلينيوم وسوق اليابان، عاصمة صناعة الأقمشة والعبايات الجاهزة بأسعار تبدأ من 350 إلى 450 روبية للقطعة. ولملابس القطن الصيفية، مدينة تيروبور هي المركز الأكبر. في كيرالا، يتوفر موزعو الجملة بشارع مافور بكاليكوت وبرودواي بكوتشي. وفي الإمارات، سوق نايف بديرة دبي هو الوجهة الأبرز."
+      }
+    },
+    {
+      "num": 4,
+      "startSec": 960,
+      "endSec": 1260,
+      "timestamp": "16:00",
+      "title": {
+        "en": "4. Wholesaler Negotiation & Quality Tests (16:00 - 21:00)",
+        "ml": "4. വ്യാപാരികളോട് സംസാരിക്കേണ്ട രീതിയും ക്വാളിറ്റി ടെസ്റ്റും (16:00 - 21:00)",
+        "ar": "4. أسرار التفاوض وفحص جودة الأقمشة والخياطة (16:00 - 21:00)"
+      },
+      "text": {
+        "ml": "നാലാമതായി തുണിയുടെ ഗുണനിലവാരം എങ്ങനെ പരിശോധിക്കണം എന്ന് മനസ്സിലാക്കാം. കടക്കാരോട് സാമ്പിൾ വാങ്ങുമ്പോൾ ഒരു തുണി കഷ്ണം എടുത്ത് കയ്യിലിട്ട് അമർത്തിപ്പിടിക്കുക. വിടുമ്പോൾ ചുളിവ് വീഴുന്നില്ലെങ്കിൽ അത് ഒറിജിനൽ നിദയോ സൂം ക്രീപ്പോ ആണ്. അല്പം വെള്ളം തളിച്ചു നോക്കുക; വെള്ളം തുണി പെട്ടെന്ന് വലിച്ചെടുത്ത് കറയാകുന്നുണ്ടോ എന്ന് നോക്കുക. വ്യാപാരിയോട് ചോദിക്കുക: 'ഞാൻ കേരളത്തിൽ ബോട്ടിക് നടത്തുകയാണ്, എനിക്ക് കളർ പോകാത്തതും ചുരുങ്ങാത്തതുമായ പ്രീമിയം തയ്യൽ ഫിനിഷിങ് ഉള്ള 30 പീസ് മിക്സഡ് സൈസുകൾ വേണം'. ഇരട്ട തയ്യൽ ഉള്ള പീസുകൾ മാത്രം തിരഞ്ഞെടുക്കുക.",
+        "en": "In Phase 4, we master quality testing and negotiation. When testing abaya fabrics, execute the crush test: squeeze a handful of fabric tightly for 5 seconds; if it releases without deep crease lines, it is authentic high-grade Nida or Zoom crepe. Perform a water-drop test to verify breathability. In your negotiation, state: 'We operate an online boutique in Kerala. We need an assorted 30-piece starter bundle across sizes 52 to 58 with reinforced double-stitch hems.' Inspect seam allowances to ensure no thread fraying.",
+        "ar": "في هذه المرحلة نتعلم أسرار الفحص والتفاوض. لاختبار جودة القماش، اضغط على طرف القماش بيدك بقوة لمدة 5 ثوانٍ؛ إذا عاد مستوياً دون تجاعيد فهو ندى أصلي. افحص الخياطة الداخلية وتأكد من وجود خياطة مزدوجة متينة تمنع التمزق. عند مخاطبة المورد قل له: 'لدينا متجر أزياء في كيرالا، نريد باقة مشكلة من 30 قطعة بمقاسات من 52 إلى 58 بسعر الجملة المخفض مع اشتراط جودة الخياطة'."
+      }
+    },
+    {
+      "num": 5,
+      "startSec": 1260,
+      "endSec": 1500,
+      "timestamp": "21:00",
+      "title": {
+        "en": "5. Finishing, Ironing & Luxury Unboxing SOP (21:00 - 25:00)",
+        "ml": "5. അയൺ ചെയ്യലും ബ്രാൻഡഡ് പാക്കിംഗും (21:00 - 25:00)",
+        "ar": "5. معايير الكي والتغليف الفاخر لفتح الصندوق (21:00 - 25:00)"
+      },
+      "text": {
+        "ml": "അഞ്ചാമതായി ഉൽപ്പന്നം കസ്റ്റമർക്ക് അയക്കാനുള്ള ഒരുക്കങ്ങൾ. ഹോൾസെയിൽ കടയിൽ നിന്ന് വാങ്ങിയ വസ്ത്രങ്ങൾ നേരിട്ട് കസ്റ്റമർക്ക് അയക്കരുത്. ആദ്യം കത്രിക ഉപയോഗിച്ച് അധികമുള്ള നൂലുകൾ വെട്ടിമാറ്റുക. ഹാൻഡ് സ്റ്റീം പ്രസ്സ് ഉപയോഗിച്ച് നല്ല രീതിയിൽ ചുളിവുകൾ മാറ്റി ഇസ്തിരിയിടുക. നിങ്ങളുടെ ബ്രാൻഡ് ലോഗോ ഉള്ള ടാഗ് കഴുത്തിൽ തുന്നിപ്പിടിപ്പിക്കുകയോ ടാഗ് ഗൺ ഉപയോഗിച്ച് ഘടിപ്പിക്കുകയോ ചെയ്യുക. തുടർന്ന് സുഗന്ധമുള്ള ഒരു തുള്ളി സ്പ്രേ ചെയ്ത ബട്ടർ പേപ്പറിൽ മടക്കിവെച്ച് നടുവിലായി ഒരു 'താങ്ക് യു കാർഡ്' വെക്കുക. ഇത് കാണുമ്പോൾ കസ്റ്റമർക്ക് ഇരട്ടി സന്തോഷം ഉണ്ടാകും.",
+        "en": "In Phase 5, we execute finishing and unboxing SOP. Never ship uninspected factory garments directly to retail customers. Trim all loose hanging threads with thread snips. Use a vertical handheld steam iron to smooth out every transit fold. Attach your custom branded neck label or hangtag using a fine-needle tagging gun. Lightly mist the tissue paper with a pleasant subtle scent, fold with sharp boutique lines, seal with a branded sticker, and insert an aesthetic handwritten thank-you card.",
+        "ar": "في هذه المرحلة نطبق معايير التجهيز النهائي. لا ترسل الملابس للمشتري مباشرة من كرتون الجملة. قم بقص كل الخيوط الزائدة بدقة، واستخدم المكواة البخارية العمودية لفرد القطعة تماماً. ثبت بطاقة علامتك التجارية الأنيقة، ثم اطوِ العباية بنعومة داخل ورق الزبدة المعطر بنفحة خفيفة، وضع بطاقة شكر شخصية أنيقة للمشتري. هذه اللمسة تزيد من ولاء الزبون وإعادة الشراء بنسبة 80%."
+      }
+    },
+    {
+      "num": 6,
+      "startSec": 1500,
+      "endSec": 1800,
+      "timestamp": "25:00",
+      "title": {
+        "en": "6. Profit Margins, Reels Video Draping & Safe Delivery (25:00 - 30:00)",
+        "ml": "6. ലാഭക്കണക്കുകളും ഇൻസ്റ്റാഗ്രാം റീൽസ് വിപണനവും (25:00 - 30:00)",
+        "ar": "6. هوامش الربح والتسويق عبر مقاطع الريلز والشحن الآمن (25:00 - 30:00)"
+      },
+      "text": {
+        "ml": "അവസാനമായി ലാഭവും വിപണന തന്ത്രങ്ങളും. സൂറത്തിൽ നിന്ന് 420 രൂപയ്ക്ക് വാങ്ങിയ ഒരു പ്രീമിയം അബായ, ബ്രാൻഡ് ചെയ്ത് ഇൻസ്റ്റാഗ്രാമിൽ വിൽക്കുന്നത് 1,199 മുതൽ 1,499 രൂപയ്ക്കാണ്! ഒരു വസ്ത്രത്തിൽ നിന്ന് മാത്രം 700 മുതൽ 900 രൂപ വരെ അറ്റാദായം ലഭിക്കും. മാസം വെറും 25 അബായകൾ വിറ്റാൽ 20,000 രൂപയ്ക്ക് മുകളിൽ ലാഭമുണ്ടാക്കാം. ഇതിനായി ഫോണിൽ നാച്ചുറൽ ലൈറ്റിൽ തുണിയുടെ ഒഴുക്ക് കാണിക്കുന്ന 10 സെക്കൻഡ് റീൽസ് വീഡിയോകൾ ചെയ്യുക. ക്യാഷ് ഓൺ ഡെലിവറിക്ക് 100 രൂപ അഡ്വാൻസ് ഗൂഗിൾ പേ വഴി വാങ്ങാൻ ഒരിക്കലും മറക്കരുത്. ഡി ടി ഡി സി അല്ലെങ്കിൽ സ്പീഡ് പോസ്റ്റ് വഴി 50 രൂപയ്ക്ക് അയക്കാം.",
+        "en": "In Phase 6, we master profit margins and video commerce. An abaya sourced at ₹420 wholesale easily commands ₹1,199 to ₹1,499 online with boutique branding, generating ₹700 to ₹900 pure profit per unit! Selling just 25 pieces a month produces over ₹20,000 net income. Capture 10-second Instagram Reels in natural daylight showing the fabric flowing and sleeve details. Crucial Rule: Always collect a ₹100 UPI advance token before dispatching COD parcels to guarantee pickup. Ship via DTDC or Speed Post for ₹50.",
+        "ar": "ختاماً، في المرحلة السادسة، نراجع حساب الأرباح واستراتيجية التسويق. العباية التي تشتريها بسعر 420 روبية تباع عبر متجرك بـ 1,199 إلى 1,499 روبية، بربح صافٍ يتراوح بين 700 إلى 900 روبية للقطعة الواحدة! بيع 25 قطعة فقط شهرياً يمنحك أكثر من 20,000 روبية ربحاً حقيقياً. صور مقاطع ريلز قصيرة في الإضاءة الطبيعية توضح انسيابية القماش وتفاصيل الأكمام. قاعدة هامة: اطلب عربون 100 روبية لأي طلب دفع عند الاستلام لتفادي المرتجعات."
+      }
+    }
+  ],
+  "watches": [
+    {
+      "num": 1,
+      "startSec": 0,
+      "endSec": 300,
+      "timestamp": "00:00",
+      "title": {
+        "en": "1. Watch Anatomy & High-Demand Styles (00:00 - 05:00)",
+        "ml": "1. വാച്ചുകളുടെ ശാസ്ത്രവും പ്രധാന മോഡലുകളും (00:00 - 05:00)",
+        "ar": "1. تشريح الساعات وحركاتها والموديلات الأكثر طلباً (00:00 - 05:00)"
+      },
+      "text": {
+        "ml": "നമസ്കാരം, പ്രീമിയം വാച്ച് ബിസിനസ്സ് മാസ്റ്റർക്ലാസിലേക്ക് സ്വാഗതം. പുരുഷന്മാരും സ്ത്രീകളും സമ്മാനങ്ങൾ നൽകാനും നിത്യവും ധരിക്കാനും ഏറ്റവും കൂടുതൽ വാങ്ങുന്ന ഒന്നാണ് വാച്ചുകൾ. ഒരു നല്ല വാച്ചിന്റെ ജീവൻ അതിന്റെ ഉള്ളിലെ മൂവ്‌മെന്റ് ആണ്. ജാപ്പനീസ് മിയോട്ട അല്ലെങ്കിൽ സെയ്‌ക്കോ മൂവ്‌മെന്റ് ഉള്ള ക്വാർട്സ് വാച്ചുകളാണ് കൃത്യതയും ദീർഘായുസ്സും നൽകുന്നത്. സ്ക്രാച്ച് വീഴാത്ത മിനറൽ ക്രിസ്റ്റൽ ഗ്ലാസ്സും 316L സ്റ്റെയിൻലെസ്സ് സ്റ്റീൽ ബോഡിയും നോക്കി വാങ്ങുക. ഏറ്റവും വേഗത്തിൽ വിറ്റുപോകുന്ന 4 മോഡലുകൾ: ഒന്ന് മിനിമലിസ്റ്റ് അൾട്രാ-തിൻ ലെതർ വാച്ച്, രണ്ട് സെറാമിക് ഡേറ്റ് വാച്ച്, മൂന്ന് മെറ്റൽ ക്രോണോഗ്രാഫ്, നാല് വിന്റേജ് സ്ക്വയർ ടാങ്ക് വാച്ച്.",
+        "en": "Welcome to the Premium Watch & Accessories Masterclass. Watches represent one of the highest perceived-value gifting and daily lifestyle segments. The core of a reliable watch is its internal movement: Japanese Miyota or Seiko Epson quartz calibers deliver pinpoint timekeeping and 2-3 years battery endurance. Look for scratch-resistant hardened mineral crystal and 316L solid stainless steel cases. The top 4 fast-moving designs are: Minimalist Ultra-Thin Leather, Ceramic Bezel Date Editions, Solid Steel Chronographs, and Vintage Square Tank models.",
+        "ar": "مرحباً بكم في ماستر كلاس تجارة الساعات الفاخرة. تعد الساعات من أكثر المنتجات طلباً للهدايا والاستخدام اليومي بقيمة ملموسة عالية. قلب الساعة هو محركها الداخلي؛ محركات الكوارتز اليابانية مثل مييوتا أو سيكو تضمن الدقة المتناهية وعمر بطارية يتجاوز سنتين. احرص على اختيار زجاج معدني مقاوم للخدش وهيكل من الستانلس ستيل 316L. أفضل 4 موديلات طلباً: الساعات النحيفة الجلدية الكلاسيكية، ساعات السيراميك، الكرونوغراف المعدني، والموديل المربع العتيق."
+      }
+    },
+    {
+      "num": 2,
+      "startSec": 300,
+      "endSec": 600,
+      "timestamp": "05:00",
+      "title": {
+        "en": "2. Exact Capital & Boxing Budget (05:00 - 10:00)",
+        "ml": "2. വാച്ച് ബിസിനസ്സ് ബഡ്ജറ്റും ബോക്സിംഗും (05:00 - 10:00)",
+        "ar": "2. ميزانية رأس المال وعلب الهدايا الفاخرة (05:00 - 10:00)"
+      },
+      "text": {
+        "ml": "രണ്ടാമതായി വാച്ച് ബിസിനസ്സ് തുടങ്ങാനുള്ള ബഡ്ജറ്റ് നോക്കാം. 8,500 രൂപ ഉണ്ടെങ്കിൽ 20 പ്രീമിയം വാച്ചുകൾ വാങ്ങി നിങ്ങൾക്ക് ഈ ബിസിനസ്സ് ആരംഭിക്കാം. 20 ക്വാർട്സ് വാച്ചുകൾക്ക് ശരാശരി 300 രൂപ നിരക്കിൽ 6,000 രൂപ. 20 ആഡംബര വെൽവെറ്റ് തലയണയുള്ള മാറ്റ്-ബ്ലാക്ക് ബോക്സുകൾക്ക് 800 രൂപ (ഒരു ബോക്സിന് 40 രൂപ). നിങ്ങളുടെ ബ്രാൻഡ് പേരുള്ള 50 വാറന്റി കാർഡുകൾക്ക് 200 രൂപ. ക്ലീനിങ് മൈക്രോഫൈബർ തുണിക്ക് 150 രൂപ. ബബിൾ റാപ്പും കൊറിയർ ബഫറും 1,350 രൂപ. ആകെ 8,500 രൂപ കൊണ്ട് ആദ്യത്തെ 20 പീസ് ബൊട്ടീക്ക് ബോക്സുകൾ വിപണിയിൽ ഇറക്കാം.",
+        "en": "In Phase 2, we allocate your startup capital. With ₹8,500, you can secure 20 high-grade watches with complete luxury presentation. 20 curated quartz watches at ₹300 wholesale cost requires ₹6,000. 20 matte-black luxury presentation boxes with velvet cushions cost ₹800 at ₹40 each. 50 custom branded 1-year movement warranty cards cost ₹200. Microfiber lens wiping cloths cost ₹150. Heavy protective bubble wraps and courier buffer require ₹1,350. Total capital is just ₹8,500.",
+        "ar": "في هذه المرحلة نستعرض ميزانية البداية لسوق الساعات. بمبلغ 8,500 روبية يمكنك شراء 20 ساعة فاخرة مع علب الهدايا الكاملة. 20 ساعة كوارتز ممتازة بمتوسط سعر جملة 300 روبية تكلف 6,000 روبية. 20 علبة هدايا سوداء فاخرة بوسادة مخملية بـ 800 روبية بمعدل 40 روبية للعلبة. 50 كرت ضمان للمحرك بشعارك بـ 200 روبية، وأقمشة تنظيف مايكروفايبر بـ 150 روبية، واحتياطي التغليف الآمن والشحن 1,350 روبية. الإجمالي 8,500 روبية فقط."
+      }
+    },
+    {
+      "num": 3,
+      "startSec": 600,
+      "endSec": 960,
+      "timestamp": "10:00",
+      "title": {
+        "en": "3. Mumbai Manish Market & Delhi Gaffar Hubs (10:00 - 16:00)",
+        "ml": "3. മനീഷ് മാർക്കറ്റും ഗഫാർ മാർക്കറ്റും (10:00 - 16:00)",
+        "ar": "3. أسواق الجملة الكبرى للساعات: مومباي ودلهي (10:00 - 16:00)"
+      },
+      "text": {
+        "ml": "മൂന്നാമതായി വാച്ചുകൾ മൊത്തമായി വാങ്ങാനുള്ള വിപണികൾ കണ്ടെത്താം. ഇന്ത്യയിൽ ഏറ്റവും കുറഞ്ഞ നിരക്കിൽ വാച്ചുകൾ ലഭിക്കുന്നത് മുംബൈയിലെ മനീഷ് മാർക്കറ്റിലും ഫോർട്ട് ക്ലോക്ക് ടവർ ഏരിയയിലുമാണ്. അതുപോലെ ഡൽഹി കരോൾ ബാഗിലെ ഗഫാർ മാർക്കറ്റിലും സദർ ബസാറിലും നേരിട്ട് ഇറക്കുമതി ചെയ്യുന്ന വൻകിട വ്യാപാരികളുണ്ട്. ഇവിടെ 250 മുതൽ 380 രൂപയ്ക്ക് ഉയർന്ന ക്വാളിറ്റിയുള്ള വാച്ചുകൾ ലഭിക്കും. കേരളത്തിൽ കോഴിക്കോട് പാളയം മാർക്കറ്റിലും എറണാകുളം പെന്റാ മേനകയിലും മൊത്ത വിതരണക്കാരുണ്ട്. വിദേശത്ത് നിന്ന് നേരിട്ട് ഹോങ്കോംഗ്, ഷെൻസെൻ എന്നിവിടങ്ങളിൽ നിന്നും കണ്ടെയ്നർ ലോട്ട് ഓർഡർ ചെയ്യാം.",
+        "en": "In Phase 3, we reveal verified watch wholesale hubs. In Mumbai, Manish Market near CST and the Fort Clock Tower wholesale street are India's premier hubs for imported timepieces, offering direct wholesale prices from ₹250 to ₹380 per unit. In Delhi, Gaffar Market in Karol Bagh and Sadar Bazaar house primary direct importers. In Kerala, Kozhikode Palayam and Kochi Penta Menaka host regional wholesale stockists. For large-scale scaling, direct air-courier lots originate from Hong Kong and Shenzhen horology districts.",
+        "ar": "في هذه المرحلة نكشف عن مراكز الجملة الكبرى للساعات. في مومباي، يعتبر سوق مانيش الشهير قرب محطة سي إس تي ومنطقة فورت المركز الأول في الهند لساعات اليد المستوردة بأسعار جملة تتراوح بين 250 إلى 380 روبية. وفي دلهي، سوق غفار في كارول باغ وسوق صدر هما الأكبر. وفي كيرالا تتوفر محلات جملة في بالايام بكاليكوت وبينتا ماناكا بإرناكولام، إضافة للاستيراد المباشر من هونغ كونغ وشينزن."
+      }
+    },
+    {
+      "num": 4,
+      "startSec": 960,
+      "endSec": 1260,
+      "timestamp": "16:00",
+      "title": {
+        "en": "4. Wholesaler Questions & Movement Warranty (16:00 - 21:00)",
+        "ml": "4. വാച്ചുകൾ വാങ്ങുമ്പോൾ ചോദിക്കേണ്ട കാര്യങ്ങൾ (16:00 - 21:00)",
+        "ar": "4. أسئلة فحص المورد وضمان المحرك والبطارية (16:00 - 21:00)"
+      },
+      "text": {
+        "ml": "നാലാമതായി വ്യാപാരികളോട് ചോദിക്കേണ്ട പ്രധാന ചോദ്യങ്ങൾ. 'ഇതിലെ ബാറ്ററി ഒറിജിനൽ സോണി അല്ലെങ്കിൽ മാക്സൽ സെൽ ആണോ? എത്ര വർഷം നിലനിൽക്കും?' എന്ന് ചോദിക്കുക. വാച്ചിന്റെ ക്രൗൺ അഥവാ സമയം തിരിക്കുന്ന കീ തിരിച്ച് തീയതിയും സൂചികളും സുഗമമായി നീങ്ങുന്നുണ്ടോ എന്ന് പരിശോധിക്കുക. 'എനിക്ക് 20 പീസ് മിക്സഡ് ബോക്സ് സ്ലാബ് റേറ്റിൽ നൽകുമോ, ഒപ്പം കേടുപാടുകൾ വന്നാൽ റീപ്ലേസ്മെന്റ് തരുമോ?' എന്ന് ഉറപ്പ് വരുത്തുക. വാട്ടർ റെസിസ്റ്റന്റ് ഗാസ്കറ്റ് ഉള്ള വാച്ചുകൾ മാത്രം തിരഞ്ഞെടുക്കുക.",
+        "en": "In Phase 4, we script your wholesaler inspection. Always ask: 'What internal movement cell is installed—is it an authentic Maxell or Sony battery with 2-year warranty?' Test the crown adjustment: ensure date switching clicks crisply at 12 o'clock and hands turn smoothly without slack. Inquire: 'Can you extend your 100-piece slab rate if I take a 20-piece mixed-box tester lot with guaranteed dead-on-arrival replacement?' Verify that the caseback features a genuine rubber O-ring seal for splash resistance.",
+        "ar": "في هذه المرحلة نتقن حوار فحص الساعات مع المورد. اسأل المورد دائماً: 'ما هو نوع البطارية المركبة، هل هي سوني أو ماكسيل الأصلية التي تدوم سنتين؟'. جرب لف تاج الساعة وتأكد من حركة العقارب بسلاسة وانتقال التاريخ بدقة. واطلب منه بوضوح: 'هل تمنحني سعر الجملة لباقة من 20 قطعة متنوعة مع استبدال أي قطعة تالفة؟'. وتأكد من وجود حلقة مطاطية عازلة تحت الغطاء الخلفي لمقاومة رذاذ الماء."
+      }
+    },
+    {
+      "num": 5,
+      "startSec": 1260,
+      "endSec": 1500,
+      "timestamp": "21:00",
+      "title": {
+        "en": "5. QC Inspection & Luxury Cushion Boxing SOP (21:00 - 25:00)",
+        "ml": "5. വാച്ച് പരിശോധനയും ലക്ഷ്വറി ബോക്സിംഗും (21:00 - 25:00)",
+        "ar": "5. خطوات الفحص والتلميع والتركيب على الوسادة الفاخرة (21:00 - 25:00)"
+      },
+      "text": {
+        "ml": "അഞ്ചാമതായി വാച്ച് ബോക്സിംഗും പാക്കിംഗും ചെയ്യുന്ന വിധം. ആദ്യം മൈക്രോഫൈബർ തുണി ഉപയോഗിച്ച് വാച്ചിലെ എല്ലാ വിരലടയാളങ്ങളും പൊടിയും തുടച്ചുമാറ്റുക. ക്രൗണിലെ പ്ലാസ്റ്റിക് ലോക്ക് മാറ്റി കൃത്യമായി സമയം ക്രമീകരിക്കുക. വാച്ച് സ്ട്രാപ്പിൽ നിങ്ങളുടെ ബ്രാൻഡ് ടാഗ് ഘടിപ്പിക്കുക. തുടർന്ന് കറുത്ത വെൽവെറ്റ് തലയണയിലേക്ക് വാച്ച് ഉറപ്പിച്ചു വെച്ച് ബോക്സിൽ വെയ്ക്കുക. ബോക്സിന്റെ അടിയിൽ 1 വർഷത്തെ വാറന്റി കാർഡും വെയ്ക്കുക. ഈ ലക്ഷ്വറി പാക്കിംഗ് കാണുമ്പോൾ 350 രൂപയുടെ വാച്ചിന് 1,500 രൂപയുടെ മൂല്യം തോന്നും!",
+        "en": "In Phase 5, we execute luxury boxing SOP. Wipe every millimeter of the mineral crystal and case with an antistatic microfiber cloth to remove manufacturing oils. Remove the plastic crown stopper clip, sync the exact time to the second, and press the crown in. Secure your custom branded foil tag around the strap buckle. Wrap the watch around the soft velvet cushion and seat it firmly inside the matte-black rigid gift box. Slip your branded 1-Year Movement Warranty Card beneath. Presentation transforms a ₹350 wholesale piece into a ₹1,500 luxury timepiece!",
+        "ar": "في هذه المرحلة نطبق معايير التغليف الفاخر. امسح الزجاج والإطار المعدني بقطعة مايكروفايبر ناعمة لإزالة أي شوائب أو بصمات. انزع قفل التاج البلاستيكي واضبط الوقت بدقة بالثانية واضغط التاج لتشغيل الحركة. ثبت بطاقة علامتك الفاخرة على إبزيم السير، ثم لف الساعة حول الوسادة المخملية وضعها داخل العلبة الأنيقة وضع كرت الضمان بالأسفل. هذا التغليف الراقي يحول ساعة كلفتك 350 روبية إلى تحفة تبدو بقيمة 1500 روبية!"
+      }
+    },
+    {
+      "num": 6,
+      "startSec": 1500,
+      "endSec": 1800,
+      "timestamp": "25:00",
+      "title": {
+        "en": "6. Profit Margins, Wrist Roll Reels & Safe Courier (25:00 - 30:00)",
+        "ml": "6. ലാഭവിഹിതവും മാക്രോ വീഡിയോ വിപണനവും (25:00 - 30:00)",
+        "ar": "6. حساب الأرباح وفيديوهات تصوير المعصم والشحن الآمن (25:00 - 30:00)"
+      },
+      "text": {
+        "ml": "അവസാനമായി ലാഭക്കണക്കുകളും സോഷ്യൽ മീഡിയ വിപണനവും. 320 രൂപയ്ക്ക് വാങ്ങിയ ഒരു വാച്ച്, പ്രീമിയം ബോക്സും വാറന്റിയും നൽകി ഇൻസ്റ്റാഗ്രാമിൽ 1,199 മുതൽ 1,499 രൂപയ്ക്കാണ് വിൽക്കുന്നത്. ഒരു വാച്ചിൽ നിന്നുള്ള അറ്റാദായം 750 രൂപയ്ക്ക് മുകളിലാണ്! മാസം 30 വാച്ചുകൾ വിറ്റാൽ 22,500 രൂപ ലാഭം നേടാം. വിൽപന കൂട്ടാൻ ഫോൺ ക്യാമറയിൽ വാച്ചിന്റെ ഡയൽ ക്ലോസ്-അപ്പായി കാണിച്ച് കൈയ്യിൽ ധരിച്ചുകൊണ്ടുള്ള 'റിസ്റ്റ് റോൾ' വീഡിയോകൾ റീൽസായി പോസ്റ്റ് ചെയ്യുക. ഗ്ലാസ്സ് വാച്ചുകൾ ആയതിനാൽ എയർ കുഷ്യൻ ബബിൾ റാപ്പ് ചുറ്റി ഇന്ത്യ പോസ്റ്റ് വഴി അയക്കുക.",
+        "en": "In Phase 6, we analyze profit realization and video marketing. Sourced at ₹320 with ₹40 luxury boxing, a watch commands ₹1,199 to ₹1,499 on Instagram, netting over ₹750 pure profit per piece! Selling just 30 watches a month yields over ₹22,500 net monthly income. Master the 'Wrist Roll Reel': shoot 4K macro video in automotive sunlight slowly rolling your wrist to highlight dial reflections and sweep second movement. Cushion the box with multi-layer bubble wrap for safe ₹45 pan-India courier dispatch.",
+        "ar": "ختاماً، في المرحلة السادسة، نحدد هوامش الأرباح واستراتيجية التسويق بالفيديو. الساعة التي تكلفك 320 روبية مع 40 روبية للعلبة تباع عبر الإنترنت بـ 1,199 إلى 1,499 روبية، بصافي ربح يفوق 750 روبية للقطعة! بيع 30 ساعة شهرياً يحقق لك أكثر من 22,500 روبية ربحاً حقيقياً. صور مقاطع ريلز قصيرة لحركة الساعة على المعصم في ضوء النهار لإبراز لمعان الزجاج وتفاصيل الميناء. غلف العلبة بطبقات فقاعية واقية لشحن آمن بـ 45 روبية."
+      }
+    }
+  ],
+  "bags": [
+    {
+      "num": 1,
+      "startSec": 0,
+      "endSec": 300,
+      "timestamp": "00:00",
+      "title": {
+        "en": "1. Canvas & Leather Science (00:00 - 05:00)",
+        "ml": "1. ക്യാൻവാസ് തുണികളും ടോട്ട് ബാഗ് ശാസ്ത്രവും (00:00 - 05:00)",
+        "ar": "1. علم أقمشة الكانفاس والجلود وحقائب التوت العصرية (00:00 - 05:00)"
+      },
+      "text": {
+        "ml": "നമസ്കാരം, ടോട്ട് ബാഗ് & ലെതർ ഗുഡ്സ് മാസ്റ്റർക്ലാസിലേക്ക് സ്വാഗതം. കോളേജ് വിദ്യാർത്ഥികളും ഓഫീസിൽ പോകുന്നവരും പരിസ്ഥിതി സൗഹൃദ ജീവിതശൈലി ഇഷ്ടപ്പെടുന്നവരും ഇന്ന് ഏറ്റവും കൂടുതൽ ഉപയോഗിക്കുന്ന ഒന്നാണ് കോട്ടൺ ടോട്ട് ബാഗുകൾ. കുറഞ്ഞത് 350 GSM ഉള്ള ഓർഗാനിക് ഡ്രിൽ കോട്ടൺ ക്യാൻവാസ് വേണം ബാഗുകൾക്കായി തിരഞ്ഞെടുക്കാൻ. ഇത് ഭാരം താങ്ങാനും ദീർഘകാലം നിലനിൽക്കാനും സഹായിക്കും. പ്രിയങ്കരമായ 4 ഇനങ്ങൾ: ഒന്ന് മലയാളം സാഹിത്യ ഉദ്ധരണികൾ പ്രിന്റ് ചെയ്ത കൾച്ചറൽ ടോട്ട് ബാഗുകൾ, രണ്ട് മിനിമലിസ്റ്റ് ആർട്ട് ടോട്ട് ബാഗുകൾ, മൂന്ന് സിപ്പറും ഉള്ളിൽ പോക്കറ്റുമുള്ള ഡെയ്‌ലി ഷോപ്പർ ബാഗുകൾ, നാല് വീഗൻ ലെതർ ലാപ്ടോപ്പ് ബാഗുകൾ.",
+        "en": "Welcome to the Aesthetic Tote Bags & Leather Goods Masterclass. Heavyweight cotton tote bags represent a booming lifestyle category driven by university students, creatives, and eco-conscious shoppers. Sourcing the right canvas is non-negotiable: insist on minimum 350 GSM organic heavy cotton drill canvas to prevent slouching and ensure heavy load bearing. The top 4 fast-moving designs are: Kerala Malayalam Typography Quotes Totes, Minimalist Botanical Line-Art Totes, Zippered Pocket Daily Shoppers, and Vegan Leather Structured Laptop Totes.",
+        "ar": "مرحباً بكم في ماستر كلاس حقائب القماش والكانفاس والجلود. تشهد حقائب التوت القطنية طلباً هائلاً بين طلاب الجامعات والموظفين ومحبي المنتجات الصديقة للبيئة. مواصفات القماش حاسمة؛ يجب ألا يقل وزن الكانفاس عن 350 غرام لضمان المتانة وتحمل الأوزان اليومية دون تمزق. أفضل 4 تصاميم مبيعاً: حقائب العبارات الثقافية والخط العربي، حقائب الرسومات النباتية البسيطة، حقائب التسوق اليومية بسحاب وجيب داخلي، وحقائب اللابتوب من الجلد النباتي الفاخر."
+      }
+    },
+    {
+      "num": 2,
+      "startSec": 300,
+      "endSec": 600,
+      "timestamp": "05:00",
+      "title": {
+        "en": "2. Exact Capital & Printing Budget (05:00 - 10:00)",
+        "ml": "2. പ്രാരംഭ ബഡ്ജറ്റും സ്ക്രീൻ പ്രിന്റിംഗും (05:00 - 10:00)",
+        "ar": "2. ميزانية رأس المال والطباعة الحريرية (05:00 - 10:00)"
+      },
+      "text": {
+        "ml": "രണ്ടാമതായി ടോട്ട് ബാഗ് ബിസിനസ്സ് തുടങ്ങാനുള്ള ബഡ്ജറ്റ് നോക്കാം. വെറും 5,500 രൂപ ഉണ്ടെങ്കിൽ 40 പ്രീമിയം പ്രിന്റഡ് ടോട്ട് ബാഗുകളുമായി നിങ്ങൾക്ക് തുടങ്ങാം. 40 അൺപ്രിന്റഡ് 350 GSM ക്യാൻവാസ് ബാഗുകൾക്ക് 60 രൂപ നിരക്കിൽ 2,400 രൂപ. 2 സ്ക്രീൻ പ്രിന്റിംഗ് ഫ്രെയിമുകൾക്കും ഇക്കോ-ഫ്രണ്ട്‌ലി മഷിക്കും 1,200 രൂപ (ഒരു ബാഗിന് 20 രൂപ പ്രിന്റിംഗ് ചെലവ്). 100 ക്രാഫ്റ്റ് പേപ്പർ ബ്രാൻഡ് റാപ്പർ സ്ലീവുകൾക്ക് 300 രൂപ. തുണിയിൽ തുന്നുന്ന ബ്രാൻഡ് ടാഗുകൾക്ക് 400 രൂപ. കൊറിയർ ബഫറിന് 1,200 രൂപ. ആകെ വെറും 5,500 രൂപ കൊണ്ട് ആദ്യ ബാച്ച് തയ്യാറാക്കാം.",
+        "en": "In Phase 2, we budget your initial tote production run. With just ₹5,500, you can produce 40 custom-printed premium totes. 40 unprinted 350 GSM heavy canvas totes at ₹60 mill rate costs ₹2,400. Silk-screen exposure frames and eco-pigment textile ink cost ₹1,200 (averaging ₹20 per print). 100 recycled kraft paper belly-band sleeves cost ₹300. Custom woven side-seam tags cost ₹400. ₹1,200 reserves cover your initial dispatches. Total startup capital is just ₹5,500 to bring your design collection to life.",
+        "ar": "في هذه المرحلة نحدد ميزانية إنتاج حقائب التوت. بمبلغ 5,500 روبية فقط يمكنك إنتاج 40 حقيبة قماشية مطبوعة بتصميمك الخاص. 40 حقيبة كانفاس خام بوزن 350 غرام بسعر 60 روبية تكلف 2,400 روبية. إطارات الطباعة الحريرية والأحبار الصديقة للبيئة تكلف 1,200 روبية بمعدل 20 روبية للطباعة بكل حبة. 100 غلاف كرتوني بشعارك بـ 300 روبية، ملصقات قماشية جانبية بـ 400 روبية، واحتياطي شحن 1,200 روبية. الإجمالي 5,500 روبية فقط."
+      }
+    },
+    {
+      "num": 3,
+      "startSec": 600,
+      "endSec": 960,
+      "timestamp": "10:00",
+      "title": {
+        "en": "3. Mumbai Dharavi & Surat Canvas Mills (10:00 - 16:00)",
+        "ml": "3. ധാരാവി ലെതർ മാർക്കറ്റും ഈറോഡ് കോട്ടൺ മില്ലുകളും (10:00 - 16:00)",
+        "ar": "3. أسواق الجملة ومصانع الأقمشة: دارافي وإيرود وسورات (10:00 - 16:00)"
+      },
+      "text": {
+        "ml": "മൂന്നാമതായി ബാഗുകളും മെറ്റീരിയലുകളും എവിടെ നിന്ന് നേരിട്ട് വാങ്ങാം എന്ന് നോക്കാം. ക്യാൻവാസ് തുണികൾക്ക് ഏറ്റവും മികച്ച സ്ഥലം തമിഴ്നാട്ടിലെ ഈറോഡ്, കോയമ്പത്തൂർ നെയ്ത്ത് ശാലകളും ഗുജറാത്തിലെ സൂറത്ത് മില്ലുകളുമാണ്. ഇവിടെ പ്ലെയിൻ ബാഗുകൾ 45 മുതൽ 60 രൂപയ്ക്ക് ലഭിക്കും. ലെതർ ഉൽപ്പന്നങ്ങൾക്കും ക്വാളിറ്റി തയ്യലിനും മുംബൈയിലെ ധാരാവി 90 ഫീറ്റ് റോഡും കൊൽക്കത്ത ബൗബസാറുമാണ് പ്രധാന കേന്ദ്രങ്ങൾ. ഇവിടെ മികച്ച ഫിനിഷിങ് ഉള്ള വീഗൻ ലെതർ ബാഗുകൾ 150 മുതൽ 250 രൂപയ്ക്ക് ലഭിക്കും. കേരളത്തിൽ കണ്ണൂരിലെ പരമ്പരാഗത കൈത്തറി സംഘങ്ങളിൽ നിന്നും ശുദ്ധമായ കോട്ടൺ ബാഗുകൾ ലഭ്യമാണ്.",
+        "en": "In Phase 3, we map verified canvas and leather sourcing hubs. For raw heavyweight canvas and pre-stitched blank totes, weaving clusters in Erode and Coimbatore in Tamil Nadu, alongside Surat canvas mills, provide direct blank totes at ₹45 to ₹60. For leather goods, laptop sleeves, and metal hardware, Mumbai's Dharavi 90-Feet Road and Kolkata's Bowbazar craft clusters offer artisan manufacturing where vegan leather totes cost between ₹150 and ₹250. In Kerala, Kannur handloom cooperative societies provide organic unbleached bags.",
+        "ar": "في هذه المرحلة نحدد مراكز توريد الكانفاس والجلود. لشراء أكياس الكانفاس الخام، تعتبر مصانع إيرود وكويمباتور في تاميل نادو ومطاحن سورات الأفضل لتوفير حقائب خام بسعر 45 إلى 60 روبية. ولمنتجات الجلود وحقائب اللابتوب، منطقة دارافي بشارع 90 في مومباي وحي بوبازار بكولكاتا هما الأبرز لتوفير حقائب جلدية فاخرة بأسعار بين 150 إلى 250 روبية. وفي كيرالا، توفر جمعيات كانور النسيجية خامات قطنية طبيعية."
+      }
+    },
+    {
+      "num": 4,
+      "startSec": 960,
+      "endSec": 1260,
+      "timestamp": "16:00",
+      "title": {
+        "en": "4. Manufacturer Dialogue & Box-X Strap Strength (16:00 - 21:00)",
+        "ml": "4. തയ്യൽക്കാരുമായി സംസാരിക്കേണ്ടതും സ്ട്രാപ്പ് ഉറപ്പും (16:00 - 21:00)",
+        "ar": "4. أسرار التفاوض مع ورش الخياطة واختبار متانة الأحزمة (16:00 - 21:00)"
+      },
+      "text": {
+        "ml": "നാലാമതായി ബാഗുകളുടെ ക്വാളിറ്റി ഉറപ്പാക്കാൻ തയ്യൽക്കാരോട് സംസാരിക്കേണ്ടത് എങ്ങനെ എന്ന് നോക്കാം. ബാഗിന്റെ പിടി അഥവാ ഹാൻഡിൽ ബാഗുമായി ചേരുന്നിടത്ത് 'ബോക്സ്-എക്സ്' (Box-X) ക്രോസ് തയ്യൽ ഉണ്ടെന്ന് ഉറപ്പാക്കണം. സാധാരണ സിംഗിൾ തയ്യൽ ആണെങ്കിൽ പുസ്തകങ്ങൾ ഇടുമ്പോൾ പിടി പൊട്ടിപ്പോകും. പ്രിന്റിംഗ് നടത്തുമ്പോൾ വാട്ടർ ബേസ്ഡ് ഇക്കോ-ഫ്രണ്ട്‌ലി മഷി ഉപയോഗിക്കാൻ പറയുക. വ്യാപാരിയോട് ചോദിക്കുക: 'എനിക്ക് 40 ബാഗുകളുടെ സാമ്പിൾ ബാച്ച് വേണം, ഉള്ളിൽ മൊബൈൽ ഫോൺ വെയ്ക്കാനുള്ള സിപ്പർ പോക്കറ്റ് കൂടി വെച്ചു തരുമോ?' ഗുണനിലവാരം ഉറപ്പാക്കിയ ശേഷം മാത്രം വലിയ ഓർഡറുകൾ നൽകുക.",
+        "en": "In Phase 4, we enforce manufacturing quality specifications. Never accept simple single-stitch strap attachments. Insist on the industrial 'Box-X cross-stitch' pattern where handles meet the bag body, guaranteeing support for 10kg laptops and books without tearing. Demand water-based phthalate-free textile inks that withstand machine washing. In your supplier script, specify: 'We require a 40-unit batch in natural unbleached canvas, reinforced Box-X handle stitching, and an internal 7x7 inch zippered smartphone pocket.'",
+        "ar": "في هذه المرحلة نضبط معايير الجودة مع ورش التصنيع. إياك وقبول خياطة بسيطة للأحزمة؛ اشترط دائماً خياطة 'Box-X' المتقاطعة عند موضع تثبيت الحزام لضمان تحمله لوزن 10 كغ من الكتب دون أي تمزق. واشترط استخدام أحبار مائية آمنة لا تتأثر بالغسيل. عند مخاطبة الورشة قل لهم: 'نحتاج دفعة أولى من 40 حقيبة من الكانفاس الطبيعي بخياطة معززة للأحزمة مع إضافة جيب داخلي بسحاب قياس 7×7 إنش للجوال'."
+      }
+    },
+    {
+      "num": 5,
+      "startSec": 1260,
+      "endSec": 1500,
+      "timestamp": "21:00",
+      "title": {
+        "en": "5. Heat Curing, Ironing & Kraft Paper Branding (21:00 - 25:00)",
+        "ml": "5. പ്രിന്റിംഗ് ഉറപ്പിക്കലും ക്രാഫ്റ്റ് പേപ്പർ പാക്കിംഗും (21:00 - 25:00)",
+        "ar": "5. تثبيت الطباعة بالحرارة وتغليف الورق البني الأنيق (21:00 - 25:00)"
+      },
+      "text": {
+        "ml": "അഞ്ചാമതായി പ്രിന്റ് ദീർഘകാലം നിൽക്കാനുള്ള വിദ്യയും പാക്കിംഗും. സ്ക്രീൻ പ്രിന്റ് ചെയ്ത ശേഷം ഹീറ്റ് പ്രസ്സ് മെഷീൻ ഉപയോഗിച്ച് 160 ഡിഗ്രി ചൂടിൽ 15 സെക്കൻഡ് അമർത്തുക (ക്യൂറിംഗ്). ഇത് മഷി തുണിയിലേക്ക് പൂർണ്ണമായി പിടിച്ചിരിക്കാൻ സഹായിക്കും, എത്ര തവണ കഴുകിയാലും കളർ പോകില്ല. തുടർന്ന് സ്റ്റീം അയൺ ചെയ്ത് ചുളിവുകൾ മാറ്റുക. ബാഗ് നീളത്തിൽ ഭംഗിയായി മടക്കി, നിങ്ങളുടെ ബ്രാൻഡ് പേരും സോഷ്യൽ മീഡിയ ലിങ്കുകളും ഉള്ള ഒരു ക്രാഫ്റ്റ് പേപ്പർ സ്ലീവ് കൊണ്ട് ചുറ്റുക. ഇത് കസ്റ്റമർക്ക് പ്രകൃതിദത്തവും പ്രീമിയവുമായ ഒരു അനുഭവം നൽകും.",
+        "en": "In Phase 5, we execute print heat-curing and packaging SOP. After screen-printing, heat-press the print at 160°C for 15 seconds to permanently polymerize the pigment into the cotton fibers, ensuring zero wash fading. Steam iron the canvas crisp. Fold the tote into a sleek vertical rectangle and wrap it with an earthy recycled kraft paper belly-band displaying your brand logo and social handles. This aesthetic minimal unboxing resonates profoundly with young lifestyle consumers.",
+        "ar": "في هذه المرحلة نطبق معايير تثبيت الطباعة والتغليف. بعد الطباعة، يجب تعريض القماش لمكبس حراري بدرجة 160 مئوية لمدة 15 ثانية لتثبيت اللون داخل ألياف القطن نهائياً بحيث لا يبهت مع الغسيل المتكرر. اكوَ الحقيبة بالبخار واطوها رأسياً بشكل مستطيل أنيق وضع حولها غلافاً من الورق البني المعاد تدويره يحمل شعارك وحسابك على إنستغرام. هذا التغليف الصديق للبيئة يعشقه جيل الشباب."
+      }
+    },
+    {
+      "num": 6,
+      "startSec": 1500,
+      "endSec": 1800,
+      "timestamp": "25:00",
+      "title": {
+        "en": "6. Profit Margins & Campus / Café Influencer Strategy (25:00 - 30:00)",
+        "ml": "6. ലാഭക്കണക്കുകളും കോളേജ്-കഫേ വിപണന തന്ത്രങ്ങളും (25:00 - 30:00)",
+        "ar": "6. حساب الأرباح وتسويق المقاهي والجامعات (25:00 - 30:00)"
+      },
+      "text": {
+        "ml": "അവസാനമായി ലാഭവും വിപണന തന്ത്രങ്ങളും. നിർമ്മാണത്തിന് 120 രൂപ ചിലവായ ഒരു പ്രീമിയം പ്രിന്റഡ് ടോട്ട് ബാഗ് ഇൻസ്റ്റാഗ്രാമിൽ വിൽക്കുന്നത് 399 മുതൽ 499 രൂപയ്ക്കാണ്! ഒരു ബാഗിൽ നിന്നുള്ള അറ്റാദായം 250 മുതൽ 320 രൂപ വരെയാണ്! മാസം 60 ബാഗുകൾ വിറ്റാൽ 16,000 രൂപ മുതൽ 19,000 രൂപ വരെ ലാഭമുണ്ടാക്കാം. കേരളത്തിലെ പ്രമുഖ കോളേജ് വിദ്യാർത്ഥികൾക്കും കഫേ വ്ലോഗർമാർക്കും സൗജന്യമായി ഓരോ ബാഗ് അയച്ചുകൊടുക്കുക. അവർ ബാഗ് ധരിച്ചുകൊണ്ട് ചിത്രങ്ങളും റീൽസും പോസ്റ്റ് ചെയ്യുമ്പോൾ നിങ്ങളുടെ പേജിലേക്ക് ധാരാളം ഓർഡറുകൾ വരും. സ്പീഡ് പോസ്റ്റ് വഴി 40 രൂപയ്ക്ക് സുരക്ഷിതമായി അയക്കാം.",
+        "en": "In Phase 6, we analyze profit scaling and organic influencer marketing. With total production cost at ₹120 (₹60 bag + ₹20 print + ₹15 tag/sleeve + ₹25 dispatch buffer), the bag retails at ₹399 to ₹499, netting ₹250 to ₹320 clear profit per tote! Selling just 60 totes a month yields ₹16,000 to ₹19,000 monthly profit. Seed free gift bags to creative college students, bookstagrammers, and café vloggers across Kerala; their organic lifestyle photos will ignite your direct-message orders.",
+        "ar": "ختاماً، في المرحلة السادسة، نراجع حساب الأرباح واستراتيجية التسويق. الحقيبة التي كلفتك 120 روبية إجمالاً تباع عبر الإنترنت بـ 399 إلى 499 روبية، بصافي ربح يتراوح بين 250 إلى 320 روبية بكل حبة! بيع 60 حقيبة شهرياً يحقق لك أرباحاً بين 16,000 إلى 19,000 روبية شهرياً. أرسل عينات مجانية لطلاب الجامعات المتميزين ومحبي القراءة وصناع محتوى المقاهي في كيرالا لنشر صورهم وهم يحملون الحقيبة، مما يولد مئات الطلبات المباشرة."
+      }
+    }
+  ],
+  "accessories": [
+    {
+      "num": 1,
+      "startSec": 0,
+      "endSec": 300,
+      "timestamp": "00:00",
+      "title": {
+        "en": "1. 316L Stainless Steel & 18K PVD Plating Science (00:00 - 05:00)",
+        "ml": "1. ആന്റി-ടാർണിഷ് ആഭരണ ശാസ്ത്രവും വിപണിയും (00:00 - 05:00)",
+        "ar": "1. علم طلاء الذهب الفاخر PVD والستانلس ستيل 316L المقاوم للصدأ (00:00 - 05:00)"
+      },
+      "text": {
+        "ml": "നമസ്കാരം, ആന്റി-ടാർണിഷ് വാട്ടർപ്രൂഫ് ജ്വല്ലറി മാസ്റ്റർക്ലാസിലേക്ക് സ്വാഗതം. സാധാരണ മുക്കുപണ്ടങ്ങൾ കുറച്ചു ദിവസം കഴിയുമ്പോൾ കറുത്തുപോവുകയും നിറം മങ്ങുകയും ചെയ്യും. എന്നാൽ ആന്റി-ടാർണിഷ് ജ്വല്ലറിയുടെ പ്രത്യേകത എന്തെന്നാൽ ഇത് 316L സർജിക്കൽ സ്റ്റെയിൻലെസ്സ് സ്റ്റീൽ കൊണ്ടാണ് നിർമ്മിക്കുന്നത്. ഇതിൽ 18 കാരറ്റ് റിയൽ ഗോൾഡ് പി.വി.ഡി (PVD Vacuum Plating) വഴി കോട്ടിംഗ് ചെയ്യുന്നു. അതിനാൽ വെള്ളമോ വിയർപ്പോ പെർഫ്യൂമോ തട്ടിയാലും ഇത് ഒരിക്കലും കറുത്തുപോകില്ല. ചർമ്മത്തിൽ അലർജി ഉണ്ടാക്കില്ല. ഏറ്റവും ഡിമാൻഡുള്ള 4 ഇനങ്ങൾ: ഹെറിങ്ബോൺ സ്നേക്ക് ചെയിൻ, റൊട്ടേറ്റിങ് റോമൻ ന്യൂമറൽ റിംഗ്സ്, കട്ടി കുറഞ്ഞ ഹഗ്ഗി ഹൂപ്പ്സ്, എവിൽ ഐ ലോക്കറ്റ് ചെയിനുകൾ.",
+        "en": "Welcome to the Anti-Tarnish Daily Wear Jewelry Masterclass. Traditional fashion jewelry tarnishes and discolors within weeks. Anti-tarnish jewelry revolutionizes this by using 316L surgical stainless steel fused with 18K real gold via PVD (Physical Vapor Deposition) vacuum plating. It is 100% waterproof, sweat-proof, perfume-resistant, and hypoallergenic. The top 4 fast-moving designs are: Flat Herringbone Snake Chains, Rotating Roman Numeral Bands, Chunky Huggie Hoops, and Mother-of-Pearl Evil Eye Pendants.",
+        "ar": "مرحباً بكم في ماستر كلاس المجوهرات اليومية المقاومة للصدأ وتغير اللون. المجوهرات التقليدية يتغير لونها بسرعة، بينما تتميز مجوهرات الآنتي-تارنيش بصناعتها من الستانلس ستيل الجراحي 316L المطلي بذهب حقيقي عيار 18 بتقنية الترسيب الفراغي PVD. مقاومة للماء والتعرق والعطور بنسبة 100% ولا تسبب أي حساسية للبشرة. أكثر 4 تصاميم طلباً: سلاسل جلد الحية المسطحة، خواتم الأرقام الرومانية، أقراط الهوقي العريضة، وسلاسل عين الحسد بصدف اللؤلؤ."
+      }
+    },
+    {
+      "num": 2,
+      "startSec": 300,
+      "endSec": 600,
+      "timestamp": "05:00",
+      "title": {
+        "en": "2. Exact Capital & Luxury Drawer Box Budget (05:00 - 10:00)",
+        "ml": "2. തുടക്ക ബഡ്ജറ്റും ഡ്രോയർ ബോക്സ് പാക്കിംഗും (05:00 - 10:00)",
+        "ar": "2. رأس مال البداية وعلب الهدايا ذات السحاب الحريري (05:00 - 10:00)"
+      },
+      "text": {
+        "ml": "രണ്ടാമതായി ഈ ബിസിനസ്സ് തുടങ്ങാനുള്ള ബഡ്ജറ്റ് നോക്കാം. വെറും 2,800 രൂപ ഉണ്ടെങ്കിൽ വീട്ടിലിരുന്ന് ആർക്കും ഈ ബിസിനസ്സ് തുടങ്ങാം. 40 പീസ് ട്രെൻഡിങ് ആഭരണങ്ങൾക്ക് ശരാശരി 45 രൂപ നിരക്കിൽ 1,800 രൂപ. റിബൺ വലിപ്പുള്ള 40 ലക്ഷ്വറി സ്ലൈഡ്-ഡ്രോയർ ബോക്സുകൾക്ക് 400 രൂപ (ഒരു ബോക്സിന് 10 രൂപ). 50 പോളിഷിംഗ് ക്ലോത്തുകൾക്ക് 150 രൂപ. എയർടൈറ്റ് സിപ്പ് ലോക്ക് കവറുകൾക്ക് 50 രൂപ. കൊറിയർ ബഫറിന് 400 രൂപ. ആകെ വെറും 2,800 രൂപ കൊണ്ട് നിങ്ങൾക്ക് ആദ്യത്തെ 40 ആഭരണങ്ങൾ ബ്രാൻഡ് ചെയ്ത് വിപണിയിൽ ഇറക്കാം.",
+        "en": "In Phase 2, we budget your initial jewelry inventory. With just ₹2,800, you can start from your home desk. 40 trending pieces at ₹45 wholesale cost requires ₹1,800. 40 luxury pull-ribbon slide drawer boxes cost ₹400 at ₹10 each. 50 micro-suede silver polishing cloths cost ₹150. Airtight mini anti-oxidation ziplocks cost ₹50. A ₹400 shipping reserve covers early orders. Total initial capital is just ₹2,800 to curate your first luxury jewelry drop.",
+        "ar": "في هذه المرحلة نستعرض ميزانية البداية. بمبلغ 2,800 روبية فقط يمكنك إطلاق مشروع مجوهرات فاخرة من منزلك. 40 قطعة مجوهرات عصرية بسعر جملة 45 روبية تكلف 1,800 روبية. 40 علبة هدايا فاخرة بسحاب شريطي حريري بـ 400 روبية بمعدل 10 روبيات للعلبة. 50 قطعة قماش تلميع بـ 150 روبية، أكياس محكمة مضادة للأكسدة بـ 50 روبية، واحتياطي شحن 400 روبية. الإجمالي 2,800 روبية فقط."
+      }
+    },
+    {
+      "num": 3,
+      "startSec": 600,
+      "endSec": 960,
+      "timestamp": "10:00",
+      "title": {
+        "en": "3. Mumbai Bhuleshwar & Jaipur Wholesale Hubs (10:00 - 16:00)",
+        "ml": "3. ഭുലേശ്വർ മാർക്കറ്റും ജയ്പൂർ ജൊഹാരി ബസാറും (10:00 - 16:00)",
+        "ar": "3. أسواق الجملة الكبرى: بهوليشوار بمومباي وجيبور وراجكوت (10:00 - 16:00)"
+      },
+      "text": {
+        "ml": "മൂന്നാമതായി ഈ ആഭരണങ്ങൾ ഏറ്റവും കുറഞ്ഞ നിരക്കിൽ എവിടെ നിന്ന് കിട്ടും എന്ന് നോക്കാം. ഇന്ത്യയിൽ ആന്റി-ടാർണിഷ് ജ്വല്ലറിയുടെ ഏറ്റവും വലിയ വിപണി മുംബൈയിലെ ഭുലേശ്വർ മാർക്കറ്റും സാവേരി ബസാറിലെ കൽബാദേവി റോഡുമാണ്. ഇവിടെ വെറും 35 മുതൽ 55 രൂപയ്ക്ക് സൂപ്പർ ക്വാളിറ്റി സ്റ്റീൽ ആഭരണങ്ങൾ ലഭിക്കും. രണ്ടാമത്തെ പ്രമുഖ കേന്ദ്രം രാജസ്ഥാനിലെ ജയ്പൂർ ജൊഹാരി ബസാറും ഗുജറാത്തിലെ രാജ്‌കോട്ടിലെ കാസ്റ്റിംഗ് ഫാക്ടറികളുമാണ്. കേരളത്തിൽ കോഴിക്കോട് വലിയങ്ങാടിയിലും കൊച്ചി ബ്രോഡ്‌വേയിലും ഉള്ള മൊത്തവിതരണക്കാരിൽ നിന്നും നേരിട്ട് വാങ്ങാം.",
+        "en": "In Phase 3, we reveal verified jewelry wholesale hubs. Mumbai's Bhuleshwar Market and Kalbadevi Road near Zaveri Bazaar represent India's epicentre for imported stainless steel jewelry, offering carded wholesale prices from ₹35 to ₹55 per piece. Jaipur's Johari Bazaar excels in semi-precious stone steel settings, while Rajkot in Gujarat hosts domestic precision steel casting mills. Within Kerala, Kozhikode Valiyangadi and Ernakulam Broadway host authorized importers.",
+        "ar": "في هذه المرحلة نحدد أسواق الجملة الحقيقية. يعتبر سوق بهوليشوار وشارع كالباديفي قرب سوق زافيري بمومباي المركز الأكبر في الهند للمجوهرات المستوردة بأسعار جملة تبدأ من 35 إلى 55 روبية للقطعة. كما يشتهر سوق جوهاري ببازار جيبور بالأحجار الكريمة، ومصانع راجكوت بسبائك الستانلس ستيل. وفي كيرالا تتوفر لدى كبار الموزعين في فاليانغادي بكاليكوت وبرودواي بكوتشي."
+      }
+    },
+    {
+      "num": 4,
+      "startSec": 960,
+      "endSec": 1260,
+      "timestamp": "16:00",
+      "title": {
+        "en": "4. Wholesaler Questions & 48-Hour Saltwater Test (16:00 - 21:00)",
+        "ml": "4. വ്യാപാരികളോട് ചോദിക്കേണ്ടതും ഉപ്പുവെള്ള പരീക്ഷണവും (16:00 - 21:00)",
+        "ar": "4. أسئلة فحص المورد واختبار الماء المالح لمدة 48 ساعة (16:00 - 21:00)"
+      },
+      "text": {
+        "ml": "നാലാമതായി ഇത് ഒറിജിനൽ ആന്റി-ടാർണിഷ് ആണെന്ന് എങ്ങനെ ഉറപ്പാക്കാം എന്ന് നോക്കാം. വ്യാപാരിയോട് ചോദിക്കുക: 'ഇത് 316L സ്റ്റെയിൻലെസ്സ് സ്റ്റീൽ ആണോ അതോ സാധാരണ സിങ്ക് അലോയ് ആണോ? PVD വാക്വം പ്ലേറ്റിംഗ് വാറന്റി ഉണ്ടോ?'. വാങ്ങിയ ശേഷം വീട്ടിൽ വെച്ച് ഒരു സാമ്പിൾ ഉപ്പുവെള്ളത്തിൽ 48 മണിക്കൂർ മുക്കിവെക്കുക. സാധാരണ മുക്കുപണ്ടം ആണെങ്കിൽ 12 മണിക്കൂറിനുള്ളിൽ പച്ചയോ കറുപ്പോ നിറമായി മാറും. ഒറിജിനൽ ആണെങ്കിൽ 48 മണിക്കൂർ കഴിഞ്ഞാലും സ്വർണ്ണം പോലെ തിളങ്ങി നിൽക്കും! ഇത് നിങ്ങളുടെ കസ്റ്റമർമാർക്ക് വീഡിയോ എടുത്ത് കാണിച്ചു കൊടുക്കാം.",
+        "en": "In Phase 4, we master purity testing and negotiation. Always ask: 'Is the core base solid 316L surgical steel, or cheap zinc alloy? Do you guarantee vacuum PVD plating?' Execute the 48-Hour Saltwater Test on every new sample: submerge the piece in concentrated saltwater for 48 hours. Cheap electroplated brass turns green and pits within 12 hours. Authentic PVD surgical steel emerges pristine, radiant, and identical to real gold—record this as powerful video proof for your buyers!",
+        "ar": "في هذه المرحلة نتقن اختبار الجودة والتفاوض. اسأل المورد بحزم: 'هل المعدن الأساسي ستانلس ستيل 316L نقي أم زنك رخيص، وهل الطلاء بطريقة PVD الفراغية؟'. قم بإجراء اختبار الماء المالح لمدة 48 ساعة: ضع عينة في ماء مالح مركز؛ المعادن الرديئة تسود ويخضر لونها خلال 12 ساعة، بينما الستيل المطلي بـ PVD يخرج لامعاً كالذهب الخالص تماماً. صور هذه التجربة لتكون برهاناً قاطعاً لزبائنك!"
+      }
+    },
+    {
+      "num": 5,
+      "startSec": 1260,
+      "endSec": 1500,
+      "timestamp": "21:00",
+      "title": {
+        "en": "5. Inspection, Anti-Oxidation Pouch & Luxury Box SOP (21:00 - 25:00)",
+        "ml": "5. ആഭരണ പരിശോധനയും ലക്ഷ്വറി ഡ്രോയർ ബോക്സിംഗും (21:00 - 25:00)",
+        "ar": "5. فحص المشابك وأكياس الحماية والعلب الفاخرة (21:00 - 25:00)"
+      },
+      "text": {
+        "ml": "അഞ്ചാമതായി ആഭരണങ്ങൾ പാക്ക് ചെയ്യുന്ന വിധം. ആദ്യം പ്ലയർ ഉപയോഗിച്ച് ചെയിനുകളുടെ ഹുക്കുകളും ലോക്കുകളും ഉറപ്പുള്ളതാണോ എന്ന് നോക്കുക. തുടർന്ന് ആഭരണം ചെറിയ എയർടൈറ്റ് സിപ്പ് കവറിൽ ഇടുക. ഇത് പോളിഷ് ചെയ്ത ലക്ഷ്വറി ഡ്രോയർ ബോക്സിൽ വെയ്ക്കുക. കൂടെ ഒരു പിങ്ക് പോളിഷിംഗ് ക്ലോത്തും നിങ്ങളുടെ നന്ദി അറിയിക്കുന്ന ഒരു കാർഡും വെയ്ക്കുക. മോതിരം ആണെങ്കിൽ അളവ് മനസ്സിലാക്കാനുള്ള ഒരു റിംഗ് സൈസ് ഗൈഡും കൂടെ വെക്കാം. ഈ ഭംഗിയുള്ള പാക്കിംഗ് കാണുമ്പോൾ 50 രൂപയുടെ മാലയ്ക്ക് കസ്റ്റമർ സന്തോഷത്തോടെ 350 രൂപ തരും!",
+        "en": "In Phase 5, we execute luxury unboxing SOP. Test every lobster clasp, jump ring, and earring post with jeweler's pliers to ensure zero transit snapping. Place the jewelry inside a miniature airtight anti-oxidation ziplock pouch to prevent dust friction. Seat it neatly inside the slide-drawer luxury box lined with velvet sponge. Include a branded pink microfiber polishing cloth and a warm thank-you note. Premium packaging transforms a ₹50 wholesale chain into a ₹350 treasured luxury piece!",
+        "ar": "في هذه المرحلة نطبق خطوات التجهيز والتغليف. افحص مشابك السلاسل وحلقات التثبيت للتأكد من قوتها. ضع القطعة في كيس صغير عازل للهواء لمنع الاحتكاك، ثم ثبتها داخل علبة السحاب الحريري المبطنة بالإسفنج المخملي. أضف قطعة قماش تلميع وردية مع كرت شكر أنيق. هذا التغليف الفاخر يجعل الزبون يدفع 350 روبية بكل سرور في قطعة كلفتك 50 روبية فقط!"
+      }
+    },
+    {
+      "num": 6,
+      "startSec": 1500,
+      "endSec": 1800,
+      "timestamp": "25:00",
+      "title": {
+        "en": "6. Profit Margins, 'Wear in Shower' Reels & Safe COD (25:00 - 30:00)",
+        "ml": "6. ലാഭക്കണക്കുകളും 'വാട്ടർപ്രൂഫ്' റീൽസ് വിപണനവും (25:00 - 30:00)",
+        "ar": "6. أرباح 300% وفيديوهات إثبات مقاومة الماء والشحن الآمن (25:00 - 30:00)"
+      },
+      "text": {
+        "ml": "അവസാനമായി ലാഭക്കണക്കുകളും ഇൻസ്റ്റാഗ്രാം വിപണനവും. 50 രൂപയ്ക്ക് വാങ്ങിയ ഒരു ചെയിൻ, മനോഹരമായ ബോക്സിൽ വെച്ച് ഇൻസ്റ്റാഗ്രാമിൽ വിൽക്കുന്നത് 299 മുതൽ 399 രൂപയ്ക്കാണ്! അതായത് 250 മുതൽ 300 രൂപ വരെ അറ്റാദായം (300% ലാഭം). മാസം 50 പീസുകൾ വിറ്റാൽ 15,000 രൂപയും, 100 പീസ് വിറ്റാൽ 30,000 രൂപയും ലാഭം ലഭിക്കും. വിൽപന കൂട്ടാൻ നിങ്ങൾ ചെയ്യേണ്ടത്: ഈ ആഭരണം ധരിച്ച് വെള്ളം ഒഴിക്കുന്നതും, സോപ്പ് പതപ്പിച്ച് കഴുകുന്നതുമായ 'ഷവർ-പ്രൂഫ്' റീൽസ് ചെയ്യുക. കൊറിയർ അയക്കുമ്പോൾ 50 രൂപ അഡ്വാൻസ് ടോക്കൺ വാങ്ങുക. ഇന്ത്യ പോസ്റ്റ് വഴി 35 രൂപയ്ക്ക് അയക്കാം.",
+        "en": "In Phase 6, we examine profit margins and viral video hooks. A chain sourced at ₹50 retails effortlessly for ₹299 to ₹399 with your branded box, delivering over ₹250 pure net profit—a 300% markup! Selling just 50 pieces monthly generates ₹15,000 profit; 100 pieces yields ₹30,000 net income. Create 'Wear In The Shower' Reels: show the jewelry under running faucet water and soap lather to prove zero tarnish. Collect a ₹50 UPI advance token on COD orders, and ship safely via Speed Post for ₹35.",
+        "ar": "ختاماً، في المرحلة السادسة، نحدد هوامش الأرباح واستراتيجية الفيديوهات الفيروسية. القطعة التي تشتريها بـ 50 روبية تباع بـ 299 إلى 399 روبية، بربح صافٍ يتجاوز 250 روبية للحبة (هامش ربح يفوق 300%)! بيع 50 قطعة شهرياً يمنحك 15,000 روبية، وبيع 100 قطعة يحقق 30,000 روبية أرباحاً صافية. انشر فيديوهات ريلز تحت الماء والصابون لإثبات مقاومة الصدأ عملياً. واطلب عربون 50 روبية للشحن البريدي بـ 35 روبية."
+      }
+    }
+  ],
+  "spices": [
+    {
+      "num": 1,
+      "startSec": 0,
+      "endSec": 300,
+      "timestamp": "00:00",
+      "title": {
+        "en": "1. Kerala Spice Agronomy & Export Grades (00:00 - 05:00)",
+        "ml": "1. കേരളത്തിലെ സുഗന്ധവ്യഞ്ജനങ്ങളും ഗ്രേഡുകളും (00:00 - 05:00)",
+        "ar": "1. درجات بهارات كيرالا التصديرية وشاي مونار الفاخر (00:00 - 05:00)"
+      },
+      "text": {
+        "ml": "നമസ്കാരം, കേരള സ്പൈസസ് & പ്രീമിയം ടീ മാസ്റ്റർക്ലാസിലേക്ക് സ്വാഗതം. ലോകത്തിൽ തന്നെ ഏറ്റവും മികച്ച സുഗന്ധവ്യഞ്ജനങ്ങൾ വിളയുന്ന നാടാണ് നമ്മുടെ കേരളം. പ്രത്യേകിച്ച് ഗൾഫ് മലയാളികൾക്കും ഉത്തരേന്ത്യക്കാർക്കും വിദേശികൾക്കും പ്രിയങ്കരമായ ഒന്നാണിത്. ഏറ്റവും ഉയർന്ന ലാഭം തരുന്ന ഇനങ്ങൾ: ഇടുക്കിയിലെ 8mm എക്സ്ട്രാ ബോൾഡ് പച്ച ഏലം, 5% കുർക്കുമിൻ അടങ്ങിയ ആലപ്പുഴ മഞ്ഞൾ, വയനാടൻ കറുത്ത കുരുമുളക്, മൂന്നാറിലെ ഓർത്തഡോക്സ് ചായപ്പൊടി. ഉയർന്ന ഗ്രേഡിലുള്ള സാധനങ്ങൾ മാത്രം തിരഞ്ഞെടുത്താൽ പ്രീമിയം നിരക്കിൽ വിൽക്കാം.",
+        "en": "Welcome to the Export Grade Kerala Spices & High-Altitude Tea Masterclass. Kerala produces the most aromatic and globally coveted spices on earth. Gulf NRIs, North Indian families, and gifting connoisseurs pay premium prices for authentic single-origin harvests. Focus on these 4 export-grade champions: 8mm Extra-Bold Green Cardamom from Idukki, Alleppey Finger Turmeric with over 5% natural curcumin, Wayanad Tellicherry Garbled Extra Bold Black Pepper, and Munnar High-Grown Orthodox BOPF Tea.",
+        "ar": "مرحباً بكم في ماستر كلاس بهارات كيرالا التصديرية وشاي المرتفعات الفاخر. تشتهر كيرالا بإنتاج أفضل التوابل العطرية في العالم، وتحظى بطلب هائل في دول الخليج وشمال الهند. ركز على 4 أصناف تصديرية كبرى: الهيل الأخضر الملكي حبة عريضة 8 ملم من إيدوكي، كركم أليبي الطبيعي المحتوي على 5% كوركومين، فلفل واياناد الأسود التصديري، وشاي مونار الأورثوذكسي الفاخر المقطوف من قمم الجبال."
+      }
+    },
+    {
+      "num": 2,
+      "startSec": 300,
+      "endSec": 600,
+      "timestamp": "05:00",
+      "title": {
+        "en": "2. Exact Capital & Gift Box Budget (05:00 - 10:00)",
+        "ml": "2. പ്രാരംഭ ബഡ്ജറ്റും ലക്ഷ്വറി ഗിഫ്റ്റ് പാക്കുകളും (05:00 - 10:00)",
+        "ar": "2. ميزانية رأس المال وصناديق الهدايا الفاخرة (05:00 - 10:00)"
+      },
+      "text": {
+        "ml": "രണ്ടാമതായി സുഗന്ധവ്യഞ്ജന ബിസിനസ്സ് തുടങ്ങാനുള്ള ബഡ്ജറ്റ് നോക്കാം. 7,000 രൂപ ഉണ്ടെങ്കിൽ ഉയർന്ന ഗുണനിലവാരമുള്ള സ്പൈസസ് ഗിഫ്റ്റ് ഹാംപറുകളുമായി നിങ്ങൾക്ക് തുടങ്ങാം. 2 കിലോഗ്രാം ഉയർന്ന ഗ്രേഡ് പച്ച ഏലത്തിനും കുരുമുളകിനും 4,200 രൂപ. 30 പ്രീമിയം ഗ്ലാസ്സ് ജാറുകൾക്കും അലുമിനിയം ഫോയിൽ സിപ്പർ പൗച്ചുകൾക്കും 1,000 രൂപ. FSSAI ബേസിക് രജിസ്ട്രേഷന് 100 രൂപ. 100 പ്രീമിയം വാട്ടർപ്രൂഫ് ലേബലുകൾക്ക് 300 രൂപ. കൊറിയർ ബഫറിന് 1,400 രൂപ. ആകെ 7,000 രൂപ കൊണ്ട് നിങ്ങൾക്ക് ആദ്യത്തെ 30 ലക്ഷ്വറി പാക്കറ്റുകൾ വിപണിയിൽ ഇറക്കാം.",
+        "en": "In Phase 2, we budget your artisanal spice launch. With ₹7,000, you can curate 30 luxury gift canisters and airtight reserve pouches. 2 kilograms of Grade-A export cardamom and black pepper requires ₹4,200. 30 hexagonal glass jars and multi-layer foil zipper pouches cost ₹1,000. Basic annual FSSAI registration costs ₹100. 100 moisture-proof metallic foil labels cost ₹300. A ₹1,400 dispatch buffer covers postal transit. Total initial capital is ₹7,000 to launch your origin-certified spice label.",
+        "ar": "في هذه المرحلة نحدد ميزانية إطلاق مشروع البهارات الفاخرة. بمبلغ 7,000 روبية يمكنك تجهيز 30 عبوة هدايا زجاجية فاخرة. 2 كيلو هيل أخضر تصديري وفلفل أسود فاخر تكلف 4,200 روبية. 30 برطماناً زجاجياً وأكياس ألومنيوم بسحاب تكلف 1,000 روبية. رسوم التسجيل الغذائي FSSAI بـ 100 روبية، 100 ملصق مقاوم للرطوبة بشعارك بـ 300 روبية، واحتياطي شحن 1,400 روبية. الإجمالي 7,000 روبية فقط."
+      }
+    },
+    {
+      "num": 3,
+      "startSec": 600,
+      "endSec": 960,
+      "timestamp": "10:00",
+      "title": {
+        "en": "3. Vandanmedu & Kozhikode Wholesale Mandis (10:00 - 16:00)",
+        "ml": "3. വണ്ടൻമേട് ഏലക്ക മണ്ടിയും വലിയങ്ങാടിയും (10:00 - 16:00)",
+        "ar": "3. أسواق الجملة الكبرى: مزادات فاندانميدو وسوق كاليكوت التاريخي (10:00 - 16:00)"
+      },
+      "text": {
+        "ml": "മൂന്നാമതായി സ്പൈസസ് എവിടെ നിന്ന് വാങ്ങണം എന്ന് നോക്കാം. ഏലക്ക ഏറ്റവും കുറഞ്ഞ വിലയ്ക്ക് വലിയ അളവിൽ കിട്ടുന്നത് ഇടുക്കിയിലെ വണ്ടൻമേട് സ്പൈസസ് പാർക്കിലും തമിഴ്നാട് അതിർത്തിയിലുള്ള ബോഡിനായ്ക്കന്നൂർ ഏലക്ക മാർക്കറ്റിലുമാണ്. ഇവിടെ കർഷകരുടെ നേരിട്ടുള്ള ലേലം നടക്കുന്നു. കുരുമുളകിനും മഞ്ഞളിനും കോഴിക്കോട് വലിയങ്ങാടിയും കൊച്ചി മട്ടാഞ്ചേരി ജൂ ടൗണുമാണ് നൂറ്റാണ്ടുകളായി പ്രശസ്തമായ വിപണികൾ. നല്ല ചായപ്പൊടിക്ക് മൂന്നാറിലെ കണ്ണൻ ദേവൻ ടീ ഫാക്ടറി ഔട്ട്‌ലെറ്റുകൾ സന്ദർശിക്കാം. ഇടനിലക്കാരില്ലാതെ വാങ്ങുമ്പോൾ ഏറ്റവും കുറഞ്ഞ നിരക്കിൽ ശുദ്ധമായ സാധനങ്ങൾ ലഭിക്കും.",
+        "en": "In Phase 3, we map authentic wholesale spice mandis. For green cardamom, the Vandanmedu Spices Park in Idukki and the Bodinayakanur Cardamom Auction Center represent the world's primary source, where farmers auction fresh batches daily. For Tellicherry black pepper and ginger, Kozhikode Valiyangadi Big Bazaar and Kochi Mattancherry Jew Town are the historic trading nerve centers. For pure orthodox whole-leaf tea, source directly through Munnar KDHP factory auctions.",
+        "ar": "في هذه المرحلة نكشف عن أسواق المزاد الكبرى للبهارات. للهيل الأخضر، يعد مجمع فاندانميدو بإيدوكي وسوق بوديناياكانور المركز العالمي الأكبر لمزادات المزارعين اليومية. وللفلفل الأسود والزنجبيل، يعتبر سوق فاليانغادي بكاليكوت وماتانتشيري بكوتشي أسواق التجارة التاريخية. ولأجود أنواع الشاي، توجه لمصانع ومزادات مونار الجبلية للحصول على أسعار المصدر مباشرة."
+      }
+    },
+    {
+      "num": 4,
+      "startSec": 960,
+      "endSec": 1260,
+      "timestamp": "16:00",
+      "title": {
+        "en": "4. Mandi Questions, Moisture Meter & Aroma Tests (16:00 - 21:00)",
+        "ml": "4. വ്യാപാരികളോട് ചോദിക്കേണ്ടതും ഈർപ്പ പരിശോധനയും (16:00 - 21:00)",
+        "ar": "4. فحص نسبة الرطوبة واختبار الزيوت العطرية النقية (16:00 - 21:00)"
+      },
+      "text": {
+        "ml": "നാലാമതായി സ്പൈസസ് വാങ്ങുമ്പോൾ ശ്രദ്ധിക്കേണ്ട ടെസ്റ്റുകൾ. ഏലക്ക വാങ്ങുമ്പോൾ കയ്യിലിട്ട് ഞെരിച്ചു നോക്കുക. നല്ല പച്ചനിറവും ഉള്ളിൽ കറുത്ത കട്ടിയുള്ള വിത്തുകളും വേണം. ഈർപ്പത്തിന്റെ അളവ് 10 ശതമാനത്തിൽ താഴെയാണെന്ന് മോയിസ്ചർ മീറ്റർ ഉപയോഗിച്ച് ഉറപ്പാക്കുക. ഈർപ്പം കൂടിയാൽ ദിവസങ്ങൾക്കുള്ളിൽ പൂപ്പൽ വരും. കുരുമുളക് വിരലുകൾക്കിടയിൽ അമർത്തുമ്പോൾ എണ്ണമയമുള്ള നല്ല രൂക്ഷമായ മണം വരണം. വ്യാപാരിയോട് ചോദിക്കുക: 'ഇത് ഈ സീസണിലെ ഫ്രഷ് കർഷക ലോട്ടാണോ, ആർട്ടിഫിഷ്യൽ കളർ ചേർക്കാത്ത പച്ച ഏലമാണോ?'. ഗുണനിലവാരം ഉറപ്പുവരുത്തി മാത്രം വാങ്ങുക.",
+        "en": "In Phase 4, we master quality testing in spice mandis. Squeeze a cardamom pod between your fingers: it must feel firm, crisp, and contain dark brown to black fragrant seeds. Insist on a moisture meter reading under 10% to prevent transit fungal growth. Crack open a peppercorn: it should release volatile essential oils without chalky powder. Ask the auctioneer: 'Is this current season single-estate crop, 100% natural without synthetic green food dyes?'",
+        "ar": "في هذه المرحلة نضبط معايير الجودة المخبرية. اضغط على حبة الهيل بأصابعك؛ يجب أن تكون متماسكة وتحتوي على بذور سوداء داكنة ذات رائحة قوية. تأكد من أن نسبة الرطوبة أقل من 10% لمنع تعفن البهارات أثناء التخزين. واكسر حبة فلفل أسود للتأكد من فوحان زيتها العطري. اسأل المورد: 'هل هذا محصول الموسم الحالي طبيعي 100% بدون أي ألوان صناعية مضافة؟'."
+      }
+    },
+    {
+      "num": 5,
+      "startSec": 1260,
+      "endSec": 1500,
+      "timestamp": "21:00",
+      "title": {
+        "en": "5. Weighing, Oxygen Absorber & Glass Jar Packaging (21:00 - 25:00)",
+        "ml": "5. അളന്നു തൂക്കലും എയർടൈറ്റ് ഗ്ലാസ്സ് ജാർ പാക്കിംഗും (21:00 - 25:00)",
+        "ar": "5. معايير الوزن الدقيق والتعبئة في البرطمانات الزجاجية المحكمة (21:00 - 25:00)"
+      },
+      "text": {
+        "ml": "അഞ്ചാമതായി സ്പൈസസ് പാക്ക് ചെയ്യുന്ന രീതി. ഡിജിറ്റൽ ഗ്രാം സ്കെയിൽ ഉപയോഗിച്ച് കൃത്യമായി 100 ഗ്രാം അളന്നെടുക്കുക. എയർടൈറ്റ് ഗ്ലാസ്സ് ജാറിലോ അല്ലെങ്കിൽ അലുമിനിയം ഫോയിൽ സിപ്പർ പൗച്ചിലോ ഇടുക. വായുസമ്പർക്കം മൂലം മണം നഷ്ടപ്പെടാതിരിക്കാൻ ഒരു ചെറിയ ഫുഡ്-ഗ്രേഡ് ഓക്സിജൻ അബ്സോർബർ സാച്ചെറ്റ് കൂടെ വെയ്ക്കുക. സീലിങ് മെഷീൻ ഉപയോഗിച്ച് പൗച്ചിന്റെ മുകൾഭാഗം ഹീറ്റ് സീൽ ചെയ്യുക. നിങ്ങളുടെ ബ്രാൻഡ് ലോഗോ, FSSAI നമ്പർ, പായ്ക്ക് ചെയ്ത തീയതി എന്നിവ രേഖപ്പെടുത്തിയ വാട്ടർപ്രൂഫ് ലേബൽ ഒട്ടിക്കുക. ഇത് 1 വർഷം വരെ അതേ മണത്തോടെ സുരക്ഷിതമായി ഇരിക്കും.",
+        "en": "In Phase 5, we execute precision food packaging SOP. Use a calibrated 0.1g digital scale to weigh exact 100g or 250g portions. Dispense into sterile hexagonal glass jars or multi-layer barrier foil pouches. Insert a miniature food-grade oxygen absorber sachet to arrest oil degradation. Heat-seal the tamper-evident pouch notch. Affix your luxury foil label containing origin coordinates, harvest month, and your FSSAI license number. Proper packaging preserves aroma for over 12 months.",
+        "ar": "في هذه المرحلة نطبق خطوات التعبئة الغذائية الدقيقة. استخدم ميزاناً رقمياً حساساً لوزن 100 غرام أو 250 غرام بدقة. عبئ البهارات داخل برطمانات زجاجية معقمة أو أكياس ألومنيوم حاجزة للرطوبة، وضع كيساً صغيراً لامتصاص الأكسجين لحفظ الزيوت العطرية لمدة سنة كاملة. اغلق الكيس بالحرارة والصق شعارك ورقم الترخيص الغذائي وتاريخ التعبئة."
+      }
+    },
+    {
+      "num": 6,
+      "startSec": 1500,
+      "endSec": 1800,
+      "timestamp": "25:00",
+      "title": {
+        "en": "6. Profit Margins, Gulf NRI Gifting & Speed Post (25:00 - 30:00)",
+        "ml": "6. ലാഭക്കണക്കുകളും ഗൾഫ് മലയാളി ഗിഫ്റ്റ് മാർക്കറ്റും (25:00 - 30:00)",
+        "ar": "6. أرباح مضاعفة وتسويق هدايا المغتربين والشحن السريع (25:00 - 30:00)"
+      },
+      "text": {
+        "ml": "അവസാനമായി ലാഭക്കണക്കുകളും വിപണനവും. മണ്ടിയിൽ നിന്ന് 1 കിലോ 8mm പച്ച ഏലക്ക 1,800 രൂപയ്ക്കാണ് ലഭിക്കുന്നത്. ഇത് 100 ഗ്രാമിന്റെ 10 ഗ്ലാസ്സ് ജാറുകളാക്കി മാറ്റുമ്പോൾ, ഒരു ജാറിന് 349 രൂപ നിരക്കിൽ ആകെ 3,490 രൂപ ലഭിക്കും! അതായത് 1 കിലോ ഏലക്കയിൽ നിന്ന് മാത്രം 1,500 രൂപ മുതൽ 1,700 രൂപ വരെ അറ്റാദായം! മാസം വെറും 15 കിലോ വിറ്റാൽ 25,000 രൂപയ്ക്ക് മുകളിൽ ലാഭമുണ്ടാക്കാം. നാട്ടിൽ വന്ന് ഗൾഫിലേക്ക് മടങ്ങുന്ന പ്രവാസികൾക്കും നോർത്ത് ഇന്ത്യൻ വിനോദസഞ്ചാരികൾക്കും ഗിഫ്റ്റ് പാക്കുകളായി വിൽക്കാം. ഇന്ത്യ പോസ്റ്റ് വഴി രാജ്യത്തെവിടെയും 45 രൂപയ്ക്ക് അയക്കാം.",
+        "en": "In Phase 6, we analyze profit scaling and gifting commerce. Sourcing 1 kilogram of 8mm green cardamom directly at ₹1,800 and packaging into ten 100g artisan glass jars retailing at ₹349 yields ₹3,490 gross revenue—over ₹1,500 to ₹1,700 pure profit per kilogram! Retailing just 15 kilograms monthly produces over ₹25,000 net income. Position your brand for Gulf NRI vacationers returning to the UAE, Saudi Arabia, and Qatar, as well as luxury corporate gifting. Ship pan-India safely via Speed Post for ₹45.",
+        "ar": "ختاماً، في المرحلة السادسة، نحسب الأرباح الهائلة لتجارة البهارات الفاخرة. كيلو الهيل التصديري من المزاد يكلف 1,800 روبية، وعند تعبئته في 10 برطمانات سعة 100 غرام وبيعه بـ 349 روبية للبرطمان، تحقق 3,490 روبية، أي بصافي ربح يفوق 1,600 روبية في الكيلو الواحد! بيع 15 كيلو فقط شهرياً يمنحك أكثر من 25,000 روبية ربحاً صافياً. استهدف المغتربين العائدين للخليج وسياح كيرالا بهدايا تذكارية فاخرة، واشحن لكافة أنحاء الهند بـ 45 روبية."
+      }
+    }
+  ]
+},
 
-  // Initialize and Render Audio Masterclass Widget
-  renderAudioMasterclass(nicheKey) {
-    const card = document.getElementById('audioMasterclassCard');
-    if (!card) return;
+  // Helper: Get audio episodes for specific category or fallback to attar
+  getAudioEpisodes(nicheKey) {
+    const key = nicheKey || this.audioMasterclassState.nicheKey || this.currentAcademy || 'attar';
+    return this.masterclassAudioLibrary[key] || this.masterclassAudioLibrary.attar;
+  },
 
-    const lang = this.audioMasterclassState.voiceLang || this.currentLang || 'ml';
-    const state = this.audioMasterclassState;
-    const currentEp = this.masterclassAudioEpisodes[state.currentEpisode - 1] || this.masterclassAudioEpisodes[0];
-
-    // Build episode quick jump chips
-    const episodeChipsHtml = this.masterclassAudioEpisodes.map(ep => {
-      const isActive = ep.num === state.currentEpisode;
-      return `
-        <button class="episode-chip ${isActive ? 'active' : ''}" onclick="app.playAudioEpisode(${ep.num})">
-          <i class="fa-solid ${isActive ? 'fa-volume-high text-white' : 'fa-play'}"></i>
-          <span>${ep.timestamp} - Ep ${ep.num}</span>
-        </button>
-      `;
-    }).join('');
-
-    // Build Transcript Paras
-    const transcriptHtml = this.masterclassAudioEpisodes.map(ep => {
-      const isActive = ep.num === state.currentEpisode;
-      return `
-        <div class="transcript-para ${isActive ? 'active' : ''}" id="transPara${ep.num}" onclick="app.playAudioEpisode(${ep.num})">
-          <span class="transcript-timestamp">[${ep.timestamp}]</span>
-          <strong>${ep.title[lang] || ep.title.en}:</strong>
-          <span> ${ep.text[lang] || ep.text.en}</span>
-        </div>
-      `;
-    }).join('');
-
-    const formattedCurrentTime = this.formatAudioTime(state.currentTimeSec);
-    const formattedTotalTime = this.formatAudioTime(state.totalDurationSec);
-    const pct = ((state.currentTimeSec / state.totalDurationSec) * 100).toFixed(1);
-
-    card.innerHTML = `
-      <div class="audio-card-header">
-        <div class="audio-title-group">
-          <div class="audio-badge-live">
-            <span class="live-pulse-dot"></span>
-            <span>30-Minute Audio Masterclass (കേട്ടു പഠിക്കാം)</span>
-          </div>
-          <h3 class="audio-title" id="audioCardHeading">
-            ${lang === 'ml' ? 'അത്തർ ബിസിനസ്സ്: 30 മിനിറ്റ് സമ്പൂർണ്ണ ഓഡിയോ ക്ലാസ്' : lang === 'ar' ? 'دورة العطور ودهن العود: ماستر كلاس صوتي شامل (30 دقيقة)' : 'Attar Business: 30-Minute Complete Audio Masterclass'}
-          </h3>
-          <p class="audio-subtitle">
-            ${lang === 'ml' ? 'തുടക്കം മുതൽ ആദ്യ വിൽപന വരെ. മധുരമുള്ള ശബ്ദത്തിൽ കേട്ടു പഠിക്കാനുള്ള സമഗ്ര വഴികാട്ടി.' : lang === 'ar' ? 'تعلم بالصوت: من الصفر وحتى أول عملية بيع بصوت احترافي وواضح.' : 'Listen and learn: from zero craft science to first sale with sweet and clear audio narration.'}
-          </p>
-        </div>
-
-        <div class="audio-lang-selector">
-          <span class="audio-lang-label">${lang === 'ml' ? 'ശബ്ദം തിരഞ്ഞെടുക്കൂ:' : lang === 'ar' ? 'اختر لغة الصوت:' : 'Select Voice Language:'}</span>
-          <div class="audio-lang-pills">
-            <button class="audio-voice-btn ${lang === 'ml' ? 'active' : ''}" onclick="app.setAudioVoice('ml')">
-              <i class="fa-solid fa-microphone"></i> മലയാളം
-            </button>
-            <button class="audio-voice-btn ${lang === 'en' ? 'active' : ''}" onclick="app.setAudioVoice('en')">
-              <i class="fa-solid fa-microphone"></i> English
-            </button>
-            <button class="audio-voice-btn ${lang === 'ar' ? 'active' : ''}" onclick="app.setAudioVoice('ar')">
-              <i class="fa-solid fa-microphone"></i> العربية
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <div class="audio-player-core">
-        <!-- Visual Soundwave Bars -->
-        <div class="audio-soundwave-wrap ${state.isPlaying ? 'playing' : ''}" id="audioSoundwave">
-          <div class="soundwave-bar"></div><div class="soundwave-bar"></div><div class="soundwave-bar"></div>
-          <div class="soundwave-bar"></div><div class="soundwave-bar"></div><div class="soundwave-bar"></div>
-          <div class="soundwave-bar"></div><div class="soundwave-bar"></div><div class="soundwave-bar"></div>
-          <div class="soundwave-bar"></div><div class="soundwave-bar"></div><div class="soundwave-bar"></div>
-          <div class="soundwave-bar"></div><div class="soundwave-bar"></div><div class="soundwave-bar"></div>
-          <div class="soundwave-bar"></div><div class="soundwave-bar"></div><div class="soundwave-bar"></div>
-          <div class="soundwave-bar"></div><div class="soundwave-bar"></div>
-        </div>
-
-        <!-- Timeline & Scrub Bar -->
-        <div class="audio-timeline-wrap">
-          <div class="audio-time-row">
-            <span class="time-current" id="audioTimeCurrent">${formattedCurrentTime}</span>
-            <span class="current-chapter-name" id="audioChapterName">${currentEp.title[lang] || currentEp.title.en}</span>
-            <span class="time-total" id="audioTimeTotal">${formattedTotalTime}</span>
-          </div>
-          <div class="audio-progress-track" id="audioProgressTrack" onclick="app.seekAudioTrack(event)">
-            <div class="audio-progress-bar" id="audioProgressBar" style="width: ${pct}%;"></div>
-          </div>
-        </div>
-
-        <!-- Controls Row -->
-        <div class="audio-controls-row">
-          <div class="audio-controls-left">
-            <button class="btn-audio-circle btn-skip" onclick="app.skipAudio(-15)" title="Rewind 15s">
-              <i class="fa-solid fa-rotate-left"></i> <span>-15s</span>
-            </button>
-            <button class="btn-audio-circle btn-play-main" id="btnAudioPlayMain" onclick="app.toggleAudioMasterclass()">
-              <i class="fa-solid ${state.isPlaying ? 'fa-pause' : 'fa-play'}" id="iconAudioPlay"></i>
-            </button>
-            <button class="btn-audio-circle btn-skip" onclick="app.skipAudio(15)" title="Forward 15s">
-              <i class="fa-solid fa-rotate-right"></i> <span>+15s</span>
-            </button>
-          </div>
-
-          <div class="audio-episodes-scroller">
-            ${episodeChipsHtml}
-          </div>
-
-          <div class="audio-controls-right">
-            <div class="audio-speed-pill-group">
-              <button class="speed-btn ${state.playbackRate === 1 ? 'active' : ''}" onclick="app.setAudioSpeed(1)">1x</button>
-              <button class="speed-btn ${state.playbackRate === 1.25 ? 'active' : ''}" onclick="app.setAudioSpeed(1.25)">1.25x</button>
-              <button class="speed-btn ${state.playbackRate === 1.5 ? 'active' : ''}" onclick="app.setAudioSpeed(1.5)">1.5x</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Real-Time Read-Along Live Transcript Box -->
-      <div class="audio-transcript-container">
-        <div class="transcript-header-flex">
-          <div class="transcript-title">
-            <i class="fa-solid fa-scroll text-primary"></i>
-            <span>${lang === 'ml' ? 'തത്സമയ വിവരണം (Live Read-Along Transcript)' : lang === 'ar' ? 'النص المقروء المتزامن مع الصوت' : 'Synchronized Read-Along Transcript'}</span>
-          </div>
-          <button class="btn-transcript-copy" onclick="app.copyOrDownloadTranscript()">
-            <i class="fa-solid fa-download"></i> <span>${lang === 'ml' ? 'സംഗ്രഹം സേവ് ചെയ്യുക' : lang === 'ar' ? 'حفظ النص' : 'Save Summary'}</span>
-          </button>
-        </div>
-        <div class="transcript-body" id="audioTranscriptBody">
-          ${transcriptHtml}
-        </div>
-      </div>
-    `;
+  getCurrentAudioEpisode() {
+    const episodes = this.getAudioEpisodes();
+    const epNum = this.audioMasterclassState.currentEpisode;
+    return episodes.find(e => e.num === epNum) || episodes[0];
   },
 
   formatAudioTime(sec) {
@@ -2247,32 +2619,70 @@ const app = {
     return `${mins < 10 ? '0' : ''}${mins}:${secs < 10 ? '0' : ''}${secs}`;
   },
 
-  // Focus and Scroll directly to Masterclass Audio Player
-  focusAudioMasterclass() {
-    const card = document.getElementById('audioMasterclassCard');
-    if (card) {
-      card.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      if (!this.audioMasterclassState.isPlaying) {
-        this.toggleAudioMasterclass();
-      }
+  // Explicit Power Switch (സ്വിച്ച് ബട്ടൺ)
+  toggleAudioPowerSwitch(forceState) {
+    const state = this.audioMasterclassState;
+    const shouldBeOn = typeof forceState === 'boolean' ? forceState : !state.isPoweredOn;
+
+    if (!shouldBeOn) {
+      this.turnAudioOff();
+    } else {
+      state.isPoweredOn = true;
+      this.playAudioMasterclass();
     }
   },
 
-  // Toggle Play / Pause
+  // Completely Turn Off Audio
+  turnAudioOff() {
+    const state = this.audioMasterclassState;
+    state.isPoweredOn = false;
+    state.isPlaying = false;
+    if (state.timerInterval) {
+      clearInterval(state.timerInterval);
+      state.timerInterval = null;
+    }
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.cancel();
+    }
+    this.updateAudioProgressUI();
+  },
+
+  // Play a specific chapter episode from the syllabus note card without hijacking the screen!
+  playChapterAudio(stepNum) {
+    const state = this.audioMasterclassState;
+    const episodes = this.getAudioEpisodes();
+    const epNum = Math.min(Math.max(1, stepNum), episodes.length);
+    const targetEp = episodes.find(e => e.num === epNum) || episodes[0];
+
+    state.currentEpisode = targetEp.num;
+    state.currentTimeSec = targetEp.startSec;
+    state.isPoweredOn = true;
+    state.isPlaying = true;
+
+    this.speakCurrentEpisode();
+    this.startAudioProgressTimer();
+    this.updateAudioProgressUI();
+
+    const dock = document.getElementById('floatingAudioDock');
+    if (dock) dock.classList.remove('dock-hidden');
+  },
+
+  // Toggle Play / Pause in background
   toggleAudioMasterclass() {
     const state = this.audioMasterclassState;
     if (state.isPlaying) {
       this.pauseAudioMasterclass();
     } else {
+      state.isPoweredOn = true;
       this.playAudioMasterclass();
     }
   },
 
   playAudioMasterclass() {
     const state = this.audioMasterclassState;
+    state.isPoweredOn = true;
     state.isPlaying = true;
 
-    // Start subtle ambient audio tone via Web Audio API so browser maintains audio session
     try {
       if (!state.audioCtx) {
         const AudioContext = window.AudioContext || window.webkitAudioContext;
@@ -2286,27 +2696,11 @@ const app = {
     }
 
     this.speakCurrentEpisode();
-
-    // Start 1-second progress timer
-    if (state.timerInterval) clearInterval(state.timerInterval);
-    state.timerInterval = setInterval(() => {
-      state.currentTimeSec += 1 * state.playbackRate;
-      if (state.currentTimeSec >= state.totalDurationSec) {
-        state.currentTimeSec = state.totalDurationSec;
-        this.pauseAudioMasterclass();
-      }
-
-      // Check if transitioned to next episode
-      const targetEp = this.masterclassAudioEpisodes.find(ep => state.currentTimeSec >= ep.startSec && state.currentTimeSec < ep.endSec);
-      if (targetEp && targetEp.num !== state.currentEpisode) {
-        state.currentEpisode = targetEp.num;
-        this.speakCurrentEpisode();
-      }
-
-      this.updateAudioProgressUI();
-    }, 1000);
-
+    this.startAudioProgressTimer();
     this.updateAudioProgressUI();
+
+    const dock = document.getElementById('floatingAudioDock');
+    if (dock) dock.classList.remove('dock-hidden');
   },
 
   pauseAudioMasterclass() {
@@ -2323,9 +2717,12 @@ const app = {
   },
 
   playAudioEpisode(epNum) {
-    const ep = this.masterclassAudioEpisodes.find(e => e.num === epNum) || this.masterclassAudioEpisodes[0];
+    const episodes = this.getAudioEpisodes();
+    const ep = episodes.find(e => e.num === epNum) || episodes[0];
     this.audioMasterclassState.currentEpisode = ep.num;
     this.audioMasterclassState.currentTimeSec = ep.startSec;
+    this.audioMasterclassState.isPoweredOn = true;
+
     if (!this.audioMasterclassState.isPlaying) {
       this.playAudioMasterclass();
     } else {
@@ -2334,12 +2731,35 @@ const app = {
     }
   },
 
+  startAudioProgressTimer() {
+    const state = this.audioMasterclassState;
+    if (state.timerInterval) clearInterval(state.timerInterval);
+    state.timerInterval = setInterval(() => {
+      if (!state.isPlaying) return;
+      state.currentTimeSec += 1 * state.playbackRate;
+      if (state.currentTimeSec >= state.totalDurationSec) {
+        state.currentTimeSec = state.totalDurationSec;
+        this.pauseAudioMasterclass();
+      }
+
+      const episodes = this.getAudioEpisodes();
+      const targetEp = episodes.find(ep => state.currentTimeSec >= ep.startSec && state.currentTimeSec < ep.endSec);
+      if (targetEp && targetEp.num !== state.currentEpisode) {
+        state.currentEpisode = targetEp.num;
+        this.speakCurrentEpisode();
+      }
+
+      this.updateAudioProgressUI();
+    }, 1000);
+  },
+
   setAudioVoice(lang) {
     this.audioMasterclassState.voiceLang = lang;
     if ('speechSynthesis' in window) {
       window.speechSynthesis.cancel();
     }
-    this.renderAudioMasterclass(this.currentAcademy);
+    this.renderFloatingAudioDock();
+    this.renderStudyStageHeaderBar(this.currentAcademy);
     if (this.audioMasterclassState.isPlaying) {
       this.speakCurrentEpisode();
     }
@@ -2350,13 +2770,14 @@ const app = {
     if (this.audioMasterclassState.isPlaying) {
       this.speakCurrentEpisode();
     }
-    this.renderAudioMasterclass(this.currentAcademy);
+    this.renderFloatingAudioDock();
   },
 
   skipAudio(seconds) {
     const state = this.audioMasterclassState;
     state.currentTimeSec = Math.max(0, Math.min(state.totalDurationSec, state.currentTimeSec + seconds));
-    const targetEp = this.masterclassAudioEpisodes.find(ep => state.currentTimeSec >= ep.startSec && state.currentTimeSec < ep.endSec);
+    const episodes = this.getAudioEpisodes();
+    const targetEp = episodes.find(ep => state.currentTimeSec >= ep.startSec && state.currentTimeSec < ep.endSec);
     if (targetEp && targetEp.num !== state.currentEpisode) {
       state.currentEpisode = targetEp.num;
     }
@@ -2367,7 +2788,7 @@ const app = {
   },
 
   seekAudioTrack(event) {
-    const track = document.getElementById('audioProgressTrack');
+    const track = document.getElementById('dockScrubTrack');
     if (!track) return;
     const rect = track.getBoundingClientRect();
     const clickX = event.clientX - rect.left;
@@ -2375,7 +2796,8 @@ const app = {
     const targetSec = Math.floor(pct * this.audioMasterclassState.totalDurationSec);
 
     this.audioMasterclassState.currentTimeSec = targetSec;
-    const targetEp = this.masterclassAudioEpisodes.find(ep => targetSec >= ep.startSec && targetSec < ep.endSec);
+    const episodes = this.getAudioEpisodes();
+    const targetEp = episodes.find(ep => targetSec >= ep.startSec && targetSec < ep.endSec);
     if (targetEp) {
       this.audioMasterclassState.currentEpisode = targetEp.num;
     }
@@ -2385,19 +2807,33 @@ const app = {
     this.updateAudioProgressUI();
   },
 
-  // Browser Speech Synthesis Speaking Logic with Pleasant Tone
+  toggleTranscriptDrawer(forceState) {
+    const state = this.audioMasterclassState;
+    state.isDrawerOpen = typeof forceState === 'boolean' ? forceState : !state.isDrawerOpen;
+    const drawer = document.getElementById('floatingTranscriptDrawer');
+    if (!drawer) return;
+
+    if (state.isDrawerOpen) {
+      drawer.style.display = 'flex';
+      this.renderTranscriptDrawerContent();
+    } else {
+      drawer.style.display = 'none';
+    }
+  },
+
   speakCurrentEpisode() {
     if (!('speechSynthesis' in window)) return;
     window.speechSynthesis.cancel();
 
     const state = this.audioMasterclassState;
-    const lang = state.voiceLang || 'ml';
-    const ep = this.masterclassAudioEpisodes[state.currentEpisode - 1] || this.masterclassAudioEpisodes[0];
+    const lang = state.voiceLang || this.currentLang || 'ml';
+    const episodes = this.getAudioEpisodes();
+    const ep = episodes[state.currentEpisode - 1] || episodes[0];
     const textToSpeak = ep.text[lang] || ep.text.en;
 
     const utterance = new SpeechSynthesisUtterance(textToSpeak);
-    utterance.rate = state.playbackRate * 0.95; // Natural pleasant rhythm
-    utterance.pitch = 1.05; // Friendly warm pitch
+    utterance.rate = state.playbackRate * 0.95;
+    utterance.pitch = 1.05;
 
     const langCodes = { ml: 'ml-IN', ar: 'ar-SA', en: 'en-US' };
     utterance.lang = langCodes[lang] || 'en-US';
@@ -2411,9 +2847,10 @@ const app = {
     }
 
     utterance.onend = () => {
-      if (state.isPlaying && state.currentEpisode < 6) {
+      const currentEpisodes = this.getAudioEpisodes();
+      if (state.isPlaying && state.currentEpisode < currentEpisodes.length) {
         state.currentEpisode += 1;
-        state.currentTimeSec = this.masterclassAudioEpisodes[state.currentEpisode - 1].startSec;
+        state.currentTimeSec = currentEpisodes[state.currentEpisode - 1].startSec;
         this.speakCurrentEpisode();
         this.updateAudioProgressUI();
       }
@@ -2422,51 +2859,271 @@ const app = {
     window.speechSynthesis.speak(utterance);
   },
 
-  // Update UI Elements During Playback
+  // Render Persistent Floating Bottom Audio Dock
+  renderFloatingAudioDock() {
+    const dock = document.getElementById('floatingAudioDock');
+    if (!dock) return;
+
+    const state = this.audioMasterclassState;
+    const lang = state.voiceLang || this.currentLang || 'ml';
+    const cat = this.categoriesData[state.nicheKey] || this.categoriesData.attar;
+    const episodes = this.getAudioEpisodes();
+    const currentEp = episodes[state.currentEpisode - 1] || episodes[0];
+
+    const formattedCurrentTime = this.formatAudioTime(state.currentTimeSec);
+    const formattedTotalTime = this.formatAudioTime(state.totalDurationSec);
+    const pct = ((state.currentTimeSec / state.totalDurationSec) * 100).toFixed(1);
+    const catTitle = cat.title[lang] || cat.title.en;
+
+    dock.innerHTML = `
+      <div class="dock-inner-container">
+        <!-- LEFT: Category Info & Mini Soundwave -->
+        <div class="dock-left-section">
+          <div class="dock-soundwave ${state.isPlaying ? 'is-playing' : ''}" id="dockSoundwave">
+            <span class="sw-bar"></span><span class="sw-bar"></span><span class="sw-bar"></span>
+            <span class="sw-bar"></span><span class="sw-bar"></span>
+          </div>
+          <div class="dock-track-info">
+            <div class="dock-category-pill" id="dockCategoryPill">
+              <i class="fa-solid fa-graduation-cap"></i> ${catTitle}
+            </div>
+            <div class="dock-episode-title" id="dockEpisodeTitle" title="${currentEp.title[lang] || currentEp.title.en}">
+              ${currentEp.title[lang] || currentEp.title.en}
+            </div>
+          </div>
+        </div>
+
+        <!-- CENTER: Playback Controls & Progress Bar -->
+        <div class="dock-center-section">
+          <div class="dock-controls-row">
+            <button class="dock-btn-circle dock-skip" onclick="app.skipAudio(-15)" title="Rewind 15s">
+              <i class="fa-solid fa-rotate-left"></i> <span>-15s</span>
+            </button>
+            <button class="dock-btn-circle dock-play-main" id="dockBtnPlay" onclick="app.toggleAudioMasterclass()" title="${state.isPlaying ? 'Pause' : 'Play'}">
+              <i class="fa-solid ${state.isPlaying ? 'fa-pause' : 'fa-play'}" id="dockPlayIcon"></i>
+            </button>
+            <button class="dock-btn-circle dock-skip" onclick="app.skipAudio(15)" title="Forward 15s">
+              <i class="fa-solid fa-rotate-right"></i> <span>+15s</span>
+            </button>
+            <div class="dock-time-display">
+              <span id="dockTimeCurrent">${formattedCurrentTime}</span>
+              <span class="dock-time-sep">/</span>
+              <span id="dockTimeTotal">${formattedTotalTime}</span>
+            </div>
+          </div>
+          <div class="dock-scrub-wrap" id="dockScrubTrack" onclick="app.seekAudioTrack(event)" title="Click to seek">
+            <div class="dock-scrub-progress" id="dockScrubBar" style="width: ${pct}%;"></div>
+          </div>
+        </div>
+
+        <!-- RIGHT: Power Switch, Voice Lang, Speed & Drawer Toggle -->
+        <div class="dock-right-section">
+          <!-- EXPLICIT POWER SWITCH (ഓൺ / ഓഫ് സ്വിച്ച്) -->
+          <div class="dock-power-switch-wrap">
+            <span class="power-switch-label">${lang === 'ml' ? 'ഓഡിയോ സ്വിച്ച്:' : lang === 'ar' ? 'مفتاح الصوت:' : 'AUDIO:'}</span>
+            <button class="audio-power-toggle-btn ${state.isPoweredOn && state.isPlaying ? 'state-on' : 'state-off'}" id="dockAudioPowerSwitch" onclick="app.toggleAudioPowerSwitch()" title="${state.isPoweredOn && state.isPlaying ? 'Click to Turn Audio OFF' : 'Click to Turn Audio ON'}">
+              <span class="power-toggle-knob"></span>
+              <span class="power-toggle-text">${state.isPoweredOn && state.isPlaying ? 'ON' : 'OFF'}</span>
+            </button>
+          </div>
+
+          <!-- Voice Language Selector -->
+          <div class="dock-lang-pills">
+            <button class="dock-lang-btn ${lang === 'ml' ? 'active' : ''}" onclick="app.setAudioVoice('ml')" title="Malayalam Voice">ML</button>
+            <button class="dock-lang-btn ${lang === 'en' ? 'active' : ''}" onclick="app.setAudioVoice('en')" title="English Voice">EN</button>
+            <button class="dock-lang-btn ${lang === 'ar' ? 'active' : ''}" onclick="app.setAudioVoice('ar')" title="Arabic Voice">AR</button>
+          </div>
+
+          <!-- Speed Controls -->
+          <div class="dock-speed-pills">
+            <button class="dock-speed-btn ${state.playbackRate === 1 ? 'active' : ''}" onclick="app.setAudioSpeed(1)">1x</button>
+            <button class="dock-speed-btn ${state.playbackRate === 1.25 ? 'active' : ''}" onclick="app.setAudioSpeed(1.25)">1.25x</button>
+            <button class="dock-speed-btn ${state.playbackRate === 1.5 ? 'active' : ''}" onclick="app.setAudioSpeed(1.5)">1.5x</button>
+          </div>
+
+          <!-- Transcript Drawer Toggle -->
+          <button class="dock-btn-icon" id="dockBtnTranscript" onclick="app.toggleTranscriptDrawer()" title="${lang === 'ml' ? 'തത്സമയ വിവരണം' : 'Live Transcript'}">
+            <i class="fa-solid fa-scroll"></i>
+          </button>
+
+          <!-- Quick Turn Off Button -->
+          <button class="dock-btn-icon dock-btn-stop" onclick="app.turnAudioOff()" title="${lang === 'ml' ? 'ഓഡിയോ ഓഫ് ചെയ്യുക' : 'Turn Off Audio'}">
+            <i class="fa-solid fa-power-off text-danger"></i>
+          </button>
+        </div>
+      </div>
+    `;
+  },
+
+  // Render Top Quick-Bar in Study Stage (Unobtrusive & Clean)
+  renderStudyStageHeaderBar(nicheKey) {
+    const bar = document.getElementById('studyStageHeaderBar');
+    if (!bar) return;
+
+    const state = this.audioMasterclassState;
+    const lang = state.voiceLang || this.currentLang || 'ml';
+    const cat = this.categoriesData[nicheKey] || this.categoriesData.attar;
+    const episodes = this.getAudioEpisodes(nicheKey);
+    const currentEp = episodes[state.currentEpisode - 1] || episodes[0];
+
+    bar.innerHTML = `
+      <div class="study-stage-header-bar-inner">
+        <div class="ssh-left">
+          <div class="ssh-badge">
+            <span class="live-pulse-dot ${state.isPlaying ? 'pulsing' : ''}"></span>
+            <span>${lang === 'ml' ? 'ബാക്ക്ഗ്രൗണ്ട് ഓഡിയോ ക്ലാസ്' : lang === 'ar' ? 'ماستر كلاس صوتي في الخلفية' : 'Background Audio Masterclass'}</span>
+          </div>
+          <div class="ssh-title-group">
+            <h3 class="ssh-title">${cat.title[lang] || cat.title.en}</h3>
+            <p class="ssh-sub">
+              <i class="fa-solid fa-headphones text-primary"></i> 
+              <span>${lang === 'ml' ? 'ഓഡിയോ ബാക്ക്ഗ്രൗണ്ടിൽ കേട്ടു പഠിക്കാം. നോട്ട്സുകളും സിലബസും താഴെ പൂർണ്ണമായി കാണാം.' : lang === 'ar' ? 'استمع للدورة في الخلفية وتابع المنهج والملاحظات أدناه بحرية.' : 'Listen in background while studying syllabus notes and practical checklists below.'}</span>
+            </p>
+          </div>
+        </div>
+
+        <div class="ssh-right">
+          <!-- Main Audio Power Switch (സ്വിച്ച് ബട്ടൺ) -->
+          <div class="ssh-power-wrap">
+            <span class="ssh-power-label">${lang === 'ml' ? 'ഓഡിയോ സ്വിച്ച്:' : lang === 'ar' ? 'مفتاح الصوت:' : 'AUDIO:'}</span>
+            <button class="audio-power-toggle-btn ${state.isPoweredOn && state.isPlaying ? 'state-on' : 'state-off'}" id="sshAudioPowerSwitch" onclick="app.toggleAudioPowerSwitch()" title="${state.isPoweredOn && state.isPlaying ? 'Turn audio OFF' : 'Turn audio ON'}">
+              <span class="power-toggle-knob"></span>
+              <span class="power-toggle-text">${state.isPoweredOn && state.isPlaying ? 'ON' : 'OFF'}</span>
+            </button>
+          </div>
+
+          <!-- Quick Play/Pause Button -->
+          <button class="btn-ssh-action" onclick="app.toggleAudioMasterclass()">
+            <i class="fa-solid ${state.isPlaying ? 'fa-pause' : 'fa-play'}"></i>
+            <span>${state.isPlaying ? (lang === 'ml' ? 'പോസ്' : 'Pause') : (lang === 'ml' ? 'കേട്ടു തുടങ്ങാം' : 'Play Audio')}</span>
+          </button>
+        </div>
+      </div>
+    `;
+  },
+
+  // Render Content inside Floating Transcript Drawer
+  renderTranscriptDrawerContent() {
+    const body = document.getElementById('floatingTranscriptDrawer');
+    if (!body) return;
+
+    const state = this.audioMasterclassState;
+    const lang = state.voiceLang || this.currentLang || 'ml';
+    const episodes = this.getAudioEpisodes();
+
+    const transcriptHtml = episodes.map(ep => {
+      const isActive = ep.num === state.currentEpisode;
+      return `
+        <div class="transcript-drawer-para ${isActive ? 'active' : ''}" onclick="app.playAudioEpisode(${ep.num})">
+          <div class="tdp-header">
+            <span class="tdp-time">[${ep.timestamp}]</span>
+            <strong>${ep.title[lang] || ep.title.en}</strong>
+          </div>
+          <p class="tdp-text">${ep.text[lang] || ep.text.en}</p>
+        </div>
+      `;
+    }).join('');
+
+    body.innerHTML = `
+      <div class="transcript-drawer-header">
+        <div class="td-title">
+          <i class="fa-solid fa-scroll text-primary"></i>
+          <span>${lang === 'ml' ? 'തത്സമയ വിവരണം (Live Transcript)' : lang === 'ar' ? 'النص المتزامن مع الصوت' : 'Synchronized Live Transcript'}</span>
+        </div>
+        <div class="td-actions">
+          <button class="btn-td-download" onclick="app.copyOrDownloadTranscript()" title="${lang === 'ml' ? 'സംഗ്രഹം ഡൗൺലോഡ് ചെയ്യുക' : 'Save Summary'}">
+            <i class="fa-solid fa-download"></i>
+          </button>
+          <button class="btn-td-close" onclick="app.toggleTranscriptDrawer(false)" title="Close">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+      </div>
+      <div class="transcript-drawer-body" id="transcriptDrawerBody">
+        ${transcriptHtml}
+      </div>
+    `;
+  },
+
+  // Focus Audio Masterclass (without hijacking viewport)
+  focusAudioMasterclass() {
+    const state = this.audioMasterclassState;
+    if (!state.isPoweredOn || !state.isPlaying) {
+      state.isPoweredOn = true;
+      this.playAudioMasterclass();
+    } else {
+      this.pauseAudioMasterclass();
+    }
+    const dock = document.getElementById('floatingAudioDock');
+    if (dock) dock.classList.remove('dock-hidden');
+  },
+
+  // Update Dynamic UI During Playback
   updateAudioProgressUI() {
     const state = this.audioMasterclassState;
-    const lang = state.voiceLang || 'ml';
-    const ep = this.masterclassAudioEpisodes[state.currentEpisode - 1] || this.masterclassAudioEpisodes[0];
+    const lang = state.voiceLang || this.currentLang || 'ml';
+    const episodes = this.getAudioEpisodes();
+    const currentEp = episodes[state.currentEpisode - 1] || episodes[0];
 
-    const timeCurrEl = document.getElementById('audioTimeCurrent');
-    const barEl = document.getElementById('audioProgressBar');
-    const chapterNameEl = document.getElementById('audioChapterName');
-    const iconPlay = document.getElementById('iconAudioPlay');
-    const soundwave = document.getElementById('audioSoundwave');
+    const timeCurrEl = document.getElementById('dockTimeCurrent');
+    const scrubBar = document.getElementById('dockScrubBar');
+    const epTitleEl = document.getElementById('dockEpisodeTitle');
+    const playIcon = document.getElementById('dockPlayIcon');
+    const soundwave = document.getElementById('dockSoundwave');
 
     if (timeCurrEl) timeCurrEl.textContent = this.formatAudioTime(state.currentTimeSec);
-    if (barEl) {
+    if (scrubBar) {
       const pct = ((state.currentTimeSec / state.totalDurationSec) * 100).toFixed(1);
-      barEl.style.width = `${pct}%`;
+      scrubBar.style.width = `${pct}%`;
     }
-    if (chapterNameEl) chapterNameEl.textContent = ep.title[lang] || ep.title.en;
+    if (epTitleEl) epTitleEl.textContent = currentEp.title[lang] || currentEp.title.en;
 
-    if (iconPlay) {
-      iconPlay.className = `fa-solid ${state.isPlaying ? 'fa-pause' : 'fa-play'}`;
+    if (playIcon) {
+      playIcon.className = `fa-solid ${state.isPlaying ? 'fa-pause' : 'fa-play'}`;
     }
     if (soundwave) {
-      soundwave.classList.toggle('playing', state.isPlaying);
+      soundwave.classList.toggle('is-playing', state.isPlaying);
     }
 
-    // Highlight active transcript paragraph and scroll into view
-    document.querySelectorAll('.transcript-para').forEach((p, idx) => {
+    // Update Power Switch buttons across UI
+    const isAudioActive = state.isPoweredOn && state.isPlaying;
+    ['dockAudioPowerSwitch', 'sshAudioPowerSwitch'].forEach(id => {
+      const btn = document.getElementById(id);
+      if (btn) {
+        btn.className = `audio-power-toggle-btn ${isAudioActive ? 'state-on' : 'state-off'}`;
+        const text = btn.querySelector('.power-toggle-text');
+        if (text) text.textContent = isAudioActive ? 'ON' : 'OFF';
+      }
+    });
+
+    // Update active paragraph in transcript drawer
+    document.querySelectorAll('.transcript-drawer-para').forEach((p, idx) => {
       const isActive = idx + 1 === state.currentEpisode;
       p.classList.toggle('active', isActive);
-      if (isActive) {
+      if (isActive && state.isDrawerOpen) {
         p.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       }
     });
 
-    // Update active episode chip
-    document.querySelectorAll('.episode-chip').forEach((chip, idx) => {
-      chip.classList.toggle('active', idx + 1 === state.currentEpisode);
+    // Update chapter play buttons inside course modules
+    document.querySelectorAll('.btn-chapter-audio-play').forEach(btn => {
+      const epNum = parseInt(btn.getAttribute('data-episode'), 10);
+      const isThisPlaying = state.isPlaying && epNum === state.currentEpisode;
+      btn.classList.toggle('is-playing', isThisPlaying);
+      const icon = btn.querySelector('i');
+      if (icon) {
+        icon.className = `fa-solid ${isThisPlaying ? 'fa-pause' : 'fa-headphones'}`;
+      }
     });
   },
 
   copyOrDownloadTranscript() {
-    const lang = this.audioMasterclassState.voiceLang || 'ml';
-    let fullText = "VYAPAR SHIKSHA — 30-MINUTE AUDIO MASTERCLASS SUMMARY\n\n";
-    this.masterclassAudioEpisodes.forEach(ep => {
+    const lang = this.audioMasterclassState.voiceLang || this.currentLang || 'ml';
+    const cat = this.categoriesData[this.audioMasterclassState.nicheKey] || this.categoriesData.attar;
+    const episodes = this.getAudioEpisodes();
+    let fullText = `VYAPAR SHIKSHA — ${cat.title.en.toUpperCase()} MASTERCLASS AUDIO SUMMARY\n\n`;
+
+    episodes.forEach(ep => {
       fullText += `[${ep.timestamp}] ${ep.title[lang] || ep.title.en}\n`;
       fullText += `${ep.text[lang] || ep.text.en}\n\n`;
     });
@@ -2475,7 +3132,7 @@ const app = {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `vyapar-shiksha-attar-audio-masterclass-${lang}.txt`;
+    a.download = `vyapar-shiksha-${this.audioMasterclassState.nicheKey}-masterclass-${lang}.txt`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -2509,9 +3166,11 @@ const app = {
     if (tagEl) tagEl.textContent = cat.tagline[lang] || cat.tagline.en;
     if (badgeEl) badgeEl.textContent = lang === 'ml' ? `പ്രത്യേക പഠന ശാഖ: ${cat.minBudget}` : lang === 'ar' ? `أكاديمية تخصصية • رأس مال: ${cat.minBudget}` : `Specialized Academy • Capital: ${cat.minBudget}`;
 
+    this.audioMasterclassState.nicheKey = nicheKey;
     this.renderCourseSidebar(nicheKey);
-    this.renderAudioMasterclass(nicheKey);
+    this.renderStudyStageHeaderBar(nicheKey);
     this.renderCourseModules(nicheKey);
+    this.renderFloatingAudioDock();
 
     if (updateHash) {
       window.history.replaceState(null, '', `#academy/${nicheKey}/${targetStep}`);
@@ -3080,6 +3739,20 @@ const app = {
             </div>
           </div>
           <div class="module-body">
+            <!-- Chapter Audio Action Bar: Listen in Background while studying notes -->
+            <div class="chapter-audio-action-bar">
+              <div class="caa-left">
+                <button class="btn-chapter-audio-play ${this.audioMasterclassState.isPlaying && this.audioMasterclassState.currentEpisode === activeStep ? 'is-playing' : ''}" data-episode="${activeStep}" onclick="app.playChapterAudio(${activeStep})" title="Play Chapter ${activeStep} in background">
+                  <i class="fa-solid ${this.audioMasterclassState.isPlaying && this.audioMasterclassState.currentEpisode === activeStep ? 'fa-pause' : 'fa-headphones'}"></i>
+                  <span>${lang === 'ml' ? 'ഈ പാഠം ബാക്ക്ഗ്രൗണ്ടിൽ കേട്ടു പഠിക്കാം' : lang === 'ar' ? 'استمع لشرح هذا الدرس في الخلفية' : 'Listen to this Lesson in Background'} (${lang === 'ml' ? 'ഭാഗം' : 'Ep'} ${Math.min(activeStep, 6)})</span>
+                </button>
+                <span class="caa-time"><i class="fa-regular fa-clock"></i> 5 Mins</span>
+              </div>
+              <div class="caa-right">
+                <span class="caa-badge"><i class="fa-solid fa-book-open"></i> ${lang === 'ml' ? 'സിലബസും പഠന കുറിപ്പുകളും' : lang === 'ar' ? 'المنهج والملاحظات الدراسية' : 'Study Notes & Syllabus'}</span>
+              </div>
+            </div>
+
             ${stepData.renderContent()}
 
             <div class="stepper-nav-footer">
@@ -3102,6 +3775,19 @@ const app = {
             </div>
           </div>
           <div class="module-body">
+            <div class="chapter-audio-action-bar">
+              <div class="caa-left">
+                <button class="btn-chapter-audio-play ${this.audioMasterclassState.isPlaying && this.audioMasterclassState.currentEpisode === (idx + 1) ? 'is-playing' : ''}" data-episode="${idx + 1}" onclick="app.playChapterAudio(${idx + 1})" title="Play Chapter ${idx + 1} in background">
+                  <i class="fa-solid ${this.audioMasterclassState.isPlaying && this.audioMasterclassState.currentEpisode === (idx + 1) ? 'fa-pause' : 'fa-headphones'}"></i>
+                  <span>${lang === 'ml' ? 'ഈ പാഠം ബാക്ക്ഗ്രൗണ്ടിൽ കേട്ടു പഠിക്കാം' : lang === 'ar' ? 'استمع لشرح هذا الدرس في الخلفية' : 'Listen to this Lesson in Background'} (${lang === 'ml' ? 'ഭാഗം' : 'Ep'} ${Math.min(idx + 1, 6)})</span>
+                </button>
+                <span class="caa-time"><i class="fa-regular fa-clock"></i> 5 Mins</span>
+              </div>
+              <div class="caa-right">
+                <span class="caa-badge"><i class="fa-solid fa-book-open"></i> ${lang === 'ml' ? 'സിലബസും പഠന കുറിപ്പുകളും' : lang === 'ar' ? 'المنهج والملاحظات الدراسية' : 'Study Notes & Syllabus'}</span>
+              </div>
+            </div>
+
             ${s.renderContent()}
           </div>
         </article>
@@ -3257,342 +3943,6 @@ const app = {
     });
 
     grid.innerHTML = html;
-  },
-
-  // Render Modules in Academy (Guided Stepper Mode vs Full Masterclass Mode)
-  renderCourseModules(nicheKey) {
-    const container = document.getElementById('courseModulesBody');
-    if (!container) return;
-
-    this.updateStepperUI();
-
-    const cat = this.categoriesData[nicheKey] || this.categoriesData.attar;
-    const lang = this.currentLang;
-    const t = this.i18n[lang] || this.i18n.en;
-    const activeStep = this.currentCourseStep;
-    const isStepper = this.courseViewMode === 'stepper';
-
-    // Build the 7 Step HTML definitions
-    const stepModules = [
-      // STEP 1: Product Science & Blueprint
-      {
-        id: "mod-blueprint",
-        stepNum: 1,
-        title: t.mod1Title || '1. Blueprint & Product Science',
-        heroImg: cat.images.product,
-        heroTitle: lang === 'ml' ? 'ഉൽപ്പന്ന വിവരങ്ങളും വിപണിയും' : lang === 'ar' ? 'علم الصنعة والمنتج' : 'Product Science & Fast Sellers',
-        heroSub: lang === 'ml' ? 'ആദ്യമായി എന്ത് ചെയ്യണം? ഉൽപ്പന്നം എന്താണെന്ന് മനസ്സിലാക്കുക, ഏറ്റവും കൂടുതൽ വിറ്റുപോകുന്ന ഇനങ്ങൾ തിരഞ്ഞെടുക്കുക.' : lang === 'ar' ? 'ماذا تفعل أولاً؟ افهم طبيعة المنتج واختر أكثر 4 أصناف طلباً في السوق.' : 'Phase 1: Zero-knowledge craft science and top 4 fastest-moving varieties.',
-        renderContent: () => `
-          <div class="blueprint-intro-box" style="background: #f8fafc; border-left: 4px solid var(--primary); padding: 18px 22px; border-radius: var(--radius-sm); margin-bottom: 24px; line-height: 1.6;">
-            <p style="font-size: 0.96rem; color: var(--secondary-dark);">${cat.blueprint.intro[lang] || cat.blueprint.intro.en}</p>
-          </div>
-
-          <h4 style="font-size: 1.15rem; font-weight: 800; color: var(--secondary-dark); margin-bottom: 14px;">
-            <i class="fa-solid fa-fire text-danger"></i> ${lang === 'ml' ? 'തുടക്കക്കാർ തിരഞ്ഞെടുക്കേണ്ട 4 ടോപ്പ് ഐറ്റങ്ങൾ' : lang === 'ar' ? 'أفضل 4 منتجات للمبتدئين' : 'Top Fast-Moving Best-Seller Products'}
-          </h4>
-          <div class="table-responsive">
-            <table class="cost-ledger-table">
-              <thead>
-                <tr>
-                  <th>${lang === 'ml' ? 'ഉൽപ്പന്നം' : lang === 'ar' ? 'المنتج' : 'Product Variety'}</th>
-                  <th>${lang === 'ml' ? 'ഹോൾസെയിൽ വില' : lang === 'ar' ? 'سعر الجملة' : 'Wholesale Cost'}</th>
-                  <th>${lang === 'ml' ? 'വിൽപന വില' : lang === 'ar' ? 'سعر البيع المقترح' : 'Selling Price'}</th>
-                  <th>${lang === 'ml' ? 'ഒരു യൂണിറ്റിൽ നിന്നുള്ള ലാഭം' : lang === 'ar' ? 'صافي الربح بكل حبة' : 'Net Unit Profit'}</th>
-                </tr>
-              </thead>
-              <tbody>
-                ${cat.blueprint.fastMovingList.map(item => `
-                  <tr>
-                    <td><strong>${item.name[lang] || item.name.en}</strong></td>
-                    <td><span class="text-danger" style="font-weight: 700;">${item.wholesale}</span></td>
-                    <td><span class="text-primary" style="font-weight: 700;">${item.retail}</span></td>
-                    <td><span class="text-success" style="font-weight: 800;">${item.profit}</span></td>
-                  </tr>
-                `).join('')}
-              </tbody>
-            </table>
-          </div>
-        `
-      },
-
-      // STEP 2: Exact Capital & Budget Breakdown Table
-      {
-        id: "mod-capital",
-        stepNum: 2,
-        title: t.mod2Title || '2. Exact Capital & Budget Breakdown',
-        heroImg: cat.images.cover,
-        heroTitle: lang === 'ml' ? 'എന്തിനൊക്കെ എത്ര രൂപ? (വിശദമായ ബഡ്ജറ്റ് പട്ടിക)' : lang === 'ar' ? 'تفاصيل الميزانية ورأس المال الدقيق' : 'Itemized Capital & Budget Ledger',
-        heroSub: lang === 'ml' ? 'രണ്ടാമതായി എന്ത് ചെയ്യണം? കയ്യിൽ എത്ര രൂപ വേണം, എന്തിനൊക്കെ എത്ര രൂപ ചെലവാകും എന്ന് കൃത്യമായി പ്ലാൻ ചെയ്യുക.' : lang === 'ar' ? 'ماذا تفعل ثانياً؟ حدد ميزانيتك بدقة واعرف أين تذهب كل روبية لتفادي أي خسائر.' : 'Phase 2: Exact itemized startup costs for Starter and Pro brand tiers.',
-        renderContent: () => `
-          <p style="font-size: 0.92rem; color: var(--text-muted); margin-bottom: 16px;">
-            ${lang === 'ml' 
-              ? 'ബിസിനസ് തുടങ്ങുമ്പോൾ എന്തിനൊക്കെ എത്ര രൂപ ചെലവാകും എന്ന് കൃത്യമായി കാണിക്കുന്ന ബഡ്ജറ്റ് പട്ടിക. അനാവശ്യ ചെലവുകൾ ഒഴിവാക്കി സുരക്ഷിതമായി തുടങ്ങാം.' 
-              : lang === 'ar'
-              ? 'جدول تفصيلي يوضح أين تذهب كل روبية من رأس مالك، لتنطلق بثقة وبدون أي هدر مالي.'
-              : 'Complete itemized budget ledger. Shows exactly what components cost and how much starting capital is needed for both Starter and Pro brand tiers.'}
-          </p>
-
-          <div class="table-responsive">
-            <table class="cost-ledger-table">
-              <thead>
-                <tr>
-                  <th>${lang === 'ml' ? 'ചെലവ് ഇനം' : lang === 'ar' ? 'بند المصروف' : 'Budget Item'}</th>
-                  <th>${lang === 'ml' ? 'തുടക്കക്കാർക്ക് (Starter Tier)' : lang === 'ar' ? 'للمبتدئين (Starter)' : 'Starter Tier'}</th>
-                  <th>${lang === 'ml' ? 'ലക്ഷ്വറി ബ്രാൻഡിന് (Pro Brand)' : lang === 'ar' ? 'علامة تجارية متقدمة (Pro)' : 'Pro Brand Tier'}</th>
-                  <th>${lang === 'ml' ? 'പ്രത്യേകതകൾ' : lang === 'ar' ? 'ملاحظات' : 'Sourcing Notes'}</th>
-                </tr>
-              </thead>
-              <tbody>
-                ${cat.capitalTable.map(row => `
-                  <tr>
-                    <td><strong>${row.item[lang] || row.item.en}</strong></td>
-                    <td style="font-weight: 700; color: var(--primary);">${row.starter}</td>
-                    <td style="font-weight: 700; color: #4338ca;">${row.pro}</td>
-                    <td><small class="text-muted">${row.notes[lang] || row.notes.en}</small></td>
-                  </tr>
-                `).join('')}
-                <tr class="total-row">
-                  <td>${lang === 'ml' ? 'ആകെ കുറഞ്ഞ പ്രാരംഭ മൂലധനം:' : lang === 'ar' ? 'إجمالي رأس المال الأولي المطلوب:' : 'Total Initial Working Capital:'}</td>
-                  <td>${cat.totalStarterCost}</td>
-                  <td>${cat.totalProCost}</td>
-                  <td>${lang === 'ml' ? 'ആദ്യ ബാച്ചിന് ആവശ്യമായത്' : lang === 'ar' ? 'يكفي لإنتاج الدفعة الأولى' : 'Sufficient for first inventory'}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        `
-      },
-
-      // STEP 3: Wholesale Hubs with Phone & Google Maps
-      {
-        id: "mod-suppliers",
-        stepNum: 3,
-        title: t.mod3Title || '3. Wholesale Markets & Google Maps',
-        heroImg: cat.images.sourcing,
-        heroTitle: lang === 'ml' ? 'മൊത്തവ്യാപാര മാർക്കറ്റുകൾ & മാപ്പ്' : lang === 'ar' ? 'أسواق الجملة وعناوين الموردين' : 'Wholesale Markets, Phone & Google Maps',
-        heroSub: lang === 'ml' ? 'മൂന്നാമതായി എന്ത് ചെയ്യണം? മിഠായിത്തെരുവ്, ക്രോഫോർഡ് മാർക്കറ്റ് എന്നിവിടങ്ങളിലെ വ്യാപാരികളുടെ ലൊക്കേഷനുകൾ കണ്ടുപിടിക്കുക.' : lang === 'ar' ? 'ماذا تفعل ثالثاً؟ اعرف أين تتسوق بأسعار الجملة الحقيقية وتواصل مع الموردين المعتمدين.' : 'Phase 3: Connect directly with verified wholesale hubs via Google Maps and WhatsApp.',
-        renderContent: () => {
-          const matchingSuppliers = this.suppliers.filter(s => s.category === nicheKey || (nicheKey === 'attar' && s.category === 'packaging'));
-          return `
-            <div class="suppliers-grid-niche" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 18px;">
-              ${matchingSuppliers.map(sup => {
-                const waMsg = encodeURIComponent(
-                  lang === 'ml' 
-                    ? `ഹലോ ${sup.name}, ഞാൻ 'വ്യാപാര ശിക്ഷ' വെബ്സൈറ്റിൽ നിങ്ങളുടെ കടയുടെ വിവരം കണ്ടതാണ്. എനിക്ക് നിങ്ങളുടെ ഹോൾസെയിൽ കാറ്റലോഗും വിലവിവരങ്ങളും വേണം.`
-                    : lang === 'ar'
-                    ? `مرحباً ${sup.name}، وجدت بيانات متجركم عبر منصة رواد الأعمال. أود الاطلاع على كتالوج الجملة وقائمة الأسعار لديكم.`
-                    : `Hello ${sup.name}, I found your wholesale details on Vyapar Shiksha. I want to inquire about your wholesale catalog and bulk pricing.`
-                );
-                const waLink = `https://wa.me/${sup.whatsapp}?text=${waMsg}`;
-
-                return `
-                  <div class="supplier-card">
-                    <div class="supplier-head">
-                      <h4 class="supplier-name">${sup.name}</h4>
-                      <span class="city-badge">${sup.city}</span>
-                    </div>
-                    <p class="supplier-address"><i class="fa-solid fa-location-dot"></i> <span>${sup.address}</span></p>
-                    <p style="font-size: 0.85rem; color: #1e293b; margin-bottom: 8px;"><strong>${lang === 'ml' ? 'പ്രത്യേകതകൾ:' : lang === 'ar' ? 'المنتجات:' : 'Specialties:'}</strong> ${sup.specialty}</p>
-                    <p style="font-size: 0.8rem; color: #64748b; margin-bottom: 14px;"><i class="fa-solid fa-box"></i> <strong>MOQ:</strong> ${sup.moq}</p>
-                    <div class="supplier-actions">
-                      <a href="${waLink}" target="_blank" rel="noopener noreferrer" class="btn-whatsapp">
-                        <i class="fa-brands fa-whatsapp"></i> ${lang === 'ml' ? 'വാട്സ്ആപ്പ്' : lang === 'ar' ? 'واتساب' : 'WhatsApp'}
-                      </a>
-                      <a href="${sup.mapUrl}" target="_blank" rel="noopener noreferrer" class="btn-map">
-                        <i class="fa-solid fa-location-crosshairs"></i> ${lang === 'ml' ? 'ഗൂഗിൾ മാപ്പ്' : lang === 'ar' ? 'خرائط جوجل' : 'Google Maps'}
-                      </a>
-                      <a href="tel:${sup.phone}" class="btn-map-call">
-                        <i class="fa-solid fa-phone"></i>
-                      </a>
-                    </div>
-                  </div>
-                `;
-              }).join('')}
-            </div>
-          `;
-        }
-      },
-
-      // STEP 4: Calling Dialogue & Negotiation Coaching
-      {
-        id: "mod-coaching",
-        stepNum: 4,
-        title: t.mod4Title || '4. Wholesaler Calling & Chat Coaching',
-        heroImg: cat.images.sourcing,
-        heroTitle: lang === 'ml' ? 'വ്യാപാരികളോട് സംസാരിക്കേണ്ട രീതി' : lang === 'ar' ? 'حوار التفاوض والاتصال مع الموردين' : 'Wholesaler Calling & Chat Coaching',
-        heroSub: lang === 'ml' ? 'നാലാമതായി എന്ത് ചെയ്യണം? കടക്കാരെ വിളിച്ച് സാമ്പിളുകൾ ആവശ്യപ്പെടാനും വിലപേശാനുമുള്ള സംസാര രീതി പഠിക്കുക.' : lang === 'ar' ? 'ماذا تفعل رابعاً؟ كيف تتصل بالموردين بثقة وتطلب عينات وتتفاوض على سعر الكيلو.' : 'Phase 4: Battle-tested calling scripts and negotiation masterclass.',
-        renderContent: () => `
-          <div class="coaching-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 18px;">
-            ${this.coachingData.map(c => `
-              <div class="coach-card">
-                <span class="coach-step-badge">Step ${c.step}</span>
-                <h4>${c.title[lang] || c.title.en}</h4>
-                <p>${c.desc[lang] || c.desc.en}</p>
-                <div class="dialogue-box">
-                  <i class="fa-solid fa-quote-left"></i> ${c.dialogue[lang] || c.dialogue.en}
-                </div>
-              </div>
-            `).join('')}
-          </div>
-        `
-      },
-
-      // STEP 5: Formulation & Assembly Guide (പുതിയത് ഉണ്ടാക്കാൻ എത്ര വേണം)
-      {
-        id: "mod-sourcing",
-        stepNum: 5,
-        title: t.mod5Title || '5. Formulation & How to Make Your Brand',
-        heroImg: cat.images.formulation,
-        heroTitle: lang === 'ml' ? 'പുതിയത് ഉണ്ടാക്കാൻ എത്ര വേണം? (നിർമ്മാണ രീതി)' : lang === 'ar' ? 'طريقة التركيب وصناعة علامتك الجديدة' : 'Formulation, Assembly & Crafting',
-        heroSub: lang === 'ml' ? 'അഞ്ചാമതായി എന്ത് ചെയ്യണം? കുപ്പിയിൽ അളന്ന് നിറച്ച്, റോൾ-ഓൺ അമർത്തി, ലേബൽ ഒട്ടിച്ച് വെൽവെറ്റ് പൗച്ചിലാക്കുന്ന വിധം.' : lang === 'ar' ? 'ماذا تفعل خامساً؟ طريقة تعبئة الزجاجات وتثبيت الرول ولصق الشعار والتغليف الفاخر.' : 'Phase 5: Step-by-step practical assembly, hygiene, bottling and unit cost.',
-        renderContent: () => `
-          <div class="unit-economics-callout" style="background: #ecfdf5; border: 1px solid #a7f3d0; padding: 18px 22px; border-radius: var(--radius-sm); margin-bottom: 24px; color: #065f46; font-size: 0.96rem; line-height: 1.6;">
-            <i class="fa-solid fa-chart-pie" style="font-size: 1.25rem; margin-right: 8px;"></i>
-            ${cat.formulation.costPerUnitBox[lang] || cat.formulation.costPerUnitBox.en}
-          </div>
-
-          <h4 style="font-size: 1.15rem; font-weight: 800; color: var(--secondary-dark); margin-bottom: 16px;">
-            <i class="fa-solid fa-list-ol text-primary"></i> ${lang === 'ml' ? 'ഘട്ടം ഘട്ടമായി തയ്യാറാക്കുന്ന വിധം' : lang === 'ar' ? 'خطوات التصنيع والتركيب خطوة بخطوة' : 'Step-by-Step Practical Creation Steps'}
-          </h4>
-
-          <div class="steps-flow-grid" style="display: flex; flex-direction: column; gap: 14px;">
-            ${cat.formulation.steps.map(s => `
-              <div class="step-card-flow" style="display: flex; gap: 16px; background: #ffffff; border: 1px solid var(--border-color); padding: 18px; border-radius: var(--radius-sm);">
-                <div class="step-num-bubble" style="width: 40px; height: 40px; border-radius: 50%; background: var(--primary); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 800; flex-shrink: 0;">
-                  ${s.step}
-                </div>
-                <div>
-                  <h5 style="font-size: 1.05rem; font-weight: 700; color: var(--secondary-dark); margin-bottom: 4px;">${s.title[lang] || s.title.en}</h5>
-                  <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.5;">${s.desc[lang] || s.desc.en}</p>
-                </div>
-              </div>
-            `).join('')}
-          </div>
-        `
-      },
-
-      // STEP 6: Live Visual Profit Graph & Simulator
-      {
-        id: "mod-simulator",
-        stepNum: 6,
-        title: t.mod6Title || '6. Profit Simulator & Live Visual Graph',
-        heroImg: cat.images.cover,
-        heroTitle: lang === 'ml' ? 'ലൈവ് ലാഭ ഗ്രാഫും സിമുലേറ്ററും' : lang === 'ar' ? 'حاسبة الأرباح والرسم البياني المباشر' : 'Live Profit Graph & Margin Visualizer',
-        heroSub: lang === 'ml' ? 'ആറാമതായി എന്ത് ചെയ്യണം? ഓരോ കുപ്പിയിലും എത്ര ലാഭം കിട്ടും, 25/50/100 കുപ്പികൾ വിൽക്കുമ്പോൾ എത്ര സമ്പാദിക്കാം എന്ന് കാണുക.' : lang === 'ar' ? 'ماذا تفعل سادساً؟ شاهد رسماً بيانياً مباشراً يوضح أرباحك وتكلفة تصنيع كل حبة بدقة.' : 'Phase 6: Interactive simulator with real-time segmented horizontal profit bar graph.',
-        renderContent: () => this.getNicheSimulatorHtml(nicheKey)
-      },
-
-      // STEP 7: Courier Rates, COD Rules & Launch Plan
-      {
-        id: "mod-logistics",
-        stepNum: 7,
-        title: t.mod7Title || '7. Courier Rates, COD & Launch Checklist',
-        heroImg: cat.images.packaging,
-        heroTitle: lang === 'ml' ? 'കൊറിയർ നിരക്കുകൾ & ആദ്യ വിൽപന' : lang === 'ar' ? 'أسعار الشحن البريدي وانطلاقة المبيعات' : 'Courier Rates, Safe COD & Launch Checklist',
-        heroSub: lang === 'ml' ? 'ഏഴാമതായി എന്ത് ചെയ്യണം? സുരക്ഷിതമായി പാക്ക് ചെയ്ത് കൊറിയർ വഴി കസ്റ്റമറിലേക്ക് എത്തിക്കുക.' : lang === 'ar' ? 'ماذا تفعل سابعاً؟ شحن الطرود بنظام وضمان استلام الأموال بدون مخاطر.' : 'Phase 7: Shipping partners, COD advance token rule, and 14-day Instagram playbook.',
-        renderContent: () => `
-          <div class="cod-danger-box" style="background: #fffbeb; border: 1px solid #fef08a; padding: 20px 24px; border-radius: var(--radius-sm); margin-bottom: 24px; color: #854d0e; font-size: 0.94rem; line-height: 1.6;">
-            <h4 style="font-size: 1.1rem; font-weight: 800; color: #78350f; margin-bottom: 8px;">
-              <i class="fa-solid fa-triangle-exclamation text-warning"></i> ${lang === 'ml' ? 'പ്രധാനപ്പെട്ടത്: ക്യാഷ് ഓൺ ഡെലിവറി (COD) അപകടം ഒഴിവാക്കാം' : lang === 'ar' ? 'تنبيه هام: تفادي خسائر الدفع عند الاستلام' : 'Critical Rule: Cash on Delivery (COD) Protection'}
-            </h4>
-            <p>
-              ${lang === 'ml'
-                ? 'അപരിചിതർക്ക് 100% ക്യാഷ് ഓൺ ഡെലിവറി അയക്കരുത്. കസ്റ്റമർ വാങ്ങിയില്ലെങ്കിൽ പോകുന്ന ചാർജ്ജും മടങ്ങി വരുന്ന ചാർജ്ജും (ഏകദേശം ₹100-₹120) നിങ്ങൾ നൽകേണ്ടി വരും. ഓർഡർ സ്ഥിരീകരിക്കാൻ ₹50 ടോക്കൺ അഡ്വാൻസ് Google Pay വഴി വാങ്ങുക!'
-                : lang === 'ar'
-                ? 'إياك وشحن طرد بالدفع عند الاستلام الكامل لأشخاص لا تعرفهم. إذا رفض الزبون الاستلام ستتحمل رسوم الذهاب والعودة (~120 روبية). خذ دائماً عربون 50 روبية مقدماً!'
-                : 'Never ship 100% COD to strangers. If a customer rejects delivery, you lose both forward and return courier charges (~₹120 total). Always collect a small ₹50 advance token via UPI to confirm serious buyers!'}
-            </p>
-          </div>
-
-          <h4 style="font-size: 1.15rem; font-weight: 800; color: var(--secondary-dark); margin-bottom: 14px;">
-            <i class="fa-solid fa-box-open text-primary"></i> ${lang === 'ml' ? 'കൊറിയർ നിരക്കുകൾ (കേരളം, ഇന്ത്യ & ഗൾഫ്)' : lang === 'ar' ? 'أسعار الشحن البريدي المعتمدة' : 'Courier Rates & Delivery Charges'}
-          </h4>
-          <div class="table-responsive">
-            <table class="cost-ledger-table">
-              <thead>
-                <tr>
-                  <th>${lang === 'ml' ? 'കൊറിയർ സർവീസ്' : lang === 'ar' ? 'شركة الشحن' : 'Service / Partner'}</th>
-                  <th>${lang === 'ml' ? 'മേഖല' : lang === 'ar' ? 'الوجهة' : 'Destination'}</th>
-                  <th>${lang === 'ml' ? 'ഭാരം' : lang === 'ar' ? 'الوزن' : 'Weight'}</th>
-                  <th>${lang === 'ml' ? 'നിരക്ക്' : lang === 'ar' ? 'السعر' : 'Rate'}</th>
-                  <th>${lang === 'ml' ? 'പ്രത്യേകത' : lang === 'ar' ? 'الميزة' : 'Key Advantage'}</th>
-                </tr>
-              </thead>
-              <tbody>
-                ${this.logisticsRates.map(r => `
-                  <tr>
-                    <td><strong>${r.service}</strong></td>
-                    <td>${r.zone}</td>
-                    <td>${r.weight}</td>
-                    <td><span class="text-success" style="font-weight: 700;">${r.rate}</span></td>
-                    <td><small class="text-muted">${r.remarks}</small></td>
-                  </tr>
-                `).join('')}
-              </tbody>
-            </table>
-          </div>
-        `
-      }
-    ];
-
-    let html = '';
-
-    if (isStepper) {
-      // GUIDED STEPPER PROCESSING MODE: Render ONLY the active step card
-      const stepData = stepModules[activeStep - 1] || stepModules[0];
-      const prevBtnHtml = activeStep > 1 
-        ? `<button class="btn-step-prev" onclick="app.prevCourseStep()">${t.btnPrevStep || '← Previous Step'}</button>` 
-        : `<span></span>`;
-      
-      const nextBtnHtml = activeStep < 7 
-        ? `<button class="btn-step-next" onclick="app.nextCourseStep()">${t.btnNextStep || 'Next Step →'}</button>` 
-        : `<button class="btn-step-next" onclick="app.navigateTo('plan')">${t.btnFinishCourse || '🎉 Finish Course & Generate Plan →'}</button>`;
-
-      html = `
-        <article class="course-module-card" id="${stepData.id}">
-          <div class="module-photo-hero">
-            <img src="${stepData.heroImg}" alt="${stepData.heroTitle}">
-            <div class="module-photo-overlay">
-              <span class="module-number-badge" style="display: inline-block; margin-bottom: 6px;">Step ${activeStep} of 7</span>
-              <h4>${stepData.heroTitle}</h4>
-              <p>${stepData.heroSub}</p>
-            </div>
-          </div>
-          <div class="module-body">
-            ${stepData.renderContent()}
-
-            <div class="stepper-nav-footer">
-              ${prevBtnHtml}
-              ${nextBtnHtml}
-            </div>
-          </div>
-        </article>
-      `;
-    } else {
-      // FULL MASTERCLASS MODE: Render all 7 steps stacked
-      html = stepModules.map((s, idx) => `
-        <article class="course-module-card" id="${s.id}">
-          <div class="module-photo-hero">
-            <img src="${s.heroImg}" alt="${s.heroTitle}">
-            <div class="module-photo-overlay">
-              <span class="module-number-badge" style="display: inline-block; margin-bottom: 6px;">Step ${idx + 1} of 7</span>
-              <h4>${s.heroTitle}</h4>
-              <p>${s.heroSub}</p>
-            </div>
-          </div>
-          <div class="module-body">
-            ${s.renderContent()}
-          </div>
-        </article>
-      `).join('');
-    }
-
-    container.innerHTML = html;
-
-    // Re-render Attar simulator graph if Step 6 is active or in all mode
-    if (nicheKey === 'attar' && (activeStep === 6 || !isStepper)) {
-      this.renderAttarSimulator();
-    }
   },
 
   // Get HTML for Simulator inside Module 6
