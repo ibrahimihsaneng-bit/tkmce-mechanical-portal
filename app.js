@@ -1989,6 +1989,499 @@ const app = {
     if (target) target.classList.add('active-nav');
   },
 
+  // =========================================================================
+  // 30-MINUTE AUDIO MASTERCLASS STATE & ENGINE
+  // =========================================================================
+  audioMasterclassState: {
+    isPlaying: false,
+    currentEpisode: 1,
+    currentTimeSec: 0,
+    totalDurationSec: 1800, // 30 minutes = 1,800 seconds
+    playbackRate: 1.0,
+    voiceLang: 'ml',
+    timerInterval: null,
+    audioCtx: null,
+    oscillator: null,
+    gainNode: null
+  },
+
+  masterclassAudioEpisodes: [
+    {
+      num: 1,
+      startSec: 0,
+      endSec: 300,
+      timestamp: "00:00",
+      title: {
+        en: "1. Scent Science & Fast-Moving Fragrances (00:00 - 05:00)",
+        ml: "1. സുഗന്ധ ശാസ്ത്രവും അത്തറിന്റെ വിപണിയും (00:00 - 05:00)",
+        ar: "1. علم الصنعة والزيوت العطرية الأكثر طلباً (00:00 - 05:00)"
+      },
+      text: {
+        ml: "നമസ്കാരം, വ്യാപാര ശിക്ഷയിലേക്ക് സ്വാഗതം. ഇന്ന് നമ്മൾ പഠിക്കുന്നത് കേരളത്തിലും ഇന്ത്യയിലും ഗൾഫിലും ഏറ്റവും ഉയർന്ന ലാഭം തരുന്ന അത്തർ ബിസിനസ്സ് എങ്ങനെ വിജയകരമായി തുടങ്ങാം എന്നതാണ്. അത്തർ എന്നാൽ ആൽക്കഹോൾ ഒട്ടും ചേർക്കാത്ത ശുദ്ധമായ പ്രകൃതിദത്ത സുഗന്ധതൈലമാണ്. നിസ്കാരത്തിന് ഉപയോഗിക്കാം എന്നതും, 12 മുതൽ 24 മണിക്കൂർ വരെ സുഗന്ധം വസ്ത്രങ്ങളിൽ തങ്ങിനിൽക്കും എന്നതുമാണ് ഇതിന്റെ ഏറ്റവും വലിയ പ്രത്യേകത. തുടക്കക്കാർ തിരഞ്ഞെടുക്കേണ്ട 4 പ്രധാന മണങ്ങൾ: ഒന്ന് റോയൽ വൈറ്റ് മസ്ക്, രണ്ട് ശമാമത്തുൽ അംബർ, മൂന്ന് അറബിക് ഊദ് അൽ ശംസ്, നാല് സാവേജ് പോലുള്ള ഫ്രഞ്ച് ക്ലോണുകൾ. ഇവ വിപണിയിൽ അതിവേഗം വിറ്റുപോകുന്ന ഇനങ്ങളാണ്.",
+        en: "Welcome to Vyapar Shiksha. Today, we master how to launch a high-profit artisanal attar business in Kerala and India from home. Attar is 100% pure concentrated perfume oil extracted without alcohol. It is prayer-safe, skin-friendly, and lasts 12 to 24 hours. The top 4 fast-moving varieties every beginner should start with are Royal White Musk, Shamamatul Amber, Arabic Oudh Al Shams, and French Fresh Clones like Sauvage and Blue Ocean. These four fragrances command an immediate 70% repeat buying rate.",
+        ar: "مرحباً بكم في منصة رواد الأعمال. في هذه الدورة الصوتية نتعلم خطوة بخطوة كيف تؤسس مشروعاً ناجحاً ومربحاً لدهن العود والعطور الزيتية. دهن العود زيت نقي مركز 100% مستخلص بدون أي كحول، مما يجعله صالحاً للصلاة ولطيفاً على البشرة ويدوم فوّاحاً لأكثر من 24 ساعة. الأصناف الأربعة الأكثر مبيعاً للمبتدئين هي: المسك الأبيض الملكي، شمامة العنبر، عود الشمس الملكي، وبدائل العطور الفرنسية الفاخرة."
+      }
+    },
+    {
+      num: 2,
+      startSec: 300,
+      endSec: 600,
+      timestamp: "05:00",
+      title: {
+        en: "2. Exact Capital & Budget Breakdown (05:00 - 10:00)",
+        ml: "2. എന്തിനൊക്കെ എത്ര രൂപ? പ്രാരംഭ ബഡ്ജറ്റ് (05:00 - 10:00)",
+        ar: "2. جدول الميزانية الدقيق وتكاليف البداية (05:00 - 10:00)"
+      },
+      text: {
+        ml: "രണ്ടാമത്തെ ഘട്ടത്തിൽ നമ്മൾ നോക്കുന്നത് ഈ ബിസിനസ് തുടങ്ങാൻ കയ്യിൽ എത്ര രൂപ വേണം എന്നതാണ്. വെറും 3,100 രൂപ ഉണ്ടെങ്കിൽ വീട്ടിലിരുന്ന് നിങ്ങൾക്ക് ഈ ബിസിനസ്സ് തുടങ്ങാം. 500 മില്ലിലിറ്റർ മദർ ഓയിലിന് 1,500 രൂപ, 50 ഗ്ലാസ് റോൾ-ഓൺ കുപ്പികൾക്ക് 450 രൂപ, 50 പ്രീമിയം കറുത്ത വെൽവെറ്റ് പൗച്ചുകൾക്ക് 300 രൂപ, 100 വാട്ടർപ്രൂഫ് വിനൈൽ ബ്രാൻഡ് സ്റ്റിക്കറുകൾക്ക് 200 രൂപ, അളന്നെടുക്കാനുള്ള ഡ്രോപ്പർ പൈപ്പറ്റുകൾക്ക് 150 രൂപ, കൊറിയർ ബഫറിന് 500 രൂപ. ആകെ വെറും 3,100 രൂപ മാത്രം മതിയാകും നിങ്ങളുടെ ആദ്യ ബാച്ച് 50 കുപ്പികൾ മാർക്കറ്റിലിറക്കാൻ.",
+        en: "In Phase 2, we break down every single rupee needed to start. With just ₹3,100, you can start right from your study table. 500ml concentrated mother oil costs ₹1,500. 50 octagonal glass flacons cost ₹450 at ₹9 each. 50 black velvet drawstring pouches cost ₹300 at ₹6 each. 100 custom vinyl waterproof stickers cost ₹200. Medical pipettes cost ₹150, and ₹500 is your courier dispatch buffer. Total starting capital is just ₹3,100 to produce your first 50 retail bottles.",
+        ar: "في هذه المرحلة نستعرض بدقة رأس المال الأولي المطلوب. بمبلغ 3,100 روبية فقط يمكنك إطلاق مشروعك من منزلك. 500 مل زيوت عطرية خام بـ 1500 روبية، 50 زجاجة كريستال رول بـ 450 روبية بمعدل 9 روبيات للزجاجة، 50 كيساً مخملياً فاخراً بـ 300 روبية، 100 ملصق فينيل مقاوم للماء بشعارك بـ 200 روبية، وقطارات قياس بـ 150 روبية، ومبلغ 500 روبية احتياطي للشحن. الإجمالي 3100 روبية فقط."
+      }
+    },
+    {
+      num: 3,
+      startSec: 600,
+      endSec: 960,
+      timestamp: "10:00",
+      title: {
+        en: "3. Kozhikode & Mumbai Wholesale Markets (10:00 - 16:00)",
+        ml: "3. മിഠായിത്തെരുവും ക്രോഫോർഡ് മാർക്കറ്റും (10:00 - 16:00)",
+        ar: "3. أسواق الجملة في كاليكوت ومومباي ودبي (10:00 - 16:00)"
+      },
+      text: {
+        ml: "മൂന്നാമതായി സാധനങ്ങൾ എവിടെ നിന്ന് വാങ്ങണം എന്ന് മനസ്സിലാക്കാം. കേരളത്തിൽ കോഴിക്കോട് മിഠായിത്തെരുവും വലിയങ്ങാടിയുമാണ് ഏറ്റവും പ്രധാനപ്പെട്ട കേന്ദ്രങ്ങൾ. വലിയ അളവിൽ കുറഞ്ഞ നിരക്കിൽ വാങ്ങാൻ മുംബൈ മുഹമ്മദ് അലി റോഡിലെ നഖൂദ മൊഹല്ലയും ക്രോഫോർഡ് മാർക്കറ്റിലെ അബ്ദുൽ റഹ്മാൻ സ്ട്രീറ്റും സന്ദർശിക്കാം. ഇവിടെ വെറും 7 മുതൽ 9 രൂപയ്ക്ക് പ്രീമിയം ഒക്ടാഗണൽ ക്രിസ്റ്റൽ കുപ്പികൾ ലഭിക്കും. ഗൾഫിലുള്ളവർക്ക് ദുബായ് ദേരയിലെ നായിഫ് പെർഫ്യൂം സൂഖും അജ്മാൻ ഇൻഡസ്ട്രിയൽ ഏരിയയുമാണ് പ്രധാന സ്രോതസ്സുകൾ. ഇവിടങ്ങളിൽ നിന്ന് എയർ കാർഗോ വഴി നാട്ടിലേക്ക് നേരിട്ട് എത്തിക്കാം.",
+        en: "In Phase 3, we explore verified wholesale markets. In Kerala, Kozhikode S.M. Street and Valiyangadi Big Bazaar are the historical trading hubs for Arabian bases and roll-on bottles. For pan-India direct manufacturing rates, Mumbai's Nakhuda Mohalla on Mohammad Ali Road and Abdul Rehman Street near Crawford Market offer the lowest prices in India, where octagonal crystal bottles cost as low as ₹7 to ₹9. For GCC NRI entrepreneurs, Dubai Deira Naif Souk and Ajman Industrial Area offer direct container and air cargo wholesale lots.",
+        ar: "في هذه المرحلة نحدد أين تتسوق بالجملة الحقيقية. في كيرالا، يعد شارع إس إم وسوق فاليانغادي بكاليكوت المركزين الأكبر لموردي زيوت العطور. وللحصول على أسعار المصانع في الهند، توجه إلى سوق نخودا بشارع محمد علي وشارع عبد الرحمن بسوق كروفورد بمومباي، حيث تباع زجاجات الكريستال بـ 7 إلى 9 روبيات فقط. وفي دول الخليج، يعتبر سوق نايف بديرة دبي والمنطقة الصناعية بعجمان المركز العالمي الأكبر للتصدير."
+      }
+    },
+    {
+      num: 4,
+      startSec: 960,
+      endSec: 1260,
+      timestamp: "16:00",
+      title: {
+        en: "4. Wholesaler Calling & Negotiation Coaching (16:00 - 21:00)",
+        ml: "4. വ്യാപാരികളോട് സംസാരിക്കേണ്ട ചോദ്യങ്ങൾ (16:00 - 21:00)",
+        ar: "4. حوار الاتصال والتفاوض مع الموردين (16:00 - 21:00)"
+      },
+      text: {
+        ml: "നാലാമതായി വ്യാപാരികളോട് എങ്ങനെ സംസാരിക്കണം എന്ന് നോക്കാം. കടക്കാരോട് ഒരിക്കലും എനിക്ക് 5 കുപ്പി തരൂ എന്ന് ചോദിക്കരുത്. 'എനിക്ക് കേരളത്തിൽ പുതിയ അത്തർ ബ്രാൻഡ് തുടങ്ങാനാണ്, എനിക്ക് നിങ്ങളുടെ 5 ടോപ്പ് സെല്ലിംഗ് ഇനങ്ങളുടെ 100ml മദർ ഓയിൽ സാമ്പിൾ വേണം, അടുത്ത ബാച്ചിൽ 5 കിലോ ബാരൽ എടുക്കുമ്പോൾ തരുന്ന അതേ ഹോൾസെയിൽ സ്ലാബ് റേറ്റ് ഇതിന് നൽകുമോ?' എന്ന് ചോദിക്കണം. ഓയിലിൽ വെള്ളമോ അനാവശ്യ കെമിക്കലുകളോ കലർന്നിട്ടില്ലെന്ന് ഉറപ്പാക്കാൻ വെള്ളക്കടലാസിൽ ഒരു തുള്ളി വീഴ്ത്തി നോക്കുക. എണ്ണക്കറ മാത്രം ബാക്കിയായാൽ അത് ശുദ്ധമായ മദർ ഓയിലാണ്.",
+        en: "In Phase 4, we master negotiation dialogue. Never ask a wholesaler for retail quantities. Always say: 'I am launching a new artisanal fragrance brand in Kerala. I need 100ml tester cuts of your top 5 fastest-moving mother oils. Will you extend your 5-kilo bulk slab rate to my initial testing lot?' To test oil purity, place a drop on white blotter paper: if it leaves a rich, concentrated, transparent fragrant sheen without water rings, it is pure undiluted concentrate.",
+        ar: "في هذه المرحلة نتقن حوار التفاوض الصوتي. إياك وأن تسأل المورد بأسلوب الزبون العادي. قل له بثقة: 'أنا أؤسس علامة تجارية جديدة للعطور في كيرالا، وأود الحصول على عينات 100 مل من أفضل 5 أصناف لديكم بسعر الجملة المخفض، مع وعد بالطلب ببراميل 5 كيلو مستقبلاً'. لاختبار نقاء الزيت، ضع قطرة على شريحة ورق بيضاء؛ إذا بقيت شفافة ذات فوحان قوي بدون دوائر مائية، فهو زيت مركز نقي 100%."
+      }
+    },
+    {
+      num: 5,
+      startSec: 1260,
+      endSec: 1500,
+      timestamp: "21:00",
+      title: {
+        en: "5. Formulation, Bottling & Unit Cost SOP (21:00 - 25:00)",
+        ml: "5. കുപ്പി നിറയ്ക്കലും നിർമ്മാണ രീതിയും (21:00 - 25:00)",
+        ar: "5. طريقة التعبئة والتركيب والتغليف الفاخر (21:00 - 25:00)"
+      },
+      text: {
+        ml: "അഞ്ചാമതായി കുപ്പി നിറയ്ക്കുന്ന വിധം. നിങ്ങളുടെ വർക്കിംഗ് ടേബിൾ പൂർണ്ണമായും ഉണങ്ങിയതാണെന്ന് ഉറപ്പാക്കുക. അത്തറിൽ ഒരു തുള്ളി വെള്ളം വീണാൽ പോലും അതിന്റെ സുഗന്ധം നഷ്ടപ്പെടും. 5ml ഡ്രോപ്പർ പൈപ്പറ്റ് ഉപയോഗിച്ച് കൃത്യമായി 6ml ഓയിൽ എടുത്ത് കുപ്പിയിലേക്ക് ഒഴിക്കുക. തുടർന്ന് റോൾ-ഓൺ ബോൾ അമർത്തി ഉറപ്പിക്കുക. മൈക്രോഫൈബർ തുണി കൊണ്ട് കുപ്പി തുടച്ച് വിരലടയാളങ്ങൾ മാറ്റിയ ശേഷം നടുവിലായി നിങ്ങളുടെ ബ്രാൻഡ് ലോഗോ ഒട്ടിക്കുക. തുടർന്ന് കറുത്ത വെൽവെറ്റ് പൗച്ചിലേക്ക് ഇടുക. ഒരു കുപ്പിയുടെ മൊത്തം ചെലവ് വെറും 33 രൂപ 80 പൈസ മാത്രമാണ്!",
+        en: "In Phase 5, we execute practical bottling SOP. Ensure your workspace is 100% dry; moisture clouds fragrance oils. Use a 5ml graduated pipette to draw exactly 6ml and dispense smoothly into the flacon. Press-fit the roller ball plug with a clean click. Wipe the exterior with a microfiber cloth to remove fingerprint grease, then align your waterproof vinyl label. Place inside the black velvet pouch. The exact finished cost of this luxury bottle is just ₹33.80!",
+        ar: "في هذه المرحلة نطبق خطوات التصنيع العملي. تأكد من جفاف طاولة العمل تماماً فالرطوبة تفسد نقاء الزيت. استخدم قطارة مدرجة 5 مل لسحب 6 مل وتعبئتها بهدوء في الزجاجة. ثبت بكرة الرول بقوة حتى تسمع صوت استقرارها ثم امسح الزجاجة بقطعة قماش ناعمة والصق شعارك في المنتصف، وضعها في الكيس المخملي الأسود. التكلفة الإجمالية لهذه الزجاجة الفاخرة لا تتجاوز 33.80 روبية فقط!"
+      }
+    },
+    {
+      num: 6,
+      startSec: 1500,
+      endSec: 1800,
+      timestamp: "25:00",
+      title: {
+        en: "6. Profit Margins, Social Selling & Safe COD (25:00 - 30:00)",
+        ml: "6. ലാഭവിഹിതവും ഓൺലൈൻ വിപണനവും (25:00 - 30:00)",
+        ar: "6. حساب الأرباح والتسويق والشحن البريدي (25:00 - 30:00)"
+      },
+      text: {
+        ml: "അവസാനമായി ലാഭക്കണക്കുകളും വിപണന തന്ത്രങ്ങളും. 34 രൂപ ചിലവായ 6ml കുപ്പി ഇൻസ്റ്റാഗ്രാമിൽ 249 രൂപയ്ക്കാണ് വിൽക്കുന്നത്. ഒരു കുപ്പിയിൽ നിന്നുള്ള അറ്റാദായം 215 രൂപയാണ്! മാസം 50 കുപ്പികൾ വിറ്റാൽ 10,750 രൂപയും, 100 കുപ്പികൾ വിറ്റാൽ 21,500 രൂപയും ലാഭം ലഭിക്കും. പ്രധാനപ്പെട്ട ഒരു നിയമം: അപരിചിതർക്ക് ക്യാഷ് ഓൺ ഡെലിവറി അയക്കുമ്പോൾ ഓർഡർ സ്ഥിരീകരിക്കാൻ 50 രൂപ അഡ്വാൻസ് ടോക്കൺ ഗൂഗിൾ പേ വഴി വാങ്ങുക. ഇല്ലെങ്കിൽ പാഴ്സൽ തിരിച്ചുവരുമ്പോൾ കൊറിയർ ചാർജ്ജ് നിങ്ങൾക്ക് നഷ്ടമാകും. ഇന്ത്യ പോസ്റ്റ് സ്പീഡ് പോസ്റ്റ് വഴി കേരളത്തിൽ 35 രൂപയ്ക്ക് സുരക്ഷിതമായി എത്തിക്കാം.",
+        en: "Finally, in Phase 6, we analyze profit margins and sales execution. A bottle costing ₹34 sells on Instagram for ₹249 to ₹349, netting over ₹215 pure profit per bottle. Selling just 50 bottles a month generates ₹10,750 net income, and 100 bottles yields ₹21,500 pure profit. Critical Rule: Never ship 100% Cash on Delivery to strangers without taking a ₹50 advance token via UPI, protecting you against return courier losses. Use India Post Speed Post for safe ₹35 delivery across Kerala.",
+        ar: "ختاماً، في المرحلة السادسة، نحلل هوامش الأرباح وقواعد البيع الآمن. الزجاجة التي كلفتك 34 روبية تباع عبر الإنترنت بـ 249 إلى 349 روبية، بصافي ربح يفوق 215 روبية بكل حبة. بيع 50 زجاجة شهرياً يمنحك 10,750 روبية، وبيع 100 حبة يمنحك 21,500 روبية ربحاً صافياً. قاعدة ذهبية: لا تشحن أبداً بنظام الدفع عند الاستلام الكامل للغرباء دون أخذ عربون 50 روبية مقدماً عبر تطبيق الدفع لحماية نفسك من رسوم الإرجاع. استخدم البريد السريع بتكلفة 35 روبية فقط داخل كيرالا."
+      }
+    }
+  ],
+
+  // Initialize and Render Audio Masterclass Widget
+  renderAudioMasterclass(nicheKey) {
+    const card = document.getElementById('audioMasterclassCard');
+    if (!card) return;
+
+    const lang = this.audioMasterclassState.voiceLang || this.currentLang || 'ml';
+    const state = this.audioMasterclassState;
+    const currentEp = this.masterclassAudioEpisodes[state.currentEpisode - 1] || this.masterclassAudioEpisodes[0];
+
+    // Build episode quick jump chips
+    const episodeChipsHtml = this.masterclassAudioEpisodes.map(ep => {
+      const isActive = ep.num === state.currentEpisode;
+      return `
+        <button class="episode-chip ${isActive ? 'active' : ''}" onclick="app.playAudioEpisode(${ep.num})">
+          <i class="fa-solid ${isActive ? 'fa-volume-high text-white' : 'fa-play'}"></i>
+          <span>${ep.timestamp} - Ep ${ep.num}</span>
+        </button>
+      `;
+    }).join('');
+
+    // Build Transcript Paras
+    const transcriptHtml = this.masterclassAudioEpisodes.map(ep => {
+      const isActive = ep.num === state.currentEpisode;
+      return `
+        <div class="transcript-para ${isActive ? 'active' : ''}" id="transPara${ep.num}" onclick="app.playAudioEpisode(${ep.num})">
+          <span class="transcript-timestamp">[${ep.timestamp}]</span>
+          <strong>${ep.title[lang] || ep.title.en}:</strong>
+          <span> ${ep.text[lang] || ep.text.en}</span>
+        </div>
+      `;
+    }).join('');
+
+    const formattedCurrentTime = this.formatAudioTime(state.currentTimeSec);
+    const formattedTotalTime = this.formatAudioTime(state.totalDurationSec);
+    const pct = ((state.currentTimeSec / state.totalDurationSec) * 100).toFixed(1);
+
+    card.innerHTML = `
+      <div class="audio-card-header">
+        <div class="audio-title-group">
+          <div class="audio-badge-live">
+            <span class="live-pulse-dot"></span>
+            <span>30-Minute Audio Masterclass (കേട്ടു പഠിക്കാം)</span>
+          </div>
+          <h3 class="audio-title" id="audioCardHeading">
+            ${lang === 'ml' ? 'അത്തർ ബിസിനസ്സ്: 30 മിനിറ്റ് സമ്പൂർണ്ണ ഓഡിയോ ക്ലാസ്' : lang === 'ar' ? 'دورة العطور ودهن العود: ماستر كلاس صوتي شامل (30 دقيقة)' : 'Attar Business: 30-Minute Complete Audio Masterclass'}
+          </h3>
+          <p class="audio-subtitle">
+            ${lang === 'ml' ? 'തുടക്കം മുതൽ ആദ്യ വിൽപന വരെ. മധുരമുള്ള ശബ്ദത്തിൽ കേട്ടു പഠിക്കാനുള്ള സമഗ്ര വഴികാട്ടി.' : lang === 'ar' ? 'تعلم بالصوت: من الصفر وحتى أول عملية بيع بصوت احترافي وواضح.' : 'Listen and learn: from zero craft science to first sale with sweet and clear audio narration.'}
+          </p>
+        </div>
+
+        <div class="audio-lang-selector">
+          <span class="audio-lang-label">${lang === 'ml' ? 'ശബ്ദം തിരഞ്ഞെടുക്കൂ:' : lang === 'ar' ? 'اختر لغة الصوت:' : 'Select Voice Language:'}</span>
+          <div class="audio-lang-pills">
+            <button class="audio-voice-btn ${lang === 'ml' ? 'active' : ''}" onclick="app.setAudioVoice('ml')">
+              <i class="fa-solid fa-microphone"></i> മലയാളം
+            </button>
+            <button class="audio-voice-btn ${lang === 'en' ? 'active' : ''}" onclick="app.setAudioVoice('en')">
+              <i class="fa-solid fa-microphone"></i> English
+            </button>
+            <button class="audio-voice-btn ${lang === 'ar' ? 'active' : ''}" onclick="app.setAudioVoice('ar')">
+              <i class="fa-solid fa-microphone"></i> العربية
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="audio-player-core">
+        <!-- Visual Soundwave Bars -->
+        <div class="audio-soundwave-wrap ${state.isPlaying ? 'playing' : ''}" id="audioSoundwave">
+          <div class="soundwave-bar"></div><div class="soundwave-bar"></div><div class="soundwave-bar"></div>
+          <div class="soundwave-bar"></div><div class="soundwave-bar"></div><div class="soundwave-bar"></div>
+          <div class="soundwave-bar"></div><div class="soundwave-bar"></div><div class="soundwave-bar"></div>
+          <div class="soundwave-bar"></div><div class="soundwave-bar"></div><div class="soundwave-bar"></div>
+          <div class="soundwave-bar"></div><div class="soundwave-bar"></div><div class="soundwave-bar"></div>
+          <div class="soundwave-bar"></div><div class="soundwave-bar"></div><div class="soundwave-bar"></div>
+          <div class="soundwave-bar"></div><div class="soundwave-bar"></div>
+        </div>
+
+        <!-- Timeline & Scrub Bar -->
+        <div class="audio-timeline-wrap">
+          <div class="audio-time-row">
+            <span class="time-current" id="audioTimeCurrent">${formattedCurrentTime}</span>
+            <span class="current-chapter-name" id="audioChapterName">${currentEp.title[lang] || currentEp.title.en}</span>
+            <span class="time-total" id="audioTimeTotal">${formattedTotalTime}</span>
+          </div>
+          <div class="audio-progress-track" id="audioProgressTrack" onclick="app.seekAudioTrack(event)">
+            <div class="audio-progress-bar" id="audioProgressBar" style="width: ${pct}%;"></div>
+          </div>
+        </div>
+
+        <!-- Controls Row -->
+        <div class="audio-controls-row">
+          <div class="audio-controls-left">
+            <button class="btn-audio-circle btn-skip" onclick="app.skipAudio(-15)" title="Rewind 15s">
+              <i class="fa-solid fa-rotate-left"></i> <span>-15s</span>
+            </button>
+            <button class="btn-audio-circle btn-play-main" id="btnAudioPlayMain" onclick="app.toggleAudioMasterclass()">
+              <i class="fa-solid ${state.isPlaying ? 'fa-pause' : 'fa-play'}" id="iconAudioPlay"></i>
+            </button>
+            <button class="btn-audio-circle btn-skip" onclick="app.skipAudio(15)" title="Forward 15s">
+              <i class="fa-solid fa-rotate-right"></i> <span>+15s</span>
+            </button>
+          </div>
+
+          <div class="audio-episodes-scroller">
+            ${episodeChipsHtml}
+          </div>
+
+          <div class="audio-controls-right">
+            <div class="audio-speed-pill-group">
+              <button class="speed-btn ${state.playbackRate === 1 ? 'active' : ''}" onclick="app.setAudioSpeed(1)">1x</button>
+              <button class="speed-btn ${state.playbackRate === 1.25 ? 'active' : ''}" onclick="app.setAudioSpeed(1.25)">1.25x</button>
+              <button class="speed-btn ${state.playbackRate === 1.5 ? 'active' : ''}" onclick="app.setAudioSpeed(1.5)">1.5x</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Real-Time Read-Along Live Transcript Box -->
+      <div class="audio-transcript-container">
+        <div class="transcript-header-flex">
+          <div class="transcript-title">
+            <i class="fa-solid fa-scroll text-primary"></i>
+            <span>${lang === 'ml' ? 'തത്സമയ വിവരണം (Live Read-Along Transcript)' : lang === 'ar' ? 'النص المقروء المتزامن مع الصوت' : 'Synchronized Read-Along Transcript'}</span>
+          </div>
+          <button class="btn-transcript-copy" onclick="app.copyOrDownloadTranscript()">
+            <i class="fa-solid fa-download"></i> <span>${lang === 'ml' ? 'സംഗ്രഹം സേവ് ചെയ്യുക' : lang === 'ar' ? 'حفظ النص' : 'Save Summary'}</span>
+          </button>
+        </div>
+        <div class="transcript-body" id="audioTranscriptBody">
+          ${transcriptHtml}
+        </div>
+      </div>
+    `;
+  },
+
+  formatAudioTime(sec) {
+    const mins = Math.floor(sec / 60);
+    const secs = Math.floor(sec % 60);
+    return `${mins < 10 ? '0' : ''}${mins}:${secs < 10 ? '0' : ''}${secs}`;
+  },
+
+  // Focus and Scroll directly to Masterclass Audio Player
+  focusAudioMasterclass() {
+    const card = document.getElementById('audioMasterclassCard');
+    if (card) {
+      card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      if (!this.audioMasterclassState.isPlaying) {
+        this.toggleAudioMasterclass();
+      }
+    }
+  },
+
+  // Toggle Play / Pause
+  toggleAudioMasterclass() {
+    const state = this.audioMasterclassState;
+    if (state.isPlaying) {
+      this.pauseAudioMasterclass();
+    } else {
+      this.playAudioMasterclass();
+    }
+  },
+
+  playAudioMasterclass() {
+    const state = this.audioMasterclassState;
+    state.isPlaying = true;
+
+    // Start subtle ambient audio tone via Web Audio API so browser maintains audio session
+    try {
+      if (!state.audioCtx) {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        if (AudioContext) state.audioCtx = new AudioContext();
+      }
+      if (state.audioCtx && state.audioCtx.state === 'suspended') {
+        state.audioCtx.resume();
+      }
+    } catch (e) {
+      console.warn('AudioContext notice:', e);
+    }
+
+    this.speakCurrentEpisode();
+
+    // Start 1-second progress timer
+    if (state.timerInterval) clearInterval(state.timerInterval);
+    state.timerInterval = setInterval(() => {
+      state.currentTimeSec += 1 * state.playbackRate;
+      if (state.currentTimeSec >= state.totalDurationSec) {
+        state.currentTimeSec = state.totalDurationSec;
+        this.pauseAudioMasterclass();
+      }
+
+      // Check if transitioned to next episode
+      const targetEp = this.masterclassAudioEpisodes.find(ep => state.currentTimeSec >= ep.startSec && state.currentTimeSec < ep.endSec);
+      if (targetEp && targetEp.num !== state.currentEpisode) {
+        state.currentEpisode = targetEp.num;
+        this.speakCurrentEpisode();
+      }
+
+      this.updateAudioProgressUI();
+    }, 1000);
+
+    this.updateAudioProgressUI();
+  },
+
+  pauseAudioMasterclass() {
+    const state = this.audioMasterclassState;
+    state.isPlaying = false;
+    if (state.timerInterval) {
+      clearInterval(state.timerInterval);
+      state.timerInterval = null;
+    }
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.cancel();
+    }
+    this.updateAudioProgressUI();
+  },
+
+  playAudioEpisode(epNum) {
+    const ep = this.masterclassAudioEpisodes.find(e => e.num === epNum) || this.masterclassAudioEpisodes[0];
+    this.audioMasterclassState.currentEpisode = ep.num;
+    this.audioMasterclassState.currentTimeSec = ep.startSec;
+    if (!this.audioMasterclassState.isPlaying) {
+      this.playAudioMasterclass();
+    } else {
+      this.speakCurrentEpisode();
+      this.updateAudioProgressUI();
+    }
+  },
+
+  setAudioVoice(lang) {
+    this.audioMasterclassState.voiceLang = lang;
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.cancel();
+    }
+    this.renderAudioMasterclass(this.currentAcademy);
+    if (this.audioMasterclassState.isPlaying) {
+      this.speakCurrentEpisode();
+    }
+  },
+
+  setAudioSpeed(speed) {
+    this.audioMasterclassState.playbackRate = speed;
+    if (this.audioMasterclassState.isPlaying) {
+      this.speakCurrentEpisode();
+    }
+    this.renderAudioMasterclass(this.currentAcademy);
+  },
+
+  skipAudio(seconds) {
+    const state = this.audioMasterclassState;
+    state.currentTimeSec = Math.max(0, Math.min(state.totalDurationSec, state.currentTimeSec + seconds));
+    const targetEp = this.masterclassAudioEpisodes.find(ep => state.currentTimeSec >= ep.startSec && state.currentTimeSec < ep.endSec);
+    if (targetEp && targetEp.num !== state.currentEpisode) {
+      state.currentEpisode = targetEp.num;
+    }
+    if (state.isPlaying) {
+      this.speakCurrentEpisode();
+    }
+    this.updateAudioProgressUI();
+  },
+
+  seekAudioTrack(event) {
+    const track = document.getElementById('audioProgressTrack');
+    if (!track) return;
+    const rect = track.getBoundingClientRect();
+    const clickX = event.clientX - rect.left;
+    const pct = Math.max(0, Math.min(1, clickX / rect.width));
+    const targetSec = Math.floor(pct * this.audioMasterclassState.totalDurationSec);
+
+    this.audioMasterclassState.currentTimeSec = targetSec;
+    const targetEp = this.masterclassAudioEpisodes.find(ep => targetSec >= ep.startSec && targetSec < ep.endSec);
+    if (targetEp) {
+      this.audioMasterclassState.currentEpisode = targetEp.num;
+    }
+    if (this.audioMasterclassState.isPlaying) {
+      this.speakCurrentEpisode();
+    }
+    this.updateAudioProgressUI();
+  },
+
+  // Browser Speech Synthesis Speaking Logic with Pleasant Tone
+  speakCurrentEpisode() {
+    if (!('speechSynthesis' in window)) return;
+    window.speechSynthesis.cancel();
+
+    const state = this.audioMasterclassState;
+    const lang = state.voiceLang || 'ml';
+    const ep = this.masterclassAudioEpisodes[state.currentEpisode - 1] || this.masterclassAudioEpisodes[0];
+    const textToSpeak = ep.text[lang] || ep.text.en;
+
+    const utterance = new SpeechSynthesisUtterance(textToSpeak);
+    utterance.rate = state.playbackRate * 0.95; // Natural pleasant rhythm
+    utterance.pitch = 1.05; // Friendly warm pitch
+
+    const langCodes = { ml: 'ml-IN', ar: 'ar-SA', en: 'en-US' };
+    utterance.lang = langCodes[lang] || 'en-US';
+
+    const voices = window.speechSynthesis.getVoices();
+    if (voices && voices.length > 0) {
+      const match = voices.find(v => v.lang.toLowerCase().replace('_', '-').startsWith(utterance.lang.toLowerCase()))
+                 || voices.find(v => lang === 'ml' && (v.name.includes('Malayalam') || v.lang.includes('IN')))
+                 || voices.find(v => lang === 'ar' && (v.name.includes('Arabic') || v.lang.startsWith('ar')));
+      if (match) utterance.voice = match;
+    }
+
+    utterance.onend = () => {
+      if (state.isPlaying && state.currentEpisode < 6) {
+        state.currentEpisode += 1;
+        state.currentTimeSec = this.masterclassAudioEpisodes[state.currentEpisode - 1].startSec;
+        this.speakCurrentEpisode();
+        this.updateAudioProgressUI();
+      }
+    };
+
+    window.speechSynthesis.speak(utterance);
+  },
+
+  // Update UI Elements During Playback
+  updateAudioProgressUI() {
+    const state = this.audioMasterclassState;
+    const lang = state.voiceLang || 'ml';
+    const ep = this.masterclassAudioEpisodes[state.currentEpisode - 1] || this.masterclassAudioEpisodes[0];
+
+    const timeCurrEl = document.getElementById('audioTimeCurrent');
+    const barEl = document.getElementById('audioProgressBar');
+    const chapterNameEl = document.getElementById('audioChapterName');
+    const iconPlay = document.getElementById('iconAudioPlay');
+    const soundwave = document.getElementById('audioSoundwave');
+
+    if (timeCurrEl) timeCurrEl.textContent = this.formatAudioTime(state.currentTimeSec);
+    if (barEl) {
+      const pct = ((state.currentTimeSec / state.totalDurationSec) * 100).toFixed(1);
+      barEl.style.width = `${pct}%`;
+    }
+    if (chapterNameEl) chapterNameEl.textContent = ep.title[lang] || ep.title.en;
+
+    if (iconPlay) {
+      iconPlay.className = `fa-solid ${state.isPlaying ? 'fa-pause' : 'fa-play'}`;
+    }
+    if (soundwave) {
+      soundwave.classList.toggle('playing', state.isPlaying);
+    }
+
+    // Highlight active transcript paragraph and scroll into view
+    document.querySelectorAll('.transcript-para').forEach((p, idx) => {
+      const isActive = idx + 1 === state.currentEpisode;
+      p.classList.toggle('active', isActive);
+      if (isActive) {
+        p.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    });
+
+    // Update active episode chip
+    document.querySelectorAll('.episode-chip').forEach((chip, idx) => {
+      chip.classList.toggle('active', idx + 1 === state.currentEpisode);
+    });
+  },
+
+  copyOrDownloadTranscript() {
+    const lang = this.audioMasterclassState.voiceLang || 'ml';
+    let fullText = "VYAPAR SHIKSHA — 30-MINUTE AUDIO MASTERCLASS SUMMARY\n\n";
+    this.masterclassAudioEpisodes.forEach(ep => {
+      fullText += `[${ep.timestamp}] ${ep.title[lang] || ep.title.en}\n`;
+      fullText += `${ep.text[lang] || ep.text.en}\n\n`;
+    });
+
+    const blob = new Blob([fullText], { type: 'text/plain;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `vyapar-shiksha-attar-audio-masterclass-${lang}.txt`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  },
+
   // Open Dedicated Academy Masterclass
   openAcademy(nicheKey, targetStep = 1, updateHash = true) {
     if (!this.categoriesData[nicheKey]) nicheKey = 'attar';
@@ -2017,6 +2510,7 @@ const app = {
     if (badgeEl) badgeEl.textContent = lang === 'ml' ? `പ്രത്യേക പഠന ശാഖ: ${cat.minBudget}` : lang === 'ar' ? `أكاديمية تخصصية • رأس مال: ${cat.minBudget}` : `Specialized Academy • Capital: ${cat.minBudget}`;
 
     this.renderCourseSidebar(nicheKey);
+    this.renderAudioMasterclass(nicheKey);
     this.renderCourseModules(nicheKey);
 
     if (updateHash) {
@@ -2119,6 +2613,14 @@ const app = {
           <img src="${cat.images.cover}" alt="${cat.title[lang] || cat.title.en}">
           <span class="sidebar-budget-badge"><i class="fa-solid fa-coins"></i> ${cat.minBudget}</span>
         </div>
+        <button class="sidebar-audio-cta-btn" onclick="app.focusAudioMasterclass()">
+          <div class="sidebar-audio-icon"><i class="fa-solid fa-headphones"></i></div>
+          <div class="sidebar-audio-text">
+            <strong>30-Min Audio Class</strong>
+            <small>${lang === 'ml' ? 'കേട്ടു പഠിക്കാം (Listen & Learn)' : lang === 'ar' ? 'استمع للدورة الصوتية' : 'Listen & Learn (30 Mins)'}</small>
+          </div>
+          <span class="audio-live-pill"><i class="fa-solid fa-play"></i></span>
+        </button>
         <h3 class="sidebar-course-name">${cat.title[lang] || cat.title.en}</h3>
         <p class="sidebar-course-tagline">${cat.tagline[lang] || cat.tagline.en}</p>
         <div class="sidebar-progress-summary">
@@ -2607,6 +3109,55 @@ const app = {
     }
 
     container.innerHTML = html;
+  },
+
+  // Switch Tools Dynamic Subview Tab
+  switchToolTab(tabKey) {
+    this.currentToolTab = tabKey;
+    document.querySelectorAll('.tool-tab-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.getAttribute('data-subview') === tabKey);
+    });
+    this.renderToolsDynamicContent(tabKey);
+  },
+
+  // Switch Language
+  switchLanguage(lang) {
+    if (!['en', 'ml', 'ar'].includes(lang)) lang = 'en';
+    this.currentLang = lang;
+    if (this.audioMasterclassState) {
+      this.audioMasterclassState.voiceLang = lang;
+    }
+    localStorage.setItem('vyapar_lang', lang);
+
+    document.documentElement.lang = lang;
+    document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+
+    document.body.className = `lang-${lang}`;
+
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+    });
+
+    const dockText = document.getElementById('dockLangText');
+    if (dockText) dockText.textContent = lang.toUpperCase();
+
+    this.translateStaticElements();
+    this.renderAllViews();
+  },
+
+  cycleLanguage() {
+    const cycle = { en: 'ml', ml: 'ar', ar: 'en' };
+    this.switchLanguage(cycle[this.currentLang] || 'en');
+  },
+
+  translateStaticElements() {
+    const t = this.i18n[this.currentLang] || this.i18n.en;
+    Object.keys(t).forEach(id => {
+      const el = document.getElementById(id);
+      if (el) {
+        el.innerHTML = t[id];
+      }
+    });
   },
 
   // Hash-based URL Routing Handler
