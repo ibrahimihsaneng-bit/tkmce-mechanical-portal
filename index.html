@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>VYAPAR SHIKSHA | സംരംഭക പാഠശാല | منصة رواد الأعمال — Complete Business Guide for India & Kerala</title>
-  <meta name="description" content="Step-by-step business learning academy and launchpad for India & Kerala. Learn how to start Attar, Clothing, Watches, Bags, and Fashion Accessories businesses with real wholesale markets, supplier contacts, profit calculators, and logistics guide. Available in English, Malayalam, and Arabic.">
+  <meta name="description" content="Dedicated study academies for starting Attar, Clothing, Watches, Bags, and Fashion Accessories micro-businesses in India & Kerala with verified wholesale markets, supplier contacts, profit calculators, and logistics guide. Available in English, Malayalam, and Arabic.">
   
   <!-- Modern Google Fonts for English, Malayalam and Arabic -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -35,10 +35,10 @@
     </div>
   </div>
 
-  <!-- Main Navigation Header -->
+  <!-- Main Navigation Header with Course Dropdowns -->
   <header class="main-header" id="navbar">
     <div class="container header-container">
-      <a href="#hero" class="brand-logo">
+      <a href="#home" class="brand-logo" onclick="app.navigateTo('home')">
         <div class="logo-icon">
           <i class="fa-solid fa-chart-line-up"></i>
           <svg viewBox="0 0 40 40" class="logo-svg">
@@ -61,16 +61,39 @@
 
       <!-- Navigation Links -->
       <nav class="nav-menu" id="navMenu">
-        <a href="#categories" class="nav-item" id="navCategories"><i class="fa-solid fa-boxes-stacked"></i> Business Niches</a>
-        <a href="#attar-simulator" class="nav-item highlight-nav" id="navAttarSim"><i class="fa-solid fa-chart-column"></i> Attar Profit Graph</a>
-        <a href="#coaching-section" class="nav-item" id="navCoaching"><i class="fa-solid fa-headset"></i> Supplier Chat Coach</a>
-        <a href="#suppliers" class="nav-item" id="navSuppliers"><i class="fa-solid fa-store"></i> Wholesale Directory</a>
-        <a href="#calculator" class="nav-item" id="navCalculator"><i class="fa-solid fa-calculator"></i> Profit Calculator</a>
-        <a href="#templates-section" class="nav-item" id="navTemplates"><i class="fa-brands fa-whatsapp"></i> WhatsApp Scripts</a>
-        <a href="#quiz-section" class="nav-item" id="navQuiz"><i class="fa-solid fa-compass"></i> Idea Finder</a>
-        <a href="#roadmap" class="nav-item" id="navRoadmap"><i class="fa-solid fa-road"></i> 7-Step Guide</a>
-        <a href="#logistics" class="nav-item" id="navLogistics"><i class="fa-solid fa-truck-fast"></i> Courier & Rates</a>
-        <a href="#plan-builder" class="nav-btn-action" id="navPlanBuilder"><i class="fa-solid fa-file-invoice-dollar"></i> Generate Plan</a>
+        <a href="#home" class="nav-item active-nav" id="navHome" onclick="app.navigateTo('home')"><i class="fa-solid fa-house"></i> Home</a>
+        
+        <!-- Academies Dropdown Menu -->
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-btn" id="navAcademies">
+            <i class="fa-solid fa-graduation-cap"></i> Study Academies <i class="fa-solid fa-chevron-down drop-arrow"></i>
+          </button>
+          <div class="dropdown-menu-box">
+            <a href="#academy/attar" class="drop-link" onclick="app.openAcademy('attar')">
+              <i class="fa-solid fa-bottle-droplet text-warning"></i> <span id="dropAttar">Attar & Perfumes Academy</span>
+            </a>
+            <a href="#academy/clothing" class="drop-link" onclick="app.openAcademy('clothing')">
+              <i class="fa-solid fa-shirt text-danger"></i> <span id="dropClothing">Dresses & Boutique Academy</span>
+            </a>
+            <a href="#academy/watches" class="drop-link" onclick="app.openAcademy('watches')">
+              <i class="fa-solid fa-clock text-info"></i> <span id="dropWatches">Fashion Watches Academy</span>
+            </a>
+            <a href="#academy/bags" class="drop-link" onclick="app.openAcademy('bags')">
+              <i class="fa-solid fa-bag-shopping text-warning"></i> <span id="dropBags">Canvas Totes & Bags Academy</span>
+            </a>
+            <a href="#academy/accessories" class="drop-link" onclick="app.openAcademy('accessories')">
+              <i class="fa-solid fa-ring text-success"></i> <span id="dropAccessories">Rings & Jewelry Academy</span>
+            </a>
+            <a href="#academy/spices" class="drop-link" onclick="app.openAcademy('spices')">
+              <i class="fa-solid fa-seedling text-success"></i> <span id="dropSpices">Kerala Spices & Honey Academy</span>
+            </a>
+          </div>
+        </div>
+
+        <a href="#tools" class="nav-item" id="navTools" onclick="app.navigateTo('tools')"><i class="fa-solid fa-calculator"></i> Profit Tools</a>
+        <a href="#suppliers" class="nav-item" id="navSuppliers" onclick="app.navigateTo('suppliers')"><i class="fa-solid fa-store"></i> Wholesalers & Maps</a>
+        <a href="#scripts" class="nav-item" id="navTemplates" onclick="app.navigateTo('scripts')"><i class="fa-brands fa-whatsapp"></i> WhatsApp Scripts</a>
+        <a href="#plan" class="nav-btn-action" id="navPlanBuilder" onclick="app.navigateTo('plan')"><i class="fa-solid fa-file-invoice-dollar"></i> Generate Plan</a>
       </nav>
 
       <!-- Mobile Menu Toggle -->
@@ -80,799 +103,294 @@
     </div>
   </header>
 
-  <!-- Hero Section -->
-  <section class="hero-section" id="hero">
-    <div class="container hero-grid">
-      <div class="hero-text-col">
-        <div class="hero-pill">
-          <span class="pulse-dot"></span>
-          <span id="heroBadge">No Business Experience Required • 100% Free Learning Portal</span>
-        </div>
-        <h1 class="hero-heading" id="heroHeading">
-          Learn How to Start a High-Profit <span class="gradient-text">Small Business</span> in Kerala & India
-        </h1>
-        <p class="hero-desc" id="heroDesc">
-          Complete practical guidance on starting small retail & Instagram businesses in India: Attar, Modest Clothing, Fashion Watches, Bags, Rings & Kerala Spices. Direct verified wholesale market locations, WhatsApp numbers, exact initial costs, profit margins, and courier breakdowns.
-        </p>
+  <!-- =========================================================================
+       VIEW 1: CLEAN HOMEPAGE (Overview, Mission, Faculty Cards, Quiz & Roadmap)
+       ========================================================================= -->
+  <main class="page-view" id="viewHome">
+    <!-- Hero Section -->
+    <section class="hero-section" id="hero">
+      <div class="container hero-grid">
+        <div class="hero-text-col">
+          <div class="hero-pill">
+            <span class="pulse-dot"></span>
+            <span id="heroBadge">No Business Experience Required • 100% Free Learning Portal</span>
+          </div>
+          <h1 class="hero-heading" id="heroHeading">
+            Learn How to Start a High-Profit <span class="gradient-text">Small Business</span> in Kerala & India
+          </h1>
+          <p class="hero-desc" id="heroDesc">
+            A structured micro-business academy for beginners. Dedicated study courses for Attar, Modest Wear, Watches, Bags, and Rings: initial capital requirements, formulation guides, verified wholesale hubs with phone numbers & Google Maps, live profit graphs, and supplier negotiation scripts.
+          </p>
 
-        <!-- Hero Quick Stats / Trust Badges -->
-        <div class="hero-stats">
-          <div class="stat-card">
-            <span class="stat-num">₹3,000</span>
-            <span class="stat-label" id="statMinInvest">Min. Initial Investment</span>
-          </div>
-          <div class="stat-card">
-            <span class="stat-num">50% - 250%</span>
-            <span class="stat-label" id="statMargin">Realistic Profit Margin</span>
-          </div>
-          <div class="stat-card">
-            <span class="stat-num">35+</span>
-            <span class="stat-label" id="statSuppliers">Verified Wholesale Hubs</span>
-          </div>
-          <div class="stat-card">
-            <span class="stat-num">3 Languages</span>
-            <span class="stat-label" id="statLang">EN • മലയാളം • العربية</span>
-          </div>
-        </div>
-
-        <!-- Hero CTAs -->
-        <div class="hero-cta-group">
-          <a href="#categories" class="btn btn-primary" id="btnExploreNiches">
-            <i class="fa-solid fa-magnifying-glass-chart"></i> Explore Business Niches
-          </a>
-          <a href="#attar-simulator" class="btn btn-secondary" id="btnOpenSimulator">
-            <i class="fa-solid fa-chart-column"></i> Attar Profit Graph & Simulator
-          </a>
-          <a href="#suppliers" class="btn btn-outline" id="btnViewDirectory">
-            <i class="fa-solid fa-location-dot"></i> Wholesalers & Google Maps
-          </a>
-        </div>
-      </div>
-
-      <!-- Hero Visual Card / Interactive Preview -->
-      <div class="hero-visual-col">
-        <div class="hero-preview-card">
-          <div class="preview-header">
-            <div class="traffic-dots"><span></span><span></span><span></span></div>
-            <span class="preview-title" id="previewTitle">Quick Startup Comparison</span>
-          </div>
-          <div class="preview-body">
-            <div class="quick-category-item" onclick="app.selectCategory('attar')">
-              <div class="cat-icon attar-bg"><i class="fa-solid fa-bottle-droplet"></i></div>
-              <div class="cat-details">
-                <h4 id="quickAttarTitle">Attar & Perfume Oils</h4>
-                <p id="quickAttarInfo">Budget: ₹3k - ₹15k • Margin: 80% - 250%</p>
-              </div>
-              <span class="trending-tag" id="tagPopular">High Margin</span>
+          <!-- Trust Badges -->
+          <div class="hero-stats">
+            <div class="stat-card">
+              <span class="stat-num">6 Courses</span>
+              <span class="stat-label" id="statFaculties">Dedicated Academies</span>
             </div>
-
-            <div class="quick-category-item" onclick="app.selectCategory('clothing')">
-              <div class="cat-icon dress-bg"><i class="fa-solid fa-shirt"></i></div>
-              <div class="cat-details">
-                <h4 id="quickClothingTitle">Dresses & Modest Wear</h4>
-                <p id="quickClothingInfo">Budget: ₹10k - ₹35k • Margin: 45% - 120%</p>
-              </div>
-              <span class="trending-tag" id="tagHighVol">High Volume</span>
+            <div class="stat-card">
+              <span class="stat-num">₹2,500</span>
+              <span class="stat-label" id="statMinInvest">Min. Initial Investment</span>
             </div>
-
-            <div class="quick-category-item" onclick="app.selectCategory('watches')">
-              <div class="cat-icon watch-bg"><i class="fa-solid fa-clock"></i></div>
-              <div class="cat-details">
-                <h4 id="quickWatchTitle">Fashion & Smartwatches</h4>
-                <p id="quickWatchInfo">Budget: ₹8k - ₹20k • Margin: 60% - 150%</p>
-              </div>
-              <span class="trending-tag" id="tagGifts">Great Gifts</span>
+            <div class="stat-card">
+              <span class="stat-num">50% - 250%</span>
+              <span class="stat-label" id="statMargin">Realistic Profit Margin</span>
             </div>
-
-            <div class="quick-category-item" onclick="app.selectCategory('accessories')">
-              <div class="cat-icon ring-bg"><i class="fa-solid fa-ring"></i></div>
-              <div class="cat-details">
-                <h4 id="quickRingTitle">Anti-Tarnish Rings & Jewelry</h4>
-                <p id="quickRingInfo">Budget: ₹2.5k - ₹8k • Margin: 100% - 300%</p>
-              </div>
-              <span class="trending-tag" id="tagLowRisk">Lowest Risk</span>
-            </div>
-
-            <div class="quick-category-item" onclick="app.selectCategory('bags')">
-              <div class="cat-icon bag-bg"><i class="fa-solid fa-bag-shopping"></i></div>
-              <div class="cat-details">
-                <h4 id="quickBagTitle">Canvas Totes & Handbags</h4>
-                <p id="quickBagInfo">Budget: ₹5k - ₹18k • Margin: 60% - 180%</p>
-              </div>
-              <span class="trending-tag" id="tagAesthetic">Instagram Trend</span>
-            </div>
-          </div>
-          <div class="preview-footer">
-            <p><i class="fa-solid fa-lightbulb"></i> <span id="previewTip">Tap any category to view full cost breakdown, market addresses & supplier phone numbers.</span></p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Business Category Detail Explorer -->
-  <section class="section categories-section" id="categories">
-    <div class="container">
-      <div class="section-head text-center">
-        <span class="section-badge" id="secBadgeNiches">Curated In-Depth Blueprints</span>
-        <h2 class="section-title" id="secTitleNiches">Explore Lucrative Small Business Ideas</h2>
-        <p class="section-subtitle" id="secSubNiches">
-          Detailed breakdown for each business: minimum capital, wholesale price ranges, selling prices, profit margins, sourcing markets, and step-by-step guidance for absolute beginners.
-        </p>
-      </div>
-
-      <!-- Category Filter Tabs -->
-      <div class="category-tabs">
-        <button class="cat-tab-btn active" data-cat="attar">
-          <i class="fa-solid fa-bottle-droplet"></i> <span class="tab-label" id="tabAttar">Attar & Perfumes</span>
-        </button>
-        <button class="cat-tab-btn" data-cat="clothing">
-          <i class="fa-solid fa-shirt"></i> <span class="tab-label" id="tabClothing">Dresses & Boutiques</span>
-        </button>
-        <button class="cat-tab-btn" data-cat="watches">
-          <i class="fa-solid fa-clock"></i> <span class="tab-label" id="tabWatches">Watches</span>
-        </button>
-        <button class="cat-tab-btn" data-cat="bags">
-          <i class="fa-solid fa-bag-shopping"></i> <span class="tab-label" id="tabBags">Bags & Totes</span>
-        </button>
-        <button class="cat-tab-btn" data-cat="accessories">
-          <i class="fa-solid fa-ring"></i> <span class="tab-label" id="tabAccessories">Rings & Jewelry</span>
-        </button>
-        <button class="cat-tab-btn" data-cat="spices">
-          <i class="fa-solid fa-seedling"></i> <span class="tab-label" id="tabSpices">Kerala Spices & Honey</span>
-        </button>
-      </div>
-
-      <!-- Dynamic Category Blueprint Display Area -->
-      <div class="category-content-container" id="categoryContent">
-        <!-- Rendered dynamically by JavaScript in English, Malayalam, or Arabic -->
-      </div>
-    </div>
-  </section>
-
-  <!-- Interactive Attar Selection & Live Profit Graph Simulator -->
-  <section class="section attar-sim-section" id="attar-simulator">
-    <div class="container">
-      <div class="section-head text-center">
-        <span class="section-badge" id="simBadge">Interactive Fragrance Studio</span>
-        <h2 class="section-title" id="simTitle">Attar Flacon Builder & Live Profit Graph</h2>
-        <p class="section-subtitle" id="simSubtitle">
-          Select an attar oil, choose bottle size and packaging luxury tier to see the exact cost breakdown, selling price, and a real-time visual profit graph!
-        </p>
-      </div>
-
-      <div class="sim-grid">
-        <!-- Left: Interactive Selections -->
-        <div class="sim-card config-card">
-          <h3 class="sim-card-title"><i class="fa-solid fa-flask-vial text-primary"></i> <span id="simConfigTitle">1. Build Your Attar Flacon</span></h3>
-          
-          <!-- Select Oil -->
-          <div class="sim-group">
-            <label id="lblSelectOil">Select Fragrance Oil Variety:</label>
-            <div class="oil-chips-grid" id="oilChipsGrid">
-              <!-- Rendered by JS -->
+            <div class="stat-card">
+              <span class="stat-num">3 Languages</span>
+              <span class="stat-label" id="statLang">EN • മലയാളം • العربية</span>
             </div>
           </div>
 
-          <!-- Select Bottle Size -->
-          <div class="sim-group">
-            <label id="lblSelectSize">Choose Flacon Size:</label>
-            <div class="pill-options" id="sizeOptions">
-              <button class="size-pill-btn active" data-size="6">6ml (Popular Roll-On)</button>
-              <button class="size-pill-btn" data-size="12">12ml (1 Tola Luxury)</button>
-              <button class="size-pill-btn" data-size="3">3ml (Pocket Discovery)</button>
-            </div>
-          </div>
-
-          <!-- Select Bottle Style -->
-          <div class="sim-group">
-            <label id="lblSelectBottle">Choose Bottle & Hardware Style:</label>
-            <div class="pill-options" id="bottleOptions">
-              <button class="bottle-pill-btn active" data-bottle="octagonal">Octagonal Glass Roll-on (₹10)</button>
-              <button class="bottle-pill-btn" data-bottle="crystal">Crystal Gold Dipstick (₹18)</button>
-              <button class="bottle-pill-btn" data-bottle="luxury">Laser-Engraved Flacon (₹32)</button>
-            </div>
-          </div>
-
-          <!-- Select Packaging -->
-          <div class="sim-group">
-            <label id="lblSelectPack">Packaging & Pouch Tier:</label>
-            <div class="pill-options" id="packOptions">
-              <button class="pack-pill-btn active" data-pack="velvet">Velvet Pouch + Scent Strip (₹8)</button>
-              <button class="pack-pill-btn" data-pack="rigid">Rigid Slide Box + Gold Foil (₹24)</button>
-              <button class="pack-pill-btn" data-pack="casket">Artisanal Wooden Casket (₹45)</button>
-            </div>
+          <!-- Hero CTAs -->
+          <div class="hero-cta-group">
+            <a href="#faculty-section" class="btn btn-primary" id="btnExploreNiches">
+              <i class="fa-solid fa-graduation-cap"></i> Explore Business Academies
+            </a>
+            <a href="#quiz-box" class="btn btn-secondary" id="btnTakeQuiz">
+              <i class="fa-solid fa-compass"></i> Find Which Business Fits You
+            </a>
+            <a href="#suppliers" class="btn btn-outline" id="btnViewDirectory" onclick="app.navigateTo('suppliers')">
+              <i class="fa-solid fa-location-dot"></i> Wholesaler Directory & Maps
+            </a>
           </div>
         </div>
 
-        <!-- Right: Real-Time Visual Profit Graph & Financial Matrix -->
-        <div class="sim-card visual-card">
-          <h3 class="sim-card-title"><i class="fa-solid fa-chart-column text-success"></i> <span id="simGraphTitle">Live Profit Graph & Margin Visualizer</span></h3>
-          
-          <!-- Visual Bar Graph Comparison -->
-          <div class="profit-graph-wrap">
-            <div class="graph-legend">
-              <span class="legend-dot dot-oil"><i class="fa-solid fa-square"></i> <span id="legOil">Oil Cost</span></span>
-              <span class="legend-dot dot-bottle"><i class="fa-solid fa-square"></i> <span id="legBottle">Bottle</span></span>
-              <span class="legend-dot dot-pack"><i class="fa-solid fa-square"></i> <span id="legPack">Packaging</span></span>
-              <span class="legend-dot dot-profit"><i class="fa-solid fa-square"></i> <span id="legProfit">Net Profit</span></span>
+        <!-- Hero Visual: Faculty Quick Cards -->
+        <div class="hero-visual-col">
+          <div class="hero-preview-card">
+            <div class="preview-header">
+              <div class="traffic-dots"><span></span><span></span><span></span></div>
+              <span class="preview-title" id="previewTitle">6 Specialized Business Academies</span>
             </div>
-
-            <!-- Dynamic Horizontal Stacked Bar -->
-            <div class="stacked-bar-container">
-              <div class="stacked-segment seg-oil" id="barOil" style="width: 15%;" title="Oil Cost"></div>
-              <div class="stacked-segment seg-bottle" id="barBottle" style="width: 10%;" title="Bottle Cost"></div>
-              <div class="stacked-segment seg-pack" id="barPack" style="width: 8%;" title="Packaging Cost"></div>
-              <div class="stacked-segment seg-profit" id="barProfit" style="width: 67%;" title="Net Profit"></div>
-            </div>
-
-            <!-- Price Breakdown Callout -->
-            <div class="price-hero-callout">
-              <div class="cost-side">
-                <span class="small-lbl" id="lblTotalCostPerBottle">Total Cost to Make:</span>
-                <span class="cost-num" id="valTotalCostPerBottle">₹42.00</span>
+            <div class="preview-body">
+              <div class="quick-category-item" onclick="app.openAcademy('attar')">
+                <div class="cat-icon attar-bg"><i class="fa-solid fa-bottle-droplet"></i></div>
+                <div class="cat-details">
+                  <h4 id="quickAttarTitle">Attar & Perfume Academy</h4>
+                  <p id="quickAttarInfo">Budget: ₹3k - ₹12k • 80% - 250% Profit • Kozhikode & Mumbai</p>
+                </div>
+                <span class="trending-tag" id="tagPopular">High Margin</span>
               </div>
-              <div class="arrow-divider"><i class="fa-solid fa-arrow-right"></i></div>
-              <div class="sell-side">
-                <span class="small-lbl" id="lblSuggestedRetail">Selling Price:</span>
-                <span class="sell-num" id="valSuggestedRetail">₹349.00</span>
+
+              <div class="quick-category-item" onclick="app.openAcademy('clothing')">
+                <div class="cat-icon dress-bg"><i class="fa-solid fa-shirt"></i></div>
+                <div class="cat-details">
+                  <h4 id="quickClothingTitle">Dresses & Modest Wear Academy</h4>
+                  <p id="quickClothingInfo">Budget: ₹10k - ₹35k • Surat & Tirupur Direct Mills</p>
+                </div>
+                <span class="trending-tag" id="tagHighVol">High Volume</span>
               </div>
-              <div class="profit-badge-pill" id="badgeProfitMultiplier">
-                <span id="lblNetProfitPerBottle">Net Profit:</span>
-                <strong id="valNetProfitPerBottle">₹307.00</strong>
-                <small id="valProfitMarginPct">(730% Markup!)</small>
+
+              <div class="quick-category-item" onclick="app.openAcademy('watches')">
+                <div class="cat-icon watch-bg"><i class="fa-solid fa-clock"></i></div>
+                <div class="cat-details">
+                  <h4 id="quickWatchTitle">Watches & Smartwatches Academy</h4>
+                  <p id="quickWatchInfo">Budget: ₹8k - ₹20k • Hard Box Combos • Mumbai & Delhi</p>
+                </div>
+                <span class="trending-tag" id="tagGifts">Great Gifts</span>
+              </div>
+
+              <div class="quick-category-item" onclick="app.openAcademy('accessories')">
+                <div class="cat-icon ring-bg"><i class="fa-solid fa-ring"></i></div>
+                <div class="cat-details">
+                  <h4 id="quickRingTitle">Anti-Tarnish Jewelry & Rings Academy</h4>
+                  <p id="quickRingInfo">Budget: ₹2.5k - ₹8k • 100% - 300% Margin • Lowest Risk</p>
+                </div>
+                <span class="trending-tag" id="tagLowRisk">Lowest Risk</span>
+              </div>
+
+              <div class="quick-category-item" onclick="app.openAcademy('bags')">
+                <div class="cat-icon bag-bg"><i class="fa-solid fa-bag-shopping"></i></div>
+                <div class="cat-details">
+                  <h4 id="quickBagTitle">Aesthetic Canvas Totes & Bags Academy</h4>
+                  <p id="quickBagInfo">Budget: ₹5k - ₹18k • Screen Printing • Dharavi Leather</p>
+                </div>
+                <span class="trending-tag" id="tagAesthetic">Instagram Trend</span>
               </div>
             </div>
-          </div>
-
-          <!-- Batch Projection Cards -->
-          <div class="batch-projection-grid">
-            <div class="batch-box">
-              <span class="batch-title" id="lblBatch25">Batch of 25 Bottles</span>
-              <span class="batch-invest" id="valBatchInvest25">Cost: ₹1,050</span>
-              <span class="batch-profit highlight-green" id="valBatchProfit25">Profit: ₹7,675</span>
-            </div>
-            <div class="batch-box highlight-batch">
-              <span class="batch-title" id="lblBatch50">Batch of 50 Bottles</span>
-              <span class="batch-invest" id="valBatchInvest50">Cost: ₹2,100</span>
-              <span class="batch-profit highlight-green" id="valBatchProfit50">Profit: ₹15,350</span>
-            </div>
-            <div class="batch-box">
-              <span class="batch-title" id="lblBatch100">Batch of 100 Bottles</span>
-              <span class="batch-invest" id="valBatchInvest100">Cost: ₹4,200</span>
-              <span class="batch-profit highlight-green" id="valBatchProfit100">Profit: ₹30,700</span>
-            </div>
-          </div>
-
-          <div class="sim-tip-note">
-            <i class="fa-solid fa-circle-check text-success"></i>
-            <span id="simProTip">Insight: Attars offer the highest repeat purchase loyalty in India. Once a customer likes your White Musk or Shamama, they reorder every 2 months!</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Supplier Call & WhatsApp Negotiation Masterclass -->
-  <section class="section coaching-section" id="coaching-section">
-    <div class="container">
-      <div class="section-head text-center">
-        <span class="section-badge" id="coachBadge">Supplier Mastery</span>
-        <h2 class="section-title" id="coachTitle">What to Ask Wholesalers: Step-by-Step Call Coaching</h2>
-        <p class="section-subtitle" id="coachSubtitle">
-          Feel nervous about calling wholesalers? Follow this exact step-by-step masterclass with proven questions to negotiate smaller trial batches and get authentic wholesale rates.
-        </p>
-      </div>
-
-      <div class="coaching-grid" id="coachingGrid">
-        <!-- Rendered by JS -->
-      </div>
-    </div>
-  </section>
-
-  <!-- Verified Wholesale Market Directory & Supplier Contacts with Google Maps -->
-  <section class="section directory-section" id="suppliers">
-    <div class="container">
-      <div class="section-head text-center">
-        <span class="section-badge" id="dirBadge">Real Wholesale Locations</span>
-        <h2 class="section-title" id="dirTitle">Verified Wholesalers & Google Maps Directory</h2>
-        <p class="section-subtitle" id="dirSubtitle">
-          Don't know where to buy stock? Here is the exact list of genuine wholesale markets, prominent shops, addresses, Google Maps locations, and direct WhatsApp contact links in Kozhikode, Kochi, Mumbai, Surat, Tirupur, and Delhi.
-        </p>
-      </div>
-
-      <!-- Search and Filter Bar -->
-      <div class="directory-filter-bar">
-        <div class="search-box">
-          <i class="fa-solid fa-magnifying-glass"></i>
-          <input type="text" id="dirSearchInput" placeholder="Search by market, shop name, city, or product...">
-        </div>
-        <div class="filter-dropdowns">
-          <select id="filterCity" class="filter-select">
-            <option value="all">All Cities / എല്ലാ നഗരങ്ങളും</option>
-            <option value="Kozhikode">Kozhikode / Calicut (കോഴിക്കോട്)</option>
-            <option value="Kochi">Kochi / Ernakulam (കൊച്ചി)</option>
-            <option value="Mumbai">Mumbai (മുംബൈ)</option>
-            <option value="Surat">Surat (സൂററ്റ്)</option>
-            <option value="Tirupur">Tirupur (തിരുപ്പൂർ)</option>
-            <option value="Delhi">Delhi (ഡൽഹി)</option>
-            <option value="Jaipur">Jaipur (ജയ്പൂർ)</option>
-            <option value="Kannauj">Kannauj (കണ്ണൗജ്)</option>
-          </select>
-
-          <select id="filterCategory" class="filter-select">
-            <option value="all">All Niches / എല്ലാ കാറ്റഗറിയും</option>
-            <option value="attar">Attar & Fragrances</option>
-            <option value="clothing">Clothing & Fabrics</option>
-            <option value="watches">Watches</option>
-            <option value="bags">Bags & Wallets</option>
-            <option value="accessories">Rings & Jewelry</option>
-            <option value="packaging">Packaging & Bottles</option>
-            <option value="spices">Kerala Spices</option>
-          </select>
-        </div>
-      </div>
-
-      <!-- Supplier Directory Cards Grid -->
-      <div class="directory-grid" id="directoryList">
-        <!-- Rendered dynamically by JavaScript -->
-      </div>
-    </div>
-  </section>
-
-  <!-- Ready-to-Use WhatsApp Message Scripts & Templates -->
-  <section class="section templates-section" id="templates-section">
-    <div class="container">
-      <div class="section-head text-center">
-        <span class="section-badge" id="tmplBadge">Ready-to-Use Scripts</span>
-        <h2 class="section-title" id="tmplTitle">Copy-Paste WhatsApp & DM Templates</h2>
-        <p class="section-subtitle" id="tmplSubtitle">
-          Don't know what to message wholesalers or customers? Use these battle-tested professional message scripts in Malayalam, English, and Arabic. Click to copy instantly.
-        </p>
-      </div>
-
-      <div class="templates-grid" id="templatesGrid">
-        <!-- Rendered dynamically by JS -->
-      </div>
-    </div>
-  </section>
-
-  <!-- Interactive Business Compatibility Quiz (Which Business Fits You?) -->
-  <section class="section quiz-section" id="quiz-section">
-    <div class="container">
-      <div class="section-head text-center">
-        <span class="section-badge" id="quizBadge">Personal Matchmaker</span>
-        <h2 class="section-title" id="quizTitle">Find Which Business Fits You in 30 Seconds</h2>
-        <p class="section-subtitle" id="quizSubtitle">
-          Unsure where to start? Answer 3 simple questions about your budget, time, and target audience, and let our algorithm suggest the perfect micro-business.
-        </p>
-      </div>
-
-      <div class="quiz-container-box">
-        <div class="quiz-questions-grid">
-          <div class="quiz-step-card">
-            <span class="quiz-num">1</span>
-            <h4 id="q1Title">What is your starting budget?</h4>
-            <div class="quiz-options">
-              <label class="quiz-opt">
-                <input type="radio" name="quizBudget" value="low" checked>
-                <span class="opt-label" id="q1Opt1">Under ₹5,000 (Micro Starter)</span>
-              </label>
-              <label class="quiz-opt">
-                <input type="radio" name="quizBudget" value="medium">
-                <span class="opt-label" id="q1Opt2">₹10,000 - ₹20,000 (Standard Brand)</span>
-              </label>
-              <label class="quiz-opt">
-                <input type="radio" name="quizBudget" value="high">
-                <span class="opt-label" id="q1Opt3">₹40,000+ (Full Inventory / Kiosk)</span>
-              </label>
-            </div>
-          </div>
-
-          <div class="quiz-step-card">
-            <span class="quiz-num">2</span>
-            <h4 id="q2Title">How much time can you dedicate?</h4>
-            <div class="quiz-options">
-              <label class="quiz-opt">
-                <input type="radio" name="quizTime" value="part_time" checked>
-                <span class="opt-label" id="q2Opt1">1-2 hours daily (Student / Part-time)</span>
-              </label>
-              <label class="quiz-opt">
-                <input type="radio" name="quizTime" value="full_time">
-                <span class="opt-label" id="q2Opt2">Full day / Dedicated Home Business</span>
-              </label>
-            </div>
-          </div>
-
-          <div class="quiz-step-card">
-            <span class="quiz-num">3</span>
-            <h4 id="q3Title">What type of customers do you want?</h4>
-            <div class="quiz-options">
-              <label class="quiz-opt">
-                <input type="radio" name="quizAudience" value="perfume" checked>
-                <span class="opt-label" id="q3Opt1">Perfume lovers, daily users, NRI families</span>
-              </label>
-              <label class="quiz-opt">
-                <input type="radio" name="quizAudience" value="fashion">
-                <span class="opt-label" id="q3Opt2">Women, modest wear buyers, festive shoppers</span>
-              </label>
-              <label class="quiz-opt">
-                <input type="radio" name="quizAudience" value="youth">
-                <span class="opt-label" id="q3Opt3">College teens, trendy accessories, gift buyers</span>
-              </label>
+            <div class="preview-footer">
+              <p><i class="fa-solid fa-arrow-right"></i> <span id="previewTip">Tap any academy above to open its comprehensive dedicated masterclass!</span></p>
             </div>
           </div>
         </div>
+      </div>
+    </section>
 
-        <div class="quiz-action-bar text-center">
-          <button class="btn btn-primary" onclick="app.runBusinessQuiz()">
-            <i class="fa-solid fa-wand-magic-sparkles"></i> <span id="btnCalculateMatch">Reveal My Perfect Match</span>
-          </button>
+    <!-- Faculty Cards Grid (The Main Study Gateway) -->
+    <section class="section faculty-section" id="faculty-section">
+      <div class="container">
+        <div class="section-head text-center">
+          <span class="section-badge" id="facultyBadge">Choose Your Business Faculty</span>
+          <h2 class="section-title" id="facultyTitle">Dedicated Business Study Academies</h2>
+          <p class="section-subtitle" id="facultySubtitle">
+            Each academy is an independent, complete masterclass. Learn the step-by-step creation roadmap, exact capital breakdown, supplier phone numbers with Google Maps, profit graphs, and negotiation dialogue.
+          </p>
         </div>
 
-        <div class="quiz-result-display" id="quizResultArea" style="display: none;">
+        <div class="faculty-cards-grid" id="facultyCardsGrid">
           <!-- Rendered dynamically by JS -->
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Interactive Profit & Cost Calculator -->
-  <section class="section calc-section" id="calculator">
-    <div class="container">
-      <div class="section-head text-center">
-        <span class="section-badge" id="calcBadge">Real-Time Estimator</span>
-        <h2 class="section-title" id="calcTitle">Startup Cost & Profit Margin Calculator</h2>
-        <p class="section-subtitle" id="calcSubtitle">
-          Plan your financial roadmap before investing a single rupee. Estimate product sourcing cost, packaging, courier delivery, online payment gateway fees, and your net monthly profit.
-        </p>
-      </div>
-
-      <div class="calc-grid">
-        <!-- Input Form -->
-        <div class="calc-card input-card">
-          <h3 class="calc-card-title"><i class="fa-solid fa-sliders"></i> <span id="calcInputsTitle">Your Business Parameters</span></h3>
-          
-          <div class="form-group">
-            <label for="calcCategory" id="lblCalcCategory">Select Business Idea:</label>
-            <select id="calcCategory" class="form-control">
-              <option value="attar">Attar / Perfume Oils (അത്തർ കച്ചവടം)</option>
-              <option value="clothing">Dresses & Modest Wear (വസ്ത്രങ്ങൾ / ബോട്ടിക്)</option>
-              <option value="watches">Fashion & Smartwatches (വാച്ചുകൾ)</option>
-              <option value="bags">Canvas Totes & Bags (ബാഗുകൾ)</option>
-              <option value="accessories">Anti-Tarnish Rings & Jewelry (മോതിരങ്ങൾ)</option>
-              <option value="spices">Kerala Spices & Forest Honey (സ്പൈസസ് / തേൻ)</option>
-            </select>
-          </div>
-
-          <div class="form-row">
-            <div class="form-group half">
-              <label for="calcWholesaleCost" id="lblCalcCost">Wholesale Unit Cost (₹):</label>
-              <div class="input-with-symbol">
-                <span class="input-symbol">₹</span>
-                <input type="number" id="calcWholesaleCost" class="form-control" value="80" min="5" step="5">
-              </div>
-              <small class="helper-text" id="helperCost">Average cost per item from wholesale market</small>
-            </div>
-
-            <div class="form-group half">
-              <label for="calcSellingPrice" id="lblCalcPrice">Selling Price to Customer (₹):</label>
-              <div class="input-with-symbol">
-                <span class="input-symbol">₹</span>
-                <input type="number" id="calcSellingPrice" class="form-control" value="349" min="10" step="10">
-              </div>
-              <small class="helper-text" id="helperPrice">Retail price on Instagram or shop</small>
-            </div>
-          </div>
-
-          <div class="form-row">
-            <div class="form-group half">
-              <label for="calcPackagingCost" id="lblCalcPack">Packaging & Branding per Unit (₹):</label>
-              <div class="input-with-symbol">
-                <span class="input-symbol">₹</span>
-                <input type="number" id="calcPackagingCost" class="form-control" value="25" min="0" step="5">
-              </div>
-              <small class="helper-text" id="helperPack">Box, bubble wrap, thank you card, sticker</small>
-            </div>
-
-            <div class="form-group half">
-              <label for="calcShippingFee" id="lblCalcShip">Courier / Shipping Cost (₹):</label>
-              <div class="input-with-symbol">
-                <span class="input-symbol">₹</span>
-                <input type="number" id="calcShippingFee" class="form-control" value="50" min="0" step="5">
-              </div>
-              <small class="helper-text" id="helperShip">Kerala avg: ₹40-₹60, India avg: ₹60-₹90</small>
-            </div>
-          </div>
-
-          <div class="form-row">
-            <div class="form-group half">
-              <label for="calcMonthlyVolume" id="lblCalcVol">Estimated Monthly Units Sold:</label>
-              <input type="number" id="calcMonthlyVolume" class="form-control" value="60" min="1" step="5">
-              <small class="helper-text" id="helperVol">e.g., 2 orders per day = 60 orders/month</small>
-            </div>
-
-            <div class="form-group half">
-              <label for="calcShippingOption" id="lblCalcShipOpt">Shipping Charge to Customer:</label>
-              <select id="calcShippingOption" class="form-control">
-                <option value="customer_pays">Customer Pays Shipping (Extra ₹50)</option>
-                <option value="free_shipping">Free Shipping (Included in price)</option>
-              </select>
-            </div>
-          </div>
-
-          <button type="button" class="btn btn-primary btn-block" id="btnRecalculate">
-            <i class="fa-solid fa-arrows-rotate"></i> <span id="btnRecalcText">Calculate Financials</span>
-          </button>
+    <!-- 30-Second Idea Finder Quiz -->
+    <section class="section quiz-section" id="quiz-box">
+      <div class="container">
+        <div class="section-head text-center">
+          <span class="section-badge" id="quizBadge">Personal Matchmaker</span>
+          <h2 class="section-title" id="quizTitle">Find Which Business Fits You in 30 Seconds</h2>
+          <p class="section-subtitle" id="quizSubtitle">
+            Unsure where to start? Answer 3 simple questions about your budget, time, and target audience, and let our algorithm suggest the perfect micro-business.
+          </p>
         </div>
 
-        <!-- Output Dashboard -->
-        <div class="calc-card result-card">
-          <h3 class="calc-card-title"><i class="fa-solid fa-chart-pie"></i> <span id="calcResultsTitle">Projected Earnings & Margin</span></h3>
-          
-          <div class="result-highlight-box">
-            <div class="res-item main-profit">
-              <span class="res-label" id="resLblNetProfitMonth">Estimated Monthly Net Profit</span>
-              <span class="res-value highlight-green" id="resValNetProfitMonth">₹14,640</span>
-            </div>
-            <div class="res-sub-bar">
-              <div class="res-sub-item">
-                <span class="sub-label" id="resLblMargin">Profit Margin:</span>
-                <strong id="resValMargin">70.0%</strong>
+        <div class="quiz-container-box">
+          <div class="quiz-questions-grid">
+            <div class="quiz-step-card">
+              <span class="quiz-num">1</span>
+              <h4 id="q1Title">What is your starting budget?</h4>
+              <div class="quiz-options">
+                <label class="quiz-opt">
+                  <input type="radio" name="quizBudget" value="low" checked>
+                  <span class="opt-label" id="q1Opt1">Under ₹5,000 (Micro Starter)</span>
+                </label>
+                <label class="quiz-opt">
+                  <input type="radio" name="quizBudget" value="medium">
+                  <span class="opt-label" id="q1Opt2">₹10,000 - ₹20,000 (Standard Brand)</span>
+                </label>
+                <label class="quiz-opt">
+                  <input type="radio" name="quizBudget" value="high">
+                  <span class="opt-label" id="q1Opt3">₹40,000+ (Full Inventory / Kiosk)</span>
+                </label>
               </div>
-              <div class="res-sub-item">
-                <span class="sub-label" id="resLblPerItem">Net Profit / Unit:</span>
-                <strong id="resValPerItem">₹244.00</strong>
+            </div>
+
+            <div class="quiz-step-card">
+              <span class="quiz-num">2</span>
+              <h4 id="q2Title">How much time can you dedicate?</h4>
+              <div class="quiz-options">
+                <label class="quiz-opt">
+                  <input type="radio" name="quizTime" value="part_time" checked>
+                  <span class="opt-label" id="q2Opt1">1-2 hours daily (Student / Part-time)</span>
+                </label>
+                <label class="quiz-opt">
+                  <input type="radio" name="quizTime" value="full_time">
+                  <span class="opt-label" id="q2Opt2">Full day / Dedicated Home Business</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="quiz-step-card">
+              <span class="quiz-num">3</span>
+              <h4 id="q3Title">What type of customers do you want?</h4>
+              <div class="quiz-options">
+                <label class="quiz-opt">
+                  <input type="radio" name="quizAudience" value="perfume" checked>
+                  <span class="opt-label" id="q3Opt1">Perfume lovers, daily users, NRI families</span>
+                </label>
+                <label class="quiz-opt">
+                  <input type="radio" name="quizAudience" value="fashion">
+                  <span class="opt-label" id="q3Opt2">Women, modest wear buyers, festive shoppers</span>
+                </label>
+                <label class="quiz-opt">
+                  <input type="radio" name="quizAudience" value="youth">
+                  <span class="opt-label" id="q3Opt3">College teens, trendy accessories, gift buyers</span>
+                </label>
               </div>
             </div>
           </div>
 
-          <!-- Breakdown Ledger -->
-          <div class="calc-ledger">
-            <div class="ledger-row">
-              <span class="ledger-label"><i class="fa-solid fa-money-bill-wave text-success"></i> <span id="resLblRevenue">Monthly Revenue</span></span>
-              <span class="ledger-value text-success" id="resValRevenue">₹20,940</span>
-            </div>
-            <div class="ledger-row">
-              <span class="ledger-label"><i class="fa-solid fa-box text-warning"></i> <span id="resLblStockCost">Stock Purchase Cost</span></span>
-              <span class="ledger-value text-danger" id="resValStockCost">- ₹4,800</span>
-            </div>
-            <div class="ledger-row">
-              <span class="ledger-label"><i class="fa-solid fa-gift text-info"></i> <span id="resLblTotalPackaging">Packaging & Branding</span></span>
-              <span class="ledger-value text-danger" id="resValTotalPackaging">- ₹1,500</span>
-            </div>
-            <div class="ledger-row" id="ledgerShippingRow">
-              <span class="ledger-label"><i class="fa-solid fa-truck text-muted"></i> <span id="resLblTotalShipping">Net Shipping Cost</span></span>
-              <span class="ledger-value text-muted" id="resValTotalShipping">₹0 (Paid by Buyer)</span>
-            </div>
-            <div class="ledger-row">
-              <span class="ledger-label"><i class="fa-solid fa-credit-card text-muted"></i> <span id="resLblPaymentGateway">Payment Gateway / Bank (2%)</span></span>
-              <span class="ledger-value text-danger" id="resValPaymentGateway">- ₹419</span>
-            </div>
-            <div class="ledger-row highlight-row">
-              <span class="ledger-label"><i class="fa-solid fa-piggy-bank"></i> <span id="resLblStartupCap">Initial Capital Needed for 1st Batch</span></span>
-              <span class="ledger-value" id="resValStartupCap">₹6,300</span>
-            </div>
-          </div>
-
-          <!-- GCC Currency Converter Bar -->
-          <div class="gcc-converter-bar">
-            <span class="gcc-title"><i class="fa-solid fa-globe"></i> <span id="gccConvTitle">GCC Expat Currency Value:</span></span>
-            <div class="gcc-pills-row" id="gccPillsRow">
-              <!-- Dynamically updated -->
-            </div>
-          </div>
-
-          <!-- Quick Tip Box -->
-          <div class="calc-tip-box">
-            <i class="fa-solid fa-lightbulb"></i>
-            <span id="calcProTip">Pro Tip: Selling 2 orders per day generates over ₹14,000+ pure side income from home with zero shop rental.</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 7-Step Beginner Launch Roadmap -->
-  <section class="section roadmap-section" id="roadmap">
-    <div class="container">
-      <div class="section-head text-center">
-        <span class="section-badge" id="roadBadge">Zero to First Sale</span>
-        <h2 class="section-title" id="roadTitle">7-Step Beginner Launch Roadmap</h2>
-        <p class="section-subtitle" id="roadSubtitle">
-          How to start even if you have zero business background. Follow this structured roadmap to launch safely without losing money.
-        </p>
-      </div>
-
-      <div class="roadmap-timeline" id="roadmapList">
-        <!-- Rendered dynamically in selected language -->
-      </div>
-    </div>
-  </section>
-
-  <!-- Courier, Logistics & Online Charges Guide -->
-  <section class="section logistics-section" id="logistics">
-    <div class="container">
-      <div class="section-head text-center">
-        <span class="section-badge" id="logBadge">Logistics & Shipping Mastery</span>
-        <h2 class="section-title" id="logTitle">Courier Charges, Delivery & Payment Gateway Fees</h2>
-        <p class="section-subtitle" id="logSubtitle">
-          Clear breakdown of how much delivery actually costs in Kerala, across India, and to GCC countries, plus how to handle Cash on Delivery (COD) safely.
-        </p>
-      </div>
-
-      <div class="logistics-grid">
-        <!-- Logistics Table Card -->
-        <div class="logistics-card">
-          <h3 class="log-card-title"><i class="fa-solid fa-boxes-packing"></i> <span id="logRatesTitle">Domestic & International Courier Rates</span></h3>
-          <div class="table-responsive">
-            <table class="data-table">
-              <thead>
-                <tr>
-                  <th id="thService">Service / Partner</th>
-                  <th id="thZone">Destination Zone</th>
-                  <th id="thWeight">Weight (Avg)</th>
-                  <th id="thRate">Rate / Cost</th>
-                  <th id="thRemarks">Key Advantage</th>
-                </tr>
-              </thead>
-              <tbody id="logisticsTableBody">
-                <!-- Populated by JS -->
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <!-- COD Safety & Online Charges -->
-        <div class="logistics-card tips-card">
-          <h3 class="log-card-title"><i class="fa-solid fa-shield-halved"></i> <span id="logCodTitle">COD Safety & Online Charges</span></h3>
-          
-          <div class="log-tip-item">
-            <div class="tip-icon"><i class="fa-solid fa-triangle-exclamation text-warning"></i></div>
-            <div class="tip-text">
-              <h4 id="tipRtoTitle">The COD Danger: RTO (Return to Origin)</h4>
-              <p id="tipRtoDesc">When a customer refuses COD delivery, you lose both forward and return courier charges (~₹120 total). Never ship 100% COD to strangers. Take a small token advance of ₹50 - ₹100 via UPI (Google Pay / PhonePe) to confirm seriousness!</p>
-            </div>
-          </div>
-
-          <div class="log-tip-item">
-            <div class="tip-icon"><i class="fa-solid fa-credit-card text-success"></i></div>
-            <div class="tip-text">
-              <h4 id="tipGatewayTitle">Payment Gateway Charges (Razorpay / Cashfree)</h4>
-              <p id="tipGatewayDesc">Standard gateway fee is 2% + 18% GST (Net ~2.36%). On a ₹500 product, the gateway takes only ~₹11.80. Direct Google Pay / PhonePe UPI transfer has 0% fee!</p>
-            </div>
-          </div>
-
-          <div class="log-tip-item">
-            <div class="tip-icon"><i class="fa-solid fa-plane-departure text-info"></i></div>
-            <div class="tip-text">
-              <h4 id="tipGccTitle">Shipping to Gulf (UAE, Saudi, Qatar, Oman)</h4>
-              <p id="tipGccDesc">Huge demand for Attar, Kasavu sarees, and Kerala Spices among Malayali expats. Use India Post International EMS or local Kerala Gulf cargo agents (rates: ₹900 - ₹1,400 per kg). Attars without alcohol pass customs easily.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Legal, Licenses, GST & Banking Simplified Guide -->
-  <section class="section legal-section" id="legal-section">
-    <div class="container">
-      <div class="section-head text-center">
-        <span class="section-badge" id="legalBadge">Government Compliance</span>
-        <h2 class="section-title" id="legalTitle">GST, Licenses & Banking Simplified</h2>
-        <p class="section-subtitle" id="legalSubtitle">
-          Clear, honest truth about what legal registrations you actually need when starting small in Kerala and India.
-        </p>
-      </div>
-
-      <div class="legal-cards-grid" id="legalGrid">
-        <!-- Rendered dynamically by JS -->
-      </div>
-    </div>
-  </section>
-
-  <!-- Instagram & Social Selling Blueprint -->
-  <section class="section insta-section" id="instagram-guide">
-    <div class="container">
-      <div class="section-head text-center">
-        <span class="section-badge" id="instaBadge">Social Commerce</span>
-        <h2 class="section-title" id="instaTitle">The Instagram Selling Playbook</h2>
-        <p class="section-subtitle" id="instaSubtitle">
-          You don't need a fancy physical shop. Over 80% of new micro-businesses in Kerala succeed with just an Instagram page and WhatsApp catalog.
-        </p>
-      </div>
-
-      <div class="insta-grid" id="instaTipsGrid">
-        <!-- Rendered by JS -->
-      </div>
-    </div>
-  </section>
-
-  <!-- Essential Equipment & Packaging Checklist -->
-  <section class="section equip-section" id="equip-section">
-    <div class="container">
-      <div class="section-head text-center">
-        <span class="section-badge" id="equipBadge">Starter Toolkit</span>
-        <h2 class="section-title" id="equipTitle">Essential Equipment Checklist & Low-Cost Sourcing</h2>
-        <p class="section-subtitle" id="equipSubtitle">
-          The only 5 tools you need at home to run a smooth professional packaging and shipping operation for under ₹1,500 total.
-        </p>
-      </div>
-
-      <div class="equip-grid" id="equipGrid">
-        <!-- Populated by JS -->
-      </div>
-    </div>
-  </section>
-
-  <!-- Interactive Beginner FAQ Section -->
-  <section class="section faq-section" id="faq-section">
-    <div class="container">
-      <div class="section-head text-center">
-        <span class="section-badge" id="faqBadge">Got Questions?</span>
-        <h2 class="section-title" id="faqTitle">Frequently Asked Questions by Beginners</h2>
-        <p class="section-subtitle" id="faqSubtitle">
-          Clear answers to common beginner doubts: overcoming fear of camera, handling broken parcels, and getting your first customer.
-        </p>
-      </div>
-
-      <div class="faq-accordion" id="faqAccordion">
-        <!-- Populated by JS -->
-      </div>
-    </div>
-  </section>
-
-  <!-- Interactive Custom Business Plan Generator & PDF / Print View -->
-  <section class="section plan-section" id="plan-builder">
-    <div class="container">
-      <div class="section-head text-center">
-        <span class="section-badge" id="planBadge">Actionable Plan</span>
-        <h2 class="section-title" id="planTitle">Generate Your Personalized Business Plan</h2>
-        <p class="section-subtitle" id="planSubtitle">
-          Input your business dream and budget to generate a customized 1-page action blueprint with recommended supplier locations, expected margin, and launch checklist.
-        </p>
-      </div>
-
-      <div class="plan-generator-box">
-        <div class="plan-form-row">
-          <div class="plan-input-group">
-            <label for="planFounderName" id="lblFounderName">Your Name / Entrepreneur Name:</label>
-            <input type="text" id="planFounderName" class="form-control" placeholder="e.g., Mohammed / Anjali / Rahul" value="New Entrepreneur">
-          </div>
-          <div class="plan-input-group">
-            <label for="planNicheSelect" id="lblPlanNiche">Selected Business Niche:</label>
-            <select id="planNicheSelect" class="form-control">
-              <option value="attar">Attar & Perfume Oils</option>
-              <option value="clothing">Boutique & Modest Dresses</option>
-              <option value="watches">Fashion Watches & Combos</option>
-              <option value="bags">Aesthetic Bags & Wallets</option>
-              <option value="accessories">Anti-Tarnish Jewelry & Rings</option>
-              <option value="spices">Kerala Spices & Organic Honey</option>
-            </select>
-          </div>
-          <div class="plan-input-group">
-            <label for="planBudget" id="lblPlanBudget">Initial Available Capital (₹):</label>
-            <select id="planBudget" class="form-control">
-              <option value="5000">₹3,000 - ₹5,000 (Micro Starter)</option>
-              <option value="15000" selected>₹10,000 - ₹20,000 (Instagram Brand)</option>
-              <option value="50000">₹40,000 - ₹75,000 (Small Kiosk / Full Inventory)</option>
-            </select>
-          </div>
-          <div class="plan-input-group btn-align">
-            <button class="btn btn-primary btn-block" id="btnGeneratePlan" onclick="app.generatePersonalPlan()">
-              <i class="fa-solid fa-wand-magic-sparkles"></i> <span id="btnGenPlanText">Generate My Plan</span>
+          <div class="quiz-action-bar text-center">
+            <button class="btn btn-primary" onclick="app.runBusinessQuiz()">
+              <i class="fa-solid fa-wand-magic-sparkles"></i> <span id="btnCalculateMatch">Reveal My Perfect Match</span>
             </button>
           </div>
+
+          <div class="quiz-result-display" id="quizResultArea" style="display: none;"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Universal 7-Step Beginner Launch Roadmap -->
+    <section class="section roadmap-section" id="roadmap">
+      <div class="container">
+        <div class="section-head text-center">
+          <span class="section-badge" id="roadBadge">Zero to First Sale</span>
+          <h2 class="section-title" id="roadTitle">7-Step Beginner Launch Roadmap</h2>
+          <p class="section-subtitle" id="roadSubtitle">
+            How to start even if you have zero business background. Follow this structured roadmap to launch safely without losing money.
+          </p>
         </div>
 
-        <!-- Generated Plan Container -->
-        <div class="generated-plan-output" id="planOutputArea">
-          <!-- Populated by JS -->
+        <div class="roadmap-timeline" id="roadmapList">
+          <!-- Rendered dynamically by JS -->
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- =========================================================================
+       VIEW 2: DEDICATED BUSINESS ACADEMY (Complete Standalone Study Course)
+       ========================================================================= -->
+  <main class="page-view" id="viewAcademy" style="display: none;">
+    <!-- Course Header Banner & Progress Bar -->
+    <section class="course-header-banner" id="courseHeaderBanner">
+      <div class="container course-header-content">
+        <button class="btn-back-hub" onclick="app.navigateTo('home')">
+          <i class="fa-solid fa-arrow-left"></i> <span id="lblBackToHub">Back to Academies Overview</span>
+        </button>
+        <div class="course-title-wrap">
+          <span class="course-badge-pill" id="courseBadgeNiche">Specialized Faculty</span>
+          <h1 class="course-main-title" id="courseMainTitle">Attar & Artisanal Perfumes Masterclass</h1>
+          <p class="course-main-tagline" id="courseMainTagline">Complete practical study course: from ₹3,000 capital to building an aesthetic brand.</p>
+        </div>
+        
+        <!-- Sticky Navigation Bar Inside Course -->
+        <div class="course-nav-bar">
+          <a href="#mod-blueprint" class="c-nav-link active"><i class="fa-solid fa-book-open"></i> 1. Blueprint</a>
+          <a href="#mod-capital" class="c-nav-link"><i class="fa-solid fa-coins"></i> 2. Capital Breakdown</a>
+          <a href="#mod-sourcing" class="c-nav-link"><i class="fa-solid fa-flask"></i> 3. Make & Brand</a>
+          <a href="#mod-suppliers" class="c-nav-link"><i class="fa-solid fa-store"></i> 4. Sourcing & Maps</a>
+          <a href="#mod-simulator" class="c-nav-link"><i class="fa-solid fa-chart-column"></i> 5. Profit Graph</a>
+          <a href="#mod-coaching" class="c-nav-link"><i class="fa-solid fa-headset"></i> 6. Call Coach</a>
+          <a href="#mod-logistics" class="c-nav-link"><i class="fa-solid fa-truck-fast"></i> 7. Courier & Launch</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Course Modules Container -->
+    <div class="container course-modules-body" id="courseModulesBody">
+      <!-- Rendered dynamically for selected academy -->
+    </div>
+  </main>
+
+  <!-- =========================================================================
+       VIEW 3: UNIVERSAL TOOLS VIEW (Profit Calculator, Global Directory, Scripts & Plan)
+       ========================================================================= -->
+  <main class="page-view" id="viewTools" style="display: none;">
+    <!-- Section Switcher Header -->
+    <div class="tools-top-banner">
+      <div class="container text-center">
+        <button class="btn-back-hub" onclick="app.navigateTo('home')">
+          <i class="fa-solid fa-arrow-left"></i> <span id="lblBackToHub2">Back to Home</span>
+        </button>
+        <h2 class="section-title text-white" id="toolsHeaderTitle">Financial Tools & Sourcing Hubs</h2>
+        <p class="section-subtitle text-light" id="toolsHeaderSub">Access our universal profit calculator, directory of 35+ verified wholesale hubs, and WhatsApp negotiation scripts.</p>
+        <div class="tools-tab-buttons">
+          <button class="tool-tab-btn active" data-subview="calc" onclick="app.switchToolTab('calc')"><i class="fa-solid fa-calculator"></i> Profit Calculator</button>
+          <button class="tool-tab-btn" data-subview="suppliers" onclick="app.switchToolTab('suppliers')"><i class="fa-solid fa-store"></i> Wholesalers & Maps</button>
+          <button class="tool-tab-btn" data-subview="scripts" onclick="app.switchToolTab('scripts')"><i class="fa-brands fa-whatsapp"></i> WhatsApp Scripts</button>
+          <button class="tool-tab-btn" data-subview="legal" onclick="app.switchToolTab('legal')"><i class="fa-solid fa-scale-balanced"></i> GST & Banking</button>
+          <button class="tool-tab-btn" data-subview="plan" onclick="app.switchToolTab('plan')"><i class="fa-solid fa-file-invoice-dollar"></i> Business Plan</button>
         </div>
       </div>
     </div>
-  </section>
+
+    <div class="container tools-dynamic-container" id="toolsDynamicContainer">
+      <!-- Dynamic tool panel (Calculator, Suppliers, Scripts, Legal, Plan) rendered here -->
+    </div>
+  </main>
 
   <!-- Footer Section -->
   <footer class="site-footer">
@@ -893,38 +411,37 @@
       </div>
 
       <div class="footer-col">
-        <h4 class="footer-heading" id="footHeadingNiches">Business Niches</h4>
+        <h4 class="footer-heading" id="footHeadingNiches">Study Academies</h4>
         <ul class="footer-links">
-          <li><a href="#categories" onclick="app.selectCategory('attar')">Attar & Perfumes (അത്തർ)</a></li>
-          <li><a href="#categories" onclick="app.selectCategory('clothing')">Dresses & Abayas (വസ്ത്രങ്ങൾ)</a></li>
-          <li><a href="#categories" onclick="app.selectCategory('watches')">Fashion Watches (വാച്ചുകൾ)</a></li>
-          <li><a href="#categories" onclick="app.selectCategory('bags')">Bags & Totes (ബാഗുകൾ)</a></li>
-          <li><a href="#categories" onclick="app.selectCategory('accessories')">Rings & Jewelry (മോതിരങ്ങൾ)</a></li>
-          <li><a href="#categories" onclick="app.selectCategory('spices')">Kerala Spices & Honey (സുഗന്ധവ്യഞ്ജനങ്ങൾ)</a></li>
+          <li><a href="#academy/attar" onclick="app.openAcademy('attar')">Attar & Perfumes Academy</a></li>
+          <li><a href="#academy/clothing" onclick="app.openAcademy('clothing')">Dresses & Boutique Academy</a></li>
+          <li><a href="#academy/watches" onclick="app.openAcademy('watches')">Fashion Watches Academy</a></li>
+          <li><a href="#academy/bags" onclick="app.openAcademy('bags')">Canvas Totes & Bags Academy</a></li>
+          <li><a href="#academy/accessories" onclick="app.openAcademy('accessories')">Rings & Jewelry Academy</a></li>
+          <li><a href="#academy/spices" onclick="app.openAcademy('spices')">Kerala Spices & Organics</a></li>
         </ul>
       </div>
 
       <div class="footer-col">
         <h4 class="footer-heading" id="footHeadingHubs">Key Wholesale Hubs</h4>
         <ul class="footer-links">
-          <li><a href="#suppliers">Kozhikode S.M. Street (മിഠായിത്തെരുവ്)</a></li>
-          <li><a href="#suppliers">Kochi Broadway & Marine Drive</a></li>
-          <li><a href="#suppliers">Mumbai Mohammad Ali Road & Crawford</a></li>
-          <li><a href="#suppliers">Surat Textile Ring Road</a></li>
-          <li><a href="#suppliers">Tirupur Cotton Knitwear Market</a></li>
-          <li><a href="#suppliers">Delhi Chandni Chowk & Sadar</a></li>
+          <li><a href="#suppliers" onclick="app.navigateTo('suppliers')">Kozhikode S.M. Street (മിഠായിത്തെരുവ്)</a></li>
+          <li><a href="#suppliers" onclick="app.navigateTo('suppliers')">Kochi Broadway & Marine Drive</a></li>
+          <li><a href="#suppliers" onclick="app.navigateTo('suppliers')">Mumbai Mohammad Ali Road & Crawford</a></li>
+          <li><a href="#suppliers" onclick="app.navigateTo('suppliers')">Surat Textile Ring Road</a></li>
+          <li><a href="#suppliers" onclick="app.navigateTo('suppliers')">Tirupur Cotton Knitwear Market</a></li>
+          <li><a href="#suppliers" onclick="app.navigateTo('suppliers')">Delhi Chandni Chowk & Sadar</a></li>
         </ul>
       </div>
 
       <div class="footer-col">
         <h4 class="footer-heading" id="footHeadingTools">Free Interactive Tools</h4>
         <ul class="footer-links">
-          <li><a href="#attar-simulator">Attar Profit Graph & Simulator</a></li>
-          <li><a href="#coaching-section">Supplier Negotiation Masterclass</a></li>
-          <li><a href="#calculator">Profit & Margin Calculator</a></li>
-          <li><a href="#quiz-section">Idea Finder Quiz</a></li>
-          <li><a href="#suppliers">Verified Wholesaler Directory</a></li>
-          <li><a href="#plan-builder">Custom Business Plan Generator</a></li>
+          <li><a href="#tools" onclick="app.navigateTo('tools')">Profit & Margin Calculator</a></li>
+          <li><a href="#suppliers" onclick="app.navigateTo('suppliers')">Verified Wholesaler Directory & Maps</a></li>
+          <li><a href="#scripts" onclick="app.navigateTo('scripts')">WhatsApp Negotiation Scripts</a></li>
+          <li><a href="#tools" onclick="app.switchToolTab('legal')">GST, MSME & Banking Guide</a></li>
+          <li><a href="#plan" onclick="app.navigateTo('plan')">Custom Business Plan Generator</a></li>
         </ul>
       </div>
     </div>
@@ -942,8 +459,8 @@
     <button class="dock-btn" onclick="app.cycleLanguage()" title="Switch Language (EN / മലയാളം / العربية)">
       <i class="fa-solid fa-language"></i> <span id="dockLangText">EN</span>
     </button>
-    <a href="#attar-simulator" class="dock-btn dock-calc" title="Open Attar Profit Graph">
-      <i class="fa-solid fa-chart-column"></i>
+    <a href="#home" class="dock-btn dock-calc" onclick="app.navigateTo('home')" title="Home">
+      <i class="fa-solid fa-graduation-cap"></i>
     </a>
   </div>
 
