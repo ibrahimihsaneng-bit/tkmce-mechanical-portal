@@ -26,6 +26,7 @@
   <!-- FontAwesome 6 Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="style.css?v=20261124_20">
+  <link rel="stylesheet" href="theme_upgrade.css?v=20261125_1">
 </head>
 <body class="lang-en">
 
@@ -40,6 +41,9 @@
         </button>
       </div>
       <div class="top-actions">
+        <button class="theme-toggle-btn" id="topThemeToggleBtn" onclick="platformEnhancements.toggleTheme()" title="Toggle Dark/Light Mode">
+          <i class="fa-solid fa-moon"></i> <span class="theme-text">Dark</span>
+        </button>
         <div class="lang-selector" aria-label="Select Language">
           <span class="lang-label"><i class="fa-solid fa-globe"></i> <span id="langCurrentText">Language:</span></span>
           <button class="lang-btn active" data-lang="en">English</button>
@@ -73,6 +77,14 @@
           <span class="brand-sub" id="siteSubtitle">Halal Physical-Goods Trading Academy • Under ₹10,000</span>
         </div>
       </a>
+
+      <!-- Global Live Search Input -->
+      <div class="header-search-wrap" style="position: relative; flex: 1; max-width: 280px; margin: 0 16px;">
+        <i class="fa-solid fa-magnifying-glass" style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 0.85rem;"></i>
+        <input type="text" id="globalSearchInput" class="form-control" style="padding-left: 34px; padding-top: 6px; padding-bottom: 6px; font-size: 0.82rem; border-radius: 999px;" 
+               placeholder="Search academies, tools, districts..." oninput="platformEnhancements.handleGlobalSearch(this.value)">
+        <div id="globalSearchResultsDropdown" style="display: none; position: absolute; top: calc(100% + 6px); left: 0; width: 100%; min-width: 300px; background: var(--bg-card); border: 1px solid var(--border-light); border-radius: 12px; box-shadow: var(--shadow-lg); z-index: 1000; overflow: hidden;"></div>
+      </div>
 
       <!-- Navigation Links -->
       <nav class="nav-menu" id="mainNavLinks">
@@ -265,6 +277,148 @@
             <div class="preview-footer">
               <p><i class="fa-solid fa-arrow-right"></i> <span id="previewTip">Tap any academy above to open its comprehensive dedicated masterclass!</span></p>
             </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Learning Dashboard & Active Resume Bar -->
+    <div class="container">
+      <div class="learning-dashboard-bar" id="learningDashboardBar"></div>
+    </div>
+
+    <!-- Start Trading Under ₹10,000 Section -->
+    <section class="section pathway-section" id="pathways">
+      <div class="container">
+        <div class="section-head text-center">
+          <span class="section-badge"><i class="fa-solid fa-coins text-warning"></i> Accessible Micro-Commerce</span>
+          <h2 class="section-title">Start Trading Under ₹10,000</h2>
+          <p class="section-subtitle">
+            Zero debt. Zero speculative dropshipping. Real physical goods you own, inspect, and sell with genuine profit margins. Choose your starting investment level:
+          </p>
+        </div>
+
+        <div class="pathways-grid">
+          <!-- Pathway 1: Micro-Pilot -->
+          <div class="pathway-card">
+            <span class="pathway-tier-pill tier-micro">Level 1 • Micro-Pilot</span>
+            <h3 class="pathway-title">Micro Test Pilot</h3>
+            <div class="pathway-budget-amount">₹1,000 – ₹2,500</div>
+            <p class="pathway-desc">The absolute lowest risk entry point into physical goods trade. Test customer demand with small 10–20 unit batches before committing larger capital.</p>
+            <ul class="pathway-features-list">
+              <li><i class="fa-solid fa-check"></i> Attar 6ml Roll-ons (20 units @ ₹58)</li>
+              <li><i class="fa-solid fa-check"></i> Anti-tarnish rings (15 units @ ₹70)</li>
+              <li><i class="fa-solid fa-check"></i> Direct family & WhatsApp status pre-sales</li>
+              <li><i class="fa-solid fa-check"></i> Zero special storage or shop needed</li>
+            </ul>
+            <button class="btn btn-outline pathway-btn" onclick="app.filterBusinessTier('under5k'); document.getElementById('faculty-section').scrollIntoView({behavior:'smooth'});">
+              Explore Micro Courses →
+            </button>
+          </div>
+
+          <!-- Pathway 2: Growth Starter -->
+          <div class="pathway-card" style="border-color: var(--primary); box-shadow: var(--shadow-md);">
+            <span class="pathway-tier-pill tier-growth">Level 2 • Recommended</span>
+            <h3 class="pathway-title">Growth Starter</h3>
+            <div class="pathway-budget-amount">₹2,500 – ₹5,000</div>
+            <p class="pathway-desc">Optimal balance of inventory volume and branding. Order sufficient stock to qualify for wholesale tier pricing, custom pouches, and printed labels.</p>
+            <ul class="pathway-features-list">
+              <li><i class="fa-solid fa-check"></i> Kollam graded cashews (20x 250g @ ₹175)</li>
+              <li><i class="fa-solid fa-check"></i> Modest stoles & hijabs (25 pieces @ ₹85)</li>
+              <li><i class="fa-solid fa-check"></i> Punalur foothill black pepper & ginger</li>
+              <li><i class="fa-solid fa-check"></i> Hybrid WhatsApp & local store supply</li>
+            </ul>
+            <button class="btn btn-primary pathway-btn" onclick="app.filterBusinessTier('under5k'); document.getElementById('faculty-section').scrollIntoView({behavior:'smooth'});">
+              Explore Starter Courses →
+            </button>
+          </div>
+
+          <!-- Pathway 3: Full Inventory Hub -->
+          <div class="pathway-card">
+            <span class="pathway-tier-pill tier-pro">Level 3 • Micro-Hub</span>
+            <h3 class="pathway-title">Full Inventory Hub</h3>
+            <div class="pathway-budget-amount">₹5,000 – ₹10,000</div>
+            <p class="pathway-desc">A structured micro-wholesale business. Supply local bakeries, gift shops, and boutique stalls while maintaining a robust cash-flow buffer.</p>
+            <ul class="pathway-features-list">
+              <li><i class="fa-solid fa-check"></i> Multiple product combos & gift sets</li>
+              <li><i class="fa-solid fa-check"></i> Wholesale trade credit terms from mandis</li>
+              <li><i class="fa-solid fa-check"></i> Dedicated stock ledger & reorder system</li>
+              <li><i class="fa-solid fa-check"></i> Professional MSME Udyam verification</li>
+            </ul>
+            <button class="btn btn-outline pathway-btn" onclick="app.filterBusinessTier('under10k'); document.getElementById('faculty-section').scrollIntoView({behavior:'smooth'});">
+              Explore Hub Courses →
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10 Product Categories Explorer -->
+    <section class="section" id="faculties-explorer" style="background: var(--bg-card-subtle); border-top: 1px solid var(--border-light); border-bottom: 1px solid var(--border-light); padding: 45px 0;">
+      <div class="container">
+        <div class="section-head text-center">
+          <span class="section-badge"><i class="fa-solid fa-layer-group text-primary"></i> 10 Comprehensive Faculties</span>
+          <h2 class="section-title">Explore 60 Halal Trading Academies</h2>
+          <p class="section-subtitle">
+            Every academy is a complete beginner-to-launch masterclass with verified suppliers, landed cost economics, and step-by-step selling scripts.
+          </p>
+        </div>
+
+        <div class="faculties-tab-scroll">
+          <button class="faculty-pill-btn active" onclick="app.filterBusinessTier('all')"><i class="fa-solid fa-globe"></i> All Academies (60)</button>
+          <button class="faculty-pill-btn" onclick="app.openAcademy('attar')"><i class="fa-solid fa-bottle-droplet text-success"></i> 1. Islamic Essentials</button>
+          <button class="faculty-pill-btn" onclick="app.openAcademy('clothing')"><i class="fa-solid fa-shirt text-primary"></i> 2. Modest Clothing</button>
+          <button class="faculty-pill-btn" onclick="app.openAcademy('chocolates')"><i class="fa-solid fa-bowl-food text-warning"></i> 3. Packaged Halal Food</button>
+          <button class="faculty-pill-btn" onclick="app.openAcademy('cookware')"><i class="fa-solid fa-kitchen-set text-danger"></i> 4. Household Products</button>
+          <button class="faculty-pill-btn" onclick="app.openAcademy('electronics')"><i class="fa-solid fa-mobile-screen-button text-info"></i> 5. Mobile Accessories</button>
+          <button class="faculty-pill-btn" onclick="app.navigateTo('tools')"><i class="fa-solid fa-book text-secondary"></i> 6. School Stationery</button>
+          <button class="faculty-pill-btn" onclick="app.openAcademy('accessories')"><i class="fa-solid fa-ring text-warning"></i> 7. Personal Accessories</button>
+          <button class="faculty-pill-btn" onclick="app.openAcademy('spices')"><i class="fa-solid fa-pepper-hot text-danger"></i> 8. Kerala Regional Spices</button>
+          <button class="faculty-pill-btn" onclick="app.selectKeralaDistrict('kollam')"><i class="fa-solid fa-seedling text-success"></i> 9. Gardening & Coir</button>
+          <button class="faculty-pill-btn" onclick="app.openAcademy('bags')"><i class="fa-solid fa-scissors text-primary"></i> 10. General Utility</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Kerala 14-District Trading Intelligence Showcase -->
+    <section class="section" style="padding: 45px 0;">
+      <div class="container">
+        <div style="background: linear-gradient(135deg, #064e3b 0%, #065f46 60%, #047857 100%); color: #ffffff; border-radius: var(--radius-lg); padding: 36px 40px; box-shadow: var(--shadow-lg); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px;">
+          <div style="max-width: 680px;">
+            <span style="background: rgba(245, 158, 11, 0.25); border: 1px solid #f59e0b; color: #fde68a; font-size: 0.75rem; font-weight: 800; padding: 4px 12px; border-radius: 999px; display: inline-flex; align-items: center; gap: 6px; margin-bottom: 12px;">
+              <i class="fa-solid fa-star text-warning"></i> Kerala Government ODOP & OLOP Intelligence
+            </span>
+            <h3 style="font-size: 1.8rem; font-weight: 800; color: #ffffff; margin: 0 0 10px;">Explore All 14 Kerala Trading Districts</h3>
+            <p style="font-size: 0.95rem; color: #d1fae5; line-height: 1.6; margin: 0;">
+              Interactive SVG map covering all 14 districts with prioritized deep coverage of <strong>Kollam</strong> (Punalur, Anchal, Pathanapuram, Kottarakkara, Karunagappally, Kundara). Sourcing hubs, verified products under ₹10,000, and logistics.
+            </p>
+          </div>
+          <div>
+            <a href="#kerala-intel" class="btn btn-secondary" style="background: #ffffff; color: #065f46; font-weight: 800; padding: 12px 24px; border-radius: 12px;" onclick="app.navigateTo('kerala-intel')">
+              <i class="fa-solid fa-map-location-dot"></i> Open Interactive Map →
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 12 Functional Tools Gateway Banner -->
+    <section class="section" style="padding: 10px 0 45px;">
+      <div class="container">
+        <div style="background: var(--bg-card); border: 2px solid var(--border-light); border-radius: var(--radius-lg); padding: 36px 40px; box-shadow: var(--shadow-md); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px;">
+          <div style="max-width: 680px;">
+            <span style="background: var(--primary-light); color: var(--primary); font-size: 0.75rem; font-weight: 800; padding: 4px 12px; border-radius: 999px; display: inline-flex; align-items: center; gap: 6px; margin-bottom: 12px;">
+              <i class="fa-solid fa-calculator text-primary"></i> 12 Functional Interactive Tools
+            </span>
+            <h3 style="font-size: 1.7rem; font-weight: 800; color: var(--text-main); margin: 0 0 10px;">Commercial Calculators, Risk Index & Printable Ledgers</h3>
+            <p style="font-size: 0.92rem; color: var(--text-muted); line-height: 1.6; margin: 0;">
+              Zero mock dashboards. Every tool performs real calculations: Break-Even Units, True Landed Cost (freight + packaging + spoilage), 1-Page Business Plan Generator, and WhatsApp Ethical Negotiation Assistant.
+            </p>
+          </div>
+          <div>
+            <a href="#tools" class="btn btn-primary" style="font-weight: 800; padding: 12px 24px; border-radius: 12px;" onclick="app.navigateTo('tools')">
+              <i class="fa-solid fa-sliders"></i> Open 12 Tools Suite →
+            </a>
           </div>
         </div>
       </div>
@@ -499,6 +653,9 @@
               </button>
               <button class="btn-listen-course-audio" onclick="app.playAudioMasterclass()" title="ഈ കോഴ്‌സിന്റെ ഓഡിയോ കേൾക്കുക">
                 <i class="fa-solid fa-headphones text-success"></i> <span>ഓഡിയോ ക്ലാസ്</span>
+              </button>
+              <button class="btn-bookmark-header" id="btnBookmarkCourse" onclick="platformEnhancements.toggleBookmark(app.currentAcademy)" style="background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); color: #fff; padding: 6px 12px; border-radius: 8px; cursor: pointer; font-size: 0.82rem; font-weight: 600; display: inline-flex; align-items: center; gap: 6px;">
+                <i class="fa-regular fa-bookmark"></i> <span>Bookmark</span>
               </button>
             </div>
           </div>
@@ -792,10 +949,12 @@
   <script src="schema_course.js?v=20261125_1"></script>
   <script src="kerala_intelligence_data.js?v=20261125_1"></script>
   <script src="kerala_intelligence.js?v=20261125_1"></script>
+  <script src="trading_tools_engine.js?v=20261125_1"></script>
+  <script src="platform_enhancements.js?v=20261125_1"></script>
   <script src="data_retail_courses.js?v=20261124_20"></script>
   <script src="data_machine_courses.js?v=20261124_20"></script>
   <script src="data_industrial_courses.js?v=20261124_20"></script>
   <script src="data_audio_library.js?v=20261124_20"></script>
-  <script src="app.js?v=20261124_20"></script>
+  <script src="app.js?v=20261125_1"></script>
 </body>
 </html>

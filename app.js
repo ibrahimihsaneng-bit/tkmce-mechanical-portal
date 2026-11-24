@@ -2936,6 +2936,9 @@ const app = {
     }
     this.renderFloatingAudioDock();
     this.freezeCoreData();
+    if (typeof window !== 'undefined' && window.platformEnhancements) {
+      window.platformEnhancements.init();
+    }
   },
 
   detectLanguage() {
@@ -2991,8 +2994,12 @@ const app = {
       this.currentView = 'tools';
       vTools.style.display = 'block';
       
-      let tabKey = viewName === 'tools' ? 'calc' : viewName;
-      this.switchToolTab(tabKey);
+      if (viewName === 'tools' && window.tradingTools) {
+        window.tradingTools.init();
+      } else {
+        let tabKey = viewName === 'tools' ? 'calc' : viewName;
+        this.switchToolTab(tabKey);
+      }
 
       if (viewName === 'suppliers') this.updateNavActive('navSuppliers');
       else if (viewName === 'scripts') this.updateNavActive('navTemplates');
@@ -4475,6 +4482,10 @@ const app = {
     // renderStudyStageHeaderBar removed to prevent screen blocking
     this.renderCourseModules(nicheKey);
     this.renderFloatingAudioDock();
+
+    if (window.platformEnhancements) {
+      window.platformEnhancements.updateBookmarkButton(nicheKey);
+    }
 
     if (updateHash) {
       window.history.replaceState(null, '', `#academy/${nicheKey}/${targetStep}`);
