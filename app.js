@@ -4058,12 +4058,40 @@ const app = {
     const current = this.currentCourseStep;
     const pct = Math.round((current / 8) * 100);
 
+    const isMachine = cat.tier === 'machine';
+    const isIndustrial = cat.tier === 'industrial';
+    const isAttar = nicheKey === 'attar';
+
+    const step1Title = isMachine ? (lang === 'ml' ? "1. മെഷീൻ വിവരങ്ങൾ" : lang === 'ar' ? "1. مواصفات الآلة" : "1. Machine Specs & Standards")
+      : isIndustrial ? (lang === 'ml' ? "1. പ്ലാന്റ് എഞ്ചിനീയറിംഗ്" : lang === 'ar' ? "1. الهندسة الصناعية" : "1. Plant Specs & Standards")
+      : (t.step1Pill || "1. Product Science");
+
+    const step1Sub = isMachine ? (lang === 'ml' ? "മെഷീൻ വിവരങ്ങളും സ്പെസിഫിക്കേഷനും" : lang === 'ar' ? "مواصفات الآلة والقدرة" : "Machine Blueprint & Capacity")
+      : isIndustrial ? (lang === 'ml' ? "പ്ലാന്റ് എൻജിനീയറിംഗും ശേഷിയും" : lang === 'ar' ? "الهندسة الصناعية والطاقة التشغيلية" : "Plant Engineering & Capacity")
+      : isAttar ? (lang === 'ml' ? "അടിത്തറ & സുഗന്ധ ശാസ്ത്രം" : lang === 'ar' ? "علم المنتج والصنعة" : "Blueprint & Scent Science")
+      : (lang === 'ml' ? "അടിത്തറ & ഉൽപ്പന്ന വിവരങ്ങൾ" : lang === 'ar' ? "علم المنتج والمواصفات" : "Blueprint & Product Standards");
+
+    const step3Title = (isMachine || isIndustrial) ? (lang === 'ml' ? "3. മെഷീൻ നിർമ്മാതാക്കൾ" : lang === 'ar' ? "3. مصنعو الآلات" : "3. Machinery Hubs & Tooling")
+      : (t.step3Pill || "3. Wholesale Markets");
+
+    const step3Sub = (isMachine || isIndustrial) ? (lang === 'ml' ? "മെഷീൻ നിർമ്മാതാക്കളും ഹബ്ബുകളും" : lang === 'ar' ? "مراكز الآلات والتجهيزات" : "Machinery Manufacturers & Tooling")
+      : (lang === 'ml' ? "ഹോൾസെയിൽ മാർക്കറ്റുകളും മാപ്പും" : lang === 'ar' ? "أسواق الجملة والخرائط" : "Wholesale Hubs & Direct Sourcing");
+
+    const step5Title = isMachine ? (lang === 'ml' ? "5. മെഷീൻ ഓപ്പറേഷൻ SOP" : lang === 'ar' ? "5. تشغيل الآلة" : "5. Machine Operation & SOP")
+      : isIndustrial ? (lang === 'ml' ? "5. ഇൻഡസ്ട്രിയൽ പ്രോസസ്സിംഗ്" : lang === 'ar' ? "5. المعالجة الصناعية" : "5. Industrial Processing SOP")
+      : (t.step5Pill || "5. Formulation & Making");
+
+    const step5Sub = isMachine ? (lang === 'ml' ? "മെഷീൻ പ്രവർത്തനവും ഉൽപ്പാദന രീതിയും" : lang === 'ar' ? "تشغيل الآلات وخطوات الإنتاج" : "Machine Operation & Production SOP")
+      : isIndustrial ? (lang === 'ml' ? "ഇൻഡസ്ട്രിയൽ പ്രോസസ്സിംഗ് ഘട്ടങ്ങൾ" : lang === 'ar' ? "مراحل التصنيع الصناعي" : "Industrial Batch Processing SOP")
+      : isAttar ? (lang === 'ml' ? "മിക്സിംഗ് & ബോട്ടിലിംഗ് രീതി" : lang === 'ar' ? "طريقة التركيب والتعبئة" : "Assembly & Bottling SOP")
+      : (lang === 'ml' ? "ഉൽപ്പാദന രീതി & പാക്കിംഗ് SOP" : lang === 'ar' ? "طريقة التجهيز والتغليف" : "Production & Packaging SOP");
+
     const chapterItems = [
-      { num: 1, title: t.step1Pill || "1. Product Science", sub: lang === 'ml' ? "അടിത്തറ & ഉൽപ്പന്ന വിവരങ്ങൾ" : lang === 'ar' ? "علم المنتج والصنعة" : "Blueprint & Scent Science" },
+      { num: 1, title: step1Title, sub: step1Sub },
       { num: 2, title: t.step2Pill || "2. Capital Breakdown", sub: lang === 'ml' ? "എന്തിനൊക്കെ എത്ര രൂപ?" : lang === 'ar' ? "جدول الميزانية والتكاليف" : "Itemized Budget Ledger" },
-      { num: 3, title: t.step3Pill || "3. Wholesale Markets", sub: lang === 'ml' ? "മിഠായിത്തെരുവ് & ക്രോഫോർഡ്" : lang === 'ar' ? "أسواق الجملة والخرائط" : "Wholesale Hubs & Maps" },
+      { num: 3, title: step3Title, sub: step3Sub },
       { num: 4, title: t.step4Pill || "4. Calling Dialogue", sub: lang === 'ml' ? "സംസാരിക്കേണ്ട രീതി & ചോദ്യങ്ങൾ" : lang === 'ar' ? "حوار الاتصال والتفاوض" : "Negotiation & Scripts" },
-      { num: 5, title: t.step5Pill || "5. Formulation & Making", sub: lang === 'ml' ? "പുതിയത് ഉണ്ടാക്കുന്ന വിധം" : lang === 'ar' ? "طريقة التركيب والتصنيع" : "Assembly & Bottling SOP" },
+      { num: 5, title: step5Title, sub: step5Sub },
       { num: 6, title: t.step6Pill || "6. Profit Graph", sub: lang === 'ml' ? "ലൈവ് ലാഭ ഗ്രാഫ്" : lang === 'ar' ? "رسم وحاسبة الأرباح" : "Visual Profit Simulator" },
       { num: 7, title: t.step7Pill || "7. Portals, Instagram & Websites", sub: lang === 'ml' ? "ഇൻസ്റ്റാഗ്രാം, ഫേസ്ബുക്ക് & സൈറ്റുകൾ" : lang === 'ar' ? "المواقع وصفحات إنستغرام" : "Instagram & Verified Portals" },
       { num: 8, title: t.step8Pill || "8. Courier & Launch", sub: lang === 'ml' ? "കൊറിയർ നിരക്കുകൾ & വിൽപന" : lang === 'ar' ? "الشحن وانطلاقة البيع" : "Safe COD & Dispatch Rules" }
