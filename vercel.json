@@ -1,13 +1,16 @@
 {
   "cleanUrls": true,
+  "rewrites": [
+    { "source": "/academy/:path*", "destination": "/index.html" },
+    { "source": "/plan", "destination": "/index.html" },
+    { "source": "/suppliers", "destination": "/index.html" },
+    { "source": "/tools", "destination": "/index.html" },
+    { "source": "/calc", "destination": "/index.html" }
+  ],
   "headers": [
     {
       "source": "/(.*)",
       "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=0, must-revalidate"
-        },
         {
           "key": "X-Frame-Options",
           "value": "DENY"
@@ -43,6 +46,24 @@
         {
           "key": "Content-Security-Policy",
           "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: https:; connect-src 'self' https:; media-src 'self' blob:; frame-ancestors 'none';"
+        }
+      ]
+    },
+    {
+      "source": "/(style.css|app.js|data_.*\\.js)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=86400, stale-while-revalidate=604800"
+        }
+      ]
+    },
+    {
+      "source": "/(sitemap.xml|robots.txt)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600"
         }
       ]
     }

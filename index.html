@@ -3,11 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-  <meta http-equiv="Pragma" content="no-cache">
-  <meta http-equiv="Expires" content="0">
-  <meta http-equiv="X-Content-Type-Options" content="nosniff">
-  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <link rel="canonical" href="https://vyapar-shiksha.vercel.app/">
   
   <!-- Anti-Clickjacking Frame Defense -->
   <script>
@@ -16,11 +12,15 @@
     }
   </script>
   <title>BUSINESS IN KERALA | Practical Business Learning Platform & Academy</title>
-  <meta name="description" content="Dedicated study academies for starting Attar, Clothing, Watches, Bags, and Fashion Accessories micro-businesses in India & Kerala with verified wholesale markets, supplier contacts, profit calculators, and logistics guide. Available in English, Malayalam, and Arabic.">
+  <meta name="description" content="Dedicated study academies for starting 30 micro, machinery, and industrial businesses in Kerala & India. Complete practical guides, verified wholesale markets, supplier contacts, and profit calculators. Available in Malayalam, English, and Arabic.">
+  <meta name="keywords" content="business ideas kerala, small scale industry kerala, attar business, machinery units, halal business kerala, vyapar shiksha">
   
-  <!-- Modern Google Fonts for English, Malayalam and Arabic -->
+  <!-- Mobile Performance & Resource Pre-connections -->
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+  <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Manjari:wght@400;700&family=Cairo:wght@400;600;700;800&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
   
   <!-- FontAwesome 6 Icons -->
@@ -485,9 +485,14 @@
         <div class="course-title-wrap">
           <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 8px;">
             <span class="course-badge-pill" id="courseBadgeNiche">Specialized Faculty</span>
-            <button class="btn-listen-course-audio" onclick="app.playAudioMasterclass()" title="ഈ കോഴ്‌സിന്റെ ഓഡിയോ കേൾക്കുക">
-              <i class="fa-solid fa-headphones text-success"></i> <span>ഓഡിയോ ക്ലാസ് കേൾക്കുക</span>
-            </button>
+            <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+              <button class="btn-checklist-header" onclick="app.openChecklistModal(app.currentAcademy)" title="ഈ ബിസിനസ്സ് തുടങ്ങാനുള്ള സൗജന്യ ചെക്ക്‌ലിസ്റ്റ് (PDF)">
+                <i class="fa-solid fa-file-pdf"></i> <span>ബിസിനസ്സ് ചെക്ക്‌ലിസ്റ്റ് (PDF)</span>
+              </button>
+              <button class="btn-listen-course-audio" onclick="app.playAudioMasterclass()" title="ഈ കോഴ്‌സിന്റെ ഓഡിയോ കേൾക്കുക">
+                <i class="fa-solid fa-headphones text-success"></i> <span>ഓഡിയോ ക്ലാസ്</span>
+              </button>
+            </div>
           </div>
           <h1 class="course-main-title" id="courseMainTitle">Attar & Artisanal Perfumes Masterclass</h1>
           <p class="course-main-tagline" id="courseMainTagline">Complete practical study course: from ₹3,000 capital to building an aesthetic brand.</p>
@@ -730,6 +735,18 @@
             <li><strong>Strict Moderation:</strong> Strictly business-related discussions only; no spam, politics, or irrelevant forwards.</li>
           </ul>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       DEDICATED BUSINESS STARTER CHECKLIST MODAL (PDF / PRINTABLE)
+       ========================================================================= -->
+  <div id="checklistModal" class="community-modal-backdrop checklist-modal-backdrop" style="display: none;">
+    <div class="community-modal-box checklist-modal-box">
+      <button class="community-modal-close" onclick="app.closeChecklistModal()" aria-label="Close Modal">&times;</button>
+      <div id="checklistModalContent">
+        <!-- Rendered dynamically by app.renderChecklistModal(nicheKey) -->
       </div>
     </div>
   </div>

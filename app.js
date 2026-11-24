@@ -5097,22 +5097,30 @@ const app = {
   },
 
   processHash() {
-    const rawHash = window.location.hash.replace(/^#/, '').trim();
-    if (!rawHash) {
+    let route = window.location.hash.replace(/^#/, '').trim();
+    // Support clean pathname routes for SEO (e.g. /academy/attar or /plan)
+    if (!route) {
+      const pathname = window.location.pathname.replace(/^\/+|\/+$/g, '').trim();
+      if (pathname && (pathname.startsWith('academy/') || ['tools', 'suppliers', 'scripts', 'legal', 'plan', 'calc', 'home'].includes(pathname))) {
+        route = pathname;
+      }
+    }
+
+    if (!route) {
       if (this.currentView !== 'academy') {
         this.navigateTo('home');
       }
       return;
     }
 
-    if (rawHash.startsWith('academy/')) {
-      const parts = rawHash.split('/');
+    if (route.startsWith('academy/')) {
+      const parts = route.split('/');
       const niche = parts[1] || 'attar';
       const step = parts[2] ? parseInt(parts[2], 10) : (this.currentCourseStep || 1);
       this.openAcademy(niche, step, false);
-    } else if (['tools', 'suppliers', 'scripts', 'legal', 'plan', 'calc'].includes(rawHash)) {
-      this.navigateTo(rawHash);
-    } else if (rawHash === 'home') {
+    } else if (['tools', 'suppliers', 'scripts', 'legal', 'plan', 'calc'].includes(route)) {
+      this.navigateTo(route);
+    } else if (route === 'home') {
       this.navigateTo('home');
     }
     // Anchor tags like #mod-capital do NOT redirect to home!
@@ -5798,6 +5806,412 @@ const app = {
     this.openCommunityModal();
   },
 
+  // =========================================================================
+  // DEDICATED BUSINESS STARTER CHECKLIST SUITE & PDF EXPORTER
+  // =========================================================================
+  openChecklistModal(categoryKey) {
+    if (!categoryKey) categoryKey = this.currentAcademy || 'attar';
+    this.renderChecklistModal(categoryKey);
+    const modal = document.getElementById('checklistModal');
+    if (modal) {
+      modal.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+  },
+
+  closeChecklistModal() {
+    const modal = document.getElementById('checklistModal');
+    if (modal) {
+      modal.style.display = 'none';
+      document.body.style.overflow = '';
+    }
+  },
+
+  getChecklistData(categoryKey) {
+    if (!categoryKey) categoryKey = this.currentAcademy || 'attar';
+    const cat = this.categoriesData[categoryKey] || this.categoriesData.attar || {};
+    const lang = this.currentLang || 'ml';
+    const title = cat.title ? (cat.title[lang] || cat.title.ml || cat.title.en) : categoryKey;
+    const budget = cat.minBudget || cat.budget || '₹3,000 - ₹15,000';
+    const margin = cat.margin || '50% - 150%';
+    const hubs = cat.topMarkets || 'Kozhikode, Kochi, Mumbai, Surat';
+
+    const isFood = ['spices', 'mach_coldpress', 'mach_spisegrind', 'mach_icepopsicle', 'ind_mangopulp', 'ind_coconutoil', 'ind_iqffrozen', 'ind_vacuumchips', 'ind_dairyplant', 'ind_cashewplant', 'ind_bottledwater'].includes(categoryKey);
+    const isMachinery = categoryKey.startsWith('mach_') || categoryKey.startsWith('ind_') || ['spices', 'cookware'].includes(categoryKey);
+
+    const licenses = [
+      {
+        title: "Udyam MSME Registration (ഉദ്യം രജിസ്ട്രേഷൻ)",
+        desc: "കേന്ദ്ര ചെറുകിട വ്യവസായ മന്ത്രാലയത്തിന്റെ സൗജന്യ ആധാർ ലിങ്ക്ഡ് രജിസ്ട്രേഷൻ. സർക്കാർ ആനുകൂല്യങ്ങൾക്കും സബ്സിഡികൾക്കും മുൻഗണനാ ബാങ്ക് വായ്പകൾക്കും നിർബന്ധം.",
+        req: "നിർബന്ധം (Mandatory)",
+        portal: "udyamregistration.gov.in"
+      },
+      {
+        title: isFood ? "FSSAI Basic / State Food Safety License (ഭക്ഷ്യ സുരക്ഷാ ലൈസൻസ്)" : "Local Body D&O Trade License (പഞ്ചായത്ത് / മുനിസിപ്പാലിറ്റി ഡി & ഒ ലൈസൻസ്)",
+        desc: isFood ? "ഭക്ഷ്യോത്പന്നങ്ങൾ, പാനീയങ്ങൾ, എണ്ണകൾ, സുഗന്ധവ്യഞ്ജനങ്ങൾ എന്നിവ വിപണനം ചെയ്യുന്നതിന് കേന്ദ്ര FSSAI ലൈസൻസ് നിർബന്ധം." : "തദ്ദേശ സ്വയംഭരണ സ്ഥാപനത്തിൽ നിന്നുള്ള വ്യാപാര / വ്യവസായ ലൈസൻസ് (K-SWIFT സിംഗിൾ വിൻഡോ വഴി അപേക്ഷിക്കാം).",
+        req: "നിർബന്ധം (Mandatory)",
+        portal: isFood ? "foscos.fssai.gov.in" : "kswift.kerala.gov.in"
+      },
+      {
+        title: "GST Registration (ജി.എസ്.ടി രജിസ്ട്രേഷൻ)",
+        desc: "സംസ്ഥാനത്തിന് പുറത്തേക്ക് ഉൽപ്പന്നങ്ങൾ വിൽക്കാനും, ഇ-കൊമേഴ്‌സ് പ്ലാറ്റ്‌ഫോമുകൾ (Amazon, Flipkart, Shopify) വഴി വിൽക്കാനും, ഇൻപുട്ട് ടാക്സ് ക്രെഡിറ്റ് ക്ലെയിം ചെയ്യാനും നിർബന്ധം.",
+        req: isMachinery ? "നിർബന്ധം (Mandatory)" : "ശുപാർശ ചെയ്യുന്നു (Recommended for Inter-state)",
+        portal: "gst.gov.in"
+      },
+      {
+        title: isMachinery ? "Kerala State Pollution Control Board (PCB) Consent" : "Current Bank Account & Trade Name (ബാങ്ക് കറന്റ് അക്കൗണ്ട്)",
+        desc: isMachinery ? "നിർമ്മാണശാലകൾക്കും യൂണിറ്റുകൾക്കും പരിസ്ഥിതി മലിനീകരണ നിയന്ത്രണ ബോർഡിൽ നിന്നുള്ള Consent to Establish (CTE) / Consent to Operate (CTO) ക്ലിയറൻസ്." : "സ്ഥാപനത്തിന്റെ പേരിൽ ചെക്ക് ബുക്കും യു.പി.ഐയും ഉള്ള കറന്റ് അക്കൗണ്ട് (വ്യാപാര ഇടപാടുകൾക്ക് നിർബന്ധം).",
+        req: isMachinery ? "നിർമ്മാണ യൂണിറ്റുകൾക്ക് നിർബന്ധം" : "നിർബന്ധം (Mandatory)",
+        portal: isMachinery ? "krocmms.nic.in" : "Bank Branch"
+      },
+      {
+        title: isMachinery ? "KSEB Industrial Power Connection (LT-IV Tariff)" : "Legal Metrology / LMPC Registration & Labeling Compliance",
+        desc: isMachinery ? "മെഷിനറികൾ പ്രവർത്തിപ്പിക്കാൻ ആവശ്യമായ വ്യാവസായിക പവർ സപ്ലൈ അനുമതി." : "പാക്കറ്റിൽ കൃത്യമായ അളവ്, തൂക്കം, നിർമ്മാതാവിന്റെ വിലാസം, എം.ആർ.പി എന്നിവ രേഖപ്പെടുത്തുന്ന നിയമപരമായ നിബന്ധനകൾ.",
+        req: "നിയമപരം (Statutory)",
+        portal: isMachinery ? "kseb.in" : "consumeraffairs.kerala.gov.in"
+      }
+    ];
+
+    const budgetItems = [
+      { name: "പ്രാരംഭ മെഷിനറി & ടൂളുകൾ (Equipment & Hardware)", share: "40% - 50%", est: "യൂണിറ്റ് കപ്പാസിറ്റി അനുസരിച്ച്" },
+      { name: "അസംസ്കൃത വസ്തുക്കൾ - ആദ്യ ബാച്ച് (Raw Materials Initial Batch)", share: "25% - 35%", est: "കുറഞ്ഞത് 2 ആഴ്ചത്തെ ഉത്പാദനത്തിന്" },
+      { name: "പാക്കേജിംഗ്, ബോട്ടിലുകൾ, ബോക്സുകൾ, ലേബലുകൾ (Packaging & Labels)", share: "10% - 15%", est: "ബ്രാൻഡഡ് റോൾസ് / പൗച്ചുകൾ" },
+      { name: "സാമ്പിൾ വിതരണവും ആദ്യ മാർക്കറ്റിംഗും (Marketing & Samples)", share: "5% - 8%", est: "സോഷ്യൽ മീഡിയ & നേരിട്ടുള്ള വിസിറ്റ്" },
+      { name: "പ്രവർത്തന ഫണ്ട് & എമർജൻസി റിസർവ് (Working Capital Buffer)", share: "10%", est: "കൊറിയർ ചാർജുകൾ & അപ്രതീക്ഷിത ചിലവുകൾ" }
+    ];
+
+    let machineryList = [];
+    if (categoryKey === 'attar') {
+      machineryList = [
+        "പ്രീമിയം ഗ്ലാസ് റോളോൺ കുപ്പികൾ (3ml, 6ml, 12ml ഒക്ടാഗണൽ ക്രിസ്റ്റൽ ഫ്ലാക്കൺസ്) - 100 എണ്ണം",
+        "മെഡിക്കൽ ഗ്രേഡ് കാലിബ്രേറ്റഡ് ഡ്രോപ്പർ പൈപ്പറ്റുകൾ (Dropper Pipettes 3ml/5ml) - 20 എണ്ണം",
+        "സുഗന്ധതൈലങ്ങൾ കൃത്യമായി അളക്കാനുള്ള ഗ്ലാസ് ബീക്കറുകൾ (50ml & 100ml)",
+        "കറുത്ത വെൽവെറ്റ് ഡ്രോസ്ട്രിംഗ് പൗച്ചുകൾ അല്ലെങ്കിൽ മാഗ്നറ്റിക് ഹാർഡ് ബോക്സുകൾ",
+        "വാട്ടർപ്രൂഫ് വിനൈൽ മെറ്റാലിക് എംബോസ്ഡ് ബ്രാൻഡ് ലേബലുകൾ & ബാർകോഡ് സ്റ്റിക്കറുകൾ"
+      ];
+    } else if (categoryKey === 'clothing') {
+      machineryList = [
+        "ഹെവി ഡ്യൂട്ടി പ്രൊഫഷണൽ ഗാർമെന്റ് സ്റ്റീം പ്രസ്സ് അയൺ (Steam Iron Station)",
+        "തുണിയുടെ ഗുണനിലവാരം പരിശോധിക്കാനുള്ള ത്രെഡ് കൗണ്ട് ലൂപ്പ് & മെഷറിംഗ് ടേപ്പ്",
+        "വസ്ത്രങ്ങളിൽ ബ്രാൻഡ് പ്രൈസ് ടാഗുകൾ ഘടിപ്പിക്കാനുള്ള ഗാർമെന്റ് ടാഗിംഗ് ഗൺ (Tagging Gun)",
+        "കസ്റ്റം പ്രീമിയം സാറ്റിൻ വോവൻ നെക്ക് ലേബലുകൾ & വാഷ് കെയർ ടാഗുകൾ",
+        "സുരക്ഷിതമായി കൊറിയർ അയക്കാനുള്ള വാട്ടർപ്രൂഫ് പ്രൊട്ടക്റ്റീവ് പോളി മെയിലർ ബാഗുകൾ"
+      ];
+    } else if (categoryKey === 'mach_paperbag') {
+      machineryList = [
+        "ഓട്ടോമാറ്റിക് ഫ്ലാറ്റ് & സാച്ചെൽ പേപ്പർ ബാഗ് നിർമ്മാണ മെഷീൻ (Automatic Paper Bag Machine)",
+        "പേപ്പർ റീൽ സ്റ്റാൻഡ് & വെബ് ടെൻഷൻ കൺട്രോളർ",
+        "ഹാൻഡിൽ പാസ്റ്റിംഗ് പ്രസ്സ് യൂണിറ്റ് (D-Cut അല്ലെങ്കിൽ Rope Handle)",
+        "ഫുഡ് ഗ്രേഡ് വാട്ടർ ബേസ്ഡ് പശ അപ്ലിക്കേറ്റർ (Adhesive Glue Tank)",
+        "കട്ടിംഗ് ബ്ലേഡുകൾ & ക്രീസിങ് ഡൈ സെറ്റ്"
+      ];
+    } else if (categoryKey === 'mach_coldpress') {
+      machineryList = [
+        "പരമ്പരാഗത തടിയിൽ നിർമ്മിച്ച റോട്ടറി ഓയിൽ എക്സ്പെല്ലർ (Marachekku Wood Press Machine 5HP)",
+        "സ്റ്റെയിൻലെസ്സ് സ്റ്റീൽ ഗ്രേഡ് SS304 ഓയിൽ കളക്ഷൻ & സെറ്റിലിംഗ് ടാങ്ക്",
+        "ഡബിൾ സ്റ്റേജ് ഫിൽട്ടർ പ്രസ്സ് യൂണിറ്റ് (Clarification Filter)",
+        "സെമി-ഓട്ടോമാറ്റിക് ബോട്ടിൽ ഫില്ലിംഗ് & ക്യാപ്പിംഗ് മെഷീൻ",
+        "ബോട്ടിൽ ഇൻഡക്ഷൻ സീലിംഗ് മെഷീൻ & ബാച്ച് കോഡിംഗ് മെഷീൻ"
+      ];
+    } else if (categoryKey === 'ind_mangopulp') {
+      machineryList = [
+        "റോട്ടറി ഫ്രൂട്ട് വാഷിംഗ് മെഷീൻ (Bubbling Air & Water Spray Washer)",
+        "തെർമൽ ഡിസ്റ്റോണർ & കണ്ടിന്യൂവസ് ഡബിൾ സ്റ്റേജ് പൾപ്പർ (Continuous Fruit Pulper)",
+        "ട്യൂബുലാർ അസെപ്റ്റിക് സ്റ്റെറിലൈസർ & പ്രീ-ഹീറ്റർ യൂണിറ്റ്",
+        "ഹോമോജെനൈസർ & ഡീ-എയറേറ്റർ വാക്വം ടാങ്ക്",
+        "അസെപ്റ്റിക് ബാഗ്-ഇൻ-ഡ്രം ഫില്ലിംഗ് സ്റ്റേഷൻ (215kg Aseptic Bags)"
+      ];
+    } else {
+      machineryList = [
+        "പ്രധാന നിർമ്മാണ / പ്രോസസ്സിംഗ് മെഷീനറി (Core Processing / Packaging Machinery)",
+        "ഗുണനിലവാര പരിശോധനയ്ക്കുള്ള ഡിജിറ്റൽ സ്കെയിൽ & മെഷറിംഗ് ഉപകരണങ്ങൾ (Digital Scales)",
+        "പ്രൊഫഷണൽ ഹീറ്റ് സീലർ അല്ലെങ്കിൽ ഓട്ടോമാറ്റിക് ബാൻഡ് സീലിംഗ് മെഷീൻ",
+        "ബാച്ച് കോഡിംഗ്, എം.ആർ.പി & എക്സ്പെയറി ഡേറ്റ് പ്രിന്റിംഗ് മെഷീൻ",
+        "കൊറിയർ ട്രാൻസിറ്റിന് ആവശ്യമായ പ്രൊട്ടക്റ്റീവ് പാക്കേജിംഗ് മെറ്റീരിയലുകൾ"
+      ];
+    }
+
+    const sourcingList = [
+      "അംഗീകൃത മൊത്തവ്യാപാര കേന്ദ്രങ്ങളിൽ നിന്നുള്ള സർട്ടിഫൈഡ് സാമ്പിൾ ബാച്ച് പരിശോധിക്കുക",
+      "മദർ ഓയിൽ / റോ മെറ്റീരിയൽ ടെസ്റ്റ് റിപ്പോർട്ടും പരിശുദ്ധി സർട്ടിഫിക്കറ്റും ഉറപ്പുവരുത്തുക",
+      "ക്യാഷ് ഡിസ്കൗണ്ടിനേക്കാൾ ഗുണനിലവാരത്തിനും സമയബന്ധിതമായ സപ്ലൈക്കും മുൻഗണന നൽകുക",
+      "സപ്ലയറുടെ വാണിജ്യ വിലാസവും ജി.എസ്.ടി നമ്പറും സർക്കാരിലെ ഔദ്യോഗിക പോർട്ടലിൽ വെരിഫൈ ചെയ്യുക",
+      "പലിശരഹിത സുതാര്യമായ കരാറുകളിൽ ഏർപ്പെടുക (No Hidden Riba or Penalties)"
+    ];
+
+    const launchSteps = [
+      "ദിവസം 1: മാർക്കറ്റ് സർവേയും, മത്സര ഉൽപ്പന്നങ്ങളുടെ വിലയും ഗുണനിലവാരവും പഠിക്കൽ",
+      "ദിവസം 2: ഉദ്യം (Udyam) രജിസ്ട്രേഷനും തദ്ദേശ സ്വയംഭരണ അപേക്ഷയും ഓൺലൈനായി സമർപ്പിക്കൽ",
+      "ദിവസം 3: ബ്രാൻഡ് നെയിം, ലോഗോ, വാട്ടർപ്രൂഫ് ലേബലുകൾ എന്നിവ ഡിസൈൻ ചെയ്തു പ്രിന്റ് ചെയ്യൽ",
+      "ദിവസം 4: ആദ്യ ബാച്ച് അസംസ്കൃത വസ്തുക്കൾ വാങ്ങി ട്രയൽ പ്രൊഡക്ഷനും ക്വാളിറ്റി ടെസ്റ്റും നടത്തൽ",
+      "ദിവസം 5: പ്രൊഫഷണൽ ഫോട്ടോകൾ എടുത്ത് വാട്സാപ്പ് ബിസിനസ്സ് കാറ്റലോഗ് തയ്യാറാക്കൽ",
+      "ദിവസം 6: ആദ്യ 20 സാമ്പിളുകൾ വിശ്വസ്തരായ ഉപഭോക്താക്കൾക്ക് നൽകി അഭിപ്രായങ്ങൾ രേഖപ്പെടുത്തൽ",
+      "ദിവസം 7: സോഷ്യൽ മീഡിയ വഴിയും ലോക്കൽ റീട്ടെയിലർമാർ വഴിയും ആദ്യ കൊമേഴ്സ്യൽ ഓർഡർ ഡിസ്പാച്ച്"
+    ];
+
+    return {
+      title,
+      budget,
+      margin,
+      hubs,
+      licenses,
+      budgetItems,
+      machineryList,
+      sourcingList,
+      launchSteps
+    };
+  },
+
+  renderChecklistModal(categoryKey) {
+    const data = this.getChecklistData(categoryKey);
+    const container = document.getElementById('checklistModalContent');
+    if (!container) return;
+
+    container.innerHTML = `
+      <div class="checklist-modal-inner" id="checklistPrintDoc">
+        <div class="checklist-header-bar">
+          <div>
+            <span class="checklist-badge-pill"><i class="fa-solid fa-clipboard-check"></i> ഔദ്യോഗിക സംരംഭക ഗൈഡ് • Vyapar Shiksha</span>
+            <h2 class="checklist-main-title">${this.escapeHtml(data.title)} - ബിസിനസ്സ് സ്റ്റാർട്ടർ ചെക്ക്‌ലിസ്റ്റ്</h2>
+            <p class="checklist-meta-line">
+              <strong>മിനിമം മൂലധനം:</strong> ${this.escapeHtml(data.budget)} &nbsp;•&nbsp; 
+              <strong>പ്രതീക്ഷിത ലാഭം:</strong> ${this.escapeHtml(data.margin)} &nbsp;•&nbsp; 
+              <strong>മാർക്കറ്റ് ഹബ്ബുകൾ:</strong> ${this.escapeHtml(data.hubs)}
+            </p>
+          </div>
+          <div class="checklist-action-btns">
+            <button class="btn btn-primary btn-sm" onclick="app.printBusinessChecklist('${categoryKey}')" style="display: inline-flex; align-items: center; gap: 7px; padding: 8px 16px; border-radius: 8px;">
+              <i class="fa-solid fa-file-pdf"></i> <span>PDF ആയി ഡൗൺലോഡ് / പ്രിന്റ്</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 1. Legal Licenses -->
+        <div class="checklist-sec">
+          <h3 class="checklist-sec-title"><i class="fa-solid fa-stamp text-success"></i> 1. ആവശ്യമായ നിയമപരമായ ലൈസൻസുകൾ (Mandatory Licenses)</h3>
+          <div class="checklist-items-grid">
+            ${data.licenses.map((lic, idx) => `
+              <div class="checklist-card">
+                <label class="checklist-checkbox-wrap">
+                  <input type="checkbox" id="chk_lic_${idx}">
+                  <div class="chk-content">
+                    <strong>${this.escapeHtml(lic.title)}</strong>
+                    <p>${this.escapeHtml(lic.desc)}</p>
+                    <div class="chk-meta">
+                      <span class="chk-tag">${this.escapeHtml(lic.req)}</span>
+                      <span class="chk-link">പോർട്ടൽ: ${this.escapeHtml(lic.portal)}</span>
+                    </div>
+                  </div>
+                </label>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+
+        <!-- 2. Capital Budget Breakdown -->
+        <div class="checklist-sec">
+          <h3 class="checklist-sec-title"><i class="fa-solid fa-coins text-warning"></i> 2. പ്രാരംഭ ബഡ്ജറ്റ് വിഹിതം (Capital Allocation)</h3>
+          <table class="checklist-table">
+            <thead>
+              <tr>
+                <th>ചെലവ് ഇനം</th>
+                <th>വിഹിതം</th>
+                <th>വിവരണം</th>
+                <th style="text-align: center;">തയ്യാറായോ?</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${data.budgetItems.map((item, idx) => `
+                <tr>
+                  <td><strong>${this.escapeHtml(item.name)}</strong></td>
+                  <td><span class="badge-alloc">${this.escapeHtml(item.share)}</span></td>
+                  <td>${this.escapeHtml(item.est)}</td>
+                  <td style="text-align: center;"><input type="checkbox" id="chk_bud_${idx}"></td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+
+        <!-- 3. Machinery & Tools -->
+        <div class="checklist-sec">
+          <h3 class="checklist-sec-title"><i class="fa-solid fa-gears text-primary"></i> 3. ആവശ്യമായ മെഷിനറികളും ഉപകരണങ്ങളും (Machinery Checklist)</h3>
+          <div class="checklist-list-box">
+            ${data.machineryList.map((m, idx) => `
+              <label class="checklist-list-item">
+                <input type="checkbox" id="chk_mach_${idx}">
+                <span>${this.escapeHtml(m)}</span>
+              </label>
+            `).join('')}
+          </div>
+        </div>
+
+        <!-- 4. Raw Materials -->
+        <div class="checklist-sec">
+          <h3 class="checklist-sec-title"><i class="fa-solid fa-boxes-stacked text-purple"></i> 4. അസംസ്കൃത വസ്തുക്കളുടെ സ്രോതസ്സുകൾ (Raw Materials Checklist)</h3>
+          <div class="checklist-list-box">
+            ${data.sourcingList.map((s, idx) => `
+              <label class="checklist-list-item">
+                <input type="checkbox" id="chk_src_${idx}">
+                <span>${this.escapeHtml(s)}</span>
+              </label>
+            `).join('')}
+          </div>
+        </div>
+
+        <!-- 5. 7-Day Launch Steps -->
+        <div class="checklist-sec">
+          <h3 class="checklist-sec-title"><i class="fa-solid fa-rocket text-danger"></i> 5. 7-ദിവസത്തെ ലോഞ്ച് കർമ്മപദ്ധതി (Launch Steps)</h3>
+          <div class="checklist-list-box">
+            ${data.launchSteps.map((step, idx) => `
+              <label class="checklist-list-item">
+                <input type="checkbox" id="chk_step_${idx}">
+                <span class="chk-step-num">${idx + 1}</span>
+                <span>${this.escapeHtml(step)}</span>
+              </label>
+            `).join('')}
+          </div>
+        </div>
+
+        <div class="checklist-footer-note">
+          <p>💡 <em>ഈ ചെക്ക്‌ലിസ്റ്റ് പ്രിന്റ് എടുത്തോ PDF ആയി സേവ് ചെയ്തോ നിങ്ങളുടെ ബിസിനസ്സ് തുടക്കത്തിൽ ഘട്ടംഘട്ടമായി പരിശോധിച്ച് ഉറപ്പുവരുത്തുക.</em></p>
+          <div class="checklist-auth-sign">
+            <span>തയ്യാറാക്കിയത്: Vyapar Shiksha Academic Board</span>
+            <span>വെബ്സൈറ്റ്: https://vyapar-shiksha.vercel.app</span>
+          </div>
+        </div>
+      </div>
+    `;
+  },
+
+  printBusinessChecklist(categoryKey) {
+    if (!categoryKey) categoryKey = this.currentAcademy || 'attar';
+    const data = this.getChecklistData(categoryKey);
+    const printWindow = window.open('', '_blank');
+    if (!printWindow) {
+      window.print();
+      return;
+    }
+
+    printWindow.document.write(`
+      <!DOCTYPE html>
+      <html lang="ml">
+      <head>
+        <meta charset="UTF-8">
+        <title>${data.title} - ബിസിനസ്സ് സ്റ്റാർട്ടർ ചെക്ക്‌ലിസ്റ്റ് (PDF)</title>
+        <style>
+          @page { size: A4; margin: 12mm; }
+          body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Manjari", sans-serif; color: #1e293b; line-height: 1.45; font-size: 12px; margin: 0; padding: 10px; }
+          .header { border-bottom: 2px solid #059669; padding-bottom: 10px; margin-bottom: 12px; }
+          .badge { background: #ecfdf5; color: #059669; border: 1px solid #a7f3d0; padding: 2px 8px; border-radius: 4px; font-size: 10px; font-weight: bold; }
+          h1 { margin: 6px 0 3px 0; font-size: 18px; color: #065f46; }
+          .meta { font-size: 11px; color: #475569; margin: 0; }
+          .sec { margin-bottom: 14px; page-break-inside: avoid; }
+          .sec-title { font-size: 13px; color: #0f172a; border-bottom: 1px solid #cbd5e1; padding-bottom: 3px; margin-bottom: 6px; font-weight: bold; }
+          .grid { display: grid; grid-template-columns: 1fr; gap: 6px; }
+          .card { border: 1px solid #cbd5e1; border-radius: 5px; padding: 6px 10px; background: #f8fafc; }
+          .card strong { font-size: 12px; color: #0f172a; display: block; margin-bottom: 2px; }
+          .card p { margin: 0 0 3px 0; font-size: 10.5px; color: #475569; }
+          .tag { font-size: 9.5px; font-weight: bold; color: #059669; background: #e6fcf5; padding: 1px 5px; border-radius: 3px; display: inline-block; }
+          table { width: 100%; border-collapse: collapse; font-size: 11.5px; margin-top: 4px; }
+          th, td { border: 1px solid #cbd5e1; padding: 5px 8px; text-align: left; }
+          th { background: #f1f5f9; font-weight: bold; }
+          .list { list-style: none; padding: 0; margin: 0; }
+          .list li { padding: 3px 0; font-size: 11.5px; display: flex; align-items: flex-start; gap: 6px; border-bottom: 1px dashed #e2e8f0; }
+          .box { width: 12px; height: 12px; border: 1.5px solid #475569; border-radius: 2px; display: inline-block; flex-shrink: 0; margin-top: 2px; }
+          .footer { margin-top: 20px; border-top: 1px solid #cbd5e1; padding-top: 8px; font-size: 10px; color: #64748b; display: flex; justify-content: space-between; }
+        </style>
+      </head>
+      <body>
+        <div class="header">
+          <span class="badge">ഔദ്യോഗിക ബിസിനസ്സ് ചെക്ക്‌ലിസ്റ്റ് • VYAPAR SHIKSHA KERALA</span>
+          <h1>${data.title} - ബിസിനസ്സ് സ്റ്റാർട്ടർ ചെക്ക്‌ലിസ്റ്റ്</h1>
+          <p class="meta">
+            <strong>മിനിമം മൂലധനം:</strong> ${data.budget} &nbsp;|&nbsp; 
+            <strong>പ്രതീക്ഷിത ലാഭം:</strong> ${data.margin} &nbsp;|&nbsp; 
+            <strong>മാർക്കറ്റ് ഹബ്ബുകൾ:</strong> ${data.hubs}
+          </p>
+        </div>
+
+        <div class="sec">
+          <div class="sec-title">1. ആവശ്യമായ നിയമപരമായ ലൈസൻസുകൾ (Mandatory Legal Licenses)</div>
+          <div class="grid">
+            ${data.licenses.map(l => `
+              <div class="card">
+                <span class="box"></span> <strong>${l.title}</strong>
+                <p>${l.desc}</p>
+                <span class="tag">${l.req}</span> &nbsp;<small style="color: #64748b;">(പോർട്ടൽ: ${l.portal})</small>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+
+        <div class="sec">
+          <div class="sec-title">2. പ്രാരംഭ ബഡ്ജറ്റ് വിഹിതം (Capital Budget Breakdown)</div>
+          <table>
+            <thead>
+              <tr>
+                <th style="width: 30px;">തയ്യാർ</th>
+                <th>ചെലവ് വിഭാഗം</th>
+                <th>വിഹിതം</th>
+                <th>വിവരണം</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${data.budgetItems.map(b => `
+                <tr>
+                  <td style="text-align: center;"><span class="box"></span></td>
+                  <td><strong>${b.name}</strong></td>
+                  <td>${b.share}</td>
+                  <td>${b.est}</td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+
+        <div class="sec">
+          <div class="sec-title">3. ആവശ്യമായ മെഷിനറികളും ഉപകരണങ്ങളും (Machinery & Hardware Checklist)</div>
+          <ul class="list">
+            ${data.machineryList.map(m => `
+              <li><span class="box"></span> <span>${m}</span></li>
+            `).join('')}
+          </ul>
+        </div>
+
+        <div class="sec">
+          <div class="sec-title">4. അസംസ്കൃത വസ്തുക്കളുടെ സ്രോതസ്സുകൾ (Raw Materials Sourcing)</div>
+          <ul class="list">
+            ${data.sourcingList.map(s => `
+              <li><span class="box"></span> <span>${s}</span></li>
+            `).join('')}
+          </ul>
+        </div>
+
+        <div class="sec">
+          <div class="sec-title">5. 7-ദിവസത്തെ ലോഞ്ച് കർമ്മപദ്ധതി (7-Day Launch Steps)</div>
+          <ul class="list">
+            ${data.launchSteps.map((step, idx) => `
+              <li><span class="box"></span> <span><strong>ഘട്ടം ${idx + 1}:</strong> ${step}</span></li>
+            `).join('')}
+          </ul>
+        </div>
+
+        <div class="footer">
+          <span>തയ്യാറാക്കിയത്: Vyapar Shiksha Academic Board</span>
+          <span>പോർട്ടൽ: https://vyapar-shiksha.vercel.app</span>
+        </div>
+        <script>
+          window.onload = function() {
+            setTimeout(function() { window.print(); }, 250);
+          };
+        </script>
+      </body>
+      </html>
+    `);
+    printWindow.document.close();
+  },
+
   printAcademyCheatsheet(categoryKey) {
     if (!categoryKey) categoryKey = this.currentAcademy || 'attar';
     const cat = this.categoriesData[categoryKey];
@@ -6419,9 +6833,14 @@ const app = {
             <h3><i class="fa-solid fa-file-signature text-success"></i> ${name} — 1-Page Business Launch Blueprint</h3>
             <p>${catTitle} • Generated on ${new Date().toLocaleDateString()} via Business in Kerala</p>
           </div>
-          <button class="btn-print-plan" onclick="window.print()">
-            <i class="fa-solid fa-print"></i> Print / Save PDF
-          </button>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <button class="btn-print-plan" style="background: #059669; border-color: #047857;" onclick="app.openChecklistModal('${nicheKey}')" title="സൗജന്യ ബിസിനസ്സ് ചെക്ക്‌ലിസ്റ്റ് (PDF)">
+              <i class="fa-solid fa-clipboard-check"></i> ബിസിനസ്സ് ചെക്ക്‌ലിസ്റ്റ് (PDF)
+            </button>
+            <button class="btn-print-plan" onclick="window.print()">
+              <i class="fa-solid fa-print"></i> Print / Save PDF
+            </button>
+          </div>
         </div>
 
         <div class="plan-doc-body">
