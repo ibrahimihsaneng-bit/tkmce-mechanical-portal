@@ -5016,7 +5016,7 @@ const app = {
                 <br><strong>${cat.minBudget}</strong>
               </div>
               <div>
-                <small>${lang === 'ml' ? 'ലാഭ ശതമാനം' : lang === 'ar' ? 'هامش الربح' : 'Profit Margin'}</small>
+                <small>${lang === 'ml' ? 'ലാഭ ശതമാനം (Markup)' : lang === 'ar' ? 'نسبة الربح من التكلفة' : 'Profit Markup on Cost'}</small>
                 <br><strong class="text-success">${cat.margin}</strong>
               </div>
             </div>
@@ -5642,7 +5642,7 @@ const app = {
             <strong>${budget}</strong>
           </div>
           <div class="stat-card">
-            <span>Target Profit Margin:</span>
+            <span>${lang === 'ml' ? 'ലാഭ നിരക്ക് (Markup):' : lang === 'ar' ? 'نسبة الربح من التكلفة:' : 'Target Markup on Cost:'}</span>
             <strong>${margin}</strong>
           </div>
           <div class="stat-card">
@@ -5748,7 +5748,7 @@ const app = {
             <span class="hero-res-label">${lang === 'ml' ? 'പ്രതിമാസ അറ്റാദായം (Net Profit / Month)' : lang === 'ar' ? 'صافي الربح الشهري المتوقع' : 'Estimated Monthly Net Profit'}</span>
             <span class="hero-res-val" id="resValNetProfitMonth">₹14,052</span>
             <div class="hero-res-sub">
-              <span>${lang === 'ml' ? 'ലാഭ ശതമാനം:' : lang === 'ar' ? 'هامش الربح:' : 'Profit Margin:'} <strong id="resValMargin">66.8%</strong></span>
+              <span>${lang === 'ml' ? 'ലാഭ ശതമാനം (Markup):' : lang === 'ar' ? 'نسبة الربح من التكلفة:' : 'Profit Markup on Cost:'} <strong id="resValMargin">66.8%</strong></span>
               <span>${lang === 'ml' ? 'ഒരു പീസിലെ ലാഭം:' : lang === 'ar' ? 'الربح بكل قطعة:' : 'Net Profit / Unit:'} <strong id="resValPerItem">₹234.20</strong></span>
             </div>
           </div>
