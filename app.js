@@ -1,5 +1,5 @@
 /**
- * VYAPAR SHIKSHA (സംരംഭക പാഠശാല | منصة رواد الأعمال)
+ * BUSINESS IN KERALA (ബിസിനസ് ഇൻ കേരള | منصة رواد الأعمال)
  * Complete Modular Single-Page Application (SPA) Engine
  * 
  * Features:
@@ -78,9 +78,9 @@ const app = {
   // Trilingual Localization Dictionary
   i18n: {
     en: {
-      siteTitle: "VYAPAR SHIKSHA",
+      siteTitle: "BUSINESS IN KERALA",
       siteSubtitle: "Practical Business Academy • India & Kerala",
-      topBarTagline: "Practical Business Academy for Kerala & Pan-India Micro-Entrepreneurs",
+      topBarTagline: "Business in Kerala — Practical Academy for Micro-Entrepreneurs",
       langCurrentText: "Language:",
       
       // Header Nav
@@ -130,7 +130,7 @@ const app = {
 
       // Halal Community Banner on Homepage
       halalBadgePill: "100% Interest-Free Halal Network",
-      halalLivePill: "Vyapar Shiksha WhatsApp Community",
+      halalLivePill: "Business in Kerala WhatsApp Community",
       halalBannerTitle: "Grow Together on Ethical & Halal Principles! 🤝",
       halalBannerDesc: "Zero bank interest or debt. Build high-profit micro-enterprises through mutual cooperation, raw material pooling, and Mudarabah / Musharakah equity partnerships. Join the official WhatsApp Community of entrepreneurs.",
       halalFeat1: "5 Specialized Business Sub-Groups",
@@ -141,7 +141,7 @@ const app = {
 
       // Halal Community Modal
       modalBadgeText: '<i class="fa-solid fa-moon"></i> 100% Interest-Free Halal Network',
-      modalTitleText: "Vyapar Shiksha – Halal Entrepreneur Network",
+      modalTitleText: "Business in Kerala – Halal Entrepreneur Network",
       modalSubText: "Zero bank interest. Advance through mutual cooperation, raw material pooling & partnerships.",
       modalMainTitle: '<i class="fa-solid fa-layer-group text-success"></i> Join the Main WhatsApp Community',
       modalMainDesc: "Connect with all official updates, machinery offers, and business opportunities under one roof.",
@@ -263,9 +263,9 @@ const app = {
     },
 
     ml: {
-      siteTitle: "വ്യാപാര ശിക്ഷ",
+      siteTitle: "ബിസിനസ് ഇൻ കേരള",
       siteSubtitle: "സംരംഭക പാഠശാല • ബിസിനസ് ഗൈഡ്",
-      topBarTagline: "കേരളത്തിലെയും ഭാരതത്തിലെയും തുടക്കക്കാർക്കുള്ള പ്രായോഗിക ബിസിനസ് പഠന വേദി",
+      topBarTagline: "ബിസിനസ് ഇൻ കേരള — തുടക്കക്കാർക്കുള്ള പ്രായോഗിക ബിസിനസ് പഠന വേദി",
       langCurrentText: "ഭാഷ:",
 
       // Header Nav
@@ -315,7 +315,7 @@ const app = {
 
       // Halal Community Banner on Homepage
       halalBadgePill: "100% പലിശരഹിത ഇസ്ലാമിക കൂട്ടായ്മ",
-      halalLivePill: "വ്യാപാര ശിക്ഷ വാട്സ്ആപ്പ് കൂട്ടായ്മ",
+      halalLivePill: "ബിസിനസ് ഇൻ കേരള വാട്സ്ആപ്പ് കൂട്ടായ്മ",
       halalBannerTitle: "ഒരുമിച്ചു വളരാം, ഹലാലായ മാർഗ്ഗത്തിൽ വിജയം നേടാം! 🤝",
       halalBannerDesc: "ബാങ്ക് പലിശകളോ കടങ്ങളോ ഇല്ലാതെ, പരസ്പര സഹകരണത്തിലൂടെയും മുശാറക / മുളാരബ (ലാഭ-നഷ്ട പങ്കാളിത്തം) വ്യവസ്ഥയിലൂടെയും സംരംഭങ്ങൾ പടുത്തുയർത്താൻ കേരളത്തിലെ സംരംഭകരുടെ ഔദ്യോഗിക WhatsApp Community-യിൽ പങ്കാളിയാകൂ.",
       halalFeat1: "5 പ്രത്യേക ബിസിനസ്സ് ഗ്രൂപ്പുകൾ",
@@ -326,7 +326,7 @@ const app = {
 
       // Halal Community Modal
       modalBadgeText: '<i class="fa-solid fa-moon"></i> 100% പലിശരഹിത ഇസ്ലാമിക കൂട്ടായ്മ',
-      modalTitleText: "വ്യാപാര ശിക്ഷ – ഹലാൽ സംരംഭക നെറ്റ്‌വർക്ക്",
+      modalTitleText: "ബിസിനസ് ഇൻ കേരള – ഹലാൽ സംരംഭക നെറ്റ്‌വർക്ക്",
       modalSubText: "പലിശയില്ലാതെ പരസ്പര സഹകരണത്തിലൂടെയും പങ്കാളിത്തത്തിലൂടെയും മുന്നേറാം.",
       modalMainTitle: '<i class="fa-solid fa-layer-group text-success"></i> പ്രധാന കമ്മ്യൂണിറ്റിയിൽ അംഗമാകുക',
       modalMainDesc: "എല്ലാ അനൗൺസ്‌മെന്റുകളും പുതിയ അപ്ഡേറ്റുകളും ഒരൊറ്റ കുടക്കീഴിൽ ലഭിക്കാൻ മെയിൻ കമ്മ്യൂണിറ്റിയിൽ ചേരുക.",
@@ -448,9 +448,9 @@ const app = {
     },
 
     ar: {
-      siteTitle: "فيابار شيكشا",
+      siteTitle: "بزنس إن كيرلا",
       siteSubtitle: "منصة رواد الأعمال • دليل المشاريع الشامل",
-      topBarTagline: "أكاديمية تعليم التجارة العملية للمبتدئين في كيرالا والهند",
+      topBarTagline: "بزنس إن كيرلا — أكاديمية تعليم التجارة العملية للمبتدئين",
       langCurrentText: "اللغة:",
 
       // Header Nav
@@ -500,7 +500,7 @@ const app = {
 
       // Halal Community Banner on Homepage
       halalBadgePill: "شبكة رواد الأعمال الحلال خالية من الفوائد 100%",
-      halalLivePill: "مجتمع واتساب Vyapar Shiksha",
+      halalLivePill: "مجتمع واتساب بزنس إن كيرلا",
       halalBannerTitle: "معاً ننمو وننجح وفق الشريعة الإسلامية الحلال! 🤝",
       halalBannerDesc: "بدون قروض بنكية ربوية، نبني مشاريع صناعية وتجارية عبر التعاون المشترك والشراكة بالمرابحة والمضاربة الشرعية. انضم لمجتمع الواتساب الرسمي لرواد الأعمال.",
       halalFeat1: "5 مجموعات تخصصية بحسب المجال",
@@ -511,7 +511,7 @@ const app = {
 
       // Halal Community Modal
       modalBadgeText: '<i class="fa-solid fa-moon"></i> شبكة رواد الأعمال الحلال خالية من الفوائد 100%',
-      modalTitleText: "فيابار شيكشا – شبكة رواد الأعمال الحلال",
+      modalTitleText: "بزنس إن كيرلا – شبكة رواد الأعمال الحلال",
       modalSubText: "بدون فوائد ربوية، نتقدم عبر التعاون المشترك والشراكة الاستثمارية.",
       modalMainTitle: '<i class="fa-solid fa-layer-group text-success"></i> انضم إلى مجتمع الواتساب الرئيسي',
       modalMainDesc: "تواصل مع التحديثات الرسمية وعروض الآلات والفرص التجارية تحت مظلة واحدة.",
@@ -2025,8 +2025,8 @@ const app = {
         ar: "طلب كتالوج الجملة وقائمة الأسعار من المورد"
       },
       text: {
-        en: "Hello Sir,\nI run a retail/online store in Kerala. I saw your shop profile on Vyapar Shiksha. We are planning our new inventory purchase for this month.\nCould you please share your latest wholesale catalog, price list, and minimum order quantity (MOQ)?\nThank you!\n— Business Founder",
-        ml: "ഹലോ സർ,\nഞാൻ കേരളത്തിൽ ഓൺലൈൻ സംരംഭം നടത്തുന്നയാളാണ്. നിങ്ങളുടെ കടയുടെ വിവരങ്ങൾ 'വ്യാപാര ശിക്ഷ' വെബ്സൈറ്റിൽ കണ്ടതാണ്.\nഈ മാസത്തെ പുതിയ സ്റ്റോക്ക് ഓർഡർ ചെയ്യാൻ നിങ്ങളുടെ ഏറ്റവും പുതിയ ഹോൾസെയിൽ കാറ്റലോഗും വിലവിവരപ്പട്ടികയും MOQ (കുറഞ്ഞ ഓർഡർ അളവ്) വിവരങ്ങളും ഒന്ന് വാട്സ്ആപ്പിൽ അയക്കാമോ?\nനന്ദി!",
+        en: "Hello Sir,\nI run a retail/online store in Kerala. I saw your shop profile on Business in Kerala. We are planning our new inventory purchase for this month.\nCould you please share your latest wholesale catalog, price list, and minimum order quantity (MOQ)?\nThank you!\n— Business Founder",
+        ml: "ഹലോ സർ,\nഞാൻ കേരളത്തിൽ ഓൺലൈൻ സംരംഭം നടത്തുന്നയാളാണ്. നിങ്ങളുടെ കടയുടെ വിവരങ്ങൾ 'ബിസിനസ് ഇൻ കേരള' വെബ്സൈറ്റിൽ കണ്ടതാണ്.\nഈ മാസത്തെ പുതിയ സ്റ്റോക്ക് ഓർഡർ ചെയ്യാൻ നിങ്ങളുടെ ഏറ്റവും പുതിയ ഹോൾസെയിൽ കാറ്റലോഗും വിലവിവരപ്പട്ടികയും MOQ (കുറഞ്ഞ ഓർഡർ അളവ്) വിവരങ്ങളും ഒന്ന് വാട്സ്ആപ്പിൽ അയക്കാമോ?\nനന്ദി!",
         ar: "مرحباً أخي الكريم،\nأنا صاحب متجر إلكتروني في كيرالا. وجدت بيانات متجركم عبر منصة رواد الأعمال. نود تجهيز دفعة بضاعة جديدة لهذا الشهر.\nهل يمكنك إرسال كتالوج الجملة المحدث وقائمة الأسعار والحد الأدنى للطلب (MOQ)؟\nشكراً لكم!"
       }
     },
@@ -2183,7 +2183,7 @@ const app = {
       desc: "5 modest wear boutique owners pooling to order 500 meters direct from Surat mill wholesale. Cost ₹115/m vs local retail ₹210/m. Delivery hub: Kozhikode S.M. Street.",
       benefit: "Saves ₹95 per meter (45% discount)",
       target: "Need 2 more partners (min 50m each)",
-      whatsappText: "Hello, I want to join the Surat Fabric Group Buy on Vyapar Shiksha."
+      whatsappText: "Hello, I want to join the Surat Fabric Group Buy on Business in Kerala."
     },
     {
       id: "cp-2",
@@ -2377,8 +2377,8 @@ const app = {
         "ar": "1. علم الصنعة والزيوت العطرية الأكثر طلباً (00:00 - 05:00)"
       },
       "text": {
-        "ml": "നമസ്കാരം, വ്യാപാര ശിക്ഷയിലേക്ക് സ്വാഗതം. ഇന്ന് നമ്മൾ പഠിക്കുന്നത് കേരളത്തിലും ഇന്ത്യയിലും ഗൾഫിലും ഏറ്റവും ഉയർന്ന ലാഭം തരുന്ന അത്തർ ബിസിനസ്സ് എങ്ങനെ വിജയകരമായി തുടങ്ങാം എന്നതാണ്. അത്തർ എന്നാൽ ആൽക്കഹോൾ ഒട്ടും ചേർക്കാത്ത ശുദ്ധമായ പ്രകൃതിദത്ത സുഗന്ധതൈലമാണ്. നിസ്കാരത്തിന് ഉപയോഗിക്കാം എന്നതും, 12 മുതൽ 24 മണിക്കൂർ വരെ സുഗന്ധം വസ്ത്രങ്ങളിൽ തങ്ങിനിൽക്കും എന്നതുമാണ് ഇതിന്റെ ഏറ്റവും വലിയ പ്രത്യേകത. തുടക്കക്കാർ തിരഞ്ഞെടുക്കേണ്ട 4 പ്രധാന മണങ്ങൾ: ഒന്ന് റോയൽ വൈറ്റ് മസ്ക്, രണ്ട് ശമാമത്തുൽ അംബർ, മൂന്ന് അറബിക് ഊദ് അൽ ശംസ്, നാല് സാവേജ് പോലുള്ള ഫ്രഞ്ച് ക്ലോണുകൾ. ഇവ വിപണിയിൽ അതിവേഗം വിറ്റുപോകുന്ന ഇനങ്ങളാണ്.",
-        "en": "Welcome to Vyapar Shiksha. Today, we master how to launch a high-profit artisanal attar business in Kerala and India from home. Attar is 100% pure concentrated perfume oil extracted without alcohol. It is prayer-safe, skin-friendly, and lasts 12 to 24 hours. The top 4 fast-moving varieties every beginner should start with are Royal White Musk, Shamamatul Amber, Arabic Oudh Al Shams, and French Fresh Clones like Sauvage and Blue Ocean. These four fragrances command an immediate 70% repeat buying rate.",
+        "ml": "നമസ്കാരം, 'ബിസിനസ് ഇൻ കേരള'യിലേക്ക് സ്വാഗതം. ഇന്ന് നമ്മൾ പഠിക്കുന്നത് കേരളത്തിലും ഇന്ത്യയിലും ഗൾഫിലും ഏറ്റവും ഉയർന്ന ലാഭം തരുന്ന അത്തർ ബിസിനസ്സ് എങ്ങനെ വിജയകരമായി തുടങ്ങാം എന്നതാണ്. അത്തർ എന്നാൽ ആൽക്കഹോൾ ഒട്ടും ചേർക്കാത്ത ശുദ്ധമായ പ്രകൃതിദത്ത സുഗന്ധതൈലമാണ്. നിസ്കാരത്തിന് ഉപയോഗിക്കാം എന്നതും, 12 മുതൽ 24 മണിക്കൂർ വരെ സുഗന്ധം വസ്ത്രങ്ങളിൽ തങ്ങിനിൽക്കും എന്നതുമാണ് ഇതിന്റെ ഏറ്റവും വലിയ പ്രത്യേകത. തുടക്കക്കാർ തിരഞ്ഞെടുക്കേണ്ട 4 പ്രധാന മണങ്ങൾ: ഒന്ന് റോയൽ വൈറ്റ് മസ്ക്, രണ്ട് ശമാമത്തുൽ അംബർ, മൂന്ന് അറബിക് ഊദ് അൽ ശംസ്, നാല് സാവേജ് പോലുള്ള ഫ്രഞ്ച് ക്ലോണുകൾ. ഇവ വിപണിയിൽ അതിവേഗം വിറ്റുപോകുന്ന ഇനങ്ങളാണ്.",
+        "en": "Welcome to Business in Kerala. Today, we master how to launch a high-profit artisanal attar business in Kerala and India from home. Attar is 100% pure concentrated perfume oil extracted without alcohol. It is prayer-safe, skin-friendly, and lasts 12 to 24 hours. The top 4 fast-moving varieties every beginner should start with are Royal White Musk, Shamamatul Amber, Arabic Oudh Al Shams, and French Fresh Clones like Sauvage and Blue Ocean. These four fragrances command an immediate 70% repeat buying rate.",
         "ar": "مرحباً بكم في منصة رواد الأعمال. في هذه الدورة الصوتية نتعلم خطوة بخطوة كيف تؤسس مشروعاً ناجحاً ومربحاً لدهن العود والعطور الزيتية. دهن العود زيت نقي مركز 100% مستخلص بدون أي كحول، مما يجعله صالحاً للصلاة ولطيفاً على البشرة ويدوم فوّاحاً لأكثر من 24 ساعة. الأصناف الأربعة الأكثر مبيعاً للمبتدئين هي: المسك الأبيض الملكي، شمامة العنبر، عود الشمس الملكي، وبدائل العطور الفرنسية الفاخرة."
       }
     },
@@ -3547,7 +3547,7 @@ const app = {
     const lang = this.audioMasterclassState.voiceLang || this.currentLang || 'ml';
     const cat = this.categoriesData[this.audioMasterclassState.nicheKey] || this.categoriesData.attar;
     const episodes = this.getAudioEpisodes();
-    let fullText = `VYAPAR SHIKSHA — ${cat.title.en.toUpperCase()} MASTERCLASS AUDIO SUMMARY\n\n`;
+    let fullText = `BUSINESS IN KERALA — ${cat.title.en.toUpperCase()} MASTERCLASS AUDIO SUMMARY\n\n`;
 
     episodes.forEach(ep => {
       fullText += `[${ep.timestamp}] ${ep.title[lang] || ep.title.en}\n`;
@@ -3558,7 +3558,7 @@ const app = {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `vyapar-shiksha-${this.audioMasterclassState.nicheKey}-masterclass-${lang}.txt`;
+    a.download = `business-in-kerala-${this.audioMasterclassState.nicheKey}-masterclass-${lang}.txt`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -4095,10 +4095,10 @@ const app = {
                 ${cat.manufacturers.map(sup => {
                   const waMsg = encodeURIComponent(
                     lang === 'ml' 
-                      ? `ഹലോ ${sup.name}, ഞാൻ 'വ്യാപാര ശിക്ഷ' പോർട്ടലിൽ നിങ്ങളുടെ മെഷീൻ/നിർമ്മാണ വിവരങ്ങൾ കണ്ടതാണ്. എനിക്ക് നിങ്ങളുടെ കാറ്റലോഗും ക്വോട്ടേഷനും വേണം.`
+                      ? `ഹലോ ${sup.name}, ഞാൻ 'ബിസിനസ് ഇൻ കേരള' പോർട്ടലിൽ നിങ്ങളുടെ മെഷീൻ/നിർമ്മാണ വിവരങ്ങൾ കണ്ടതാണ്. എനിക്ക് നിങ്ങളുടെ കാറ്റലോഗും ക്വോട്ടേഷനും വേണം.`
                       : lang === 'ar'
                       ? `مرحباً ${sup.name}، وجدت بيانات مصنعكم عبر منصة رواد الأعمال. أود الاطلاع على الكتالوج وعرض الأسعار الفني.`
-                      : `Hello ${sup.name}, I found your machinery manufacturing details on Vyapar Shiksha. I want to inquire about your machinery catalog, pricing, and trial run.`
+                      : `Hello ${sup.name}, I found your machinery manufacturing details on Business in Kerala. I want to inquire about your machinery catalog, pricing, and trial run.`
                   );
                   const waLink = `https://wa.me/${sup.whatsapp}?text=${waMsg}`;
 
@@ -4138,10 +4138,10 @@ const app = {
               ${matchingSuppliers.map(sup => {
                 const waMsg = encodeURIComponent(
                   lang === 'ml' 
-                    ? `ഹലോ ${sup.name}, ഞാൻ 'വ്യാപാര ശിക്ഷ' വെബ്സൈറ്റിൽ നിങ്ങളുടെ കടയുടെ വിവരം കണ്ടതാണ്. എനിക്ക് നിങ്ങളുടെ ഹോൾസെയിൽ കാറ്റലോഗും വിലവിവരങ്ങളും വേണം.`
+                    ? `ഹലോ ${sup.name}, ഞാൻ 'ബിസിനസ് ഇൻ കേരള' വെബ്സൈറ്റിൽ നിങ്ങളുടെ കടയുടെ വിവരം കണ്ടതാണ്. എനിക്ക് നിങ്ങളുടെ ഹോൾസെയിൽ കാറ്റലോഗും വിലവിവരങ്ങളും വേണം.`
                     : lang === 'ar'
                     ? `مرحباً ${sup.name}، وجدت بيانات متجركم عبر منصة رواد الأعمال. أود الاطلاع على كتالوج الجملة وقائمة الأسعار لديكم.`
-                    : `Hello ${sup.name}, I found your wholesale details on Vyapar Shiksha. I want to inquire about your wholesale catalog and bulk pricing.`
+                    : `Hello ${sup.name}, I found your wholesale details on Business in Kerala. I want to inquire about your wholesale catalog and bulk pricing.`
                 );
                 const waLink = `https://wa.me/${sup.whatsapp}?text=${waMsg}`;
 
@@ -5120,7 +5120,7 @@ const app = {
     }
 
     grid.innerHTML = filtered.map(post => {
-      const waMsg = encodeURIComponent(`Hello, I saw your collaboration posting "${post.title}" on Vyapar Shiksha. I want to connect and discuss details.`);
+      const waMsg = encodeURIComponent(`Hello, I saw your collaboration posting "${post.title}" on Business in Kerala. I want to connect and discuss details.`);
       const waLink = `https://wa.me/919847123450?text=${waMsg}`;
       return `
         <div class="collab-card">
@@ -5175,7 +5175,7 @@ const app = {
       <!DOCTYPE html>
       <html>
       <head>
-        <title>Vyapar Shiksha - ${title} (1-Page Action Plan)</title>
+        <title>Business in Kerala - ${title} (1-Page Action Plan)</title>
         <style>
           body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; padding: 25px; color: #1e293b; line-height: 1.5; font-size: 13px; }
           .header { border-bottom: 2px solid #047857; padding-bottom: 12px; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: flex-end; }
@@ -5195,7 +5195,7 @@ const app = {
       <body>
         <div class="header">
           <div>
-            <h1>VYAPAR SHIKSHA • 1-PAGE BUSINESS ACTION PLAN</h1>
+            <h1>BUSINESS IN KERALA • 1-PAGE BUSINESS ACTION PLAN</h1>
             <p>${title} | 100% Halal Ethics & Sourcing Blueprint</p>
           </div>
           <div style="text-align: right; font-size: 11px;">
@@ -5226,7 +5226,7 @@ const app = {
         <div class="section">
           <h2>2. 7-Day Launch Checklist</h2>
           <ul>
-            <li><strong>Day 1:</strong> Finalize verified wholesale supplier contact from Vyapar Shiksha directory & confirm MOQ pricing.</li>
+            <li><strong>Day 1:</strong> Finalize verified wholesale supplier contact from Business in Kerala directory & confirm MOQ pricing.</li>
             <li><strong>Day 2:</strong> Procure essential starter packaging materials, bottles/boxes, and a precision digital scale.</li>
             <li><strong>Day 3:</strong> Test sample batch formulation & take aesthetic photos in clean natural sunlight.</li>
             <li><strong>Day 4:</strong> Calculate exact unit production cost and set retail price with healthy 40%+ profit margin.</li>
@@ -5246,7 +5246,7 @@ const app = {
         </div>
 
         <div class="footer">
-          Generated from Vyapar Shiksha • Practical Micro-Entrepreneurship Academy • Kerala & Pan-India
+          Generated from Business in Kerala • Practical Micro-Entrepreneurship Academy • Kerala & Pan-India
         </div>
 
         <script>
@@ -5555,10 +5555,10 @@ const app = {
     filtered.forEach(sup => {
       const waMsg = encodeURIComponent(
         lang === 'ml' 
-          ? `ഹലോ ${sup.name}, ഞാൻ 'വ്യാപാര ശിക്ഷ' വെബ്സൈറ്റിൽ നിങ്ങളുടെ കടയുടെ വിവരം കണ്ടതാണ്. എനിക്ക് നിങ്ങളുടെ ഹോൾസെയിൽ കാറ്റലോഗും വിലവിവരങ്ങളും വേണം.`
+          ? `ഹലോ ${sup.name}, ഞാൻ 'ബിസിനസ് ഇൻ കേരള' വെബ്സൈറ്റിൽ നിങ്ങളുടെ കടയുടെ വിവരം കണ്ടതാണ്. എനിക്ക് നിങ്ങളുടെ ഹോൾസെയിൽ കാറ്റലോഗും വിലവിവരങ്ങളും വേണം.`
           : lang === 'ar'
           ? `مرحباً ${sup.name}، وجدت بيانات متجركم عبر منصة رواد الأعمال. أود الاطلاع على كتالوج الجملة وقائمة الأسعار لديكم.`
-          : `Hello ${sup.name}, I found your wholesale details on Vyapar Shiksha. I want to inquire about your wholesale catalog and bulk pricing.`
+          : `Hello ${sup.name}, I found your wholesale details on Business in Kerala. I want to inquire about your wholesale catalog and bulk pricing.`
       );
       const waLink = `https://wa.me/${sup.whatsapp}?text=${waMsg}`;
 
@@ -5726,7 +5726,7 @@ const app = {
         <div class="plan-doc-header">
           <div class="plan-doc-title">
             <h3><i class="fa-solid fa-file-signature text-success"></i> ${name} — 1-Page Business Launch Blueprint</h3>
-            <p>${catTitle} • Generated on ${new Date().toLocaleDateString()} via Vyapar Shiksha</p>
+            <p>${catTitle} • Generated on ${new Date().toLocaleDateString()} via Business in Kerala</p>
           </div>
           <button class="btn-print-plan" onclick="window.print()">
             <i class="fa-solid fa-print"></i> Print / Save PDF
