@@ -3,24 +3,27 @@
  * Complete Modular Single-Page Application (SPA) Engine
  * 
  * Features:
- * 1. Clean Homepage with Study Academies Overview, 30-Sec Business Matchmaker Quiz & 7-Step Roadmap
- * 2. Dedicated Business Study Academies (പഠന ശാഖകൾ):
- *    - Module 1: Blueprint & Zero-Knowledge Product Science
- *    - Module 2: Exact Capital & Budget Breakdown Table (എന്തിനൊക്കെ എത്ര രൂപ)
- *    - Module 3: Formulation / How to Make Your Brand (പുതിയത് ഉണ്ടാക്കാൻ എത്ര വേണം)
- *    - Module 4: Verified Wholesalers with Phone, WhatsApp & Google Maps
- *    - Module 5: Interactive Niche Profit Simulator & Live Visual Graph
- *    - Module 6: Wholesaler Calling & Chat Coaching (സംസാരിക്കേണ്ട രീതി & ചോദ്യങ്ങൾ)
- *    - Module 7: Courier Rates, Safe COD & 14-Day Launch Checklist
- * 3. Dedicated Financial & Sourcing Tools View (Calculator, Directory, WhatsApp Scripts, Legal, Plan Generator)
- * 4. Trilingual Localization Engine (English, Malayalam, Arabic with full RTL support)
+ * 1. Clean Homepage with Study Academies Overview, Real Photo Cards, 30-Sec Quiz & 7-Step Roadmap
+ * 2. Dedicated Business Study Academies (പഠന ശാഖകൾ) with Step-by-Step Processing Stepper:
+ *    - ഘട്ടം 1: ഉൽപ്പന്ന വിവരങ്ങളും വിപണിയും (Blueprint & Product Science)
+ *    - ഘട്ടം 2: എന്തിനൊക്കെ എത്ര രൂപ? (Exact Capital & Itemized Budget Table)
+ *    - ഘട്ടം 3: മൊത്തവ്യാപാര മാർക്കറ്റുകൾ & മാപ്പ് (Wholesale Hubs with Phone & Google Maps)
+ *    - ഘട്ടം 4: വ്യാപാരികളോട് സംസാരിക്കേണ്ട രീതി (Wholesaler Calling Dialogue & Coaching)
+ *    - ഘട്ടം 5: പുതിയത് ഉണ്ടാക്കാൻ എത്ര വേണം? (Formulation & How to Make Step-by-Step)
+ *    - ഘട്ടം 6: ലൈവ് ലാഭ ഗ്രാഫ് (Live Profit Graph & Margin Visualizer)
+ *    - ഘട്ടം 7: കൊറിയറും ആദ്യ വിൽപനയും (Courier Rates, Safe COD & 14-Day Launch Checklist)
+ * 3. High-Resolution, 100% Authentic Real-Life Photography (Zero AI Cartoons/Fake Graphics)
+ * 4. Dedicated Financial & Sourcing Tools View (Calculator, Directory, WhatsApp Scripts, Legal, Plan Generator)
+ * 5. Complete Trilingual Localization (English, Malayalam, Arabic with full RTL support)
  */
 
 const app = {
   currentLang: 'en',
-  currentView: 'home',       // 'home' | 'academy' | 'tools'
-  currentAcademy: 'attar',    // 'attar' | 'clothing' | 'watches' | 'bags' | 'accessories' | 'spices'
-  currentToolTab: 'calc',     // 'calc' | 'suppliers' | 'scripts' | 'legal' | 'plan'
+  currentView: 'home',         // 'home' | 'academy' | 'tools'
+  currentAcademy: 'attar',      // 'attar' | 'clothing' | 'watches' | 'bags' | 'accessories' | 'spices'
+  currentToolTab: 'calc',       // 'calc' | 'suppliers' | 'scripts' | 'legal' | 'plan'
+  currentCourseStep: 1,         // Active step inside academy (1 to 7)
+  courseViewMode: 'stepper',    // 'stepper' (guided 1-step processing) | 'all' (view full masterclass)
 
   // Current Attar Simulator State
   simState: {
@@ -89,6 +92,20 @@ const app = {
       facultySubtitle: "Each academy is an independent, complete masterclass. Learn the step-by-step creation roadmap, exact capital breakdown, supplier phone numbers with Google Maps, profit graphs, and negotiation dialogue.",
       btnStartCourse: "Open Study Academy",
 
+      // Stepper Labels
+      lblGuidedMode: "Guided Step Processing",
+      lblAllStepsMode: "View Full Masterclass",
+      step1Pill: "1. Product Science",
+      step2Pill: "2. Capital Breakdown",
+      step3Pill: "3. Wholesale Markets",
+      step4Pill: "4. Calling Dialogue",
+      step5Pill: "5. Formulation & Making",
+      step6Pill: "6. Profit Graph",
+      step7Pill: "7. Courier & Orders",
+      btnPrevStep: "← Previous Step",
+      btnNextStep: "Next Step →",
+      btnFinishCourse: "🎉 Finish Course & Generate Plan →",
+
       // Quiz
       quizBadge: "Personal Matchmaker",
       quizTitle: "Find Which Business Fits You in 30 Seconds",
@@ -115,10 +132,10 @@ const app = {
       lblBackToHub: "Back to Academies Overview",
       mod1Title: "1. Blueprint & Product Science",
       mod2Title: "2. Exact Capital & Budget Breakdown",
-      mod3Title: "3. Formulation / Make Your Brand",
-      mod4Title: "4. Verified Wholesalers & Google Maps",
-      mod5Title: "5. Profit Simulator & Live Graph",
-      mod6Title: "6. Wholesaler Calling & Chat Coaching",
+      mod3Title: "3. Wholesale Markets & Google Maps",
+      mod4Title: "4. Wholesaler Calling & Chat Coaching",
+      mod5Title: "5. Formulation / How to Make Your Brand",
+      mod6Title: "6. Profit Simulator & Live Visual Graph",
       mod7Title: "7. Courier Rates, COD & Launch Checklist",
 
       // Tools Top
@@ -190,6 +207,20 @@ const app = {
       facultySubtitle: "ഓരോ ശാഖയും ഒരു സമ്പൂർണ്ണ മാസ്റ്റർക്ലാസ്സാണ്. പൂജ്യത്തിൽ നിന്നുള്ള തുടക്കം, എന്തിനൊക്കെ എത്ര രൂപ ചെലവാകും, പുതിയത് എങ്ങനെ ഉണ്ടാക്കാം, വ്യാപാരികളുടെ ഫോൺ നമ്പറും ഗൂഗിൾ മാപ്പും, ലൈവ് ലാഭ ഗ്രാഫും, കടക്കാരുമായി സംസാരിക്കേണ്ട ചോദ്യങ്ങളും പഠിക്കാം.",
       btnStartCourse: "പഠനം ആരംഭിക്കുക",
 
+      // Stepper Labels
+      lblGuidedMode: "ഘട്ടം ഘട്ടമായുള്ള പ്രോസസിങ്",
+      lblAllStepsMode: "മുഴുവൻ കോഴ്സും ഒന്നിച്ചു കാണുക",
+      step1Pill: "1. ഉൽപ്പന്ന ശാസ്ത്രം",
+      step2Pill: "2. ബഡ്ജറ്റ് കണക്കുകൾ",
+      step3Pill: "3. മാർക്കറ്റുകൾ & മാപ്പ്",
+      step4Pill: "4. സംസാരിക്കേണ്ട രീതി",
+      step5Pill: "5. നിർമ്മാണ രീതി",
+      step6Pill: "6. ലൈവ് ലാഭ ഗ്രാഫ്",
+      step7Pill: "7. കൊറിയർ & ഓർഡറുകൾ",
+      btnPrevStep: "← മുൻപത്തെ ഘട്ടം",
+      btnNextStep: "അടുത്ത ഘട്ടം കാണുക →",
+      btnFinishCourse: "🎉 പഠനം പൂർത്തിയായി! ബിസിനസ് പ്ലാൻ തയ്യാറാക്കുക →",
+
       // Quiz
       quizBadge: "നിങ്ങൾക്ക് യോജിച്ച ബിസിനസ് കണ്ടെത്താം",
       quizTitle: "30 സെക്കൻഡിൽ നിങ്ങൾക്ക് അനുയോജ്യമായ ബിസിനസ്സ്",
@@ -216,10 +247,10 @@ const app = {
       lblBackToHub: "പഠന ശാഖകളുടെ ഹോം പേജിലേക്ക്",
       mod1Title: "1. ബിസിനസ് അടിത്തറ & ഉൽപ്പന്ന വിവരങ്ങൾ",
       mod2Title: "2. എന്തിനൊക്കെ എത്ര രൂപ? (വിശദമായ ബഡ്ജറ്റ് പട്ടിക)",
-      mod3Title: "3. പുതിയത് ഉണ്ടാക്കാൻ എത്ര വേണം? (തയ്യാറാക്കുന്ന വിധം)",
-      mod4Title: "4. വിശ്വസ്തരായ വ്യാപാരികൾ, ഫോൺ & ഗൂഗിൾ മാപ്പ്",
-      mod5Title: "5. ഇന്ററാക്ടീവ് ലാഭ ഗ്രാഫും കാൽക്കുലേറ്ററും",
-      mod6Title: "6. വ്യാപാരികളോട് സംസാരിക്കേണ്ട രീതിയും ചോദ്യങ്ങളും",
+      mod3Title: "3. മൊത്തവ്യാപാര മാർക്കറ്റുകൾ, ഫോൺ & ഗൂഗിൾ മാപ്പ്",
+      mod4Title: "4. വ്യാപാരികളോട് സംസാരിക്കേണ്ട രീതിയും ചോദ്യങ്ങളും",
+      mod5Title: "5. പുതിയത് ഉണ്ടാക്കാൻ എത്ര വേണം? (തയ്യാറാക്കുന്ന വിധം)",
+      mod6Title: "6. ഇന്ററാക്ടീവ് ലാഭ ഗ്രാഫും കാൽക്കുലേറ്ററും",
       mod7Title: "7. കൊറിയർ നിരക്കുകൾ, സി.ഒ.ഡി നിയമങ്ങൾ & ലോഞ്ച് പ്ലാൻ",
 
       // Tools Top
@@ -291,6 +322,20 @@ const app = {
       facultySubtitle: "كل أكاديمية عبارة عن دورة احترافية مستقلة تمنحك خطوات التأسيس من الصفر، جدول توزيع التكاليف الدقيق، أرقام الموردين ومواقعهم على خرائط جوجل، ورسم بياني تفاعلي للأرباح.",
       btnStartCourse: "ابدأ دراسة الأكاديمية",
 
+      // Stepper Labels
+      lblGuidedMode: "المسار التفاعلي خطوة بخطوة",
+      lblAllStepsMode: "عرض الدورة كاملة",
+      step1Pill: "1. علم الصنعة والمنتج",
+      step2Pill: "2. تفاصيل رأس المال",
+      step3Pill: "3. أسواق الجملة والخرائط",
+      step4Pill: "4. حوار التفاوض",
+      step5Pill: "5. التركيب والتصنيع",
+      step6Pill: "6. حاسبة ورسم الأرباح",
+      step7Pill: "7. الشحن والطلبات الأولى",
+      btnPrevStep: "← الخطوة السابقة",
+      btnNextStep: "الخطوة التالية →",
+      btnFinishCourse: "🎉 أكملت الدورة! إنشاء خطة العمل →",
+
       // Quiz
       quizBadge: "مساعدك لاختيار الفكرة",
       quizTitle: "اكتشف المشروع الأنسب لك خلال 30 ثانية",
@@ -317,10 +362,10 @@ const app = {
       lblBackToHub: "العودة إلى نظرة عامة على الأكاديميات",
       mod1Title: "1. أساسيات المنتج وعلم الصنعة",
       mod2Title: "2. تفاصيل الميزانية ورأس المال الدقيق",
-      mod3Title: "3. طريقة التركيب وصناعة علامتك الجديدة",
-      mod4Title: "4. موردي الجملة المعتمدين وخرائط جوجل",
-      mod5Title: "5. حاسبة الأرباح والرسم البياني المباشر",
-      mod6Title: "6. تدريب الاتصال والتفاوض مع الموردين",
+      mod3Title: "3. أسواق الجملة وخرائط جوجل",
+      mod4Title: "4. تدريب الاتصال والتفاوض مع الموردين",
+      mod5Title: "5. طريقة التركيب وصناعة علامتك الجديدة",
+      mod6Title: "6. حاسبة الأرباح والرسم البياني المباشر",
       mod7Title: "7. أسعار الشحن وضوابط الدفع عند الاستلام",
 
       // Tools Top
@@ -349,7 +394,7 @@ const app = {
   bottleCosts: { octagonal: 10, crystal: 35, luxury: 75 },
   packCosts: { velvet: 6, rigid: 25, casket: 60 },
 
-  // All 6 Categories with Deep Curriculum Data
+  // All 6 Categories with Deep Curriculum Data & Real Authentic Photography
   categoriesData: {
     attar: {
       id: "attar",
@@ -370,6 +415,15 @@ const app = {
       margin: "80% - 250%",
       topMarkets: "Kozhikode S.M. Street, Mumbai Crawford Market, Kannauj",
       
+      // Authentic Real-Life Photography
+      images: {
+        cover: "https://images.unsplash.com/photo-1615397349754-cfa2066a298e?auto=format&fit=crop&w=800&q=80",
+        product: "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?auto=format&fit=crop&w=800&q=80",
+        sourcing: "https://images.unsplash.com/photo-1596178065887-1198b6148b2b?auto=format&fit=crop&w=800&q=80",
+        formulation: "https://images.unsplash.com/photo-1615397349754-cfa2066a298e?auto=format&fit=crop&w=800&q=80",
+        packaging: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=800&q=80"
+      },
+
       curriculumHighlights: {
         en: [
           "Zero-knowledge scent science: Attar vs EDP spray & oil notes",
@@ -480,6 +534,14 @@ const app = {
       margin: "45% - 120%",
       topMarkets: "Surat Millennium Market, Tirupur Cotton Cluster, Kochi Broadway",
       
+      images: {
+        cover: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=800&q=80",
+        product: "https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?auto=format&fit=crop&w=800&q=80",
+        sourcing: "https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=800&q=80",
+        formulation: "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?auto=format&fit=crop&w=800&q=80",
+        packaging: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=800&q=80"
+      },
+
       curriculumHighlights: {
         en: [
           "Understanding fabric GSM, Nada crepe, Korean chiffon & pure cotton",
@@ -586,6 +648,14 @@ const app = {
       margin: "60% - 150%",
       topMarkets: "Mumbai Manish Market, Delhi Sadar Bazaar & Gaffar Market",
 
+      images: {
+        cover: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=80",
+        product: "https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=800&q=80",
+        sourcing: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=800&q=80",
+        formulation: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=80",
+        packaging: "https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=800&q=80"
+      },
+
       curriculumHighlights: {
         en: [
           "Movement basics: Quartz movements, battery lifespan & waterproof grading",
@@ -690,6 +760,14 @@ const app = {
       minBudget: "₹5,000 - ₹18,000",
       margin: "60% - 180%",
       topMarkets: "Dharavi Leather Cluster (Mumbai), Surat, Delhi Nabi Karim",
+
+      images: {
+        cover: "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=800&q=80",
+        product: "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=800&q=80",
+        sourcing: "https://images.unsplash.com/photo-1627123424574-724758594e93?auto=format&fit=crop&w=800&q=80",
+        formulation: "https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=800&q=80",
+        packaging: "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=800&q=80"
+      },
 
       curriculumHighlights: {
         en: [
@@ -796,6 +874,14 @@ const app = {
       margin: "100% - 300%",
       topMarkets: "Mumbai Bhuleshwar Market, Jaipur Johari Bazaar, Delhi Sadar",
 
+      images: {
+        cover: "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=800&q=80",
+        product: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=800&q=80",
+        sourcing: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=800&q=80",
+        formulation: "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=800&q=80",
+        packaging: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=800&q=80"
+      },
+
       curriculumHighlights: {
         en: [
           "Understanding 316L Stainless Steel & 18K PVD vacuum plating (never tarnishes)",
@@ -899,6 +985,14 @@ const app = {
       minBudget: "₹5,000 - ₹25,000",
       margin: "50% - 140%",
       topMarkets: "Kozhikode Valiyangadi, Idukki Cardamom Auctions, Wayanad Honey Depots",
+
+      images: {
+        cover: "https://images.unsplash.com/photo-1599940824399-b87987ceb72a?auto=format&fit=crop&w=800&q=80",
+        product: "https://images.unsplash.com/photo-1599940824399-b87987ceb72a?auto=format&fit=crop&w=800&q=80",
+        sourcing: "https://images.unsplash.com/photo-1588668214407-6ea9a6d8c272?auto=format&fit=crop&w=800&q=80",
+        formulation: "https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&w=800&q=80",
+        packaging: "https://images.unsplash.com/photo-1599940824399-b87987ceb72a?auto=format&fit=crop&w=800&q=80"
+      },
 
       curriculumHighlights: {
         en: [
@@ -1413,14 +1507,6 @@ const app = {
     { service: "Kerala Gulf Air Cargo", zone: "UAE & Saudi Air Cargo", weight: "Per Kg (Min 5kg)", rate: "₹800 - ₹1,100 / kg", remarks: "Very popular among Gulf NRI expatriates" }
   ],
 
-  // Instagram Tips
-  instaTips: [
-    { icon: "fa-video", title: { en: "Show Aesthetic Packaging Reels", ml: "പാക്കിംഗ് റീലുകൾ ഇൻസ്റ്റാഗ്രാമിൽ ഇടുക", ar: "تصوير مقاطع تغليف الطرود (Aesthetic)" }, desc: { en: "Packing orders with trending background audio generates 5x more views than plain static product images.", ml: "പാഴ്സലുകൾ പാക്ക് ചെയ്യുന്നതിന്റെ റീലുകൾ ട്രെൻഡിംഗ് പാട്ടുകൾ വെച്ച് പോസ്റ്റ് ചെയ്താൽ കൂടുതൽ ആളുകൾ കാണും.", ar: "فيديوهات تجهيز وتغليف الطلبات مع مؤثرات صوتية تحقق انتشاراً أوسع 5 أضعاف من الصور الثابتة." } },
-    { icon: "fa-tag", title: { en: "Clear Pricing in Caption", ml: "വില ക്യാപ്ഷനിൽ കൃത്യമായി പറയുക", ar: "ذكر السعر بوضوح في وصف المنشور" }, desc: { en: "Never say 'DM for price'. Stating the exact price + 'Free Shipping on Prepaid' increases checkout conversion by 60%.", ml: "'വില അറിയാൻ DM ചെയ്യുക' എന്ന് പറയരുത്. വിലയും 'ഫ്രീ ഷിപ്പിംഗും' ക്യാപ്ഷനിൽ വ്യക്തമായി നൽകിയാൽ ആളുകൾ പെട്ടെന്ന് വാങ്ങും.", ar: "تجنب عبارة 'السعر على الخاص'. ذكر السعر مباشرة مع شحن مجاني يزيد المبيعات بنسبة 60%." } },
-    { icon: "fa-hand-holding-dollar", title: { en: "The ₹50 COD Advance Token Rule", ml: "COD-ൽ ₹50 അഡ്വാൻസ് നിർബന്ധമാക്കുക", ar: "شرط تحويل 50 روبية مقدماً للدفع عند الاستلام" }, desc: { en: "Never send 100% Cash on Delivery to strangers. Collect ₹50 advance via GPay to eliminate fake orders and RTO losses.", ml: "ക്യാഷ് ഓൺ ഡെലിവറി നൽകുമ്പോൾ ₹50 ഗൂഗിൾ പേ വഴി അഡ്വാൻസ് വാങ്ങുക. ഇത് വ്യാജ ഓർഡറുകൾ പൂർണ്ണമായി ഒഴിവാക്കും.", ar: "لا ترسل أي طرد بنظام الدفع عند الاستلام بدون تحويل عربون 50 روبية مقدماً لتفادي الطرود الوهمية." } },
-    { icon: "fa-users", title: { en: "Send PR Boxes to Micro Creators", ml: "സുഹൃത്തുക്കൾക്കും ഇൻഫ്ലുവൻസർമാർക്കും നൽകുക", ar: "إهداء عينات للمؤثرين الصغار محلياً" }, desc: { en: "Gift 3-5 sample bottles to local beauty or lifestyle creators with 3k-10k followers for honest shoutouts.", ml: "3k-10k ഫോളോവേഴ്സ് ഉള്ള ലോക്കൽ ഇൻഫ്ലുവൻസർമാർക്ക് ഫ്രീയായി ഗിഫ്റ്റ് നൽകി ഇൻസ്റ്റാഗ്രാം പ്രൊമോഷൻ നേടാം.", ar: "أهدِ 3 إلى 5 عينات لمؤثرين محليين يتابعهم من 3 إلى 10 آلاف شخص للحصول على توصيات حقيقية." } }
-  ],
-
   // Core Application Initialization
   init() {
     this.detectLanguage();
@@ -1489,10 +1575,11 @@ const app = {
   },
 
   // Open Dedicated Academy Masterclass
-  openAcademy(nicheKey) {
+  openAcademy(nicheKey, targetStep = 1) {
     if (!this.categoriesData[nicheKey]) nicheKey = 'attar';
     this.currentAcademy = nicheKey;
     this.currentView = 'academy';
+    this.currentCourseStep = targetStep;
 
     const vHome = document.getElementById('viewHome');
     const vAcademy = document.getElementById('viewAcademy');
@@ -1517,6 +1604,88 @@ const app = {
     this.renderCourseModules(nicheKey);
     window.location.hash = `#academy/${nicheKey}`;
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  },
+
+  // Set Stepper Step
+  setCourseStep(stepNum) {
+    if (stepNum < 1) stepNum = 1;
+    if (stepNum > 7) stepNum = 7;
+    this.currentCourseStep = stepNum;
+    this.renderCourseModules(this.currentAcademy);
+    window.scrollTo({ top: 220, behavior: 'smooth' });
+  },
+
+  nextCourseStep() {
+    if (this.currentCourseStep < 7) {
+      this.setCourseStep(this.currentCourseStep + 1);
+    } else {
+      this.navigateTo('plan');
+    }
+  },
+
+  prevCourseStep() {
+    if (this.currentCourseStep > 1) {
+      this.setCourseStep(this.currentCourseStep - 1);
+    }
+  },
+
+  toggleCourseViewMode(mode) {
+    this.courseViewMode = mode;
+    const btnStepper = document.getElementById('btnModeStepper');
+    const btnAll = document.getElementById('btnModeAll');
+
+    if (btnStepper) btnStepper.classList.toggle('active', mode === 'stepper');
+    if (btnAll) btnAll.classList.toggle('active', mode === 'all');
+
+    this.renderCourseModules(this.currentAcademy);
+  },
+
+  // Update Stepper Progress UI
+  updateStepperUI() {
+    const fill = document.getElementById('stepperProgressFill');
+    const text = document.getElementById('lblStepProgress');
+    const pillsRow = document.getElementById('stepperPillsRow');
+    if (!fill || !text || !pillsRow) return;
+
+    const current = this.currentCourseStep;
+    const pct = Math.round((current / 7) * 100);
+    fill.style.width = `${pct}%`;
+
+    const lang = this.currentLang;
+    const t = this.i18n[lang] || this.i18n.en;
+
+    text.textContent = lang === 'ml' 
+      ? `ഘട്ടം ${current} / 7 • (${pct}% പൂർത്തിയായി)`
+      : lang === 'ar'
+      ? `الخطوة ${current} من 7 • (اكتمل ${pct}%)`
+      : `Step ${current} of 7 • (${pct}% Completed)`;
+
+    const pillLabels = [
+      t.step1Pill || "1. Product Science",
+      t.step2Pill || "2. Capital Breakdown",
+      t.step3Pill || "3. Wholesale Markets",
+      t.step4Pill || "4. Calling Dialogue",
+      t.step5Pill || "5. Formulation & Making",
+      t.step6Pill || "6. Profit Graph",
+      t.step7Pill || "7. Courier & Orders"
+    ];
+
+    let pillsHtml = '';
+    pillLabels.forEach((label, idx) => {
+      const stepIdx = idx + 1;
+      const isActive = stepIdx === current;
+      const isDone = stepIdx < current;
+      const cls = isActive ? 'active' : isDone ? 'completed' : '';
+      const checkIcon = isDone ? '<i class="fa-solid fa-check text-success"></i>' : `<small>${stepIdx}.</small>`;
+
+      pillsHtml += `
+        <button class="step-pill-btn ${cls}" onclick="app.setCourseStep(${stepIdx})">
+          ${checkIcon} <span>${label}</span>
+        </button>
+      `;
+    });
+
+    pillsRow.innerHTML = pillsHtml;
   },
 
   // Switch Tools Dynamic Subview Tab
@@ -1588,13 +1757,13 @@ const app = {
     this.renderFacultyCards();
     this.renderRoadmap();
     if (this.currentView === 'academy') {
-      this.openAcademy(this.currentAcademy);
+      this.openAcademy(this.currentAcademy, this.currentCourseStep);
     } else if (this.currentView === 'tools') {
       this.renderToolsDynamicContent(this.currentToolTab);
     }
   },
 
-  // Render Homepage Faculty Cards Grid
+  // Render Homepage Faculty Cards Grid with Real Photography
   renderFacultyCards() {
     const grid = document.getElementById('facultyCardsGrid');
     if (!grid) return;
@@ -1616,6 +1785,10 @@ const app = {
 
       html += `
         <div class="faculty-card">
+          <div class="faculty-card-cover">
+            <img src="${cat.images.cover}" alt="${title}" loading="lazy">
+            <span class="cover-badge"><i class="fa-solid fa-coins"></i> ${cat.minBudget}</span>
+          </div>
           <div class="faculty-header ${cat.headerClass}">
             <div class="faculty-icon-wrap">
               <i class="fa-solid ${cat.icon}"></i>
@@ -1650,31 +1823,36 @@ const app = {
     grid.innerHTML = html;
   },
 
-  // Render All 7 Modules of the Active Business Academy
+  // Render Modules in Academy (Guided Stepper Mode vs Full Masterclass Mode)
   renderCourseModules(nicheKey) {
     const container = document.getElementById('courseModulesBody');
     if (!container) return;
 
+    this.updateStepperUI();
+
     const cat = this.categoriesData[nicheKey] || this.categoriesData.attar;
     const lang = this.currentLang;
     const t = this.i18n[lang] || this.i18n.en;
+    const activeStep = this.currentCourseStep;
+    const isStepper = this.courseViewMode === 'stepper';
 
-    let html = '';
-
-    // MODULE 1: Blueprint & Product Science
-    html += `
-      <section class="course-module-card" id="mod-blueprint">
-        <div class="module-header-strip">
-          <span class="module-number-badge">Module 1</span>
-          <h3><i class="fa-solid fa-book-open text-primary"></i> ${t.mod1Title || '1. Blueprint & Product Science'}</h3>
-        </div>
-        <div class="module-body">
+    // Build the 7 Step HTML definitions
+    const stepModules = [
+      // STEP 1: Product Science & Blueprint
+      {
+        id: "mod-blueprint",
+        stepNum: 1,
+        title: t.mod1Title || '1. Blueprint & Product Science',
+        heroImg: cat.images.product,
+        heroTitle: lang === 'ml' ? 'ഉൽപ്പന്ന വിവരങ്ങളും വിപണിയും' : lang === 'ar' ? 'علم الصنعة والمنتج' : 'Product Science & Fast Sellers',
+        heroSub: lang === 'ml' ? 'ആദ്യമായി എന്ത് ചെയ്യണം? ഉൽപ്പന്നം എന്താണെന്ന് മനസ്സിലാക്കുക, ഏറ്റവും കൂടുതൽ വിറ്റുപോകുന്ന ഇനങ്ങൾ തിരഞ്ഞെടുക്കുക.' : lang === 'ar' ? 'ماذا تفعل أولاً؟ افهم طبيعة المنتج واختر أكثر 4 أصناف طلباً في السوق.' : 'Phase 1: Zero-knowledge craft science and top 4 fastest-moving varieties.',
+        renderContent: () => `
           <div class="blueprint-intro-box" style="background: #f8fafc; border-left: 4px solid var(--primary); padding: 18px 22px; border-radius: var(--radius-sm); margin-bottom: 24px; line-height: 1.6;">
             <p style="font-size: 0.96rem; color: var(--secondary-dark);">${cat.blueprint.intro[lang] || cat.blueprint.intro.en}</p>
           </div>
 
-          <h4 style="font-size: 1.1rem; font-weight: 800; color: var(--secondary-dark); margin-bottom: 14px;">
-            <i class="fa-solid fa-fire text-danger"></i> ${lang === 'ml' ? 'ഏറ്റവും കൂടുതൽ വിറ്റുപോകുന്ന ടോപ്പ് ഐറ്റങ്ങൾ' : lang === 'ar' ? 'المنتجات الأكثر مبيعاً والأعلى ربحاً' : 'Top Fast-Moving Best-Seller Products'}
+          <h4 style="font-size: 1.15rem; font-weight: 800; color: var(--secondary-dark); margin-bottom: 14px;">
+            <i class="fa-solid fa-fire text-danger"></i> ${lang === 'ml' ? 'തുടക്കക്കാർ തിരഞ്ഞെടുക്കേണ്ട 4 ടോപ്പ് ഐറ്റങ്ങൾ' : lang === 'ar' ? 'أفضل 4 منتجات للمبتدئين' : 'Top Fast-Moving Best-Seller Products'}
           </h4>
           <div class="table-responsive">
             <table class="cost-ledger-table">
@@ -1698,18 +1876,18 @@ const app = {
               </tbody>
             </table>
           </div>
-        </div>
-      </section>
-    `;
+        `
+      },
 
-    // MODULE 2: Exact Capital & Budget Breakdown Table (എന്തിനൊക്കെ എത്ര രൂപ)
-    html += `
-      <section class="course-module-card" id="mod-capital">
-        <div class="module-header-strip">
-          <span class="module-number-badge">Module 2</span>
-          <h3><i class="fa-solid fa-coins text-warning"></i> ${t.mod2Title || '2. Exact Capital & Budget Breakdown'}</h3>
-        </div>
-        <div class="module-body">
+      // STEP 2: Exact Capital & Budget Breakdown Table
+      {
+        id: "mod-capital",
+        stepNum: 2,
+        title: t.mod2Title || '2. Exact Capital & Budget Breakdown',
+        heroImg: cat.images.cover,
+        heroTitle: lang === 'ml' ? 'എന്തിനൊക്കെ എത്ര രൂപ? (വിശദമായ ബഡ്ജറ്റ് പട്ടിക)' : lang === 'ar' ? 'تفاصيل الميزانية ورأس المال الدقيق' : 'Itemized Capital & Budget Ledger',
+        heroSub: lang === 'ml' ? 'രണ്ടാമതായി എന്ത് ചെയ്യണം? കയ്യിൽ എത്ര രൂപ വേണം, എന്തിനൊക്കെ എത്ര രൂപ ചെലവാകും എന്ന് കൃത്യമായി പ്ലാൻ ചെയ്യുക.' : lang === 'ar' ? 'ماذا تفعل ثانياً؟ حدد ميزانيتك بدقة واعرف أين تذهب كل روبية لتفادي أي خسائر.' : 'Phase 2: Exact itemized startup costs for Starter and Pro brand tiers.',
+        renderContent: () => `
           <p style="font-size: 0.92rem; color: var(--text-muted); margin-bottom: 16px;">
             ${lang === 'ml' 
               ? 'ബിസിനസ് തുടങ്ങുമ്പോൾ എന്തിനൊക്കെ എത്ര രൂപ ചെലവാകും എന്ന് കൃത്യമായി കാണിക്കുന്ന ബഡ്ജറ്റ് പട്ടിക. അനാവശ്യ ചെലവുകൾ ഒഴിവാക്കി സുരക്ഷിതമായി തുടങ്ങാം.' 
@@ -1746,129 +1924,68 @@ const app = {
               </tbody>
             </table>
           </div>
-        </div>
-      </section>
-    `;
+        `
+      },
 
-    // MODULE 3: Formulation & Assembly Guide (പുതിയത് ഉണ്ടാക്കാൻ എത്ര വേണം)
-    html += `
-      <section class="course-module-card" id="mod-sourcing">
-        <div class="module-header-strip">
-          <span class="module-number-badge">Module 3</span>
-          <h3><i class="fa-solid fa-flask text-success"></i> ${t.mod3Title || '3. Formulation & How to Make Your Brand'}</h3>
-        </div>
-        <div class="module-body">
-          <div class="unit-economics-callout" style="background: #ecfdf5; border: 1px solid #a7f3d0; padding: 16px 20px; border-radius: var(--radius-sm); margin-bottom: 24px; color: #065f46; font-size: 0.95rem; line-height: 1.6;">
-            <i class="fa-solid fa-chart-pie" style="font-size: 1.2rem; margin-right: 8px;"></i>
-            ${cat.formulation.costPerUnitBox[lang] || cat.formulation.costPerUnitBox.en}
-          </div>
+      // STEP 3: Wholesale Hubs with Phone & Google Maps
+      {
+        id: "mod-suppliers",
+        stepNum: 3,
+        title: t.mod3Title || '3. Wholesale Markets & Google Maps',
+        heroImg: cat.images.sourcing,
+        heroTitle: lang === 'ml' ? 'മൊത്തവ്യാപാര മാർക്കറ്റുകൾ & മാപ്പ്' : lang === 'ar' ? 'أسواق الجملة وعناوين الموردين' : 'Wholesale Markets, Phone & Google Maps',
+        heroSub: lang === 'ml' ? 'മൂന്നാമതായി എന്ത് ചെയ്യണം? മിഠായിത്തെരുവ്, ക്രോഫോർഡ് മാർക്കറ്റ് എന്നിവിടങ്ങളിലെ വ്യാപാരികളുടെ ലൊക്കേഷനുകൾ കണ്ടുപിടിക്കുക.' : lang === 'ar' ? 'ماذا تفعل ثالثاً؟ اعرف أين تتسوق بأسعار الجملة الحقيقية وتواصل مع الموردين المعتمدين.' : 'Phase 3: Connect directly with verified wholesale hubs via Google Maps and WhatsApp.',
+        renderContent: () => {
+          const matchingSuppliers = this.suppliers.filter(s => s.category === nicheKey || (nicheKey === 'attar' && s.category === 'packaging'));
+          return `
+            <div class="suppliers-grid-niche" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 18px;">
+              ${matchingSuppliers.map(sup => {
+                const waMsg = encodeURIComponent(
+                  lang === 'ml' 
+                    ? `ഹലോ ${sup.name}, ഞാൻ 'വ്യാപാര ശിക്ഷ' വെബ്സൈറ്റിൽ നിങ്ങളുടെ കടയുടെ വിവരം കണ്ടതാണ്. എനിക്ക് നിങ്ങളുടെ ഹോൾസെയിൽ കാറ്റലോഗും വിലവിവരങ്ങളും വേണം.`
+                    : lang === 'ar'
+                    ? `مرحباً ${sup.name}، وجدت بيانات متجركم عبر منصة رواد الأعمال. أود الاطلاع على كتالوج الجملة وقائمة الأسعار لديكم.`
+                    : `Hello ${sup.name}, I found your wholesale details on Vyapar Shiksha. I want to inquire about your wholesale catalog and bulk pricing.`
+                );
+                const waLink = `https://wa.me/${sup.whatsapp}?text=${waMsg}`;
 
-          <h4 style="font-size: 1.1rem; font-weight: 800; color: var(--secondary-dark); margin-bottom: 16px;">
-            <i class="fa-solid fa-list-ol text-primary"></i> ${lang === 'ml' ? 'ഘട്ടം ഘട്ടമായി തയ്യാറാക്കുന്ന വിധം' : lang === 'ar' ? 'خطوات التصنيع والتركيب خطوة بخطوة' : 'Step-by-Step Practical Creation Steps'}
-          </h4>
-
-          <div class="steps-flow-grid" style="display: flex; flex-direction: column; gap: 14px;">
-            ${cat.formulation.steps.map(s => `
-              <div class="step-card-flow" style="display: flex; gap: 16px; background: #ffffff; border: 1px solid var(--border-color); padding: 16px; border-radius: var(--radius-sm);">
-                <div class="step-num-bubble" style="width: 38px; height: 38px; border-radius: 50%; background: var(--primary); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 800; flex-shrink: 0;">
-                  ${s.step}
-                </div>
-                <div>
-                  <h5 style="font-size: 1rem; font-weight: 700; color: var(--secondary-dark); margin-bottom: 4px;">${s.title[lang] || s.title.en}</h5>
-                  <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.5;">${s.desc[lang] || s.desc.en}</p>
-                </div>
-              </div>
-            `).join('')}
-          </div>
-        </div>
-      </section>
-    `;
-
-    // MODULE 4: Verified Wholesalers with Phone & Google Maps
-    const matchingSuppliers = this.suppliers.filter(s => s.category === nicheKey || (nicheKey === 'attar' && s.category === 'packaging'));
-    html += `
-      <section class="course-module-card" id="mod-suppliers">
-        <div class="module-header-strip">
-          <span class="module-number-badge">Module 4</span>
-          <h3><i class="fa-solid fa-store text-info"></i> ${t.mod4Title || '4. Verified Wholesalers & Google Maps'}</h3>
-        </div>
-        <div class="module-body">
-          <p style="font-size: 0.92rem; color: var(--text-muted); margin-bottom: 20px;">
-            ${lang === 'ml'
-              ? 'ഈ ബിസിനസ്സിന് ആവശ്യമായ സാധനങ്ങൾ മൊത്തവിലയ്ക്ക് വാങ്ങാൻ നേരിട്ട് ബന്ധപ്പെടാവുന്ന വ്യാപാരികൾ. വാട്സ്ആപ്പിലൂടെയോ നേരിട്ടോ ഓർഡർ ചെയ്യാം.'
-              : lang === 'ar'
-              ? 'عناوين وأرقام موردي الجملة المعتمدين مع خرائط جوجل للشراء المباشر أو الطلب عبر الواتساب.'
-              : 'Direct verified wholesale shops with phone numbers, Google Maps location links, and instant WhatsApp chat buttons.'}
-          </p>
-
-          <div class="suppliers-grid-niche" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 18px;">
-            ${matchingSuppliers.map(sup => {
-              const waMsg = encodeURIComponent(
-                lang === 'ml' 
-                  ? `ഹലോ ${sup.name}, ഞാൻ 'വ്യാപാര ശിക്ഷ' വെബ്സൈറ്റിൽ നിങ്ങളുടെ കടയുടെ വിവരം കണ്ടതാണ്. എനിക്ക് നിങ്ങളുടെ ഹോൾസെയിൽ കാറ്റലോഗും വിലവിവരങ്ങളും വേണം.`
-                  : lang === 'ar'
-                  ? `مرحباً ${sup.name}، وجدت بيانات متجركم عبر منصة رواد الأعمال. أود الاطلاع على كتالوج الجملة وقائمة الأسعار لديكم.`
-                  : `Hello ${sup.name}, I found your wholesale details on Vyapar Shiksha. I want to inquire about your wholesale catalog and bulk pricing.`
-              );
-              const waLink = `https://wa.me/${sup.whatsapp}?text=${waMsg}`;
-
-              return `
-                <div class="supplier-card">
-                  <div class="supplier-head">
-                    <h4 class="supplier-name">${sup.name}</h4>
-                    <span class="city-badge">${sup.city}</span>
+                return `
+                  <div class="supplier-card">
+                    <div class="supplier-head">
+                      <h4 class="supplier-name">${sup.name}</h4>
+                      <span class="city-badge">${sup.city}</span>
+                    </div>
+                    <p class="supplier-address"><i class="fa-solid fa-location-dot"></i> <span>${sup.address}</span></p>
+                    <p style="font-size: 0.85rem; color: #1e293b; margin-bottom: 8px;"><strong>${lang === 'ml' ? 'പ്രത്യേകതകൾ:' : lang === 'ar' ? 'المنتجات:' : 'Specialties:'}</strong> ${sup.specialty}</p>
+                    <p style="font-size: 0.8rem; color: #64748b; margin-bottom: 14px;"><i class="fa-solid fa-box"></i> <strong>MOQ:</strong> ${sup.moq}</p>
+                    <div class="supplier-actions">
+                      <a href="${waLink}" target="_blank" rel="noopener noreferrer" class="btn-whatsapp">
+                        <i class="fa-brands fa-whatsapp"></i> ${lang === 'ml' ? 'വാട്സ്ആപ്പ്' : lang === 'ar' ? 'واتساب' : 'WhatsApp'}
+                      </a>
+                      <a href="${sup.mapUrl}" target="_blank" rel="noopener noreferrer" class="btn-map">
+                        <i class="fa-solid fa-location-crosshairs"></i> ${lang === 'ml' ? 'ഗൂഗിൾ മാപ്പ്' : lang === 'ar' ? 'خرائط جوجل' : 'Google Maps'}
+                      </a>
+                      <a href="tel:${sup.phone}" class="btn-map-call">
+                        <i class="fa-solid fa-phone"></i>
+                      </a>
+                    </div>
                   </div>
-                  <p class="supplier-address"><i class="fa-solid fa-location-dot"></i> <span>${sup.address}</span></p>
-                  <p style="font-size: 0.85rem; color: #1e293b; margin-bottom: 8px;"><strong>${lang === 'ml' ? 'പ്രത്യേകതകൾ:' : lang === 'ar' ? 'المنتجات:' : 'Specialties:'}</strong> ${sup.specialty}</p>
-                  <p style="font-size: 0.8rem; color: #64748b; margin-bottom: 14px;"><i class="fa-solid fa-box"></i> <strong>MOQ:</strong> ${sup.moq}</p>
-                  <div class="supplier-actions">
-                    <a href="${waLink}" target="_blank" rel="noopener noreferrer" class="btn-whatsapp">
-                      <i class="fa-brands fa-whatsapp"></i> ${lang === 'ml' ? 'വാട്സ്ആപ്പ്' : lang === 'ar' ? 'واتساب' : 'WhatsApp'}
-                    </a>
-                    <a href="${sup.mapUrl}" target="_blank" rel="noopener noreferrer" class="btn-map">
-                      <i class="fa-solid fa-location-crosshairs"></i> ${lang === 'ml' ? 'ഗൂഗിൾ മാപ്പ്' : lang === 'ar' ? 'خرائط جوجل' : 'Google Maps'}
-                    </a>
-                    <a href="tel:${sup.phone}" class="btn-map-call">
-                      <i class="fa-solid fa-phone"></i>
-                    </a>
-                  </div>
-                </div>
-              `;
-            }).join('')}
-          </div>
-        </div>
-      </section>
-    `;
+                `;
+              }).join('')}
+            </div>
+          `;
+        }
+      },
 
-    // MODULE 5: Interactive Simulator with Live Profit Graph
-    html += `
-      <section class="course-module-card" id="mod-simulator">
-        <div class="module-header-strip">
-          <span class="module-number-badge">Module 5</span>
-          <h3><i class="fa-solid fa-chart-column text-danger"></i> ${t.mod5Title || '5. Profit Simulator & Live Graph'}</h3>
-        </div>
-        <div class="module-body" id="nicheSimulatorContainer">
-          ${this.getNicheSimulatorHtml(nicheKey)}
-        </div>
-      </section>
-    `;
-
-    // MODULE 6: Wholesaler Calling & Chat Coaching (സംസാരിക്കേണ്ട രീതി)
-    html += `
-      <section class="course-module-card" id="mod-coaching">
-        <div class="module-header-strip">
-          <span class="module-number-badge">Module 6</span>
-          <h3><i class="fa-solid fa-headset text-warning"></i> ${t.mod6Title || '6. Wholesaler Calling & Chat Coaching'}</h3>
-        </div>
-        <div class="module-body">
-          <p style="font-size: 0.92rem; color: var(--text-muted); margin-bottom: 20px;">
-            ${lang === 'ml'
-              ? 'വ്യാപാരികളോട് സംസാരിക്കാൻ ഭയമാണോ? റീട്ടെയിൽ കടക്കാരെപ്പോലെ അല്ലാതെ ഒരു പ്രൊഫഷണൽ ബിസിനസ്സുകാരനായി വിലപേശി സാമ്പിളുകൾ വാങ്ങാനുള്ള കൃത്യമായ ചോദ്യങ്ങൾ ഇതാ.'
-              : lang === 'ar'
-              ? 'هل تشعر بالتردد في الاتصال بالموردين؟ إليك الحوار الصوتي المعتمد للتفاوض الاحترافي لطلب عينات تجريبية بأفضل الأسعار.'
-              : 'Feel nervous about calling wholesalers? Follow this step-by-step masterclass with proven questions to negotiate smaller trial batches and get authentic wholesale rates.'}
-          </p>
-
+      // STEP 4: Calling Dialogue & Negotiation Coaching
+      {
+        id: "mod-coaching",
+        stepNum: 4,
+        title: t.mod4Title || '4. Wholesaler Calling & Chat Coaching',
+        heroImg: cat.images.sourcing,
+        heroTitle: lang === 'ml' ? 'വ്യാപാരികളോട് സംസാരിക്കേണ്ട രീതി' : lang === 'ar' ? 'حوار التفاوض والاتصال مع الموردين' : 'Wholesaler Calling & Chat Coaching',
+        heroSub: lang === 'ml' ? 'നാലാമതായി എന്ത് ചെയ്യണം? കടക്കാരെ വിളിച്ച് സാമ്പിളുകൾ ആവശ്യപ്പെടാനും വിലപേശാനുമുള്ള സംസാര രീതി പഠിക്കുക.' : lang === 'ar' ? 'ماذا تفعل رابعاً؟ كيف تتصل بالموردين بثقة وتطلب عينات وتتفاوض على سعر الكيلو.' : 'Phase 4: Battle-tested calling scripts and negotiation masterclass.',
+        renderContent: () => `
           <div class="coaching-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 18px;">
             ${this.coachingData.map(c => `
               <div class="coach-card">
@@ -1881,21 +1998,66 @@ const app = {
               </div>
             `).join('')}
           </div>
-        </div>
-      </section>
-    `;
+        `
+      },
 
-    // MODULE 7: Courier Rates, Safe COD & Launch Checklist
-    html += `
-      <section class="course-module-card" id="mod-logistics">
-        <div class="module-header-strip">
-          <span class="module-number-badge">Module 7</span>
-          <h3><i class="fa-solid fa-truck-fast text-success"></i> ${t.mod7Title || '7. Courier Rates, COD & Launch Checklist'}</h3>
-        </div>
-        <div class="module-body">
-          <div class="cod-danger-box" style="background: #fffbeb; border: 1px solid #fef08a; padding: 18px 22px; border-radius: var(--radius-sm); margin-bottom: 24px; color: #854d0e; font-size: 0.92rem; line-height: 1.6;">
-            <h4 style="font-size: 1.05rem; font-weight: 800; color: #78350f; margin-bottom: 6px;">
-              <i class="fa-solid fa-triangle-exclamation text-warning"></i> ${lang === 'ml' ? 'പ്രധാനപ്പെട്ടത്: ക്യാഷ് ഓൺ ഡെലിവറി (COD) അപകടം' : lang === 'ar' ? 'تنبيه هام: مخاطر الدفع عند الاستلام' : 'Critical Rule: Cash on Delivery (COD) Protection'}
+      // STEP 5: Formulation & Assembly Guide (പുതിയത് ഉണ്ടാക്കാൻ എത്ര വേണം)
+      {
+        id: "mod-sourcing",
+        stepNum: 5,
+        title: t.mod5Title || '5. Formulation & How to Make Your Brand',
+        heroImg: cat.images.formulation,
+        heroTitle: lang === 'ml' ? 'പുതിയത് ഉണ്ടാക്കാൻ എത്ര വേണം? (നിർമ്മാണ രീതി)' : lang === 'ar' ? 'طريقة التركيب وصناعة علامتك الجديدة' : 'Formulation, Assembly & Crafting',
+        heroSub: lang === 'ml' ? 'അഞ്ചാമതായി എന്ത് ചെയ്യണം? കുപ്പിയിൽ അളന്ന് നിറച്ച്, റോൾ-ഓൺ അമർത്തി, ലേബൽ ഒട്ടിച്ച് വെൽവെറ്റ് പൗച്ചിലാക്കുന്ന വിധം.' : lang === 'ar' ? 'ماذا تفعل خامساً؟ طريقة تعبئة الزجاجات وتثبيت الرول ولصق الشعار والتغليف الفاخر.' : 'Phase 5: Step-by-step practical assembly, hygiene, bottling and unit cost.',
+        renderContent: () => `
+          <div class="unit-economics-callout" style="background: #ecfdf5; border: 1px solid #a7f3d0; padding: 18px 22px; border-radius: var(--radius-sm); margin-bottom: 24px; color: #065f46; font-size: 0.96rem; line-height: 1.6;">
+            <i class="fa-solid fa-chart-pie" style="font-size: 1.25rem; margin-right: 8px;"></i>
+            ${cat.formulation.costPerUnitBox[lang] || cat.formulation.costPerUnitBox.en}
+          </div>
+
+          <h4 style="font-size: 1.15rem; font-weight: 800; color: var(--secondary-dark); margin-bottom: 16px;">
+            <i class="fa-solid fa-list-ol text-primary"></i> ${lang === 'ml' ? 'ഘട്ടം ഘട്ടമായി തയ്യാറാക്കുന്ന വിധം' : lang === 'ar' ? 'خطوات التصنيع والتركيب خطوة بخطوة' : 'Step-by-Step Practical Creation Steps'}
+          </h4>
+
+          <div class="steps-flow-grid" style="display: flex; flex-direction: column; gap: 14px;">
+            ${cat.formulation.steps.map(s => `
+              <div class="step-card-flow" style="display: flex; gap: 16px; background: #ffffff; border: 1px solid var(--border-color); padding: 18px; border-radius: var(--radius-sm);">
+                <div class="step-num-bubble" style="width: 40px; height: 40px; border-radius: 50%; background: var(--primary); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 800; flex-shrink: 0;">
+                  ${s.step}
+                </div>
+                <div>
+                  <h5 style="font-size: 1.05rem; font-weight: 700; color: var(--secondary-dark); margin-bottom: 4px;">${s.title[lang] || s.title.en}</h5>
+                  <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.5;">${s.desc[lang] || s.desc.en}</p>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        `
+      },
+
+      // STEP 6: Live Visual Profit Graph & Simulator
+      {
+        id: "mod-simulator",
+        stepNum: 6,
+        title: t.mod6Title || '6. Profit Simulator & Live Visual Graph',
+        heroImg: cat.images.cover,
+        heroTitle: lang === 'ml' ? 'ലൈവ് ലാഭ ഗ്രാഫും സിമുലേറ്ററും' : lang === 'ar' ? 'حاسبة الأرباح والرسم البياني المباشر' : 'Live Profit Graph & Margin Visualizer',
+        heroSub: lang === 'ml' ? 'ആറാമതായി എന്ത് ചെയ്യണം? ഓരോ കുപ്പിയിലും എത്ര ലാഭം കിട്ടും, 25/50/100 കുപ്പികൾ വിൽക്കുമ്പോൾ എത്ര സമ്പാദിക്കാം എന്ന് കാണുക.' : lang === 'ar' ? 'ماذا تفعل سادساً؟ شاهد رسماً بيانياً مباشراً يوضح أرباحك وتكلفة تصنيع كل حبة بدقة.' : 'Phase 6: Interactive simulator with real-time segmented horizontal profit bar graph.',
+        renderContent: () => this.getNicheSimulatorHtml(nicheKey)
+      },
+
+      // STEP 7: Courier Rates, COD Rules & Launch Plan
+      {
+        id: "mod-logistics",
+        stepNum: 7,
+        title: t.mod7Title || '7. Courier Rates, COD & Launch Checklist',
+        heroImg: cat.images.packaging,
+        heroTitle: lang === 'ml' ? 'കൊറിയർ നിരക്കുകൾ & ആദ്യ വിൽപന' : lang === 'ar' ? 'أسعار الشحن البريدي وانطلاقة المبيعات' : 'Courier Rates, Safe COD & Launch Checklist',
+        heroSub: lang === 'ml' ? 'ഏഴാമതായി എന്ത് ചെയ്യണം? സുരക്ഷിതമായി പാക്ക് ചെയ്ത് കൊറിയർ വഴി കസ്റ്റമറിലേക്ക് എത്തിക്കുക.' : lang === 'ar' ? 'ماذا تفعل سابعاً؟ شحن الطرود بنظام وضمان استلام الأموال بدون مخاطر.' : 'Phase 7: Shipping partners, COD advance token rule, and 14-day Instagram playbook.',
+        renderContent: () => `
+          <div class="cod-danger-box" style="background: #fffbeb; border: 1px solid #fef08a; padding: 20px 24px; border-radius: var(--radius-sm); margin-bottom: 24px; color: #854d0e; font-size: 0.94rem; line-height: 1.6;">
+            <h4 style="font-size: 1.1rem; font-weight: 800; color: #78350f; margin-bottom: 8px;">
+              <i class="fa-solid fa-triangle-exclamation text-warning"></i> ${lang === 'ml' ? 'പ്രധാനപ്പെട്ടത്: ക്യാഷ് ഓൺ ഡെലിവറി (COD) അപകടം ഒഴിവാക്കാം' : lang === 'ar' ? 'تنبيه هام: تفادي خسائر الدفع عند الاستلام' : 'Critical Rule: Cash on Delivery (COD) Protection'}
             </h4>
             <p>
               ${lang === 'ml'
@@ -1906,7 +2068,7 @@ const app = {
             </p>
           </div>
 
-          <h4 style="font-size: 1.1rem; font-weight: 800; color: var(--secondary-dark); margin-bottom: 14px;">
+          <h4 style="font-size: 1.15rem; font-weight: 800; color: var(--secondary-dark); margin-bottom: 14px;">
             <i class="fa-solid fa-box-open text-primary"></i> ${lang === 'ml' ? 'കൊറിയർ നിരക്കുകൾ (കേരളം, ഇന്ത്യ & ഗൾഫ്)' : lang === 'ar' ? 'أسعار الشحن البريدي المعتمدة' : 'Courier Rates & Delivery Charges'}
           </h4>
           <div class="table-responsive">
@@ -1933,19 +2095,71 @@ const app = {
               </tbody>
             </table>
           </div>
-        </div>
-      </section>
-    `;
+        `
+      }
+    ];
+
+    let html = '';
+
+    if (isStepper) {
+      // GUIDED STEPPER PROCESSING MODE: Render ONLY the active step card
+      const stepData = stepModules[activeStep - 1] || stepModules[0];
+      const prevBtnHtml = activeStep > 1 
+        ? `<button class="btn-step-prev" onclick="app.prevCourseStep()">${t.btnPrevStep || '← Previous Step'}</button>` 
+        : `<span></span>`;
+      
+      const nextBtnHtml = activeStep < 7 
+        ? `<button class="btn-step-next" onclick="app.nextCourseStep()">${t.btnNextStep || 'Next Step →'}</button>` 
+        : `<button class="btn-step-next" onclick="app.navigateTo('plan')">${t.btnFinishCourse || '🎉 Finish Course & Generate Plan →'}</button>`;
+
+      html = `
+        <article class="course-module-card" id="${stepData.id}">
+          <div class="module-photo-hero">
+            <img src="${stepData.heroImg}" alt="${stepData.heroTitle}">
+            <div class="module-photo-overlay">
+              <span class="module-number-badge" style="display: inline-block; margin-bottom: 6px;">Step ${activeStep} of 7</span>
+              <h4>${stepData.heroTitle}</h4>
+              <p>${stepData.heroSub}</p>
+            </div>
+          </div>
+          <div class="module-body">
+            ${stepData.renderContent()}
+
+            <div class="stepper-nav-footer">
+              ${prevBtnHtml}
+              ${nextBtnHtml}
+            </div>
+          </div>
+        </article>
+      `;
+    } else {
+      // FULL MASTERCLASS MODE: Render all 7 steps stacked
+      html = stepModules.map((s, idx) => `
+        <article class="course-module-card" id="${s.id}">
+          <div class="module-photo-hero">
+            <img src="${s.heroImg}" alt="${s.heroTitle}">
+            <div class="module-photo-overlay">
+              <span class="module-number-badge" style="display: inline-block; margin-bottom: 6px;">Step ${idx + 1} of 7</span>
+              <h4>${s.heroTitle}</h4>
+              <p>${s.heroSub}</p>
+            </div>
+          </div>
+          <div class="module-body">
+            ${s.renderContent()}
+          </div>
+        </article>
+      `).join('');
+    }
 
     container.innerHTML = html;
 
-    // Initialize Attar Live Graph if Attar Academy
-    if (nicheKey === 'attar') {
+    // Re-render Attar simulator graph if Step 6 is active or in all mode
+    if (nicheKey === 'attar' && (activeStep === 6 || !isStepper)) {
       this.renderAttarSimulator();
     }
   },
 
-  // Get HTML for Simulator inside Module 5
+  // Get HTML for Simulator inside Module 6
   getNicheSimulatorHtml(nicheKey) {
     const lang = this.currentLang;
     const cat = this.categoriesData[nicheKey];

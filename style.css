@@ -2740,7 +2740,7 @@ body.lang-ar .drop-link:hover {
   border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
   overflow: hidden;
-  box-shadow: var(--shadow-md);
+  box-shadow: 0 4px 20px -2px rgba(0,0,0,0.06);
   display: flex;
   flex-direction: column;
   transition: var(--transition);
@@ -2748,8 +2748,49 @@ body.lang-ar .drop-link:hover {
 
 .faculty-card:hover {
   transform: translateY(-4px);
-  box-shadow: var(--shadow-xl);
+  box-shadow: 0 12px 28px -4px rgba(0,0,0,0.12);
   border-color: var(--primary);
+}
+
+.faculty-card-cover {
+  width: 100%;
+  height: 190px;
+  position: relative;
+  overflow: hidden;
+  background: #0f172a;
+}
+
+.faculty-card-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.faculty-card:hover .faculty-card-cover img {
+  transform: scale(1.06);
+}
+
+.faculty-card-cover .cover-badge {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: rgba(15, 23, 42, 0.78);
+  backdrop-filter: blur(8px);
+  color: #34d399;
+  font-size: 0.78rem;
+  font-weight: 800;
+  padding: 5px 12px;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(255,255,255,0.15);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+body.lang-ar .faculty-card-cover .cover-badge {
+  right: auto;
+  left: 14px;
 }
 
 .faculty-header {
@@ -2915,6 +2956,211 @@ body.lang-ar .course-main-title { font-size: 2rem; }
   font-size: 1.05rem;
   color: #94a3b8;
   max-width: 800px;
+}
+
+/* Course Processing Stepper & Mode Switcher */
+.course-stepper-wrap {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-lg);
+  padding: 18px 24px;
+  margin-top: 22px;
+  margin-bottom: 25px;
+}
+
+.stepper-header-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-bottom: 12px;
+}
+
+.stepper-progress-text {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #34d399;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.course-mode-toggle {
+  display: inline-flex;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius-full);
+  padding: 4px;
+  gap: 4px;
+}
+
+.mode-toggle-btn {
+  background: none;
+  border: none;
+  color: #94a3b8;
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.mode-toggle-btn:hover {
+  color: #fff;
+}
+
+.mode-toggle-btn.active {
+  background: var(--primary);
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(16,185,129,0.4);
+}
+
+.stepper-progress-track {
+  width: 100%;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.14);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+
+.stepper-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #10b981, #34d399);
+  border-radius: var(--radius-full);
+  transition: width 0.4s ease;
+}
+
+.stepper-pills-row {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.step-pill-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: #cbd5e1;
+  padding: 8px 14px;
+  border-radius: var(--radius-md);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: var(--transition);
+}
+
+.step-pill-btn:hover {
+  background: rgba(255, 255, 255, 0.18);
+  color: #fff;
+}
+
+.step-pill-btn.active {
+  background: #10b981;
+  border-color: #10b981;
+  color: #ffffff;
+  font-weight: 800;
+  box-shadow: 0 2px 10px rgba(16,185,129,0.35);
+}
+
+.step-pill-btn.completed {
+  border-color: #059669;
+  color: #a7f3d0;
+}
+
+/* Step Card Visual Photo Hero */
+.module-photo-hero {
+  width: 100%;
+  height: 250px;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border-color);
+  background: #0f172a;
+}
+
+.module-photo-hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.module-photo-hero:hover img {
+  transform: scale(1.03);
+}
+
+.module-photo-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 24px 28px;
+  background: linear-gradient(0deg, rgba(15,23,42,0.92) 0%, rgba(15,23,42,0.4) 60%, rgba(15,23,42,0) 100%);
+  color: #ffffff;
+}
+
+.module-photo-overlay h4 {
+  font-size: 1.3rem;
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+
+.module-photo-overlay p {
+  font-size: 0.88rem;
+  opacity: 0.92;
+  line-height: 1.4;
+}
+
+/* Stepper Bottom Navigation Footer */
+.stepper-nav-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-top: 36px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border-color);
+}
+
+.btn-step-prev, .btn-step-next {
+  padding: 13px 26px;
+  border-radius: var(--radius-md);
+  font-weight: 700;
+  font-size: 0.94rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: var(--transition);
+}
+
+.btn-step-prev {
+  background: #f1f5f9;
+  border: 1px solid var(--border-color);
+  color: var(--secondary-dark);
+}
+
+.btn-step-prev:hover {
+  background: #e2e8f0;
+}
+
+.btn-step-next {
+  background: var(--primary);
+  border: none;
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(16,185,129,0.3);
+}
+
+.btn-step-next:hover {
+  background: var(--primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(16,185,129,0.4);
 }
 
 /* Course Sticky Nav Bar */

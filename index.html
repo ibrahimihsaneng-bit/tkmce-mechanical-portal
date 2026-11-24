@@ -346,15 +346,29 @@
           <p class="course-main-tagline" id="courseMainTagline">Complete practical study course: from ₹3,000 capital to building an aesthetic brand.</p>
         </div>
         
-        <!-- Sticky Navigation Bar Inside Course -->
-        <div class="course-nav-bar">
-          <a href="#mod-blueprint" class="c-nav-link active"><i class="fa-solid fa-book-open"></i> 1. Blueprint</a>
-          <a href="#mod-capital" class="c-nav-link"><i class="fa-solid fa-coins"></i> 2. Capital Breakdown</a>
-          <a href="#mod-sourcing" class="c-nav-link"><i class="fa-solid fa-flask"></i> 3. Make & Brand</a>
-          <a href="#mod-suppliers" class="c-nav-link"><i class="fa-solid fa-store"></i> 4. Sourcing & Maps</a>
-          <a href="#mod-simulator" class="c-nav-link"><i class="fa-solid fa-chart-column"></i> 5. Profit Graph</a>
-          <a href="#mod-coaching" class="c-nav-link"><i class="fa-solid fa-headset"></i> 6. Call Coach</a>
-          <a href="#mod-logistics" class="c-nav-link"><i class="fa-solid fa-truck-fast"></i> 7. Courier & Launch</a>
+        <!-- Processing Stepper & Mode Switcher -->
+        <div class="course-stepper-wrap" id="courseStepperContainer">
+          <div class="stepper-header-flex">
+            <div class="stepper-progress-text" id="stepperProgressText">
+              <i class="fa-solid fa-graduation-cap"></i> <span id="lblStepProgress">Step 1 of 7 • Getting Started (14% Complete)</span>
+            </div>
+            <div class="course-mode-toggle">
+              <button class="mode-toggle-btn active" id="btnModeStepper" onclick="app.toggleCourseViewMode('stepper')">
+                <i class="fa-solid fa-shoe-prints"></i> <span id="lblGuidedMode">Guided Step Processing</span>
+              </button>
+              <button class="mode-toggle-btn" id="btnModeAll" onclick="app.toggleCourseViewMode('all')">
+                <i class="fa-solid fa-list"></i> <span id="lblAllStepsMode">View Full Masterclass</span>
+              </button>
+            </div>
+          </div>
+          
+          <div class="stepper-progress-track">
+            <div class="stepper-progress-fill" id="stepperProgressFill" style="width: 14%;"></div>
+          </div>
+
+          <div class="stepper-pills-row" id="stepperPillsRow">
+            <!-- Dynamically populated 7 step pills -->
+          </div>
         </div>
       </div>
     </section>
