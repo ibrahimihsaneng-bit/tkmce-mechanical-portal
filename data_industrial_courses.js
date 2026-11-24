@@ -86,7 +86,7 @@ window.dataIndustrialCourses = {
     "subsidiesAndFinancing": {
       "pmfme": "35% Credit-Linked Capital Subsidy under PMFME Scheme (Max ₹10 Lakhs)",
       "mofpi": "MoFPI Mega Food Park / Creation of Infrastructure Scheme (Grant-in-aid 35%-50% up to ₹5 Crore)",
-      "aifLoan": "Agriculture Infrastructure Fund (AIF) term loans with 3% annual interest subvention up to ₹2 Crore",
+      "halalEquity": "Halal Equity Syndication & Mudarabah Partnership with Kerala & GCC Angel Investors (100% Interest-Free)",
       "kinfra": "KINFRA Agro Parks concessional industrial land allotment with pre-cleared industrial licenses"
     },
     "images": {
@@ -578,7 +578,7 @@ window.dataIndustrialCourses = {
     "subsidiesAndFinancing": {
       "pmfme": "35% Credit-Linked Capital Subsidy under PMFME Scheme (Max ₹10 Lakhs)",
       "mofpi": "MoFPI Mega Food Park / Creation of Infrastructure Scheme (Grant-in-aid 35%-50% up to ₹5 Crore)",
-      "aifLoan": "Agriculture Infrastructure Fund (AIF) term loans with 3% annual interest subvention up to ₹2 Crore",
+      "halalEquity": "Halal Equity Syndication & Mudarabah Partnership with Kerala & GCC Angel Investors (100% Interest-Free)",
       "kinfra": "KINFRA Agro Parks concessional industrial land allotment with pre-cleared industrial licenses"
     },
     "images": {
@@ -1062,7 +1062,7 @@ window.dataIndustrialCourses = {
     "subsidiesAndFinancing": {
       "pmfme": "35% Credit-Linked Capital Subsidy under PMFME Scheme (Max ₹10 Lakhs)",
       "mofpi": "MoFPI Mega Food Park / Creation of Infrastructure Scheme (Grant-in-aid 35%-50% up to ₹5 Crore)",
-      "aifLoan": "Agriculture Infrastructure Fund (AIF) term loans with 3% annual interest subvention up to ₹2 Crore",
+      "halalEquity": "Halal Equity Syndication & Mudarabah Partnership with Kerala & GCC Angel Investors (100% Interest-Free)",
       "kinfra": "KINFRA Agro Parks concessional industrial land allotment with pre-cleared industrial licenses"
     },
     "images": {
@@ -1559,7 +1559,7 @@ window.dataIndustrialCourses = {
     "subsidiesAndFinancing": {
       "pmfme": "35% Credit-Linked Capital Subsidy under PMFME Scheme (Max ₹10 Lakhs)",
       "mofpi": "MoFPI Mega Food Park / Creation of Infrastructure Scheme (Grant-in-aid 35%-50% up to ₹5 Crore)",
-      "aifLoan": "Agriculture Infrastructure Fund (AIF) term loans with 3% annual interest subvention up to ₹2 Crore",
+      "halalEquity": "Halal Equity Syndication & Mudarabah Partnership with Kerala & GCC Angel Investors (100% Interest-Free)",
       "kinfra": "KINFRA Agro Parks concessional industrial land allotment with pre-cleared industrial licenses"
     },
     "images": {
@@ -2043,7 +2043,7 @@ window.dataIndustrialCourses = {
     "subsidiesAndFinancing": {
       "pmfme": "35% Credit-Linked Capital Subsidy under PMFME Scheme (Max ₹10 Lakhs)",
       "mofpi": "MoFPI Mega Food Park / Creation of Infrastructure Scheme (Grant-in-aid 35%-50% up to ₹5 Crore)",
-      "aifLoan": "Agriculture Infrastructure Fund (AIF) term loans with 3% annual interest subvention up to ₹2 Crore",
+      "halalEquity": "Halal Equity Syndication & Mudarabah Partnership with Kerala & GCC Angel Investors (100% Interest-Free)",
       "kinfra": "KINFRA Agro Parks concessional industrial land allotment with pre-cleared industrial licenses"
     },
     "images": {
@@ -2532,7 +2532,7 @@ window.dataIndustrialCourses = {
     "subsidiesAndFinancing": {
       "pmfme": "35% Credit-Linked Capital Subsidy under PMFME Scheme (Max ₹10 Lakhs)",
       "mofpi": "MoFPI Mega Food Park / Creation of Infrastructure Scheme (Grant-in-aid 35%-50% up to ₹5 Crore)",
-      "aifLoan": "Agriculture Infrastructure Fund (AIF) term loans with 3% annual interest subvention up to ₹2 Crore",
+      "halalEquity": "Halal Equity Syndication & Mudarabah Partnership with Kerala & GCC Angel Investors (100% Interest-Free)",
       "kinfra": "KINFRA Agro Parks concessional industrial land allotment with pre-cleared industrial licenses"
     },
     "images": {
@@ -3010,7 +3010,7 @@ window.dataIndustrialCourses = {
     "subsidiesAndFinancing": {
       "pmfme": "35% Credit-Linked Capital Subsidy under PMFME Scheme (Max ₹10 Lakhs)",
       "mofpi": "MoFPI Mega Food Park / Creation of Infrastructure Scheme (Grant-in-aid 35%-50% up to ₹5 Crore)",
-      "aifLoan": "Agriculture Infrastructure Fund (AIF) term loans with 3% annual interest subvention up to ₹2 Crore",
+      "halalEquity": "Halal Equity Syndication & Mudarabah Partnership with Kerala & GCC Angel Investors (100% Interest-Free)",
       "kinfra": "KINFRA Agro Parks concessional industrial land allotment with pre-cleared industrial licenses"
     },
     "images": {
@@ -3488,7 +3488,7 @@ window.dataIndustrialCourses = {
     "subsidiesAndFinancing": {
       "pmfme": "35% Credit-Linked Capital Subsidy under PMFME Scheme (Max ₹10 Lakhs)",
       "mofpi": "MoFPI Mega Food Park / Creation of Infrastructure Scheme (Grant-in-aid 35%-50% up to ₹5 Crore)",
-      "aifLoan": "Agriculture Infrastructure Fund (AIF) term loans with 3% annual interest subvention up to ₹2 Crore",
+      "halalEquity": "Halal Equity Syndication & Mudarabah Partnership with Kerala & GCC Angel Investors (100% Interest-Free)",
       "kinfra": "KINFRA Agro Parks concessional industrial land allotment with pre-cleared industrial licenses"
     },
     "images": {
@@ -3967,7 +3967,7 @@ window.dataIndustrialCourses = {
     "subsidiesAndFinancing": {
       "pmfme": "35% Credit-Linked Capital Subsidy under PMFME Scheme (Max ₹10 Lakhs)",
       "mofpi": "MoFPI Mega Food Park / Creation of Infrastructure Scheme (Grant-in-aid 35%-50% up to ₹5 Crore)",
-      "aifLoan": "Agriculture Infrastructure Fund (AIF) term loans with 3% annual interest subvention up to ₹2 Crore",
+      "halalEquity": "Halal Equity Syndication & Mudarabah Partnership with Kerala & GCC Angel Investors (100% Interest-Free)",
       "kinfra": "KINFRA Agro Parks concessional industrial land allotment with pre-cleared industrial licenses"
     },
     "images": {
@@ -4451,7 +4451,7 @@ window.dataIndustrialCourses = {
     "subsidiesAndFinancing": {
       "pmfme": "35% Credit-Linked Capital Subsidy under PMFME Scheme (Max ₹10 Lakhs)",
       "mofpi": "MoFPI Mega Food Park / Creation of Infrastructure Scheme (Grant-in-aid 35%-50% up to ₹5 Crore)",
-      "aifLoan": "Agriculture Infrastructure Fund (AIF) term loans with 3% annual interest subvention up to ₹2 Crore",
+      "halalEquity": "Halal Equity Syndication & Mudarabah Partnership with Kerala & GCC Angel Investors (100% Interest-Free)",
       "kinfra": "KINFRA Agro Parks concessional industrial land allotment with pre-cleared industrial licenses"
     },
     "images": {

@@ -4931,3 +4931,442 @@ body.lang-ar .card-tier-pill {
   }
 }
 
+/* ==========================================================================
+   HALAL ISLAMIC WHATSAPP COMMUNITY & COLLABORATION STYLES
+   ========================================================================== */
+
+/* Top bar community pill */
+.top-community-pill {
+  background: rgba(16, 185, 129, 0.18);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  color: #10b981;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 20px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: 12px;
+  transition: all 0.2s ease;
+}
+.top-community-pill:hover {
+  background: #10b981;
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+/* Nav community button */
+.nav-community-btn {
+  color: #059669 !important;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.nav-community-btn:hover {
+  color: #10b981 !important;
+}
+
+/* Halal Community Homepage Banner */
+.halal-community-banner-section {
+  padding: 40px 0 10px 0;
+}
+.halal-community-card {
+  background: linear-gradient(135deg, #064e3b 0%, #065f46 50%, #047857 100%);
+  border-radius: 20px;
+  padding: 32px 36px;
+  color: #ffffff;
+  box-shadow: 0 14px 34px -8px rgba(6, 78, 59, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  position: relative;
+  overflow: hidden;
+}
+.halal-community-card::before {
+  content: "";
+  position: absolute;
+  top: -50px;
+  right: -50px;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(52, 211, 153, 0.25) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.halal-badge-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+}
+.halal-pill {
+  background: rgba(255, 255, 255, 0.2);
+  color: #a7f3d0;
+  padding: 5px 14px;
+  border-radius: 20px;
+  font-size: 0.82rem;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+.community-live-pill {
+  background: rgba(16, 185, 129, 0.35);
+  color: #ffffff;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.halal-card-grid {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 28px;
+  align-items: center;
+}
+.halal-text-col h3 {
+  font-size: 1.55rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 10px;
+  line-height: 1.35;
+}
+.halal-text-col p {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.6;
+  margin-bottom: 16px;
+  max-width: 720px;
+}
+.halal-features-list {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  font-size: 0.88rem;
+  color: #e2e8f0;
+  font-weight: 600;
+}
+.halal-action-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+  text-align: right;
+}
+.btn-join-community {
+  background: #25d366;
+  color: #ffffff;
+  font-size: 1.05rem;
+  font-weight: 800;
+  padding: 14px 26px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+  transition: all 0.25s ease;
+}
+.btn-join-community:hover {
+  background: #20ba59;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(37, 211, 102, 0.5);
+}
+.halal-privacy-note {
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.8);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+@media (max-width: 860px) {
+  .halal-card-grid {
+    grid-template-columns: 1fr;
+  }
+  .halal-action-col {
+    align-items: flex-start;
+    text-align: left;
+  }
+}
+
+/* Floating Bottom-Left Community Button */
+.floating-community-dock {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  z-index: 999;
+}
+.dock-community-btn {
+  background: #25d366;
+  color: #ffffff;
+  border: none;
+  border-radius: 30px;
+  padding: 10px 18px;
+  font-size: 0.92rem;
+  font-weight: 800;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 6px 18px rgba(37, 211, 102, 0.45);
+  transition: all 0.25s ease;
+}
+.dock-community-btn:hover {
+  background: #20ba59;
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 8px 24px rgba(37, 211, 102, 0.6);
+}
+
+/* ==========================================================================
+   COMMUNITY MODAL DIALOG
+   ========================================================================== */
+.community-modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(6px);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.community-modal-box {
+  background: #ffffff;
+  border-radius: 20px;
+  max-width: 680px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  position: relative;
+  animation: modalPop 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+@keyframes modalPop {
+  0% { transform: scale(0.95); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+.community-modal-close {
+  position: absolute;
+  top: 18px;
+  right: 20px;
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  font-size: 1.8rem;
+  color: #ffffff;
+  cursor: pointer;
+  line-height: 1;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  z-index: 2;
+}
+.community-modal-close:hover {
+  background: rgba(255, 255, 255, 0.35);
+}
+.community-modal-header {
+  background: linear-gradient(135deg, #064e3b 0%, #047857 100%);
+  padding: 28px 28px 24px 28px;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+.community-header-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: #25d366;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+.community-header-badge {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #a7f3d0;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 4px;
+}
+.community-modal-header h3 {
+  font-size: 1.35rem;
+  font-weight: 800;
+  margin-bottom: 2px;
+  color: #ffffff;
+}
+.community-modal-header p {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.88);
+  margin: 0;
+}
+.community-modal-body {
+  padding: 24px 28px;
+}
+.main-community-invite-card {
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 14px;
+  padding: 18px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.main-invite-info h4 {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #166534;
+  margin-bottom: 4px;
+}
+.main-invite-info p {
+  font-size: 0.82rem;
+  color: #15803d;
+  margin: 0;
+}
+.btn-community-join-main {
+  background: #25d366;
+  color: #ffffff;
+  border: none;
+  font-size: 0.88rem;
+  font-weight: 800;
+  padding: 10px 18px;
+  border-radius: 10px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.35);
+  transition: all 0.2s;
+}
+.btn-community-join-main:hover {
+  background: #20ba59;
+  transform: translateY(-1px);
+}
+.subgroups-section-title {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 14px;
+}
+.community-subgroups-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+.subgroup-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  transition: all 0.2s;
+}
+.subgroup-card:hover {
+  background: #f1f5f9;
+  border-color: #cbd5e1;
+}
+.subgroup-card-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.subgroup-icon {
+  font-size: 1.25rem;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.subgroup-info h5 {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 2px;
+}
+.subgroup-info small {
+  font-size: 0.78rem;
+  color: #64748b;
+  line-height: 1.3;
+  display: block;
+}
+.btn-subgroup-join {
+  background: #ffffff;
+  color: #16a34a;
+  border: 1px solid #86efac;
+  font-size: 0.82rem;
+  font-weight: 800;
+  padding: 7px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  transition: all 0.2s;
+}
+.btn-subgroup-join:hover {
+  background: #16a34a;
+  color: #ffffff;
+  border-color: #16a34a;
+}
+.islamic-rules-box {
+  background: #fffbeb;
+  border: 1px solid #fef08a;
+  border-radius: 12px;
+  padding: 16px 18px;
+}
+.islamic-rules-box h5 {
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: #854d0e;
+  margin-bottom: 8px;
+}
+.islamic-rules-box ul {
+  padding-left: 20px;
+  margin: 0;
+  font-size: 0.8rem;
+  color: #78350f;
+  line-height: 1.5;
+}
+.islamic-rules-box li {
+  margin-bottom: 4px;
+}
+
+

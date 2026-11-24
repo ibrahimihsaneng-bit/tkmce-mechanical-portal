@@ -33,6 +33,48 @@ const app = {
     packTier: 'velvet'
   },
 
+  // Halal Entrepreneur WhatsApp Community Links Configuration
+  // (Paste your generated group invite links here)
+  whatsappCommunityLinks: {
+    communityMain: "", // e.g. "https://chat.whatsapp.com/..."
+    announcements: "", // Official Announcements channel
+    retail: "",        // Tier 1 Retail & Trading group
+    machines: "",      // Tier 2 Machine Manufacturing group
+    partnership: "",   // Halal Partnership / Mudarabah / Musharakah group
+    sourcing: ""       // Raw Materials & Buyback group
+  },
+
+  openCommunityModal() {
+    const modal = document.getElementById('communityModal');
+    if (modal) {
+      modal.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+  },
+
+  closeCommunityModal() {
+    const modal = document.getElementById('communityModal');
+    if (modal) {
+      modal.style.display = 'none';
+      document.body.style.overflow = '';
+    }
+  },
+
+  joinWhatsAppGroup(groupKey) {
+    const link = this.whatsappCommunityLinks[groupKey] || this.whatsappCommunityLinks.communityMain;
+    if (link && link.startsWith('http') && !link.includes('YOUR_') && link.length > 25) {
+      window.open(link, '_blank');
+    } else {
+      const lang = this.currentLang;
+      const msg = lang === 'ml'
+        ? "ഈ വാട്സ്ആപ്പ് ഗ്രൂപ്പ് ലിങ്ക് ഉടൻ തന്നെ അഡ്മിൻ സജീവമാക്കുന്നതാണ്. ഗ്രൂപ്പുകൾ ക്രിയേറ്റ് ചെയ്ത ശേഷം ലിങ്ക് ഇവിടെ ആഡ് ചെയ്യപ്പെടും."
+        : lang === 'ar'
+        ? "سيتم تفعيل رابط مجموعة الواتساب قريباً من قبل الإدارة بعد الإنشاء."
+        : "This WhatsApp group link will be active shortly once updated by the admin.";
+      alert(msg);
+    }
+  },
+
   // Trilingual Localization Dictionary
   i18n: {
     en: {
@@ -3923,9 +3965,9 @@ const app = {
                   <i class="fa-solid fa-award text-warning"></i> ${lang === 'ml' ? 'സർക്കാർ സബ്‌സിഡികൾ എങ്ങനെ അപേക്ഷിക്കാം? (Application Guide)' : lang === 'ar' ? 'دليل التقديم على الدعم والمنح الحكومية' : 'Government Subsidy & Grant Application Guide'}
                 </h4>
                 <div style="font-size: 0.9rem; color: #78350f; line-height: 1.6;">
-                  <p><strong>1. PMFME Scheme (pmfme.mofpi.gov.in):</strong> ${lang === 'ml' ? 'ഭക്ഷ്യ സംസ്കരണ യൂണിറ്റുകൾക്ക് 35% ക്രെഡിറ്റ് ലിങ്ക്ഡ് സബ്‌സിഡി (പരമാവധി ₹10 ലക്ഷം). ജില്ലാ വ്യവസായ കേന്ദ്രം (DIC) വഴി അപേക്ഷിക്കാം.' : '35% capital subsidy up to ₹10 Lakhs for micro food processing enterprises via DIC single window.'}</p>
-                  <p><strong>2. PMEGP Scheme (kviconline.gov.in):</strong> ${lang === 'ml' ? 'മെഷീൻ നിർമ്മാണ യൂണിറ്റുകൾക്ക് ഗ്രാമങ്ങളിൽ 35%, നഗരങ്ങളിൽ 25% സബ്‌സിഡി. ബാങ്ക് ലോണിനൊപ്പം സബ്‌സിഡി തുക അക്കൗണ്ടിൽ ക്രെഡിറ്റ് ആകുന്നു.' : 'Prime Minister Employment Generation Programme with 25%-35% subsidy on project machinery cost.'}</p>
-                  <p><strong>3. Mudra Loan (Tarun / Kishor):</strong> ${lang === 'ml' ? 'ഈട് (Collateral) ഇല്ലാതെ ₹10 ലക്ഷം വരെ നാഷണലൈസ്ഡ് ബാങ്കുകൾ വഴി കുറഞ്ഞ പലിശ നിരക്കിൽ പ്രവർത്തന മൂലധനം.' : 'Collateral-free business loan up to ₹10 Lakhs through banks with CGTMSE guarantee.'}</p>
+                  <p><strong>1. PMFME & സർക്കാർ ഗ്രാന്റുകൾ:</strong> ${lang === 'ml' ? 'ഭക്ഷ്യ സംസ്കരണ യൂണിറ്റുകൾക്ക് 35% ക്യാപിറ്റൽ സബ്‌സിഡി (പരമാവധി ₹10 ലക്ഷം). ജില്ലാ വ്യവസായ കേന്ദ്രം (DIC) വഴി അപേക്ഷിക്കാം.' : '35% capital subsidy up to ₹10 Lakhs for micro food processing enterprises via DIC single window.'}</p>
+                  <p><strong>2. ഇസ്ലാമിക മൂലധന പങ്കാളിത്തം (മുളാരബ & മുശാറക):</strong> ${lang === 'ml' ? 'പലിശയില്ലാതെ ഒന്നിലധികം സംരംഭകർ ഒരുമിച്ചുനിന്നുകൊണ്ട് ലാഭ-നഷ്ട പങ്കാളിത്ത വ്യവസ്ഥയിൽ (Equity Partnership) മെഷീനുകൾ വാങ്ങാനും സംയുക്തമായി ബിസിനസ്സ് നടത്താനുമുള്ള ഹലാൽ മാതൃക.' : 'Zero-interest Islamic equity partnership (Mudarabah & Musharakah) where partners pool capital with pre-agreed profit-sharing ratios.'}</p>
+                  <p><strong>3. പലിശരഹിത കടം (ഖർദുൽ ഹസൻ) & കൂട്ടായ്മ ഫണ്ടിംഗ്:</strong> ${lang === 'ml' ? 'പലിശയില്ലാത്ത സ്വകാര്യ നിക്ഷേപങ്ങൾ, ഖർദുൽ ഹസൻ, അല്ലെങ്കിൽ സംരംഭക കൂട്ടായ്മ വഴി ഒന്നിച്ച് മെഷീനുകൾ വാങ്ങി ചെലവ് ചുരുക്കൽ.' : 'Benevolent interest-free financing (Qard al-Hasan) and community machinery co-ownership.'}</p>
                 </div>
               </div>
             ` : ''}
@@ -5180,6 +5222,16 @@ const app = {
     document.addEventListener('click', (e) => {
       if (!e.target.closest('.nav-dropdown')) {
         document.querySelectorAll('.nav-dropdown').forEach(d => d.classList.remove('open'));
+      }
+      const communityModal = document.getElementById('communityModal');
+      if (communityModal && e.target === communityModal) {
+        this.closeCommunityModal();
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        this.closeCommunityModal();
       }
     });
   }

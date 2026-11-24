@@ -13,7 +13,7 @@
   
   <!-- FontAwesome 6 Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link rel="stylesheet" href="style.css?v=20261124_05">
+  <link rel="stylesheet" href="style.css?v=20261124_06">
 </head>
 <body class="lang-en">
 
@@ -23,6 +23,9 @@
       <div class="top-badge">
         <i class="fa-solid fa-graduation-cap"></i>
         <span id="topBarTagline">Practical Business Academy for Kerala & Pan-India Micro-Entrepreneurs</span>
+        <button class="top-community-pill" onclick="app.openCommunityModal()" title="Join Halal Business WhatsApp Community">
+          <i class="fa-brands fa-whatsapp text-success"></i> <span>ഹലാൽ സംരംഭക കൂട്ടായ്മ</span> →
+        </button>
       </div>
       <div class="top-actions">
         <div class="lang-selector" aria-label="Select Language">
@@ -122,6 +125,7 @@
         <a href="#tools" class="nav-item" id="navTools" onclick="app.navigateTo('tools')"><i class="fa-solid fa-calculator"></i> Profit Tools</a>
         <a href="#suppliers" class="nav-item" id="navSuppliers" onclick="app.navigateTo('suppliers')"><i class="fa-solid fa-store"></i> Wholesalers & Maps</a>
         <a href="#scripts" class="nav-item" id="navTemplates" onclick="app.navigateTo('scripts')"><i class="fa-brands fa-whatsapp"></i> WhatsApp Scripts</a>
+        <a href="#community" class="nav-item nav-community-btn" id="navCommunity" onclick="app.openCommunityModal()"><i class="fa-brands fa-whatsapp text-success"></i> <span>ഹലാൽ കൂട്ടായ്മ</span></a>
         <a href="#plan" class="nav-btn-action" id="navPlanBuilder" onclick="app.navigateTo('plan')"><i class="fa-solid fa-file-invoice-dollar"></i> Generate Plan</a>
       </nav>
 
@@ -240,6 +244,35 @@
             </div>
             <div class="preview-footer">
               <p><i class="fa-solid fa-arrow-right"></i> <span id="previewTip">Tap any academy above to open its comprehensive dedicated masterclass!</span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Halal Business WhatsApp Community & Collaboration Section -->
+    <section class="halal-community-banner-section" id="community-banner">
+      <div class="container">
+        <div class="halal-community-card">
+          <div class="halal-badge-row">
+            <span class="halal-pill"><i class="fa-solid fa-moon"></i> 100% പലിശരഹിത ഇസ്ലാമിക കൂട്ടായ്മ</span>
+            <span class="community-live-pill"><i class="fa-brands fa-whatsapp"></i> Vyapar Shiksha Community</span>
+          </div>
+          <div class="halal-card-grid">
+            <div class="halal-text-col">
+              <h3>ഒരുമിച്ചു വളരാം, ഹലാലായ മാർഗ്ഗത്തിൽ വിജയം നേടാം! 🤝</h3>
+              <p>ബാങ്ക് പലിശകളോ കടങ്ങളോ ഇല്ലാതെ, പരസ്പര സഹകരണത്തിലൂടെയും മുശാറക / മുളാരബ (ലാഭ-നഷ്ട പങ്കാളിത്തം) വ്യവസ്ഥയിലൂടെയും സംരംഭങ്ങൾ പടുത്തുയർത്താൻ കേരളത്തിലെ സംരംഭകരുടെ ഔദ്യോഗിക WhatsApp Community-യിൽ പങ്കാളിയാകൂ.</p>
+              <div class="halal-features-list">
+                <span><i class="fa-solid fa-circle-check text-success"></i> 5 പ്രത്യേക ബിസിനസ്സ് ഗ്രൂപ്പുകൾ</span>
+                <span><i class="fa-solid fa-circle-check text-success"></i> നേരിട്ടുള്ള റോ മെറ്റീരിയൽ ഷെയറിംഗ്</span>
+                <span><i class="fa-solid fa-circle-check text-success"></i> മെഷീൻ പാർട്ണർഷിപ്പ് സപ്പോർട്ട്</span>
+              </div>
+            </div>
+            <div class="halal-action-col">
+              <button class="btn-join-community" onclick="app.openCommunityModal()">
+                <i class="fa-brands fa-whatsapp"></i> <span>കമ്മ്യൂണിറ്റിയിൽ ചേരുക</span> <i class="fa-solid fa-arrow-right"></i>
+              </button>
+              <small class="halal-privacy-note"><i class="fa-solid fa-shield-halved text-success"></i> ഫോൺ നമ്പർ സുരക്ഷിതം • കർശനമായ ഇസ്ലാമിക പെരുമാറ്റച്ചട്ടം</small>
             </div>
           </div>
         </div>
@@ -545,6 +578,14 @@
     </div>
   </footer>
 
+  <!-- Floating WhatsApp Halal Community Button (Bottom Left) -->
+  <div class="floating-community-dock" id="floatingCommunityDock">
+    <button class="dock-community-btn" onclick="app.openCommunityModal()" title="ഹലാൽ സംരംഭക WhatsApp Community">
+      <i class="fa-brands fa-whatsapp"></i>
+      <span class="community-btn-text">ഹലാൽ കൂട്ടായ്മ</span>
+    </button>
+  </div>
+
   <!-- Floating Quick Help / Language Switcher Button -->
   <div class="floating-lang-dock" id="floatingLangDock">
     <button class="dock-btn" onclick="app.cycleLanguage()" title="Switch Language (EN / മലയാളം / العربية)">
@@ -561,10 +602,126 @@
   <!-- Floating Synchronized Read-Along Transcript Drawer -->
   <div id="floatingTranscriptDrawer" class="floating-transcript-drawer" style="display: none;"></div>
 
-  <script src="data_retail_courses.js?v=20261124_05"></script>
-  <script src="data_machine_courses.js?v=20261124_05"></script>
-  <script src="data_industrial_courses.js?v=20261124_05"></script>
-  <script src="data_audio_library.js?v=20261124_05"></script>
-  <script src="app.js?v=20261124_05"></script>
+  <!-- =========================================================================
+       HALAL WHATSAPP COMMUNITY & COLLABORATION MODAL
+       ========================================================================= -->
+  <div id="communityModal" class="community-modal-backdrop" style="display: none;">
+    <div class="community-modal-box">
+      <button class="community-modal-close" onclick="app.closeCommunityModal()" aria-label="Close Modal">&times;</button>
+      
+      <div class="community-modal-header">
+        <div class="community-header-icon"><i class="fa-brands fa-whatsapp"></i></div>
+        <div>
+          <span class="community-header-badge"><i class="fa-solid fa-moon"></i> 100% പലിശരഹിത ഇസ്ലാമിക കൂട്ടായ്മ</span>
+          <h3>വ്യാപാര ശിക്ഷ – ഹലാൽ സംരംഭക നെറ്റ്‌വർക്ക്</h3>
+          <p>പലിശയില്ലാതെ പരസ്പര സഹകരണത്തിലൂടെയും പങ്കാളിത്തത്തിലൂടെയും മുന്നേറാം.</p>
+        </div>
+      </div>
+
+      <div class="community-modal-body">
+        <!-- Main Community Invite Card -->
+        <div class="main-community-invite-card">
+          <div class="main-invite-info">
+            <h4><i class="fa-solid fa-layer-group text-success"></i> പ്രധാന കമ്മ്യൂണിറ്റിയിൽ അംഗമാകുക</h4>
+            <p>എല്ലാ അനൗൺസ്‌മെന്റുകളും പുതിയ അപ്ഡേറ്റുകളും ഒരൊറ്റ കുടക്കീഴിൽ ലഭിക്കാൻ മെയിൻ കമ്മ്യൂണിറ്റിയിൽ ചേരുക.</p>
+          </div>
+          <button class="btn-community-join-main" onclick="app.joinWhatsAppGroup('communityMain')">
+            <i class="fa-brands fa-whatsapp"></i> <span>Join Main Community</span>
+          </button>
+        </div>
+
+        <h4 class="subgroups-section-title"><i class="fa-solid fa-users"></i> നിങ്ങളുടെ മേഖലയ്ക്ക് അനുയോജ്യമായ ഗ്രൂപ്പുകൾ തിരഞ്ഞെടുക്കാം:</h4>
+        
+        <div class="community-subgroups-grid">
+          <!-- Group 1 -->
+          <div class="subgroup-card">
+            <div class="subgroup-card-top">
+              <span class="subgroup-icon text-warning"><i class="fa-solid fa-bullhorn"></i></span>
+              <div class="subgroup-info">
+                <h5>1. ഒഫീഷ്യൽ അനൗൺസ്‌മെന്റുകൾ</h5>
+                <small>അഡ്മിൻ അപ്ഡേറ്റുകൾ, പുതിയ മെഷീൻ വിവരങ്ങൾ, വിപണി വിലകൾ</small>
+              </div>
+            </div>
+            <button class="btn-subgroup-join" onclick="app.joinWhatsAppGroup('announcements')">
+              <i class="fa-brands fa-whatsapp"></i> <span>ചേരുക</span>
+            </button>
+          </div>
+
+          <!-- Group 2 -->
+          <div class="subgroup-card">
+            <div class="subgroup-card-top">
+              <span class="subgroup-icon text-success"><i class="fa-solid fa-store"></i></span>
+              <div class="subgroup-info">
+                <h5>2. ചെറുകിട & റീട്ടെയിൽ സംരംഭകർ</h5>
+                <small>അത്തർ, വസ്ത്രങ്ങൾ, വാച്ചുകൾ, സ്പൈസസ്, ആന്റി-ടാർണിഷ് ജ്വല്ലറി</small>
+              </div>
+            </div>
+            <button class="btn-subgroup-join" onclick="app.joinWhatsAppGroup('retail')">
+              <i class="fa-brands fa-whatsapp"></i> <span>ചേരുക</span>
+            </button>
+          </div>
+
+          <!-- Group 3 -->
+          <div class="subgroup-card">
+            <div class="subgroup-card-top">
+              <span class="subgroup-icon text-info"><i class="fa-solid fa-gears"></i></span>
+              <div class="subgroup-info">
+                <h5>3. മെഷീൻ നിർമ്മാണ യൂണിറ്റുകൾ</h5>
+                <small>പേപ്പർ ബാഗ്, ഫോയിൽ കണ്ടെയ്നർ, അഗർബത്തി, മരച്ചെക്ക്, ഡിറ്റർജന്റ്</small>
+              </div>
+            </div>
+            <button class="btn-subgroup-join" onclick="app.joinWhatsAppGroup('machines')">
+              <i class="fa-brands fa-whatsapp"></i> <span>ചേരുക</span>
+            </button>
+          </div>
+
+          <!-- Group 4 -->
+          <div class="subgroup-card">
+            <div class="subgroup-card-top">
+              <span class="subgroup-icon text-primary"><i class="fa-solid fa-handshake"></i></span>
+              <div class="subgroup-info">
+                <h5>4. ഹലാൽ പാർട്ണർഷിപ്പ് & മുശാറക</h5>
+                <small>പലിശയില്ലാതെ ഒന്നിച്ചുനിന്നു സംരംഭം തുടങ്ങാനും നിക്ഷേപം കണ്ടെത്താനും</small>
+              </div>
+            </div>
+            <button class="btn-subgroup-join" onclick="app.joinWhatsAppGroup('partnership')">
+              <i class="fa-brands fa-whatsapp"></i> <span>ചേരുക</span>
+            </button>
+          </div>
+
+          <!-- Group 5 -->
+          <div class="subgroup-card">
+            <div class="subgroup-card-top">
+              <span class="subgroup-icon text-danger"><i class="fa-solid fa-box-open"></i></span>
+              <div class="subgroup-info">
+                <h5>5. റോ മെറ്റീരിയൽ & ബൈബാക്ക് ഹെൽപ്പ്</h5>
+                <small>അസംസ്കൃത വസ്തുക്കൾ ഒന്നിച്ച് കുറഞ്ഞ വിലയ്ക്ക് വാങ്ങാനും വിൽക്കാനും</small>
+              </div>
+            </div>
+            <button class="btn-subgroup-join" onclick="app.joinWhatsAppGroup('sourcing')">
+              <i class="fa-brands fa-whatsapp"></i> <span>ചേരുക</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Islamic Code of Conduct Accordion/Box -->
+        <div class="islamic-rules-box">
+          <h5><i class="fa-solid fa-scale-balanced text-success"></i> ഇസ്ലാമിക സംരംഭക പെരുമാറ്റച്ചട്ടം (Code of Ethics):</h5>
+          <ul>
+            <li><strong>റീബ (പലിശ) നിരോധനം:</strong> യാതൊരുവിധ ബാങ്ക് പലിശ ഇടപാടുകളോ നിശ്ചിത പലിശ വാഗ്ദാനങ്ങളോ ഗ്രൂപ്പിൽ അനുവദിക്കില്ല.</li>
+            <li><strong>മുശാറക & മുളാരബ തത്വം:</strong> പാർട്ണർഷിപ്പിൽ ലാഭം മുൻകൂട്ടി നിശ്ചയിച്ച ശതമാനത്തിലും നഷ്ടം നിക്ഷേപത്തിന് ആനുപാതികമായും പങ്കിടണം.</li>
+            <li><strong>സത്യസന്ധത & അമാനത്ത്:</strong> ഉൽപ്പന്നങ്ങളുടെ കുറവുകൾ മറച്ചുവെക്കാതെ വ്യക്തമായി പറയണം; അളവുതൂക്കങ്ങളിൽ കൃത്യത പാലിക്കണം.</li>
+            <li><strong>അനാവശ്യ ചർച്ചകൾ ഒഴിവാക്കുക:</strong> ബിസിനസ്സും സംരംഭകത്വവും അല്ലാത്ത യാതൊരു സന്ദേശങ്ങളും ഫോർവേഡുകളും അനുവദിക്കില്ല.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="data_retail_courses.js?v=20261124_06"></script>
+  <script src="data_machine_courses.js?v=20261124_06"></script>
+  <script src="data_industrial_courses.js?v=20261124_06"></script>
+  <script src="data_audio_library.js?v=20261124_06"></script>
+  <script src="app.js?v=20261124_06"></script>
 </body>
 </html>
