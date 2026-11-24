@@ -2683,6 +2683,11 @@ const app = {
     this.switchLanguage(this.currentLang);
     this.handleHashRouting();
     this.bindEvents();
+    if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+      window.speechSynthesis.onvoiceschanged = () => {
+        try { window.speechSynthesis.getVoices(); } catch (e) {}
+      };
+    }
     this.renderFloatingAudioDock();
     this.freezeCoreData();
   },
@@ -2693,10 +2698,10 @@ const app = {
       if (saved && typeof saved === 'string' && ['en', 'ml', 'ar'].includes(saved.trim())) {
         this.currentLang = saved.trim();
       } else {
-        this.currentLang = 'en';
+        this.currentLang = 'ml';
       }
     } catch (e) {
-      this.currentLang = 'en';
+      this.currentLang = 'ml';
     }
   },
 
@@ -2769,7 +2774,7 @@ const app = {
     isDrawerOpen: false,
     isMenuOpen: false,
     isMinimized: false,
-    isClosed: true,
+    isClosed: false,
     longPressTimer: null
   },
 
@@ -3667,6 +3672,9 @@ const app = {
   setAudioVoice(lang) {
     const state = this.audioMasterclassState;
     state.voiceLang = lang;
+    if (this.currentLang !== lang) {
+      this.switchLanguage(lang);
+    }
     if ('speechSynthesis' in window) {
       window.speechSynthesis.cancel();
     }
@@ -3812,10 +3820,18 @@ const app = {
       }
     };
 
+    utterance.onerror = (e) => {
+      console.warn('SpeechSynthesis event:', e);
+    };
+
+    if (window.speechSynthesis.paused) {
+      window.speechSynthesis.resume();
+    }
+
     window.speechSynthesis.speak(utterance);
   },
 
-  // Ultra-Compact Floating Side Audio Widget with Pause (||) / Play (▶) icons, seek controls, and quick menu
+  // Round Floating Audio Player with Pause (||) / Play (▶) icons, quick language toggle, and popup menu
   renderFloatingAudioDock() {
     const dock = document.getElementById('floatingAudioDock');
     if (!dock) return;
@@ -3836,77 +3852,71 @@ const app = {
     const courseTitle = cat.title ? (cat.title[lang] || cat.title.en) : 'Business Course';
 
     dock.innerHTML = `
-      <!-- 1. POPUP SIDE MENU (Opens on menu button click: Language selection, speed, seek, close) -->
+      <!-- 1. POPUP MENU (Opens on menu bar button click: Language selection, episodes, speed, dismiss) -->
       <div class="audio-side-menu-popup ${state.isMenuOpen ? 'is-open' : ''}" id="audioSideMenuPopup" style="display: ${state.isMenuOpen ? 'flex' : 'none'};">
         <div class="asmp-header">
           <div class="asmp-title-box">
-            <span class="asmp-ep-badge">Ep ${state.currentEpisode} of ${episodes.length}</span>
+            <span class="asmp-ep-badge">Ep ${state.currentEpisode} / ${episodes.length}</span>
             <small class="asmp-course-name">${courseTitle}</small>
           </div>
           <div class="asmp-header-actions">
-            <!-- Down Arrow Minimize -->
-            <button class="asmp-btn-action" onclick="app.minimizeAudioWidget(event)" title="${lang === 'ml' ? 'ഹൈഡ് ചെയ്യുക (Minimize)' : 'Minimize'}">
-              <i class="fa-solid fa-chevron-down"></i>
-            </button>
-            <!-- Close 'X' -->
-            <button class="asmp-btn-action asmp-btn-close" onclick="app.closeAudioWidget(event)" title="${lang === 'ml' ? 'ഓഡിയോ ഒഴിവാക്കുക (Close / Dismiss)' : 'Close'}">
+            <!-- Close Menu -->
+            <button class="asmp-btn-action" onclick="app.toggleAudioSideMenu(event)" title="Close Menu">
               <i class="fa-solid fa-xmark"></i>
             </button>
           </div>
         </div>
 
-        <!-- Language Selector Section with Clear Visible Buttons -->
+        <!-- Language Selector Section: Clear Buttons for Malayalam, English, Arabic -->
         <div class="asmp-section">
           <div class="asmp-section-label">
             <i class="fa-solid fa-globe text-primary"></i>
-            <span>${lang === 'ml' ? 'ഓഡിയോ ഭാഷ (Voice Language):' : lang === 'ar' ? 'لغة الصوت:' : 'Voice Language:'}</span>
+            <span>${lang === 'ml' ? 'ഓഡിയോ ഭാഷ മാറ്റുക (Language):' : lang === 'ar' ? 'لغة الصوت:' : 'Voice Language:'}</span>
           </div>
           <div class="asmp-lang-grid">
             <button class="asmp-lang-btn ${lang === 'ml' ? 'active' : ''}" onclick="app.setAudioVoice('ml')">
               <span class="lang-flag">🌴</span>
-              <span class="lang-text">മലയാളം (ML)</span>
+              <span class="lang-text">മലയാളം (Malayalam)</span>
               ${lang === 'ml' ? '<i class="fa-solid fa-check text-success"></i>' : ''}
             </button>
             <button class="asmp-lang-btn ${lang === 'en' ? 'active' : ''}" onclick="app.setAudioVoice('en')">
               <span class="lang-flag">🇬🇧</span>
-              <span class="lang-text">English (EN)</span>
+              <span class="lang-text">English</span>
               ${lang === 'en' ? '<i class="fa-solid fa-check text-success"></i>' : ''}
             </button>
             <button class="asmp-lang-btn ${lang === 'ar' ? 'active' : ''}" onclick="app.setAudioVoice('ar')">
               <span class="lang-flag">🇦🇪</span>
-              <span class="lang-text">العربية (AR)</span>
+              <span class="lang-text">العربية</span>
               ${lang === 'ar' ? '<i class="fa-solid fa-check text-success"></i>' : ''}
             </button>
           </div>
         </div>
 
-        <!-- Forward / Rewind Seek Buttons (-10s / +10s) -->
+        <!-- Course Episodes List (All 6 Chapters for current course) -->
         <div class="asmp-section">
           <div class="asmp-section-label">
-            <i class="fa-solid fa-sliders text-primary"></i>
-            <span>${lang === 'ml' ? 'ഓഡിയോ കൺട്രോൾ (Seek & Episode):' : lang === 'ar' ? 'التحكم بالصوت:' : 'Seek & Controls:'}</span>
+            <i class="fa-solid fa-list-ol text-primary"></i>
+            <span>${lang === 'ml' ? 'അധ്യായങ്ങൾ (Chapters):' : 'Chapters:'}</span>
           </div>
-          <div class="asmp-seek-grid">
-            <button class="asmp-action-chip" onclick="app.skipAudio(-10, event)" title="10s പിന്നോട്ട്">
-              <i class="fa-solid fa-rotate-left"></i> <span>-10s</span>
-            </button>
-            <button class="asmp-action-chip" onclick="app.skipAudio(10, event)" title="10s മുന്നോട്ട്">
-              <i class="fa-solid fa-rotate-right"></i> <span>+10s</span>
-            </button>
-            <button class="asmp-action-chip" onclick="app.skipAudioEpisode(-1)" title="Previous Episode">
-              <i class="fa-solid fa-backward-step"></i> <span>Prev</span>
-            </button>
-            <button class="asmp-action-chip" onclick="app.skipAudioEpisode(1)" title="Next Episode">
-              <span>Next</span> <i class="fa-solid fa-forward-step"></i>
-            </button>
+          <div class="asmp-episodes-list">
+            ${episodes.map(ep => {
+              const epTitle = (ep.title && (ep.title[lang] || ep.title.ml || ep.title.en)) || ('Episode ' + ep.num);
+              return `
+                <button class="asmp-ep-item ${state.currentEpisode === ep.num ? 'active' : ''}" onclick="app.playAudioEpisode(${ep.num})">
+                  <span class="ep-num">${ep.num}</span>
+                  <span class="ep-title" title="${epTitle}">${epTitle}</span>
+                  <span class="ep-time">${ep.timestamp || ''}</span>
+                </button>
+              `;
+            }).join('')}
           </div>
         </div>
 
-        <!-- Playback Speed Section -->
+        <!-- Speed & Seek Controls -->
         <div class="asmp-section">
           <div class="asmp-section-label">
             <i class="fa-solid fa-gauge-high text-primary"></i>
-            <span>${lang === 'ml' ? 'സ്പീഡ് (Speed):' : lang === 'ar' ? 'سرعة الصوت:' : 'Speed:'}</span>
+            <span>${lang === 'ml' ? 'സ്പീഡ് (Speed):' : 'Speed:'}</span>
           </div>
           <div class="asmp-speed-grid">
             <button class="asmp-speed-btn ${state.playbackRate === 1 ? 'active' : ''}" onclick="app.setAudioSpeed(1)">1.0x</button>
@@ -3916,65 +3926,44 @@ const app = {
           </div>
         </div>
 
-        <!-- Dismiss / Close Action -->
+        <!-- Dismiss / Close Option (ഒഴിവാക്കാനുള്ള ഓപ്ഷൻ) -->
         <div class="asmp-footer">
           <button class="asmp-btn-dismiss" onclick="app.closeAudioWidget(event)">
-            <i class="fa-solid fa-xmark"></i>
-            <span>${lang === 'ml' ? 'പ്ലെയർ ഒഴിവാക്കുക (Dismiss Player)' : lang === 'ar' ? 'إغلاق المشغل' : 'Dismiss Player'}</span>
+            <i class="fa-solid fa-eye-slash"></i>
+            <span>${lang === 'ml' ? 'പ്ലെയർ ഒഴിവാക്കുക (Dismiss Player)' : 'Dismiss Player'}</span>
           </button>
         </div>
       </div>
 
-      <!-- 2. ULTRA-COMPACT FLOATING SIDE CAPSULE (~38px Height) -->
-      <div class="audio-capsule ${state.isMinimized ? 'is-minimized' : ''} ${state.isPlaying ? 'is-playing' : ''}" 
-           id="audioCapsule" 
-           title="${lang === 'ml' ? 'ഓഡിയോ മെനു കാണാൻ ക്ലിക്ക് ചെയ്യുക' : 'Click for Audio Menu'}">
+      <!-- 2. ROUND FLOATING AUDIO PLAYER WIDGET -->
+      <div class="round-audio-widget ${state.isMinimized ? 'is-minimized' : ''} ${state.isPlaying ? 'is-playing' : ''}" id="roundAudioWidget">
+        <!-- Circular Play/Pause Button: Shows || (Pause) when playing, ▶ (Play) when paused -->
+        <button class="round-main-btn ${state.isPlaying ? 'playing' : ''}" onclick="app.toggleAudioMasterclass(event)" title="${state.isPlaying ? 'Pause Audio' : 'Play Audio'}">
+          <i class="fa-solid ${state.isPlaying ? 'fa-pause' : 'fa-play'}" id="capsulePlayIcon"></i>
+        </button>
 
-        <!-- Normal State: Ultra-Compact Pill -->
-        <div class="capsule-normal-content" style="${state.isMinimized ? 'display: none;' : 'display: flex;'}">
-          <!-- Play / Pause Circular Icon: Shows || (Pause) when playing, ▶ (Play) when paused -->
-          <button class="capsule-play-btn ${state.isPlaying ? 'playing' : ''}" onclick="app.toggleAudioMasterclass(event)" title="${state.isPlaying ? 'Pause' : 'Play'}">
-            <i class="fa-solid ${state.isPlaying ? 'fa-pause' : 'fa-play'}" id="capsulePlayIcon"></i>
-          </button>
+        <!-- Widget Details (Hidden when Minimized) -->
+        <div class="round-widget-details" style="${state.isMinimized ? 'display: none;' : 'display: flex; align-items: center; gap: 8px;'}">
+          <!-- Course Title & Time -->
+          <div class="round-widget-info">
+            <span class="rwi-course" title="${courseTitle}">${courseTitle}</span>
+            <span class="rwi-time" id="capsuleTime">${formattedCurrentTime}</span>
+          </div>
 
-          <!-- 10s Rewind Button -->
-          <button class="capsule-seek-btn" onclick="app.skipAudio(-10, event)" title="${lang === 'ml' ? '10 സെക്കൻഡ് പിന്നോട്ട്' : 'Rewind 10s'}">
-            <i class="fa-solid fa-rotate-left"></i>
-          </button>
-
-          <!-- 10s Forward Button -->
-          <button class="capsule-seek-btn" onclick="app.skipAudio(10, event)" title="${lang === 'ml' ? '10 സെക്കൻഡ് മുന്നോട്ട്' : 'Forward 10s'}">
-            <i class="fa-solid fa-rotate-right"></i>
-          </button>
-
-          <!-- Time text -->
-          <span class="capsule-time" id="capsuleTime">${formattedCurrentTime}</span>
-
-          <!-- Audio Voice Language Pill: Single Click Cycles Voice ML / EN / AR -->
-          <button class="capsule-lang-pill" id="capsuleLangPill" onclick="app.cycleAudioVoice(event)" title="${lang === 'ml' ? 'ഭാഷ: മലയാളം (മാറ്റാൻ ക്ലിക്ക് ചെയ്യുക)' : lang === 'ar' ? 'اللغة: العربية (انقر للتبديل)' : 'Voice: English (Click to cycle)'}">
+          <!-- Language Quick Button -->
+          <button class="round-lang-btn" id="capsuleLangPill" onclick="app.cycleAudioVoice(event)" title="${lang === 'ml' ? 'ഭാഷ മാറ്റാൻ ക്ലിക്ക് ചെയ്യുക (ML/EN/AR)' : 'Change Language'}">
             <i class="fa-solid fa-globe"></i> <span>${lang.toUpperCase()}</span>
           </button>
 
-          <!-- Speed Quick Pill -->
-          <button class="capsule-speed-pill" id="capsuleSpeedPill" onclick="app.cycleAudioSpeed(event)" title="Speed: ${state.playbackRate}x">
-            ${state.playbackRate}x
-          </button>
-
-          <!-- Menu Bar Button (ചെറിയ മെനു ബാർ ഓപ്ഷൻ) -->
-          <button class="capsule-action-btn btn-menu" onclick="app.toggleAudioSideMenu(event)" title="${lang === 'ml' ? 'മെനു ഓപ്ഷനുകൾ (Menu)' : 'Audio Menu'}">
+          <!-- Small Menu Bar Button (മെനു ബാർ പോലത്തെ ചെറിയ ഓപ്ഷൻ) -->
+          <button class="round-action-btn btn-menu" onclick="app.toggleAudioSideMenu(event)" title="${lang === 'ml' ? 'മെനു ഓപ്ഷനുകൾ (Menu)' : 'Audio Menu'}">
             <i class="fa-solid fa-bars"></i>
           </button>
 
-          <!-- Close 'X' Button ("ഒഴിവാക്കാനുള്ള ഓപ്ഷൻ") -->
-          <button class="capsule-action-btn btn-close" onclick="app.closeAudioWidget(event)" title="${lang === 'ml' ? 'ഓഡിയോ ഒഴിവാക്കുക (Close / Dismiss)' : 'Close Audio'}">
+          <!-- Close / Dismiss Button (ഒഴിവാക്കാനുള്ള ഓപ്ഷൻ) -->
+          <button class="round-action-btn btn-close" onclick="app.closeAudioWidget(event)" title="${lang === 'ml' ? 'പ്ലെയർ ഒഴിവാക്കുക (Dismiss Player)' : 'Dismiss Player'}">
             <i class="fa-solid fa-xmark"></i>
           </button>
-        </div>
-
-        <!-- Minimized State: Tiny 38px Circular Floating Bubble -->
-        <div class="capsule-minimized-content" style="${state.isMinimized ? 'display: flex;' : 'display: none;'}" onclick="app.restoreAudioWidget(event)" title="${lang === 'ml' ? 'പ്ലെയർ കാണിക്കുക' : 'Show Player'}">
-          <i class="fa-solid ${state.isPlaying ? 'fa-pause' : 'fa-play'}"></i>
-          <span class="mini-pulse-dot ${state.isPlaying ? 'pulsing' : ''}"></span>
         </div>
       </div>
     `;
@@ -4141,8 +4130,8 @@ const app = {
       }
     }
 
-    // Update play button styling class
-    const playBtn = document.querySelector('.capsule-play-btn');
+    // Update play button styling class (round play button pulse effect)
+    const playBtn = document.querySelector('.round-main-btn') || document.querySelector('.capsule-play-btn');
     if (playBtn) {
       if (state.isPlaying) playBtn.classList.add('playing');
       else playBtn.classList.remove('playing');

@@ -25,7 +25,7 @@
   
   <!-- FontAwesome 6 Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link rel="stylesheet" href="style.css?v=20261124_19">
+  <link rel="stylesheet" href="style.css?v=20261124_20">
 </head>
 <body class="lang-en">
 
@@ -483,7 +483,12 @@
         </div>
 
         <div class="course-title-wrap">
-          <span class="course-badge-pill" id="courseBadgeNiche">Specialized Faculty</span>
+          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 8px;">
+            <span class="course-badge-pill" id="courseBadgeNiche">Specialized Faculty</span>
+            <button class="btn-listen-course-audio" onclick="app.playAudioMasterclass()" title="ഈ കോഴ്‌സിന്റെ ഓഡിയോ കേൾക്കുക">
+              <i class="fa-solid fa-headphones text-success"></i> <span>ഓഡിയോ ക്ലാസ് കേൾക്കുക</span>
+            </button>
+          </div>
           <h1 class="course-main-title" id="courseMainTitle">Attar & Artisanal Perfumes Masterclass</h1>
           <p class="course-main-tagline" id="courseMainTagline">Complete practical study course: from ₹3,000 capital to building an aesthetic brand.</p>
         </div>
@@ -729,10 +734,10 @@
     </div>
   </div>
 
-  <script src="data_retail_courses.js?v=20261124_19"></script>
-  <script src="data_machine_courses.js?v=20261124_19"></script>
-  <script src="data_industrial_courses.js?v=20261124_19"></script>
-  <script src="data_audio_library.js?v=20261124_19"></script>
-  <script src="app.js?v=20261124_19"></script>
+  <script src="data_retail_courses.js?v=20261124_20"></script>
+  <script src="data_machine_courses.js?v=20261124_20"></script>
+  <script src="data_industrial_courses.js?v=20261124_20"></script>
+  <script src="data_audio_library.js?v=20261124_20"></script>
+  <script src="app.js?v=20261124_20"></script>
 </body>
 </html>

@@ -4317,19 +4317,19 @@ body.lang-ar .sidebar-audio-cta-btn {
 
 
 /* ==========================================================================
-   PERFECTED ULTRA-COMPACT FLOATING SIDE AUDIO CAPSULE & POPUP SPEED MENU
+   PERFECTED ROUND FLOATING AUDIO PLAYER & POPUP MENU
    ========================================================================== */
 
-/* Zero bottom body padding so no screen space is consumed */
+/* Zero bottom body padding */
 body {
   padding-bottom: 0 !important;
 }
 
-/* Floating Audio Side Widget: Pinned subtly on bottom-left, taking near-zero space */
+/* Floating Audio Side Widget: Pinned on bottom-left */
 .floating-audio-dock, .compact-audio-side-dock {
   position: fixed;
-  bottom: 20px;
-  left: 20px;
+  bottom: 24px;
+  left: 24px;
   z-index: 9999;
   display: block;
   transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
@@ -4338,93 +4338,97 @@ body {
 body.lang-ar .floating-audio-dock, 
 body.lang-ar .compact-audio-side-dock {
   left: auto;
-  right: 20px;
+  right: 24px;
 }
 
-/* Ultra-Compact Floating Side Capsule (~38px Height, ~175px Width) */
-.audio-capsule {
+/* Round Audio Widget Bar */
+.round-audio-widget {
   background: rgba(15, 23, 42, 0.96);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(16, 185, 129, 0.45);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
+  border: 1.5px solid rgba(16, 185, 129, 0.5);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 16px rgba(16, 185, 129, 0.2);
   border-radius: 999px;
-  padding: 3px 6px;
+  padding: 4px 10px 4px 4px;
   display: flex;
   align-items: center;
+  gap: 8px;
   user-select: none;
-  cursor: default;
-  transition: all 0.22s ease;
+  transition: all 0.25s ease;
 }
 
-.audio-capsule:hover {
-  border-color: rgba(52, 211, 153, 0.7);
-  box-shadow: 0 8px 24px rgba(16, 185, 129, 0.25);
+.round-audio-widget:hover {
+  border-color: rgba(52, 211, 153, 0.8);
+  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.6), 0 0 22px rgba(16, 185, 129, 0.35);
 }
 
-/* Normal State Content inside Capsule */
-.capsule-normal-content {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.capsule-play-btn {
-  width: 28px;
-  height: 28px;
+/* Round Circular Play/Pause Button */
+.round-main-btn {
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
   border-radius: 50%;
   background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-  border: none;
+  border: 2px solid rgba(255, 255, 255, 0.25);
   color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.75rem;
+  font-size: 1.1rem;
   cursor: pointer;
-  transition: transform 0.2s ease, background 0.2s ease;
-  box-shadow: 0 2px 6px rgba(16, 185, 129, 0.4);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.45);
 }
 
-.capsule-play-btn:hover {
-  transform: scale(1.1);
+.round-main-btn:hover {
+  transform: scale(1.08);
   background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+  box-shadow: 0 6px 18px rgba(16, 185, 129, 0.6);
 }
 
-.capsule-time {
-  font-size: 0.74rem;
+.round-main-btn.playing {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  animation: pulseRoundPlay 2s infinite ease-in-out;
+}
+
+@keyframes pulseRoundPlay {
+  0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+  70% { box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+
+/* Course & Time text inside widget */
+.round-widget-info {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.rwi-course {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #e2e8f0;
+  max-width: 110px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.rwi-time {
+  font-size: 0.68rem;
   font-weight: 800;
-  color: #f1f5f9;
-  font-family: monospace;
-  letter-spacing: 0.5px;
-}
-
-/* Fast Speed Quick-Pill: Single Click Cycles Speed */
-.capsule-speed-pill {
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.16);
   color: #34d399;
-  font-size: 0.7rem;
-  font-weight: 800;
-  padding: 2px 6px;
-  border-radius: 999px;
-  cursor: pointer;
-  transition: all 0.2s ease;
+  font-family: monospace;
 }
 
-.capsule-speed-pill:hover {
-  background: rgba(16, 185, 129, 0.25);
-  border-color: #34d399;
-  color: #ffffff;
-}
-
-/* Audio Language Quick-Pill: Single Click Cycles Voice ML / EN / AR */
-.capsule-lang-pill {
+/* Language quick toggle button */
+.round-lang-btn {
   background: rgba(16, 185, 129, 0.18);
   border: 1px solid rgba(52, 211, 153, 0.45);
   color: #6ee7b7;
-  font-size: 0.68rem;
+  font-size: 0.7rem;
   font-weight: 800;
-  padding: 2px 7px;
+  padding: 4px 8px;
   border-radius: 999px;
   cursor: pointer;
   display: flex;
@@ -4433,51 +4437,79 @@ body.lang-ar .compact-audio-side-dock {
   transition: all 0.2s ease;
 }
 
-.capsule-lang-pill:hover {
-  background: rgba(16, 185, 129, 0.4);
-  border-color: #34d399;
+.round-lang-btn:hover {
+  background: rgba(16, 185, 129, 0.38);
   color: #ffffff;
   transform: scale(1.05);
 }
 
-/* Capsule Mini Action Buttons (Minimize Down-Arrow, Close X) */
-.capsule-action-btn {
-  width: 24px;
-  height: 24px;
+/* Action icons: Menu bar (☰) and Dismiss (✕) */
+.round-action-btn {
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.08);
-  border: none;
+  border: 1px solid rgba(255, 255, 255, 0.1);
   color: #94a3b8;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.68rem;
+  font-size: 0.75rem;
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
-.capsule-action-btn:hover {
+.round-action-btn:hover {
   color: #ffffff;
   background: rgba(255, 255, 255, 0.2);
   transform: scale(1.08);
 }
 
-.capsule-action-btn.btn-min:hover {
+.round-action-btn.btn-menu:hover {
   color: #38bdf8;
-  background: rgba(56, 189, 248, 0.2);
+  border-color: rgba(56, 189, 248, 0.4);
 }
 
-.capsule-action-btn.btn-close:hover {
+.round-action-btn.btn-close:hover {
   color: #ef4444;
-  background: rgba(239, 68, 68, 0.2);
+  border-color: rgba(239, 68, 68, 0.4);
 }
 
-/* Minimized Mode: Tiny 38px Circular Floating Bubble */
-.audio-capsule.is-minimized {
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
+/* Minimized Floating Bubble */
+.round-audio-widget.is-minimized {
   padding: 0;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  justify-content: center;
+  position: relative;
+  background: linear-gradient(135deg, #091e17 0%, #0f172a 100%);
+  border: 2px solid #10b981;
+}
+
+/* Header Audio Button in Academy View */
+.btn-listen-course-audio {
+  background: rgba(16, 185, 129, 0.16);
+  border: 1.5px solid rgba(52, 211, 153, 0.45);
+  color: #34d399;
+  font-size: 0.8rem;
+  font-weight: 700;
+  border-radius: 999px;
+  padding: 5px 14px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  transition: all 0.2s ease;
+}
+
+.btn-listen-course-audio:hover {
+  background: rgba(16, 185, 129, 0.3);
+  color: #ffffff;
+  border-color: #34d399;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
+}
   justify-content: center;
   cursor: pointer;
   position: relative;
@@ -4641,6 +4673,137 @@ body.lang-ar .audio-side-menu-popup {
   color: #ffffff;
   font-weight: 800;
   box-shadow: 0 2px 6px rgba(16, 185, 129, 0.4);
+}
+
+/* Language Selection Grid inside Popup Menu */
+.asmp-lang-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 6px;
+}
+
+.asmp-lang-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #e2e8f0;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 0.2s ease;
+}
+
+.asmp-lang-btn:hover {
+  background: rgba(16, 185, 129, 0.2);
+  border-color: #34d399;
+  color: #ffffff;
+}
+
+.asmp-lang-btn.active {
+  background: rgba(16, 185, 129, 0.28);
+  border-color: #10b981;
+  color: #34d399;
+  font-weight: 800;
+}
+
+/* Episodes List inside Popup Menu */
+.asmp-episodes-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-height: 150px;
+  overflow-y: auto;
+  padding-right: 2px;
+}
+
+.asmp-ep-item {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  padding: 6px 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #cbd5e1;
+  font-size: 0.72rem;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.asmp-ep-item:hover {
+  background: rgba(16, 185, 129, 0.2);
+  color: #ffffff;
+  border-color: rgba(52, 211, 153, 0.4);
+}
+
+.asmp-ep-item.active {
+  background: rgba(16, 185, 129, 0.25);
+  border-color: #10b981;
+  color: #34d399;
+  font-weight: 700;
+}
+
+.asmp-ep-item .ep-num {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+.asmp-ep-item.active .ep-num {
+  background: #10b981;
+  color: #ffffff;
+}
+
+.asmp-ep-item .ep-title {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.asmp-ep-item .ep-time {
+  font-size: 0.65rem;
+  color: #94a3b8;
+  font-family: monospace;
+}
+
+/* Dismiss Button inside Popup Menu */
+.asmp-footer {
+  margin-top: 4px;
+}
+
+.asmp-btn-dismiss {
+  width: 100%;
+  padding: 8px;
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #f87171;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+}
+
+.asmp-btn-dismiss:hover {
+  background: rgba(239, 68, 68, 0.3);
+  color: #ffffff;
 }
 
 /* Controls & Voice Language */
