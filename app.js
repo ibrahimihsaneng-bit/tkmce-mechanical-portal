@@ -79,7 +79,7 @@ const app = {
   i18n: {
     en: {
       siteTitle: "VYAPAR SHIKSHA",
-      siteSubtitle: "സംരംഭക പാഠശാല • منصة الانطلاق",
+      siteSubtitle: "Practical Business Academy • India & Kerala",
       topBarTagline: "Practical Business Academy for Kerala & Pan-India Micro-Entrepreneurs",
       langCurrentText: "Language:",
       
@@ -91,16 +91,68 @@ const app = {
       tierTabRetail: "1. Retail & Trading (10)",
       tierTabMachine: "2. Machine Units (10)",
       tierTabIndustrial: "3. Industrial Plants (10)",
-      dropAttar: "Attar & Perfumes Academy",
-      dropClothing: "Dresses & Boutique Academy",
-      dropWatches: "Fashion Watches Academy",
-      dropBags: "Canvas Totes & Bags Academy",
-      dropAccessories: "Rings & Jewelry Academy",
-      dropSpices: "Kerala Spices & Honey Academy",
+
+      // Dropdown Navigation
+      dropTier1Title: '<i class="fa-solid fa-store text-primary"></i> 1. Retail & Micro Ventures (₹3k - ₹25k)',
+      dropAttarText: "Attar & Artisanal Perfumes",
+      dropClothingText: "Dresses & Modest Boutique",
+      dropWatchesText: "Fashion Watches & Combos",
+      dropRetailAllText: "All Retail Businesses (10) →",
+
+      dropTier2Title: '<i class="fa-solid fa-gears text-success"></i> 2. Machine Manufacturing (₹1L - ₹5L)',
+      dropPaperbagText: "Kraft Paper Bag Making",
+      dropColdpressText: "Wood-Pressed Edible Oil",
+      dropSpisegrindText: "Commercial Spice Pulverizer",
+      dropMachineAllText: "All Machine Units (10) →",
+
+      dropTier3Title: '<i class="fa-solid fa-industry text-primary"></i> 3. Industrial Plants (₹25L - ₹50L+)',
+      dropMangopulpText: "Mango Pulp Aseptic Plant",
+      dropCoconutoilText: "Integrated Coconut VCO Mill",
+      dropBottledwaterText: "Packaged Water Bottling Plant",
+      dropIndustrialAllText: "All Industrial Plants (10) →",
+
       navTools: "Profit Tools",
       navSuppliers: "Wholesalers & Maps",
       navTemplates: "WhatsApp Scripts",
+      navCommunityText: "Halal Community",
+      topCommunityText: "Halal Community",
       navPlanBuilder: "Generate Plan",
+
+      // Halal Community Banner on Homepage
+      halalBadgePill: "100% Interest-Free Halal Network",
+      halalLivePill: "Vyapar Shiksha WhatsApp Community",
+      halalBannerTitle: "Grow Together on Ethical & Halal Principles! 🤝",
+      halalBannerDesc: "Zero bank interest or debt. Build high-profit micro-enterprises through mutual cooperation, raw material pooling, and Mudarabah / Musharakah equity partnerships. Join the official WhatsApp Community of entrepreneurs.",
+      halalFeat1: "5 Specialized Business Sub-Groups",
+      halalFeat2: "Direct Raw Material Sharing",
+      halalFeat3: "Machinery Co-Investment Support",
+      halalBtnJoinText: "Join WhatsApp Community",
+      halalPrivacyText: "Phone Numbers Hidden & Private • Strict Islamic Ethics",
+
+      // Halal Community Modal
+      modalBadgeText: '<i class="fa-solid fa-moon"></i> 100% Interest-Free Halal Network',
+      modalTitleText: "Vyapar Shiksha – Halal Entrepreneur Network",
+      modalSubText: "Zero bank interest. Advance through mutual cooperation, raw material pooling & partnerships.",
+      modalMainTitle: '<i class="fa-solid fa-layer-group text-success"></i> Join the Main WhatsApp Community',
+      modalMainDesc: "Connect with all official updates, machinery offers, and business opportunities under one roof.",
+      modalBtnJoinMain: "Join Community",
+      modalSubgroupsTitle: '<i class="fa-solid fa-users"></i> Select your specialized business cluster:',
+      sg1Title: "1. Official Announcements",
+      sg1Desc: "Admin updates, verified machine offers, and mandi market rates",
+      sgBtn1: "Join",
+      sg2Title: "2. Retail & Micro Ventures",
+      sg2Desc: "Attar, Modest Wear, Watches, Spices, Anti-Tarnish Jewelry",
+      sgBtn2: "Join",
+      sg3Title: "3. Machine Manufacturing Units",
+      sg3Desc: "Paper Bag, Foil Container, Agarbatti, Cold Press, Detergent",
+      sgBtn3: "Join",
+      sg4Title: "4. Halal Partnership & Mudarabah",
+      sg4Desc: "Zero-interest co-investment, equity syndication & machinery pooling",
+      sgBtn4: "Join",
+      sg5Title: "5. Raw Material & Buyback Help",
+      sg5Desc: "Bulk raw material procurement and mutual finished goods trade",
+      sgBtn5: "Join",
+      modalEthicsTitle: "Islamic Business Code of Conduct:",
 
       // Hero
       heroBadge: "No Business Experience Required • 100% Free Learning Portal",
@@ -214,16 +266,68 @@ const app = {
       tierTabRetail: "1. ചെറുകിട വ്യാപാരങ്ങൾ (10)",
       tierTabMachine: "2. മെഷീൻ നിർമ്മാണ യൂണിറ്റുകൾ (10)",
       tierTabIndustrial: "3. വൻകിട ഇൻഡസ്ട്രിയൽ പ്ലാന്റുകൾ (10)",
-      dropAttar: "അത്തർ & പെർഫ്യൂം ശാഖ",
-      dropClothing: "വസ്ത്രങ്ങൾ & ബോട്ടിക് ശാഖ",
-      dropWatches: "ഫാഷൻ വാച്ചുകൾ ശാഖ",
-      dropBags: "ക്യാൻവാസ് ബാഗുകൾ ശാഖ",
-      dropAccessories: "മോതിരങ്ങൾ & ആഭരണ ശാഖ",
-      dropSpices: "കേരള സുഗന്ധവ്യഞ്ജന ശാഖ",
+
+      // Dropdown Navigation
+      dropTier1Title: '<i class="fa-solid fa-store text-primary"></i> 1. ചെറുകിട വ്യാപാരങ്ങൾ (₹3k - ₹25k)',
+      dropAttarText: "അത്തർ & പെർഫ്യൂംസ്",
+      dropClothingText: "വസ്ത്രങ്ങൾ & ബോട്ടിക്",
+      dropWatchesText: "ഫാഷൻ വാച്ചുകൾ & കോമ്പോസ്",
+      dropRetailAllText: "എല്ലാ ചെറുകിട ബിസിനസ്സുകളും (10) →",
+
+      dropTier2Title: '<i class="fa-solid fa-gears text-success"></i> 2. മെഷീൻ നിർമ്മാണം (₹1L - ₹5L)',
+      dropPaperbagText: "പേപ്പർ ബാഗ് നിർമ്മാണം",
+      dropColdpressText: "മരച്ചെക്ക് വെളിച്ചെണ്ണ",
+      dropSpisegrindText: "സ്പൈസ് പൾവറൈസർ",
+      dropMachineAllText: "എല്ലാ മെഷീൻ യൂണിറ്റുകളും (10) →",
+
+      dropTier3Title: '<i class="fa-solid fa-industry text-primary"></i> 3. വൻകിട പ്ലാന്റുകൾ (₹25L - ₹50L+)',
+      dropMangopulpText: "മാംഗോ പൾപ്പ് കണ്ടിന്യൂവസ് പ്ലാന്റ്",
+      dropCoconutoilText: "ഓട്ടോമാറ്റിക് വെളിച്ചെണ്ണ മിൽ & VCO",
+      dropBottledwaterText: "മിനറൽ വാട്ടർ ബോട്ടിലിംഗ്",
+      dropIndustrialAllText: "എല്ലാ ഇൻഡസ്ട്രിയൽ പ്ലാന്റുകളും (10) →",
+
       navTools: "പ്രോഫിറ്റ് ടൂളുകൾ",
       navSuppliers: "ഹോൾസെയിൽ വ്യാപാരികൾ & മാപ്പ്",
       navTemplates: "വാട്സ്ആപ്പ് സ്ക്രിപ്റ്റുകൾ",
+      navCommunityText: "ഹലാൽ കൂട്ടായ്മ",
+      topCommunityText: "ഹലാൽ കൂട്ടായ്മ",
       navPlanBuilder: "പ്ലാൻ തയ്യാറാക്കുക",
+
+      // Halal Community Banner on Homepage
+      halalBadgePill: "100% പലിശരഹിത ഇസ്ലാമിക കൂട്ടായ്മ",
+      halalLivePill: "വ്യാപാര ശിക്ഷ വാട്സ്ആപ്പ് കൂട്ടായ്മ",
+      halalBannerTitle: "ഒരുമിച്ചു വളരാം, ഹലാലായ മാർഗ്ഗത്തിൽ വിജയം നേടാം! 🤝",
+      halalBannerDesc: "ബാങ്ക് പലിശകളോ കടങ്ങളോ ഇല്ലാതെ, പരസ്പര സഹകരണത്തിലൂടെയും മുശാറക / മുളാരബ (ലാഭ-നഷ്ട പങ്കാളിത്തം) വ്യവസ്ഥയിലൂടെയും സംരംഭങ്ങൾ പടുത്തുയർത്താൻ കേരളത്തിലെ സംരംഭകരുടെ ഔദ്യോഗിക WhatsApp Community-യിൽ പങ്കാളിയാകൂ.",
+      halalFeat1: "5 പ്രത്യേക ബിസിനസ്സ് ഗ്രൂപ്പുകൾ",
+      halalFeat2: "നേരിട്ടുള്ള റോ മെറ്റീരിയൽ ഷെയറിംഗ്",
+      halalFeat3: "മെഷീൻ പാർട്ണർഷിപ്പ് സപ്പോർട്ട്",
+      halalBtnJoinText: "കമ്മ്യൂണിറ്റിയിൽ ചേരുക",
+      halalPrivacyText: "ഫോൺ നമ്പർ സുരക്ഷിതം • കർശനമായ ഇസ്ലാമിക പെരുമാറ്റച്ചട്ടം",
+
+      // Halal Community Modal
+      modalBadgeText: '<i class="fa-solid fa-moon"></i> 100% പലിശരഹിത ഇസ്ലാമിക കൂട്ടായ്മ',
+      modalTitleText: "വ്യാപാര ശിക്ഷ – ഹലാൽ സംരംഭക നെറ്റ്‌വർക്ക്",
+      modalSubText: "പലിശയില്ലാതെ പരസ്പര സഹകരണത്തിലൂടെയും പങ്കാളിത്തത്തിലൂടെയും മുന്നേറാം.",
+      modalMainTitle: '<i class="fa-solid fa-layer-group text-success"></i> പ്രധാന കമ്മ്യൂണിറ്റിയിൽ അംഗമാകുക',
+      modalMainDesc: "എല്ലാ അനൗൺസ്‌മെന്റുകളും പുതിയ അപ്ഡേറ്റുകളും ഒരൊറ്റ കുടക്കീഴിൽ ലഭിക്കാൻ മെയിൻ കമ്മ്യൂണിറ്റിയിൽ ചേരുക.",
+      modalBtnJoinMain: "കമ്മ്യൂണിറ്റിയിൽ ചേരുക",
+      modalSubgroupsTitle: '<i class="fa-solid fa-users"></i> നിങ്ങളുടെ മേഖലയ്ക്ക് അനുയോജ്യമായ ഗ്രൂപ്പുകൾ തിരഞ്ഞെടുക്കാം:',
+      sg1Title: "1. ഒഫീഷ്യൽ അനൗൺസ്‌മെന്റുകൾ",
+      sg1Desc: "അഡ്മിൻ അപ്ഡേറ്റുകൾ, പുതിയ മെഷീൻ വിവരങ്ങൾ, വിപണി വിലകൾ",
+      sgBtn1: "ചേരുക",
+      sg2Title: "2. ചെറുകിട & റീട്ടെയിൽ സംരംഭകർ",
+      sg2Desc: "അത്തർ, വസ്ത്രങ്ങൾ, വാച്ചുകൾ, സ്പൈസസ്, ആന്റി-ടാർണിഷ് ജ്വല്ലറി",
+      sgBtn2: "ചേരുക",
+      sg3Title: "3. മെഷീൻ നിർമ്മാണ യൂണിറ്റുകൾ",
+      sg3Desc: "പേപ്പർ ബാഗ്, ഫോയിൽ കണ്ടെയ്നർ, അഗർബത്തി, മരച്ചെക്ക്, ഡിറ്റർജന്റ്",
+      sgBtn3: "ചേരുക",
+      sg4Title: "4. ഹലാൽ പാർട്ണർഷിപ്പ് & മുശാറക",
+      sg4Desc: "പലിശയില്ലാതെ ഒന്നിച്ചുനിന്നു സംരംഭം തുടങ്ങാനും നിക്ഷേപം കണ്ടെത്താനും",
+      sgBtn4: "ചേരുക",
+      sg5Title: "5. റോ മെറ്റീരിയൽ & ബൈബാക്ക് ഹെൽപ്പ്",
+      sg5Desc: "അസംസ്കൃത വസ്തുക്കൾ ഒന്നിച്ച് കുറഞ്ഞ വിലയ്ക്ക് വാങ്ങാനും വിൽക്കാനും",
+      sgBtn5: "ചേരുക",
+      modalEthicsTitle: "ഇസ്ലാമിക സംരംഭക പെരുമാറ്റച്ചട്ടം:",
 
       // Hero
       heroBadge: "ബിസിനസ് പരിചയം ആവശ്യമില്ല • 100% സൗജന്യ പഠന വെബ്സൈറ്റ്",
@@ -324,8 +428,8 @@ const app = {
     },
 
     ar: {
-      siteTitle: "منصة رواد الأعمال",
-      siteSubtitle: "أكاديمية التجارة والمشاريع المصغرة",
+      siteTitle: "فيابار شيكشا",
+      siteSubtitle: "منصة رواد الأعمال • دليل المشاريع الشامل",
       topBarTagline: "أكاديمية تعليم التجارة العملية للمبتدئين في كيرالا والهند",
       langCurrentText: "اللغة:",
 
@@ -337,16 +441,68 @@ const app = {
       tierTabRetail: "1. تجارة التجزئة (10)",
       tierTabMachine: "2. وحدات التصنيع الآلي (10)",
       tierTabIndustrial: "3. المصانع الصناعية (10)",
-      dropAttar: "أكاديمية العطور ودهن العود",
-      dropClothing: "أكاديمية العبايات والأزياء",
-      dropWatches: "أكاديمية الساعات الفاخرة",
-      dropBags: "أكاديمية الحقائب اليدوية",
-      dropAccessories: "أكاديمية الخواتم والإكسسوارات",
-      dropSpices: "أكاديمية التوابل والعسل الطبيعي",
+
+      // Dropdown Navigation
+      dropTier1Title: '<i class="fa-solid fa-store text-primary"></i> 1. تجارة التجزئة والمشاريع (₹3k - ₹25k)',
+      dropAttarText: "العطور الزيتية والفرنسية",
+      dropClothingText: "العبايات والأزياء والبوتيك",
+      dropWatchesText: "الساعات الفاخرة والهدايا",
+      dropRetailAllText: "جميع مشاريع التجزئة (10) →",
+
+      dropTier2Title: '<i class="fa-solid fa-gears text-success"></i> 2. وحدات التصنيع الآلية (₹1L - ₹5L)',
+      dropPaperbagText: "صناعة الأكياس الورقية",
+      dropColdpressText: "معاصر الزيوت الطبيعية",
+      dropSpisegrindText: "طواحين البهارات والتوابل",
+      dropMachineAllText: "جميع وحدات التصنيع (10) →",
+
+      dropTier3Title: '<i class="fa-solid fa-industry text-primary"></i> 3. المجمعات الصناعية الكبرى (₹25L - ₹50L+)',
+      dropMangopulpText: "مصنع لب المانجو المعقم",
+      dropCoconutoilText: "مجمع صناعات جوز الهند وزيت البكر",
+      dropBottledwaterText: "محطة تعبئة المياه النقية",
+      dropIndustrialAllText: "جميع المصانع الكبرى (10) →",
+
       navTools: "حاسبة الأرباح",
       navSuppliers: "أسواق الجملة والخرائط",
       navTemplates: "نماذج واتساب الجاهزة",
+      navCommunityText: "المجتمع الحلال",
+      topCommunityText: "المجتمع الحلال",
       navPlanBuilder: "خطة العمل",
+
+      // Halal Community Banner on Homepage
+      halalBadgePill: "شبكة رواد الأعمال الحلال خالية من الفوائد 100%",
+      halalLivePill: "مجتمع واتساب Vyapar Shiksha",
+      halalBannerTitle: "معاً ننمو وننجح وفق الشريعة الإسلامية الحلال! 🤝",
+      halalBannerDesc: "بدون قروض بنكية ربوية، نبني مشاريع صناعية وتجارية عبر التعاون المشترك والشراكة بالمرابحة والمضاربة الشرعية. انضم لمجتمع الواتساب الرسمي لرواد الأعمال.",
+      halalFeat1: "5 مجموعات تخصصية بحسب المجال",
+      halalFeat2: "شراء وتوزيع المواد الخام بالجملة",
+      halalFeat3: "المشاركة في خطوط الإنتاج والآلات",
+      halalBtnJoinText: "انضم إلى مجتمع الواتساب",
+      halalPrivacyText: "أرقام الهواتف محمية وخاصة • ميثاق أخلاقي شرعي صارم",
+
+      // Halal Community Modal
+      modalBadgeText: '<i class="fa-solid fa-moon"></i> شبكة رواد الأعمال الحلال خالية من الفوائد 100%',
+      modalTitleText: "فيابار شيكشا – شبكة رواد الأعمال الحلال",
+      modalSubText: "بدون فوائد ربوية، نتقدم عبر التعاون المشترك والشراكة الاستثمارية.",
+      modalMainTitle: '<i class="fa-solid fa-layer-group text-success"></i> انضم إلى مجتمع الواتساب الرئيسي',
+      modalMainDesc: "تواصل مع التحديثات الرسمية وعروض الآلات والفرص التجارية تحت مظلة واحدة.",
+      modalBtnJoinMain: "انضم للمجتمع الرئيسي",
+      modalSubgroupsTitle: '<i class="fa-solid fa-users"></i> اختر المجموعة التخصصية لمجال عملك:',
+      sg1Title: "1. الإعلانات والتحديثات الرسمية",
+      sg1Desc: "تحديثات الإدارة وعروض الآلات الموثوقة وأسعار الأسواق",
+      sgBtn1: "انضمام",
+      sg2Title: "2. تجارة التجزئة والمشاريع المصغرة",
+      sg2Desc: "العطور، العبايات، الساعات، التوابل، والمجوهرات المقاومة للصدأ",
+      sgBtn2: "انضمام",
+      sg3Title: "3. خطوط ووحدات التصنيع الآلي",
+      sg3Desc: "الأكياس الورقية، أطباق الألمنيوم، البخور، المعاصر، والمنظفات",
+      sgBtn3: "انضمام",
+      sg4Title: "4. الشراكة الحلال والمضاربة",
+      sg4Desc: "استثمار مشترك بدون فوائد، تمويل إسلامي وشراكة في الآلات",
+      sgBtn4: "انضمام",
+      sg5Title: "5. توفير المواد الخام وخدمات الشراء",
+      sg5Desc: "شراء المواد الخام بالجملة بأسعار المصانع وتبادل المنتجات الجاهزة",
+      sgBtn5: "انضمام",
+      modalEthicsTitle: "ميثاق الأخلاقيات الإسلامية للأعمال:",
 
       // Hero
       heroBadge: "لا تشترط أي خبرة سابقة • منصة تعليمية مجانية 100%",
@@ -2008,9 +2164,9 @@ const app = {
       }
     }
     this.detectLanguage();
+    this.switchLanguage(this.currentLang);
     this.handleHashRouting();
     this.bindEvents();
-    this.renderAllViews();
     this.renderFloatingAudioDock();
   },
 
@@ -2851,6 +3007,13 @@ const app = {
     }
   },
 
+  cycleAudioVoice(e) {
+    if (e) e.stopPropagation();
+    const current = this.audioMasterclassState.voiceLang || this.currentLang || 'ml';
+    const nextLang = current === 'ml' ? 'en' : current === 'en' ? 'ar' : 'ml';
+    this.setAudioVoice(nextLang);
+  },
+
   setAudioSpeed(speed) {
     this.audioMasterclassState.playbackRate = speed;
     if (this.audioMasterclassState.isPlaying) {
@@ -3000,9 +3163,9 @@ const app = {
             <span>${state.isPlaying ? (lang === 'ml' ? 'പോസ്' : 'Pause') : (lang === 'ml' ? 'പ്ലേ' : 'Play')}</span>
           </button>
           <div class="asmp-lang-box">
-            <button class="asmp-lang-chip ${lang === 'ml' ? 'active' : ''}" onclick="app.setAudioVoice('ml')">ML</button>
-            <button class="asmp-lang-chip ${lang === 'en' ? 'active' : ''}" onclick="app.setAudioVoice('en')">EN</button>
-            <button class="asmp-lang-chip ${lang === 'ar' ? 'active' : ''}" onclick="app.setAudioVoice('ar')">AR</button>
+            <button class="asmp-lang-chip ${lang === 'ml' ? 'active' : ''}" onclick="app.setAudioVoice('ml')">മലയാളം (ML)</button>
+            <button class="asmp-lang-chip ${lang === 'en' ? 'active' : ''}" onclick="app.setAudioVoice('en')">English (EN)</button>
+            <button class="asmp-lang-chip ${lang === 'ar' ? 'active' : ''}" onclick="app.setAudioVoice('ar')">العربية (AR)</button>
           </div>
         </div>
 
@@ -3040,6 +3203,11 @@ const app = {
           <!-- Fast Speed Quick-Pill: Single Click Cycles 1x -> 1.25x -> 1.5x -> 2x -->
           <button class="capsule-speed-pill" id="capsuleSpeedPill" onclick="app.cycleAudioSpeed(event)" title="Speed: ${state.playbackRate}x (Click to cycle)">
             ${state.playbackRate}x
+          </button>
+
+          <!-- Audio Voice Language Pill: Single Click Cycles ML -> EN -> AR -->
+          <button class="capsule-lang-pill" id="capsuleLangPill" onclick="app.cycleAudioVoice(event)" title="${lang === 'ml' ? 'ഓഡിയോ ഭാഷ: മലയാളം (മാറ്റാൻ ക്ലിക്ക് ചെയ്യുക)' : lang === 'ar' ? 'صوت الأوديو: العربية (انقر للتغيير)' : 'Audio Voice: English (Click to cycle)'}">
+            <i class="fa-solid fa-volume-high"></i> <span>${lang.toUpperCase()}</span>
           </button>
 
           <!-- Down Arrow ("തെക്ക് ആരോ / ഡൗൺ ആരോ കൊടുത്തിട്ട് അത് ഒഴിവാക്കാനും / ഹൈഡ് ചെയ്യാനും") -->
@@ -5237,10 +5405,12 @@ const app = {
   }
 };
 
-// Auto-run on DOMContentLoaded
-document.addEventListener('DOMContentLoaded', () => {
-  app.init();
-});
+// Auto-run on DOMContentLoaded (Browser only)
+if (typeof document !== 'undefined') {
+  document.addEventListener('DOMContentLoaded', () => {
+    app.init();
+  });
+}
 
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = app;
