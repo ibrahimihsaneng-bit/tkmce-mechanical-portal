@@ -5700,3 +5700,158 @@ body.lang-ar .card-tier-pill {
 
 
 
+
+
+/* ==========================================================================
+   ENHANCED FLOATING AUDIO DOCK & CONTROLS (30 COURSES & SEAMLESS MULTI-LANG)
+   ========================================================================== */
+.capsule-play-btn.playing {
+  background: linear-gradient(135deg, #10b981 0%, #047857 100%);
+  animation: audioPulseGlow 1.8s infinite;
+}
+
+@keyframes audioPulseGlow {
+  0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+  70% { box-shadow: 0 0 0 7px rgba(16, 185, 129, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+
+.capsule-seek-btn {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #cbd5e1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.68rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 0;
+}
+
+.capsule-seek-btn:hover {
+  background: rgba(16, 185, 129, 0.25);
+  color: #34d399;
+  border-color: #34d399;
+  transform: scale(1.08);
+}
+
+.capsule-action-btn.btn-menu:hover {
+  color: #10b981;
+  background: rgba(16, 185, 129, 0.2);
+}
+
+.asmp-title-box {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.asmp-course-name {
+  font-size: 0.68rem;
+  color: #94a3b8;
+  max-width: 170px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.asmp-section {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.asmp-lang-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.asmp-lang-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 10px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  color: #cbd5e1;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.asmp-lang-btn:hover {
+  background: rgba(16, 185, 129, 0.15);
+  color: #ffffff;
+  border-color: rgba(52, 211, 153, 0.4);
+}
+
+.asmp-lang-btn.active {
+  background: rgba(16, 185, 129, 0.25);
+  color: #34d399;
+  border-color: #10b981;
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.3);
+}
+
+.asmp-lang-btn .lang-flag {
+  margin-right: 6px;
+  font-size: 0.9rem;
+}
+
+.asmp-seek-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 5px;
+}
+
+.asmp-action-chip {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #cbd5e1;
+  padding: 5px 4px;
+  border-radius: 6px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.asmp-action-chip:hover {
+  background: rgba(16, 185, 129, 0.2);
+  color: #ffffff;
+  border-color: #34d399;
+}
+
+.asmp-btn-dismiss {
+  width: 100%;
+  padding: 7px 10px;
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #f87171;
+  border-radius: 6px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+  margin-top: 4px;
+}
+
+.asmp-btn-dismiss:hover {
+  background: rgba(239, 68, 68, 0.3);
+  color: #ffffff;
+  border-color: #ef4444;
+}

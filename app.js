@@ -3358,22 +3358,77 @@ const app = {
   ]
 },
 
-  // Helper: Get audio episodes for specific category or fallback to attar
+﻿  // Helper: Get audio episodes for specific category or fallback to attar
   getAudioEpisodes(nicheKey) {
     const key = nicheKey || this.audioMasterclassState.nicheKey || this.currentAcademy || 'attar';
-    return this.masterclassAudioLibrary[key] || this.masterclassAudioLibrary.attar;
+    const lib = (typeof window !== 'undefined' && window.dataAudioLibrary)
+      ? window.dataAudioLibrary
+      : this.masterclassAudioLibrary;
+    return lib[key] || this.masterclassAudioLibrary[key] || lib.attar || this.masterclassAudioLibrary.attar || [];
+  },
+
+  getEpisodeText(ep, lang) {
+    if (!ep) return '';
+    const l = lang || this.audioMasterclassState.voiceLang || this.currentLang || 'ml';
+    const t = ep.text || ep.script || {};
+    return t[l] || t.ml || t.en || t.ar || '';
   },
 
   getCurrentAudioEpisode() {
     const episodes = this.getAudioEpisodes();
     const epNum = this.audioMasterclassState.currentEpisode;
-    return episodes.find(e => e.num === epNum) || episodes[0];
+    return episodes.find(e => e.num === epNum) || episodes[0] || {};
   },
 
   formatAudioTime(sec) {
     const mins = Math.floor(sec / 60);
     const secs = Math.floor(sec % 60);
     return `${mins < 10 ? '0' : ''}${mins}:${secs < 10 ? '0' : ''}${secs}`;
+  },
+
+  // Subtle acoustic audio tone for physical sound verification
+  playChimeTone(type = 'click') {
+    try {
+      const state = this.audioMasterclassState;
+      if (!state.audioCtx) {
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        if (AudioCtx) state.audioCtx = new AudioCtx();
+      }
+      if (state.audioCtx && state.audioCtx.state === 'suspended') {
+        state.audioCtx.resume();
+      }
+      if (!state.audioCtx) return;
+
+      const osc = state.audioCtx.createOscillator();
+      const gain = state.audioCtx.createGain();
+      osc.connect(gain);
+      gain.connect(state.audioCtx.destination);
+
+      const now = state.audioCtx.currentTime;
+      if (type === 'play') {
+        osc.frequency.setValueAtTime(440, now);
+        osc.frequency.exponentialRampToValueAtTime(880, now + 0.12);
+        gain.gain.setValueAtTime(0.08, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.12);
+        osc.start(now);
+        osc.stop(now + 0.12);
+      } else if (type === 'pause') {
+        osc.frequency.setValueAtTime(660, now);
+        osc.frequency.exponentialRampToValueAtTime(330, now + 0.12);
+        gain.gain.setValueAtTime(0.06, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.12);
+        osc.start(now);
+        osc.stop(now + 0.12);
+      } else {
+        osc.frequency.setValueAtTime(520, now);
+        gain.gain.setValueAtTime(0.05, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
+        osc.start(now);
+        osc.stop(now + 0.08);
+      }
+    } catch (e) {
+      // AudioContext fallback
+    }
   },
 
   // Explicit Power Switch (സ്വിച്ച് ബട്ടൺ)
@@ -3401,6 +3456,7 @@ const app = {
     if ('speechSynthesis' in window) {
       window.speechSynthesis.cancel();
     }
+    this.playChimeTone('pause');
     this.updateAudioProgressUI();
   },
 
@@ -3414,18 +3470,19 @@ const app = {
     const targetEp = episodes.find(e => e.num === epNum) || episodes[0];
 
     state.currentEpisode = targetEp.num;
-    state.currentTimeSec = targetEp.startSec;
+    state.currentTimeSec = targetEp.startSec || 0;
     state.isPoweredOn = true;
     state.isPlaying = true;
 
-    this.speakCurrentEpisode();
+    this.speakCurrentEpisode(false);
     this.startAudioProgressTimer();
     this.renderFloatingAudioDock();
     this.updateAudioProgressUI();
   },
 
   // Toggle Play / Pause in background
-  toggleAudioMasterclass() {
+  toggleAudioMasterclass(e) {
+    if (e) e.stopPropagation();
     const state = this.audioMasterclassState;
     if (state.isPlaying) {
       this.pauseAudioMasterclass();
@@ -3439,25 +3496,19 @@ const app = {
     const state = this.audioMasterclassState;
     state.isPoweredOn = true;
     state.isPlaying = true;
+    state.isClosed = false;
 
-    try {
-      if (!state.audioCtx) {
-        const AudioContext = window.AudioContext || window.webkitAudioContext;
-        if (AudioContext) state.audioCtx = new AudioContext();
-      }
-      if (state.audioCtx && state.audioCtx.state === 'suspended') {
-        state.audioCtx.resume();
-      }
-    } catch (e) {
-      console.warn('AudioContext notice:', e);
-    }
-
-    this.speakCurrentEpisode();
+    this.playChimeTone('play');
+    this.speakCurrentEpisode(true);
     this.startAudioProgressTimer();
+    this.renderFloatingAudioDock();
     this.updateAudioProgressUI();
 
     const dock = document.getElementById('floatingAudioDock');
-    if (dock) dock.classList.remove('dock-hidden');
+    if (dock) {
+      dock.style.display = 'block';
+      dock.classList.remove('dock-hidden');
+    }
   },
 
   pauseAudioMasterclass() {
@@ -3470,6 +3521,8 @@ const app = {
     if ('speechSynthesis' in window) {
       window.speechSynthesis.cancel();
     }
+    this.playChimeTone('pause');
+    this.renderFloatingAudioDock();
     this.updateAudioProgressUI();
   },
 
@@ -3477,13 +3530,13 @@ const app = {
     const episodes = this.getAudioEpisodes();
     const ep = episodes.find(e => e.num === epNum) || episodes[0];
     this.audioMasterclassState.currentEpisode = ep.num;
-    this.audioMasterclassState.currentTimeSec = ep.startSec;
+    this.audioMasterclassState.currentTimeSec = ep.startSec || 0;
     this.audioMasterclassState.isPoweredOn = true;
 
     if (!this.audioMasterclassState.isPlaying) {
       this.playAudioMasterclass();
     } else {
-      this.speakCurrentEpisode();
+      this.speakCurrentEpisode(false);
       this.updateAudioProgressUI();
     }
   },
@@ -3503,22 +3556,25 @@ const app = {
       const targetEp = episodes.find(ep => state.currentTimeSec >= ep.startSec && state.currentTimeSec < ep.endSec);
       if (targetEp && targetEp.num !== state.currentEpisode) {
         state.currentEpisode = targetEp.num;
-        this.speakCurrentEpisode();
+        this.speakCurrentEpisode(false);
       }
 
       this.updateAudioProgressUI();
     }, 1000);
   },
 
+  // Seamless Language Switcher: Changes language and resumes playback from CURRENT timestamp!
   setAudioVoice(lang) {
-    this.audioMasterclassState.voiceLang = lang;
+    const state = this.audioMasterclassState;
+    state.voiceLang = lang;
     if ('speechSynthesis' in window) {
       window.speechSynthesis.cancel();
     }
+    this.playChimeTone('click');
     this.renderFloatingAudioDock();
-    // renderStudyStageHeaderBar removed to prevent screen blocking
-    if (this.audioMasterclassState.isPlaying) {
-      this.speakCurrentEpisode();
+    if (state.isPlaying) {
+      // Resume from current proportional progress in the new language!
+      this.speakCurrentEpisode(true);
     }
   },
 
@@ -3530,14 +3586,26 @@ const app = {
   },
 
   setAudioSpeed(speed) {
-    this.audioMasterclassState.playbackRate = speed;
-    if (this.audioMasterclassState.isPlaying) {
-      this.speakCurrentEpisode();
+    const state = this.audioMasterclassState;
+    state.playbackRate = speed;
+    this.playChimeTone('click');
+    if (state.isPlaying) {
+      this.speakCurrentEpisode(true);
     }
     this.renderFloatingAudioDock();
   },
 
-  skipAudio(seconds) {
+  cycleAudioSpeed(e) {
+    if (e) e.stopPropagation();
+    const speeds = [1, 1.25, 1.5, 2];
+    const current = this.audioMasterclassState.playbackRate || 1;
+    const nextIdx = (speeds.indexOf(current) + 1) % speeds.length;
+    this.setAudioSpeed(speeds[nextIdx]);
+  },
+
+  // Skip / Seek by seconds (+10s or -10s)
+  skipAudio(seconds, e) {
+    if (e) e.stopPropagation();
     const state = this.audioMasterclassState;
     state.currentTimeSec = Math.max(0, Math.min(state.totalDurationSec, state.currentTimeSec + seconds));
     const episodes = this.getAudioEpisodes();
@@ -3545,8 +3613,9 @@ const app = {
     if (targetEp && targetEp.num !== state.currentEpisode) {
       state.currentEpisode = targetEp.num;
     }
+    this.playChimeTone('click');
     if (state.isPlaying) {
-      this.speakCurrentEpisode();
+      this.speakCurrentEpisode(true);
     }
     this.updateAudioProgressUI();
   },
@@ -3557,35 +3626,38 @@ const app = {
     const rect = track.getBoundingClientRect();
     const clickX = event.clientX - rect.left;
     const pct = Math.max(0, Math.min(1, clickX / rect.width));
-    const targetSec = Math.floor(pct * this.audioMasterclassState.totalDurationSec);
+    const state = this.audioMasterclassState;
+    const targetSec = Math.round(pct * state.totalDurationSec);
+    state.currentTimeSec = targetSec;
 
-    this.audioMasterclassState.currentTimeSec = targetSec;
     const episodes = this.getAudioEpisodes();
     const targetEp = episodes.find(ep => targetSec >= ep.startSec && targetSec < ep.endSec);
     if (targetEp) {
-      this.audioMasterclassState.currentEpisode = targetEp.num;
+      state.currentEpisode = targetEp.num;
     }
-    if (this.audioMasterclassState.isPlaying) {
-      this.speakCurrentEpisode();
+    this.playChimeTone('click');
+    if (state.isPlaying) {
+      this.speakCurrentEpisode(true);
     }
     this.updateAudioProgressUI();
   },
 
-  toggleTranscriptDrawer(forceState) {
-    const state = this.audioMasterclassState;
-    state.isDrawerOpen = typeof forceState === 'boolean' ? forceState : !state.isDrawerOpen;
-    const drawer = document.getElementById('floatingTranscriptDrawer');
+  toggleTranscriptDrawer() {
+    const drawer = document.getElementById('audioTranscriptDrawer');
     if (!drawer) return;
-
-    if (state.isDrawerOpen) {
-      drawer.style.display = 'flex';
-      this.renderTranscriptDrawerContent();
-    } else {
+    const isOpen = drawer.classList.contains('is-open');
+    if (isOpen) {
+      drawer.classList.remove('is-open');
       drawer.style.display = 'none';
+    } else {
+      this.renderTranscriptDrawerContent();
+      drawer.style.display = 'flex';
+      drawer.classList.add('is-open');
     }
   },
 
-  speakCurrentEpisode() {
+  // Intelligent Text-to-Speech Engine with Mid-Audio Resume Support
+  speakCurrentEpisode(resumeFromOffset = true) {
     if (!('speechSynthesis' in window)) return;
     window.speechSynthesis.cancel();
 
@@ -3593,11 +3665,29 @@ const app = {
     const lang = state.voiceLang || this.currentLang || 'ml';
     const episodes = this.getAudioEpisodes();
     const ep = episodes[state.currentEpisode - 1] || episodes[0];
-    const textToSpeak = ep.text[lang] || ep.text.en;
+    if (!ep) return;
 
-    const utterance = new SpeechSynthesisUtterance(textToSpeak);
-    utterance.rate = state.playbackRate * 0.95;
-    utterance.pitch = 1.05;
+    let fullText = this.getEpisodeText(ep, lang);
+    if (!fullText) return;
+
+    // Calculate proportional progress within the episode
+    let speechText = fullText;
+    const epDuration = Math.max(1, (ep.endSec || 300) - (ep.startSec || 0));
+    const currentProgressSec = Math.max(0, state.currentTimeSec - (ep.startSec || 0));
+    const progressRatio = Math.min(0.95, Math.max(0, currentProgressSec / epDuration));
+
+    // If more than 3% into the episode and resuming, speak from that exact proportional offset!
+    if (resumeFromOffset && progressRatio > 0.03 && fullText.length > 40) {
+      const words = fullText.trim().split(/\s+/);
+      const startIdx = Math.min(words.length - 8, Math.floor(words.length * progressRatio));
+      if (startIdx > 0) {
+        speechText = words.slice(startIdx).join(' ');
+      }
+    }
+
+    const utterance = new SpeechSynthesisUtterance(speechText);
+    utterance.rate = (state.playbackRate || 1) * 0.96;
+    utterance.pitch = 1.02;
 
     const langCodes = { ml: 'ml-IN', ar: 'ar-SA', en: 'en-US' };
     utterance.lang = langCodes[lang] || 'en-US';
@@ -3614,16 +3704,18 @@ const app = {
       const currentEpisodes = this.getAudioEpisodes();
       if (state.isPlaying && state.currentEpisode < currentEpisodes.length) {
         state.currentEpisode += 1;
-        state.currentTimeSec = currentEpisodes[state.currentEpisode - 1].startSec;
-        this.speakCurrentEpisode();
+        state.currentTimeSec = currentEpisodes[state.currentEpisode - 1].startSec || 0;
+        this.speakCurrentEpisode(false);
         this.updateAudioProgressUI();
+      } else if (state.isPlaying && state.currentEpisode >= currentEpisodes.length) {
+        this.pauseAudioMasterclass();
       }
     };
 
     window.speechSynthesis.speak(utterance);
   },
 
-  // Ultra-Compact Floating Side Audio Widget (Zero-Branding & Minimal Screen Footprint)
+  // Ultra-Compact Floating Side Audio Widget with Pause (||) / Play (▶) icons, seek controls, and quick menu
   renderFloatingAudioDock() {
     const dock = document.getElementById('floatingAudioDock');
     if (!dock) return;
@@ -3637,31 +3729,84 @@ const app = {
 
     const lang = state.voiceLang || this.currentLang || 'ml';
     const episodes = this.getAudioEpisodes();
-    const currentEp = episodes[state.currentEpisode - 1] || episodes[0];
+    const currentEp = episodes[state.currentEpisode - 1] || episodes[0] || {};
     const formattedCurrentTime = this.formatAudioTime(state.currentTimeSec);
 
+    const cat = this.categoriesData[this.currentAcademy] || this.categoriesData.attar || {};
+    const courseTitle = cat.title ? (cat.title[lang] || cat.title.en) : 'Business Course';
+
     dock.innerHTML = `
-      <!-- 1. POPUP SIDE MENU (Opens on long-press or menu click: Speed controls, down-arrow, close) -->
+      <!-- 1. POPUP SIDE MENU (Opens on menu button click: Language selection, speed, seek, close) -->
       <div class="audio-side-menu-popup ${state.isMenuOpen ? 'is-open' : ''}" id="audioSideMenuPopup" style="display: ${state.isMenuOpen ? 'flex' : 'none'};">
         <div class="asmp-header">
-          <span class="asmp-ep-badge">Ep ${state.currentEpisode} • 30-Min Audio</span>
+          <div class="asmp-title-box">
+            <span class="asmp-ep-badge">Ep ${state.currentEpisode} of ${episodes.length}</span>
+            <small class="asmp-course-name">${courseTitle}</small>
+          </div>
           <div class="asmp-header-actions">
-            <!-- Down Arrow Minimize ("ഡൗൺ ആരോ / തെക്ക് ആരോ") -->
-            <button class="asmp-btn-action" onclick="app.minimizeAudioWidget(event)" title="${lang === 'ml' ? 'ഹൈഡ് ചെയ്യുക (Minimize / Hide)' : 'Hide / Minimize'}">
+            <!-- Down Arrow Minimize -->
+            <button class="asmp-btn-action" onclick="app.minimizeAudioWidget(event)" title="${lang === 'ml' ? 'ഹൈഡ് ചെയ്യുക (Minimize)' : 'Minimize'}">
               <i class="fa-solid fa-chevron-down"></i>
             </button>
-            <!-- Close 'X' ("തെറ്റ് ഒഴിവാക്കാൻ") -->
-            <button class="asmp-btn-action asmp-btn-close" onclick="app.closeAudioWidget(event)" title="${lang === 'ml' ? 'ഓഡിയോ ക്ലോസ് ചെയ്യുക (Close / Dismiss)' : 'Close'}">
+            <!-- Close 'X' -->
+            <button class="asmp-btn-action asmp-btn-close" onclick="app.closeAudioWidget(event)" title="${lang === 'ml' ? 'ഓഡിയോ ഒഴിവാക്കുക (Close / Dismiss)' : 'Close'}">
               <i class="fa-solid fa-xmark"></i>
             </button>
           </div>
         </div>
 
-        <!-- Speed Selector: "അതിൽ സ്പീഡ് കൂട്ടാനുള്ള ഓപ്ഷൻ, അത് മാത്രം ചെയ്താൽ മതി" -->
-        <div class="asmp-speed-section">
+        <!-- Language Selector Section with Clear Visible Buttons -->
+        <div class="asmp-section">
+          <div class="asmp-section-label">
+            <i class="fa-solid fa-globe text-primary"></i>
+            <span>${lang === 'ml' ? 'ഓഡിയോ ഭാഷ (Voice Language):' : lang === 'ar' ? 'لغة الصوت:' : 'Voice Language:'}</span>
+          </div>
+          <div class="asmp-lang-grid">
+            <button class="asmp-lang-btn ${lang === 'ml' ? 'active' : ''}" onclick="app.setAudioVoice('ml')">
+              <span class="lang-flag">🌴</span>
+              <span class="lang-text">മലയാളം (ML)</span>
+              ${lang === 'ml' ? '<i class="fa-solid fa-check text-success"></i>' : ''}
+            </button>
+            <button class="asmp-lang-btn ${lang === 'en' ? 'active' : ''}" onclick="app.setAudioVoice('en')">
+              <span class="lang-flag">🇬🇧</span>
+              <span class="lang-text">English (EN)</span>
+              ${lang === 'en' ? '<i class="fa-solid fa-check text-success"></i>' : ''}
+            </button>
+            <button class="asmp-lang-btn ${lang === 'ar' ? 'active' : ''}" onclick="app.setAudioVoice('ar')">
+              <span class="lang-flag">🇦🇪</span>
+              <span class="lang-text">العربية (AR)</span>
+              ${lang === 'ar' ? '<i class="fa-solid fa-check text-success"></i>' : ''}
+            </button>
+          </div>
+        </div>
+
+        <!-- Forward / Rewind Seek Buttons (-10s / +10s) -->
+        <div class="asmp-section">
+          <div class="asmp-section-label">
+            <i class="fa-solid fa-sliders text-primary"></i>
+            <span>${lang === 'ml' ? 'ഓഡിയോ കൺട്രോൾ (Seek & Episode):' : lang === 'ar' ? 'التحكم بالصوت:' : 'Seek & Controls:'}</span>
+          </div>
+          <div class="asmp-seek-grid">
+            <button class="asmp-action-chip" onclick="app.skipAudio(-10, event)" title="10s പിന്നോട്ട്">
+              <i class="fa-solid fa-rotate-left"></i> <span>-10s</span>
+            </button>
+            <button class="asmp-action-chip" onclick="app.skipAudio(10, event)" title="10s മുന്നോട്ട്">
+              <i class="fa-solid fa-rotate-right"></i> <span>+10s</span>
+            </button>
+            <button class="asmp-action-chip" onclick="app.skipAudioEpisode(-1)" title="Previous Episode">
+              <i class="fa-solid fa-backward-step"></i> <span>Prev</span>
+            </button>
+            <button class="asmp-action-chip" onclick="app.skipAudioEpisode(1)" title="Next Episode">
+              <span>Next</span> <i class="fa-solid fa-forward-step"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Playback Speed Section -->
+        <div class="asmp-section">
           <div class="asmp-section-label">
             <i class="fa-solid fa-gauge-high text-primary"></i>
-            <span>${lang === 'ml' ? 'സ്പീഡ് മാറ്റുക (Speed):' : lang === 'ar' ? 'سرعة الصوت:' : 'Playback Speed:'}</span>
+            <span>${lang === 'ml' ? 'സ്പീഡ് (Speed):' : lang === 'ar' ? 'سرعة الصوت:' : 'Speed:'}</span>
           </div>
           <div class="asmp-speed-grid">
             <button class="asmp-speed-btn ${state.playbackRate === 1 ? 'active' : ''}" onclick="app.setAudioSpeed(1)">1.0x</button>
@@ -3671,110 +3816,105 @@ const app = {
           </div>
         </div>
 
-        <!-- Controls & Voice Language -->
-        <div class="asmp-controls-grid">
-          <button class="asmp-play-toggle-btn" onclick="app.toggleAudioMasterclass(event)">
-            <i class="fa-solid ${state.isPlaying ? 'fa-pause' : 'fa-play'}"></i>
-            <span>${state.isPlaying ? (lang === 'ml' ? 'പോസ്' : 'Pause') : (lang === 'ml' ? 'പ്ലേ' : 'Play')}</span>
-          </button>
-          <div class="asmp-lang-box">
-            <button class="asmp-lang-chip ${lang === 'ml' ? 'active' : ''}" onclick="app.setAudioVoice('ml')">മലയാളം (ML)</button>
-            <button class="asmp-lang-chip ${lang === 'en' ? 'active' : ''}" onclick="app.setAudioVoice('en')">English (EN)</button>
-            <button class="asmp-lang-chip ${lang === 'ar' ? 'active' : ''}" onclick="app.setAudioVoice('ar')">العربية (AR)</button>
-          </div>
-        </div>
-
-        <!-- Episode Stepper -->
-        <div class="asmp-nav-row">
-          <button class="asmp-nav-btn" onclick="app.skipAudioEpisode(-1)" title="Previous Episode">
-            <i class="fa-solid fa-backward-step"></i> <span>Ep ${Math.max(1, state.currentEpisode - 1)}</span>
-          </button>
-          <span class="asmp-nav-status">Ep ${state.currentEpisode} of 6</span>
-          <button class="asmp-nav-btn" onclick="app.skipAudioEpisode(1)" title="Next Episode">
-            <span>Ep ${Math.min(6, state.currentEpisode + 1)}</span> <i class="fa-solid fa-forward-step"></i>
+        <!-- Dismiss / Close Action -->
+        <div class="asmp-footer">
+          <button class="asmp-btn-dismiss" onclick="app.closeAudioWidget(event)">
+            <i class="fa-solid fa-xmark"></i>
+            <span>${lang === 'ml' ? 'പ്ലെയർ ഒഴിവാക്കുക (Dismiss Player)' : lang === 'ar' ? 'إغلاق المشغل' : 'Dismiss Player'}</span>
           </button>
         </div>
       </div>
 
-      <!-- 2. ULTRA-COMPACT FLOATING SIDE CAPSULE (~38px Height, Zero Branding Clutter) -->
-      <div class="audio-capsule ${state.isMinimized ? 'is-minimized' : ''}" 
+      <!-- 2. ULTRA-COMPACT FLOATING SIDE CAPSULE (~38px Height) -->
+      <div class="audio-capsule ${state.isMinimized ? 'is-minimized' : ''} ${state.isPlaying ? 'is-playing' : ''}" 
            id="audioCapsule" 
-           onmousedown="app.handleCapsuleMouseDown(event)" 
-           onmouseup="app.handleCapsuleMouseUp(event)" 
-           ontouchstart="app.handleCapsuleTouchStart(event)" 
-           ontouchend="app.handleCapsuleTouchEnd(event)"
-           title="${lang === 'ml' ? 'മെനു കാണാൻ ക്ലിക്ക് ചെയ്യുക അല്ലെങ്കിൽ ഞെക്കിപ്പിടിക്കുക' : 'Click or Press & Hold for Menu'}">
+           title="${lang === 'ml' ? 'ഓഡിയോ മെനു കാണാൻ ക്ലിക്ക് ചെയ്യുക' : 'Click for Audio Menu'}">
 
-        <!-- Normal State: Ultra-Compact 38px pill -->
+        <!-- Normal State: Ultra-Compact Pill -->
         <div class="capsule-normal-content" style="${state.isMinimized ? 'display: none;' : 'display: flex;'}">
-          <!-- Play / Pause Circular Icon -->
-          <button class="capsule-play-btn" onclick="app.toggleAudioMasterclass(event)" title="${state.isPlaying ? 'Pause' : 'Play'}">
+          <!-- Play / Pause Circular Icon: Shows || (Pause) when playing, ▶ (Play) when paused -->
+          <button class="capsule-play-btn ${state.isPlaying ? 'playing' : ''}" onclick="app.toggleAudioMasterclass(event)" title="${state.isPlaying ? 'Pause' : 'Play'}">
             <i class="fa-solid ${state.isPlaying ? 'fa-pause' : 'fa-play'}" id="capsulePlayIcon"></i>
+          </button>
+
+          <!-- 10s Rewind Button -->
+          <button class="capsule-seek-btn" onclick="app.skipAudio(-10, event)" title="${lang === 'ml' ? '10 സെക്കൻഡ് പിന്നോട്ട്' : 'Rewind 10s'}">
+            <i class="fa-solid fa-rotate-left"></i>
+          </button>
+
+          <!-- 10s Forward Button -->
+          <button class="capsule-seek-btn" onclick="app.skipAudio(10, event)" title="${lang === 'ml' ? '10 സെക്കൻഡ് മുന്നോട്ട്' : 'Forward 10s'}">
+            <i class="fa-solid fa-rotate-right"></i>
           </button>
 
           <!-- Time text -->
           <span class="capsule-time" id="capsuleTime">${formattedCurrentTime}</span>
 
-          <!-- Fast Speed Quick-Pill: Single Click Cycles 1x -> 1.25x -> 1.5x -> 2x -->
-          <button class="capsule-speed-pill" id="capsuleSpeedPill" onclick="app.cycleAudioSpeed(event)" title="Speed: ${state.playbackRate}x (Click to cycle)">
+          <!-- Audio Voice Language Pill: Single Click Cycles Voice ML / EN / AR -->
+          <button class="capsule-lang-pill" id="capsuleLangPill" onclick="app.cycleAudioVoice(event)" title="${lang === 'ml' ? 'ഭാഷ: മലയാളം (മാറ്റാൻ ക്ലിക്ക് ചെയ്യുക)' : lang === 'ar' ? 'اللغة: العربية (انقر للتبديل)' : 'Voice: English (Click to cycle)'}">
+            <i class="fa-solid fa-globe"></i> <span>${lang.toUpperCase()}</span>
+          </button>
+
+          <!-- Speed Quick Pill -->
+          <button class="capsule-speed-pill" id="capsuleSpeedPill" onclick="app.cycleAudioSpeed(event)" title="Speed: ${state.playbackRate}x">
             ${state.playbackRate}x
           </button>
 
-          <!-- Audio Voice Language Pill: Single Click Cycles ML -> EN -> AR -->
-          <button class="capsule-lang-pill" id="capsuleLangPill" onclick="app.cycleAudioVoice(event)" title="${lang === 'ml' ? 'ഓഡിയോ ഭാഷ: മലയാളം (മാറ്റാൻ ക്ലിക്ക് ചെയ്യുക)' : lang === 'ar' ? 'صوت الأوديو: العربية (انقر للتغيير)' : 'Audio Voice: English (Click to cycle)'}">
-            <i class="fa-solid fa-volume-high"></i> <span>${lang.toUpperCase()}</span>
+          <!-- Menu Bar Button (ചെറിയ മെനു ബാർ ഓപ്ഷൻ) -->
+          <button class="capsule-action-btn btn-menu" onclick="app.toggleAudioSideMenu(event)" title="${lang === 'ml' ? 'മെനു ഓപ്ഷനുകൾ (Menu)' : 'Audio Menu'}">
+            <i class="fa-solid fa-bars"></i>
           </button>
 
-          <!-- Down Arrow ("തെക്ക് ആരോ / ഡൗൺ ആരോ കൊടുത്തിട്ട് അത് ഒഴിവാക്കാനും / ഹൈഡ് ചെയ്യാനും") -->
-          <button class="capsule-action-btn btn-min" onclick="app.minimizeAudioWidget(event)" title="${lang === 'ml' ? 'ഹൈഡ് ചെയ്യുക (Hide / Minimize)' : 'Hide to bubble'}">
-            <i class="fa-solid fa-chevron-down"></i>
-          </button>
-
-          <!-- Close 'X' Button ("തെറ്റ് ഒഴിവാക്കാൻ") -->
-          <button class="capsule-action-btn btn-close" onclick="app.closeAudioWidget(event)" title="${lang === 'ml' ? 'ഓഡിയോ ക്ലോസ് ചെയ്യുക (Close / Dismiss)' : 'Close Audio'}">
+          <!-- Close 'X' Button ("ഒഴിവാക്കാനുള്ള ഓപ്ഷൻ") -->
+          <button class="capsule-action-btn btn-close" onclick="app.closeAudioWidget(event)" title="${lang === 'ml' ? 'ഓഡിയോ ഒഴിവാക്കുക (Close / Dismiss)' : 'Close Audio'}">
             <i class="fa-solid fa-xmark"></i>
           </button>
         </div>
 
-        <!-- Minimized State: Tiny 38px floating bubble with pulsing dot -->
-        <div class="capsule-minimized-content" style="${state.isMinimized ? 'display: flex;' : 'display: none;'}" onclick="app.restoreAudioWidget(event)" title="${lang === 'ml' ? 'ഓഡിയോ പ്ലെയർ തുറക്കുക' : 'Restore Audio'}">
-          <i class="fa-solid fa-headphones"></i>
+        <!-- Minimized State: Tiny 38px Circular Floating Bubble -->
+        <div class="capsule-minimized-content" style="${state.isMinimized ? 'display: flex;' : 'display: none;'}" onclick="app.restoreAudioWidget(event)" title="${lang === 'ml' ? 'പ്ലെയർ കാണിക്കുക' : 'Show Player'}">
+          <i class="fa-solid ${state.isPlaying ? 'fa-pause' : 'fa-play'}"></i>
           <span class="mini-pulse-dot ${state.isPlaying ? 'pulsing' : ''}"></span>
         </div>
       </div>
     `;
   },
 
-  // Cycle speed quickly on single click: 1x -> 1.25x -> 1.5x -> 2.0x -> 1x
-  cycleAudioSpeed(event) {
-    if (event) event.stopPropagation();
-    const speeds = [1, 1.25, 1.5, 2];
-    const currIdx = speeds.indexOf(this.audioMasterclassState.playbackRate);
-    const nextIdx = (currIdx + 1) % speeds.length;
-    this.setAudioSpeed(speeds[nextIdx]);
-  },
-
-  // Skip between episodes
   skipAudioEpisode(delta) {
     const state = this.audioMasterclassState;
     const episodes = this.getAudioEpisodes();
     const nextEpNum = Math.min(Math.max(1, state.currentEpisode + delta), episodes.length);
-    this.playAudioEpisode(nextEpNum);
-  },
-
-  // Toggle Popup Side Menu
-  toggleSideMenu(event) {
-    if (event) event.stopPropagation();
-    this.audioMasterclassState.isMenuOpen = !this.audioMasterclassState.isMenuOpen;
-    const popup = document.getElementById('audioSideMenuPopup');
-    if (popup) {
-      popup.style.display = this.audioMasterclassState.isMenuOpen ? 'flex' : 'none';
-      popup.classList.toggle('is-open', this.audioMasterclassState.isMenuOpen);
+    if (nextEpNum !== state.currentEpisode) {
+      state.currentEpisode = nextEpNum;
+      state.currentTimeSec = episodes[nextEpNum - 1].startSec || 0;
+      this.playChimeTone('click');
+      if (state.isPlaying) {
+        this.speakCurrentEpisode(false);
+      }
+      this.renderFloatingAudioDock();
+      this.updateAudioProgressUI();
     }
   },
 
+  toggleAudioSideMenu(e) {
+    if (e) e.stopPropagation();
+    const state = this.audioMasterclassState;
+    state.isMenuOpen = !state.isMenuOpen;
+    const popup = document.getElementById('audioSideMenuPopup');
+    if (popup) {
+      popup.style.display = state.isMenuOpen ? 'flex' : 'none';
+      if (state.isMenuOpen) popup.classList.add('is-open');
+      else popup.classList.remove('is-open');
+    }
+  },
+
+  toggleSideMenu() {
+    this.toggleAudioSideMenu();
+  },
+
   openSideMenu() {
-    this.audioMasterclassState.isMenuOpen = true;
+    const state = this.audioMasterclassState;
+    state.isMenuOpen = true;
     const popup = document.getElementById('audioSideMenuPopup');
     if (popup) {
       popup.style.display = 'flex';
@@ -3782,52 +3922,63 @@ const app = {
     }
   },
 
-  // Minimize Audio Widget into tiny bubble ("തെക്ക് ആരോ കൊടുത്തിട്ട് അത് ഒഴിവാക്കാനും")
-  minimizeAudioWidget(event) {
-    if (event) event.stopPropagation();
-    this.audioMasterclassState.isMinimized = true;
-    this.audioMasterclassState.isMenuOpen = false;
+  minimizeAudioWidget(e) {
+    if (e) e.stopPropagation();
+    const state = this.audioMasterclassState;
+    state.isMinimized = true;
+    state.isMenuOpen = false;
     this.renderFloatingAudioDock();
   },
 
-  // Restore Minimized Audio Widget
-  restoreAudioWidget(event) {
-    if (event) event.stopPropagation();
-    this.audioMasterclassState.isMinimized = false;
+  restoreAudioWidget(e) {
+    if (e) e.stopPropagation();
+    const state = this.audioMasterclassState;
+    state.isMinimized = false;
     this.renderFloatingAudioDock();
   },
 
-  // Completely Close & Dismiss Audio Widget ("തെറ്റ് ഒഴിവാക്കാൻ")
-  closeAudioWidget(event) {
-    if (event) event.stopPropagation();
-    this.turnAudioOff();
-    this.audioMasterclassState.isClosed = true;
-    this.audioMasterclassState.isMenuOpen = false;
+  closeAudioWidget(e) {
+    if (e) e.stopPropagation();
+    const state = this.audioMasterclassState;
+    state.isClosed = true;
+    state.isPlaying = false;
+    state.isPoweredOn = false;
+    state.isMenuOpen = false;
+    if (state.timerInterval) {
+      clearInterval(state.timerInterval);
+      state.timerInterval = null;
+    }
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.cancel();
+    }
+    this.playChimeTone('pause');
     const dock = document.getElementById('floatingAudioDock');
     if (dock) dock.style.display = 'none';
   },
 
-  // Press-and-Hold / Long-Press Handlers ("ഞെക്കിപ്പിടിച്ചാൽ മാത്രം ഫങ്ക്ഷൻ പ്രവർത്തിക്കുന്ന രീതി")
   handleCapsuleMouseDown(event) {
-    if (event.target.closest('button')) return;
     this.startLongPressTimer();
   },
+
   handleCapsuleMouseUp(event) {
     this.clearLongPressTimer();
   },
+
   handleCapsuleTouchStart(event) {
-    if (event.target.closest('button')) return;
     this.startLongPressTimer();
   },
+
   handleCapsuleTouchEnd(event) {
     this.clearLongPressTimer();
   },
+
   startLongPressTimer() {
     this.clearLongPressTimer();
     this.audioMasterclassState.longPressTimer = setTimeout(() => {
       this.openSideMenu();
-    }, 400);
+    }, 450);
   },
+
   clearLongPressTimer() {
     if (this.audioMasterclassState.longPressTimer) {
       clearTimeout(this.audioMasterclassState.longPressTimer);
@@ -3835,57 +3986,37 @@ const app = {
     }
   },
 
-  // Render Content inside Floating Transcript Drawer
   renderTranscriptDrawerContent() {
-    const body = document.getElementById('floatingTranscriptDrawer');
-    if (!body) return;
-
+    const container = document.getElementById('audioTranscriptContent');
+    if (!container) return;
     const state = this.audioMasterclassState;
     const lang = state.voiceLang || this.currentLang || 'ml';
     const episodes = this.getAudioEpisodes();
 
     const transcriptHtml = episodes.map(ep => {
-      const isActive = ep.num === state.currentEpisode;
+      const isCurrent = ep.num === state.currentEpisode;
+      const title = ep.title ? (ep.title[lang] || ep.title.en) : `Episode ${ep.num}`;
+      const text = this.getEpisodeText(ep, lang);
       return `
-        <div class="transcript-drawer-para ${isActive ? 'active' : ''}" onclick="app.playAudioEpisode(${ep.num})">
+        <div class="transcript-dialog-part ${isCurrent ? 'active' : ''}">
           <div class="tdp-header">
-            <span class="tdp-time">[${ep.timestamp}]</span>
-            <strong>${ep.title[lang] || ep.title.en}</strong>
+            <span class="tdp-badge">Ep ${ep.num} • ${ep.timestamp || '00:00'}</span>
+            <h4 class="tdp-title">${title}</h4>
           </div>
-          <p class="tdp-text">${ep.text[lang] || ep.text.en}</p>
+          <p class="tdp-text">${text}</p>
         </div>
       `;
     }).join('');
 
-    body.innerHTML = `
-      <div class="transcript-drawer-header">
-        <div class="td-title">
-          <i class="fa-solid fa-scroll text-primary"></i>
-          <span>${lang === 'ml' ? 'തത്സമയ വിവരണം (Live Transcript)' : lang === 'ar' ? 'النص المتزامن مع الصوت' : 'Synchronized Live Transcript'}</span>
-        </div>
-        <div class="td-actions">
-          <button class="btn-td-download" onclick="app.copyOrDownloadTranscript()" title="${lang === 'ml' ? 'സംഗ്രഹം ഡൗൺലോഡ് ചെയ്യുക' : 'Save Summary'}">
-            <i class="fa-solid fa-download"></i>
-          </button>
-          <button class="btn-td-close" onclick="app.toggleTranscriptDrawer(false)" title="Close">
-            <i class="fa-solid fa-xmark"></i>
-          </button>
-        </div>
-      </div>
-      <div class="transcript-drawer-body" id="transcriptDrawerBody">
-        ${transcriptHtml}
-      </div>
-    `;
+    container.innerHTML = transcriptHtml;
   },
 
-  // Focus Audio Masterclass (without hijacking viewport)
   focusAudioMasterclass() {
     const state = this.audioMasterclassState;
-    if (!state.isPoweredOn || !state.isPlaying) {
-      state.isPoweredOn = true;
-      this.playAudioMasterclass();
-    } else {
-      this.pauseAudioMasterclass();
+    if (state.isClosed) {
+      state.isClosed = false;
+      state.isMinimized = false;
+      this.renderFloatingAudioDock();
     }
     const dock = document.getElementById('floatingAudioDock');
     if (dock) dock.classList.remove('dock-hidden');
@@ -3894,74 +4025,65 @@ const app = {
   // Update Dynamic UI During Playback
   updateAudioProgressUI() {
     const state = this.audioMasterclassState;
-    const lang = state.voiceLang || this.currentLang || 'ml';
-    const episodes = this.getAudioEpisodes();
-    const currentEp = episodes[state.currentEpisode - 1] || episodes[0];
+    const formatted = this.formatAudioTime(state.currentTimeSec);
 
-    const timeCurrEl = document.getElementById('capsuleTime');
-    const playIcon = document.getElementById('capsulePlayIcon');
-    const soundwave = document.getElementById('capsuleSoundwave');
+    // Update capsule time
+    const timeEl = document.getElementById('capsuleTime');
+    if (timeEl) timeEl.textContent = formatted;
+
+    // Update capsule play icon (|| for pause, ▶ for play)
+    const icon = document.getElementById('capsulePlayIcon');
+    if (icon) {
+      if (state.isPlaying) {
+        icon.className = 'fa-solid fa-pause';
+      } else {
+        icon.className = 'fa-solid fa-play';
+      }
+    }
+
+    // Update play button styling class
+    const playBtn = document.querySelector('.capsule-play-btn');
+    if (playBtn) {
+      if (state.isPlaying) playBtn.classList.add('playing');
+      else playBtn.classList.remove('playing');
+    }
+
+    // Update speed pill
     const speedPill = document.getElementById('capsuleSpeedPill');
+    if (speedPill) speedPill.textContent = `${state.playbackRate}x`;
 
-    if (timeCurrEl) timeCurrEl.textContent = this.formatAudioTime(state.currentTimeSec);
-    if (playIcon) {
-      playIcon.className = `fa-solid ${state.isPlaying ? 'fa-pause' : 'fa-play'}`;
-    }
-    if (soundwave) {
-      soundwave.classList.toggle('is-playing', state.isPlaying);
-    }
-    if (speedPill) {
-      speedPill.textContent = `${state.playbackRate}x`;
+    // Update lang pill
+    const langPill = document.getElementById('capsuleLangPill');
+    const currentLang = state.voiceLang || this.currentLang || 'ml';
+    if (langPill) {
+      langPill.innerHTML = `<i class="fa-solid fa-globe"></i> <span>${currentLang.toUpperCase()}</span>`;
     }
 
-    // Update Power Switch buttons across UI
-    const isAudioActive = state.isPoweredOn && state.isPlaying;
-    ['dockAudioPowerSwitch', 'sshAudioPowerSwitch'].forEach(id => {
-      const btn = document.getElementById(id);
-      if (btn) {
-        btn.className = `audio-power-toggle-btn ${isAudioActive ? 'state-on' : 'state-off'}`;
-        const text = btn.querySelector('.power-toggle-text');
-        if (text) text.textContent = isAudioActive ? 'ON' : 'OFF';
-      }
-    });
-
-    // Update active paragraph in transcript drawer
-    document.querySelectorAll('.transcript-drawer-para').forEach((p, idx) => {
-      const isActive = idx + 1 === state.currentEpisode;
-      p.classList.toggle('active', isActive);
-      if (isActive && state.isDrawerOpen) {
-        p.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-      }
-    });
-
-    // Update chapter play buttons inside course modules
-    document.querySelectorAll('.btn-chapter-audio-play').forEach(btn => {
-      const epNum = parseInt(btn.getAttribute('data-episode'), 10);
-      const isThisPlaying = state.isPlaying && epNum === state.currentEpisode;
-      btn.classList.toggle('is-playing', isThisPlaying);
-      const icon = btn.querySelector('i');
-      if (icon) {
-        icon.className = `fa-solid ${isThisPlaying ? 'fa-pause' : 'fa-headphones'}`;
-      }
-    });
+    // Update scrubber bar if present
+    const pct = Math.min(100, (state.currentTimeSec / state.totalDurationSec) * 100);
+    const scrubFill = document.getElementById('dockScrubFill');
+    if (scrubFill) scrubFill.style.width = `${pct}%`;
   },
 
   copyOrDownloadTranscript() {
-    const lang = this.audioMasterclassState.voiceLang || this.currentLang || 'ml';
-    const cat = this.categoriesData[this.audioMasterclassState.nicheKey] || this.categoriesData.attar;
+    const state = this.audioMasterclassState;
+    const lang = state.voiceLang || this.currentLang || 'ml';
     const episodes = this.getAudioEpisodes();
-    let fullText = `BUSINESS IN KERALA — ${cat.title.en.toUpperCase()} MASTERCLASS AUDIO SUMMARY\n\n`;
+    const cat = this.categoriesData[this.currentAcademy] || this.categoriesData.attar || {};
+    let fullText = `BUSINESS IN KERALA — ${cat.title ? cat.title.en.toUpperCase() : 'AUDIO MASTERCLASS'}\n\n`;
 
     episodes.forEach(ep => {
-      fullText += `[${ep.timestamp}] ${ep.title[lang] || ep.title.en}\n`;
-      fullText += `${ep.text[lang] || ep.text.en}\n\n`;
+      const epTitle = ep.title ? (ep.title[lang] || ep.title.en) : `Episode ${ep.num}`;
+      const epText = this.getEpisodeText(ep, lang);
+      fullText += `### EPISODE ${ep.num}: ${epTitle}\n`;
+      fullText += `${epText}\n\n`;
     });
 
     const blob = new Blob([fullText], { type: 'text/plain;charset=utf-8' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `business-in-kerala-${this.audioMasterclassState.nicheKey}-masterclass-${lang}.txt`;
+    a.download = `Business_In_Kerala_${this.currentAcademy}_${lang}_Masterclass_Audio_Transcript.txt`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
