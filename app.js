@@ -1,4 +1,4 @@
-/**
+﻿/**
  * BUSINESS IN KERALA (ബിസിനസ് ഇൻ കേരള | منصة رواد الأعمال)
  * Complete Modular Single-Page Application (SPA) Engine
  * 
@@ -1935,6 +1935,398 @@ const app = {
       specialty: "Wayanad raw forest honey, Malabar bold black pepper, Idukki 8mm green cardamom",
       moq: "Min 5 kg or wholesale pouches",
       tags: ["Honey", "Spices", "Kozhikode"]
+    },
+
+    // ── THIRUVANANTHAPURAM ────────────────────────────────────────────────
+    {
+      id: "sup-16",
+      name: "Chalai Bazaar Wholesale Hub",
+      city: "Thiruvananthapuram",
+      district: "Thiruvananthapuram",
+      category: "spices",
+      address: "Main Road, Chalai Market, East Fort, Thiruvananthapuram, Kerala 695023",
+      mapUrl: "https://www.google.com/maps/search/?api=1&query=Chalai+Market+Thiruvananthapuram",
+      phone: "+91 94470 55001",
+      whatsapp: "919447055001",
+      website: "https://chalaimarket.in",
+      facebook: "https://www.facebook.com/chalaimarket",
+      specialty: "Kerala spices, dry fish, coconut oil, rice, jaggery wholesale",
+      moq: "Min 10 kg per item",
+      tags: ["Spices", "Thiruvananthapuram", "Chalai", "East Fort"]
+    },
+    {
+      id: "sup-17",
+      name: "East Fort Textile & Accessories Wholesale",
+      city: "Thiruvananthapuram",
+      district: "Thiruvananthapuram",
+      category: "clothing",
+      address: "East Fort Junction, Near Padmanabhaswamy Temple, Thiruvananthapuram, Kerala 695023",
+      mapUrl: "https://www.google.com/maps/search/?api=1&query=East+Fort+Thiruvananthapuram+Textile+Wholesale",
+      phone: "+91 94470 55002",
+      whatsapp: "919447055002",
+      website: "",
+      facebook: "https://www.facebook.com/eastfortfashions",
+      specialty: "Kerala kasavu sarees, modest wear, Abayas, cotton dress materials wholesale",
+      moq: "Min 12 pieces per style",
+      tags: ["Clothing", "Thiruvananthapuram", "East Fort", "Textiles"]
+    },
+
+    // ── KOLLAM ───────────────────────────────────────────────────────────
+    {
+      id: "sup-18",
+      name: "Chinnakada Cashew & Coir Wholesale",
+      city: "Kollam",
+      district: "Kollam",
+      category: "spices",
+      address: "Chinnakada Junction, Main Road, Kollam, Kerala 691001",
+      mapUrl: "https://www.google.com/maps/search/?api=1&query=Chinnakada+Kollam+wholesale+market",
+      phone: "+91 94470 66101",
+      whatsapp: "919447066101",
+      website: "https://kollamcashew.com",
+      facebook: "https://www.facebook.com/kollamcashewexports",
+      specialty: "W240 W320 W180 cashew grades, coir rope, coir mat, coconut shell products",
+      moq: "Min 10 kg cashew / 50m coir",
+      tags: ["Cashew", "Coir", "Kollam", "Chinnakada"]
+    },
+    {
+      id: "sup-19",
+      name: "Kollam Handloom & Textile Centre",
+      city: "Kollam",
+      district: "Kollam",
+      category: "clothing",
+      address: "Near Kollam KSRTC Bus Stand, Parameswar Nagar, Kollam, Kerala 691001",
+      mapUrl: "https://www.google.com/maps/search/?api=1&query=Kollam+textile+wholesale+centre",
+      phone: "+91 94470 66102",
+      whatsapp: "919447066102",
+      website: "",
+      facebook: "https://www.facebook.com/kollamtextiles",
+      specialty: "Handloom sarees, lungi, towels, cotton fabrics direct from weavers",
+      moq: "Min 24 pieces",
+      tags: ["Clothing", "Handloom", "Kollam"]
+    },
+
+    // ── PATHANAMTHITTA ───────────────────────────────────────────────────
+    {
+      id: "sup-20",
+      name: "Pandalam Rubber & Spice Wholesale Depot",
+      city: "Pathanamthitta",
+      district: "Pathanamthitta",
+      category: "spices",
+      address: "Pandalam Town, Near Pandalam Palace Road, Pathanamthitta, Kerala 689501",
+      mapUrl: "https://www.google.com/maps/search/?api=1&query=Pandalam+rubber+spice+wholesale+Pathanamthitta",
+      phone: "+91 94470 77201",
+      whatsapp: "919447077201",
+      website: "",
+      facebook: "https://www.facebook.com/pandalamrubberspice",
+      specialty: "Rubber sheets RSS3/RSS4, black pepper, dry ginger, turmeric wholesale",
+      moq: "Min 25 kg rubber / 5 kg spices",
+      tags: ["Rubber", "Spices", "Pathanamthitta", "Pandalam"]
+    },
+
+    // ── ALAPPUZHA ────────────────────────────────────────────────────────
+    {
+      id: "sup-21",
+      name: "Alappuzha Coir & Backwater Products Wholesale",
+      city: "Alappuzha",
+      district: "Alappuzha",
+      category: "spices",
+      address: "Coir Alley, Finishing Point, Alappuzha, Kerala 688001",
+      mapUrl: "https://www.google.com/maps/search/?api=1&query=Alappuzha+coir+wholesale+market",
+      phone: "+91 94470 88301",
+      whatsapp: "919447088301",
+      website: "https://alappuzhacoir.com",
+      facebook: "https://www.facebook.com/alappuzhacoir",
+      specialty: "Coir mats, coir ropes, rice (Jeerakasala/Palakkadan Matta), coconut products",
+      moq: "Min 50 pieces mats / 20 kg rice",
+      tags: ["Coir", "Rice", "Alappuzha", "Backwater Products"]
+    },
+    {
+      id: "sup-22",
+      name: "Alappuzha Boat & Fishing Equipment Supplier",
+      city: "Alappuzha",
+      district: "Alappuzha",
+      category: "cookware",
+      address: "Boat Jetty Road, Alappuzha, Kerala 688001",
+      mapUrl: "https://www.google.com/maps/search/?api=1&query=Alappuzha+fishing+equipment+wholesale",
+      phone: "+91 94470 88302",
+      whatsapp: "919447088302",
+      website: "",
+      facebook: "https://www.facebook.com/alappuzhafishingequipments",
+      specialty: "Fishing nets, boat accessories, seafood processing equipment, ice boxes",
+      moq: "Min order ₹5,000",
+      tags: ["Fishing", "Equipment", "Alappuzha"]
+    },
+
+    // ── KOTTAYAM ─────────────────────────────────────────────────────────
+    {
+      id: "sup-23",
+      name: "Kottayam Rubber & Spice Trading Co.",
+      city: "Kottayam",
+      district: "Kottayam",
+      category: "spices",
+      address: "Baker Junction, Kottayam Town, Kerala 686001",
+      mapUrl: "https://www.google.com/maps/search/?api=1&query=Baker+Junction+Kottayam+wholesale",
+      phone: "+91 94470 99401",
+      whatsapp: "919447099401",
+      website: "https://kottayamrubber.com",
+      facebook: "https://www.facebook.com/kottayamrubbertrading",
+      specialty: "Rubber sheets, pepper, cardamom, cocoa beans wholesale",
+      moq: "Min 25 kg",
+      tags: ["Rubber", "Spices", "Kottayam", "Baker Junction"]
+    },
+    {
+      id: "sup-24",
+      name: "Kottayam Christian Colony Textile Wholesale",
+      city: "Kottayam",
+      district: "Kottayam",
+      category: "clothing",
+      address: "MC Road, Kottayam, Kerala 686001",
+      mapUrl: "https://www.google.com/maps/search/?api=1&query=Kottayam+MC+Road+textile+wholesale",
+      phone: "+91 94470 99402",
+      whatsapp: "919447099402",
+      website: "",
+      facebook: "https://www.facebook.com/kottayamtextilecentre",
+      specialty: "Church goods, modest wear, cotton sarees, nightwear wholesale",
+      moq: "Min 24 pieces",
+      tags: ["Clothing", "Kottayam", "MC Road"]
+    },
+
+    // ── IDUKKI ───────────────────────────────────────────────────────────
+    {
+      id: "sup-25",
+      name: "Kumily Cardamom & Spice Cooperative",
+      city: "Idukki",
+      district: "Idukki",
+      category: "spices",
+      address: "Kumily Town, Near Thekkady, Idukki, Kerala 685509",
+      mapUrl: "https://www.google.com/maps/search/?api=1&query=Kumily+cardamom+spice+cooperative+Idukki",
+      phone: "+91 94470 44501",
+      whatsapp: "919447044501",
+      website: "https://kumilyspices.in",
+      facebook: "https://www.facebook.com/kumilyspicewholesale",
+      specialty: "Idukki 8mm green cardamom, cloves, cinnamon, star anise, pepper estate-direct",
+      moq: "Min 1 kg cardamom / 5 kg pepper",
+      tags: ["Cardamom", "Spices", "Idukki", "Kumily", "Thekkady"]
+    },
+    {
+      id: "sup-26",
+      name: "Munnar Tea & Honey Wholesale Depot",
+      city: "Idukki",
+      district: "Idukki",
+      category: "spices",
+      address: "Munnar Town Centre, Idukki, Kerala 685612",
+      mapUrl: "https://www.google.com/maps/search/?api=1&query=Munnar+tea+wholesale+depot",
+      phone: "+91 94470 44502",
+      whatsapp: "919447044502",
+      website: "https://munnarteadepot.com",
+      facebook: "https://www.facebook.com/munnarteawholesale",
+      specialty: "Single-estate Munnar CTC tea, forest honey, coffee estate-direct wholesale",
+      moq: "Min 5 kg tea",
+      tags: ["Tea", "Honey", "Idukki", "Munnar"]
+    },
+
+    // ── ERNAKULAM (KOCHI) ─────────────────────────────────────────────────
+    {
+      id: "sup-27",
+      name: "Broadway Wholesale Market Kochi",
+      city: "Kochi",
+      district: "Ernakulam",
+      category: "accessories",
+      address: "Broadway, Ernakulam, Kochi, Kerala 682035",
+      mapUrl: "https://www.google.com/maps/search/?api=1&query=Broadway+wholesale+market+Kochi",
+      phone: "+91 94470 33601",
+      whatsapp: "919447033601",
+      website: "https://broadwaykochi.com",
+      facebook: "https://www.facebook.com/broadwaykochiwholesale",
+      specialty: "Jewelry, accessories, bags, watches, cosmetics — Kochi's largest wholesale hub",
+      moq: "Min ₹2,000 per category",
+      tags: ["Accessories", "Kochi", "Broadway", "Ernakulam"]
+    },
+    {
+      id: "sup-28",
+      name: "MG Road Electronics & Mobile Accessories Wholesale",
+      city: "Kochi",
+      district: "Ernakulam",
+      category: "electronics",
+      address: "MG Road, Ravipuram, Kochi, Kerala 682015",
+      mapUrl: "https://www.google.com/maps/search/?api=1&query=MG+Road+Kochi+electronics+wholesale",
+      phone: "+91 94470 33602",
+      whatsapp: "919447033602",
+      website: "",
+      facebook: "https://www.facebook.com/kochimobileaccessories",
+      specialty: "Mobile cases, chargers, earphones, smart watches, power banks — bulk wholesale",
+      moq: "Min 50 pieces per SKU",
+      tags: ["Electronics", "Mobile", "Kochi", "MG Road"]
+    },
+
+    // ── THRISSUR ─────────────────────────────────────────────────────────
+    {
+      id: "sup-29",
+      name: "Thrissur Gold & Jewellery Wholesale Hub",
+      city: "Thrissur",
+      district: "Thrissur",
+      category: "accessories",
+      address: "Round South, Near Vadakkunnathan Temple, Thrissur, Kerala 680001",
+      mapUrl: "https://www.google.com/maps/search/?api=1&query=Thrissur+gold+jewellery+wholesale+Round+South",
+      phone: "+91 94470 22701",
+      whatsapp: "919447022701",
+      website: "https://thrissurgold.com",
+      facebook: "https://www.facebook.com/thrissurgoldwholesale",
+      specialty: "Imitation jewelry, gold-plated sets, fashion rings, bridal accessories wholesale",
+      moq: "Min ₹3,000",
+      tags: ["Jewelry", "Gold", "Thrissur", "Accessories"]
+    },
+    {
+      id: "sup-30",
+      name: "Thrissur Fabric & Textile Wholesale Centre",
+      city: "Thrissur",
+      district: "Thrissur",
+      category: "clothing",
+      address: "Shakthan Thampuran Nagar, Thrissur, Kerala 680001",
+      mapUrl: "https://www.google.com/maps/search/?api=1&query=Thrissur+textile+wholesale+Shakthan",
+      phone: "+91 94470 22702",
+      whatsapp: "919447022702",
+      website: "",
+      facebook: "https://www.facebook.com/thrissurtextilehub",
+      specialty: "Nada Crepe, Georgette, Cotton, Linen, Kasavu fabrics wholesale for boutiques",
+      moq: "Min 25 metres per fabric",
+      tags: ["Fabric", "Clothing", "Thrissur", "Textiles"]
+    },
+
+    // ── WAYANAD ──────────────────────────────────────────────────────────
+    {
+      id: "sup-31",
+      name: "Wayanad Coffee & Pepper Cooperative",
+      city: "Wayanad",
+      district: "Wayanad",
+      category: "spices",
+      address: "Kalpetta Town, Wayanad, Kerala 673121",
+      mapUrl: "https://www.google.com/maps/search/?api=1&query=Kalpetta+Wayanad+coffee+pepper+cooperative",
+      phone: "+91 94470 11801",
+      whatsapp: "919447011801",
+      website: "https://wayanadcoffee.in",
+      facebook: "https://www.facebook.com/wayanadcoffeewholesale",
+      specialty: "Wayanad Arabica/Robusta green coffee beans, Tellicherry bold pepper, raw honey",
+      moq: "Min 25 kg coffee / 5 kg pepper",
+      tags: ["Coffee", "Pepper", "Wayanad", "Kalpetta"]
+    },
+    {
+      id: "sup-32",
+      name: "Sulthan Bathery Cardamom & Spice Traders",
+      city: "Wayanad",
+      district: "Wayanad",
+      category: "spices",
+      address: "Market Road, Sulthan Bathery, Wayanad, Kerala 673592",
+      mapUrl: "https://www.google.com/maps/search/?api=1&query=Sulthan+Bathery+spice+market+Wayanad",
+      phone: "+91 94470 11802",
+      whatsapp: "919447011802",
+      website: "",
+      facebook: "https://www.facebook.com/wayanadspicetraders",
+      specialty: "Cardamom, pepper, coffee, vanilla, turmeric estate-fresh wholesale",
+      moq: "Min 5 kg per spice",
+      tags: ["Cardamom", "Spices", "Wayanad", "Sulthan Bathery"]
+    },
+
+    // ── KANNUR ───────────────────────────────────────────────────────────
+    {
+      id: "sup-33",
+      name: "Kannur Handloom Textile Wholesale",
+      city: "Kannur",
+      district: "Kannur",
+      category: "clothing",
+      address: "Fort Road, Near Kannur Fort, Kannur, Kerala 670001",
+      mapUrl: "https://www.google.com/maps/search/?api=1&query=Kannur+handloom+wholesale+Fort+Road",
+      phone: "+91 94470 00901",
+      whatsapp: "919447000901",
+      website: "https://kannurhandloom.com",
+      facebook: "https://www.facebook.com/kannurhandloomwholesale",
+      specialty: "Kannur handloom bedsheets, curtains, traditional dresses, export-grade cotton",
+      moq: "Min 24 pieces",
+      tags: ["Handloom", "Textiles", "Kannur"]
+    },
+    {
+      id: "sup-34",
+      name: "Thalassery Biryani Masala & Spice Wholesale",
+      city: "Kannur",
+      district: "Kannur",
+      category: "spices",
+      address: "Thalassery Town, Near Thalassery Fort, Kannur, Kerala 670101",
+      mapUrl: "https://www.google.com/maps/search/?api=1&query=Thalassery+biryani+masala+spice+wholesale",
+      phone: "+91 94470 00902",
+      whatsapp: "919447000902",
+      website: "",
+      facebook: "https://www.facebook.com/thalasserymasalahouse",
+      specialty: "Thalassery biryani masala blends, pepper, cloves, cinnamon, dry ginger wholesale",
+      moq: "Min 5 kg per masala blend",
+      tags: ["Biryani Masala", "Spices", "Kannur", "Thalassery"]
+    },
+
+    // ── KASARAGOD ────────────────────────────────────────────────────────
+    {
+      id: "sup-35",
+      name: "Kasaragod Handloom & Handicraft Wholesale",
+      city: "Kasaragod",
+      district: "Kasaragod",
+      category: "clothing",
+      address: "Super Market Road, Kasaragod Town, Kerala 671121",
+      mapUrl: "https://www.google.com/maps/search/?api=1&query=Kasaragod+handloom+wholesale+market",
+      phone: "+91 94470 00001",
+      whatsapp: "919447000001",
+      website: "https://kasaragodhandloom.in",
+      facebook: "https://www.facebook.com/kasaragodhandloomwholesale",
+      specialty: "Kasaragod sarees, lungi, traditional dress materials, coconut shell handicrafts",
+      moq: "Min 24 pieces fabric / 50 pcs handicraft",
+      tags: ["Handloom", "Handicraft", "Kasaragod"]
+    },
+    {
+      id: "sup-36",
+      name: "Kasaragod Cashew & Coconut Products Wholesale",
+      city: "Kasaragod",
+      district: "Kasaragod",
+      category: "spices",
+      address: "Vidyanagar, Kasaragod, Kerala 671123",
+      mapUrl: "https://www.google.com/maps/search/?api=1&query=Kasaragod+cashew+coconut+wholesale",
+      phone: "+91 94470 00002",
+      whatsapp: "919447000002",
+      website: "",
+      facebook: "https://www.facebook.com/kasaragodcashewhouse",
+      specialty: "W240 cashew, coconut oil, copra, arecanut, timber products wholesale",
+      moq: "Min 10 kg cashew",
+      tags: ["Cashew", "Coconut", "Kasaragod"]
+    },
+
+    // ── THRISSUR extra — Palakkad extra (already in filter, more entries) ──
+    {
+      id: "sup-37",
+      name: "Palakkad Cotton & Grain Wholesale Market",
+      city: "Palakkad",
+      district: "Palakkad",
+      category: "clothing",
+      address: "Big Bazaar Street, Palakkad Town, Kerala 678001",
+      mapUrl: "https://www.google.com/maps/search/?api=1&query=Palakkad+Big+Bazaar+Street+wholesale",
+      phone: "+91 94470 55701",
+      whatsapp: "919447055701",
+      website: "",
+      facebook: "https://www.facebook.com/palakkadtextilemarket",
+      specialty: "Cotton fabrics, bed linen, grain sacks, mill-direct textiles, lungi wholesale",
+      moq: "Min 50 metres / 50 pieces",
+      tags: ["Cotton", "Textiles", "Palakkad", "Big Bazaar"]
+    },
+    {
+      id: "sup-38",
+      name: "Manjeri Attar & Textile Wholesale Centre",
+      city: "Malappuram",
+      district: "Malappuram",
+      category: "attar",
+      address: "Manjeri Town, Near KSRTC Stand, Malappuram, Kerala 676121",
+      mapUrl: "https://www.google.com/maps/search/?api=1&query=Manjeri+attar+textile+wholesale+Malappuram",
+      phone: "+91 94470 66201",
+      whatsapp: "919447066201",
+      website: "https://manjeriattarhouse.com",
+      facebook: "https://www.facebook.com/manjeriattarwholesale",
+      specialty: "Oud oils, rose attar, musk blends, Islamic perfume bottles wholesale Malappuram",
+      moq: "Min 12 bottles / 100ml bulk",
+      tags: ["Attar", "Perfumes", "Malappuram", "Manjeri"]
     }
   ],
 
@@ -4121,6 +4513,8 @@ const app = {
                         <a href="tel:${sup.phone}" class="btn-map-call">
                           <i class="fa-solid fa-phone"></i>
                         </a>
+                        ${sup.website ? `<a href="${sup.website}" target="_blank" rel="noopener noreferrer" class="btn-map-call" title="Website"><i class="fa-solid fa-globe"></i></a>` : ""}
+                        ${sup.facebook ? `<a href="${sup.facebook}" target="_blank" rel="noopener noreferrer" class="btn-map-call" title="Facebook" style="background:#1877f2;"><i class="fa-brands fa-facebook"></i></a>` : ""}
                       </div>
                     </div>
                   `;
@@ -5465,18 +5859,32 @@ const app = {
           <input type="text" class="dir-search-input" id="dirSearchInput" placeholder="${lang === 'ml' ? 'വ്യാപാരികളുടെ പേര്, സ്ഥലം അല്ലെങ്കിൽ ഉൽപ്പന്നം തിരയുക...' : lang === 'ar' ? 'ابحث باسم السوق أو المدينة أو المنتج...' : 'Search by market, shop name, city, or product...'}" oninput="app.renderDirectory()">
           <select class="dir-filter-select" id="filterCity" onchange="app.renderDirectory()">
             <option value="all">${lang === 'ml' ? 'എല്ലാ നഗരങ്ങളും' : lang === 'ar' ? 'جميع المدن' : 'All Cities'}</option>
-            <option value="Kozhikode">Kozhikode (കോഴിക്കോട്)</option>
-            <option value="Kochi">Kochi (കൊച്ചി)</option>
-            <option value="Malappuram">Malappuram (മലപ്പുറം)</option>
-            <option value="Palakkad">Palakkad (പാലക്കാട്)</option>
-            <option value="Coimbatore">Coimbatore (കോയമ്പത്തൂർ)</option>
-            <option value="Mumbai">Mumbai (മുംബൈ)</option>
-            <option value="Surat">Surat (സൂററ്റ്)</option>
-            <option value="Tirupur">Tirupur (തിരുപ്പൂർ)</option>
-            <option value="Delhi">Delhi (ഡൽഹി)</option>
-            <option value="Jaipur">Jaipur (ജയ്പൂർ)</option>
-            <option value="Kannauj">Kannauj (കണ്ണൗജ്)</option>
-            <option value="Ahmedabad">Ahmedabad & Rajkot</option>
+            <optgroup label="${lang === 'ml' ? '🌴 കേരള ജില്ലകൾ' : lang === 'ar' ? '🌴 مناطق كيرالا' : '🌴 Kerala Districts'}">
+              <option value="Thiruvananthapuram">Thiruvananthapuram (തിരുവനന്തപുരം)</option>
+              <option value="Kollam">Kollam (കൊല്ലം)</option>
+              <option value="Pathanamthitta">Pathanamthitta (പത്തനംതിട്ട)</option>
+              <option value="Alappuzha">Alappuzha (ആലപ്പുഴ)</option>
+              <option value="Kottayam">Kottayam (കോട്ടയം)</option>
+              <option value="Idukki">Idukki (ഇടുക്കി)</option>
+              <option value="Kochi">Kochi / Ernakulam (കൊച്ചി / എറണാകുളം)</option>
+              <option value="Thrissur">Thrissur (തൃശ്ശൂർ)</option>
+              <option value="Palakkad">Palakkad (പാലക്കാട്)</option>
+              <option value="Malappuram">Malappuram (മലപ്പുറം)</option>
+              <option value="Kozhikode">Kozhikode (കോഴിക്കോട്)</option>
+              <option value="Wayanad">Wayanad (വയനാട്)</option>
+              <option value="Kannur">Kannur (കണ്ണൂർ)</option>
+              <option value="Kasaragod">Kasaragod (കാസർഗോഡ്)</option>
+            </optgroup>
+            <optgroup label="${lang === 'ml' ? '✈️ ദേശീയ / അന്തർദേശീയം' : lang === 'ar' ? '✈️ وطني / دولي' : '✈️ National / International'}">
+              <option value="Coimbatore">Coimbatore (കോയമ്പത്തൂർ)</option>
+              <option value="Mumbai">Mumbai (മുംബൈ)</option>
+              <option value="Surat">Surat (സൂററ്റ്)</option>
+              <option value="Tirupur">Tirupur (തിരുപ്പൂർ)</option>
+              <option value="Delhi">Delhi (ഡൽഹി)</option>
+              <option value="Jaipur">Jaipur (ജയ്പൂർ)</option>
+              <option value="Kannauj">Kannauj (കണ്ണൗജ്)</option>
+              <option value="Ahmedabad">Ahmedabad & Rajkot</option>
+            </optgroup>
           </select>
           <select class="dir-filter-select" id="filterCategory" onchange="app.renderDirectory()">
             <option value="all">${lang === 'ml' ? 'എല്ലാ കാറ്റഗറിയും (30 Academies)' : lang === 'ar' ? 'جميع التخصصات' : 'All Categories (30 Academies)'}</option>
@@ -5529,7 +5937,7 @@ const app = {
     const lang = this.currentLang;
 
     const filtered = this.suppliers.filter(sup => {
-      const matchCity = (cityFilter === 'all') || (sup.city.toLowerCase() === cityFilter.toLowerCase());
+      const matchCity = (cityFilter === 'all') || (sup.city.toLowerCase() === cityFilter.toLowerCase()) || (sup.district && sup.district.toLowerCase() === cityFilter.toLowerCase());
       const matchCat = (catFilter === 'all') || (sup.category.toLowerCase() === catFilter.toLowerCase());
       const matchSearch = !searchTerm || 
         sup.name.toLowerCase().includes(searchTerm) ||
