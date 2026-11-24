@@ -1,11 +1,11 @@
 {
   "cleanUrls": true,
   "rewrites": [
-    { "source": "/academy/:path*", "destination": "/index.html" },
-    { "source": "/plan", "destination": "/index.html" },
-    { "source": "/suppliers", "destination": "/index.html" },
-    { "source": "/tools", "destination": "/index.html" },
-    { "source": "/calc", "destination": "/index.html" }
+    { "source": "/academy/(.*)", "destination": "/" },
+    { "source": "/plan", "destination": "/" },
+    { "source": "/suppliers", "destination": "/" },
+    { "source": "/tools", "destination": "/" },
+    { "source": "/calc", "destination": "/" }
   ],
   "headers": [
     {
