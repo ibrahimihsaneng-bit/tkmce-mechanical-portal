@@ -2009,7 +2009,7 @@ const app = {
     isDrawerOpen: false,
     isMenuOpen: false,
     isMinimized: false,
-    isClosed: false,
+    isClosed: true,
     longPressTimer: null
   },
 
@@ -2762,7 +2762,7 @@ const app = {
       window.speechSynthesis.cancel();
     }
     this.renderFloatingAudioDock();
-    this.renderStudyStageHeaderBar(this.currentAcademy);
+    // renderStudyStageHeaderBar removed to prevent screen blocking
     if (this.audioMasterclassState.isPlaying) {
       this.speakCurrentEpisode();
     }
@@ -2862,7 +2862,7 @@ const app = {
     window.speechSynthesis.speak(utterance);
   },
 
-  // Render Ultra-Compact Floating Side Audio Widget (Non-Intrusive & Minimal)
+  // Ultra-Compact Floating Side Audio Widget (Zero-Branding & Minimal Screen Footprint)
   renderFloatingAudioDock() {
     const dock = document.getElementById('floatingAudioDock');
     if (!dock) return;
@@ -2875,37 +2875,32 @@ const app = {
     dock.style.display = 'block';
 
     const lang = state.voiceLang || this.currentLang || 'ml';
-    const cat = this.categoriesData[state.nicheKey] || this.categoriesData.attar;
     const episodes = this.getAudioEpisodes();
     const currentEp = episodes[state.currentEpisode - 1] || episodes[0];
     const formattedCurrentTime = this.formatAudioTime(state.currentTimeSec);
-    const catTitle = cat.title[lang] || cat.title.en;
 
     dock.innerHTML = `
-      <!-- 1. EXPANDABLE SIDE MENU POPUP (Reveals on menu click or long-press) -->
+      <!-- 1. POPUP SIDE MENU (Opens on long-press or menu click: Speed controls, down-arrow, close) -->
       <div class="audio-side-menu-popup ${state.isMenuOpen ? 'is-open' : ''}" id="audioSideMenuPopup" style="display: ${state.isMenuOpen ? 'flex' : 'none'};">
         <div class="asmp-header">
-          <div class="asmp-title-info">
-            <span class="asmp-cat-badge"><i class="fa-solid fa-graduation-cap"></i> ${catTitle}</span>
-            <strong class="asmp-ep-name">${currentEp.title[lang] || currentEp.title.en}</strong>
-          </div>
+          <span class="asmp-ep-badge">Ep ${state.currentEpisode} • 30-Min Audio</span>
           <div class="asmp-header-actions">
-            <!-- Minimize Down Arrow ("ഡൗൺ ആരോ / തെക്ക് ആരോ") -->
-            <button class="asmp-btn-action" onclick="app.minimizeAudioWidget(event)" title="${lang === 'ml' ? 'ചെറുതാക്കുക (Minimize)' : 'Minimize'}">
+            <!-- Down Arrow Minimize ("ഡൗൺ ആരോ / തെക്ക് ആരോ") -->
+            <button class="asmp-btn-action" onclick="app.minimizeAudioWidget(event)" title="${lang === 'ml' ? 'ഹൈഡ് ചെയ്യുക (Minimize / Hide)' : 'Hide / Minimize'}">
               <i class="fa-solid fa-chevron-down"></i>
             </button>
             <!-- Close 'X' ("തെറ്റ് ഒഴിവാക്കാൻ") -->
-            <button class="asmp-btn-action asmp-btn-close" onclick="app.closeAudioWidget(event)" title="${lang === 'ml' ? 'ഓഡിയോ ക്ലോസ് ചെയ്യുക' : 'Close and Stop Audio'}">
+            <button class="asmp-btn-action asmp-btn-close" onclick="app.closeAudioWidget(event)" title="${lang === 'ml' ? 'ഓഡിയോ ക്ലോസ് ചെയ്യുക (Close / Dismiss)' : 'Close'}">
               <i class="fa-solid fa-xmark"></i>
             </button>
           </div>
         </div>
 
-        <!-- Speed Selector Row: "അതിൽ സ്പീഡ് കൂട്ടാനുള്ള ഓപ്ഷൻ, അത് മാത്രം ചെയ്താൽ മതി" -->
+        <!-- Speed Selector: "അതിൽ സ്പീഡ് കൂട്ടാനുള്ള ഓപ്ഷൻ, അത് മാത്രം ചെയ്താൽ മതി" -->
         <div class="asmp-speed-section">
           <div class="asmp-section-label">
             <i class="fa-solid fa-gauge-high text-primary"></i>
-            <span>${lang === 'ml' ? 'കേൾക്കാനുള്ള വേഗത (Audio Speed):' : lang === 'ar' ? 'سرعة الصوت:' : 'Playback Speed:'}</span>
+            <span>${lang === 'ml' ? 'സ്പീഡ് മാറ്റുക (Speed):' : lang === 'ar' ? 'سرعة الصوت:' : 'Playback Speed:'}</span>
           </div>
           <div class="asmp-speed-grid">
             <button class="asmp-speed-btn ${state.playbackRate === 1 ? 'active' : ''}" onclick="app.setAudioSpeed(1)">1.0x</button>
@@ -2915,23 +2910,20 @@ const app = {
           </div>
         </div>
 
-        <!-- Power Switch & Voice Language -->
+        <!-- Controls & Voice Language -->
         <div class="asmp-controls-grid">
-          <div class="asmp-power-box">
-            <span class="asmp-small-label">${lang === 'ml' ? 'പവർ:' : 'POWER:'}</span>
-            <button class="audio-power-toggle-btn ${state.isPoweredOn && state.isPlaying ? 'state-on' : 'state-off'}" id="popupAudioPowerSwitch" onclick="app.toggleAudioPowerSwitch()">
-              <span class="power-toggle-knob"></span>
-              <span class="power-toggle-text">${state.isPoweredOn && state.isPlaying ? 'ON' : 'OFF'}</span>
-            </button>
-          </div>
+          <button class="asmp-play-toggle-btn" onclick="app.toggleAudioMasterclass(event)">
+            <i class="fa-solid ${state.isPlaying ? 'fa-pause' : 'fa-play'}"></i>
+            <span>${state.isPlaying ? (lang === 'ml' ? 'പോസ്' : 'Pause') : (lang === 'ml' ? 'പ്ലേ' : 'Play')}</span>
+          </button>
           <div class="asmp-lang-box">
-            <button class="asmp-lang-chip ${lang === 'ml' ? 'active' : ''}" onclick="app.setAudioVoice('ml')" title="Malayalam">ML</button>
-            <button class="asmp-lang-chip ${lang === 'en' ? 'active' : ''}" onclick="app.setAudioVoice('en')" title="English">EN</button>
-            <button class="asmp-lang-chip ${lang === 'ar' ? 'active' : ''}" onclick="app.setAudioVoice('ar')" title="Arabic">AR</button>
+            <button class="asmp-lang-chip ${lang === 'ml' ? 'active' : ''}" onclick="app.setAudioVoice('ml')">ML</button>
+            <button class="asmp-lang-chip ${lang === 'en' ? 'active' : ''}" onclick="app.setAudioVoice('en')">EN</button>
+            <button class="asmp-lang-chip ${lang === 'ar' ? 'active' : ''}" onclick="app.setAudioVoice('ar')">AR</button>
           </div>
         </div>
 
-        <!-- Chapter Stepper -->
+        <!-- Episode Stepper -->
         <div class="asmp-nav-row">
           <button class="asmp-nav-btn" onclick="app.skipAudioEpisode(-1)" title="Previous Episode">
             <i class="fa-solid fa-backward-step"></i> <span>Ep ${Math.max(1, state.currentEpisode - 1)}</span>
@@ -2943,7 +2935,7 @@ const app = {
         </div>
       </div>
 
-      <!-- 2. ULTRA-COMPACT FLOATING SIDE CAPSULE (~42px Height) -->
+      <!-- 2. ULTRA-COMPACT FLOATING SIDE CAPSULE (~38px Height, Zero Branding Clutter) -->
       <div class="audio-capsule ${state.isMinimized ? 'is-minimized' : ''}" 
            id="audioCapsule" 
            onmousedown="app.handleCapsuleMouseDown(event)" 
@@ -2952,46 +2944,34 @@ const app = {
            ontouchend="app.handleCapsuleTouchEnd(event)"
            title="${lang === 'ml' ? 'മെനു കാണാൻ ക്ലിക്ക് ചെയ്യുക അല്ലെങ്കിൽ ഞെക്കിപ്പിടിക്കുക' : 'Click or Press & Hold for Menu'}">
 
-        <!-- Normal Compact State -->
+        <!-- Normal State: Ultra-Compact 38px pill -->
         <div class="capsule-normal-content" style="${state.isMinimized ? 'display: none;' : 'display: flex;'}">
           <!-- Play / Pause Circular Icon -->
           <button class="capsule-play-btn" onclick="app.toggleAudioMasterclass(event)" title="${state.isPlaying ? 'Pause' : 'Play'}">
             <i class="fa-solid ${state.isPlaying ? 'fa-pause' : 'fa-play'}" id="capsulePlayIcon"></i>
           </button>
 
-          <!-- Mini Animated Soundwave -->
-          <div class="capsule-soundwave ${state.isPlaying ? 'is-playing' : ''}" id="capsuleSoundwave">
-            <span class="csw-bar"></span>
-            <span class="csw-bar"></span>
-            <span class="csw-bar"></span>
-          </div>
-
           <!-- Time text -->
           <span class="capsule-time" id="capsuleTime">${formattedCurrentTime}</span>
 
-          <!-- Fast Speed Quick-Pill: click cycles 1x -> 1.25x -> 1.5x -> 2x -->
-          <button class="capsule-speed-pill" id="capsuleSpeedPill" onclick="app.cycleAudioSpeed(event)" title="Speed: ${state.playbackRate}x (Click to change)">
+          <!-- Fast Speed Quick-Pill: Single Click Cycles 1x -> 1.25x -> 1.5x -> 2x -->
+          <button class="capsule-speed-pill" id="capsuleSpeedPill" onclick="app.cycleAudioSpeed(event)" title="Speed: ${state.playbackRate}x (Click to cycle)">
             ${state.playbackRate}x
           </button>
 
-          <!-- Menu Button (sliders icon) -->
-          <button class="capsule-action-btn" onclick="app.toggleSideMenu(event)" title="${lang === 'ml' ? 'മെനു ബാർ (സ്പീഡ് & സെറ്റിംഗ്സ്)' : 'Menu (Speed & Settings)'}">
-            <i class="fa-solid fa-sliders"></i>
-          </button>
-
-          <!-- Minimize Down Arrow ("തെക്ക് ആരോ / ഡൗൺ ആരോ") -->
-          <button class="capsule-action-btn btn-min" onclick="app.minimizeAudioWidget(event)" title="${lang === 'ml' ? 'ചെറുതാക്കുക (Minimize)' : 'Minimize to bubble'}">
+          <!-- Down Arrow ("തെക്ക് ആരോ / ഡൗൺ ആരോ കൊടുത്തിട്ട് അത് ഒഴിവാക്കാനും / ഹൈഡ് ചെയ്യാനും") -->
+          <button class="capsule-action-btn btn-min" onclick="app.minimizeAudioWidget(event)" title="${lang === 'ml' ? 'ഹൈഡ് ചെയ്യുക (Hide / Minimize)' : 'Hide to bubble'}">
             <i class="fa-solid fa-chevron-down"></i>
           </button>
 
           <!-- Close 'X' Button ("തെറ്റ് ഒഴിവാക്കാൻ") -->
-          <button class="capsule-action-btn btn-close" onclick="app.closeAudioWidget(event)" title="${lang === 'ml' ? 'ഓഡിയോ ക്ലോസ് ചെയ്യുക' : 'Close and Stop Audio'}">
+          <button class="capsule-action-btn btn-close" onclick="app.closeAudioWidget(event)" title="${lang === 'ml' ? 'ഓഡിയോ ക്ലോസ് ചെയ്യുക (Close / Dismiss)' : 'Close Audio'}">
             <i class="fa-solid fa-xmark"></i>
           </button>
         </div>
 
-        <!-- Minimized State: Tiny 38px floating bubble -->
-        <div class="capsule-minimized-content" style="${state.isMinimized ? 'display: flex;' : 'display: none;'}" onclick="app.restoreAudioWidget(event)" title="${lang === 'ml' ? 'ഓഡിയോ പ്ലെയർ തുറക്കുക' : 'Restore Audio Player'}">
+        <!-- Minimized State: Tiny 38px floating bubble with pulsing dot -->
+        <div class="capsule-minimized-content" style="${state.isMinimized ? 'display: flex;' : 'display: none;'}" onclick="app.restoreAudioWidget(event)" title="${lang === 'ml' ? 'ഓഡിയോ പ്ലെയർ തുറക്കുക' : 'Restore Audio'}">
           <i class="fa-solid fa-headphones"></i>
           <span class="mini-pulse-dot ${state.isPlaying ? 'pulsing' : ''}"></span>
         </div>
@@ -3087,53 +3067,6 @@ const app = {
       clearTimeout(this.audioMasterclassState.longPressTimer);
       this.audioMasterclassState.longPressTimer = null;
     }
-  },
-
-  // Render Top Quick-Bar in Study Stage (Unobtrusive & Clean)
-  renderStudyStageHeaderBar(nicheKey) {
-    const bar = document.getElementById('studyStageHeaderBar');
-    if (!bar) return;
-
-    const state = this.audioMasterclassState;
-    const lang = state.voiceLang || this.currentLang || 'ml';
-    const cat = this.categoriesData[nicheKey] || this.categoriesData.attar;
-    const episodes = this.getAudioEpisodes(nicheKey);
-    const currentEp = episodes[state.currentEpisode - 1] || episodes[0];
-
-    bar.innerHTML = `
-      <div class="study-stage-header-bar-inner">
-        <div class="ssh-left">
-          <div class="ssh-badge">
-            <span class="live-pulse-dot ${state.isPlaying ? 'pulsing' : ''}"></span>
-            <span>${lang === 'ml' ? 'ബാക്ക്ഗ്രൗണ്ട് ഓഡിയോ ക്ലാസ്' : lang === 'ar' ? 'ماستر كلاس صوتي في الخلفية' : 'Background Audio Masterclass'}</span>
-          </div>
-          <div class="ssh-title-group">
-            <h3 class="ssh-title">${cat.title[lang] || cat.title.en}</h3>
-            <p class="ssh-sub">
-              <i class="fa-solid fa-headphones text-primary"></i> 
-              <span>${lang === 'ml' ? 'ഓഡിയോ ബാക്ക്ഗ്രൗണ്ടിൽ കേട്ടു പഠിക്കാം. നോട്ട്സുകളും സിലബസും താഴെ പൂർണ്ണമായി കാണാം.' : lang === 'ar' ? 'استمع للدورة في الخلفية وتابع المنهج والملاحظات أدناه بحرية.' : 'Listen in background while studying syllabus notes and practical checklists below.'}</span>
-            </p>
-          </div>
-        </div>
-
-        <div class="ssh-right">
-          <!-- Main Audio Power Switch (സ്വിച്ച് ബട്ടൺ) -->
-          <div class="ssh-power-wrap">
-            <span class="ssh-power-label">${lang === 'ml' ? 'ഓഡിയോ സ്വിച്ച്:' : lang === 'ar' ? 'مفتاح الصوت:' : 'AUDIO:'}</span>
-            <button class="audio-power-toggle-btn ${state.isPoweredOn && state.isPlaying ? 'state-on' : 'state-off'}" id="sshAudioPowerSwitch" onclick="app.toggleAudioPowerSwitch()" title="${state.isPoweredOn && state.isPlaying ? 'Turn audio OFF' : 'Turn audio ON'}">
-              <span class="power-toggle-knob"></span>
-              <span class="power-toggle-text">${state.isPoweredOn && state.isPlaying ? 'ON' : 'OFF'}</span>
-            </button>
-          </div>
-
-          <!-- Quick Play/Pause Button -->
-          <button class="btn-ssh-action" onclick="app.toggleAudioMasterclass()">
-            <i class="fa-solid ${state.isPlaying ? 'fa-pause' : 'fa-play'}"></i>
-            <span>${state.isPlaying ? (lang === 'ml' ? 'പോസ്' : 'Pause') : (lang === 'ml' ? 'കേട്ടു തുടങ്ങാം' : 'Play Audio')}</span>
-          </button>
-        </div>
-      </div>
-    `;
   },
 
   // Render Content inside Floating Transcript Drawer
@@ -3298,7 +3231,7 @@ const app = {
 
     this.audioMasterclassState.nicheKey = nicheKey;
     this.renderCourseSidebar(nicheKey);
-    this.renderStudyStageHeaderBar(nicheKey);
+    // renderStudyStageHeaderBar removed to prevent screen blocking
     this.renderCourseModules(nicheKey);
     this.renderFloatingAudioDock();
 
@@ -3869,18 +3802,12 @@ const app = {
             </div>
           </div>
           <div class="module-body">
-            <!-- Chapter Audio Action Bar: Listen in Background while studying notes -->
-            <div class="chapter-audio-action-bar">
-              <div class="caa-left">
-                <button class="btn-chapter-audio-play ${this.audioMasterclassState.isPlaying && this.audioMasterclassState.currentEpisode === activeStep ? 'is-playing' : ''}" data-episode="${activeStep}" onclick="app.playChapterAudio(${activeStep})" title="Play Chapter ${activeStep} in background">
-                  <i class="fa-solid ${this.audioMasterclassState.isPlaying && this.audioMasterclassState.currentEpisode === activeStep ? 'fa-pause' : 'fa-headphones'}"></i>
-                  <span>${lang === 'ml' ? 'ഈ പാഠം ബാക്ക്ഗ്രൗണ്ടിൽ കേട്ടു പഠിക്കാം' : lang === 'ar' ? 'استمع لشرح هذا الدرس في الخلفية' : 'Listen to this Lesson in Background'} (${lang === 'ml' ? 'ഭാഗം' : 'Ep'} ${Math.min(activeStep, 6)})</span>
-                </button>
-                <span class="caa-time"><i class="fa-regular fa-clock"></i> 5 Mins</span>
-              </div>
-              <div class="caa-right">
-                <span class="caa-badge"><i class="fa-solid fa-book-open"></i> ${lang === 'ml' ? 'സിലബസും പഠന കുറിപ്പുകളും' : lang === 'ar' ? 'المنهج والملاحظات الدراسية' : 'Study Notes & Syllabus'}</span>
-              </div>
+            <!-- Slim Chapter Audio Pill -->
+            <div class="chapter-audio-simple-bar">
+              <button class="btn-chapter-audio-pill ${this.audioMasterclassState.isPlaying && this.audioMasterclassState.currentEpisode === activeStep ? 'is-playing' : ''}" data-episode="${activeStep}" onclick="app.playChapterAudio(${activeStep})" title="Play Chapter ${activeStep}">
+                <i class="fa-solid ${this.audioMasterclassState.isPlaying && this.audioMasterclassState.currentEpisode === activeStep ? 'fa-pause' : 'fa-headphones'}"></i>
+                <span>${lang === 'ml' ? 'ഈ പാഠം കേട്ടുപഠിക്കാം' : lang === 'ar' ? 'استمع لهذا الدرس' : 'Listen to Lesson'} (Ep ${Math.min(activeStep, 6)})</span>
+              </button>
             </div>
 
             ${stepData.renderContent()}
@@ -3905,17 +3832,11 @@ const app = {
             </div>
           </div>
           <div class="module-body">
-            <div class="chapter-audio-action-bar">
-              <div class="caa-left">
-                <button class="btn-chapter-audio-play ${this.audioMasterclassState.isPlaying && this.audioMasterclassState.currentEpisode === (idx + 1) ? 'is-playing' : ''}" data-episode="${idx + 1}" onclick="app.playChapterAudio(${idx + 1})" title="Play Chapter ${idx + 1} in background">
-                  <i class="fa-solid ${this.audioMasterclassState.isPlaying && this.audioMasterclassState.currentEpisode === (idx + 1) ? 'fa-pause' : 'fa-headphones'}"></i>
-                  <span>${lang === 'ml' ? 'ഈ പാഠം ബാക്ക്ഗ്രൗണ്ടിൽ കേട്ടു പഠിക്കാം' : lang === 'ar' ? 'استمع لشرح هذا الدرس في الخلفية' : 'Listen to this Lesson in Background'} (${lang === 'ml' ? 'ഭാഗം' : 'Ep'} ${Math.min(idx + 1, 6)})</span>
-                </button>
-                <span class="caa-time"><i class="fa-regular fa-clock"></i> 5 Mins</span>
-              </div>
-              <div class="caa-right">
-                <span class="caa-badge"><i class="fa-solid fa-book-open"></i> ${lang === 'ml' ? 'സിലബസും പഠന കുറിപ്പുകളും' : lang === 'ar' ? 'المنهج والملاحظات الدراسية' : 'Study Notes & Syllabus'}</span>
-              </div>
+            <div class="chapter-audio-simple-bar">
+              <button class="btn-chapter-audio-pill ${this.audioMasterclassState.isPlaying && this.audioMasterclassState.currentEpisode === (idx + 1) ? 'is-playing' : ''}" data-episode="${idx + 1}" onclick="app.playChapterAudio(${idx + 1})" title="Play Chapter ${idx + 1}">
+                <i class="fa-solid ${this.audioMasterclassState.isPlaying && this.audioMasterclassState.currentEpisode === (idx + 1) ? 'fa-pause' : 'fa-headphones'}"></i>
+                <span>${lang === 'ml' ? 'ഈ പാഠം കേട്ടുപഠിക്കാം' : lang === 'ar' ? 'استمع لهذا الدرس' : 'Listen to Lesson'} (Ep ${Math.min(idx + 1, 6)})</span>
+              </button>
             </div>
 
             ${s.renderContent()}
