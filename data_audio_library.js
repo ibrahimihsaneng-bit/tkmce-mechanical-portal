@@ -4414,5 +4414,310 @@ window.dataAudioLibrary = {
         "ar": "في الفصل السادس والأخير، نحسب بدقة اقتصاديات الوحدة وهوامش الأرباح واستراتيجيات التوزيع لـ مصنع التجفيف الصناعي الهجين بالطاقة الشمسية والكتلة الحيوية للتوابل. نحدد صافي ربح كل حبة، وعقود التوريد الشهرية للمتاجر والشركات الكبرى، لتضمن تدفقات نقدية مستمرة واسترداداً سريعاً لرأس المال."
       }
     }
-  ]
+  ],
+
+  "chocolates": [
+    {
+      "num": 1,
+      "startSec": 0,
+      "endSec": 300,
+      "title": {
+        "en": "1. Chocolate & Dates Science: Handcrafted Chocolates & Gourmet Stuffed Dates",
+        "ml": "1. ഉൽപ്പന്ന ശാസ്ത്രം & സാങ്കേതികത: ഹാൻഡ്ക്രാഫ്റ്റഡ് ചോക്ലേറ്റുകളും ഈത്തപ്പഴ ഗിഫ്റ്റ് ബോക്സുകളും",
+        "ar": "1. علم ومواصفات المنتج: الشوكولاتة الفاخرة والتمور المحشوة للهدايا"
+      },
+      "sub": {
+        "en": "Foundational craft science, zero-knowledge principles, and market varieties",
+        "ml": "ചോക്ലേറ്റ് ടെമ്പറിംഗ് രഹസ്യങ്ങളും ഈത്തപ്പഴ സ്റ്റഫിംഗ് വിദ്യകളും",
+        "ar": "الأسس الأولية، أنواع الشوكولاتة، واختيار أجود أنواع التمور"
+      },
+      "script": {
+        "en": "Welcome to the Handcrafted Chocolates & Gourmet Stuffed Dates Academy. In this introductory chapter, we break down compound chocolate versus couverture, microwave tempering temperatures, and premium Medjool date stuffing with roasted California almonds and Iranian pistachios. Start right from your home kitchen with zero expensive machinery.",
+        "ml": "ഹാൻഡ്ക്രാഫ്റ്റഡ് ചോക്ലേറ്റുകളും റോയൽ ഈത്തപ്പഴ ഗിഫ്റ്റ് ബോക്സുകളും എന്ന കോഴ്സിലേക്ക് സ്വാഗതം. വലിയ മെഷീനുകളോ ഫാക്ടറിയോ ഇല്ലാതെ വീട്ടിലിരുന്ന് തന്നെ പ്രീമിയം ചോക്ലേറ്റുകളും ഈത്തപ്പഴ ബോക്സുകളും ഉണ്ടാക്കുന്നതിനുള്ള അടിസ്ഥാന കാര്യങ്ങളാണ് നാം ഇതിൽ പഠിക്കുന്നത്. കോമ്പൗണ്ട് ചോക്ലേറ്റും കവർച്ചറും തമ്മിലുള്ള വ്യത്യാസം, ഡ്രൈ ഫ്രൂട്ട് സ്റ്റഫിംഗ് എന്നിവ ആദ്യഘട്ടത്തിൽ മനസ്സിലാക്കാം.",
+        "ar": "مرحباً بكم في أكاديمية الشوكولاتة الفاخرة والتمور المحشوة للهدايا. في هذا الفصل الأول، نتعرف على الفرق بين الشوكولاتة الخام والشوكولاتة النقية، ودرجات حرارة التذويب المثالية، وكيفية حشو تمور المجدول بالمكسرات المحمصة الفاخرة لتنطلق من مطبخك بأقل التكاليف."
+      },
+      "text": {
+        "en": "Welcome to the Handcrafted Chocolates & Gourmet Stuffed Dates Academy. In this introductory chapter, we break down compound chocolate versus couverture, microwave tempering temperatures, and premium Medjool date stuffing with roasted California almonds and Iranian pistachios. Start right from your home kitchen with zero expensive machinery.",
+        "ml": "ഹാൻഡ്ക്രാഫ്റ്റഡ് ചോക്ലേറ്റുകളും റോയൽ ഈത്തപ്പഴ ഗിഫ്റ്റ് ബോക്സുകളും എന്ന കോഴ്സിലേക്ക് സ്വാഗതം. വലിയ മെഷീനുകളോ ഫാക്ടറിയോ ഇല്ലാതെ വീട്ടിലിരുന്ന് തന്നെ പ്രീമിയം ചോക്ലേറ്റുകളും ഈത്തപ്പഴ ബോക്സുകളും ഉണ്ടാക്കുന്നതിനുള്ള അടിസ്ഥാന കാര്യങ്ങളാണ് നാം ഇതിൽ പഠിക്കുന്നത്. കോമ്പൗണ്ട് ചോക്ലേറ്റും കവർച്ചറും തമ്മിലുള്ള വ്യത്യാസം, ഡ്രൈ ഫ്രൂട്ട് സ്റ്റഫിംഗ് എന്നിവ ആദ്യഘട്ടത്തിൽ മനസ്സിലാക്കാം.",
+        "ar": "مرحباً بكم في أكاديمية الشوكولاتة الفاخرة والتمور المحشوة للهدايا. في هذا الفصل الأول، نتعرف على الفرق بين الشوكولاتة الخام والشوكولاتة النقية، ودرجات حرارة التذويب المثالية، وكيفية حشو تمور المجدول بالمكسرات المحمصة الفاخرة لتنطلق من مطبخك بأقل التكاليف."
+      }
+    },
+    {
+      "num": 2,
+      "startSec": 300,
+      "endSec": 600,
+      "title": {
+        "en": "2. Working Capital & Tools: Handcrafted Chocolates & Dates",
+        "ml": "2. മുതൽമുടക്കും ഉപകരണങ്ങളും: ചോക്ലേറ്റ് & ഈത്തപ്പഴ ബിസിനസ്സ്",
+        "ar": "2. الميزانية والأدوات: الشوكولاتة الفاخرة والتمور"
+      },
+      "sub": {
+        "en": "Itemized equipment, silicone moulds, and starting capital of ₹4,500",
+        "ml": "സിലിക്കൺ മോൾഡുകൾ, തെർമോമീറ്റർ, തുച്ഛമായ മുതൽമുടക്ക്",
+        "ar": "قوالب السيلكون، الميزان الرقمي، ورأس مال يبدأ من 4,500 روبية"
+      },
+      "script": {
+        "en": "In chapter 2, we detail the micro-budget of ₹4,500. You need food-grade silicone moulds, a digital kitchen scale, microwave-safe bowls, and gift box partitions. We itemize every single rupee so you never face surprise costs.",
+        "ml": "രണ്ടാമത്തെ അധ്യായത്തിൽ, വെറും ₹4,500 കൊണ്ട് 25 ഗിഫ്റ്റ് ബോക്സുകൾ ഉണ്ടാക്കാനുള്ള കൃത്യമായ കണക്കുകൾ നാം പഠിക്കുന്നു. സിലിക്കൺ മോൾഡുകൾ, ഡിജിറ്റൽ സ്കെയിൽ, മിക്സിംഗ് ബൗളുകൾ എന്നിവയ്ക്കുള്ള തുച്ഛമായ ചെലവുകൾ ഇതിലൂടെ മനസ്സിലാക്കാം.",
+        "ar": "في الفصل الثاني، نفصل ميزانية 4,500 روبية لبدء إنتاج أول 25 علبة هدايا، متضمنة قوالب السيلكون وميزان المطبخ الرقمي وأوعية التذويب."
+      },
+      "text": {
+        "en": "In chapter 2, we detail the micro-budget of ₹4,500. You need food-grade silicone moulds, a digital kitchen scale, microwave-safe bowls, and gift box partitions. We itemize every single rupee so you never face surprise costs.",
+        "ml": "രണ്ടാമത്തെ അധ്യായത്തിൽ, വെറും ₹4,500 കൊണ്ട് 25 ഗിഫ്റ്റ് ബോക്സുകൾ ഉണ്ടാക്കാനുള്ള കൃത്യമായ കണക്കുകൾ നാം പഠിക്കുന്നു. സിലിക്കൺ മോൾഡുകൾ, ഡിജിറ്റൽ സ്കെയിൽ, മിക്സിംഗ് ബൗളുകൾ എന്നിവയ്ക്കുള്ള തുച്ഛമായ ചെലവുകൾ ഇതിലൂടെ മനസ്സിലാക്കാം.",
+        "ar": "في الفصل الثاني، نفصل ميزانية 4,500 روبية لبدء إنتاج أول 25 علبة هدايا، متضمنة قوالب السيلكون وميزان المطبخ الرقمي وأوعية التذويب."
+      }
+    },
+    {
+      "num": 3,
+      "startSec": 600,
+      "endSec": 900,
+      "title": {
+        "en": "3. Wholesale Raw Material Sourcing: Valiyangadi & Broadway",
+        "ml": "3. അസംസ്കൃത വസ്തുക്കൾ മൊത്തവിലയിൽ വാങ്ങാൻ: വലിയങ്ങാടിയും ബ്രോഡ്‌വേയും",
+        "ar": "3. أسواق الجملة للخامات: سوق كاليكوت وبرودواي كوتشي"
+      },
+      "sub": {
+        "en": "Bulk chocolate compound slabs, premium dry fruits, and food packaging",
+        "ml": "കോമ്പൗണ്ട് സ്ലാബുകൾ, മേഡ്ജൂൾ ഈത്തപ്പഴം, പ്രീമിയം നട്സ്",
+        "ar": "ألواح الشوكولاتة بالجملة، تمور المجدول، ومستلزمات التغليف الغذائي"
+      },
+      "script": {
+        "en": "Chapter 3 reveals verified wholesale traders in Kozhikode Big Bazaar and Kochi Broadway who supply 5kg chocolate compound slabs, import-grade Medjool dates, and Golden Almonds at 40% below retail.",
+        "ml": "മൂന്നാമത്തെ അധ്യായത്തിൽ, കോഴിക്കോട് വലിയങ്ങാടിയിലെയും എറണാകുളം ബ്രോഡ്‌വേയിലെയും മൊത്തവ്യാപാരികളിൽ നിന്നും 40% കുറഞ്ഞ വിലയിൽ ചോക്ലേറ്റ് സ്ലാബുകളും, ഒന്നാംതരം മേഡ്ജൂൾ ഈത്തപ്പഴവും, കാഷ്യൂ-ആൽമണ്ട് നട്സുകളും എങ്ങനെ വാങ്ങാമെന്ന് പഠിക്കാം.",
+        "ar": "الفصل الثالث يكشف لك أسواق الجملة المعتمدة في كاليكوت وكوتشي لشراء ألواح الشوكولاتة والتمور الفاخرة والمكسرات بأسعار تنخفض 40% عن سعر السوق."
+      },
+      "text": {
+        "en": "Chapter 3 reveals verified wholesale traders in Kozhikode Big Bazaar and Kochi Broadway who supply 5kg chocolate compound slabs, import-grade Medjool dates, and Golden Almonds at 40% below retail.",
+        "ml": "മൂന്നാമത്തെ അധ്യായത്തിൽ, കോഴിക്കോട് വലിയങ്ങാടിയിലെയും എറണാകുളം ബ്രോഡ്‌വേയിലെയും മൊത്തവ്യാപാരികളിൽ നിന്നും 40% കുറഞ്ഞ വിലയിൽ ചോക്ലേറ്റ് സ്ലാബുകളും, ഒന്നാംതരം മേഡ്ജൂൾ ഈത്തപ്പഴവും, കാഷ്യൂ-ആൽമണ്ട് നട്സുകളും എങ്ങനെ വാങ്ങാമെന്ന് പഠിക്കാം.",
+        "ar": "الفصل الثالث يكشف لك أسواق الجملة المعتمدة في كاليكوت وكوتشي لشراء ألواح الشوكولاتة والتمور الفاخرة والمكسرات بأسعار تنخفض 40% عن سعر السوق."
+      }
+    },
+    {
+      "num": 4,
+      "startSec": 900,
+      "endSec": 1200,
+      "title": {
+        "en": "4. Step-by-Step Crafting & Assembly: Artisanal Chocolates & Dates",
+        "ml": "4. നിർമ്മാണ രീതികൾ: ചോക്ലേറ്റ് ടെമ്പറിംഗും ഈത്തപ്പഴം ഫില്ലിംഗും",
+        "ar": "4. خطوات التصنيع والحشو: طريقة صب الشوكولاتة وحشو التمور"
+      },
+      "sub": {
+        "en": "Microwave melting, almond roasting, piping, and edible gold leaf application",
+        "ml": "മൈക്രോവേവ് മെൽറ്റിംഗ്, നട്സ് റോസ്റ്റിംഗ്, പൈപ്പിംഗ് രീതികൾ",
+        "ar": "إذابة الشوكولاتة، تحميص المكسرات، وتطبيق ورق الذهب الصالح للأكل"
+      },
+      "script": {
+        "en": "Chapter 4 walks you through hands-on fabrication: melting dark, milk, and white chocolate, piping hazelnut paste into seedless dates, dipping, and applying edible gold leaf for an ultra-luxury finish.",
+        "ml": "നാലാമത്തെ അധ്യായത്തിൽ, ചോക്ലേറ്റ് ഉരുകുന്നതിനുള്ള കൃത്യമായ താപനില, ഈത്തപ്പഴത്തിലെ കുരു മാറ്റി റോസ്റ്റഡ് നട്സ് വെച്ച് ചോക്ലേറ്റിൽ മുക്കി സ്വർണ്ണ ഇലകൾ (Gold Foil) ഒട്ടിച്ച് ആഡംബര ലുക്ക് നൽകുന്ന വിധം പഠിക്കുന്നു.",
+        "ar": "في الفصل الرابع، نأخذكم خطوة بخطوة في صهر الشوكولاتة وحشو التمور وتغطيتها بطبقة لامعة وتزيينها بلمسات ورق الذهب الفاخرة."
+      },
+      "text": {
+        "en": "Chapter 4 walks you through hands-on fabrication: melting dark, milk, and white chocolate, piping hazelnut paste into seedless dates, dipping, and applying edible gold leaf for an ultra-luxury finish.",
+        "ml": "നാലാമത്തെ അധ്യായത്തിൽ, ചോക്ലേറ്റ് ഉരുകുന്നതിനുള്ള കൃത്യമായ താപനില, ഈത്തപ്പഴത്തിലെ കുരു മാറ്റി റോസ്റ്റഡ് നട്സ് വെച്ച് ചോക്ലേറ്റിൽ മുക്കി സ്വർണ്ണ ഇലകൾ (Gold Foil) ഒട്ടിച്ച് ആഡംബര ലുക്ക് നൽകുന്ന വിധം പഠിക്കുന്നു.",
+        "ar": "في الفصل الرابع، نأخذكم خطوة بخطوة في صهر الشوكولاتة وحشو التمور وتغطيتها بطبقة لامعة وتزيينها بلمسات ورق الذهب الفاخرة."
+      }
+    },
+    {
+      "num": 5,
+      "startSec": 1200,
+      "endSec": 1500,
+      "title": {
+        "en": "5. Luxury Gift Packaging & Summer Shipping Protection",
+        "ml": "5. ലക്ഷ്വറി ഗിഫ്റ്റ് പാക്കേജിംഗും വേനൽക്കാല തെർമൽ ഷിപ്പിംഗും",
+        "ar": "5. التغليف الفاخر والحماية الحرارية أثناء الشحن"
+      },
+      "sub": {
+        "en": "Rigid magnetic boxes, satin ribbon, ice gel packs, and thermal bubble mailers",
+        "ml": "മാഗ്നറ്റിക് ഗിഫ്റ്റ് ബോക്സുകൾ, ഐസ് ജെൽ പാക്ക്, തെർമൽ റാപ്പിംഗ്",
+        "ar": "العلب المغناطيسية الفاخرة، أكياس التبريد، والشحن الآمن ضد الحرارة"
+      },
+      "script": {
+        "en": "In chapter 5, master premium unboxing with rigid boxes and satin ribbons, along with using thermal bubble mailers and ice gel packs so your chocolates never melt during Kerala transit.",
+        "ml": "അഞ്ചാമത്തെ അധ്യായത്തിൽ, കസ്റ്റമർമാരെ ആകർഷിക്കുന്ന പ്രീമിയം ഗിഫ്റ്റ് ബോക്സുകൾ, റിബൺ കെട്ടൽ, കേരളത്തിലെ ചൂടിലും ഉരുകാതെ കൊറിയർ അയക്കാനുള്ള തെർമൽ ഐസ് ജെൽ പാക്കിംഗ് എന്നിവ വിശദമായി പഠിക്കാം.",
+        "ar": "في الفصل الخامس، نتعلم فن التغليف الفاخر مع الأشرطة الحريرية وطرق الشحن الآمن في أجواء كيرالا الحارة باستخدام أكياس الجل المبردة."
+      },
+      "text": {
+        "en": "In chapter 5, master premium unboxing with rigid boxes and satin ribbons, along with using thermal bubble mailers and ice gel packs so your chocolates never melt during Kerala transit.",
+        "ml": "അഞ്ചാമത്തെ അധ്യായത്തിൽ, കസ്റ്റമർമാരെ ആകർഷിക്കുന്ന പ്രീമിയം ഗിഫ്റ്റ് ബോക്സുകൾ, റിബൺ കെട്ടൽ, കേരളത്തിലെ ചൂടിലും ഉരുകാതെ കൊറിയർ അയക്കാനുള്ള തെർമൽ ഐസ് ജെൽ പാക്കിംഗ് എന്നിവ വിശദമായി പഠിക്കാം.",
+        "ar": "في الفصل الخامس، نتعلم فن التغليف الفاخر مع الأشرطة الحريرية وطرق الشحن الآمن في أجواء كيرالا الحارة باستخدام أكياس الجل المبردة."
+      }
+    },
+    {
+      "num": 6,
+      "startSec": 1500,
+      "endSec": 1800,
+      "title": {
+        "en": "6. Instagram Wedding Gifting Sales & 150% Profit Economics",
+        "ml": "6. ഇൻസ്റ്റാഗ്രാം വെഡ്ഡിംഗ് മാർക്കറ്റിംഗും 150% ലാഭക്കണക്കും",
+        "ar": "6. تسويق هدايا الأعراس عبر إنستغرام وهوامش أرباح 150%"
+      },
+      "sub": {
+        "en": "Wedding planner tie-ups, corporate Eid orders, and high recurring cash flow",
+        "ml": "വെഡ്ഡിംഗ് ഓർഡറുകൾ, പെരുന്നാൾ ഗിഫ്റ്റ് ബോക്സുകൾ, ഉയർന്ന ലാഭം",
+        "ar": "التعاقد مع منظمي الحفلات، هدايا الشركات، والتدفقات النقدية العالية"
+      },
+      "script": {
+        "en": "In our final chapter, calculate the exact unit economics: a 12-piece gourmet box costing ₹110 sells for ₹349 to ₹499. Connect with local wedding planners and event coordinators across Kerala for bulk recurring orders.",
+        "ml": "അവസാന അധ്യായത്തിൽ, ഉണ്ടാക്കാൻ ₹110 ചെലവ് വരുന്ന 12 പീസ് ബോക്സ് ₹350 മുതൽ ₹500 വരെ വിൽക്കുന്നതിലൂടെ 150% ലാഭം എങ്ങനെ നേടാമെന്നും, കേരളത്തിലെ വെഡ്ഡിംഗ് പ്ലാനർമാരുമായി ചേർന്ന് വലിയ ഓർഡറുകൾ എങ്ങനെ നേടാമെന്നും മനസ്സിലാക്കാം.",
+        "ar": "في الفصل السادس، نحدد أرباح الصندوق المكون من 12 قطعة، والذي يكلف 110 روبيات ويباع بـ 350 إلى 499 روبية بهامش ربح يفوق 150% عبر التعاقد مع منظمي الأعراس."
+      },
+      "text": {
+        "en": "In our final chapter, calculate the exact unit economics: a 12-piece gourmet box costing ₹110 sells for ₹349 to ₹499. Connect with local wedding planners and event coordinators across Kerala for bulk recurring orders.",
+        "ml": "അവസാന അധ്യായത്തിൽ, ഉണ്ടാക്കാൻ ₹110 ചെലവ് വരുന്ന 12 പീസ് ബോക്സ് ₹350 മുതൽ ₹500 വരെ വിൽക്കുന്നതിലൂടെ 150% ലാഭം എങ്ങനെ നേടാമെന്നും, കേരളത്തിലെ വെഡ്ഡിംഗ് പ്ലാനർമാരുമായി ചേർന്ന് വലിയ ഓർഡറുകൾ എങ്ങനെ നേടാമെന്നും മനസ്സിലാക്കാം.",
+        "ar": "في الفصل السادس، نحدد أرباح الصندوق المكون من 12 قطعة، والذي يكلف 110 روبيات ويباع بـ 350 إلى 499 روبية بهامش ربح يفوق 150% عبر التعاقد مع منظمي الأعراس."
+      }
+    }
+  ],
+  "candles": [
+    {
+      "num": 1,
+      "startSec": 0,
+      "endSec": 300,
+      "title": {
+        "en": "1. Wax Chemistry & Aroma Science: Scented Soy Wax Candles & Melts",
+        "ml": "1. ഉൽപ്പന്ന ശാസ്ത്രം & വാക്സ് കെമിസ്ട്രി: സുഗന്ധ സോയ വാക്സ് കാൻഡിലുകൾ",
+        "ar": "1. كيمياء الشموع والزيوت: شموع الصويا ومكعبات الفواحة"
+      },
+      "sub": {
+        "en": "Natural soy flakes vs paraffin, wooden crackling wicks, and hot/cold scent throw",
+        "ml": "പ്രകൃതിദത്ത സോയ വാക്സ്, തടി തിരികൾ, സുഗന്ധത്തിന്റെ രഹസ്യങ്ങൾ",
+        "ar": "شمع الصويا النباتي، الفتيل الخشبي، وقوة انتشار الرائحة"
+      },
+      "script": {
+        "en": "Welcome to the Aroma Soy Wax Candles Academy. In chapter 1, discover 100% natural, clean-burning soy wax, wooden crackling wicks, and how to achieve powerful cold and hot scent throw without dangerous soot or toxins.",
+        "ml": "സുഗന്ധ സോയ വാക്സ് കാൻഡിലുകൾ എന്ന കോഴ്സിലേക്ക് സ്വാഗതം. പ്രകൃതിദത്ത സോയ വാക്സ് ഉപയോഗിച്ച് മുറി മുഴുവൻ സുഗന്ധം പരത്തുന്ന ആഡംബര മെഴുകുതിരികൾ വീട്ടിൽ തന്നെ നിർമ്മിക്കുന്നതിനുള്ള തുടക്ക പാഠങ്ങളാണ് നാം ഇതിൽ പഠിക്കുന്നത്.",
+        "ar": "مرحباً بكم في أكاديمية شموع الصويا العطرية ومكعبات الفواحة. في هذا الفصل الأول، نتعرف على شمع الصويا النباتي النقي، وأسرار الفتيل الخشبي، وكيفية ضمان انتشار العطر في كامل الغرفة بدون دخان."
+      },
+      "text": {
+        "en": "Welcome to the Aroma Soy Wax Candles Academy. In chapter 1, discover 100% natural, clean-burning soy wax, wooden crackling wicks, and how to achieve powerful cold and hot scent throw without dangerous soot or toxins.",
+        "ml": "സുഗന്ധ സോയ വാക്സ് കാൻഡിലുകൾ എന്ന കോഴ്സിലേക്ക് സ്വാഗതം. പ്രകൃതിദത്ത സോയ വാക്സ് ഉപയോഗിച്ച് മുറി മുഴുവൻ സുഗന്ധം പരത്തുന്ന ആഡംബര മെഴുകുതിരികൾ വീട്ടിൽ തന്നെ നിർമ്മിക്കുന്നതിനുള്ള തുടക്ക പാഠങ്ങളാണ് നാം ഇതിൽ പഠിക്കുന്നത്.",
+        "ar": "مرحباً بكم في أكاديمية شموع الصويا العطرية ومكعبات الفواحة. في هذا الفصل الأول، نتعرف على شمع الصويا النباتي النقي، وأسرار الفتيل الخشبي، وكيفية ضمان انتشار العطر في كامل الغرفة بدون دخان."
+      }
+    },
+    {
+      "num": 2,
+      "startSec": 300,
+      "endSec": 600,
+      "title": {
+        "en": "2. Home Starter Toolkit: Starting with just ₹3,500",
+        "ml": "2. ആരംഭ ടൂൾകിറ്റും ചെലവുകളും: വെറും ₹3,500-ൽ തുടങ്ങാം",
+        "ar": "2. عدة العمل المنزلية: البدء بـ 3,500 روبية فقط"
+      },
+      "sub": {
+        "en": "Stainless melting pitcher, infrared thermometer, and amber glass jars",
+        "ml": "മെൽറ്റിംഗ് പിക്ചർ, ഡിജിറ്റൽ തെർമോമീറ്റർ, ആംബർ ഗ്ലാസ് ജാറുകൾ",
+        "ar": "إبريق الصهر، ميزان الحرارة، وبرطمانات الزجاج الكهرمانية"
+      },
+      "script": {
+        "en": "Chapter 2 lays out the minimal equipment: a stainless steel pouring pot, kitchen scale, digital candy thermometer, and 20 amber apothecary jars for a total investment under ₹3,500.",
+        "ml": "രണ്ടാമത്തെ അധ്യായത്തിൽ, വെറും ₹3,500 കൊണ്ട് സ്വന്തമായി ഒരു കാൻഡിൽ സ്റ്റുഡിയോ തുടങ്ങാൻ ആവശ്യമായ മെൽറ്റിംഗ് പോട്ട്, തെർമോമീറ്റർ, ആംബർ ഗ്ലാസ് ജാറുകൾ എന്നിവയുടെ കണക്കുകൾ പഠിക്കാം.",
+        "ar": "في الفصل الثاني، نستعرض المعدات البسيطة المطلوبة للبدء بأقل من 3,500 روبية، بما فيها إبريق الصهر وميزان الحرارة والبرطمانات الكهرمانية."
+      },
+      "text": {
+        "en": "Chapter 2 lays out the minimal equipment: a stainless steel pouring pot, kitchen scale, digital candy thermometer, and 20 amber apothecary jars for a total investment under ₹3,500.",
+        "ml": "രണ്ടാമത്തെ അധ്യായത്തിൽ, വെറും ₹3,500 കൊണ്ട് സ്വന്തമായി ഒരു കാൻഡിൽ സ്റ്റുഡിയോ തുടങ്ങാൻ ആവശ്യമായ മെൽറ്റിംഗ് പോട്ട്, തെർമോമീറ്റർ, ആംബർ ഗ്ലാസ് ജാറുകൾ എന്നിവയുടെ കണക്കുകൾ പഠിക്കാം.",
+        "ar": "في الفصل الثاني، نستعرض المعدات البسيطة المطلوبة للبدء بأقل من 3,500 روبية، بما فيها إبريق الصهر وميزان الحرارة والبرطمانات الكهرمانية."
+      }
+    },
+    {
+      "num": 3,
+      "startSec": 600,
+      "endSec": 900,
+      "title": {
+        "en": "3. Wholesale Wax & Fragrance Oil Sourcing",
+        "ml": "3. സോയ വാക്സും സുഗന്ധ ഓയിലുകളും ഹോൾസെയിലായി വാങ്ങാൻ",
+        "ar": "3. مصادر شراء شمع الصويا والزيوت العطرية بالجملة"
+      },
+      "sub": {
+        "en": "Bulk soy wax flakes, concentrated French fragrance oils, and crackling wicks",
+        "ml": "സോയ വാക്സ് പെല്ലറ്റുകൾ, ഫ്രഞ്ച് സുഗന്ധ തൈലങ്ങൾ, ഹോൾസെയിൽ കടകൾ",
+        "ar": "رقائق شمع الصويا، الزيوت الفرنسية المركزة، والفتائل الخشبية"
+      },
+      "script": {
+        "en": "Chapter 3 introduces verified suppliers in Kochi and Mumbai offering pure Golden Wax 464 soy flakes at wholesale rates along with French fragrance oils (vanilla, lavender, sandalwood) at half market price.",
+        "ml": "മൂന്നാമത്തെ അധ്യായത്തിൽ, കൊച്ചിയിലെയും മുംബൈയിലെയും പ്രമുഖ വിതരണക്കാരിൽ നിന്നും ഒന്നാംതരം സോയ വാക്സ് ഫ്ലേക്കുകളും, ലാവെൻഡർ, വാനില, സാൻഡൽവുഡ് സുഗന്ധ തൈലങ്ങളും കുറഞ്ഞ നിരക്കിൽ വാങ്ങുന്ന വഴികൾ പഠിക്കാം.",
+        "ar": "في الفصل الثالث، نتعرف على الموردين المعتمدين في كوتشي ومومباي لتوريد شمع الصويا الطبيعي والزيوت العطرية الفرنسية بنصف سعر التجزئة."
+      },
+      "text": {
+        "en": "Chapter 3 introduces verified suppliers in Kochi and Mumbai offering pure Golden Wax 464 soy flakes at wholesale rates along with French fragrance oils (vanilla, lavender, sandalwood) at half market price.",
+        "ml": "മൂന്നാമത്തെ അധ്യായത്തിൽ, കൊച്ചിയിലെയും മുംബൈയിലെയും പ്രമുഖ വിതരണക്കാരിൽ നിന്നും ഒന്നാംതരം സോയ വാക്സ് ഫ്ലേക്കുകളും, ലാവെൻഡർ, വാനില, സാൻഡൽവുഡ് സുഗന്ധ തൈലങ്ങളും കുറഞ്ഞ നിരക്കിൽ വാങ്ങുന്ന വഴികൾ പഠിക്കാം.",
+        "ar": "في الفصل الثالث، نتعرف على الموردين المعتمدين في كوتشي ومومباي لتوريد شمع الصويا الطبيعي والزيوت العطرية الفرنسية بنصف سعر التجزئة."
+      }
+    },
+    {
+      "num": 4,
+      "startSec": 900,
+      "endSec": 1200,
+      "title": {
+        "en": "4. Step-by-Step Pouring & Wick Centering Masterclass",
+        "ml": "4. കാൻഡിൽ നിർമ്മാണ രീതികൾ: വാക്സ് മെൽറ്റിംഗും തിരി സെറ്റ് ചെയ്യലും",
+        "ar": "4. خطوات الصب والتثبيت: إذابة الشمع وتثبيت الفتيل"
+      },
+      "sub": {
+        "en": "Melt to 85°C, add oil at 70°C, stir 2 minutes, and slow cooling for smooth tops",
+        "ml": "70°C താപനിലയിൽ ഓയിൽ ചേർക്കലും സ്മൂത്ത് ഫിനിഷിംഗും",
+        "ar": "إذابة الشمع لدرجة 85 ثم إضافة الزيت عند 70 درجة لسطح ناعم ومثالي"
+      },
+      "script": {
+        "en": "Chapter 4 demonstrates precise craft: melting wax to 85°C, stirring fragrance oil for 2 full minutes at 70°C, centering the wooden wick, and cooling slowly at room temperature for flawless, glass-smooth tops without frosting.",
+        "ml": "നാലാമത്തെ അധ്യായത്തിൽ, വാക്സ് ചൂടാക്കി 70 ഡിഗ്രിയിൽ സുഗന്ധ ഓയിൽ ഒഴിച്ച് രണ്ട് മിനിറ്റ് ഇളക്കി, ഗ്ലാസ് ജാറിന്റെ നടുവിൽ തടി തിരി വെച്ച് ഒഴിച്ച് സ്മൂത്തായി സെറ്റാക്കി എടുക്കുന്ന വിദ്യകൾ പഠിക്കാം.",
+        "ar": "في الفصل الرابع، نتدرب على الخطوات الاحترافية لصب الشمع عند درجة حرارة 70 مئوية وتثبيت الفتيل بدقة ليجف بسطح ناعم خالٍ من التشققات."
+      },
+      "text": {
+        "en": "Chapter 4 demonstrates precise craft: melting wax to 85°C, stirring fragrance oil for 2 full minutes at 70°C, centering the wooden wick, and cooling slowly at room temperature for flawless, glass-smooth tops without frosting.",
+        "ml": "നാലാമത്തെ അധ്യായത്തിൽ, വാക്സ് ചൂടാക്കി 70 ഡിഗ്രിയിൽ സുഗന്ധ ഓയിൽ ഒഴിച്ച് രണ്ട് മിനിറ്റ് ഇളക്കി, ഗ്ലാസ് ജാറിന്റെ നടുവിൽ തടി തിരി വെച്ച് ഒഴിച്ച് സ്മൂത്തായി സെറ്റാക്കി എടുക്കുന്ന വിദ്യകൾ പഠിക്കാം.",
+        "ar": "في الفصل الرابع، نتدرب على الخطوات الاحترافية لصب الشمع عند درجة حرارة 70 مئوية وتثبيت الفتيل بدقة ليجف بسطح ناعم خالٍ من التشققات."
+      }
+    },
+    {
+      "num": 5,
+      "startSec": 1200,
+      "endSec": 1500,
+      "title": {
+        "en": "5. Aesthetic Kraft Packaging & Break-Proof Honeycomb Paper Wrap",
+        "ml": "5. ക്രാഫ്റ്റ് സിലിണ്ടർ പാക്കേജിംഗും സുരക്ഷിത ഹണികോമ്പ് റാപ്പിംഗും",
+        "ar": "5. التغليف الأنبوبي الأنيق والحماية ضد الكسر"
+      },
+      "sub": {
+        "en": "Minimalist labels, wax seal stamps, matchstick jars, and shockproof transit",
+        "ml": "സിലിണ്ടർ ബോക്സ്, വാക്സ് സീൽ സ്റ്റാമ്പ്, പൊട്ടാതെ കൊറിയർ അയക്കൽ",
+        "ar": "العلب الأنبوبية، أختام الشمع، وتغليف خلايا النحل المقاوم للصدمات"
+      },
+      "script": {
+        "en": "In chapter 5, brand your candles with aesthetic matte labels and wax seal stamps. Wrap in biodegradable honeycomb paper for 100% zero-breakage courier delivery across Kerala.",
+        "ml": "അഞ്ചാമത്തെ അധ്യായത്തിൽ, മനോഹരമായ ക്രാഫ്റ്റ് ബോക്സുകളിൽ കാൻഡിൽ പായ്ക്ക് ചെയ്യുന്നതും, കൊറിയർ വഴി അയക്കുമ്പോൾ ഗ്ലാസ് പൊട്ടാതെ സംരക്ഷിക്കുന്ന ഹണികോമ്പ് പേപ്പർ റാപ്പിംഗ് രീതികളും പഠിക്കാം.",
+        "ar": "في الفصل الخامس، نتعلم فن تصميم الهوية البصرية مع العلب الأنبوبية الأنيقة وأختام الشمع، وحماية الزجاج بورق خلايا النحل ضد الكسر أثناء الشحن."
+      },
+      "text": {
+        "en": "In chapter 5, brand your candles with aesthetic matte labels and wax seal stamps. Wrap in biodegradable honeycomb paper for 100% zero-breakage courier delivery across Kerala.",
+        "ml": "അഞ്ചാമത്തെ അധ്യായത്തിൽ, മനോഹരമായ ക്രാഫ്റ്റ് ബോക്സുകളിൽ കാൻഡിൽ പായ്ക്ക് ചെയ്യുന്നതും, കൊറിയർ വഴി അയക്കുമ്പോൾ ഗ്ലാസ് പൊട്ടാതെ സംരക്ഷിക്കുന്ന ഹണികോമ്പ് പേപ്പർ റാപ്പിംഗ് രീതികളും പഠിക്കാം.",
+        "ar": "في الفصل الخامس، نتعلم فن تصميم الهوية البصرية مع العلب الأنبوبية الأنيقة وأختام الشمع، وحماية الزجاج بورق خلايا النحل ضد الكسر أثناء الشحن."
+      }
+    },
+    {
+      "num": 6,
+      "startSec": 1500,
+      "endSec": 1800,
+      "title": {
+        "en": "6. Instagram Aesthetic Video Selling & 200% Profit Calculation",
+        "ml": "6. ഇൻസ്റ്റാഗ്രാം റീൽസ് മാർക്കറ്റിംഗും 200% ലാഭക്കണക്കുകളും",
+        "ar": "6. التسويق بالفيديو على إنستغرام وهوامش أرباح 200%"
+      },
+      "sub": {
+        "en": "Cozy ambiance lighting reels, cafe gifting tie-ups, and recurring profit",
+        "ml": "കാൻഡിൽ ലൈറ്റിംഗ് വീഡിയോകൾ, കഫേ ടൈ-അപ്പുകൾ, ഉയർന്ന ലാഭം",
+        "ar": "فيديوهات الإنارة الدافئة، التعاقد مع المقاهي، والأرباح العالية"
+      },
+      "script": {
+        "en": "In chapter 6, master the numbers: each 200g scented candle costs ₹85 to make (wax, jar, oil, wick, box) and easily sells for ₹299 to ₹449, yielding up to 200% net profit margin. Create viral evening ambiance reels that sell out every batch.",
+        "ml": "അവസാന അധ്യായത്തിൽ, ഉണ്ടാക്കാൻ ₹85 ചെലവ് വരുന്ന ഒരു 200 ഗ്രാം സോയ കാൻഡിൽ ₹299 മുതൽ ₹450 വരെ വിൽക്കുന്നതിലൂടെ 200% ലാഭം എങ്ങനെ നേടാമെന്നും, ഇൻസ്റ്റാഗ്രാമിലൂടെയും ലോക്കൽ കഫേകളിലൂടെയും സ്ഥിരം ഓർഡറുകൾ എങ്ങനെ നേടാമെന്നും പഠിക്കാം.",
+        "ar": "في الفصل السادس، نحدد أرباح الشمعة سعة 200 جرام، والتي تكلف 85 روبية وتباع بـ 299 إلى 449 روبية بهامش ربح يصل 200% عبر فيديوهات إنستغرام الجذابة والتعاقد مع المقاهي."
+      },
+      "text": {
+        "en": "In chapter 6, master the numbers: each 200g scented candle costs ₹85 to make (wax, jar, oil, wick, box) and easily sells for ₹299 to ₹449, yielding up to 200% net profit margin. Create viral evening ambiance reels that sell out every batch.",
+        "ml": "അവസാന അധ്യായത്തിൽ, ഉണ്ടാക്കാൻ ₹85 ചെലവ് വരുന്ന ഒരു 200 ഗ്രാം സോയ കാൻഡിൽ ₹299 മുതൽ ₹450 വരെ വിൽക്കുന്നതിലൂടെ 200% ലാഭം എങ്ങനെ നേടാമെന്നും, ഇൻസ്റ്റാഗ്രാമിലൂടെയും ലോക്കൽ കഫേകളിലൂടെയും സ്ഥിരം ഓർഡറുകൾ എങ്ങനെ നേടാമെന്നും പഠിക്കാം.",
+        "ar": "في الفصل السادس، نحدد أرباح الشمعة سعة 200 جرام، والتي تكلف 85 روبية وتباع بـ 299 إلى 449 روبية بهامش ربح يصل 200% عبر فيديوهات إنستغرام الجذابة والتعاقد مع المقاهي."
+      }
+    }
+  ],
 };

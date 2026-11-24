@@ -18,11 +18,19 @@ window.dataRetailCourses = {
     "margin": "80% - 250%",
     "topMarkets": "Kozhikode S.M. Street, Mumbai Crawford Market, Kannauj",
     "images": {
-      "cover": "https://images.unsplash.com/photo-1615397349754-cfa2066a298e?auto=format&fit=crop&w=800&q=80",
-      "product": "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?auto=format&fit=crop&w=800&q=80",
+      "cover": "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&w=800&q=80",
+      "product": "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&w=800&q=80",
       "sourcing": "https://images.unsplash.com/photo-1596178065887-1198b6148b2b?auto=format&fit=crop&w=800&q=80",
       "formulation": "https://images.unsplash.com/photo-1615397349754-cfa2066a298e?auto=format&fit=crop&w=800&q=80",
-      "packaging": "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=800&q=80"
+      "packaging": "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=800&q=80",
+      "chapter1": "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&w=800&q=80",
+      "chapter2": "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?auto=format&fit=crop&w=800&q=80",
+      "chapter3": "https://images.unsplash.com/photo-1596178065887-1198b6148b2b?auto=format&fit=crop&w=800&q=80",
+      "chapter4": "https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=800&q=80",
+      "chapter5": "https://images.unsplash.com/photo-1615397349754-cfa2066a298e?auto=format&fit=crop&w=800&q=80",
+      "chapter6": "https://images.unsplash.com/photo-1450133064473-71024230f91b?auto=format&fit=crop&w=800&q=80",
+      "chapter7": "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=800&q=80",
+      "chapter8": "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80"
     },
     "curriculumHighlights": {
       "en": [
@@ -507,11 +515,19 @@ window.dataRetailCourses = {
     "margin": "45% - 120%",
     "topMarkets": "Surat Millennium Market, Tirupur Cotton Cluster, Kochi Broadway",
     "images": {
-      "cover": "https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=800&q=80",
+      "cover": "https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?auto=format&fit=crop&w=800&q=80",
       "product": "https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?auto=format&fit=crop&w=800&q=80",
       "sourcing": "https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=800&q=80",
       "formulation": "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?auto=format&fit=crop&w=800&q=80",
-      "packaging": "https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=800&q=80"
+      "packaging": "https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=800&q=80",
+      "chapter1": "https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?auto=format&fit=crop&w=800&q=80",
+      "chapter2": "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?auto=format&fit=crop&w=800&q=80",
+      "chapter3": "https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=800&q=80",
+      "chapter4": "https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=800&q=80",
+      "chapter5": "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=800&q=80",
+      "chapter6": "https://images.unsplash.com/photo-1450133064473-71024230f91b?auto=format&fit=crop&w=800&q=80",
+      "chapter7": "https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=800&q=80",
+      "chapter8": "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80"
     },
     "onlinePortals": {
       "intro": {
@@ -1550,11 +1566,19 @@ window.dataRetailCourses = {
     "margin": "100% - 300%",
     "topMarkets": "Mumbai Bhuleshwar Market, Jaipur Johari Bazaar, Delhi Sadar",
     "images": {
-      "cover": "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=800&q=80",
+      "cover": "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=800&q=80",
       "product": "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=800&q=80",
       "sourcing": "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=800&q=80",
-      "formulation": "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=800&q=80",
-      "packaging": "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=800&q=80"
+      "formulation": "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=800&q=80",
+      "packaging": "https://images.unsplash.com/photo-1602751584552-8ba73aad10e1?auto=format&fit=crop&w=800&q=80",
+      "chapter1": "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=800&q=80",
+      "chapter2": "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=800&q=80",
+      "chapter3": "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=800&q=80",
+      "chapter4": "https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=800&q=80",
+      "chapter5": "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=800&q=80",
+      "chapter6": "https://images.unsplash.com/photo-1450133064473-71024230f91b?auto=format&fit=crop&w=800&q=80",
+      "chapter7": "https://images.unsplash.com/photo-1602751584552-8ba73aad10e1?auto=format&fit=crop&w=800&q=80",
+      "chapter8": "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80"
     },
     "curriculumHighlights": {
       "en": [
@@ -1837,8 +1861,16 @@ window.dataRetailCourses = {
       "cover": "https://images.unsplash.com/photo-1599940824399-b87987ceb72a?auto=format&fit=crop&w=800&q=80",
       "product": "https://images.unsplash.com/photo-1599940824399-b87987ceb72a?auto=format&fit=crop&w=800&q=80",
       "sourcing": "https://images.unsplash.com/photo-1588668214407-6ea9a6d8c272?auto=format&fit=crop&w=800&q=80",
-      "formulation": "https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&w=800&q=80",
-      "packaging": "https://images.unsplash.com/photo-1599940824399-b87987ceb72a?auto=format&fit=crop&w=800&q=80"
+      "formulation": "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=800&q=80",
+      "packaging": "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=800&q=80",
+      "chapter1": "https://images.unsplash.com/photo-1599940824399-b87987ceb72a?auto=format&fit=crop&w=800&q=80",
+      "chapter2": "https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&w=800&q=80",
+      "chapter3": "https://images.unsplash.com/photo-1588668214407-6ea9a6d8c272?auto=format&fit=crop&w=800&q=80",
+      "chapter4": "https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=800&q=80",
+      "chapter5": "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=800&q=80",
+      "chapter6": "https://images.unsplash.com/photo-1450133064473-71024230f91b?auto=format&fit=crop&w=800&q=80",
+      "chapter7": "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=800&q=80",
+      "chapter8": "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80"
     },
     "curriculumHighlights": {
       "en": [
@@ -3245,5 +3277,128 @@ window.dataRetailCourses = {
         }
       ]
     }
-  }
+  },
+
+  "chocolates": {
+    "id": "chocolates",
+    "tier": "retail",
+    "icon": "fa-cookie-bite",
+    "headerClass": "attar-header",
+    "badgeColor": "#d97706",
+    "title": {
+      "en": "Artisanal Chocolates & Gourmet Stuffed Dates Academy",
+      "ml": "ഹാൻഡ്ക്രാഫ്റ്റഡ് ചോക്ലേറ്റുകളും ഈത്തപ്പഴ ഗിഫ്റ്റ് ബോക്സുകളും",
+      "ar": "أكاديمية الشوكولاتة الفاخرة والتمور المحشوة للهدايا"
+    },
+    "tagline": {
+      "en": "Highest gifting margins (120% - 250%) in Kerala. Start with just ₹4,500 from your home kitchen.",
+      "ml": "വിവാഹങ്ങൾക്കും ഈദിനും ഏറ്റവുമധികം ഡിമാൻഡുള്ള സംരംഭം. ₹4,500 ഉണ്ടെങ്കിൽ വീട്ടിൽ തുടങ്ങാം.",
+      "ar": "أعلى هوامش ربح لهدايا الأعراس والمناسبات (120% إلى 250%). ابدأ من مطبخ منزلك بـ 4,500 روبية فقط."
+    },
+    "minBudget": "₹4,500 - ₹9,500",
+    "margin": "120% - 250%",
+    "topMarkets": "Kozhikode Valiyangadi, Ernakulam Broadway, Mangalore Cashew Hub",
+    "images": {
+      "cover": "https://images.unsplash.com/photo-1549007994-cb92caebd54b?auto=format&fit=crop&w=800&q=80",
+      "product": "https://images.unsplash.com/photo-1549007994-cb92caebd54b?auto=format&fit=crop&w=800&q=80",
+      "sourcing": "https://images.unsplash.com/photo-1578849278619-e73505e9610f?auto=format&fit=crop&w=800&q=80",
+      "formulation": "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=800&q=80",
+      "packaging": "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?auto=format&fit=crop&w=800&q=80",
+      "chapter1": "https://images.unsplash.com/photo-1549007994-cb92caebd54b?auto=format&fit=crop&w=800&q=80",
+      "chapter2": "https://images.unsplash.com/photo-1511381939415-e44015466834?auto=format&fit=crop&w=800&q=80",
+      "chapter3": "https://images.unsplash.com/photo-1578849278619-e73505e9610f?auto=format&fit=crop&w=800&q=80",
+      "chapter4": "https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=800&q=80",
+      "chapter5": "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=800&q=80",
+      "chapter6": "https://images.unsplash.com/photo-1450133064473-71024230f91b?auto=format&fit=crop&w=800&q=80",
+      "chapter7": "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?auto=format&fit=crop&w=800&q=80",
+      "chapter8": "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80"
+    },
+    "curriculumHighlights": {
+      "en": [
+        "Chocolate science: Compound vs Couverture & microwave tempering",
+        "Stuffed Dates crafting: Medjool dates with roasted almond, pistachio & gold leaf",
+        "Itemized budget: Start 25 luxury gift hampers for under ₹4,800",
+        "Direct wholesale suppliers: Valiyangadi chocolate slabs & silicone moulds",
+        "Luxury rigid gift boxes with golden satin ribbon & dividers",
+        "Thermal insulated packing & ice gel packs for safe Kerala shipping"
+      ],
+      "ml": [
+        "ചോക്ലേറ്റ് ടെമ്പറിംഗ് രഹസ്യങ്ങളും ഈത്തപ്പഴ സ്റ്റഫിംഗ് വിദ്യകളും",
+        "റോസ്റ്റഡ് ആൽമണ്ട്, പിസ്ത, കശുവണ്ടി ചേർത്ത റോയൽ ഈത്തപ്പഴ ബോക്സുകൾ",
+        "തുടക്കക്കാർക്കുള്ള കൃത്യമായ ബഡ്ജറ്റ് (₹4,800-ൽ 25 ഗിഫ്റ്റ് ബോക്സുകൾ)",
+        "കോഴിക്കോട് വലിയങ്ങാടി ചോക്ലേറ്റ് കോമ്പൗണ്ട് & മോൾഡ് ഹോൾസെയിൽ വ്യാപാരികൾ",
+        "റിജിഡ് മാഗ്നറ്റിക് ഗിഫ്റ്റ് ബോക്സുകളും ഗോൾഡൻ റിബൺ പാക്കിംഗും",
+        "ചൂടുകാലത്തും ഉരുകാത്ത തെർമൽ ബബിൾ പാക്കിംഗും ഷിപ്പിംഗ് രീതികളും"
+      ],
+      "ar": [
+        "أسرار تذويب وضبط حرارة الشوكولاتة وحشو التمور بالمكسرات المحمصة",
+        "تصميم علب تمور ملكية بحشوة الفستق واللوز وورق الذهب الغذائي",
+        "ميزانية البدء: إنتاج 25 علبة هدايا فاخرة بأقل من 4,800 روبية",
+        "موردو قوالب السيلكون وألواح الشوكولاتة الخام بسعر الجملة",
+        "التغليف الكرتوني الفاخر مع الأشرطة الذهبية والفواصل الأنيقة",
+        "طرق الشحن الآمن في الأجواء الحارة باستخدام أكياس الجل المبردة"
+      ]
+    }
+  },
+  "candles": {
+    "id": "candles",
+    "tier": "retail",
+    "icon": "fa-fire-flame-curved",
+    "headerClass": "attar-header",
+    "badgeColor": "#f59e0b",
+    "title": {
+      "en": "Aroma Soy Wax Candles & Melts Academy",
+      "ml": "സുഗന്ധ സോയ വാക്സ് കാൻഡിലുകളും അരോമ മെൽറ്റുകളും",
+      "ar": "أكاديمية شموع الصويا العطرية ومكعبات الفواحة"
+    },
+    "tagline": {
+      "en": "Viral Instagram decor business with 150% - 300% profit margins. Start with just ₹3,500.",
+      "ml": "ഇൻസ്റ്റാഗ്രാമിൽ ട്രെൻഡിംഗ് ആയ സുഗന്ധ മെഴുകുതിരികൾ. ₹3,500 ഉണ്ടെങ്കിൽ സ്വന്തമായി നിർമ്മിക്കാം.",
+      "ar": "مشروع الديكور العطري الأكثر رواجاً على إنستغرام بأرباح تصل 300%. ابدأ بـ 3,500 روبية."
+    },
+    "minBudget": "₹3,500 - ₹8,500",
+    "margin": "150% - 300%",
+    "topMarkets": "Kochi Chemical Hub, Mumbai Crawford Market, Delhi Sadar Bazaar",
+    "images": {
+      "cover": "https://images.unsplash.com/photo-1603006905003-be475563bc59?auto=format&fit=crop&w=800&q=80",
+      "product": "https://images.unsplash.com/photo-1603006905003-be475563bc59?auto=format&fit=crop&w=800&q=80",
+      "sourcing": "https://images.unsplash.com/photo-1508746829417-e6f548d8d6ed?auto=format&fit=crop&w=800&q=80",
+      "formulation": "https://images.unsplash.com/photo-1601055903647-ddf1ee9701b7?auto=format&fit=crop&w=800&q=80",
+      "packaging": "https://images.unsplash.com/photo-1605651202774-7d573fd3f12d?auto=format&fit=crop&w=800&q=80",
+      "chapter1": "https://images.unsplash.com/photo-1603006905003-be475563bc59?auto=format&fit=crop&w=800&q=80",
+      "chapter2": "https://images.unsplash.com/photo-1570823635306-250abb06d4b3?auto=format&fit=crop&w=800&q=80",
+      "chapter3": "https://images.unsplash.com/photo-1508746829417-e6f548d8d6ed?auto=format&fit=crop&w=800&q=80",
+      "chapter4": "https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=800&q=80",
+      "chapter5": "https://images.unsplash.com/photo-1601055903647-ddf1ee9701b7?auto=format&fit=crop&w=800&q=80",
+      "chapter6": "https://images.unsplash.com/photo-1450133064473-71024230f91b?auto=format&fit=crop&w=800&q=80",
+      "chapter7": "https://images.unsplash.com/photo-1605651202774-7d573fd3f12d?auto=format&fit=crop&w=800&q=80",
+      "chapter8": "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80"
+    },
+    "curriculumHighlights": {
+      "en": [
+        "Wax chemistry: 100% natural Soy Wax vs Paraffin & crackling wood wicks",
+        "Scent throw mastering: Fragrance oil ratios at 70°C pour temperature",
+        "Minimalist starter kit: Melting pitcher, thermometer, amber glass jars",
+        "Wholesale raw material sources: Soy wax flakes & aroma oils in bulk",
+        "Kraft tube boxes, wax seal stamps & aesthetic unboxing reels",
+        "Cushioned honeycomb paper packing for 100% break-free glass transit"
+      ],
+      "ml": [
+        "100% പ്രകൃതിദത്ത സോയ വാക്സും പാരഫിനും തമ്മിലുള്ള വ്യത്യാസങ്ങൾ",
+        "സുഗന്ധം മുറി മുഴുവൻ പരക്കാനുള്ള ഓയിൽ മിക്സിംഗ് അനുപാതങ്ങൾ (70°C ടെമ്പറേച്ചർ)",
+        "ലളിതമായ ഹോം കിറ്റ്: മെൽറ്റിംഗ് പിക്ചർ, ഡിജിറ്റൽ തെർമോമീറ്റർ, ആംബർ ഗ്ലാസ് ജാറുകൾ",
+        "സോയ വാക്സ് പെല്ലറ്റുകളും എസ്സെൻഷ്യൽ ഓയിലുകളും കുറഞ്ഞ നിരക്കിൽ വാങ്ങാൻ",
+        "ക്രാഫ്റ്റ് സിലിണ്ടർ ബോക്സുകളും കസ്റ്റം വാക്സ് സീൽ സ്റ്റാമ്പ് പാക്കിംഗും",
+        "പൊട്ടാതെ സുരക്ഷിതമായി അയക്കാൻ ഹണികോമ്പ് പേപ്പർ പാക്കിംഗ് രീതികൾ"
+      ],
+      "ar": [
+        "كيمياء الشموع: شمع الصويا الطبيعي 100% مقابل البرافين وأسرار الفتيل الخشبي",
+        "درجة حرارة صب الزيوت العطرية (70 مئوية) لضمان فوحان الرائحة في أرجاء الغرفة",
+        "عدة العمل الأساسية: إبريق الصهر، ميزان الحرارة الرقمي، والبرطمانات الكهرمانية",
+        "مصادر شراء رقائق شمع الصويا والزيوت النقية بأسعار الجملة المخفضة",
+        "التغليف الأنبوبي الأنيق مع أختام الشمع الأحمر لنيل ثقة متابعي إنستغرام",
+        "تغليف خلايا النحل الورقي لحماية الزجاج من الكسر أثناء الشحن البريدي"
+      ]
+    }
+  },
 };

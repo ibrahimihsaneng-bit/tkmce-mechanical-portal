@@ -4730,7 +4730,7 @@ const app = {
         id: "mod-blueprint",
         stepNum: 1,
         title: t.mod1Title || '1. Blueprint & Product Science',
-        heroImg: cat.images.product,
+        heroImg: cat.images.chapter1 || cat.images.product,
         heroTitle: lang === 'ml' ? 'ഉൽപ്പന്ന വിവരങ്ങളും സാങ്കേതിക സവിശേഷതകളും' : lang === 'ar' ? 'المواصفات الفنية وعلم المنتج' : 'Specifications, Blueprint & Science',
         heroSub: lang === 'ml' ? 'ആദ്യമായി എന്ത് ചെയ്യണം? ഉൽപ്പന്നം എന്താണെന്ന് മനസ്സിലാക്കുക, മെഷീൻ വിവരങ്ങളും വിപണി നിരക്കുകളും പഠിക്കുക.' : lang === 'ar' ? 'ماذا تفعل أولاً؟ افهم طبيعة المنتج والمواصفات الفنية للماكينة أو المصنع.' : 'Phase 1: Zero-knowledge craft science, machinery technical parameters, and top varieties.',
         renderContent: () => {
@@ -4858,7 +4858,7 @@ const app = {
         id: "mod-capital",
         stepNum: 2,
         title: t.mod2Title || '2. Exact Capital & Budget Breakdown',
-        heroImg: cat.images.cover,
+        heroImg: cat.images.chapter2 || cat.images.costing || cat.images.cover,
         heroTitle: lang === 'ml' ? 'എന്തിനൊക്കെ എത്ര രൂപ? (വിശദമായ ബഡ്ജറ്റ് പട്ടിക)' : lang === 'ar' ? 'تفاصيل الميزانية ورأس المال الدقيق' : 'Itemized Capital & Budget Ledger',
         heroSub: lang === 'ml' ? 'രണ്ടാമതായി എന്ത് ചെയ്യണം? കയ്യിൽ എത്ര രൂപ വേണം, എന്തിനൊക്കെ എത്ര രൂപ ചെലവാകും എന്ന് കൃത്യമായി പ്ലാൻ ചെയ്യുക.' : lang === 'ar' ? 'ماذا تفعل ثانياً؟ حدد ميزانيتك بدقة واعرف أين تذهب كل روبية لتفادي أي خسائر.' : 'Phase 2: Exact itemized startup costs for Starter and Pro brand tiers.',
         renderContent: () => {
@@ -4925,7 +4925,7 @@ const app = {
         id: "mod-suppliers",
         stepNum: 3,
         title: t.mod3Title || '3. Wholesale Markets & Google Maps',
-        heroImg: cat.images.sourcing,
+        heroImg: cat.images.chapter3 || cat.images.sourcing,
         heroTitle: lang === 'ml' ? 'വിശ്വസനീയ നിർമ്മാതാക്കൾ & അസംസ്കൃത വസ്തുക്കൾ' : lang === 'ar' ? 'المصنعون المعتمدون ومصادر المواد الخام' : 'Verified Manufacturers, Wholesalers & Maps',
         heroSub: lang === 'ml' ? 'മൂന്നാമതായി എന്ത് ചെയ്യണം? മെഷീൻ നിർമ്മാതാക്കളുടെയും അസംസ്കൃത വസ്തുക്കളുടെയും ലൊക്കേഷനുകൾ കണ്ടുപിടിച്ച് നേരിട്ട് ബന്ധപ്പെടുക.' : lang === 'ar' ? 'ماذا تفعل ثالثاً؟ تواصل مباشرة مع مصنعي الماكينات وموردي المواد الخام بالخرائط والواتساب.' : 'Phase 3: Connect directly with verified machinery manufacturers, EPC contractors, and raw material mandis.',
         renderContent: () => {
@@ -5040,7 +5040,7 @@ const app = {
         id: "mod-coaching",
         stepNum: 4,
         title: t.mod4Title || '4. Wholesaler Calling & Chat Coaching',
-        heroImg: cat.images.sourcing,
+        heroImg: cat.images.chapter4 || cat.images.negotiation || "https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=800&q=80",
         heroTitle: lang === 'ml' ? 'വ്യാപാരികളോട് സംസാരിക്കേണ്ട രീതി' : lang === 'ar' ? 'حوار التفاوض والاتصال مع الموردين' : 'Wholesaler Calling & Chat Coaching',
         heroSub: lang === 'ml' ? 'നാലാമതായി എന്ത് ചെയ്യണം? കടക്കാരെ വിളിച്ച് സാമ്പിളുകൾ ആവശ്യപ്പെടാനും വിലപേശാനുമുള്ള സംസാര രീതി പഠിക്കുക.' : lang === 'ar' ? 'ماذا تفعل رابعاً؟ كيف تتصل بالموردين بثقة وتطلب عينات وتتفاوض على سعر الكيلو.' : 'Phase 4: Battle-tested calling scripts and negotiation masterclass.',
         renderContent: () => `
@@ -5064,7 +5064,7 @@ const app = {
         id: "mod-sourcing",
         stepNum: 5,
         title: t.mod5Title || '5. Formulation & How to Make Your Brand',
-        heroImg: cat.images.formulation,
+        heroImg: cat.images.chapter5 || cat.images.formulation || cat.images.manufacturing,
         heroTitle: lang === 'ml' ? 'നിർമ്മാണ രീതി & സർക്കാർ സബ്‌സിഡികൾ' : lang === 'ar' ? 'خطوات التصنيع والدعم الحكومي' : 'Manufacturing Process & Government Grants',
         heroSub: lang === 'ml' ? 'അഞ്ചാമതായി എന്ത് ചെയ്യണം? ഘട്ടം ഘട്ടമായുള്ള നിർമ്മാണ പ്രക്രിയയും, സർക്കാർ സബ്‌സിഡികൾ ലഭ്യമാക്കുന്ന വിധവും.' : lang === 'ar' ? 'ماذا تفعل خامساً؟ خطوات التشغيل والتصنيع وكيفية التقديم على الدعم المالي.' : 'Phase 5: Step-by-step practical manufacturing SOP, unit cost, and government subsidy clearance.',
         renderContent: () => {
@@ -5120,7 +5120,7 @@ const app = {
         id: "mod-simulator",
         stepNum: 6,
         title: t.mod6Title || '6. Profit Simulator & Live Visual Graph',
-        heroImg: cat.images.cover,
+        heroImg: cat.images.chapter6 || cat.images.legal || "https://images.unsplash.com/photo-1450133064473-71024230f91b?auto=format&fit=crop&w=800&q=80",
         heroTitle: lang === 'ml' ? 'ലൈവ് ലാഭ ഗ്രാഫും സിമുലേറ്ററും' : lang === 'ar' ? 'حاسبة الأرباح والرسم البياني المباشر' : 'Live Profit Graph & Margin Visualizer',
         heroSub: lang === 'ml' ? 'ആറാമതായി എന്ത് ചെയ്യണം? ഉൽപ്പാദനച്ചെലവും വിൽപന ലാഭവും തത്സമയം കണക്കുകൂട്ടുക.' : lang === 'ar' ? 'ماذا تفعل سادساً؟ شاهد رسماً بيانياً يوضح أرباحك وتكلفة تصنيع كل وحدة بدقة.' : 'Phase 6: Interactive simulator with real-time unit economics and profit margin visualizer.',
         renderContent: () => this.getNicheSimulatorHtml(nicheKey)
@@ -5131,7 +5131,7 @@ const app = {
         id: "mod-portals",
         stepNum: 7,
         title: t.mod7Title || '7. Verified Online Portals, Instagram & Websites',
-        heroImg: cat.images.packaging,
+        heroImg: cat.images.chapter7 || cat.images.packaging,
         heroTitle: lang === 'ml' ? 'സോഷ്യൽ മീഡിയ, വ്യാപാരികളുടെ വെബ്‌സൈറ്റുകൾ & ലിങ്കുകൾ' : lang === 'ar' ? 'بوابات الموردين الرسمية وصفحات إنستغرام وفيسبوك' : 'Verified Online Portals, Instagram & Websites',
         heroSub: lang === 'ml' ? 'ഏഴാമതായി എന്ത് ചെയ്യണം? പ്രമുഖ ബ്രാൻഡുകളുടെ ഇൻസ്റ്റാഗ്രാം, ഫേസ്ബുക്ക് ഗ്രൂപ്പുകൾ, ഇന്ത്യയിലെയും ഗൾഫിലെയും ഒഫീഷ്യൽ സൈറ്റുകൾ പരിശോധിക്കുക.' : lang === 'ar' ? 'ماذا تفعل سابعاً؟ استكشف الحسابات الملهمة على إنستغرام ومجموعات تجار الجملة ومواقع المصانع في الهند والخليج.' : 'Phase 7: Direct verified links to Instagram brands, Facebook wholesale groups, domestic portals, and GCC/international exporters.',
         renderContent: () => this.renderPortalsSection(nicheKey)
@@ -5142,7 +5142,7 @@ const app = {
         id: "mod-logistics",
         stepNum: 8,
         title: t.mod8Title || '8. Courier Rates, COD & Launch Checklist',
-        heroImg: cat.images.packaging,
+        heroImg: cat.images.chapter8 || cat.images.logistics || "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80",
         heroTitle: lang === 'ml' ? 'കൊറിയർ & ട്രാൻസ്പോർട്ട് നിരക്കുകൾ, വിതരണ ശൃംഖല' : lang === 'ar' ? 'أسعار الشحن والخدمات اللوجستية وشبكة التوزيع' : 'Logistics, Freight Rates & Distribution Launch',
         heroSub: lang === 'ml' ? 'എട്ടാമതായി എന്ത് ചെയ്യണം? സുരക്ഷിതമായി പാക്ക് ചെയ്ത് കൊറിയർ/ലോറി ട്രാൻസ്പോർട്ട് വഴി വിതരണം ചെയ്യുക.' : lang === 'ar' ? 'ماذا تفعل ثامناً؟ شحن الطرود والمنتجات بنظام وتوزيعها على المحلات والوكلاء بأمان.' : 'Phase 8: Shipping partners, B2B freight, and launch distribution roadmap.',
         renderContent: () => `
@@ -6052,7 +6052,7 @@ const app = {
     const margin = cat.margin || '50% - 150%';
     const hubs = cat.topMarkets || 'Kozhikode, Kochi, Mumbai, Surat';
 
-    const isFood = ['spices', 'mach_coldpress', 'mach_spisegrind', 'mach_icepopsicle', 'ind_mangopulp', 'ind_coconutoil', 'ind_iqffrozen', 'ind_vacuumchips', 'ind_dairyplant', 'ind_cashewplant', 'ind_bottledwater'].includes(categoryKey);
+    const isFood = ['spices', 'chocolates', 'mach_coldpress', 'mach_spisegrind', 'mach_icepopsicle', 'ind_mangopulp', 'ind_coconutoil', 'ind_iqffrozen', 'ind_vacuumchips', 'ind_dairyplant', 'ind_cashewplant', 'ind_bottledwater'].includes(categoryKey);
     const isMachinery = categoryKey.startsWith('mach_') || categoryKey.startsWith('ind_') || ['spices', 'cookware'].includes(categoryKey);
 
     const licenses = [
@@ -6548,6 +6548,10 @@ const app = {
               <option value="bags">Canvas Totes & Bags (ബാഗുകൾ)</option>
               <option value="accessories">Anti-Tarnish Jewelry (മോതിരങ്ങൾ & ആഭരണങ്ങൾ)</option>
               <option value="spices">Kerala Spices & Honey (സുഗന്ധവ്യഞ്ജനങ്ങൾ)</option>
+              <option value="chocolates">Artisan Chocolates & Dates (ചോക്ലേറ്റുകൾ & ഈത്തപ്പഴം)</option>
+              <option value="candles">Aroma Soy Wax Candles (സുഗന്ധ മെഴുകുതിരികൾ)</option>
+                <option value="chocolates">Handcrafted Chocolates & Dates (ചോക്ലേറ്റ് & ഈത്തപ്പഴം)</option>
+                <option value="candles">Aroma Soy Wax Candles (സുഗന്ധ മെഴുകുതിരികൾ)</option>
             </select>
           </div>
           <div class="form-group">
@@ -6759,6 +6763,16 @@ const app = {
       priceInput.value = 750;
       packInput.value = 30;
       shipInput.value = 60;
+    } else if (catKey === 'chocolates') {
+      costInput.value = 95;
+      priceInput.value = 349;
+      packInput.value = 35;
+      shipInput.value = 50;
+    } else if (catKey === 'candles') {
+      costInput.value = 75;
+      priceInput.value = 299;
+      packInput.value = 25;
+      shipInput.value = 45;
     }
   },
 
