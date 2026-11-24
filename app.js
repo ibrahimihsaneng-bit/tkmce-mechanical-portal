@@ -3380,6 +3380,17 @@ const app = {
     return episodes.find(e => e.num === epNum) || episodes[0] || {};
   },
 
+  // Secure HTML Entity Sanitizer (XSS Protection)
+  escapeHtml(str) {
+    if (typeof str !== 'string') return String(str ?? '');
+    return str
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  },
+
   formatAudioTime(sec) {
     const mins = Math.floor(sec / 60);
     const secs = Math.floor(sec % 60);
@@ -5691,7 +5702,7 @@ const app = {
               <span><strong>Allotment:</strong> ${post.target}</span>
             </div>
           </div>
-          <a href="${waLink}" target="_blank" class="btn-collab-wa">
+          <a href="${waLink}" target="_blank" rel="noopener noreferrer" class="btn-collab-wa">
             <i class="fa-brands fa-whatsapp"></i> <span>${lang === 'ml' ? 'വാട്സ്ആപ്പിൽ സംസാരിക്കുക' : 'Connect on WhatsApp'}</span>
           </a>
         </div>
@@ -5721,10 +5732,10 @@ const app = {
       return;
     }
 
-    const title = cat.title ? (cat.title[lang] || cat.title.en) : categoryKey;
-    const budget = cat.budget ? (cat.budget[lang] || cat.budget.en) : (cat.minBudget || '₹3,000');
-    const margin = cat.margin ? (cat.margin[lang] || cat.margin.en) : '40% - 150%';
-    const desc = cat.desc ? (cat.desc[lang] || cat.desc.en) : (cat.tagline ? (cat.tagline[lang] || cat.tagline.en) : '');
+    const title = this.escapeHtml(cat.title ? (cat.title[lang] || cat.title.en) : categoryKey);
+    const budget = this.escapeHtml(cat.budget ? (cat.budget[lang] || cat.budget.en) : (cat.minBudget || '₹3,000'));
+    const margin = this.escapeHtml(cat.margin ? (cat.margin[lang] || cat.margin.en) : '40% - 150%');
+    const desc = this.escapeHtml(cat.desc ? (cat.desc[lang] || cat.desc.en) : (cat.tagline ? (cat.tagline[lang] || cat.tagline.en) : ''));
 
     printWindow.document.write(`
       <!DOCTYPE html>
@@ -6275,7 +6286,8 @@ const app = {
   },
 
   generatePersonalPlan() {
-    const name = (document.getElementById('planFounderName')?.value || '').trim() || 'Entrepreneur';
+    const rawName = (document.getElementById('planFounderName')?.value || '').trim() || 'Entrepreneur';
+    const name = this.escapeHtml(rawName.slice(0, 60));
     const nicheKey = document.getElementById('planNicheSelect')?.value || 'attar';
     const rawBudget = parseInt(document.getElementById('planBudget')?.value);
     const container = document.getElementById('planOutputArea');
