@@ -66,27 +66,56 @@
         <!-- Academies Dropdown Menu -->
         <div class="nav-dropdown">
           <button class="nav-dropdown-btn" id="navAcademies">
-            <i class="fa-solid fa-graduation-cap"></i> Study Academies <i class="fa-solid fa-chevron-down drop-arrow"></i>
+            <i class="fa-solid fa-graduation-cap"></i> <span id="navAcademiesText">30 Study Academies</span> <i class="fa-solid fa-chevron-down drop-arrow"></i>
           </button>
-          <div class="dropdown-menu-box">
-            <a href="#academy/attar" class="drop-link" onclick="app.openAcademy('attar')">
-              <i class="fa-solid fa-bottle-droplet text-warning"></i> <span id="dropAttar">Attar & Perfumes Academy</span>
-            </a>
-            <a href="#academy/clothing" class="drop-link" onclick="app.openAcademy('clothing')">
-              <i class="fa-solid fa-shirt text-danger"></i> <span id="dropClothing">Dresses & Boutique Academy</span>
-            </a>
-            <a href="#academy/watches" class="drop-link" onclick="app.openAcademy('watches')">
-              <i class="fa-solid fa-clock text-info"></i> <span id="dropWatches">Fashion Watches Academy</span>
-            </a>
-            <a href="#academy/bags" class="drop-link" onclick="app.openAcademy('bags')">
-              <i class="fa-solid fa-bag-shopping text-warning"></i> <span id="dropBags">Canvas Totes & Bags Academy</span>
-            </a>
-            <a href="#academy/accessories" class="drop-link" onclick="app.openAcademy('accessories')">
-              <i class="fa-solid fa-ring text-success"></i> <span id="dropAccessories">Rings & Jewelry Academy</span>
-            </a>
-            <a href="#academy/spices" class="drop-link" onclick="app.openAcademy('spices')">
-              <i class="fa-solid fa-seedling text-success"></i> <span id="dropSpices">Kerala Spices & Honey Academy</span>
-            </a>
+          <div class="dropdown-menu-box dropdown-tiers-box">
+            <div class="drop-tier-section">
+              <span class="drop-tier-title"><i class="fa-solid fa-store text-primary"></i> 1. ചെറുകിട വ്യാപാരങ്ങൾ (₹3k - ₹25k)</span>
+              <a href="#academy/attar" class="drop-link" onclick="app.openAcademy('attar')">
+                <i class="fa-solid fa-bottle-droplet text-warning"></i> <span>അത്തർ & പെർഫ്യൂംസ്</span>
+              </a>
+              <a href="#academy/clothing" class="drop-link" onclick="app.openAcademy('clothing')">
+                <i class="fa-solid fa-shirt text-danger"></i> <span>വസ്ത്രങ്ങൾ & ബോട്ടിക്</span>
+              </a>
+              <a href="#academy/watches" class="drop-link" onclick="app.openAcademy('watches')">
+                <i class="fa-solid fa-clock text-info"></i> <span>ഫാഷൻ വാച്ചുകൾ</span>
+              </a>
+              <a href="#home" class="drop-link-more" onclick="app.navigateTo('home'); app.filterBusinessTier('retail');">
+                <i class="fa-solid fa-arrow-right"></i> <span>എല്ലാ ചെറുകിട ബിസിനസ്സുകളും (10) →</span>
+              </a>
+            </div>
+
+            <div class="drop-tier-section">
+              <span class="drop-tier-title"><i class="fa-solid fa-gears text-success"></i> 2. മെഷീൻ നിർമ്മാണം (₹1L - ₹5L)</span>
+              <a href="#academy/mach_paperbag" class="drop-link" onclick="app.openAcademy('mach_paperbag')">
+                <i class="fa-solid fa-box text-success"></i> <span>പേപ്പർ ബാഗ് നിർമ്മാണം</span>
+              </a>
+              <a href="#academy/mach_coldpress" class="drop-link" onclick="app.openAcademy('mach_coldpress')">
+                <i class="fa-solid fa-oil-well text-warning"></i> <span>മരച്ചെക്ക് വെളിച്ചെണ്ണ</span>
+              </a>
+              <a href="#academy/mach_spisegrind" class="drop-link" onclick="app.openAcademy('mach_spisegrind')">
+                <i class="fa-solid fa-pepper-hot text-danger"></i> <span>സ്പൈസ് പൾവറൈസർ</span>
+              </a>
+              <a href="#home" class="drop-link-more" onclick="app.navigateTo('home'); app.filterBusinessTier('machine');">
+                <i class="fa-solid fa-arrow-right"></i> <span>എല്ലാ മെഷീൻ യൂണിറ്റുകളും (10) →</span>
+              </a>
+            </div>
+
+            <div class="drop-tier-section">
+              <span class="drop-tier-title"><i class="fa-solid fa-industry text-primary"></i> 3. വൻകിട പ്ലാന്റുകൾ (₹10L - ₹50L+)</span>
+              <a href="#academy/ind_mangopulp" class="drop-link" onclick="app.openAcademy('ind_mangopulp')">
+                <i class="fa-solid fa-blender text-warning"></i> <span>മാംഗോ പൾപ്പ് കണ്ടിന്യൂവസ് പ്ലാന്റ്</span>
+              </a>
+              <a href="#academy/ind_coconutoil" class="drop-link" onclick="app.openAcademy('ind_coconutoil')">
+                <i class="fa-solid fa-droplet text-info"></i> <span>ഓട്ടോമാറ്റിക് വെളിച്ചെണ്ണ മിൽ</span>
+              </a>
+              <a href="#academy/ind_bottledwater" class="drop-link" onclick="app.openAcademy('ind_bottledwater')">
+                <i class="fa-solid fa-faucet-drip text-primary"></i> <span>മിനറൽ വാട്ടർ ബോട്ടിലിംഗ്</span>
+              </a>
+              <a href="#home" class="drop-link-more" onclick="app.navigateTo('home'); app.filterBusinessTier('industrial');">
+                <i class="fa-solid fa-arrow-right"></i> <span>എല്ലാ ഇൻഡസ്ട്രിയൽ പ്ലാന്റുകളും (10) →</span>
+              </a>
+            </div>
           </div>
         </div>
 
@@ -226,6 +255,22 @@
           <p class="section-subtitle" id="facultySubtitle">
             Each academy is an independent, complete masterclass. Learn the step-by-step creation roadmap, exact capital breakdown, supplier phone numbers with Google Maps, profit graphs, and negotiation dialogue.
           </p>
+        </div>
+
+        <!-- 3-Tier Category Filter Bar -->
+        <div class="tier-filter-bar" id="tierFilterBar">
+          <button class="tier-tab-btn active" data-tier="all" onclick="app.filterBusinessTier('all')">
+            <i class="fa-solid fa-layer-group"></i> <span id="tierTabAll">എല്ലാ ബിസിനസ്സുകളും (30)</span>
+          </button>
+          <button class="tier-tab-btn" data-tier="retail" onclick="app.filterBusinessTier('retail')">
+            <i class="fa-solid fa-store"></i> <span id="tierTabRetail">1. ചെറുകിട വ്യാപാരങ്ങൾ (10)</span>
+          </button>
+          <button class="tier-tab-btn" data-tier="machine" onclick="app.filterBusinessTier('machine')">
+            <i class="fa-solid fa-gears"></i> <span id="tierTabMachine">2. മെഷീൻ നിർമ്മാണ യൂണിറ്റുകൾ (10)</span>
+          </button>
+          <button class="tier-tab-btn" data-tier="industrial" onclick="app.filterBusinessTier('industrial')">
+            <i class="fa-solid fa-industry"></i> <span id="tierTabIndustrial">3. വൻകിട ഇൻഡസ്ട്രിയൽ പ്ലാന്റുകൾ (10)</span>
+          </button>
         </div>
 
         <div class="faculty-cards-grid" id="facultyCardsGrid">
@@ -516,6 +561,10 @@
   <!-- Floating Synchronized Read-Along Transcript Drawer -->
   <div id="floatingTranscriptDrawer" class="floating-transcript-drawer" style="display: none;"></div>
 
+  <script src="data_retail_courses.js"></script>
+  <script src="data_machine_courses.js"></script>
+  <script src="data_industrial_courses.js"></script>
+  <script src="data_audio_library.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

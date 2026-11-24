@@ -44,6 +44,11 @@ const app = {
       // Header Nav
       navHome: "Home",
       navAcademies: "Study Academies",
+      navAcademiesText: "30 Study Academies",
+      tierTabAll: "All Businesses (30)",
+      tierTabRetail: "1. Retail & Trading (10)",
+      tierTabMachine: "2. Machine Units (10)",
+      tierTabIndustrial: "3. Industrial Plants (10)",
       dropAttar: "Attar & Perfumes Academy",
       dropClothing: "Dresses & Boutique Academy",
       dropWatches: "Fashion Watches Academy",
@@ -162,6 +167,11 @@ const app = {
       // Header Nav
       navHome: "ഹോം",
       navAcademies: "പഠന ശാഖകൾ",
+      navAcademiesText: "30 പഠന ശാഖകൾ",
+      tierTabAll: "എല്ലാ ബിസിനസ്സുകളും (30)",
+      tierTabRetail: "1. ചെറുകിട വ്യാപാരങ്ങൾ (10)",
+      tierTabMachine: "2. മെഷീൻ നിർമ്മാണ യൂണിറ്റുകൾ (10)",
+      tierTabIndustrial: "3. വൻകിട ഇൻഡസ്ട്രിയൽ പ്ലാന്റുകൾ (10)",
       dropAttar: "അത്തർ & പെർഫ്യൂം ശാഖ",
       dropClothing: "വസ്ത്രങ്ങൾ & ബോട്ടിക് ശാഖ",
       dropWatches: "ഫാഷൻ വാച്ചുകൾ ശാഖ",
@@ -280,6 +290,11 @@ const app = {
       // Header Nav
       navHome: "الرئيسية",
       navAcademies: "أكاديميات المشاريع",
+      navAcademiesText: "30 أكاديمية دراسية",
+      tierTabAll: "جميع المشاريع (30)",
+      tierTabRetail: "1. تجارة التجزئة (10)",
+      tierTabMachine: "2. وحدات التصنيع الآلي (10)",
+      tierTabIndustrial: "3. المصانع الصناعية (10)",
       dropAttar: "أكاديمية العطور ودهن العود",
       dropClothing: "أكاديمية العبايات والأزياء",
       dropWatches: "أكاديمية الساعات الفاخرة",
@@ -1922,8 +1937,34 @@ const app = {
     { service: "Kerala Gulf Air Cargo", zone: "UAE & Saudi Air Cargo", weight: "Per Kg (Min 5kg)", rate: "₹800 - ₹1,100 / kg", remarks: "Very popular among Gulf NRI expatriates" }
   ],
 
+  // Current Active Business Tier Filter ('all' | 'retail' | 'machine' | 'industrial')
+  currentTierFilter: 'all',
+
+  filterBusinessTier(tier) {
+    this.currentTierFilter = tier;
+    document.querySelectorAll('.tier-tab-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.getAttribute('data-tier') === tier);
+    });
+    this.renderFacultyCards();
+  },
+
   // Core Application Initialization
   init() {
+    if (typeof window !== 'undefined') {
+      if (window.dataRetailCourses || window.dataMachineCourses || window.dataIndustrialCourses) {
+        this.categoriesData = {
+          ...(window.dataRetailCourses || this.categoriesData),
+          ...(window.dataMachineCourses || {}),
+          ...(window.dataIndustrialCourses || {})
+        };
+      }
+      if (window.dataAudioLibrary) {
+        this.masterclassAudioLibrary = {
+          ...this.masterclassAudioLibrary,
+          ...window.dataAudioLibrary
+        };
+      }
+    }
     this.detectLanguage();
     this.handleHashRouting();
     this.bindEvents();
@@ -3504,45 +3545,132 @@ const app = {
 
     // Build the 8 Step HTML definitions
     const stepModules = [
-      // STEP 1: Product Science & Blueprint
+      // STEP 1: Product Science, Specifications & Blueprint
       {
         id: "mod-blueprint",
         stepNum: 1,
         title: t.mod1Title || '1. Blueprint & Product Science',
         heroImg: cat.images.product,
-        heroTitle: lang === 'ml' ? 'ഉൽപ്പന്ന വിവരങ്ങളും വിപണിയും' : lang === 'ar' ? 'علم الصنعة والمنتج' : 'Product Science & Fast Sellers',
-        heroSub: lang === 'ml' ? 'ആദ്യമായി എന്ത് ചെയ്യണം? ഉൽപ്പന്നം എന്താണെന്ന് മനസ്സിലാക്കുക, ഏറ്റവും കൂടുതൽ വിറ്റുപോകുന്ന ഇനങ്ങൾ തിരഞ്ഞെടുക്കുക.' : lang === 'ar' ? 'ماذا تفعل أولاً؟ افهم طبيعة المنتج واختر أكثر 4 أصناف طلباً في السوق.' : 'Phase 1: Zero-knowledge craft science and top 4 fastest-moving varieties.',
-        renderContent: () => `
-          <div class="blueprint-intro-box" style="background: #f8fafc; border-left: 4px solid var(--primary); padding: 18px 22px; border-radius: var(--radius-sm); margin-bottom: 24px; line-height: 1.6;">
-            <p style="font-size: 0.96rem; color: var(--secondary-dark);">${cat.blueprint.intro[lang] || cat.blueprint.intro.en}</p>
-          </div>
+        heroTitle: lang === 'ml' ? 'ഉൽപ്പന്ന വിവരങ്ങളും സാങ്കേതിക സവിശേഷതകളും' : lang === 'ar' ? 'المواصفات الفنية وعلم المنتج' : 'Specifications, Blueprint & Science',
+        heroSub: lang === 'ml' ? 'ആദ്യമായി എന്ത് ചെയ്യണം? ഉൽപ്പന്നം എന്താണെന്ന് മനസ്സിലാക്കുക, മെഷീൻ വിവരങ്ങളും വിപണി നിരക്കുകളും പഠിക്കുക.' : lang === 'ar' ? 'ماذا تفعل أولاً؟ افهم طبيعة المنتج والمواصفات الفنية للماكينة أو المصنع.' : 'Phase 1: Zero-knowledge craft science, machinery technical parameters, and top varieties.',
+        renderContent: () => {
+          let machineOrPlantHtml = '';
+          if (cat.machineSpecs) {
+            machineOrPlantHtml = `
+              <div class="machine-specs-box" style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: var(--radius-sm); padding: 20px; margin-bottom: 24px;">
+                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 14px;">
+                  <div style="width: 36px; height: 36px; border-radius: 8px; background: #16a34a; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 1.1rem;">
+                    <i class="fa-solid fa-gears"></i>
+                  </div>
+                  <div>
+                    <h4 style="margin: 0; font-size: 1.1rem; color: #166534; font-weight: 800;">${lang === 'ml' ? 'മെഷീന്റെ സാങ്കേതിക വിവരങ്ങൾ (Machine Specifications)' : lang === 'ar' ? 'المواصفات الفنية للماكينة' : 'Machine Technical Specifications'}</h4>
+                    <p style="margin: 0; font-size: 0.85rem; color: #15803d;">${cat.machineSpecs.machineName || ''}</p>
+                  </div>
+                </div>
+                <div class="specs-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; font-size: 0.88rem;">
+                  <div class="spec-item" style="background: #ffffff; padding: 12px; border-radius: 6px; border: 1px solid #dcfce7;">
+                    <span style="color: #64748b; font-size: 0.78rem; font-weight: 600;">${lang === 'ml' ? 'പ്രൊഡക്ഷൻ ശേഷി' : lang === 'ar' ? 'الطاقة الإنتاجية' : 'Hourly Capacity'}</span>
+                    <br><strong style="color: #0f172a;">${cat.machineSpecs.capacity || 'N/A'}</strong>
+                  </div>
+                  <div class="spec-item" style="background: #ffffff; padding: 12px; border-radius: 6px; border: 1px solid #dcfce7;">
+                    <span style="color: #64748b; font-size: 0.78rem; font-weight: 600;">${lang === 'ml' ? 'മോട്ടോർ പവർ & വൈദ്യുതി' : lang === 'ar' ? 'قوة المحرك والكهرباء' : 'Motor & Power'}</span>
+                    <br><strong style="color: #0f172a;">${cat.machineSpecs.powerHp || 'N/A'} (${cat.machineSpecs.powerPhase || ''})</strong>
+                  </div>
+                  <div class="spec-item" style="background: #ffffff; padding: 12px; border-radius: 6px; border: 1px solid #dcfce7;">
+                    <span style="color: #64748b; font-size: 0.78rem; font-weight: 600;">${lang === 'ml' ? 'ആവശ്യമായ സ്ഥലം' : lang === 'ar' ? 'المساحة المطلوبة' : 'Space Required'}</span>
+                    <br><strong style="color: #0f172a;">${cat.machineSpecs.spaceRequired || 'N/A'}</strong>
+                  </div>
+                  <div class="spec-item" style="background: #ffffff; padding: 12px; border-radius: 6px; border: 1px solid #dcfce7;">
+                    <span style="color: #64748b; font-size: 0.78rem; font-weight: 600;">${lang === 'ml' ? 'മെഷീന്റെ ഭാരം' : lang === 'ar' ? 'وزن الماكينة' : 'Machine Weight'}</span>
+                    <br><strong style="color: #0f172a;">${cat.machineSpecs.weightKg || 'N/A'}</strong>
+                  </div>
+                  <div class="spec-item" style="background: #ffffff; padding: 12px; border-radius: 6px; border: 1px solid #dcfce7;">
+                    <span style="color: #64748b; font-size: 0.78rem; font-weight: 600;">${lang === 'ml' ? 'മെഷീന്റെ വില' : lang === 'ar' ? 'سعر الماكينة التقريبي' : 'Machine Price'}</span>
+                    <br><strong style="color: #16a34a;">${cat.machineSpecs.priceRange || 'N/A'}</strong>
+                  </div>
+                </div>
+              </div>
+            `;
+          } else if (cat.plantSpecs) {
+            machineOrPlantHtml = `
+              <div class="plant-specs-box" style="background: #eff6ff; border: 1px solid #bfdbfe; border-radius: var(--radius-sm); padding: 20px; margin-bottom: 24px;">
+                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 14px;">
+                  <div style="width: 36px; height: 36px; border-radius: 8px; background: #2563eb; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 1.1rem;">
+                    <i class="fa-solid fa-industry"></i>
+                  </div>
+                  <div>
+                    <h4 style="margin: 0; font-size: 1.1rem; color: #1e40af; font-weight: 800;">${lang === 'ml' ? 'ഇൻഡസ്ട്രിയൽ പ്ലാന്റ് സവിശേഷതകൾ (Continuous Processing Plant)' : lang === 'ar' ? 'المواصفات الفنية للمصنع الصناعي المتكامل' : 'Industrial Continuous Processing Plant Specifications'}</h4>
+                    <p style="margin: 0; font-size: 0.85rem; color: #1d4ed8;">${cat.plantSpecs.plantName || ''}</p>
+                  </div>
+                </div>
+                <div class="specs-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; font-size: 0.88rem; margin-bottom: 16px;">
+                  <div class="spec-item" style="background: #ffffff; padding: 12px; border-radius: 6px; border: 1px solid #dbeafe;">
+                    <span style="color: #64748b; font-size: 0.78rem; font-weight: 600;">${lang === 'ml' ? 'പ്രോസസ്സിംഗ് ശേഷി' : lang === 'ar' ? 'الطاقة الإنتاجية' : 'Processing Capacity'}</span>
+                    <br><strong style="color: #0f172a;">${cat.plantSpecs.capacity || 'N/A'}</strong>
+                  </div>
+                  <div class="spec-item" style="background: #ffffff; padding: 12px; border-radius: 6px; border: 1px solid #dbeafe;">
+                    <span style="color: #64748b; font-size: 0.78rem; font-weight: 600;">${lang === 'ml' ? 'കണക്റ്റഡ് പവർ' : lang === 'ar' ? 'الحمل الكهربائي' : 'Connected Load'}</span>
+                    <br><strong style="color: #0f172a;">${cat.plantSpecs.powerHp || 'N/A'}</strong>
+                  </div>
+                  <div class="spec-item" style="background: #ffffff; padding: 12px; border-radius: 6px; border: 1px solid #dbeafe;">
+                    <span style="color: #64748b; font-size: 0.78rem; font-weight: 600;">${lang === 'ml' ? 'സ്റ്റീം ബോയിലർ ശേഷി' : lang === 'ar' ? 'المرجل البخاري' : 'Steam Boiler'}</span>
+                    <br><strong style="color: #0f172a;">${cat.plantSpecs.steamBoiler || 'N/A'}</strong>
+                  </div>
+                  <div class="spec-item" style="background: #ffffff; padding: 12px; border-radius: 6px; border: 1px solid #dbeafe;">
+                    <span style="color: #64748b; font-size: 0.78rem; font-weight: 600;">${lang === 'ml' ? 'ഫാക്ടറി ഷെഡ് സ്ഥലം' : lang === 'ar' ? 'مساحة المصنع' : 'Factory Shed Space'}</span>
+                    <br><strong style="color: #0f172a;">${cat.plantSpecs.spaceRequired || 'N/A'}</strong>
+                  </div>
+                  <div class="spec-item" style="background: #ffffff; padding: 12px; border-radius: 6px; border: 1px solid #dbeafe;">
+                    <span style="color: #64748b; font-size: 0.78rem; font-weight: 600;">${lang === 'ml' ? 'ടേൺകീ പ്രൊജക്റ്റ് ചെലവ്' : lang === 'ar' ? 'تكلفة التنفيذ الشاملة' : 'Turnkey Cost'}</span>
+                    <br><strong style="color: #2563eb;">${cat.plantSpecs.priceRange || 'N/A'}</strong>
+                  </div>
+                </div>
+                ${cat.plantSpecs.coreMachinery && cat.plantSpecs.coreMachinery.length ? `
+                  <div style="background: #ffffff; padding: 14px 18px; border-radius: 6px; border: 1px solid #dbeafe;">
+                    <strong style="font-size: 0.88rem; color: #1e3a8a;"><i class="fa-solid fa-list-check"></i> ${lang === 'ml' ? 'പ്രധാന തുടർച്ചയായ മെഷിനറികൾ (Continuous Machinery Line):' : lang === 'ar' ? 'خط الإنتاج والماكينات الأساسية:' : 'Core Continuous Machinery Line:'}</strong>
+                    <ul style="margin: 8px 0 0 16px; padding: 0; font-size: 0.84rem; color: #334155; line-height: 1.6;">
+                      ${cat.plantSpecs.coreMachinery.map(m => `<li>${m}</li>`).join('')}
+                    </ul>
+                  </div>
+                ` : ''}
+              </div>
+            `;
+          }
 
-          <h4 style="font-size: 1.15rem; font-weight: 800; color: var(--secondary-dark); margin-bottom: 14px;">
-            <i class="fa-solid fa-fire text-danger"></i> ${lang === 'ml' ? 'തുടക്കക്കാർ തിരഞ്ഞെടുക്കേണ്ട 4 ടോപ്പ് ഐറ്റങ്ങൾ' : lang === 'ar' ? 'أفضل 4 منتجات للمبتدئين' : 'Top Fast-Moving Best-Seller Products'}
-          </h4>
-          <div class="table-responsive">
-            <table class="cost-ledger-table">
-              <thead>
-                <tr>
-                  <th>${lang === 'ml' ? 'ഉൽപ്പന്നം' : lang === 'ar' ? 'المنتج' : 'Product Variety'}</th>
-                  <th>${lang === 'ml' ? 'ഹോൾസെയിൽ വില' : lang === 'ar' ? 'سعر الجملة' : 'Wholesale Cost'}</th>
-                  <th>${lang === 'ml' ? 'വിൽപന വില' : lang === 'ar' ? 'سعر البيع المقترح' : 'Selling Price'}</th>
-                  <th>${lang === 'ml' ? 'ഒരു യൂണിറ്റിൽ നിന്നുള്ള ലാഭം' : lang === 'ar' ? 'صافي الربح بكل حبة' : 'Net Unit Profit'}</th>
-                </tr>
-              </thead>
-              <tbody>
-                ${cat.blueprint.fastMovingList.map(item => `
+          return `
+            <div class="blueprint-intro-box" style="background: #f8fafc; border-left: 4px solid var(--primary); padding: 18px 22px; border-radius: var(--radius-sm); margin-bottom: 24px; line-height: 1.6;">
+              <p style="font-size: 0.96rem; color: var(--secondary-dark);">${(cat.blueprint && cat.blueprint.intro) ? (cat.blueprint.intro[lang] || cat.blueprint.intro.en) : ''}</p>
+            </div>
+
+            ${machineOrPlantHtml}
+
+            <h4 style="font-size: 1.15rem; font-weight: 800; color: var(--secondary-dark); margin-bottom: 14px;">
+              <i class="fa-solid fa-fire text-danger"></i> ${lang === 'ml' ? 'ടോപ്പ് പ്രൊഡക്റ്റുകൾ & വിപണി നിരക്കുകൾ' : lang === 'ar' ? 'المنتجات الأكثر مبيعاً وأسعار السوق' : 'Top Fast-Moving Best-Seller Products'}
+            </h4>
+            <div class="table-responsive">
+              <table class="cost-ledger-table">
+                <thead>
                   <tr>
-                    <td><strong>${item.name[lang] || item.name.en}</strong></td>
-                    <td><span class="text-danger" style="font-weight: 700;">${item.wholesale}</span></td>
-                    <td><span class="text-primary" style="font-weight: 700;">${item.retail}</span></td>
-                    <td><span class="text-success" style="font-weight: 800;">${item.profit}</span></td>
+                    <th>${lang === 'ml' ? 'ഉൽപ്പന്നം' : lang === 'ar' ? 'المنتج' : 'Product Variety'}</th>
+                    <th>${lang === 'ml' ? 'ഹോൾസെയിൽ വില' : lang === 'ar' ? 'سعر الجملة' : 'Wholesale Cost'}</th>
+                    <th>${lang === 'ml' ? 'വിൽപന വില' : lang === 'ar' ? 'سعر البيع المقترح' : 'Selling Price'}</th>
+                    <th>${lang === 'ml' ? 'ഒരു യൂണിറ്റിൽ നിന്നുള്ള ലാഭം' : lang === 'ar' ? 'صافي الربح بكل حبة' : 'Net Unit Profit'}</th>
                   </tr>
-                `).join('')}
-              </tbody>
-            </table>
-          </div>
-        `
+                </thead>
+                <tbody>
+                  ${((cat.blueprint && cat.blueprint.fastMovingList) || []).map(item => `
+                    <tr>
+                      <td><strong>${item.name ? (item.name[lang] || item.name.en) : item.name}</strong></td>
+                      <td><span class="text-danger" style="font-weight: 700;">${item.wholesale}</span></td>
+                      <td><span class="text-primary" style="font-weight: 700;">${item.retail}</span></td>
+                      <td><span class="text-success" style="font-weight: 800;">${item.profit}</span></td>
+                    </tr>
+                  `).join('')}
+                </tbody>
+              </table>
+            </div>
+          `;
+        }
       },
 
       // STEP 2: Exact Capital & Budget Breakdown Table
@@ -3553,55 +3681,135 @@ const app = {
         heroImg: cat.images.cover,
         heroTitle: lang === 'ml' ? 'എന്തിനൊക്കെ എത്ര രൂപ? (വിശദമായ ബഡ്ജറ്റ് പട്ടിക)' : lang === 'ar' ? 'تفاصيل الميزانية ورأس المال الدقيق' : 'Itemized Capital & Budget Ledger',
         heroSub: lang === 'ml' ? 'രണ്ടാമതായി എന്ത് ചെയ്യണം? കയ്യിൽ എത്ര രൂപ വേണം, എന്തിനൊക്കെ എത്ര രൂപ ചെലവാകും എന്ന് കൃത്യമായി പ്ലാൻ ചെയ്യുക.' : lang === 'ar' ? 'ماذا تفعل ثانياً؟ حدد ميزانيتك بدقة واعرف أين تذهب كل روبية لتفادي أي خسائر.' : 'Phase 2: Exact itemized startup costs for Starter and Pro brand tiers.',
-        renderContent: () => `
-          <p style="font-size: 0.92rem; color: var(--text-muted); margin-bottom: 16px;">
-            ${lang === 'ml' 
-              ? 'ബിസിനസ് തുടങ്ങുമ്പോൾ എന്തിനൊക്കെ എത്ര രൂപ ചെലവാകും എന്ന് കൃത്യമായി കാണിക്കുന്ന ബഡ്ജറ്റ് പട്ടിക. അനാവശ്യ ചെലവുകൾ ഒഴിവാക്കി സുരക്ഷിതമായി തുടങ്ങാം.' 
-              : lang === 'ar'
-              ? 'جدول تفصيلي يوضح أين تذهب كل روبية من رأس مالك، لتنطلق بثقة وبدون أي هدر مالي.'
-              : 'Complete itemized budget ledger. Shows exactly what components cost and how much starting capital is needed for both Starter and Pro brand tiers.'}
-          </p>
-
-          <div class="table-responsive">
-            <table class="cost-ledger-table">
-              <thead>
-                <tr>
-                  <th>${lang === 'ml' ? 'ചെലവ് ഇനം' : lang === 'ar' ? 'بند المصروف' : 'Budget Item'}</th>
-                  <th>${lang === 'ml' ? 'തുടക്കക്കാർക്ക് (Starter Tier)' : lang === 'ar' ? 'للمبتدئين (Starter)' : 'Starter Tier'}</th>
-                  <th>${lang === 'ml' ? 'ലക്ഷ്വറി ബ്രാൻഡിന് (Pro Brand)' : lang === 'ar' ? 'علامة تجارية متقدمة (Pro)' : 'Pro Brand Tier'}</th>
-                  <th>${lang === 'ml' ? 'പ്രത്യേകതകൾ' : lang === 'ar' ? 'ملاحظات' : 'Sourcing Notes'}</th>
-                </tr>
-              </thead>
-              <tbody>
-                ${cat.capitalTable.map(row => `
-                  <tr>
-                    <td><strong>${row.item[lang] || row.item.en}</strong></td>
-                    <td style="font-weight: 700; color: var(--primary);">${row.starter}</td>
-                    <td style="font-weight: 700; color: #4338ca;">${row.pro}</td>
-                    <td><small class="text-muted">${row.notes[lang] || row.notes.en}</small></td>
-                  </tr>
+        renderContent: () => {
+          const subsidiesBrief = cat.subsidiesAndFinancing ? `
+            <div class="subsidy-quick-banner" style="margin-top: 24px; background: #fefce8; border: 1px solid #fef08a; border-radius: var(--radius-sm); padding: 18px 22px;">
+              <h4 style="font-size: 1.05rem; font-weight: 800; color: #854d0e; margin-bottom: 10px;">
+                <i class="fa-solid fa-hand-holding-dollar text-warning"></i> ${lang === 'ml' ? 'ലഭ്യമായ സർക്കാർ സബ്‌സിഡികളും വായ്പകളും (Government Subsidies & Financing)' : lang === 'ar' ? 'الدعم الحكومي والتمويل الميسر' : 'Eligible Government Grants & Subsidies'}
+              </h4>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 10px; font-size: 0.86rem; color: #713f12;">
+                ${Object.entries(cat.subsidiesAndFinancing).map(([k, v]) => `
+                  <div style="background: #ffffff; padding: 12px; border-radius: 6px; border: 1px solid #fde047;">
+                    <i class="fa-solid fa-circle-check" style="color: #16a34a; margin-right: 6px;"></i> <strong>${v}</strong>
+                  </div>
                 `).join('')}
-                <tr class="total-row">
-                  <td>${lang === 'ml' ? 'ആകെ കുറഞ്ഞ പ്രാരംഭ മൂലധനം:' : lang === 'ar' ? 'إجمالي رأس المال الأولي المطلوب:' : 'Total Initial Working Capital:'}</td>
-                  <td>${cat.totalStarterCost}</td>
-                  <td>${cat.totalProCost}</td>
-                  <td>${lang === 'ml' ? 'ആദ്യ ബാച്ചിന് ആവശ്യമായത്' : lang === 'ar' ? 'يكفي لإنتاج الدفعة الأولى' : 'Sufficient for first inventory'}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        `
+              </div>
+            </div>
+          ` : '';
+
+          return `
+            <p style="font-size: 0.92rem; color: var(--text-muted); margin-bottom: 16px;">
+              ${lang === 'ml' 
+                ? 'ബിസിനസ് തുടങ്ങുമ്പോൾ എന്തിനൊക്കെ എത്ര രൂപ ചെലവാകും എന്ന് കൃത്യമായി കാണിക്കുന്ന ബഡ്ജറ്റ് പട്ടിക. അനാവശ്യ ചെലവുകൾ ഒഴിവാക്കി സുരക്ഷിതമായി തുടങ്ങാം.' 
+                : lang === 'ar'
+                ? 'جدول تفصيلي يوضح أين تذهب كل روبية من رأس مالك، لتنطلق بثقة وبدون أي هدر مالي.'
+                : 'Complete itemized budget ledger. Shows exactly what components cost and how much starting capital is needed for both Starter and Pro brand tiers.'}
+            </p>
+
+            <div class="table-responsive">
+              <table class="cost-ledger-table">
+                <thead>
+                  <tr>
+                    <th>${lang === 'ml' ? 'ചെലവ് ഇനം' : lang === 'ar' ? 'بند المصروف' : 'Budget Item'}</th>
+                    <th>${lang === 'ml' ? 'തുടക്കക്കാർക്ക് (Starter Tier)' : lang === 'ar' ? 'للمبتدئين (Starter)' : 'Starter Tier'}</th>
+                    <th>${lang === 'ml' ? 'ലക്ഷ്വറി / വലിയ പ്ലാന്റിന് (Pro Tier)' : lang === 'ar' ? 'المستوى المتقدم (Pro)' : 'Pro Tier'}</th>
+                    <th>${lang === 'ml' ? 'പ്രത്യേകതകൾ' : lang === 'ar' ? 'മلاحظات' : 'Sourcing Notes'}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${(cat.capitalTable || []).map(row => `
+                    <tr>
+                      <td><strong>${row.item ? (row.item[lang] || row.item.en) : row.item}</strong></td>
+                      <td style="font-weight: 700; color: var(--primary);">${row.starter}</td>
+                      <td style="font-weight: 700; color: #4338ca;">${row.pro}</td>
+                      <td><small class="text-muted">${row.notes ? (row.notes[lang] || row.notes.en) : (row.notes || '')}</small></td>
+                    </tr>
+                  `).join('')}
+                  <tr class="total-row">
+                    <td>${lang === 'ml' ? 'ആകെ കുറഞ്ഞ പ്രാരംഭ മൂലധനം:' : lang === 'ar' ? 'إجمالي رأس المال الأولي المطلوب:' : 'Total Initial Working Capital:'}</td>
+                    <td>${cat.totalStarterCost || ''}</td>
+                    <td>${cat.totalProCost || ''}</td>
+                    <td>${lang === 'ml' ? 'ആദ്യ ബാച്ചിന് ആവശ്യമായത്' : lang === 'ar' ? 'يكفي لإنتاج الدفعة الأولى' : 'Sufficient for first inventory'}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            ${subsidiesBrief}
+          `;
+        }
       },
 
-      // STEP 3: Wholesale Hubs with Phone & Google Maps
+      // STEP 3: Wholesale Hubs & Machinery Manufacturers / EPC Contractors with Phone & Maps
       {
         id: "mod-suppliers",
         stepNum: 3,
         title: t.mod3Title || '3. Wholesale Markets & Google Maps',
         heroImg: cat.images.sourcing,
-        heroTitle: lang === 'ml' ? 'മൊത്തവ്യാപാര മാർക്കറ്റുകൾ & മാപ്പ്' : lang === 'ar' ? 'أسواق الجملة وعناوين الموردين' : 'Wholesale Markets, Phone & Google Maps',
-        heroSub: lang === 'ml' ? 'മൂന്നാമതായി എന്ത് ചെയ്യണം? മിഠായിത്തെരുവ്, ക്രോഫോർഡ് മാർക്കറ്റ് എന്നിവിടങ്ങളിലെ വ്യാപാരികളുടെ ലൊക്കേഷനുകൾ കണ്ടുപിടിക്കുക.' : lang === 'ar' ? 'ماذا تفعل ثالثاً؟ اعرف أين تتسوق بأسعار الجملة الحقيقية وتواصل مع الموردين المعتمدين.' : 'Phase 3: Connect directly with verified wholesale hubs via Google Maps and WhatsApp.',
+        heroTitle: lang === 'ml' ? 'വിശ്വസനീയ നിർമ്മാതാക്കൾ & അസംസ്കൃത വസ്തുക്കൾ' : lang === 'ar' ? 'المصنعون المعتمدون ومصادر المواد الخام' : 'Verified Manufacturers, Wholesalers & Maps',
+        heroSub: lang === 'ml' ? 'മൂന്നാമതായി എന്ത് ചെയ്യണം? മെഷീൻ നിർമ്മാതാക്കളുടെയും അസംസ്കൃത വസ്തുക്കളുടെയും ലൊക്കേഷനുകൾ കണ്ടുപിടിച്ച് നേരിട്ട് ബന്ധപ്പെടുക.' : lang === 'ar' ? 'ماذا تفعل ثالثاً؟ تواصل مباشرة مع مصنعي الماكينات وموردي المواد الخام بالخرائط والواتساب.' : 'Phase 3: Connect directly with verified machinery manufacturers, EPC contractors, and raw material mandis.',
         renderContent: () => {
+          // If the course has dedicated machinery manufacturers / EPC contractors
+          if (cat.manufacturers && cat.manufacturers.length > 0) {
+            const rawMatHtml = (cat.rawMaterials && cat.rawMaterials.length > 0) ? `
+              <div class="raw-materials-box" style="margin-top: 24px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: var(--radius-sm); padding: 20px 22px;">
+                <h4 style="font-size: 1.05rem; font-weight: 800; color: #1e293b; margin-bottom: 14px;">
+                  <i class="fa-solid fa-boxes-stacked text-primary"></i> ${lang === 'ml' ? 'അസംസ്കൃത വസ്തുക്കൾ ലഭിക്കുന്ന പ്രധാന മാർക്കറ്റുകൾ (Raw Material Mandis & Sourcing)' : lang === 'ar' ? 'مصادر توريد المواد الخام والأسواق' : 'Raw Material Sourcing Hubs & Mandis'}
+                </h4>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px;">
+                  ${cat.rawMaterials.map(rm => `
+                    <div style="background: #ffffff; border: 1px solid #cbd5e1; border-radius: 6px; padding: 12px;">
+                      <strong style="color: #0f172a; font-size: 0.9rem;">${rm.material || rm.name || ''}</strong>
+                      <p style="margin: 4px 0; font-size: 0.82rem; color: #475569;"><strong>${lang === 'ml' ? 'മാർക്കറ്റ്:' : lang === 'ar' ? 'السوق:' : 'Hub:'}</strong> ${rm.mandi || rm.source || rm.hub || ''}</p>
+                      <span style="font-size: 0.8rem; font-weight: 700; color: #16a34a;">${rm.approxCost || rm.price || ''}</span>
+                    </div>
+                  `).join('')}
+                </div>
+              </div>
+            ` : '';
+
+            return `
+              <div class="suppliers-grid-niche" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 18px;">
+                ${cat.manufacturers.map(sup => {
+                  const waMsg = encodeURIComponent(
+                    lang === 'ml' 
+                      ? `ഹലോ ${sup.name}, ഞാൻ 'വ്യാപാര ശിക്ഷ' പോർട്ടലിൽ നിങ്ങളുടെ മെഷീൻ/നിർമ്മാണ വിവരങ്ങൾ കണ്ടതാണ്. എനിക്ക് നിങ്ങളുടെ കാറ്റലോഗും ക്വോട്ടേഷനും വേണം.`
+                      : lang === 'ar'
+                      ? `مرحباً ${sup.name}، وجدت بيانات مصنعكم عبر منصة رواد الأعمال. أود الاطلاع على الكتالوج وعرض الأسعار الفني.`
+                      : `Hello ${sup.name}, I found your machinery manufacturing details on Vyapar Shiksha. I want to inquire about your machinery catalog, pricing, and trial run.`
+                  );
+                  const waLink = `https://wa.me/${sup.whatsapp}?text=${waMsg}`;
+
+                  return `
+                    <div class="supplier-card">
+                      <div class="supplier-head">
+                        <h4 class="supplier-name">${sup.name}</h4>
+                        <span class="city-badge">${sup.city}</span>
+                      </div>
+                      <p class="supplier-address"><i class="fa-solid fa-location-dot"></i> <span>${sup.address}</span></p>
+                      <p style="font-size: 0.85rem; color: #1e293b; margin-bottom: 8px;"><strong>${lang === 'ml' ? 'പ്രത്യേകതകൾ:' : lang === 'ar' ? 'المنتجات:' : 'Specialties:'}</strong> ${sup.specialty || cat.title.en}</p>
+                      <p style="font-size: 0.8rem; color: #64748b; margin-bottom: 14px;"><i class="fa-solid fa-phone"></i> <strong>Phone:</strong> ${sup.phone}</p>
+                      <div class="supplier-actions">
+                        <a href="${waLink}" target="_blank" rel="noopener noreferrer" class="btn-whatsapp">
+                          <i class="fa-brands fa-whatsapp"></i> ${lang === 'ml' ? 'വാട്സ്ആപ്പ്' : lang === 'ar' ? 'واتساب' : 'WhatsApp'}
+                        </a>
+                        <a href="${sup.mapUrl}" target="_blank" rel="noopener noreferrer" class="btn-map">
+                          <i class="fa-solid fa-location-crosshairs"></i> ${lang === 'ml' ? 'മാപ്പ്' : lang === 'ar' ? 'الخريطة' : 'Map'}
+                        </a>
+                        <a href="tel:${sup.phone}" class="btn-map-call">
+                          <i class="fa-solid fa-phone"></i>
+                        </a>
+                      </div>
+                    </div>
+                  `;
+                }).join('')}
+              </div>
+
+              ${rawMatHtml}
+            `;
+          }
+
+          // Otherwise render from general suppliers directory
           const matchingSuppliers = this.suppliers.filter(s => s.category === nicheKey || (nicheKey === 'attar' && s.category === 'packaging'));
           return `
             <div class="suppliers-grid-niche" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 18px;">
@@ -3669,38 +3877,60 @@ const app = {
         `
       },
 
-      // STEP 5: Formulation & Assembly Guide
+      // STEP 5: Formulation, Manufacturing SOP & Subsidies
       {
         id: "mod-sourcing",
         stepNum: 5,
         title: t.mod5Title || '5. Formulation & How to Make Your Brand',
         heroImg: cat.images.formulation,
-        heroTitle: lang === 'ml' ? 'പുതിയത് ഉണ്ടാക്കാൻ എത്ര വേണം? (നിർമ്മാണ രീതി)' : lang === 'ar' ? 'طريقة التركيب وصناعة علامتك الجديدة' : 'Formulation, Assembly & Crafting',
-        heroSub: lang === 'ml' ? 'അഞ്ചാമതായി എന്ത് ചെയ്യണം? കുപ്പിയിൽ അളന്ന് നിറച്ച്, റോൾ-ഓൺ അമർത്തി, ലേബൽ ഒട്ടിച്ച് വെൽവെറ്റ് പൗച്ചിലാക്കുന്ന വിധം.' : lang === 'ar' ? 'ماذا تفعل خامساً؟ طريقة تعبئة الزجاجات وتثبيت الرول ولصق الشعار والتغليف الفاخر.' : 'Phase 5: Step-by-step practical assembly, hygiene, bottling and unit cost.',
-        renderContent: () => `
-          <div class="unit-economics-callout" style="background: #ecfdf5; border: 1px solid #a7f3d0; padding: 18px 22px; border-radius: var(--radius-sm); margin-bottom: 24px; color: #065f46; font-size: 0.96rem; line-height: 1.6;">
-            <i class="fa-solid fa-chart-pie" style="font-size: 1.25rem; margin-right: 8px;"></i>
-            ${cat.formulation.costPerUnitBox[lang] || cat.formulation.costPerUnitBox.en}
-          </div>
+        heroTitle: lang === 'ml' ? 'നിർമ്മാണ രീതി & സർക്കാർ സബ്‌സിഡികൾ' : lang === 'ar' ? 'خطوات التصنيع والدعم الحكومي' : 'Manufacturing Process & Government Grants',
+        heroSub: lang === 'ml' ? 'അഞ്ചാമതായി എന്ത് ചെയ്യണം? ഘട്ടം ഘട്ടമായുള്ള നിർമ്മാണ പ്രക്രിയയും, സർക്കാർ സബ്‌സിഡികൾ ലഭ്യമാക്കുന്ന വിധവും.' : lang === 'ar' ? 'ماذا تفعل خامساً؟ خطوات التشغيل والتصنيع وكيفية التقديم على الدعم المالي.' : 'Phase 5: Step-by-step practical manufacturing SOP, unit cost, and government subsidy clearance.',
+        renderContent: () => {
+          const costText = (cat.formulation && cat.formulation.costPerUnitBox) 
+            ? (cat.formulation.costPerUnitBox[lang] || cat.formulation.costPerUnitBox.en)
+            : '';
+          const steps = (cat.formulation && cat.formulation.steps) ? cat.formulation.steps : [];
 
-          <h4 style="font-size: 1.15rem; font-weight: 800; color: var(--secondary-dark); margin-bottom: 16px;">
-            <i class="fa-solid fa-list-ol text-primary"></i> ${lang === 'ml' ? 'ഘട്ടം ഘട്ടമായി തയ്യാറാക്കുന്ന വിധം' : lang === 'ar' ? 'خطوات التصنيع والتركيب خطوة بخطوة' : 'Step-by-Step Practical Creation Steps'}
-          </h4>
+          return `
+            ${costText ? `
+              <div class="unit-economics-callout" style="background: #ecfdf5; border: 1px solid #a7f3d0; padding: 18px 22px; border-radius: var(--radius-sm); margin-bottom: 24px; color: #065f46; font-size: 0.96rem; line-height: 1.6;">
+                <i class="fa-solid fa-chart-pie" style="font-size: 1.25rem; margin-right: 8px;"></i>
+                ${costText}
+              </div>
+            ` : ''}
 
-          <div class="steps-flow-grid" style="display: flex; flex-direction: column; gap: 14px;">
-            ${cat.formulation.steps.map(s => `
-              <div class="step-card-flow" style="display: flex; gap: 16px; background: #ffffff; border: 1px solid var(--border-color); padding: 18px; border-radius: var(--radius-sm);">
-                <div class="step-num-bubble" style="width: 40px; height: 40px; border-radius: 50%; background: var(--primary); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 800; flex-shrink: 0;">
-                  ${s.step}
+            <h4 style="font-size: 1.15rem; font-weight: 800; color: var(--secondary-dark); margin-bottom: 16px;">
+              <i class="fa-solid fa-list-ol text-primary"></i> ${lang === 'ml' ? 'ഘട്ടം ഘട്ടമായുള്ള പ്രവർത്തന രീതി (Standard Operating Procedure)' : lang === 'ar' ? 'خطوات التشغيل والتصنيع خطوة بخطوة' : 'Step-by-Step Practical Operational Steps'}
+            </h4>
+
+            <div class="steps-flow-grid" style="display: flex; flex-direction: column; gap: 14px;">
+              ${steps.map(s => `
+                <div class="step-card-flow" style="display: flex; gap: 16px; background: #ffffff; border: 1px solid var(--border-color); padding: 18px; border-radius: var(--radius-sm);">
+                  <div class="step-num-bubble" style="width: 40px; height: 40px; border-radius: 50%; background: var(--primary); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 800; flex-shrink: 0;">
+                    ${s.step}
+                  </div>
+                  <div>
+                    <h5 style="font-size: 1.05rem; font-weight: 700; color: var(--secondary-dark); margin-bottom: 4px;">${s.title ? (s.title[lang] || s.title.en) : s.title}</h5>
+                    <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.5;">${s.desc ? (s.desc[lang] || s.desc.en) : s.desc}</p>
+                  </div>
                 </div>
-                <div>
-                  <h5 style="font-size: 1.05rem; font-weight: 700; color: var(--secondary-dark); margin-bottom: 4px;">${s.title[lang] || s.title.en}</h5>
-                  <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.5;">${s.desc[lang] || s.desc.en}</p>
+              `).join('')}
+            </div>
+
+            ${cat.subsidiesAndFinancing ? `
+              <div class="subsidy-detailed-guide" style="margin-top: 28px; background: #fffbeb; border: 1px solid #fef08a; border-radius: var(--radius-sm); padding: 22px;">
+                <h4 style="font-size: 1.1rem; font-weight: 800; color: #854d0e; margin-bottom: 12px;">
+                  <i class="fa-solid fa-award text-warning"></i> ${lang === 'ml' ? 'സർക്കാർ സബ്‌സിഡികൾ എങ്ങനെ അപേക്ഷിക്കാം? (Application Guide)' : lang === 'ar' ? 'دليل التقديم على الدعم والمنح الحكومية' : 'Government Subsidy & Grant Application Guide'}
+                </h4>
+                <div style="font-size: 0.9rem; color: #78350f; line-height: 1.6;">
+                  <p><strong>1. PMFME Scheme (pmfme.mofpi.gov.in):</strong> ${lang === 'ml' ? 'ഭക്ഷ്യ സംസ്കരണ യൂണിറ്റുകൾക്ക് 35% ക്രെഡിറ്റ് ലിങ്ക്ഡ് സബ്‌സിഡി (പരമാവധി ₹10 ലക്ഷം). ജില്ലാ വ്യവസായ കേന്ദ്രം (DIC) വഴി അപേക്ഷിക്കാം.' : '35% capital subsidy up to ₹10 Lakhs for micro food processing enterprises via DIC single window.'}</p>
+                  <p><strong>2. PMEGP Scheme (kviconline.gov.in):</strong> ${lang === 'ml' ? 'മെഷീൻ നിർമ്മാണ യൂണിറ്റുകൾക്ക് ഗ്രാമങ്ങളിൽ 35%, നഗരങ്ങളിൽ 25% സബ്‌സിഡി. ബാങ്ക് ലോണിനൊപ്പം സബ്‌സിഡി തുക അക്കൗണ്ടിൽ ക്രെഡിറ്റ് ആകുന്നു.' : 'Prime Minister Employment Generation Programme with 25%-35% subsidy on project machinery cost.'}</p>
+                  <p><strong>3. Mudra Loan (Tarun / Kishor):</strong> ${lang === 'ml' ? 'ഈട് (Collateral) ഇല്ലാതെ ₹10 ലക്ഷം വരെ നാഷണലൈസ്ഡ് ബാങ്കുകൾ വഴി കുറഞ്ഞ പലിശ നിരക്കിൽ പ്രവർത്തന മൂലധനം.' : 'Collateral-free business loan up to ₹10 Lakhs through banks with CGTMSE guarantee.'}</p>
                 </div>
               </div>
-            `).join('')}
-          </div>
-        `
+            ` : ''}
+          `;
+        }
       },
 
       // STEP 6: Live Visual Profit Graph & Simulator
@@ -3710,7 +3940,7 @@ const app = {
         title: t.mod6Title || '6. Profit Simulator & Live Visual Graph',
         heroImg: cat.images.cover,
         heroTitle: lang === 'ml' ? 'ലൈവ് ലാഭ ഗ്രാഫും സിമുലേറ്ററും' : lang === 'ar' ? 'حاسبة الأرباح والرسم البياني المباشر' : 'Live Profit Graph & Margin Visualizer',
-        heroSub: lang === 'ml' ? 'ആറാമതായി എന്ത് ചെയ്യണം? ഓരോ കുപ്പിയിലും എത്ര ലാഭം കിട്ടും, 25/50/100 കുപ്പികൾ വിൽക്കുമ്പോൾ എത്ര സമ്പാദിക്കാം എന്ന് കാണുക.' : lang === 'ar' ? 'ماذا تفعل سادساً؟ شاهد رسماً بيانياً مباشراً يوضح أرباحك وتكلفة تصنيع كل حبة بدقة.' : 'Phase 6: Interactive simulator with real-time segmented horizontal profit bar graph.',
+        heroSub: lang === 'ml' ? 'ആറാമതായി എന്ത് ചെയ്യണം? ഉൽപ്പാദനച്ചെലവും വിൽപന ലാഭവും തത്സമയം കണക്കുകൂട്ടുക.' : lang === 'ar' ? 'ماذا تفعل سادساً؟ شاهد رسماً بيانياً يوضح أرباحك وتكلفة تصنيع كل وحدة بدقة.' : 'Phase 6: Interactive simulator with real-time unit economics and profit margin visualizer.',
         renderContent: () => this.getNicheSimulatorHtml(nicheKey)
       },
 
@@ -3725,36 +3955,36 @@ const app = {
         renderContent: () => this.renderPortalsSection(nicheKey)
       },
 
-      // STEP 8: Courier Rates, COD Rules & Launch Plan
+      // STEP 8: Courier Rates, Heavy Freight & Distribution Launch
       {
         id: "mod-logistics",
         stepNum: 8,
         title: t.mod8Title || '8. Courier Rates, COD & Launch Checklist',
         heroImg: cat.images.packaging,
-        heroTitle: lang === 'ml' ? 'കൊറിയർ നിരക്കുകൾ & സുരക്ഷിതമായ വിൽപന' : lang === 'ar' ? 'أسعار الشحن البريدي وانطلاقة المبيعات' : 'Courier Rates, Safe COD & Launch Checklist',
-        heroSub: lang === 'ml' ? 'എട്ടാമതായി എന്ത് ചെയ്യണം? സുരക്ഷിതമായി പാക്ക് ചെയ്ത് കൊറിയർ വഴി കസ്റ്റമറിലേക്ക് എത്തിക്കുക, COD നഷ്ടങ്ങൾ ഒഴിവാക്കുക.' : lang === 'ar' ? 'ماذا تفعل ثامناً؟ شحن الطرود بنظام وضمان استلام الأموال بدون مخاطر التوصيل.' : 'Phase 8: Shipping partners, COD advance token rule, and 14-day Instagram playbook.',
+        heroTitle: lang === 'ml' ? 'കൊറിയർ & ട്രാൻസ്പോർട്ട് നിരക്കുകൾ, വിതരണ ശൃംഖല' : lang === 'ar' ? 'أسعار الشحن والخدمات اللوجستية وشبكة التوزيع' : 'Logistics, Freight Rates & Distribution Launch',
+        heroSub: lang === 'ml' ? 'എട്ടാമതായി എന്ത് ചെയ്യണം? സുരക്ഷിതമായി പാക്ക് ചെയ്ത് കൊറിയർ/ലോറി ട്രാൻസ്പോർട്ട് വഴി വിതരണം ചെയ്യുക.' : lang === 'ar' ? 'ماذا تفعل ثامناً؟ شحن الطرود والمنتجات بنظام وتوزيعها على المحلات والوكلاء بأمان.' : 'Phase 8: Shipping partners, B2B freight, and launch distribution roadmap.',
         renderContent: () => `
           <div class="cod-danger-box" style="background: #fffbeb; border: 1px solid #fef08a; padding: 20px 24px; border-radius: var(--radius-sm); margin-bottom: 24px; color: #854d0e; font-size: 0.94rem; line-height: 1.6;">
             <h4 style="font-size: 1.1rem; font-weight: 800; color: #78350f; margin-bottom: 8px;">
-              <i class="fa-solid fa-triangle-exclamation text-warning"></i> ${lang === 'ml' ? 'പ്രധാനപ്പെട്ടത്: ക്യാഷ് ഓൺ ഡെലിവറി (COD) അപകടം ഒഴിവാക്കാം' : lang === 'ar' ? 'تنبيه هام: تفادي خسائر الدفع عند الاستلام' : 'Critical Rule: Cash on Delivery (COD) Protection'}
+              <i class="fa-solid fa-triangle-exclamation text-warning"></i> ${lang === 'ml' ? 'പ്രധാനപ്പെട്ടത്: പേയ്മെന്റ് സുരക്ഷയും ക്യാഷ് ഓൺ ഡെലിവറിയും (Payment Security)' : lang === 'ar' ? 'تنبيه هام: شروط الدفع الآمن والتوزيع' : 'Critical Rule: Payment Terms & Distribution Security'}
             </h4>
             <p>
               ${lang === 'ml'
-                ? 'അപരിചിതർക്ക് 100% ക്യാഷ് ഓൺ ഡെലിവറി അയക്കരുത്. കസ്റ്റമർ വാങ്ങിയില്ലെങ്കിൽ പോകുന്ന ചാർജ്ജും മടങ്ങി വരുന്ന ചാർജ്ജും (ഏകദേശം ₹100-₹120) നിങ്ങൾ നൽകേണ്ടി വരും. ഓർഡർ സ്ഥിരീകരിക്കാൻ ₹50 ടോക്കൺ അഡ്വാൻസ് Google Pay വഴി വാങ്ങുക!'
+                ? 'ചില്ലറ വിൽപനയിൽ അപരിചിതർക്ക് 100% ക്യാഷ് ഓൺ ഡെലിവറി അയക്കരുത്. ഓർഡർ സ്ഥിരീകരിക്കാൻ കുറഞ്ഞത് ₹50-₹100 ടോക്കൺ അഡ്വാൻസ് വാങ്ങുക. മെഷീൻ/ഹോൾസെയിൽ ഡീലുകളിൽ 50% അഡ്വാൻസ്, ബാക്കി 50% ഡെസ്പാച്ച് ചെയ്യുന്ന സമയത്ത് ട്രാൻസ്പോർട്ട് ബിൽ (L/R) നൽകി സ്വീകരിക്കുക!'
                 : lang === 'ar'
-                ? 'إياك وشحن طرد بالدفع عند الاستلام الكامل لأشخاص لا تعرفهم. إذا رفض الزبون الاستلام ستتحمل رسوم الذهاب والعودة (~120 روبية). خذ دائماً عربون 50 روبية مقدماً!'
-                : 'Never ship 100% COD to strangers. If a customer rejects delivery, you lose both forward and return courier charges (~₹120 total). Always collect a small ₹50 advance token via UPI to confirm serious buyers!'}
+                ? 'إياك والشحن بالدفع عند الاستلام الكامل بدون عربون مسبق. وفي صفقات الجملة والمعدات خذ 50% دفعة مقدمة والباقي مقابل بوليصة الشحن (L/R) لضمان حقوقك المالية.'
+                : 'Never dispatch without token advance. For retail orders, collect ₹50-₹100 advance token. For machinery and B2B wholesale consignments, follow standard 50% advance upon PO and balance against lorry receipt (L/R) copy before delivery!'}
             </p>
           </div>
 
           <h4 style="font-size: 1.15rem; font-weight: 800; color: var(--secondary-dark); margin-bottom: 14px;">
-            <i class="fa-solid fa-box-open text-primary"></i> ${lang === 'ml' ? 'കൊറിയർ നിരക്കുകൾ (കേരളം, ഇന്ത്യ & ഗൾഫ്)' : lang === 'ar' ? 'أسعار الشحن البريدي المعتمدة' : 'Courier Rates & Delivery Charges'}
+            <i class="fa-solid fa-truck-fast text-primary"></i> ${lang === 'ml' ? 'കൊറിയർ & ട്രാൻസ്പോർട്ട് നിരക്കുകൾ' : lang === 'ar' ? 'أسعار الشحن والخدمات اللوجستية' : 'Courier Rates & Commercial Freight Charges'}
           </h4>
           <div class="table-responsive">
             <table class="cost-ledger-table">
               <thead>
                 <tr>
-                  <th>${lang === 'ml' ? 'കൊറിയർ സർവീസ്' : lang === 'ar' ? 'شركة الشحن' : 'Service / Partner'}</th>
+                  <th>${lang === 'ml' ? 'സർവീസ് / പാർട്ണർ' : lang === 'ar' ? 'شركة الشحن' : 'Service / Partner'}</th>
                   <th>${lang === 'ml' ? 'മേഖല' : lang === 'ar' ? 'الوجهة' : 'Destination'}</th>
                   <th>${lang === 'ml' ? 'ഭാരം' : lang === 'ar' ? 'الوزن' : 'Weight'}</th>
                   <th>${lang === 'ml' ? 'നിരക്ക്' : lang === 'ar' ? 'السعر' : 'Rate'}</th>
@@ -3801,13 +4031,11 @@ const app = {
               <p>${stepData.heroSub}</p>
             </div>
           </div>
-          <div class="module-body">
-            <!-- Slim Chapter Audio Pill -->
-            <div class="chapter-audio-simple-bar">
-              <button class="btn-chapter-audio-pill ${this.audioMasterclassState.isPlaying && this.audioMasterclassState.currentEpisode === activeStep ? 'is-playing' : ''}" data-episode="${activeStep}" onclick="app.playChapterAudio(${activeStep})" title="Play Chapter ${activeStep}">
-                <i class="fa-solid ${this.audioMasterclassState.isPlaying && this.audioMasterclassState.currentEpisode === activeStep ? 'fa-pause' : 'fa-headphones'}"></i>
-                <span>${lang === 'ml' ? 'ഈ പാഠം കേട്ടുപഠിക്കാം' : lang === 'ar' ? 'استمع لهذا الدرس' : 'Listen to Lesson'} (Ep ${Math.min(activeStep, 6)})</span>
-              </button>
+
+          <div class="module-content-inner">
+            <div class="module-chapter-lead">
+              <span class="chapter-lead-badge"><i class="fa-solid fa-compass"></i> Step ${activeStep} Roadmap</span>
+              <h3 class="chapter-lead-heading">${stepData.title}</h3>
             </div>
 
             ${stepData.renderContent()}
@@ -3820,23 +4048,22 @@ const app = {
         </article>
       `;
     } else {
-      // FULL MASTERCLASS MODE: Render all 8 steps stacked
-      html = stepModules.map((s, idx) => `
-        <article class="course-module-card" id="${s.id}" style="margin-bottom: 35px;">
+      // FULL MASTERCLASS VIEW: Render all 8 chapters sequentially
+      html = stepModules.map(s => `
+        <article class="course-module-card mb-4" id="${s.id}">
           <div class="module-photo-hero">
             <img src="${s.heroImg}" alt="${s.heroTitle}">
             <div class="module-photo-overlay">
-              <span class="module-number-badge" style="display: inline-block; margin-bottom: 6px;">Chapter ${idx + 1} of 8</span>
+              <span class="module-number-badge" style="display: inline-block; margin-bottom: 6px;">Chapter ${s.stepNum} of 8</span>
               <h4>${s.heroTitle}</h4>
               <p>${s.heroSub}</p>
             </div>
           </div>
-          <div class="module-body">
-            <div class="chapter-audio-simple-bar">
-              <button class="btn-chapter-audio-pill ${this.audioMasterclassState.isPlaying && this.audioMasterclassState.currentEpisode === (idx + 1) ? 'is-playing' : ''}" data-episode="${idx + 1}" onclick="app.playChapterAudio(${idx + 1})" title="Play Chapter ${idx + 1}">
-                <i class="fa-solid ${this.audioMasterclassState.isPlaying && this.audioMasterclassState.currentEpisode === (idx + 1) ? 'fa-pause' : 'fa-headphones'}"></i>
-                <span>${lang === 'ml' ? 'ഈ പാഠം കേട്ടുപഠിക്കാം' : lang === 'ar' ? 'استمع لهذا الدرس' : 'Listen to Lesson'} (Ep ${Math.min(idx + 1, 6)})</span>
-              </button>
+
+          <div class="module-content-inner">
+            <div class="module-chapter-lead">
+              <span class="chapter-lead-badge"><i class="fa-solid fa-compass"></i> Step ${s.stepNum} Roadmap</span>
+              <h3 class="chapter-lead-heading">${s.title}</h3>
             </div>
 
             ${s.renderContent()}
@@ -3945,24 +4172,42 @@ const app = {
     const t = this.i18n[lang] || this.i18n.en;
     let html = '';
 
-    Object.keys(this.categoriesData).forEach(catKey => {
+    const allKeys = Object.keys(this.categoriesData);
+    const filteredKeys = allKeys.filter(catKey => {
       const cat = this.categoriesData[catKey];
-      const title = cat.title[lang] || cat.title.en;
-      const tagline = cat.tagline[lang] || cat.tagline.en;
-      const highlights = cat.curriculumHighlights[lang] || cat.curriculumHighlights.en;
+      const tier = cat.tier || 'retail';
+      if (this.currentTierFilter === 'all') return true;
+      return tier === this.currentTierFilter;
+    });
+
+    filteredKeys.forEach(catKey => {
+      const cat = this.categoriesData[catKey];
+      const title = cat.title ? (cat.title[lang] || cat.title.en) : catKey;
+      const tagline = cat.tagline ? (cat.tagline[lang] || cat.tagline.en) : '';
+      const highlights = (cat.curriculumHighlights && (cat.curriculumHighlights[lang] || cat.curriculumHighlights.en)) || [];
 
       let hlList = '';
       highlights.slice(0, 4).forEach(h => {
         hlList += `<li><i class="fa-solid fa-circle-check"></i> <span>${h}</span></li>`;
       });
 
+      let tierPill = '';
+      if (cat.tier === 'industrial') {
+        tierPill = `<span class="card-tier-pill tier-industrial"><i class="fa-solid fa-industry"></i> ${lang === 'ml' ? '3. വൻകിട പ്ലാന്റ്' : lang === 'ar' ? 'مصنع صناعي متكامل' : 'Tier 3: Industrial Plant'}</span>`;
+      } else if (cat.tier === 'machine') {
+        tierPill = `<span class="card-tier-pill tier-machine"><i class="fa-solid fa-gears"></i> ${lang === 'ml' ? '2. മെഷീൻ നിർമ്മാണം' : lang === 'ar' ? 'وحدة تصنيع آلية' : 'Tier 2: Machine Unit'}</span>`;
+      } else {
+        tierPill = `<span class="card-tier-pill tier-retail"><i class="fa-solid fa-store"></i> ${lang === 'ml' ? '1. ചെറുകിട വ്യാപാരം' : lang === 'ar' ? 'تجارة تجزئة ومشاريع' : 'Tier 1: Retail & Trading'}</span>`;
+      }
+
       html += `
-        <div class="faculty-card">
+        <div class="faculty-card tier-${cat.tier || 'retail'}">
           <div class="faculty-card-cover">
             <img src="${cat.images.cover}" alt="${title}" loading="lazy">
             <span class="cover-badge"><i class="fa-solid fa-coins"></i> ${cat.minBudget}</span>
+            ${tierPill}
           </div>
-          <div class="faculty-header ${cat.headerClass}">
+          <div class="faculty-header ${cat.headerClass || ''}">
             <div class="faculty-icon-wrap">
               <i class="fa-solid ${cat.icon}"></i>
             </div>
@@ -3992,6 +4237,10 @@ const app = {
         </div>
       `;
     });
+
+    if (filteredKeys.length === 0) {
+      html = `<div style="grid-column: 1/-1; text-align: center; padding: 40px; color: #64748b;">${lang === 'ml' ? 'ഈ വിഭാഗത്തിൽ കോഴ്സുകൾ ലഭ്യമല്ല.' : 'No courses found in this category.'}</div>`;
+    }
 
     grid.innerHTML = html;
   },
@@ -4078,15 +4327,25 @@ const app = {
         </div>
       `;
     } else {
-      // General Niche Simulator
+      // General, Machine & Industrial Economic Projections
+      const unitCostText = (cat.formulation && cat.formulation.costPerUnitBox) 
+        ? (cat.formulation.costPerUnitBox[lang] || cat.formulation.costPerUnitBox.en)
+        : '';
+
       return `
         <div style="background: #f8fafc; border: 1px solid var(--border-color); padding: 24px; border-radius: var(--radius-md);">
           <h4 style="font-size: 1.15rem; font-weight: 800; color: var(--secondary-dark); margin-bottom: 12px;">
-            <i class="fa-solid fa-calculator text-primary"></i> ${cat.title[lang] || cat.title.en} — ${lang === 'ml' ? 'ലാഭ കണക്കുകൂട്ടൽ' : lang === 'ar' ? 'حساب الأرباح التقديري' : 'Profit Projection'}
+            <i class="fa-solid fa-calculator text-primary"></i> ${cat.title ? (cat.title[lang] || cat.title.en) : ''} — ${lang === 'ml' ? 'യൂണിറ്റ് ഇക്കണോമിക്സും ലാഭവും' : lang === 'ar' ? 'اقتصاديات الوحدة والأرباح' : 'Unit Economics & Profit Breakdown'}
           </h4>
-          <p style="font-size: 0.92rem; color: var(--text-muted); margin-bottom: 20px;">
-            ${lang === 'ml' ? 'ഈ കാറ്റഗറിയിലെ ശരാശരി ലാഭക്കണക്കുകൾ താഴെ കാണാം. കൂടുതൽ വിശദമായി കണക്കാക്കാൻ ഞങ്ങളുടെ പ്രോഫിറ്റ് ടൂൾ ഉപയോഗിക്കുക.' : lang === 'ar' ? 'متوسط أرباح هذا التخصص موضح أدناه. يمكنك استخدام حاسبة الأرباح لتخصيص الأرقام بدقة.' : 'Standard unit projections for this niche. Open our full Profit Calculator for detailed customization.'}
-          </p>
+          
+          ${unitCostText ? `
+            <div style="background: #ecfdf5; border: 1px solid #a7f3d0; border-radius: var(--radius-sm); padding: 18px 20px; color: #065f46; font-size: 0.95rem; line-height: 1.6; margin-bottom: 20px;">
+              <i class="fa-solid fa-chart-pie" style="font-size: 1.2rem; margin-right: 8px;"></i>
+              <strong>${lang === 'ml' ? 'യൂണിറ്റ് നിർമ്മാണച്ചെലവും വിൽപന ലാഭവും:' : lang === 'ar' ? 'تحليل تكلفة الوحدة وهوامش الربح:' : 'Unit Cost & Profit Economics:'}</strong>
+              <p style="margin: 8px 0 0 0;">${unitCostText}</p>
+            </div>
+          ` : ''}
+
           <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin-bottom: 20px;">
             <div style="background: #fff; padding: 16px; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
               <span style="font-size: 0.8rem; color: var(--text-muted);">${lang === 'ml' ? 'കുറഞ്ഞ പ്രാരംഭ മൂലധനം' : lang === 'ar' ? 'أقل رأس مال' : 'Minimum Capital'}</span>
@@ -4096,7 +4355,12 @@ const app = {
               <span style="font-size: 0.8rem; color: var(--text-muted);">${lang === 'ml' ? 'പ്രതീക്ഷിക്കാവുന്ന ലാഭം' : lang === 'ar' ? 'هامش الربح المتوقع' : 'Realistic Margin'}</span>
               <h3 style="font-size: 1.4rem; font-weight: 800; color: #10b981; margin-top: 4px;">${cat.margin}</h3>
             </div>
+            <div style="background: #fff; padding: 16px; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+              <span style="font-size: 0.8rem; color: var(--text-muted);">${lang === 'ml' ? 'ലക്ഷ്യമിടുന്ന പ്രധാന വിപണി' : lang === 'ar' ? 'السوق المستهدف الرئيسي' : 'Primary Target Market'}</span>
+              <h3 style="font-size: 1.1rem; font-weight: 700; color: var(--primary); margin-top: 4px;">${cat.topMarkets || 'Kerala & Pan-India'}</h3>
+            </div>
           </div>
+          
           <button class="btn btn-primary" onclick="app.navigateTo('calc')">
             <i class="fa-solid fa-calculator"></i> ${lang === 'ml' ? 'വിശദമായ കാൽക്കുലേറ്റർ തുറക്കുക' : lang === 'ar' ? 'فتح حاسبة الأرباح الشاملة' : 'Open Comprehensive Profit Calculator'}
           </button>
@@ -4887,3 +5151,7 @@ const app = {
 document.addEventListener('DOMContentLoaded', () => {
   app.init();
 });
+
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = app;
+}
