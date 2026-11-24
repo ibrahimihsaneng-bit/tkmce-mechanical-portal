@@ -96,6 +96,8 @@ const app = {
       
       // Header Nav
       navHome: "Home",
+      navKeralaIntelText: "Kerala Intel (14 Districts)",
+      btnExploreKeralaIntel: "Kerala 14 Districts Trading Intel",
       navAcademies: "Trading Academies",
       navAcademiesText: "Halal Trading Academies (≤ ₹10k)",
       tierTabAll: "All Halal Trading Academies (12)",
@@ -281,6 +283,8 @@ const app = {
 
       // Header Nav
       navHome: "ഹോം",
+      navKeralaIntelText: "കേരള ഇന്റലിജൻസ് (14 ജില്ലകൾ)",
+      btnExploreKeralaIntel: "14 ജില്ലാ ട്രേഡിംഗ് ഇന്റലിജൻസ് മാപ്പ്",
       navAcademies: "പഠന ശാഖകൾ",
       navAcademiesText: "30 പഠന ശാഖകൾ",
       tierTabAll: "എല്ലാ ബിസിനസ്സുകളും (30)",
@@ -466,6 +470,8 @@ const app = {
 
       // Header Nav
       navHome: "الرئيسية",
+      navKeralaIntelText: "استخبارات كيرالا (14 مقاطعة)",
+      btnExploreKeralaIntel: "خريطة التجارة لـ 14 مقاطعة في كيرالا",
       navAcademies: "أكاديميات المشاريع",
       navAcademiesText: "30 أكاديمية دراسية",
       tierTabAll: "جميع المشاريع (30)",
@@ -2950,6 +2956,7 @@ const app = {
     const vHome = document.getElementById('viewHome');
     const vAcademy = document.getElementById('viewAcademy');
     const vTools = document.getElementById('viewTools');
+    const vKeralaIntel = document.getElementById('viewKeralaIntel');
 
     if (!vHome || !vAcademy || !vTools) return;
 
@@ -2957,6 +2964,7 @@ const app = {
     vHome.style.display = 'none';
     vAcademy.style.display = 'none';
     vTools.style.display = 'none';
+    if (vKeralaIntel) vKeralaIntel.style.display = 'none';
 
     // Handle View States
     if (viewName === 'home') {
@@ -2969,6 +2977,15 @@ const app = {
       this.currentView = 'academy';
       vAcademy.style.display = 'block';
       this.updateNavActive('navAcademies');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else if (viewName === 'kerala-intel') {
+      this.currentView = 'kerala-intel';
+      if (vKeralaIntel) {
+        vKeralaIntel.style.display = 'block';
+        if (window.keralaIntel) window.keralaIntel.init();
+      }
+      this.updateNavActive('navKeralaIntel');
+      window.location.hash = '#kerala-intel';
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else if (['tools', 'suppliers', 'scripts', 'legal', 'plan', 'calc', 'halalcalc', 'collab'].includes(viewName)) {
       this.currentView = 'tools';
@@ -2984,6 +3001,13 @@ const app = {
 
       window.location.hash = `#${viewName}`;
       window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  },
+
+  selectKeralaDistrict(districtId) {
+    this.navigateTo('kerala-intel');
+    if (window.keralaIntel) {
+      window.keralaIntel.setDistrict(districtId);
     }
   },
 
@@ -5448,6 +5472,12 @@ const app = {
       const niche = parts[1] || 'attar';
       const step = parts[2] ? parseInt(parts[2], 10) : (this.currentCourseStep || 1);
       this.openAcademy(niche, step, false);
+    } else if (route === 'kerala-intel' || route.startsWith('kerala-intel')) {
+      const parts = route.split('/');
+      this.navigateTo('kerala-intel');
+      if (parts[1] && window.keralaIntel) {
+        window.keralaIntel.setDistrict(parts[1]);
+      }
     } else if (['tools', 'suppliers', 'scripts', 'legal', 'plan', 'calc'].includes(route)) {
       this.navigateTo(route);
     } else if (route === 'home') {

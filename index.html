@@ -77,6 +77,7 @@
       <!-- Navigation Links -->
       <nav class="nav-menu" id="mainNavLinks">
         <a href="#home" class="nav-item active-nav" id="navHome" onclick="app.navigateTo('home')"><i class="fa-solid fa-house"></i> Home</a>
+        <a href="#kerala-intel" class="nav-item" id="navKeralaIntel" onclick="app.navigateTo('kerala-intel')"><i class="fa-solid fa-map-location-dot text-success"></i> <span id="navKeralaIntelText">Kerala Intel (14 Districts)</span></a>
         
         <!-- Halal Trading Academies Dropdown Menu -->
         <div class="nav-dropdown">
@@ -196,14 +197,14 @@
 
           <!-- Hero CTAs -->
           <div class="hero-cta-group">
-            <a href="#faculty-section" class="btn btn-primary" id="btnExploreNiches">
+            <a href="#kerala-intel" class="btn btn-primary" onclick="app.navigateTo('kerala-intel')">
+              <i class="fa-solid fa-map-location-dot"></i> <span id="btnExploreKeralaIntel">Kerala 14 Districts Trading Intel</span>
+            </a>
+            <a href="#faculty-section" class="btn btn-secondary" id="btnExploreNiches">
               <i class="fa-solid fa-graduation-cap"></i> Explore Business Academies
             </a>
-            <a href="#quiz-box" class="btn btn-secondary" id="btnTakeQuiz">
+            <a href="#quiz-box" class="btn btn-outline" id="btnTakeQuiz">
               <i class="fa-solid fa-compass"></i> Find Which Business Fits You
-            </a>
-            <a href="#suppliers" class="btn btn-outline" id="btnViewDirectory" onclick="app.navigateTo('suppliers')">
-              <i class="fa-solid fa-location-dot"></i> Wholesaler Directory & Maps
             </a>
           </div>
         </div>
@@ -552,6 +553,11 @@
     </div>
   </main>
 
+  <!-- =========================================================================
+       VIEW 4: KERALA HALAL TRADING INTELLIGENCE SYSTEM (14 Districts & Kollam Priority)
+       ========================================================================= -->
+  <main class="page-view" id="viewKeralaIntel" style="display: none;"></main>
+
   <!-- Footer Section -->
   <footer class="site-footer">
     <div class="container footer-grid">
@@ -784,6 +790,8 @@
   </div>
 
   <script src="schema_course.js?v=20261125_1"></script>
+  <script src="kerala_intelligence_data.js?v=20261125_1"></script>
+  <script src="kerala_intelligence.js?v=20261125_1"></script>
   <script src="data_retail_courses.js?v=20261124_20"></script>
   <script src="data_machine_courses.js?v=20261124_20"></script>
   <script src="data_industrial_courses.js?v=20261124_20"></script>
