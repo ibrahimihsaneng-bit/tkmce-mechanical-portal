@@ -2754,7 +2754,7 @@ body.lang-ar .drop-link:hover {
 
 .faculty-card-cover {
   width: 100%;
-  height: 190px;
+  height: 220px;
   position: relative;
   overflow: hidden;
   background: #0f172a;
@@ -2764,6 +2764,8 @@ body.lang-ar .drop-link:hover {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center center;
+  display: block;
   transition: transform 0.5s ease;
 }
 
@@ -2794,42 +2796,76 @@ body.lang-ar .faculty-card-cover .cover-badge {
 }
 
 .faculty-header {
-  padding: 24px;
+  padding: 22px 24px;
   color: #ffffff;
   position: relative;
   display: flex;
   align-items: flex-start;
   gap: 16px;
+  background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
 }
 
+/* Tier 1 - Retail & Trading Headers */
 .faculty-header.attar-header { background: linear-gradient(135deg, #064e3b 0%, #047857 100%); }
 .faculty-header.clothing-header { background: linear-gradient(135deg, #831843 0%, #be185d 100%); }
 .faculty-header.watch-header { background: linear-gradient(135deg, #1e1b4b 0%, #4338ca 100%); }
 .faculty-header.bag-header { background: linear-gradient(135deg, #7c2d12 0%, #c2410c 100%); }
 .faculty-header.ring-header { background: linear-gradient(135deg, #042f2e 0%, #0f766e 100%); }
 .faculty-header.spice-header { background: linear-gradient(135deg, #14532d 0%, #15803d 100%); }
+.faculty-header.electronics-header { background: linear-gradient(135deg, #0c4a6e 0%, #0284c7 100%); }
+.faculty-header.cookware-header { background: linear-gradient(135deg, #7c2d12 0%, #ea580c 100%); }
+.faculty-header.footwear-header { background: linear-gradient(135deg, #451a03 0%, #92400e 100%); }
+.faculty-header.cosmetics-header { background: linear-gradient(135deg, #064e3b 0%, #059669 100%); }
+
+/* Tier 2 - Machine Manufacturing Headers */
+.faculty-header.paperbag-header { background: linear-gradient(135deg, #78350f 0%, #d97706 100%); }
+.faculty-header.coldpress-header { background: linear-gradient(135deg, #14532d 0%, #16a34a 100%); }
+.faculty-header.agarbatti-header { background: linear-gradient(135deg, #4c1d95 0%, #7c3aed 100%); }
+.faculty-header.spisegrind-header { background: linear-gradient(135deg, #7f1d1d 0%, #dc2626 100%); }
+.faculty-header.foilcontainer-header { background: linear-gradient(135deg, #1e293b 0%, #475569 100%); }
+.faculty-header.detergent-header { background: linear-gradient(135deg, #075985 0%, #0284c7 100%); }
+.faculty-header.popsicle-header { background: linear-gradient(135deg, #831843 0%, #db2777 100%); }
+.faculty-header.notebook-header { background: linear-gradient(135deg, #312e81 0%, #4f46e5 100%); }
+.faculty-header.slipper-header { background: linear-gradient(135deg, #7c2d12 0%, #ea580c 100%); }
+.faculty-header.tissue-header { background: linear-gradient(135deg, #134e4a 0%, #0d9488 100%); }
+
+/* Tier 3 - Industrial Plant Headers */
+.faculty-header.mangopulp-header { background: linear-gradient(135deg, #78350f 0%, #d97706 100%); }
+.faculty-header.coconutoil-header { background: linear-gradient(135deg, #064e3b 0%, #059669 100%); }
+.faculty-header.iqffrozen-header { background: linear-gradient(135deg, #0c4a6e 0%, #0284c7 100%); }
+.faculty-header.spicextr-header { background: linear-gradient(135deg, #581c87 0%, #9333ea 100%); }
+.faculty-header.vacuumchips-header { background: linear-gradient(135deg, #713f12 0%, #ca8a04 100%); }
+.faculty-header.bottledwater-header { background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%); }
+.faculty-header.cashewplant-header { background: linear-gradient(135deg, #78350f 0%, #b45309 100%); }
+.faculty-header.arecaplate-header { background: linear-gradient(135deg, #14532d 0%, #16a34a 100%); }
+.faculty-header.dairyplant-header { background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%); }
+.faculty-header.biodryer-header { background: linear-gradient(135deg, #7c2d12 0%, #ea580c 100%); }
 
 .faculty-icon-wrap {
   width: 48px;
   height: 48px;
   border-radius: var(--radius-md);
-  background: rgba(255,255,255,0.18);
+  background: rgba(255,255,255,0.22);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 1.4rem;
+  color: #ffffff;
   flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
 }
 
 .faculty-title-text h3 {
   font-size: 1.25rem;
   font-weight: 800;
   margin-bottom: 4px;
+  color: #ffffff;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.2);
 }
 
 .faculty-title-text p {
   font-size: 0.82rem;
-  opacity: 0.9;
+  color: rgba(255,255,255,0.92);
   line-height: 1.4;
 }
 

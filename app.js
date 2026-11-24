@@ -4024,7 +4024,7 @@ const app = {
       html = `
         <article class="course-module-card" id="${stepData.id}">
           <div class="module-photo-hero">
-            <img src="${stepData.heroImg}" alt="${stepData.heroTitle}">
+            <img src="${stepData.heroImg}" alt="${stepData.heroTitle}" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1542744094-3a31f272c490?auto=format&fit=crop&w=800&q=80';">
             <div class="module-photo-overlay">
               <span class="module-number-badge" style="display: inline-block; margin-bottom: 6px;">Chapter ${activeStep} of 8</span>
               <h4>${stepData.heroTitle}</h4>
@@ -4052,7 +4052,7 @@ const app = {
       html = stepModules.map(s => `
         <article class="course-module-card mb-4" id="${s.id}">
           <div class="module-photo-hero">
-            <img src="${s.heroImg}" alt="${s.heroTitle}">
+            <img src="${s.heroImg}" alt="${s.heroTitle}" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1542744094-3a31f272c490?auto=format&fit=crop&w=800&q=80';">
             <div class="module-photo-overlay">
               <span class="module-number-badge" style="display: inline-block; margin-bottom: 6px;">Chapter ${s.stepNum} of 8</span>
               <h4>${s.heroTitle}</h4>
@@ -4203,7 +4203,7 @@ const app = {
       html += `
         <div class="faculty-card tier-${cat.tier || 'retail'}">
           <div class="faculty-card-cover">
-            <img src="${cat.images.cover}" alt="${title}" loading="lazy">
+            <img src="${cat.images.cover}" alt="${title}" loading="lazy" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1542744094-3a31f272c490?auto=format&fit=crop&w=800&q=80';">
             <span class="cover-badge"><i class="fa-solid fa-coins"></i> ${cat.minBudget}</span>
             ${tierPill}
           </div>

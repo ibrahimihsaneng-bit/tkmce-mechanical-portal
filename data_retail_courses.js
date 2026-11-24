@@ -2438,8 +2438,8 @@ window.dataRetailCourses = {
     "margin": "50% - 110%",
     "topMarkets": "Salem Steel Market, Jaggi Market Moradabad, Palakkad Traditional Foundry",
     "images": {
-      "cover": "https://images.unsplash.com/photo-1584990347449-399676e9d892?auto=format&fit=crop&w=800&q=80",
-      "product": "https://images.unsplash.com/photo-1584990347449-399676e9d892?auto=format&fit=crop&w=800&q=80",
+      "cover": "https://images.unsplash.com/photo-1584269600464-37b1b58a9fe7?auto=format&fit=crop&w=800&q=80",
+      "product": "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=800&q=80",
       "sourcing": "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=800&q=80",
       "formulation": "https://images.unsplash.com/photo-1590794056226-79ef3a8147e1?auto=format&fit=crop&w=800&q=80",
       "packaging": "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=800&q=80"
@@ -2984,10 +2984,10 @@ window.dataRetailCourses = {
     "margin": "80% - 200%",
     "topMarkets": "Thrissur Ayurvedic Raw Herbs Mandi, Kannauj Pure Floral Hydrosols, Khari Baoli",
     "images": {
-      "cover": "https://images.unsplash.com/photo-1608248597359-0098a5870295?auto=format&fit=crop&w=800&q=80",
-      "product": "https://images.unsplash.com/photo-1608248597359-0098a5870295?auto=format&fit=crop&w=800&q=80",
+      "cover": "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=800&q=80",
+      "product": "https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=800&q=80",
       "sourcing": "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=800&q=80",
-      "formulation": "https://images.unsplash.com/photo-1608248597359-0098a5870295?auto=format&fit=crop&w=800&q=80",
+      "formulation": "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=800&q=80",
       "packaging": "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=800&q=80"
     },
     "curriculumHighlights": {
