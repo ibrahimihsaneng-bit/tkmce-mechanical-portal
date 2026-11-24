@@ -702,7 +702,7 @@
 
           <div class="course-header-actions">
             <!-- 1-Page Printable Action Cheatsheet -->
-            <button class="btn btn-outline" style="border-color: rgba(255,255,255,0.35); color: #ffffff; padding: 6px 14px; font-size: 0.82rem; border-radius: 999px;" onclick="app.printAcademyCheatsheet(app.currentAcademy)" title="Print 1-Page Business Blueprint">
+            <button class="btn-action-cheatsheet" onclick="app.printAcademyCheatsheet(app.currentAcademy)" title="Print 1-Page Business Blueprint">
               <i class="fa-solid fa-print"></i> <span id="lblPrintCheatsheet">1-Page Action Plan</span>
             </button>
 
@@ -754,11 +754,11 @@
           <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 8px;">
             <span class="course-badge-pill" id="courseBadgeNiche">Specialized Faculty</span>
             <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
-              <button class="btn-checklist-header" onclick="app.openChecklistModal(app.currentAcademy)" title="ഈ ബിസിനസ്സ് തുടങ്ങാനുള്ള സൗജന്യ ചെക്ക്‌ലിസ്റ്റ് (PDF)">
-                <i class="fa-solid fa-file-pdf"></i> <span>ബിസിനസ്സ് ചെക്ക്‌ലിസ്റ്റ് (PDF)</span>
+              <button class="btn-checklist-header" onclick="app.openChecklistModal(app.currentAcademy)" title="Free Business Starter Checklist (PDF)">
+                <i class="fa-solid fa-file-pdf"></i> <span id="lblAcademyChecklistBtn">Business Checklist (PDF)</span>
               </button>
-              <button class="btn-listen-course-audio" onclick="app.playAudioMasterclass()" title="ഈ കോഴ്‌സിന്റെ ഓഡിയോ കേൾക്കുക">
-                <i class="fa-solid fa-headphones text-success"></i> <span>ഓഡിയോ ക്ലാസ്</span>
+              <button class="btn-listen-course-audio" onclick="app.playAudioMasterclass()" title="Listen to Course Audio">
+                <i class="fa-solid fa-headphones text-success"></i> <span id="lblAcademyAudioBtn">Audio Lesson</span>
               </button>
               <button class="btn-bookmark-header" id="btnBookmarkCourse" onclick="platformEnhancements.toggleBookmark(app.currentAcademy)" style="background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); color: #fff; padding: 6px 12px; border-radius: 8px; cursor: pointer; font-size: 0.82rem; font-weight: 600; display: inline-flex; align-items: center; gap: 6px;">
                 <i class="fa-regular fa-bookmark"></i> <span>Bookmark</span>

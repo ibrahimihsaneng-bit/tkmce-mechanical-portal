@@ -508,6 +508,49 @@ const tradingTools = {
   // =========================================================================
   // TOOL 3: WHOLESALE-TO-RETAIL PROFIT CALCULATOR
   // =========================================================================
+  updateProfitCalcValues() {
+    const p = this.profitCalc;
+    const spoilagePerUnit = Math.round(p.wholesaleCost * (p.spoilagePct / 100) * 10) / 10;
+    const landedCost = Math.round((p.wholesaleCost + p.freightPerUnit + p.packPerUnit + spoilagePerUnit) * 10) / 10;
+    const unitGrossProfit = Math.round((p.retailPrice - landedCost) * 10) / 10;
+    const marginPct = p.retailPrice > 0 ? Math.round((unitGrossProfit / p.retailPrice) * 100) : 0;
+    const markupPct = landedCost > 0 ? Math.round((unitGrossProfit / landedCost) * 100) : 0;
+    const totalBatchInvestment = Math.round(landedCost * p.batchUnits);
+    const totalBatchProfit = Math.round(unitGrossProfit * p.batchUnits);
+
+    const elLanded = document.getElementById('calcLandedCostVal');
+    const elGross = document.getElementById('calcUnitGrossProfitVal');
+    const elMargin = document.getElementById('calcMarginPctVal');
+    const elMarkup = document.getElementById('calcMarkupPctVal');
+    const elBatchInvest = document.getElementById('calcBatchInvestVal');
+    const elBatchProfit = document.getElementById('calcBatchProfitVal');
+
+    if (elLanded) elLanded.textContent = `₹${landedCost.toFixed(2)}`;
+    if (elGross) elGross.textContent = `₹${unitGrossProfit.toFixed(2)}`;
+    if (elMargin) elMargin.textContent = `${marginPct}%`;
+    if (elMarkup) elMarkup.textContent = `${markupPct}%`;
+    if (elBatchInvest) elBatchInvest.textContent = `₹${totalBatchInvestment.toLocaleString('en-IN')}`;
+    if (elBatchProfit) elBatchProfit.textContent = `₹${totalBatchProfit.toLocaleString('en-IN')}`;
+  },
+
+  updateBreakEvenValues() {
+    const b = this.breakEven;
+    const unitContrib = b.retailPrice - b.variableCost;
+    const breakEvenUnits = unitContrib > 0 ? Math.ceil(b.fixedCosts / unitContrib) : 0;
+    const breakEvenRevenue = breakEvenUnits * b.retailPrice;
+    const daysToBreakEven = Math.ceil(breakEvenUnits / (b.dailySalesTarget || 1));
+
+    const elContrib = document.getElementById('beUnitContribVal');
+    const elUnits = document.getElementById('beUnitsVal');
+    const elRevenue = document.getElementById('beRevenueVal');
+    const elDays = document.getElementById('beDaysVal');
+
+    if (elContrib) elContrib.textContent = `₹${unitContrib}`;
+    if (elUnits) elUnits.textContent = `${breakEvenUnits} Units`;
+    if (elRevenue) elRevenue.textContent = `₹${breakEvenRevenue.toLocaleString('en-IN')}`;
+    if (elDays) elDays.textContent = `${daysToBreakEven} Days`;
+  },
+
   getProfitCalcHtml() {
     const p = this.profitCalc;
     const spoilagePerUnit = Math.round(p.wholesaleCost * (p.spoilagePct / 100) * 10) / 10;
@@ -532,12 +575,12 @@ const tradingTools = {
             <div class="form-group">
               <label class="form-label">Wholesale Cost (₹):</label>
               <input type="number" class="form-control" value="${p.wholesaleCost}" 
-                     oninput="tradingTools.profitCalc.wholesaleCost = parseFloat(this.value)||0; tradingTools.renderToolPane();">
+                     oninput="tradingTools.profitCalc.wholesaleCost = parseFloat(this.value)||0; tradingTools.updateProfitCalcValues();">
             </div>
             <div class="form-group">
               <label class="form-label">Inward Freight (₹):</label>
               <input type="number" class="form-control" value="${p.freightPerUnit}" 
-                     oninput="tradingTools.profitCalc.freightPerUnit = parseFloat(this.value)||0; tradingTools.renderToolPane();">
+                     oninput="tradingTools.profitCalc.freightPerUnit = parseFloat(this.value)||0; tradingTools.updateProfitCalcValues();">
             </div>
           </div>
 
@@ -545,12 +588,12 @@ const tradingTools = {
             <div class="form-group">
               <label class="form-label">Pouch / Box / Label (₹):</label>
               <input type="number" class="form-control" value="${p.packPerUnit}" 
-                     oninput="tradingTools.profitCalc.packPerUnit = parseFloat(this.value)||0; tradingTools.renderToolPane();">
+                     oninput="tradingTools.profitCalc.packPerUnit = parseFloat(this.value)||0; tradingTools.updateProfitCalcValues();">
             </div>
             <div class="form-group">
               <label class="form-label">Spoilage / Defect (%):</label>
               <input type="number" class="form-control" value="${p.spoilagePct}" 
-                     oninput="tradingTools.profitCalc.spoilagePct = parseFloat(this.value)||0; tradingTools.renderToolPane();">
+                     oninput="tradingTools.profitCalc.spoilagePct = parseFloat(this.value)||0; tradingTools.updateProfitCalcValues();">
             </div>
           </div>
 
@@ -558,12 +601,12 @@ const tradingTools = {
             <div class="form-group">
               <label class="form-label">Target Selling Price (₹):</label>
               <input type="number" class="form-control" value="${p.retailPrice}" 
-                     oninput="tradingTools.profitCalc.retailPrice = parseFloat(this.value)||0; tradingTools.renderToolPane();">
+                     oninput="tradingTools.profitCalc.retailPrice = parseFloat(this.value)||0; tradingTools.updateProfitCalcValues();">
             </div>
             <div class="form-group">
               <label class="form-label">Batch Units:</label>
               <input type="number" class="form-control" value="${p.batchUnits}" 
-                     oninput="tradingTools.profitCalc.batchUnits = parseInt(this.value, 10)||1; tradingTools.renderToolPane();">
+                     oninput="tradingTools.profitCalc.batchUnits = parseInt(this.value, 10)||1; tradingTools.updateProfitCalcValues();">
             </div>
           </div>
         </div>
@@ -573,29 +616,29 @@ const tradingTools = {
           
           <div style="display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 0.88rem;">
             <span>True Landed Cost per Unit:</span>
-            <strong>₹${landedCost.toFixed(2)}</strong>
+            <strong id="calcLandedCostVal">₹${landedCost.toFixed(2)}</strong>
           </div>
           <div style="display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 0.88rem;">
             <span>Net Profit per Unit:</span>
-            <strong class="text-success" style="font-size: 1.1rem;">₹${unitGrossProfit.toFixed(2)}</strong>
+            <strong class="text-success" style="font-size: 1.1rem;" id="calcUnitGrossProfitVal">₹${unitGrossProfit.toFixed(2)}</strong>
           </div>
           <div style="display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 0.88rem;">
             <span>Profit Margin on Selling Price:</span>
-            <strong style="color: var(--primary);">${marginPct}%</strong>
+            <strong style="color: var(--primary);" id="calcMarginPctVal">${marginPct}%</strong>
           </div>
           <div style="display: flex; justify-content: space-between; margin-bottom: 14px; font-size: 0.88rem;">
             <span>Markup on Landed Cost:</span>
-            <strong style="color: var(--gold-600);">${markupPct}%</strong>
+            <strong style="color: var(--gold-600);" id="calcMarkupPctVal">${markupPct}%</strong>
           </div>
 
           <div style="background: var(--bg-card); border-top: 2px dashed var(--border-light); padding-top: 12px; margin-top: 12px;">
             <div style="display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 0.88rem;">
               <span>Total Batch Sourcing Cost:</span>
-              <strong>₹${totalBatchInvestment.toLocaleString('en-IN')}</strong>
+              <strong id="calcBatchInvestVal">₹${totalBatchInvestment.toLocaleString('en-IN')}</strong>
             </div>
             <div style="display: flex; justify-content: space-between; font-size: 1rem; font-weight: 800;">
               <span>Total Projected Batch Profit:</span>
-              <span class="text-success" style="font-size: 1.25rem;">₹${totalBatchProfit.toLocaleString('en-IN')}</span>
+              <span class="text-success" style="font-size: 1.25rem;" id="calcBatchProfitVal">₹${totalBatchProfit.toLocaleString('en-IN')}</span>
             </div>
           </div>
         </div>
@@ -626,41 +669,41 @@ const tradingTools = {
           <div class="form-group" style="margin-bottom: 12px;">
             <label class="form-label">Initial Fixed Startup Costs (₹):</label>
             <input type="number" class="form-control" value="${b.fixedCosts}" 
-                   oninput="tradingTools.breakEven.fixedCosts = parseFloat(this.value)||0; tradingTools.renderToolPane();">
+                   oninput="tradingTools.breakEven.fixedCosts = parseFloat(this.value)||0; tradingTools.updateBreakEvenValues();">
             <small style="color: var(--text-muted); font-size: 0.72rem;">Weighing scale, label printer, sample flyers, tape gun, initial setup</small>
           </div>
 
           <div class="form-group" style="margin-bottom: 12px;">
             <label class="form-label">Selling Price per Unit (₹):</label>
             <input type="number" class="form-control" value="${b.retailPrice}" 
-                   oninput="tradingTools.breakEven.retailPrice = parseFloat(this.value)||0; tradingTools.renderToolPane();">
+                   oninput="tradingTools.breakEven.retailPrice = parseFloat(this.value)||0; tradingTools.updateBreakEvenValues();">
           </div>
 
           <div class="form-group" style="margin-bottom: 12px;">
             <label class="form-label">Variable Landed Cost per Unit (₹):</label>
             <input type="number" class="form-control" value="${b.variableCost}" 
-                   oninput="tradingTools.breakEven.variableCost = parseFloat(this.value)||0; tradingTools.renderToolPane();">
+                   oninput="tradingTools.breakEven.variableCost = parseFloat(this.value)||0; tradingTools.updateBreakEvenValues();">
           </div>
 
           <div class="form-group" style="margin-bottom: 12px;">
             <label class="form-label">Daily Sales Target (Units/Day):</label>
             <input type="number" class="form-control" value="${b.dailySalesTarget}" 
-                   oninput="tradingTools.breakEven.dailySalesTarget = parseInt(this.value, 10)||1; tradingTools.renderToolPane();">
+                   oninput="tradingTools.breakEven.dailySalesTarget = parseInt(this.value, 10)||1; tradingTools.updateBreakEvenValues();">
           </div>
         </div>
 
         <div style="background: var(--bg-card-subtle); border: 1px solid var(--border-light); border-radius: var(--radius-md); padding: 22px; text-align: center;">
           <span style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Contribution Margin per Unit:</span>
-          <div style="font-size: 1.5rem; font-weight: 900; color: var(--text-main); margin: 4px 0 16px;">₹${unitContrib}</div>
+          <div style="font-size: 1.5rem; font-weight: 900; color: var(--text-main); margin: 4px 0 16px;" id="beUnitContribVal">₹${unitContrib}</div>
 
           <div style="background: var(--bg-card); border: 1px solid var(--border-light); border-radius: var(--radius-md); padding: 16px; margin-bottom: 14px;">
             <span style="font-size: 0.85rem; color: var(--text-muted);">Units to Break-Even:</span>
-            <div style="font-size: 2.2rem; font-weight: 900; color: var(--primary); line-height: 1.2;">${breakEvenUnits} Units</div>
-            <small style="color: var(--text-muted); font-size: 0.78rem;">Gross sales required: ₹${breakEvenRevenue.toLocaleString('en-IN')}</small>
+            <div style="font-size: 2.2rem; font-weight: 900; color: var(--primary); line-height: 1.2;" id="beUnitsVal">${breakEvenUnits} Units</div>
+            <small style="color: var(--text-muted); font-size: 0.78rem;">Gross sales required: <span id="beRevenueVal">₹${breakEvenRevenue.toLocaleString('en-IN')}</span></small>
           </div>
 
           <div style="background: var(--emerald-50); border: 1px solid var(--emerald-500); padding: 10px 14px; border-radius: 8px; font-size: 0.82rem; color: var(--emerald-800); font-weight: 700;">
-            <i class="fa-solid fa-clock"></i> Projected Break-Even Time: ~${daysToBreakEven} Days at ${b.dailySalesTarget} sales/day
+            <i class="fa-solid fa-clock"></i> Projected Break-Even Time: ~<span id="beDaysVal">${daysToBreakEven} Days</span> at ${b.dailySalesTarget} sales/day
           </div>
         </div>
       </div>

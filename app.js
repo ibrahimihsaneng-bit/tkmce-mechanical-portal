@@ -140,6 +140,8 @@ const app = {
       toolTabLegal: "Halal Compliance & GST",
       toolTabPlan: "Business Plan",
       lblPrintCheatsheet: "1-Page Action Plan",
+      lblAcademyChecklistBtn: "Business Checklist (PDF)",
+      lblAcademyAudioBtn: "Audio Lesson",
 
       // Halal Community Banner on Homepage
       halalBadgePill: "100% Interest-Free Halal Network",
@@ -327,6 +329,8 @@ const app = {
       toolTabLegal: "ഹലാൽ നിയമങ്ങളും GST യും",
       toolTabPlan: "ബിസിനസ് പ്ലാൻ",
       lblPrintCheatsheet: "1-പേജ് ആക്ഷൻ പ്ലാൻ",
+      lblAcademyChecklistBtn: "ബിസിനസ്സ് ചെക്ക്‌ലിസ്റ്റ് (PDF)",
+      lblAcademyAudioBtn: "ഓഡിയോ ക്ലാസ്",
 
       // Halal Community Banner on Homepage
       halalBadgePill: "100% പലിശരഹിത ഇസ്ലാമിക കൂട്ടായ്മ",
@@ -514,6 +518,8 @@ const app = {
       toolTabLegal: "الضوابط الشرعية ورخص العمل",
       toolTabPlan: "خطة العمل",
       lblPrintCheatsheet: "خطة العمل (صفحة واحدة)",
+      lblAcademyChecklistBtn: "قائمة فحص المشروع (PDF)",
+      lblAcademyAudioBtn: "درس صوتي",
 
       // Halal Community Banner on Homepage
       halalBadgePill: "شبكة رواد الأعمال الحلال خالية من الفوائد 100%",
