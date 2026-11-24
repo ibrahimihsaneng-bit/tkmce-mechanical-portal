@@ -62,11 +62,12 @@
       <!-- Navigation Links -->
       <nav class="nav-menu" id="navMenu">
         <a href="#categories" class="nav-item" id="navCategories"><i class="fa-solid fa-boxes-stacked"></i> Business Niches</a>
-        <a href="#quiz-section" class="nav-item" id="navQuiz"><i class="fa-solid fa-compass"></i> Idea Finder Quiz</a>
+        <a href="#attar-simulator" class="nav-item highlight-nav" id="navAttarSim"><i class="fa-solid fa-chart-column"></i> Attar Profit Graph</a>
+        <a href="#coaching-section" class="nav-item" id="navCoaching"><i class="fa-solid fa-headset"></i> Supplier Chat Coach</a>
         <a href="#suppliers" class="nav-item" id="navSuppliers"><i class="fa-solid fa-store"></i> Wholesale Directory</a>
-        <a href="#calculator" class="nav-item highlight-nav" id="navCalculator"><i class="fa-solid fa-calculator"></i> Profit Calculator</a>
+        <a href="#calculator" class="nav-item" id="navCalculator"><i class="fa-solid fa-calculator"></i> Profit Calculator</a>
         <a href="#templates-section" class="nav-item" id="navTemplates"><i class="fa-brands fa-whatsapp"></i> WhatsApp Scripts</a>
-        <a href="#legal-section" class="nav-item" id="navLegal"><i class="fa-solid fa-scale-balanced"></i> GST & Banking</a>
+        <a href="#quiz-section" class="nav-item" id="navQuiz"><i class="fa-solid fa-compass"></i> Idea Finder</a>
         <a href="#roadmap" class="nav-item" id="navRoadmap"><i class="fa-solid fa-road"></i> 7-Step Guide</a>
         <a href="#logistics" class="nav-item" id="navLogistics"><i class="fa-solid fa-truck-fast"></i> Courier & Rates</a>
         <a href="#plan-builder" class="nav-btn-action" id="navPlanBuilder"><i class="fa-solid fa-file-invoice-dollar"></i> Generate Plan</a>
@@ -119,11 +120,11 @@
           <a href="#categories" class="btn btn-primary" id="btnExploreNiches">
             <i class="fa-solid fa-magnifying-glass-chart"></i> Explore Business Niches
           </a>
-          <a href="#quiz-section" class="btn btn-secondary" id="btnTakeQuiz">
-            <i class="fa-solid fa-wand-magic-sparkles"></i> Find Which Business Fits You
+          <a href="#attar-simulator" class="btn btn-secondary" id="btnOpenSimulator">
+            <i class="fa-solid fa-chart-column"></i> Attar Profit Graph & Simulator
           </a>
-          <a href="#calculator" class="btn btn-outline" id="btnOpenCalc">
-            <i class="fa-solid fa-calculator"></i> Profit Calculator
+          <a href="#suppliers" class="btn btn-outline" id="btnViewDirectory">
+            <i class="fa-solid fa-location-dot"></i> Wholesalers & Google Maps
           </a>
         </div>
       </div>
@@ -225,6 +226,213 @@
       <!-- Dynamic Category Blueprint Display Area -->
       <div class="category-content-container" id="categoryContent">
         <!-- Rendered dynamically by JavaScript in English, Malayalam, or Arabic -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Attar Selection & Live Profit Graph Simulator -->
+  <section class="section attar-sim-section" id="attar-simulator">
+    <div class="container">
+      <div class="section-head text-center">
+        <span class="section-badge" id="simBadge">Interactive Fragrance Studio</span>
+        <h2 class="section-title" id="simTitle">Attar Flacon Builder & Live Profit Graph</h2>
+        <p class="section-subtitle" id="simSubtitle">
+          Select an attar oil, choose bottle size and packaging luxury tier to see the exact cost breakdown, selling price, and a real-time visual profit graph!
+        </p>
+      </div>
+
+      <div class="sim-grid">
+        <!-- Left: Interactive Selections -->
+        <div class="sim-card config-card">
+          <h3 class="sim-card-title"><i class="fa-solid fa-flask-vial text-primary"></i> <span id="simConfigTitle">1. Build Your Attar Flacon</span></h3>
+          
+          <!-- Select Oil -->
+          <div class="sim-group">
+            <label id="lblSelectOil">Select Fragrance Oil Variety:</label>
+            <div class="oil-chips-grid" id="oilChipsGrid">
+              <!-- Rendered by JS -->
+            </div>
+          </div>
+
+          <!-- Select Bottle Size -->
+          <div class="sim-group">
+            <label id="lblSelectSize">Choose Flacon Size:</label>
+            <div class="pill-options" id="sizeOptions">
+              <button class="size-pill-btn active" data-size="6">6ml (Popular Roll-On)</button>
+              <button class="size-pill-btn" data-size="12">12ml (1 Tola Luxury)</button>
+              <button class="size-pill-btn" data-size="3">3ml (Pocket Discovery)</button>
+            </div>
+          </div>
+
+          <!-- Select Bottle Style -->
+          <div class="sim-group">
+            <label id="lblSelectBottle">Choose Bottle & Hardware Style:</label>
+            <div class="pill-options" id="bottleOptions">
+              <button class="bottle-pill-btn active" data-bottle="octagonal">Octagonal Glass Roll-on (₹10)</button>
+              <button class="bottle-pill-btn" data-bottle="crystal">Crystal Gold Dipstick (₹18)</button>
+              <button class="bottle-pill-btn" data-bottle="luxury">Laser-Engraved Flacon (₹32)</button>
+            </div>
+          </div>
+
+          <!-- Select Packaging -->
+          <div class="sim-group">
+            <label id="lblSelectPack">Packaging & Pouch Tier:</label>
+            <div class="pill-options" id="packOptions">
+              <button class="pack-pill-btn active" data-pack="velvet">Velvet Pouch + Scent Strip (₹8)</button>
+              <button class="pack-pill-btn" data-pack="rigid">Rigid Slide Box + Gold Foil (₹24)</button>
+              <button class="pack-pill-btn" data-pack="casket">Artisanal Wooden Casket (₹45)</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Real-Time Visual Profit Graph & Financial Matrix -->
+        <div class="sim-card visual-card">
+          <h3 class="sim-card-title"><i class="fa-solid fa-chart-column text-success"></i> <span id="simGraphTitle">Live Profit Graph & Margin Visualizer</span></h3>
+          
+          <!-- Visual Bar Graph Comparison -->
+          <div class="profit-graph-wrap">
+            <div class="graph-legend">
+              <span class="legend-dot dot-oil"><i class="fa-solid fa-square"></i> <span id="legOil">Oil Cost</span></span>
+              <span class="legend-dot dot-bottle"><i class="fa-solid fa-square"></i> <span id="legBottle">Bottle</span></span>
+              <span class="legend-dot dot-pack"><i class="fa-solid fa-square"></i> <span id="legPack">Packaging</span></span>
+              <span class="legend-dot dot-profit"><i class="fa-solid fa-square"></i> <span id="legProfit">Net Profit</span></span>
+            </div>
+
+            <!-- Dynamic Horizontal Stacked Bar -->
+            <div class="stacked-bar-container">
+              <div class="stacked-segment seg-oil" id="barOil" style="width: 15%;" title="Oil Cost"></div>
+              <div class="stacked-segment seg-bottle" id="barBottle" style="width: 10%;" title="Bottle Cost"></div>
+              <div class="stacked-segment seg-pack" id="barPack" style="width: 8%;" title="Packaging Cost"></div>
+              <div class="stacked-segment seg-profit" id="barProfit" style="width: 67%;" title="Net Profit"></div>
+            </div>
+
+            <!-- Price Breakdown Callout -->
+            <div class="price-hero-callout">
+              <div class="cost-side">
+                <span class="small-lbl" id="lblTotalCostPerBottle">Total Cost to Make:</span>
+                <span class="cost-num" id="valTotalCostPerBottle">₹42.00</span>
+              </div>
+              <div class="arrow-divider"><i class="fa-solid fa-arrow-right"></i></div>
+              <div class="sell-side">
+                <span class="small-lbl" id="lblSuggestedRetail">Selling Price:</span>
+                <span class="sell-num" id="valSuggestedRetail">₹349.00</span>
+              </div>
+              <div class="profit-badge-pill" id="badgeProfitMultiplier">
+                <span id="lblNetProfitPerBottle">Net Profit:</span>
+                <strong id="valNetProfitPerBottle">₹307.00</strong>
+                <small id="valProfitMarginPct">(730% Markup!)</small>
+              </div>
+            </div>
+          </div>
+
+          <!-- Batch Projection Cards -->
+          <div class="batch-projection-grid">
+            <div class="batch-box">
+              <span class="batch-title" id="lblBatch25">Batch of 25 Bottles</span>
+              <span class="batch-invest" id="valBatchInvest25">Cost: ₹1,050</span>
+              <span class="batch-profit highlight-green" id="valBatchProfit25">Profit: ₹7,675</span>
+            </div>
+            <div class="batch-box highlight-batch">
+              <span class="batch-title" id="lblBatch50">Batch of 50 Bottles</span>
+              <span class="batch-invest" id="valBatchInvest50">Cost: ₹2,100</span>
+              <span class="batch-profit highlight-green" id="valBatchProfit50">Profit: ₹15,350</span>
+            </div>
+            <div class="batch-box">
+              <span class="batch-title" id="lblBatch100">Batch of 100 Bottles</span>
+              <span class="batch-invest" id="valBatchInvest100">Cost: ₹4,200</span>
+              <span class="batch-profit highlight-green" id="valBatchProfit100">Profit: ₹30,700</span>
+            </div>
+          </div>
+
+          <div class="sim-tip-note">
+            <i class="fa-solid fa-circle-check text-success"></i>
+            <span id="simProTip">Insight: Attars offer the highest repeat purchase loyalty in India. Once a customer likes your White Musk or Shamama, they reorder every 2 months!</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Supplier Call & WhatsApp Negotiation Masterclass -->
+  <section class="section coaching-section" id="coaching-section">
+    <div class="container">
+      <div class="section-head text-center">
+        <span class="section-badge" id="coachBadge">Supplier Mastery</span>
+        <h2 class="section-title" id="coachTitle">What to Ask Wholesalers: Step-by-Step Call Coaching</h2>
+        <p class="section-subtitle" id="coachSubtitle">
+          Feel nervous about calling wholesalers? Follow this exact step-by-step masterclass with proven questions to negotiate smaller trial batches and get authentic wholesale rates.
+        </p>
+      </div>
+
+      <div class="coaching-grid" id="coachingGrid">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Verified Wholesale Market Directory & Supplier Contacts with Google Maps -->
+  <section class="section directory-section" id="suppliers">
+    <div class="container">
+      <div class="section-head text-center">
+        <span class="section-badge" id="dirBadge">Real Wholesale Locations</span>
+        <h2 class="section-title" id="dirTitle">Verified Wholesalers & Google Maps Directory</h2>
+        <p class="section-subtitle" id="dirSubtitle">
+          Don't know where to buy stock? Here is the exact list of genuine wholesale markets, prominent shops, addresses, Google Maps locations, and direct WhatsApp contact links in Kozhikode, Kochi, Mumbai, Surat, Tirupur, and Delhi.
+        </p>
+      </div>
+
+      <!-- Search and Filter Bar -->
+      <div class="directory-filter-bar">
+        <div class="search-box">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" id="dirSearchInput" placeholder="Search by market, shop name, city, or product...">
+        </div>
+        <div class="filter-dropdowns">
+          <select id="filterCity" class="filter-select">
+            <option value="all">All Cities / എല്ലാ നഗരങ്ങളും</option>
+            <option value="Kozhikode">Kozhikode / Calicut (കോഴിക്കോട്)</option>
+            <option value="Kochi">Kochi / Ernakulam (കൊച്ചി)</option>
+            <option value="Mumbai">Mumbai (മുംബൈ)</option>
+            <option value="Surat">Surat (സൂററ്റ്)</option>
+            <option value="Tirupur">Tirupur (തിരുപ്പൂർ)</option>
+            <option value="Delhi">Delhi (ഡൽഹി)</option>
+            <option value="Jaipur">Jaipur (ജയ്പൂർ)</option>
+            <option value="Kannauj">Kannauj (കണ്ണൗജ്)</option>
+          </select>
+
+          <select id="filterCategory" class="filter-select">
+            <option value="all">All Niches / എല്ലാ കാറ്റഗറിയും</option>
+            <option value="attar">Attar & Fragrances</option>
+            <option value="clothing">Clothing & Fabrics</option>
+            <option value="watches">Watches</option>
+            <option value="bags">Bags & Wallets</option>
+            <option value="accessories">Rings & Jewelry</option>
+            <option value="packaging">Packaging & Bottles</option>
+            <option value="spices">Kerala Spices</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Supplier Directory Cards Grid -->
+      <div class="directory-grid" id="directoryList">
+        <!-- Rendered dynamically by JavaScript -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Ready-to-Use WhatsApp Message Scripts & Templates -->
+  <section class="section templates-section" id="templates-section">
+    <div class="container">
+      <div class="section-head text-center">
+        <span class="section-badge" id="tmplBadge">Ready-to-Use Scripts</span>
+        <h2 class="section-title" id="tmplTitle">Copy-Paste WhatsApp & DM Templates</h2>
+        <p class="section-subtitle" id="tmplSubtitle">
+          Don't know what to message wholesalers or customers? Use these battle-tested professional message scripts in Malayalam, English, and Arabic. Click to copy instantly.
+        </p>
+      </div>
+
+      <div class="templates-grid" id="templatesGrid">
+        <!-- Rendered dynamically by JS -->
       </div>
     </div>
   </section>
@@ -461,73 +669,6 @@
             <span id="calcProTip">Pro Tip: Selling 2 orders per day generates over ₹14,000+ pure side income from home with zero shop rental.</span>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Verified Wholesale Market Directory & Supplier Contacts -->
-  <section class="section directory-section" id="suppliers">
-    <div class="container">
-      <div class="section-head text-center">
-        <span class="section-badge" id="dirBadge">Real Wholesale Locations</span>
-        <h2 class="section-title" id="dirTitle">Verified Wholesalers & Market Directory</h2>
-        <p class="section-subtitle" id="dirSubtitle">
-          Don't know where to buy stock? Here is the exact list of genuine wholesale markets, prominent shops, addresses, and direct WhatsApp contact links in Kozhikode, Kochi, Mumbai, Surat, Tirupur, and Delhi.
-        </p>
-      </div>
-
-      <!-- Search and Filter Bar -->
-      <div class="directory-filter-bar">
-        <div class="search-box">
-          <i class="fa-solid fa-magnifying-glass"></i>
-          <input type="text" id="dirSearchInput" placeholder="Search by market, shop name, city, or product...">
-        </div>
-        <div class="filter-dropdowns">
-          <select id="filterCity" class="filter-select">
-            <option value="all">All Cities / എല്ലാ നഗരങ്ങളും</option>
-            <option value="Kozhikode">Kozhikode / Calicut (കോഴിക്കോട്)</option>
-            <option value="Kochi">Kochi / Ernakulam (കൊച്ചി)</option>
-            <option value="Mumbai">Mumbai (മുംബൈ)</option>
-            <option value="Surat">Surat (സൂററ്റ്)</option>
-            <option value="Tirupur">Tirupur (തിരുപ്പൂർ)</option>
-            <option value="Delhi">Delhi (ഡൽഹി)</option>
-            <option value="Jaipur">Jaipur (ജയ്പൂർ)</option>
-            <option value="Kannauj">Kannauj (കണ്ണൗജ്)</option>
-          </select>
-
-          <select id="filterCategory" class="filter-select">
-            <option value="all">All Niches / എല്ലാ കാറ്റഗറിയും</option>
-            <option value="attar">Attar & Fragrances</option>
-            <option value="clothing">Clothing & Fabrics</option>
-            <option value="watches">Watches</option>
-            <option value="bags">Bags & Wallets</option>
-            <option value="accessories">Rings & Jewelry</option>
-            <option value="packaging">Packaging & Bottles</option>
-            <option value="spices">Kerala Spices</option>
-          </select>
-        </div>
-      </div>
-
-      <!-- Supplier Directory Cards Grid -->
-      <div class="directory-grid" id="directoryList">
-        <!-- Rendered dynamically by JavaScript -->
-      </div>
-    </div>
-  </section>
-
-  <!-- Ready-to-Use WhatsApp Message Scripts & Templates -->
-  <section class="section templates-section" id="templates-section">
-    <div class="container">
-      <div class="section-head text-center">
-        <span class="section-badge" id="tmplBadge">Ready-to-Use Scripts</span>
-        <h2 class="section-title" id="tmplTitle">Copy-Paste WhatsApp & DM Templates</h2>
-        <p class="section-subtitle" id="tmplSubtitle">
-          Don't know what to message wholesalers or customers? Use these battle-tested professional message scripts in Malayalam, English, and Arabic. Click to copy instantly.
-        </p>
-      </div>
-
-      <div class="templates-grid" id="templatesGrid">
-        <!-- Rendered dynamically by JS -->
       </div>
     </div>
   </section>
@@ -778,11 +919,11 @@
       <div class="footer-col">
         <h4 class="footer-heading" id="footHeadingTools">Free Interactive Tools</h4>
         <ul class="footer-links">
+          <li><a href="#attar-simulator">Attar Profit Graph & Simulator</a></li>
+          <li><a href="#coaching-section">Supplier Negotiation Masterclass</a></li>
           <li><a href="#calculator">Profit & Margin Calculator</a></li>
           <li><a href="#quiz-section">Idea Finder Quiz</a></li>
           <li><a href="#suppliers">Verified Wholesaler Directory</a></li>
-          <li><a href="#templates-section">WhatsApp Copy-Paste Scripts</a></li>
-          <li><a href="#legal-section">GST, MSME & Banking Guide</a></li>
           <li><a href="#plan-builder">Custom Business Plan Generator</a></li>
         </ul>
       </div>
@@ -801,8 +942,8 @@
     <button class="dock-btn" onclick="app.cycleLanguage()" title="Switch Language (EN / മലയാളം / العربية)">
       <i class="fa-solid fa-language"></i> <span id="dockLangText">EN</span>
     </button>
-    <a href="#calculator" class="dock-btn dock-calc" title="Open Profit Calculator">
-      <i class="fa-solid fa-calculator"></i>
+    <a href="#attar-simulator" class="dock-btn dock-calc" title="Open Attar Profit Graph">
+      <i class="fa-solid fa-chart-column"></i>
     </a>
   </div>
 

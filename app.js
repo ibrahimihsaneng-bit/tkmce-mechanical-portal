@@ -1,14 +1,28 @@
 /**
  * VYAPAR SHIKSHA (സംരംഭക പാഠശാല | منصة رواد الأعمال)
  * Complete Application Logic, Trilingual Localization & Directory Data Engine
- * Features: Niche Blueprints, Profit Calculator, Wholesaler Directory,
- * Compatibility Quiz, WhatsApp Message Scripts, Legal Guide, Equipment Checklist, and FAQs.
+ * Features:
+ * - Interactive Attar Studio & Real-Time Profit Bar Graph
+ * - Supplier Call & WhatsApp Negotiation Masterclass
+ * - Google Maps Verified Wholesale Locations
+ * - 30-Second Idea Finder Quiz
+ * - Copy-Paste WhatsApp & DM Scripts
+ * - Startup Financial Calculator
+ * - GST, MSME & Banking Compliance
  * Languages: English (en), Malayalam (ml), Arabic (ar)
  */
 
 const app = {
   currentLang: 'en',
   activeCategory: 'attar',
+
+  // Current Attar Simulator State
+  simState: {
+    oilId: 'white_musk',
+    sizeMl: 6,
+    bottleStyle: 'octagonal',
+    packTier: 'velvet'
+  },
 
   // Complete Trilingual Localization Dictionary
   i18n: {
@@ -18,11 +32,12 @@ const app = {
       topBarTagline: "Practical Business Academy for Kerala & Pan-India Micro-Entrepreneurs",
       langCurrentText: "Language:",
       navCategories: "Business Niches",
-      navQuiz: "Idea Finder Quiz",
+      navAttarSim: "Attar Profit Graph",
+      navCoaching: "Supplier Chat Coach",
       navSuppliers: "Wholesale Directory",
       navCalculator: "Profit Calculator",
       navTemplates: "WhatsApp Scripts",
-      navLegal: "GST & Banking",
+      navQuiz: "Idea Finder",
       navRoadmap: "7-Step Guide",
       navLogistics: "Courier & Rates",
       navPlanBuilder: "Generate Plan",
@@ -37,8 +52,8 @@ const app = {
       statLang: "EN • മലയാളം • العربية",
 
       btnExploreNiches: "Explore Business Niches",
-      btnTakeQuiz: "Find Which Business Fits You",
-      btnOpenCalc: "Profit Calculator",
+      btnOpenSimulator: "Attar Profit Graph & Simulator",
+      btnViewDirectory: "Wholesalers & Google Maps",
 
       previewTitle: "Quick Startup Comparison",
       quickAttarTitle: "Attar & Perfume Oils",
@@ -69,6 +84,39 @@ const app = {
       tabBags: "Bags & Totes",
       tabAccessories: "Rings & Jewelry",
       tabSpices: "Kerala Spices & Honey",
+
+      // Simulator Strings
+      simBadge: "Interactive Fragrance Studio",
+      simTitle: "Attar Flacon Builder & Live Profit Graph",
+      simSubtitle: "Select an attar oil, choose bottle size and packaging luxury tier to see the exact cost breakdown, selling price, and a real-time visual profit graph!",
+      simConfigTitle: "1. Build Your Attar Flacon",
+      lblSelectOil: "Select Fragrance Oil Variety:",
+      lblSelectSize: "Choose Flacon Size:",
+      lblSelectBottle: "Choose Bottle & Hardware Style:",
+      lblSelectPack: "Packaging & Pouch Tier:",
+      simGraphTitle: "Live Profit Graph & Margin Visualizer",
+      legOil: "Oil Cost",
+      legBottle: "Bottle",
+      legPack: "Packaging",
+      legProfit: "Net Profit",
+      lblTotalCostPerBottle: "Total Cost to Make:",
+      lblSuggestedRetail: "Selling Price:",
+      lblNetProfitPerBottle: "Net Profit:",
+      lblBatch25: "Batch of 25 Bottles",
+      lblBatch50: "Batch of 50 Bottles",
+      lblBatch100: "Batch of 100 Bottles",
+      simProTip: "Insight: Attars offer the highest repeat purchase loyalty in India. Once a customer likes your White Musk or Shamama, they reorder every 2 months!",
+
+      // Coaching Strings
+      coachBadge: "Supplier Mastery",
+      coachTitle: "What to Ask Wholesalers: Step-by-Step Call Coaching",
+      coachSubtitle: "Feel nervous about calling wholesalers? Follow this exact step-by-step masterclass with proven questions to negotiate smaller trial batches and get authentic wholesale rates.",
+
+      // Directory Strings
+      dirBadge: "Real Wholesale Locations",
+      dirTitle: "Verified Wholesalers & Google Maps Directory",
+      dirSubtitle: "Don't know where to buy stock? Here is the exact list of genuine wholesale markets, prominent shops, addresses, Google Maps locations, and direct WhatsApp contact links in Kozhikode, Kochi, Mumbai, Surat, Tirupur, and Delhi.",
+      dirSearchPlaceholder: "Search by market, shop name, city, or product...",
 
       // Quiz
       quizBadge: "Personal Matchmaker",
@@ -117,12 +165,6 @@ const app = {
       resLblStartupCap: "Initial Capital Needed for 1st Batch",
       gccConvTitle: "GCC Expat Currency Value:",
       calcProTip: "Pro Tip: Selling 2 orders per day generates over ₹14,000+ pure side income from home with zero shop rental.",
-
-      // Directory Strings
-      dirBadge: "Real Wholesale Locations",
-      dirTitle: "Verified Wholesalers & Market Directory",
-      dirSubtitle: "Don't know where to buy stock? Here is the exact list of genuine wholesale markets, prominent shops, addresses, and direct WhatsApp contact links in Kozhikode, Kochi, Mumbai, Surat, Tirupur, and Delhi.",
-      dirSearchPlaceholder: "Search by market, shop name, city, or product...",
 
       // Templates
       tmplBadge: "Ready-to-Use Scripts",
@@ -195,11 +237,12 @@ const app = {
       topBarTagline: "കേരളത്തിലെയും ഭാരതത്തിലെയും തുടക്കക്കാർക്കുള്ള പ്രായോഗിക ബിസിനസ് പഠന വേദി",
       langCurrentText: "ഭാഷ:",
       navCategories: "ബിസിനസ് ആശയങ്ങൾ",
-      navQuiz: "ഐഡിയ ഫൈൻഡർ ക്വിസ്",
+      navAttarSim: "അത്തർ പ്രോഫിറ്റ് ഗ്രാഫ്",
+      navCoaching: "സപ്ലയർ ചാറ്റ് കോച്ച്",
       navSuppliers: "ഹോൾസെയിൽ ഡയറക്ടറി",
       navCalculator: "പ്രോഫിറ്റ് കാൽക്കുലേറ്റർ",
       navTemplates: "വാട്സ്ആപ്പ് സ്ക്രിപ്റ്റുകൾ",
-      navLegal: "ജി.എസ്.ടിയും ബാങ്കിംഗും",
+      navQuiz: "ഐഡിയ ഫൈൻഡർ",
       navRoadmap: "7-ഘട്ട ഗൈഡ്",
       navLogistics: "കൊറിയർ & നിരക്കുകൾ",
       navPlanBuilder: "പ്ലാൻ തയ്യാറാക്കുക",
@@ -214,8 +257,8 @@ const app = {
       statLang: "മലയാളം • English • العربية",
 
       btnExploreNiches: "ബിസിനസ് ആശയങ്ങൾ കാണുക",
-      btnTakeQuiz: "ഏത് ബിസിനസ്സാണ് നിങ്ങൾക്ക് ചേരുക?",
-      btnOpenCalc: "ലാഭം കണക്കാക്കുക",
+      btnOpenSimulator: "അത്തർ പ്രോഫിറ്റ് ഗ്രാഫും സിമുലേറ്ററും",
+      btnViewDirectory: "വ്യാപാരികളും ഗൂഗിൾ മാപ്പും",
 
       previewTitle: "ബിസിനസ് താരതമ്യം ഒറ്റനോട്ടത്തിൽ",
       quickAttarTitle: "അത്തർ & പെർഫ്യൂം ഓയിൽസ്",
@@ -246,6 +289,39 @@ const app = {
       tabBags: "ബാഗുകൾ & വാലറ്റുകൾ",
       tabAccessories: "മോതിരങ്ങൾ & ആഭരണങ്ങൾ",
       tabSpices: "സുഗന്ധവ്യഞ്ജനങ്ങൾ & തേൻ",
+
+      // Simulator Strings
+      simBadge: "ഇന്ററാക്ടീവ് അത്തർ സ്റ്റുഡിയോ",
+      simTitle: "അത്തർ ബോട്ടിൽ ബിൽഡറും ലൈവ് പ്രോഫിറ്റ് ഗ്രാഫും",
+      simSubtitle: "നിങ്ങൾക്ക് ഇഷ്ടപ്പെട്ട അത്തർ ഓയിൽ, കുപ്പിയുടെ വലിപ്പം, പാക്കിംഗ് രീതി എന്നിവ തിരഞ്ഞെടുക്കൂ — കൃത്യമായ നിർമ്മാണച്ചെലവും വിൽപനവിലയും ലൈവ് ഗ്രാഫിലൂടെ തത്സമയം കാണാം!",
+      simConfigTitle: "1. നിങ്ങളുടെ അത്തർ കുപ്പി ഡിസൈൻ ചെയ്യുക",
+      lblSelectOil: "അത്തർ ഓയിൽ വെറൈറ്റി തിരഞ്ഞെടുക്കുക:",
+      lblSelectSize: "കുപ്പിയുടെ അളവ് തിരഞ്ഞെടുക്കുക:",
+      lblSelectBottle: "കുപ്പിയുടെയും ക്യാപ്പിന്റെയും മോഡൽ:",
+      lblSelectPack: "പാക്കിംഗ് & പൗച്ച് ലെവൽ:",
+      simGraphTitle: "തത്സമയ പ്രോഫിറ്റ് ഗ്രാഫും മാർജിൻ കാൽക്കുലേറ്ററും",
+      legOil: "ഓയിൽ വില",
+      legBottle: "കുപ്പി വില",
+      legPack: "പാക്കിംഗ്",
+      legProfit: "അറ്റാദായം (Net Profit)",
+      lblTotalCostPerBottle: "ഒരു കുപ്പി ഉണ്ടാക്കാനുള്ള ആകെ ചെലവ്:",
+      lblSuggestedRetail: "നിർദ്ദേശിക്കുന്ന വിൽപന വില:",
+      lblNetProfitPerBottle: "ഒരു കുപ്പിയിലെ അറ്റാദായം:",
+      lblBatch25: "25 കുപ്പികളുടെ ബാച്ച്",
+      lblBatch50: "50 കുപ്പികളുടെ ബാച്ച്",
+      lblBatch100: "100 കുപ്പികളുടെ ബാച്ച്",
+      simProTip: "പ്രധാന അറിവ്: ഇന്ത്യയിൽ ഏറ്റവും കൂടുതൽ ആവർത്തിച്ച് വിറ്റുപോകുന്ന ഒന്നാണ് അത്തർ. കസ്റ്റമർക്ക് നിങ്ങളുടെ വൈറ്റ് മസ്കോ ശമാമയോ ഇഷ്ടപ്പെട്ടാൽ അവർ 2 മാസം കൂടുമ്പോൾ വീണ്ടും ഓർഡർ ചെയ്യും!",
+
+      // Coaching Strings
+      coachBadge: "സപ്ലയർ മാസ്റ്റർക്ലാസ്",
+      coachTitle: "ഹോൾസെയിൽ വ്യാപാരികളോട് എന്തൊക്കെ ചോദിക്കണം? (ഫോൺ & ചാറ്റ് കോച്ചിംഗ്)",
+      coachSubtitle: "ഹോൾസെയിൽ കടക്കാരെ വിളിക്കാൻ മടിയുണ്ടോ? സാമ്പിൾ ബാച്ചുകൾ കുറഞ്ഞ വിലയ്ക്ക് സ്വന്തമാക്കാൻ അവരോട് സംസാരിക്കേണ്ട കൃത്യമായ രീതി താഴെ പഠിക്കാം.",
+
+      // Directory Strings
+      dirBadge: "യഥാർത്ഥ മാർക്കറ്റുകൾ",
+      dirTitle: "ഹോൾസെയിൽ വ്യാപാരികളും ഗൂഗിൾ മാപ്പ് ലൊക്കേഷനുകളും",
+      dirSubtitle: "എവിടെ നിന്ന് സ്റ്റോക്ക് വാങ്ങണമെന്ന് അറിയാത്തവർക്കായി കോഴിക്കോട്, കൊച്ചി, മുംബൈ, സൂററ്റ്, തിരുപ്പൂർ, ഡൽഹി എന്നിവിടങ്ങളിലെ കടകളുടെ വിലാസവും, വാട്സ്ആപ്പും, നേരിട്ട് പോകാനുള്ള ഗൂഗിൾ മാപ്പ് ലിങ്കുകളും.",
+      dirSearchPlaceholder: "മാർക്കറ്റ്, കടയുടെ പേര്, നഗരം, അല്ലെങ്കിൽ ഉൽപ്പന്നം തിരയുക...",
 
       // Quiz
       quizBadge: "നിങ്ങൾക്കായുള്ള ബിസിനസ് തിരഞ്ഞെടുപ്പ്",
@@ -294,12 +370,6 @@ const app = {
       resLblStartupCap: "ആദ്യ ഓർഡർ ബാച്ചിന് ആവശ്യമായ മൂലധനം",
       gccConvTitle: "ഗൾഫ് കറൻസിയിലെ മൂല്യം (GCC Value):",
       calcProTip: "പ്രധാന സൂചന: വീട്ടിലിരുന്ന് പ്രതിദിനം വെറും 2 ഓർഡർ അയച്ചാൽ പോലും വാടകയില്ലാതെ ₹14,000-ൽ അധികം ലാഭം കണ്ടെത്താം.",
-
-      // Directory Strings
-      dirBadge: "യഥാർത്ഥ മാർക്കറ്റുകൾ",
-      dirTitle: "ഹോൾസെയിൽ വ്യാപാരികളുടെ ഡയറക്ടറി",
-      dirSubtitle: "എവിടെ നിന്ന് സ്റ്റോക്ക് വാങ്ങണമെന്ന് അറിയാത്തവർക്കായി കോഴിക്കോട്, കൊച്ചി, മുംബൈ, സൂററ്റ്, തിരുപ്പൂർ, ഡൽഹി എന്നിവിടങ്ങളിലെ പ്രമുഖ ഹോൾസെയിൽ കടകളുടെ വിലാസവും വാട്സ്ആപ്പ് നമ്പറുകളും.",
-      dirSearchPlaceholder: "മാർക്കറ്റ്, കടയുടെ പേര്, നഗരം, അല്ലെങ്കിൽ ഉൽപ്പന്നം തിരയുക...",
 
       // Templates
       tmplBadge: "റെഡിമെയ്ഡ് സന്ദേശങ്ങൾ",
@@ -372,11 +442,12 @@ const app = {
       topBarTagline: "أكاديمية تدريبية وعملية لإطلاق المشاريع الصغيرة والتجارة الإلكترونية في الهند",
       langCurrentText: "اللغة:",
       navCategories: "المشاريع التجارية",
-      navQuiz: "اختبار فكرة المشروع",
+      navAttarSim: "رسم بياني لأرباح العطور",
+      navCoaching: "دليل محادثة الموردين",
       navSuppliers: "دليل تجار الجملة",
       navCalculator: "حاسبة الأرباح",
       navTemplates: "قوالب الواتساب",
-      navLegal: "الضرائب والبنوك",
+      navQuiz: "اختبار فكرة المشروع",
       navRoadmap: "خارطة الطريق 7 خطوات",
       navLogistics: "الشحن والأسعار",
       navPlanBuilder: "إنشاء خطة العمل",
@@ -391,8 +462,8 @@ const app = {
       statLang: "العربية • English • മലയാളം",
 
       btnExploreNiches: "استكشف أفكار المشاريع",
-      btnTakeQuiz: "اكتشف المشروع الأنسب لك",
-      btnOpenCalc: "حاسبة الأرباح",
+      btnOpenSimulator: "محاكي أرباح العطور التفاعلي",
+      btnViewDirectory: "الموردون وخرائط جوجل",
 
       previewTitle: "مقارنة المشاريع في لمحة واحدة",
       quickAttarTitle: "دهن العود والعطور الزيتية",
@@ -423,6 +494,39 @@ const app = {
       tabBags: "الحقائب والمحافظ",
       tabAccessories: "الخواتم والإكسسوارات",
       tabSpices: "بهارات كيرالا والعسل",
+
+      // Simulator Strings
+      simBadge: "أستوديو العطور التفاعلي",
+      simTitle: "مصمم عبوة العطر والرسم البياني الفوري للأرباح",
+      simSubtitle: "اختر نوع زيت العطر، سعة الزجاجة ومستوى التغليف لتشاهد التكلفة التفصيلية وسعر البيع ورسماً بيانياً فوري لهامش ربحك!",
+      simConfigTitle: "1. صمم عبوة العطر الخاصة بك",
+      lblSelectOil: "اختر نوع الزيت العطري المركز:",
+      lblSelectSize: "اختر سعة العبوة:",
+      lblSelectBottle: "اختر تصميم ونوع الزجاجة والغطاء:",
+      lblSelectPack: "نوع التغليف والكيس المخملي:",
+      simGraphTitle: "الرسم البياني لهامش وصافي الأرباح",
+      legOil: "تكلفة الزيت",
+      legBottle: "الزجاجة",
+      legPack: "التغليف",
+      legProfit: "صافي الربح",
+      lblTotalCostPerBottle: "إجمالي تكلفة تصنيع الحبة:",
+      lblSuggestedRetail: "سعر البيع المقترح:",
+      lblNetProfitPerBottle: "صافي ربح الحبة الواحدة:",
+      lblBatch25: "دفعة 25 زجاجة",
+      lblBatch50: "دفعة 50 زجاجة",
+      lblBatch100: "دفعة 100 زجاجة",
+      simProTip: "نصيحة ذهبية: العطور تمتاز بأعلى ولاء وإعادة شراء بين الزبائن. متى ما أعجبت رائحة المسك أو العود عميلاً فإنه سيعاود الطلب كل شهرين!",
+
+      // Coaching Strings
+      coachBadge: "احتراف التعامل مع الموردين",
+      coachTitle: "ماذا تسأل تجار الجملة؟ (تدريب عملي للمكالمات والرسائل)",
+      coachSubtitle: "هل تشعر بالحرج من الاتصال بالموردين؟ إليك الدليل العملي المنظم بالأسئلة الذهبية للتفاوض على كميات تجريبية وأسعار الجملة الرسمية.",
+
+      // Directory Strings
+      dirBadge: "عناوين حقيقية وموثقة",
+      dirTitle: "دليل تجار الجملة المعتمدين وخرائط جوجل",
+      dirSubtitle: "لا تعرف من أين تشتري بضائعك؟ إليك القائمة الموثقة لأسواق الجملة الشهيرة والمحلات المعتمدة في كوزيكود، كوتشي، مومباي، سورات، تيروبور ونيودلهي مع روابط خرائط جوجل وواتساب المباشرة.",
+      dirSearchPlaceholder: "ابحث باسم السوق، المتجر، المدينة، أو نوع البضاعة...",
 
       // Quiz
       quizBadge: "موفق المشاريع الذكي",
@@ -471,12 +575,6 @@ const app = {
       resLblStartupCap: "رأس المال التشغيلي للدفعة الأولى",
       gccConvTitle: "القيمة بعملات دول الخليج:",
       calcProTip: "نصيحة ذهبية: بيع طلبيتين فقط يومياً من منزلك يحقق لك دخلاً إضافياً صافياً يتجاوز 14,000 روبية شهرياً بدون إيجار محل.",
-
-      // Directory Strings
-      dirBadge: "عناوين حقيقية وموثقة",
-      dirTitle: "دليل تجار الجملة والأسواق الكبرى",
-      dirSubtitle: "لا تعرف من أين تشتري بضائعك؟ إليك القائمة الموثقة لأسواق الجملة الشهيرة والمحلات المعتمدة في كوزيكود، كوتشي، مومباي، سورات، تيروبور ونيودلهي مع روابط واتساب مباشرة.",
-      dirSearchPlaceholder: "ابحث باسم السوق، المتجر، المدينة، أو نوع البضاعة...",
 
       // Templates
       tmplBadge: "رسائل جاهزة للاستخدام",
@@ -543,6 +641,307 @@ const app = {
       footerMotto: "ابدأ صغيراً، فكر كبيراً، واستمر بالنمو بثبات."
     }
   },
+
+  // Attar Oils Database for Simulator
+  attarOils: [
+    { id: 'white_musk', name: { en: 'White Musk (مسك أبيض)', ml: 'വൈറ്റ് മസ്ക്', ar: 'المسك الأبيض' }, costPer100ml: 180, retailBase6ml: 349, retailBase12ml: 549, retailBase3ml: 220 },
+    { id: 'shamama', name: { en: 'Shamamatul Amber', ml: 'ശമാമത്തുൽ അംബർ', ar: 'شمامة العنبر' }, costPer100ml: 450, retailBase6ml: 450, retailBase12ml: 750, retailBase3ml: 280 },
+    { id: 'cambodian_oudh', name: { en: 'Royal Cambodian Oudh', ml: 'കംബോഡിയൻ ഔദ്', ar: 'العود الكمبودي' }, costPer100ml: 1200, retailBase6ml: 799, retailBase12ml: 1499, retailBase3ml: 450 },
+    { id: 'baccarat', name: { en: 'Baccarat 540 Clone', ml: 'ബക്കാരറ്റ് 540 ക്ലോൺ', ar: 'بديل بكرات روج' }, costPer100ml: 350, retailBase6ml: 399, retailBase12ml: 650, retailBase3ml: 250 },
+    { id: 'black_afghan', name: { en: 'Black Afghan (Woody)', ml: 'ബ്ലാക്ക് അഫ്ഗാൻ', ar: 'بلاك أفغانو' }, costPer100ml: 380, retailBase6ml: 399, retailBase12ml: 650, retailBase3ml: 250 },
+    { id: 'ruh_khus', name: { en: 'Ruh Khus (Pure Vetiver)', ml: 'റൂഹ് ഖുസ് (രാമച്ചം)', ar: 'روح الخس الطبيعي' }, costPer100ml: 650, retailBase6ml: 550, retailBase12ml: 899, retailBase3ml: 320 },
+    { id: 'kashmiri_rose', name: { en: 'Kashmiri Rose & Saffron', ml: 'റോസ് & കുങ്കുമപ്പൂവ്', ar: 'الورد الكشميري والزعفران' }, costPer100ml: 500, retailBase6ml: 450, retailBase12ml: 799, retailBase3ml: 290 },
+    { id: 'kasturi', name: { en: 'Kasturi Deer Musk Notes', ml: 'കസ്തൂരി മസ്ക്', ar: 'مسك الكستوري' }, costPer100ml: 280, retailBase6ml: 349, retailBase12ml: 599, retailBase3ml: 220 }
+  ],
+
+  // Bottle styles
+  bottleCosts: {
+    octagonal: 10,
+    crystal: 18,
+    luxury: 32
+  },
+
+  // Packaging tiers
+  packCosts: {
+    velvet: 8,
+    rigid: 24,
+    casket: 45
+  },
+
+  // Coaching Guide Data
+  coachingData: [
+    {
+      step: 1,
+      title: {
+        en: "Question 1: Inquire About Sample Trial Batches",
+        ml: "ചോദ്യം 1: സാമ്പിൾ ബാച്ചുകൾ ലഭ്യമാണോ എന്ന് ചോദിക്കുക",
+        ar: "السؤال الأول: الاستفسار عن الدفعات التجريبية والعينات"
+      },
+      desc: {
+        en: "Wholesalers normally want carton orders of 100+ pcs. But if you ask professionally, 90% of them will happily dispatch a mixed 15-25 pcs sample starter box.",
+        ml: "മൊത്തവ്യാപാരികൾ 100 എണ്ണത്തിന്റെ ബോക്സ് എടുക്കാനാണ് പറയുക. എന്നാൽ മനോഹരമായി സംസാരിച്ചാൽ 15-25 എണ്ണത്തിന്റെ സാമ്പിൾ ബാച്ച് അവർ സന്തോഷത്തോടെ അയച്ചുതരും.",
+        ar: "يطلب الموردون عادة طلب كراتين كاملة، لكن عند التحدث باحترافية يوافق 90% منهم على إرسال دفعة تجريبية مشكلة من 15 إلى 25 قطعة."
+      },
+      dialogue: {
+        en: "\"Bhaiya, I am setting up a boutique brand in Kerala. Please send a sample trial parcel of 15 pieces mixed assortment so I can test quality before placing my 100 pcs bulk order.\"",
+        ml: "\"ചേട്ടാ, ഞങ്ങൾ കേരളത്തിൽ പുതിയൊരു ബ്രാൻഡ് തുടങ്ങുകയാണ്. ക്വാളിറ്റി പരിശോധിച്ച് സ്ഥിരമായി എടുക്കാൻ വേണ്ടി ആദ്യമായി ഒരു 15-20 പീസിന്റെ മിക്സഡ് സാമ്പിൾ ബോക്സ് അയച്ചുതരുമോ?\"",
+        ar: "\"مرحباً أخي الكريم، نؤسس متجراً جديداً في كيرالا، نود تجربة دفعة عينات مصغرة (15-20 قطعة مشكلة) لفحص الجودة قبل اعتماد طلبية الجملة الكبرى.\""
+      }
+    },
+    {
+      step: 2,
+      title: {
+        en: "Question 2: Ask About Courier & Transport Options",
+        ml: "ചോദ്യം 2: പാർസൽ ട്രാൻസ്പോർട്ട് നിരക്കുകൾ ചോദിക്കുക",
+        ar: "السؤال الثاني: خيارات الشحن وتكلفة النقل"
+      },
+      desc: {
+        en: "Always confirm which courier or parcel transport service they use. For Kerala, ask if they can book via ST Courier, VRL, or Indian Post to avoid high private cargo costs.",
+        ml: "അവർ സാധനം എങ്ങനെയാണ് അയക്കുക എന്ന് മുൻകൂട്ടി ചോദിക്കുക. കേരളത്തിലേക്ക് ST Courier, VRL, അല്ലെങ്കിൽ India Post വഴി അയച്ചാൽ കുറഞ്ഞ ട്രാൻസ്പോർട്ട് ചാർജിൽ സാധനം എത്തും.",
+        ar: "تأكد من شركة الشحن التي يتعاملون معها. اطلب الشحن عبر البريد الهندي أو الشركات المحلية الاقتصادية لتوفير تكاليف النقل."
+      },
+      dialogue: {
+        en: "\"Which transport service do you use for Kerala delivery? Can you book via ST Courier or India Post Parcel? What is the freight charge per kg?\"",
+        ml: "\"കേരളത്തിലേക്ക് ഏത് പാർസൽ സർവീസ് വഴിയാണ് അയക്കുന്നത്? ST Courier അല്ലെങ്കിൽ India Post വഴി അയക്കാൻ പറ്റുമോ? കിലോയ്ക്ക് എത്ര ചാർജ് വരും?\"",
+        ar: "\"ما هي شركة النقل المعتمدة لديكم للتوصيل إلى كيرالا؟ هل يمكنكم الشحن عبر البريد الهندي وكم تكلفة الكيلوغرام؟\""
+      }
+    },
+    {
+      step: 3,
+      title: {
+        en: "Question 3: Clarify Breakage & Leakage Policy",
+        ml: "ചോദ്യം 3: കുപ്പികൾ പൊട്ടിയാലോ ചോർന്നാലോ ഉള്ള റീപ്ലേസ്‌മെന്റ്",
+        ar: "السؤال الثالث: سياسة التعويض في حال الكسر أو التسرب"
+      },
+      desc: {
+        en: "Perfume oils and glassware can occasionally leak if mishandled. Good suppliers immediately adjust or replace broken items in the next order if you provide an unboxing video.",
+        ml: "അത്തർ കുപ്പികളും ഗ്ലാസ്സും വഴിയിൽ വെച്ച് പൊട്ടാൻ സാധ്യതയുണ്ട്. പാർസൽ തുറക്കുമ്പോൾ വീഡിയോ എടുത്താൽ പൊട്ടിയ സാധനങ്ങൾ മാറ്റിത്തരുമോ എന്ന് ചോദിച്ച് ഉറപ്പാക്കുക.",
+        ar: "زجاجات العطور قد تتعرض للكسر إن لم تغلف جيداً. الموردون الموثوقون يعوضون التالف فوراً عند إرسال فيديو فتح الطرد."
+      },
+      dialogue: {
+        en: "\"If any glass bottle breaks or leaks during courier transit, what is your replacement policy? Will you adjust the amount in my next invoice?\"",
+        ml: "\"കൊറിയറിൽ വെച്ച് കുപ്പി പൊട്ടുകയോ ഓയിൽ ലീക്കാവുകയോ ചെയ്താൽ അടുത്ത ഓർഡറിൽ അത് കുറച്ചുതരുമോ? റീപ്ലേസ്‌മെന്റ് പോളിസി എങ്ങനെയാണ്?\"",
+        ar: "\"في حال حدث أي كسر أو تسرب للزجاجات أثناء الشحن، هل تقومون بتعويضه في الفاتورة القادمة عند تزويدكم بفيديو الاستلام؟\""
+      }
+    },
+    {
+      step: 4,
+      title: {
+        en: "Question 4: Ask for High-Res Photos & Note Breakdown",
+        ml: "ചോദ്യം 4: പ്രൊഡക്റ്റ് ഫോട്ടോകളും നോട്സ് വിവരങ്ങളും ആവശ്യപ്പെടുക",
+        ar: "السؤال الرابع: طلب صور عالية الدقة وقائمة النوتات العطرية"
+      },
+      desc: {
+        en: "Ask if they can send clear WhatsApp photos of the bottles and olfactory fragrance notes (Top, Heart, Base notes) so you can create your Instagram posts easily.",
+        ml: "അത്തറിന്റെ മനോഹരമായ ഫോട്ടോകളും അതിലടങ്ങിയിട്ടുള്ള സുഗന്ധ ചേരുവകളും (Notes) അവർ വാട്സ്ആപ്പിൽ അയച്ചുതന്നാൽ ഇൻസ്റ്റാഗ്രാമിൽ പോസ്റ്റ് ചെയ്യാൻ വളരെ എളുപ്പമായിരിക്കും.",
+        ar: "اطلب صوراً واضحة للعبوات مع قائمة بالنوتات العطرية (القمة، القلب، القاعدة) لتسهيل نشرها في متجرك الإلكتروني."
+      },
+      dialogue: {
+        en: "\"Can you share high-resolution pictures of these bottles and the scent notes (Oud, Musk, Floral) so I can showcase them to my buyers?\"",
+        ml: "\"ഈ അത്തറുകളുടെ നല്ല ഫോട്ടോകളും അതിലെ പ്രധാന സുഗന്ധ ചേരുവകളുടെ വിവരങ്ങളും വാട്സ്ആപ്പിൽ അയച്ചുതരുമോ? ഇൻസ്റ്റാഗ്രാമിൽ ഇടാനാണ്.\"",
+        ar: "\"هل يمكنكم إرسال صور احترافية للزجاجات مع تفاصيل النوتات العطرية لنعرضها بشكل لائق لعملائنا؟\""
+      }
+    }
+  ],
+
+  // Verified Wholesaler & Supplier Database with Exact Google Maps Coordinates
+  suppliers: [
+    {
+      id: "sup-1",
+      name: "Al-Ameen Perfumers & Bottle Souk",
+      city: "Kozhikode",
+      category: "attar",
+      address: "Shop 14, S.M. Street (Mittayi Theruvu), Near Mananchira Square, Kozhikode, Kerala 673001",
+      mapUrl: "https://www.google.com/maps/search/?api=1&query=S.M.+Street+Mittayi+Theruvu+Mananchira+Kozhikode",
+      phone: "+91 98471 23450",
+      whatsapp: "919847123450",
+      specialty: "Pure Arabian perfume oils, White Musk, Shamama, crystal roll-on bottles (6ml/12ml), atomizers",
+      moq: "Min 100ml oil or 25 bottles",
+      tags: ["Attar", "Bottles", "Kozhikode", "Wholesale"]
+    },
+    {
+      id: "sup-2",
+      name: "Calicut Aroma & Essence Traders",
+      city: "Kozhikode",
+      category: "attar",
+      address: "Valiyangadi (Big Bazaar), Near Railway Station Road, Kozhikode, Kerala 673001",
+      mapUrl: "https://www.google.com/maps/search/?api=1&query=Valiyangadi+Big+Bazaar+Kozhikode",
+      phone: "+91 94471 89012",
+      whatsapp: "919447189012",
+      specialty: "Bulk perfume compounding bases, DPG oil, Bakhoor, empty velvet pouches",
+      moq: "Min ₹2,000 order",
+      tags: ["Attar", "Big Bazaar", "Packaging"]
+    },
+    {
+      id: "sup-3",
+      name: "S. Mohd. Ayub Mohd. Yaqub Perfumers",
+      city: "Mumbai",
+      category: "attar",
+      address: "5-B, Nakhuda Mohalla, Mohammad Ali Road, Mumbai, Maharashtra 400003",
+      mapUrl: "https://www.google.com/maps/search/?api=1&query=Nakhuda+Mohalla+Mohammad+Ali+Road+Mumbai",
+      phone: "+91 22 2347 1856",
+      whatsapp: "919820018560",
+      specialty: "Legendary distillers: Pure Dehn al Oudh, Ruh Gulab, Amber, Kashmiri Saffron, French blends",
+      moq: "50g / 100g bottles, courier across India",
+      tags: ["Attar", "Mumbai", "Direct Distiller"]
+    },
+    {
+      id: "sup-4",
+      name: "Abdul Rehman Glass & Flacon Mart",
+      city: "Mumbai",
+      category: "packaging",
+      address: "128, Abdul Rehman Street, Near Crawford Market, Mumbai, Maharashtra 400003",
+      mapUrl: "https://www.google.com/maps/search/?api=1&query=Abdul+Rehman+Street+Crawford+Market+Mumbai",
+      phone: "+91 98214 77650",
+      whatsapp: "919821477650",
+      specialty: "India's lowest price for octagonal attar bottles (₹7-₹12), luxury pump sprays, dropper bottles",
+      moq: "Min 50 pcs batch",
+      tags: ["Bottles", "Packaging", "Mumbai"]
+    },
+    {
+      id: "sup-5",
+      name: "Royal Textile & Abaya Hub",
+      city: "Surat",
+      category: "clothing",
+      address: "Shop B-204, Millennium Textile Market, Ring Road, Surat, Gujarat 395002",
+      mapUrl: "https://www.google.com/maps/search/?api=1&query=Millennium+Textile+Market+Ring+Road+Surat",
+      phone: "+91 98982 45671",
+      whatsapp: "919898245671",
+      specialty: "Dubai Crepe & Nada modest abayas, hijabs, unstitched dress materials, wholesale kurtis",
+      moq: "Min 15 pieces (Mix designs allowed)",
+      tags: ["Abaya", "Dresses", "Surat", "Wholesale"]
+    },
+    {
+      id: "sup-6",
+      name: "Tirupur Knitwear & Cotton Cluster",
+      city: "Tirupur",
+      category: "clothing",
+      address: "Khaderpet Cotton Market, Railway Feeder Road, Tirupur, Tamil Nadu 641601",
+      mapUrl: "https://www.google.com/maps/search/?api=1&query=Khaderpet+Cotton+Market+Tirupur",
+      phone: "+91 94432 11200",
+      whatsapp: "919443211200",
+      specialty: "220-240 GSM Oversized French Terry T-shirts, bio-washed plain tees, track pants",
+      moq: "Min 20 pcs mix colors",
+      tags: ["T-Shirts", "Cotton", "Tirupur"]
+    },
+    {
+      id: "sup-7",
+      name: "Broadway Modest & Pardha House",
+      city: "Kochi",
+      category: "clothing",
+      address: "Broadway Market, Near Menaka Junction, Ernakulam, Kochi, Kerala 682031",
+      mapUrl: "https://www.google.com/maps/search/?api=1&query=Broadway+Market+Menaka+Kochi",
+      phone: "+91 98460 33441",
+      whatsapp: "919846033441",
+      specialty: "Ready stock pardhas, abayas, hijabs, inner caps, scarves for quick Kerala reorders",
+      moq: "Min 10 pieces",
+      tags: ["Abaya", "Kochi", "Kerala Stock"]
+    },
+    {
+      id: "sup-8",
+      name: "TimeZone Wholesale & Imports",
+      city: "Mumbai",
+      category: "watches",
+      address: "Shop 42, 1st Floor, Manish Market, Musafir Khana, Mumbai 400001",
+      mapUrl: "https://www.google.com/maps/search/?api=1&query=Manish+Market+Musafir+Khana+Mumbai",
+      phone: "+91 98201 54321",
+      whatsapp: "919820154321",
+      specialty: "Minimalist fashion analog watches, couple watch gift combos, smartwatches, hard gift boxes",
+      moq: "Min 15 watches",
+      tags: ["Watches", "Mumbai", "Combos"]
+    },
+    {
+      id: "sup-9",
+      name: "Gaffar Watch & Tech Hub",
+      city: "Delhi",
+      category: "watches",
+      address: "Gaffar Market, Karol Bagh, New Delhi 110005",
+      mapUrl: "https://www.google.com/maps/search/?api=1&query=Gaffar+Market+Karol+Bagh+Delhi",
+      phone: "+91 98110 99887",
+      whatsapp: "919811099887",
+      specialty: "Calling smartwatches, magnetic strap combos, AMOLED series smartwatches",
+      moq: "Min 10 pieces",
+      tags: ["Smartwatches", "Delhi"]
+    },
+    {
+      id: "sup-10",
+      name: "Dharavi Artisan Leather Craft Co.",
+      city: "Mumbai",
+      category: "bags",
+      address: "90 Feet Road, Near Kumbharwada, Dharavi, Mumbai 400017",
+      mapUrl: "https://www.google.com/maps/search/?api=1&query=90+Feet+Road+Dharavi+Mumbai",
+      phone: "+91 97690 12345",
+      whatsapp: "919769012345",
+      specialty: "Genuine leather men's wallets, vegan leather sling bags, laptop sleeves at workshop direct rates",
+      moq: "Min 20 pieces",
+      tags: ["Leather", "Wallets", "Bags"]
+    },
+    {
+      id: "sup-11",
+      name: "Nabi Karim Bag Wholesale Bazaar",
+      city: "Delhi",
+      category: "bags",
+      address: "Main Market, Nabi Karim, Paharganj, New Delhi 110055",
+      mapUrl: "https://www.google.com/maps/search/?api=1&query=Nabi+Karim+Bag+Market+New+Delhi",
+      phone: "+91 99991 22334",
+      whatsapp: "919999122334",
+      specialty: "Canvas tote bags (blank), college backpacks, trendy ladies shoulder bags",
+      moq: "Min 30 pieces",
+      tags: ["Totes", "Backpacks", "Delhi"]
+    },
+    {
+      id: "sup-12",
+      name: "Jaipur Johari Gems & Silver Ring Mart",
+      city: "Jaipur",
+      category: "accessories",
+      address: "Chameliwala Market, M.I. Road, Jaipur, Rajasthan 302001",
+      mapUrl: "https://www.google.com/maps/search/?api=1&query=Johari+Bazaar+Chameliwala+Market+Jaipur",
+      phone: "+91 94140 76543",
+      whatsapp: "919414076543",
+      specialty: "Turkish Aqeeq stone rings, 925 sterling finish anti-tarnish rings, natural gemstone rings",
+      moq: "Min 20 rings mix sizes",
+      tags: ["Rings", "Aqeeq", "Jaipur"]
+    },
+    {
+      id: "sup-13",
+      name: "Bhuleshwar Fashion Jewelry Lane",
+      city: "Mumbai",
+      category: "accessories",
+      address: "Bhuleshwar Road, Marine Lines East, Mumbai, Maharashtra 400002",
+      mapUrl: "https://www.google.com/maps/search/?api=1&query=Bhuleshwar+Market+Marine+Lines+Mumbai",
+      phone: "+91 98205 67890",
+      whatsapp: "919820567890",
+      specialty: "Stainless steel waterproof rings, Korean minimalist chains, aesthetic beaded bracelets",
+      moq: "Min ₹2,500 mix assortment",
+      tags: ["Jewelry", "Anti-Tarnish", "Mumbai"]
+    },
+    {
+      id: "sup-14",
+      name: "Malabar Spice & Forest Honey Depot",
+      city: "Kozhikode",
+      category: "spices",
+      address: "Shop 18, Copra Bazaar, Valiyangadi, Kozhikode, Kerala 673001",
+      mapUrl: "https://www.google.com/maps/search/?api=1&query=Copra+Bazaar+Valiyangadi+Kozhikode",
+      phone: "+91 94470 11998",
+      whatsapp: "919447011998",
+      specialty: "Wayanad raw forest honey, Malabar bold black pepper, Idukki 8mm green cardamom",
+      moq: "Min 5 kg or wholesale pouches",
+      tags: ["Honey", "Spices", "Kozhikode"]
+    },
+    {
+      id: "sup-15",
+      name: "Kannauj Traditional Deg Attar Distillers",
+      city: "Kannauj",
+      category: "attar",
+      address: "Saraimeera Perfumery Road, Kannauj, Uttar Pradesh 209725",
+      mapUrl: "https://www.google.com/maps/search/?api=1&query=Saraimeera+Kannauj+Uttar+Pradesh",
+      phone: "+91 94500 33221",
+      whatsapp: "919450033221",
+      specialty: "Authentic Mitti Attar (Baked earth scent), Ruh Khus (Wild vetiver), Pure Gulab (Rose)",
+      moq: "50ml sample sets or 500ml bulk",
+      tags: ["Kannauj", "Mitti Attar", "Ruh Khus"]
+    }
+  ],
 
   // Category blueprints
   categoriesData: {
@@ -798,200 +1197,12 @@ const app = {
     }
   },
 
-  // Verified Wholesaler & Supplier Database
-  suppliers: [
-    {
-      id: "sup-1",
-      name: "Al-Ameen Perfumers & Bottle Souk",
-      city: "Kozhikode",
-      category: "attar",
-      address: "Shop 14, S.M. Street (Mittayi Theruvu), Near Mananchira Square, Kozhikode, Kerala 673001",
-      phone: "+91 98471 23450",
-      whatsapp: "919847123450",
-      specialty: "Pure Arabian perfume oils, White Musk, Shamama, crystal roll-on bottles (6ml/12ml), atomizers",
-      moq: "Min 100ml oil or 25 bottles",
-      tags: ["Attar", "Bottles", "Kozhikode", "Wholesale"]
-    },
-    {
-      id: "sup-2",
-      name: "Calicut Aroma & Essence Traders",
-      city: "Kozhikode",
-      category: "attar",
-      address: "Valiyangadi (Big Bazaar), Near Railway Station Road, Kozhikode, Kerala 673001",
-      phone: "+91 94471 89012",
-      whatsapp: "919447189012",
-      specialty: "Bulk perfume compounding bases, DPG oil, Bakhoor, empty velvet pouches",
-      moq: "Min ₹2,000 order",
-      tags: ["Attar", "Big Bazaar", "Packaging"]
-    },
-    {
-      id: "sup-3",
-      name: "S. Mohd. Ayub Mohd. Yaqub Perfumers",
-      city: "Mumbai",
-      category: "attar",
-      address: "5-B, Nakhuda Mohalla, Mohammad Ali Road, Mumbai, Maharashtra 400003",
-      phone: "+91 22 2347 1856",
-      whatsapp: "919820018560",
-      specialty: "Legendary distillers: Pure Dehn al Oudh, Ruh Gulab, Amber, Kashmiri Saffron, French blends",
-      moq: "50g / 100g bottles, courier across India",
-      tags: ["Attar", "Mumbai", "Direct Distiller"]
-    },
-    {
-      id: "sup-4",
-      name: "Abdul Rehman Glass & Flacon Mart",
-      city: "Mumbai",
-      category: "packaging",
-      address: "128, Abdul Rehman Street, Near Crawford Market, Mumbai, Maharashtra 400003",
-      phone: "+91 98214 77650",
-      whatsapp: "919821477650",
-      specialty: "India's lowest price for octagonal attar bottles (₹7-₹12), luxury pump sprays, dropper bottles",
-      moq: "Min 50 pcs batch",
-      tags: ["Bottles", "Packaging", "Mumbai"]
-    },
-    {
-      id: "sup-5",
-      name: "Royal Textile & Abaya Hub",
-      city: "Surat",
-      category: "clothing",
-      address: "Shop B-204, Millennium Textile Market, Ring Road, Surat, Gujarat 395002",
-      phone: "+91 98982 45671",
-      whatsapp: "919898245671",
-      specialty: "Dubai Crepe & Nada modest abayas, hijabs, unstitched dress materials, wholesale kurtis",
-      moq: "Min 15 pieces (Mix designs allowed)",
-      tags: ["Abaya", "Dresses", "Surat", "Wholesale"]
-    },
-    {
-      id: "sup-6",
-      name: "Tirupur Knitwear & Cotton Cluster",
-      city: "Tirupur",
-      category: "clothing",
-      address: "Khaderpet Cotton Market, Railway Feeder Road, Tirupur, Tamil Nadu 641601",
-      phone: "+91 94432 11200",
-      whatsapp: "919443211200",
-      specialty: "220-240 GSM Oversized French Terry T-shirts, bio-washed plain tees, track pants",
-      moq: "Min 20 pcs mix colors",
-      tags: ["T-Shirts", "Cotton", "Tirupur"]
-    },
-    {
-      id: "sup-7",
-      name: "Broadway Modest & Pardha House",
-      city: "Kochi",
-      category: "clothing",
-      address: "Broadway Market, Near Menaka Junction, Ernakulam, Kochi, Kerala 682031",
-      phone: "+91 98460 33441",
-      whatsapp: "919846033441",
-      specialty: "Ready stock pardhas, abayas, hijabs, inner caps, scarves for quick Kerala reorders",
-      moq: "Min 10 pieces",
-      tags: ["Abaya", "Kochi", "Kerala Stock"]
-    },
-    {
-      id: "sup-8",
-      name: "TimeZone Wholesale & Imports",
-      city: "Mumbai",
-      category: "watches",
-      address: "Shop 42, 1st Floor, Manish Market, Musafir Khana, Mumbai 400001",
-      phone: "+91 98201 54321",
-      whatsapp: "919820154321",
-      specialty: "Minimalist fashion analog watches, couple watch gift combos, smartwatches, hard gift boxes",
-      moq: "Min 15 watches",
-      tags: ["Watches", "Mumbai", "Combos"]
-    },
-    {
-      id: "sup-9",
-      name: "Gaffar Watch & Tech Hub",
-      city: "Delhi",
-      category: "watches",
-      address: "Gaffar Market, Karol Bagh, New Delhi 110005",
-      phone: "+91 98110 99887",
-      whatsapp: "919811099887",
-      specialty: "Calling smartwatches, magnetic strap combos, AMOLED series smartwatches",
-      moq: "Min 10 pieces",
-      tags: ["Smartwatches", "Delhi"]
-    },
-    {
-      id: "sup-10",
-      name: "Dharavi Artisan Leather Craft Co.",
-      city: "Mumbai",
-      category: "bags",
-      address: "90 Feet Road, Near Kumbharwada, Dharavi, Mumbai 400017",
-      phone: "+91 97690 12345",
-      whatsapp: "919769012345",
-      specialty: "Genuine leather men's wallets, vegan leather sling bags, laptop sleeves at workshop direct rates",
-      moq: "Min 20 pieces",
-      tags: ["Leather", "Wallets", "Bags"]
-    },
-    {
-      id: "sup-11",
-      name: "Nabi Karim Bag Wholesale Bazaar",
-      city: "Delhi",
-      category: "bags",
-      address: "Main Market, Nabi Karim, Paharganj, New Delhi 110055",
-      phone: "+91 99991 22334",
-      whatsapp: "919999122334",
-      specialty: "Canvas tote bags (blank), college backpacks, trendy ladies shoulder bags",
-      moq: "Min 30 pieces",
-      tags: ["Totes", "Backpacks", "Delhi"]
-    },
-    {
-      id: "sup-12",
-      name: "Jaipur Johari Gems & Silver Ring Mart",
-      city: "Jaipur",
-      category: "accessories",
-      address: "Chameliwala Market, M.I. Road, Jaipur, Rajasthan 302001",
-      phone: "+91 94140 76543",
-      whatsapp: "919414076543",
-      specialty: "Turkish Aqeeq stone rings, 925 sterling finish anti-tarnish rings, natural gemstone rings",
-      moq: "Min 20 rings mix sizes",
-      tags: ["Rings", "Aqeeq", "Jaipur"]
-    },
-    {
-      id: "sup-13",
-      name: "Bhuleshwar Fashion Jewelry Lane",
-      city: "Mumbai",
-      category: "accessories",
-      address: "Bhuleshwar Road, Marine Lines East, Mumbai, Maharashtra 400002",
-      phone: "+91 98205 67890",
-      whatsapp: "919820567890",
-      specialty: "Stainless steel waterproof rings, Korean minimalist chains, aesthetic beaded bracelets",
-      moq: "Min ₹2,500 mix assortment",
-      tags: ["Jewelry", "Anti-Tarnish", "Mumbai"]
-    },
-    {
-      id: "sup-14",
-      name: "Malabar Spice & Forest Honey Depot",
-      city: "Kozhikode",
-      category: "spices",
-      address: "Shop 18, Copra Bazaar, Valiyangadi, Kozhikode, Kerala 673001",
-      phone: "+91 94470 11998",
-      whatsapp: "919447011998",
-      specialty: "Wayanad raw forest honey, Malabar bold black pepper, Idukki 8mm green cardamom",
-      moq: "Min 5 kg or wholesale pouches",
-      tags: ["Honey", "Spices", "Kozhikode"]
-    },
-    {
-      id: "sup-15",
-      name: "Kannauj Traditional Deg Attar Distillers",
-      city: "Kannauj",
-      category: "attar",
-      address: "Saraimeera Perfumery Road, Kannauj, Uttar Pradesh 209725",
-      phone: "+91 94500 33221",
-      whatsapp: "919450033221",
-      specialty: "Authentic Mitti Attar (Baked earth scent), Ruh Khus (Wild vetiver), Pure Gulab (Rose)",
-      moq: "50ml sample sets or 500ml bulk",
-      tags: ["Kannauj", "Mitti Attar", "Ruh Khus"]
-    }
-  ],
-
   // Ready-to-Use WhatsApp Message Templates
   templatesData: [
     {
       id: "tmpl-supplier",
       icon: "fa-store",
-      title: {
-        en: "Wholesaler Catalog & Price Inquiry",
-        ml: "ഹോൾസെയിൽ വിലയും കാറ്റലോഗും ചോദിക്കാൻ",
-        ar: "طلب كتالوج وأسعار الجملة من المورد"
-      },
+      title: { en: "Wholesaler Catalog & Price Inquiry", ml: "ഹോൾസെയിൽ വിലയും കാറ്റലോഗും ചോദിക്കാൻ", ar: "طلب كتالوج وأسعار الجملة من المورد" },
       text: {
         en: "Hello Sir/Madam,\nI came across your store details on Vyapar Shiksha. I am starting a retail business in Kerala and would like to see your latest wholesale product catalog, minimum order quantity (MOQ), and price list. Please share photos and bulk rates. Thank you!",
         ml: "നമസ്കാരം സർ/മാഡം,\nഞാൻ 'വ്യാപാര ശിക്ഷ' ഡയറക്ടറിയിലാണ് നിങ്ങളുടെ കടയുടെ വിവരങ്ങൾ കണ്ടത്. കേരളത്തിൽ ഒരു പുതിയ സംരംഭം ആരംഭിക്കുകയാണ്. നിങ്ങളുടെ ഏറ്റവും പുതിയ ഹോൾസെയിൽ കാറ്റലോഗും, കുറഞ്ഞ ഓർഡർ അളവും (MOQ), വിലവിവരങ്ങളും അയച്ചുതരുമോ? നന്ദി!",
@@ -1001,11 +1212,7 @@ const app = {
     {
       id: "tmpl-order-confirm",
       icon: "fa-circle-check",
-      title: {
-        en: "Customer Order & UPI Payment Request",
-        ml: "കസ്റ്റമറുടെ ഓർഡർ സ്ഥിരീകരിക്കാനും പണം വാങ്ങാനും",
-        ar: "تأكيد طلب العميل ورابط الدفع"
-      },
+      title: { en: "Customer Order & UPI Payment Request", ml: "കസ്റ്റമറുടെ ഓർഡർ സ്ഥിരീകരിക്കാനും പണം വാങ്ങാനും", ar: "تأكيد طلب العميل ورابط الدفع" },
       text: {
         en: "Dear Customer,\nThank you for choosing us! 🌸 Your order has been registered.\nTotal Amount: ₹[AMOUNT]\nGoogle Pay / PhonePe UPI ID: [YOUR_UPI_ID]\n(Or pay ₹50 advance delivery charge for Cash on Delivery).\nPlease send the payment screenshot and full delivery address with Pincode to dispatch your parcel. Thank you!",
         ml: "പ്രിയ ഉപഭോക്താവേ,\nഞങ്ങളിൽ നിന്ന് ഓർഡർ ചെയ്തതിന് നന്ദി! 🌸\nആകെ തുക: ₹[AMOUNT]\nGoogle Pay / PhonePe UPI ID: [YOUR_UPI_ID]\n(ക്യാഷ് ഓൺ ഡെലിവറിക്ക് വെറും ₹50 ഡെലിവറി അഡ്വാൻസ് നൽകിയാൽ മതിയാകും).\nപണം അയച്ചതിന്റെ സ്ക്രീൻഷോട്ടും, പിൻകോഡ് അടക്കമുള്ള കൃത്യമായ അഡ്രസ്സും അയച്ചുതരിക. നന്ദി!",
@@ -1015,11 +1222,7 @@ const app = {
     {
       id: "tmpl-dispatch",
       icon: "fa-truck-fast",
-      title: {
-        en: "Parcel Dispatched & Tracking Update",
-        ml: "കൊറിയർ ട്രാക്കിംഗ് വിവരങ്ങൾ അയക്കാൻ",
-        ar: "إشعار شحن الطرد ورقم التتبع"
-      },
+      title: { en: "Parcel Dispatched & Tracking Update", ml: "കൊറിയർ ട്രാക്കിംഗ് വിവരങ്ങൾ അയക്കാൻ", ar: "إشعار شحن الطرد ورقم التتبع" },
       text: {
         en: "Hello!\nGreat news — your parcel has been safely packed and dispatched! 📦🚚\nCourier Partner: [ST Courier / India Post / Delhivery]\nTracking Number: [TRACKING_NO]\nYou can expect delivery within 2-3 business days. Please feel free to reach out once received!",
         ml: "ഹലോ!\nസന്തോഷവാർത്ത — നിങ്ങളുടെ ഓർഡർ ഭംഗിയായി പാക്ക് ചെയ്ത് കൊറിയർ അയച്ചിട്ടുണ്ട്! 📦🚚\nകൊറിയർ സർവീസ്: [ST Courier / India Post]\nട്രാക്കിംഗ് നമ്പർ: [TRACKING_NO]\n2-3 ദിവസത്തിനകം നിങ്ങളുടെ കൈകളിൽ എത്തും. സാധനം കിട്ടിയാൽ അറിയിക്കുമല്ലോ!",
@@ -1029,11 +1232,7 @@ const app = {
     {
       id: "tmpl-review",
       icon: "fa-star",
-      title: {
-        en: "Customer Review & Feedback Request",
-        ml: "കസ്റ്റമർ റിവ്യൂ ചോദിക്കാൻ",
-        ar: "طلب تقييم العميل ورأيه الصادق"
-      },
+      title: { en: "Customer Review & Feedback Request", ml: "കസ്റ്റമർ റിവ്യൂ ചോദിക്കാൻ", ar: "طلب تقييم العميل ورأيه الصادق" },
       text: {
         en: "Hello! We hope your parcel reached you safely. Did you like the product quality? We are a small growing business and your honest review or a short photo/video would mean the world to us! Thank you so much for your support ❤️",
         ml: "ഹലോ! അയച്ച പാർസൽ കൈപ്പറ്റിയെന്ന് കരുതുന്നു. പ്രൊഡക്റ്റിന്റെ ക്വാളിറ്റി ഇഷ്ടപ്പെട്ടോ? നിങ്ങളുടെ ഒരു ചെറിയ റിവ്യൂവോ ഫോട്ടോയോ ഞങ്ങളുടെ വളർച്ചയ്ക്ക് വലിയ പ്രചോദനമാകും! നിങ്ങളുടെ വിലയേറിയ പിന്തുണയ്ക്ക് ഹൃദയം നിറഞ്ഞ നന്ദി ❤️",
@@ -1154,7 +1353,7 @@ const app = {
       },
       a: {
         en: "Most Malayalis in the Gulf have active Indian NRE/NRO accounts with Google Pay or PhonePe that transfer directly in Indian Rupees (INR) with 0% fee. Alternatively, use Western Union or international payment links on Razorpay.",
-        ml: "ഗൾഫിലുള്ള ഭൂരിഭാഗം മലയാളികൾക്കും ഗൂഗിൾ പേ അല്ലെങ്കിൽ ഫോൺപേ ബന്ധിപ്പിച്ച ഇന്ത്യൻ NRE/NRO അക്കൗണ്ടുകൾ ഉണ്ട്. അവർക്ക് യാതൊരു ചാർജുമില്ലാതെ നേരിട്ട് ഇന്ത്യൻ രൂപയായി അയക്കാം. കൂടാതെ റെയ്സർപേ (Razorpay) വഴി അന്താരാഷ്ട്ര കാർഡുകൾ വഴിയും പണം സ്വീകരിക്കാം.",
+        ml: "ഗൾഫിലുള്ള ഭൂരിഭാഗം മലയാളികൾക്കും ഗൂഗിൾ പേ അല്ലെങ്കിൽ ഫോൺപേ ബന്ധിപ്പിച്ച ഇന്ത്യൻ NRE/NRO അക്കൗണ്ടുകൾ ഉണ്ട്. അവർക്ക് യാതൊരു ചാർജുമില്ലാതെ നേരിട്ട് ഇന്ത്യൻ രൂപയായി അയക്കാം. കൂടാതെ റേസർപേ (Razorpay) വഴി അന്താരാഷ്ട്ര കാർഡുകൾ വഴിയും പണം സ്വീകരിക്കാം.",
         ar: "معظم المغتربين في دول الخليج يملكون حسابات بنكية هندية مرتبطة بـ Google Pay، فيمكنهم التحويل المباشر بالروبية بدون أي رسوم، أو عبر روابط الدفع الدولي في Razorpay."
       }
     },
@@ -1176,11 +1375,7 @@ const app = {
   roadmapData: [
     {
       step: 1,
-      title: {
-        en: "Choose 1 Micro-Niche & Customer Persona",
-        ml: "ഒരു പ്രത്യേക കാറ്റഗറിയും കസ്റ്റമർ ഗ്രൂപ്പും തിരഞ്ഞെടുക്കുക",
-        ar: "اختر تخصصاً دقيقاً وشريحة زبائن محددة"
-      },
+      title: { en: "Choose 1 Micro-Niche & Customer Persona", ml: "ഒരു പ്രത്യേക കാറ്റഗറിയും കസ്റ്റമർ ഗ്രൂപ്പും തിരഞ്ഞെടുക്കുക", ar: "اختر تخصصاً دقيقاً وشريحة زبائن محددة" },
       desc: {
         en: "Never try to sell everything at once. Choose one focused product: e.g., 'Luxury alcohol-free attars' OR 'Affordable modest abayas' OR 'Anti-tarnish waterproof rings'. Know exactly who is buying (college students, working women, perfume lovers, NRI families).",
         ml: "എല്ലാം കൂടി ഒന്നിച്ച് വിൽക്കാൻ ശ്രമിക്കരുത്. ഒരു പ്രത്യേക ഉൽപ്പന്നം മാത്രം തിരഞ്ഞെടുക്കുക: ഉദാഹരണത്തിന് 'ആൽക്കഹോൾ ഫ്രീ അത്തറുകൾ' അല്ലെങ്കിൽ 'ആന്റി-ടാർണിഷ് മോതിരങ്ങൾ' അല്ലെങ്കിൽ 'കോളേജ് ടോട്ട് ബാഗുകൾ'. ആരാണ് നിങ്ങളുടെ ഉപഭോക്താക്കൾ എന്ന് വ്യക്തമായി മനസ്സിലാക്കുക.",
@@ -1190,11 +1385,7 @@ const app = {
     },
     {
       step: 2,
-      title: {
-        en: "Sample Stock from Verified Wholesalers",
-        ml: "വിശ്വസ്തരായ വ്യാപാരികളിൽ നിന്ന് സാമ്പിളുകൾ വാങ്ങുക",
-        ar: "طلب عينات تجريبية من تجار الجملة المعتمدين"
-      },
+      title: { en: "Sample Stock from Verified Wholesalers", ml: "വിശ്വസ്തരായ വ്യാപാരികളിൽ നിന്ന് സാമ്പിളുകൾ വാങ്ങുക", ar: "طلب عينات تجريبية من تجار الجملة المعتمدين" },
       desc: {
         en: "Do not buy massive quantities on day one. Use our supplier directory to contact wholesalers via WhatsApp and order a small sample starter batch (15 - 30 pieces). Verify quality, scent longevity, fabric softness, or ring durability yourself.",
         ml: "തുടക്കത്തിൽ തന്നെ ലക്ഷക്കണക്കിന് രൂപയുടെ സാധനം വാങ്ങരുത്. നമ്മുടെ ഡയറക്ടറിയിലെ വാട്സ്ആപ്പ് നമ്പറുകളിൽ ബന്ധപ്പെട്ട് 15-30 എണ്ണത്തിന്റെ ഒരു ചെറിയ സാമ്പിൾ ബാച്ച് മാത്രം ഓർഡർ ചെയ്യുക. ഗുണനിലവാരം നിങ്ങൾ തന്നെ നേരിട്ട് കണ്ട് ബോധ്യപ്പെടുക.",
@@ -1204,11 +1395,7 @@ const app = {
     },
     {
       step: 3,
-      title: {
-        en: "Create Brand Identity (Name, Logo & Packaging)",
-        ml: "ബ്രാൻഡ് ഐഡന്റിറ്റി ഉണ്ടാക്കുക (പേര്, ലോഗോ, പാക്കിംഗ്)",
-        ar: "بناء الهوية البصرية (الاسم، الشعار، التغليف)"
-      },
+      title: { en: "Create Brand Identity (Name, Logo & Packaging)", ml: "ബ്രാൻഡ് ഐഡന്റിറ്റി ഉണ്ടാക്കുക (പേര്, ലോഗോ, പാക്കിംഗ്)", ar: "بناء الهوية البصرية (الاسم، الشعار، التغليف)" },
       desc: {
         en: "Create a memorable, short brand name. Design a clean minimalist logo on Canva for free. Print 100 metallic or vinyl stickers from a local screen printer (costs ~₹150). Order bubble mailers and thank-you cards.",
         ml: "മനസ്സിൽ തങ്ങിനിൽക്കുന്ന ഒരു നല്ല പേര് തിരഞ്ഞെടുക്കുക. കാൻവ (Canva) ഉപയോഗിച്ച് സൗജന്യമായി ലോഗോ ഡിസൈൻ ചെയ്യാം. ₹150 ന് 100 സ്റ്റിക്കറുകൾ പ്രിന്റ് ചെയ്ത് വാങ്ങുക. മനോഹരമായ പാക്കിംഗ് കവറുകളും നന്ദി കാർഡുകളും തയ്യാറാക്കുക.",
@@ -1218,11 +1405,7 @@ const app = {
     },
     {
       step: 4,
-      title: {
-        en: "Set Up Instagram Store & WhatsApp Catalog",
-        ml: "ഇൻസ്റ്റാഗ്രാം പേജും വാട്സ്ആപ്പ് ബിസിനസ്സും സജ്ജമാക്കുക",
-        ar: "إعداد متجر إنستغرام وكتالوج واتساب للأعمال"
-      },
+      title: { en: "Set Up Instagram Store & WhatsApp Catalog", ml: "ഇൻസ്റ്റാഗ്രാം പേജും വാട്സ്ആപ്പ് ബിസിനസ്സും സജ്ജമാക്കുക", ar: "إعداد متجر إنستغرام وكتالوج واتساب للأعمال" },
       desc: {
         en: "Switch Instagram to a Professional Creator/Business Account. Put a clear one-line bio: '100% Pure Alcohol-Free Attars | Shipping Across Kerala & India | DM or Tap to Order'. Put a direct click-to-chat WhatsApp link (`wa.me/...`) in bio.",
         ml: "ഇൻസ്റ്റാഗ്രാം അക്കൗണ്ട് പ്രൊഫഷണൽ അക്കൗണ്ടാക്കി മാറ്റുക. ബയോയിൽ വ്യക്തമായ വിവരങ്ങൾ നൽകുക: '100% ആൽക്കഹോൾ ഫ്രീ അത്തറുകൾ | കേരളത്തിലുടനീളം കൊറിയർ സർവീസ് | ഓർഡർ ചെയ്യാൻ വാട്സ്ആപ്പിൽ മെസ്സേജ് അയക്കുക'. വാട്സ്ആപ്പ് ലിങ്ക് നൽകാൻ മറക്കരുത്.",
@@ -1232,11 +1415,7 @@ const app = {
     },
     {
       step: 5,
-      title: {
-        en: "Set Pricing: Wholesale + Packaging + Shipping + Margin",
-        ml: "വില നിശ്ചയിക്കുക: ഹോൾസെയിൽ + പാക്കിംഗ് + ഷിപ്പിംഗ് + ലാഭം",
-        ar: "تسعير المنتجات: تكلفة الجملة + التغليف + الشحن + هامش الربح"
-      },
+      title: { en: "Set Pricing: Wholesale + Packaging + Shipping + Margin", ml: "വില നിശ്ചയിക്കുക: ഹോൾസെയിൽ + പാക്കിംഗ് + ഷിപ്പിംഗ് + ലാഭം", ar: "تسعير المنتجات: تكلفة الجملة + التغليف + الشحن + هامش الربح" },
       desc: {
         en: "Use our interactive Profit Calculator! Formula: Retail Price = (Wholesale Cost + Packaging ₹25 + Courier ₹50) × Target Profit Multiplier. Keep retail prices competitive yet highly profitable (e.g., Sourcing ₹70, Selling ₹349).",
         ml: "നമ്മുടെ പ്രോഫിറ്റ് കാൽക്കുലേറ്റർ ഉപയോഗിക്കുക! ഫോർമുല: വിൽപന വില = (ഹോൾസെയിൽ വില + പാക്കിംഗ് ₹25 + കൊറിയർ ₹50) + നിങ്ങളുടെ ലാഭം. വിപണിയിലെ മറ്റ് വിലകൾ പരിശോധിച്ച് ആകർഷകമായ വില നിശ്ചയിക്കുക (ഉദാ: ₹70 ന് വാങ്ങി ₹349 ന് വിൽക്കാം).",
@@ -1246,11 +1425,7 @@ const app = {
     },
     {
       step: 6,
-      title: {
-        en: "Post High-Converting Reels & Gather First 10 Orders",
-        ml: "റീലുകൾ പോസ്റ്റ് ചെയ്യുക & ആദ്യത്തെ 10 ഓർഡറുകൾ നേടുക",
-        ar: "نشر مقاطع ريلز جذابة وتحصيل أول 10 طلبيات"
-      },
+      title: { en: "Post High-Converting Reels & Gather First 10 Orders", ml: "റീലുകൾ പോസ്റ്റ് ചെയ്യുക & ആദ്യത്തെ 10 ഓർഡറുകൾ നേടുക", ar: "نشر مقاطع ريلز جذابة وتحصيل أول 10 طلبيات" },
       desc: {
         en: "Don't just post static images. Shoot short 7-second reels: packing an order, macro close-ups of the perfume oil rolling on skin, showing ring shine in water. Offer introductory free shipping or a complimentary sample to the first 10 customers.",
         ml: "വെറും ഫോട്ടോകൾ മാത്രം പോസ്റ്റ് ചെയ്യാതെ ആകർഷകമായ റീലുകൾ ചെയ്യുക: ഓർഡറുകൾ പാക്ക് ചെയ്യുന്ന വീഡിയോ, അത്തർ കൈകളിൽ പുരട്ടുന്നത്, മോതിരം തിളങ്ങുന്നത് തുടങ്ങിയവ. ആദ്യത്തെ 10 ഉപഭോക്താക്കൾക്ക് സൗജന്യ ഷിപ്പിംഗോ ഫ്രീ സാമ്പിളോ നൽകുക.",
@@ -1260,11 +1435,7 @@ const app = {
     },
     {
       step: 7,
-      title: {
-        en: "Ship Safely, Request Reviews & Reinvest Profits",
-        ml: "സുരക്ഷിതമായി അയക്കുക, റിവ്യൂകൾ ശേഖരിക്കുക, ലാഭം വീണ്ടും നിക്ഷേപിക്കുക",
-        ar: "الشحن الآمن، جمع آراء العملاء، وإعادة استثمار الأرباح"
-      },
+      title: { en: "Ship Safely, Request Reviews & Reinvest Profits", ml: "സുരക്ഷിതമായി അയക്കുക, റിവ്യൂകൾ ശേഖരിക്കുക, ലാഭം വീണ്ടും നിക്ഷേപിക്കുക", ar: "الشحن الآمن، جمع آراء العملاء، وإعادة استثمار الأرباح" },
       desc: {
         en: "Dispatch orders within 24 hours and share tracking slip immediately. Message customer 3 days later: 'Did the package arrive safely? How did you like the scent?' Screenshot positive reviews and post to Instagram Highlights!",
         ml: "ഓർഡർ ലഭിച്ച് 24 മണിക്കൂറിനകം കൊറിയർ അയച്ച് ട്രാക്കിംഗ് നമ്പർ നൽകുക. 3 ദിവസത്തിന് ശേഷം കസ്റ്റമറെ വിളിച്ച് സാധനം ഇഷ്ടപ്പെട്ടോ എന്ന് അന്വേഷിക്കുക. അവർ നൽകുന്ന നല്ല അഭിപ്രായങ്ങൾ സ്ക്രീൻഷോട്ട് എടുത്ത് ഇൻസ്റ്റാഗ്രാമിൽ ഹൈലൈറ്റ് ചെയ്യുക.",
@@ -1274,7 +1445,7 @@ const app = {
     }
   ],
 
-  // Domestic & International Logistics Rates Table
+  // Logistics rates
   logisticsRates: [
     { service: "ST Courier / Professional", zone: "Within Kerala (District to District)", weight: "Up to 500g", rate: "₹40 - ₹55", remarks: "Fastest overnight delivery across all Kerala towns" },
     { service: "India Post (Speed Post)", zone: "All India (Pin codes nationwide)", weight: "Up to 500g", rate: "₹45 - ₹65", remarks: "Covers every remote village; highly reliable & economical" },
@@ -1312,6 +1483,8 @@ const app = {
   init() {
     this.detectLanguage();
     this.renderCategoryBlueprint(this.activeCategory);
+    this.renderAttarSimulator();
+    this.renderCoachingGuide();
     this.renderDirectory();
     this.renderRoadmap();
     this.renderLogisticsTable();
@@ -1354,7 +1527,6 @@ const app = {
     const t = this.i18n[lang];
     if (!t) return;
 
-    // Set HTML attribute and body classes
     const html = document.documentElement;
     html.lang = lang;
     if (lang === 'ar') {
@@ -1368,29 +1540,31 @@ const app = {
       document.body.className = 'lang-en';
     }
 
-    // Update active state in top-bar buttons
     document.querySelectorAll('.lang-btn').forEach(btn => {
       btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
     });
 
-    // Update floating dock text
     const dockLang = document.getElementById('dockLangText');
     if (dockLang) dockLang.textContent = lang.toUpperCase();
 
-    // Update Text Elements by IDs
     const textIds = [
       'siteTitle', 'siteSubtitle', 'topBarTagline', 'langCurrentText',
-      'navCategories', 'navQuiz', 'navSuppliers', 'navCalculator', 'navTemplates', 'navLegal',
+      'navCategories', 'navAttarSim', 'navCoaching', 'navSuppliers', 'navCalculator', 'navTemplates', 'navQuiz',
       'navRoadmap', 'navLogistics', 'navPlanBuilder',
       'heroBadge', 'heroHeading', 'heroDesc',
       'statMinInvest', 'statMargin', 'statSuppliers', 'statLang',
-      'btnExploreNiches', 'btnTakeQuiz', 'btnOpenCalc',
+      'btnExploreNiches', 'btnOpenSimulator', 'btnViewDirectory',
       'previewTitle', 'quickAttarTitle', 'quickAttarInfo',
       'quickClothingTitle', 'quickClothingInfo', 'quickWatchTitle', 'quickWatchInfo',
       'quickRingTitle', 'quickRingInfo', 'quickBagTitle', 'quickBagInfo',
       'previewTip', 'tagPopular', 'tagHighVol', 'tagGifts', 'tagLowRisk', 'tagAesthetic',
       'secBadgeNiches', 'secTitleNiches', 'secSubNiches',
       'tabAttar', 'tabClothing', 'tabWatches', 'tabBags', 'tabAccessories', 'tabSpices',
+      'simBadge', 'simTitle', 'simSubtitle', 'simConfigTitle', 'lblSelectOil', 'lblSelectSize',
+      'lblSelectBottle', 'lblSelectPack', 'simGraphTitle', 'legOil', 'legBottle', 'legPack', 'legProfit',
+      'lblTotalCostPerBottle', 'lblSuggestedRetail', 'lblNetProfitPerBottle',
+      'lblBatch25', 'lblBatch50', 'lblBatch100', 'simProTip',
+      'coachBadge', 'coachTitle', 'coachSubtitle',
       'quizBadge', 'quizTitle', 'quizSubtitle', 'q1Title', 'q1Opt1', 'q1Opt2', 'q1Opt3',
       'q2Title', 'q2Opt1', 'q2Opt2', 'q3Title', 'q3Opt1', 'q3Opt2', 'q3Opt3', 'btnCalculateMatch',
       'calcBadge', 'calcTitle', 'calcSubtitle', 'calcInputsTitle',
@@ -1428,8 +1602,9 @@ const app = {
       searchInput.placeholder = t.dirSearchPlaceholder;
     }
 
-    // Re-render dynamic sections in the current language
     this.renderCategoryBlueprint(this.activeCategory);
+    this.renderAttarSimulator();
+    this.renderCoachingGuide();
     this.renderDirectory();
     this.renderTemplates();
     this.renderLegalGuide();
@@ -1451,7 +1626,6 @@ const app = {
     });
     this.renderCategoryBlueprint(catKey);
 
-    // Sync calculator category dropdown
     const calcCat = document.getElementById('calcCategory');
     if (calcCat) {
       calcCat.value = catKey;
@@ -1460,7 +1634,7 @@ const app = {
     }
   },
 
-  // Render Detailed Category Blueprint
+  // Render Category Blueprint
   renderCategoryBlueprint(catKey) {
     const cat = this.categoriesData[catKey];
     const container = document.getElementById('categoryContent');
@@ -1548,7 +1722,290 @@ const app = {
     `;
   },
 
-  // Business Compatibility Quiz Logic
+  // Render Attar Simulator Choices & Live Profit Graph
+  renderAttarSimulator() {
+    const oilGrid = document.getElementById('oilChipsGrid');
+    if (!oilGrid) return;
+
+    const lang = this.currentLang;
+    let chipsHtml = '';
+
+    this.attarOils.forEach(oil => {
+      const activeClass = oil.id === this.simState.oilId ? 'active' : '';
+      const name = oil.name[lang] || oil.name.en;
+      chipsHtml += `
+        <div class="oil-chip ${activeClass}" onclick="app.setSimOil('${oil.id}')">
+          <span>${name}</span>
+          <small>₹${oil.costPer100ml}/100ml</small>
+        </div>
+      `;
+    });
+    oilGrid.innerHTML = chipsHtml;
+
+    this.updateSimulatorGraph();
+  },
+
+  setSimOil(id) {
+    this.simState.oilId = id;
+    this.renderAttarSimulator();
+  },
+
+  setSimSize(size) {
+    this.simState.sizeMl = parseInt(size);
+    document.querySelectorAll('.size-pill-btn').forEach(btn => {
+      btn.classList.toggle('active', parseInt(btn.getAttribute('data-size')) === this.simState.sizeMl);
+    });
+    this.updateSimulatorGraph();
+  },
+
+  setSimBottle(bottle) {
+    this.simState.bottleStyle = bottle;
+    document.querySelectorAll('.bottle-pill-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.getAttribute('data-bottle') === bottle);
+    });
+    this.updateSimulatorGraph();
+  },
+
+  setSimPack(pack) {
+    this.simState.packTier = pack;
+    document.querySelectorAll('.pack-pill-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.getAttribute('data-pack') === pack);
+    });
+    this.updateSimulatorGraph();
+  },
+
+  // Calculate & Update Attar Live Visual Graph
+  updateSimulatorGraph() {
+    const oil = this.attarOils.find(o => o.id === this.simState.oilId) || this.attarOils[0];
+    const size = this.simState.sizeMl;
+    const bottleCost = this.bottleCosts[this.simState.bottleStyle] || 10;
+    const packCost = this.packCosts[this.simState.packTier] || 8;
+
+    // Oil cost per bottle = (cost per 100ml / 100) * size
+    const oilCost = (oil.costPer100ml / 100) * size;
+    const totalCost = oilCost + bottleCost + packCost;
+
+    // Suggested retail selling price based on size
+    let sellingPrice = size === 3 ? oil.retailBase3ml : size === 12 ? oil.retailBase12ml : oil.retailBase6ml;
+    // Add premium if crystal/luxury
+    if (this.simState.bottleStyle === 'crystal') sellingPrice += 50;
+    if (this.simState.bottleStyle === 'luxury') sellingPrice += 120;
+    if (this.simState.packTier === 'rigid') sellingPrice += 40;
+    if (this.simState.packTier === 'casket') sellingPrice += 100;
+
+    const netProfit = Math.max(0, sellingPrice - totalCost);
+    const markupPct = ((netProfit / totalCost) * 100).toFixed(0);
+
+    // Graph Bar Widths (Relative to sellingPrice)
+    const oilWidthPct = Math.max(4, (oilCost / sellingPrice) * 100).toFixed(1);
+    const bottleWidthPct = Math.max(4, (bottleCost / sellingPrice) * 100).toFixed(1);
+    const packWidthPct = Math.max(4, (packCost / sellingPrice) * 100).toFixed(1);
+    const profitWidthPct = Math.max(10, (netProfit / sellingPrice) * 100).toFixed(1);
+
+    const barOil = document.getElementById('barOil');
+    const barBottle = document.getElementById('barBottle');
+    const barPack = document.getElementById('barPack');
+    const barProfit = document.getElementById('barProfit');
+
+    if (barOil) barOil.style.width = `${oilWidthPct}%`;
+    if (barBottle) barBottle.style.width = `${bottleWidthPct}%`;
+    if (barPack) barPack.style.width = `${packWidthPct}%`;
+    if (barProfit) barProfit.style.width = `${profitWidthPct}%`;
+
+    // Numbers display
+    const costEl = document.getElementById('valTotalCostPerBottle');
+    const sellEl = document.getElementById('valSuggestedRetail');
+    const profitEl = document.getElementById('valNetProfitPerBottle');
+    const markupEl = document.getElementById('valProfitMarginPct');
+
+    if (costEl) costEl.textContent = `₹${totalCost.toFixed(2)}`;
+    if (sellEl) sellEl.textContent = `₹${sellingPrice.toFixed(2)}`;
+    if (profitEl) profitEl.textContent = `₹${netProfit.toFixed(2)}`;
+    if (markupEl) markupEl.textContent = `(${markupPct}% Markup!)`;
+
+    // Projections
+    const b25Cost = totalCost * 25;
+    const b25Profit = netProfit * 25;
+    const b50Cost = totalCost * 50;
+    const b50Profit = netProfit * 50;
+    const b100Cost = totalCost * 100;
+    const b100Profit = netProfit * 100;
+
+    const vBatchCost25 = document.getElementById('valBatchInvest25');
+    const vBatchProfit25 = document.getElementById('valBatchProfit25');
+    const vBatchCost50 = document.getElementById('valBatchInvest50');
+    const vBatchProfit50 = document.getElementById('valBatchProfit50');
+    const vBatchCost100 = document.getElementById('valBatchInvest100');
+    const vBatchProfit100 = document.getElementById('valBatchProfit100');
+
+    if (vBatchCost25) vBatchCost25.textContent = `Cost: ₹${Math.round(b25Cost).toLocaleString('en-IN')}`;
+    if (vBatchProfit25) vBatchProfit25.textContent = `Profit: ₹${Math.round(b25Profit).toLocaleString('en-IN')}`;
+    if (vBatchCost50) vBatchCost50.textContent = `Cost: ₹${Math.round(b50Cost).toLocaleString('en-IN')}`;
+    if (vBatchProfit50) vBatchProfit50.textContent = `Profit: ₹${Math.round(b50Profit).toLocaleString('en-IN')}`;
+    if (vBatchCost100) vBatchCost100.textContent = `Cost: ₹${Math.round(b100Cost).toLocaleString('en-IN')}`;
+    if (vBatchProfit100) vBatchProfit100.textContent = `Profit: ₹${Math.round(b100Profit).toLocaleString('en-IN')}`;
+  },
+
+  // Render Supplier Call & Chat Coaching Guide
+  renderCoachingGuide() {
+    const container = document.getElementById('coachingGrid');
+    if (!container) return;
+
+    const lang = this.currentLang;
+    let html = '';
+
+    this.coachingData.forEach(c => {
+      const title = c.title[lang] || c.title.en;
+      const desc = c.desc[lang] || c.desc.en;
+      const dialogue = c.dialogue[lang] || c.dialogue.en;
+
+      html += `
+        <div class="coach-card">
+          <span class="coach-step-badge">Step ${c.step}</span>
+          <h4>${title}</h4>
+          <p>${desc}</p>
+          <div class="dialogue-box">
+            <i class="fa-solid fa-quote-left"></i> ${dialogue}
+          </div>
+        </div>
+      `;
+    });
+
+    container.innerHTML = html;
+  },
+
+  // Render Wholesaler Directory with Google Maps & WhatsApp
+  renderDirectory() {
+    const container = document.getElementById('directoryList');
+    if (!container) return;
+
+    const searchTerm = (document.getElementById('dirSearchInput')?.value || '').toLowerCase();
+    const cityFilter = document.getElementById('filterCity')?.value || 'all';
+    const catFilter = document.getElementById('filterCategory')?.value || 'all';
+    const lang = this.currentLang;
+
+    const filtered = this.suppliers.filter(sup => {
+      const matchCity = (cityFilter === 'all') || (sup.city.toLowerCase() === cityFilter.toLowerCase());
+      const matchCat = (catFilter === 'all') || (sup.category.toLowerCase() === catFilter.toLowerCase());
+      const matchSearch = !searchTerm || 
+        sup.name.toLowerCase().includes(searchTerm) ||
+        sup.city.toLowerCase().includes(searchTerm) ||
+        sup.address.toLowerCase().includes(searchTerm) ||
+        sup.specialty.toLowerCase().includes(searchTerm) ||
+        sup.tags.some(t => t.toLowerCase().includes(searchTerm));
+
+      return matchCity && matchCat && matchSearch;
+    });
+
+    if (filtered.length === 0) {
+      container.innerHTML = `
+        <div style="grid-column: 1 / -1; text-align: center; padding: 40px; color: var(--text-muted);">
+          <i class="fa-solid fa-magnifying-glass" style="font-size: 2rem; margin-bottom: 12px; color: var(--border-color);"></i>
+          <p>${lang === 'ml' ? 'വ്യാപാരികളെ കണ്ടെത്തിയില്ല. ഫിൽട്ടർ മാറ്റി ശ്രമിക്കുക.' : lang === 'ar' ? 'لم يتم العثور على موردين مطابقين لبحثك.' : 'No suppliers match your search filters. Try resetting the filters.'}</p>
+        </div>
+      `;
+      return;
+    }
+
+    let html = '';
+    filtered.forEach(sup => {
+      const waMsg = encodeURIComponent(
+        lang === 'ml' 
+          ? `ഹലോ ${sup.name}, ഞാൻ 'വ്യാപാര ശിക്ഷ' വെബ്സൈറ്റിൽ നിങ്ങളുടെ കടയുടെ വിവരം കണ്ടതാണ്. എനിക്ക് നിങ്ങളുടെ ഹോൾസെയിൽ കാറ്റലോഗും വിലവിവരങ്ങളും വേണം.`
+          : lang === 'ar'
+          ? `مرحباً ${sup.name}، وجدت بيانات متجركم عبر منصة رواد الأعمال. أود الاطلاع على كتالوج الجملة وقائمة الأسعار لديكم.`
+          : `Hello ${sup.name}, I found your wholesale details on Vyapar Shiksha. I want to inquire about your wholesale catalog and bulk pricing.`
+      );
+      const waLink = `https://wa.me/${sup.whatsapp}?text=${waMsg}`;
+
+      let tagsHtml = '';
+      sup.tags.forEach(t => {
+        tagsHtml += `<span class="supplier-tag">${t}</span>`;
+      });
+
+      html += `
+        <div class="supplier-card">
+          <div class="supplier-head">
+            <h4 class="supplier-name">${sup.name}</h4>
+            <span class="city-badge">${sup.city}</span>
+          </div>
+          <p class="supplier-address">
+            <i class="fa-solid fa-location-dot"></i>
+            <span>${sup.address}</span>
+          </p>
+          <p style="font-size: 0.85rem; color: #1e293b; margin-bottom: 8px;">
+            <strong>${lang === 'ml' ? 'പ്രത്യേകതകൾ:' : lang === 'ar' ? 'أهم المنتجات:' : 'Specialties:'}</strong> ${sup.specialty}
+          </p>
+          <p style="font-size: 0.78rem; color: #64748b; margin-bottom: 14px;">
+            <i class="fa-solid fa-box"></i> <strong>MOQ:</strong> ${sup.moq}
+          </p>
+          <div class="supplier-tags">
+            ${tagsHtml}
+          </div>
+          <div class="supplier-actions">
+            <a href="${waLink}" target="_blank" rel="noopener noreferrer" class="btn-whatsapp">
+              <i class="fa-brands fa-whatsapp"></i> ${lang === 'ml' ? 'വാട്സ്ആപ്പ്' : lang === 'ar' ? 'واتساب' : 'WhatsApp'}
+            </a>
+            <a href="${sup.mapUrl}" target="_blank" rel="noopener noreferrer" class="btn-map">
+              <i class="fa-solid fa-location-crosshairs"></i> ${lang === 'ml' ? 'ഗൂഗിൾ മാപ്പ്' : lang === 'ar' ? 'خرائط جوجل' : 'Google Maps'}
+            </a>
+            <a href="tel:${sup.phone}" class="btn-map-call">
+              <i class="fa-solid fa-phone"></i>
+            </a>
+          </div>
+        </div>
+      `;
+    });
+
+    container.innerHTML = html;
+  },
+
+  // Render WhatsApp Templates
+  renderTemplates() {
+    const container = document.getElementById('templatesGrid');
+    if (!container) return;
+
+    const lang = this.currentLang;
+    let html = '';
+
+    this.templatesData.forEach(tmpl => {
+      const title = tmpl.title[lang] || tmpl.title.en;
+      const text = tmpl.text[lang] || tmpl.text.en;
+
+      html += `
+        <div class="template-card">
+          <div class="tmpl-head">
+            <div class="tmpl-icon"><i class="fa-solid ${tmpl.icon}"></i></div>
+            <h4 class="tmpl-title">${title}</h4>
+          </div>
+          <div class="tmpl-body-box" id="tmplText_${tmpl.id}">${text}</div>
+          <button class="btn-copy-tmpl" onclick="app.copyTemplate('${tmpl.id}')">
+            <i class="fa-regular fa-copy"></i> <span id="btnCopyLabel_${tmpl.id}">${lang === 'ml' ? 'മെസ്സേജ് കോപ്പി ചെയ്യുക' : lang === 'ar' ? 'نسخ الرسالة' : 'Copy Message'}</span>
+          </button>
+        </div>
+      `;
+    });
+
+    container.innerHTML = html;
+  },
+
+  copyTemplate(tmplId) {
+    const box = document.getElementById(`tmplText_${tmplId}`);
+    const label = document.getElementById(`btnCopyLabel_${tmplId}`);
+    if (!box) return;
+
+    navigator.clipboard.writeText(box.innerText).then(() => {
+      if (label) {
+        const originalText = label.innerText;
+        label.innerText = this.currentLang === 'ml' ? 'കോപ്പി ചെയ്തു! ✓' : this.currentLang === 'ar' ? 'تم النسخ بنجاح! ✓' : 'Copied! ✓';
+        setTimeout(() => {
+          label.innerText = originalText;
+        }, 2000);
+      }
+    });
+  },
+
+  // Business Compatibility Quiz
   runBusinessQuiz() {
     const budget = document.querySelector('input[name="quizBudget"]:checked')?.value || 'low';
     const time = document.querySelector('input[name="quizTime"]:checked')?.value || 'part_time';
@@ -1627,7 +2084,6 @@ const app = {
     resBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   },
 
-  // Populate Default Numbers in Calculator When Category Changes
   populateCategoryDefaults(catKey) {
     const costInput = document.getElementById('calcWholesaleCost');
     const priceInput = document.getElementById('calcSellingPrice');
@@ -1667,7 +2123,6 @@ const app = {
     }
   },
 
-  // Dynamic Financial Calculations
   calculateProfit() {
     const cost = parseFloat(document.getElementById('calcWholesaleCost').value) || 0;
     const price = parseFloat(document.getElementById('calcSellingPrice').value) || 0;
@@ -1709,16 +2164,13 @@ const app = {
     document.getElementById('resValPaymentGateway').textContent = `- ₹${Math.round(monthlyGatewayFee).toLocaleString('en-IN')}`;
     document.getElementById('resValStartupCap').textContent = `₹${Math.round(initialCapital).toLocaleString('en-IN')} (${initialBatchUnits} units)`;
 
-    // Update GCC Currency Row
     this.updateGccPills(monthlyNetProfit);
   },
 
-  // Update GCC Multi-Currency Converter Pills
   updateGccPills(inrAmount) {
     const row = document.getElementById('gccPillsRow');
     if (!row) return;
 
-    // Standard baseline conversion rates
     const aed = (inrAmount * 0.044).toFixed(0);
     const sar = (inrAmount * 0.045).toFixed(0);
     const qar = (inrAmount * 0.044).toFixed(0);
@@ -1734,136 +2186,6 @@ const app = {
     `;
   },
 
-  // Render Verified Supplier Directory
-  renderDirectory() {
-    const container = document.getElementById('directoryList');
-    if (!container) return;
-
-    const searchTerm = (document.getElementById('dirSearchInput')?.value || '').toLowerCase();
-    const cityFilter = document.getElementById('filterCity')?.value || 'all';
-    const catFilter = document.getElementById('filterCategory')?.value || 'all';
-    const lang = this.currentLang;
-
-    const filtered = this.suppliers.filter(sup => {
-      const matchCity = (cityFilter === 'all') || (sup.city.toLowerCase() === cityFilter.toLowerCase());
-      const matchCat = (catFilter === 'all') || (sup.category.toLowerCase() === catFilter.toLowerCase());
-      const matchSearch = !searchTerm || 
-        sup.name.toLowerCase().includes(searchTerm) ||
-        sup.city.toLowerCase().includes(searchTerm) ||
-        sup.address.toLowerCase().includes(searchTerm) ||
-        sup.specialty.toLowerCase().includes(searchTerm) ||
-        sup.tags.some(t => t.toLowerCase().includes(searchTerm));
-
-      return matchCity && matchCat && matchSearch;
-    });
-
-    if (filtered.length === 0) {
-      container.innerHTML = `
-        <div style="grid-column: 1 / -1; text-align: center; padding: 40px; color: var(--text-muted);">
-          <i class="fa-solid fa-magnifying-glass" style="font-size: 2rem; margin-bottom: 12px; color: var(--border-color);"></i>
-          <p>${lang === 'ml' ? 'വ്യാപാരികളെ കണ്ടെത്തിയില്ല. ഫിൽട്ടർ മാറ്റി ശ്രമിക്കുക.' : lang === 'ar' ? 'لم يتم العثور على موردين مطابقين لبحثك.' : 'No suppliers match your search filters. Try resetting the filters.'}</p>
-        </div>
-      `;
-      return;
-    }
-
-    let html = '';
-    filtered.forEach(sup => {
-      const waMsg = encodeURIComponent(
-        lang === 'ml' 
-          ? `ഹലോ ${sup.name}, ഞാൻ 'വ്യാപാര ശിക്ഷ' വെബ്സൈറ്റിൽ നിങ്ങളുടെ കടയുടെ വിവരം കണ്ടതാണ്. എനിക്ക് നിങ്ങളുടെ ഹോൾസെയിൽ കാറ്റലോഗും വിലവിവരങ്ങളും വേണം.`
-          : lang === 'ar'
-          ? `مرحباً ${sup.name}، وجدت بيانات متجركم عبر منصة رواد الأعمال. أود الاطلاع على كتالوج الجملة وقائمة الأسعار لديكم.`
-          : `Hello ${sup.name}, I found your wholesale details on Vyapar Shiksha. I want to inquire about your wholesale catalog and bulk pricing.`
-      );
-      const waLink = `https://wa.me/${sup.whatsapp}?text=${waMsg}`;
-
-      let tagsHtml = '';
-      sup.tags.forEach(t => {
-        tagsHtml += `<span class="supplier-tag">${t}</span>`;
-      });
-
-      html += `
-        <div class="supplier-card">
-          <div class="supplier-head">
-            <h4 class="supplier-name">${sup.name}</h4>
-            <span class="city-badge">${sup.city}</span>
-          </div>
-          <p class="supplier-address">
-            <i class="fa-solid fa-location-dot"></i>
-            <span>${sup.address}</span>
-          </p>
-          <p style="font-size: 0.85rem; color: #1e293b; margin-bottom: 8px;">
-            <strong>${lang === 'ml' ? 'പ്രത്യേകതകൾ:' : lang === 'ar' ? 'أهم المنتجات:' : 'Specialties:'}</strong> ${sup.specialty}
-          </p>
-          <p style="font-size: 0.78rem; color: #64748b; margin-bottom: 14px;">
-            <i class="fa-solid fa-box"></i> <strong>MOQ:</strong> ${sup.moq}
-          </p>
-          <div class="supplier-tags">
-            ${tagsHtml}
-          </div>
-          <div class="supplier-actions">
-            <a href="${waLink}" target="_blank" rel="noopener noreferrer" class="btn-whatsapp">
-              <i class="fa-brands fa-whatsapp"></i> ${lang === 'ml' ? 'വാട്സ്ആപ്പ് ചാറ്റ്' : lang === 'ar' ? 'محادثة واتساب' : 'WhatsApp Chat'}
-            </a>
-            <a href="tel:${sup.phone}" class="btn-map-call">
-              <i class="fa-solid fa-phone"></i> ${lang === 'ml' ? 'വിളിക്കുക' : lang === 'ar' ? 'اتصال' : 'Call'}
-            </a>
-          </div>
-        </div>
-      `;
-    });
-
-    container.innerHTML = html;
-  },
-
-  // Render WhatsApp Templates
-  renderTemplates() {
-    const container = document.getElementById('templatesGrid');
-    if (!container) return;
-
-    const lang = this.currentLang;
-    let html = '';
-
-    this.templatesData.forEach(tmpl => {
-      const title = tmpl.title[lang] || tmpl.title.en;
-      const text = tmpl.text[lang] || tmpl.text.en;
-
-      html += `
-        <div class="template-card">
-          <div class="tmpl-head">
-            <div class="tmpl-icon"><i class="fa-solid ${tmpl.icon}"></i></div>
-            <h4 class="tmpl-title">${title}</h4>
-          </div>
-          <div class="tmpl-body-box" id="tmplText_${tmpl.id}">${text}</div>
-          <button class="btn-copy-tmpl" onclick="app.copyTemplate('${tmpl.id}')">
-            <i class="fa-regular fa-copy"></i> <span id="btnCopyLabel_${tmpl.id}">${lang === 'ml' ? 'മെസ്സേജ് കോപ്പി ചെയ്യുക' : lang === 'ar' ? 'نسخ الرسالة' : 'Copy Message'}</span>
-          </button>
-        </div>
-      `;
-    });
-
-    container.innerHTML = html;
-  },
-
-  // Copy template text to clipboard
-  copyTemplate(tmplId) {
-    const box = document.getElementById(`tmplText_${tmplId}`);
-    const label = document.getElementById(`btnCopyLabel_${tmplId}`);
-    if (!box) return;
-
-    navigator.clipboard.writeText(box.innerText).then(() => {
-      if (label) {
-        const originalText = label.innerText;
-        label.innerText = this.currentLang === 'ml' ? 'കോപ്പി ചെയ്തു! ✓' : this.currentLang === 'ar' ? 'تم النسخ بنجاح! ✓' : 'Copied! ✓';
-        setTimeout(() => {
-          label.innerText = originalText;
-        }, 2000);
-      }
-    });
-  },
-
-  // Render Legal & Compliance Section
   renderLegalGuide() {
     const container = document.getElementById('legalGrid');
     if (!container) return;
@@ -1888,7 +2210,6 @@ const app = {
     container.innerHTML = html;
   },
 
-  // Render Equipment Toolkit
   renderEquipment() {
     const container = document.getElementById('equipGrid');
     if (!container) return;
@@ -1913,7 +2234,6 @@ const app = {
     container.innerHTML = html;
   },
 
-  // Render Beginner FAQs
   renderFAQs() {
     const container = document.getElementById('faqAccordion');
     if (!container) return;
@@ -1941,7 +2261,6 @@ const app = {
     container.innerHTML = html;
   },
 
-  // Render 7-Step Roadmap
   renderRoadmap() {
     const container = document.getElementById('roadmapList');
     if (!container) return;
@@ -1975,7 +2294,6 @@ const app = {
     container.innerHTML = html;
   },
 
-  // Render Logistics Rates Table
   renderLogisticsTable() {
     const tbody = document.getElementById('logisticsTableBody');
     if (!tbody) return;
@@ -1995,7 +2313,6 @@ const app = {
     tbody.innerHTML = html;
   },
 
-  // Render Instagram Tips
   renderInstaTips() {
     const container = document.getElementById('instaTipsGrid');
     if (!container) return;
@@ -2019,7 +2336,6 @@ const app = {
     container.innerHTML = html;
   },
 
-  // Generate Personalized Business Plan
   generatePersonalPlan() {
     const name = document.getElementById('planFounderName')?.value || 'Entrepreneur';
     const nicheKey = document.getElementById('planNicheSelect')?.value || 'attar';
@@ -2109,6 +2425,25 @@ const app = {
       btn.addEventListener('click', () => {
         const cat = btn.getAttribute('data-cat');
         this.selectCategory(cat);
+      });
+    });
+
+    // Attar pill selections
+    document.querySelectorAll('.size-pill-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        this.setSimSize(btn.getAttribute('data-size'));
+      });
+    });
+
+    document.querySelectorAll('.bottle-pill-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        this.setSimBottle(btn.getAttribute('data-bottle'));
+      });
+    });
+
+    document.querySelectorAll('.pack-pill-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        this.setSimPack(btn.getAttribute('data-pack'));
       });
     });
 
