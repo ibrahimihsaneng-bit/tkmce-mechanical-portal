@@ -16,13 +16,33 @@
     loanAmount: 1000000, // ₹10 Lakhs
     loanTenureYears: 5,
     interestRatePct: 13.5, // 13.5% Commercial SME bank interest
+    targetCourseKey: null,
+    _unlocked: false,
     checklist: {
       surplusCapital: false,
       overheadRisks: false,
       tradingFirst: false
     },
 
+    getApp() {
+      return (typeof window !== 'undefined' && window.app) || (typeof app !== 'undefined' ? app : null);
+    },
+
+    getLang() {
+      const a = this.getApp();
+      if (a && a.currentLang) return a.currentLang;
+      try {
+        const saved = localStorage.getItem('vyapar_lang');
+        if (saved && ['en', 'ml', 'ar'].includes(saved)) return saved;
+      } catch (e) {}
+      if (typeof document !== 'undefined' && document.documentElement.lang) {
+        return document.documentElement.lang;
+      }
+      return 'en';
+    },
+
     isUnlocked() {
+      if (this._unlocked) return true;
       try {
         return localStorage.getItem('vyapar_archived_unlocked') === 'true';
       } catch (e) {
@@ -30,38 +50,57 @@
       }
     },
 
-    unlock() {
+    unlock(courseKey) {
+      this._unlocked = true;
       try {
         localStorage.setItem('vyapar_archived_unlocked', 'true');
       } catch (e) {}
 
       this.closeModal();
 
-      if (window.app) {
-        window.app.filterBusinessTier('archived');
-        const el = document.getElementById('faculty-section');
-        if (el) el.scrollIntoView({ behavior: 'smooth' });
-      }
+      const appRef = this.getApp();
+      const lang = this.getLang();
 
       if (window.platformEnhancements) {
-        const lang = window.app?.currentLang || 'en';
         window.platformEnhancements.showToast(
           lang === 'ml' 
             ? '✅ വ്യാവസായിക നിർമ്മാണ റഫറൻസുകൾ അൺലോക്ക് ചെയ്യപ്പെട്ടു!' 
             : '✅ Archived Industrial References Unlocked!'
         );
       }
+
+      const target = courseKey || this.targetCourseKey;
+      this.targetCourseKey = null;
+
+      if (appRef) {
+        appRef.currentTierFilter = 'archived';
+        document.querySelectorAll('.tier-tab-btn').forEach(btn => {
+          btn.classList.toggle('active', btn.getAttribute('data-tier') === 'archived');
+        });
+        appRef.renderFacultyCards();
+
+        if (target) {
+          appRef.openArchivedCourse(target);
+        } else {
+          const el = document.getElementById('facultyCardsGrid') || document.getElementById('faculty-section');
+          if (el) el.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
     },
 
     relock() {
+      this._unlocked = false;
       try {
         localStorage.removeItem('vyapar_archived_unlocked');
       } catch (e) {}
-      if (window.app) {
-        window.app.filterBusinessTier('all');
+
+      const appRef = this.getApp();
+      const lang = this.getLang();
+
+      if (appRef) {
+        appRef.filterBusinessTier('all');
       }
       if (window.platformEnhancements) {
-        const lang = window.app?.currentLang || 'en';
         window.platformEnhancements.showToast(
           lang === 'ml' 
             ? '🔒 ആർക്കൈവ് സെക്ഷൻ വീണ്ടും ലോക്ക് ചെയ്തു.' 
@@ -70,7 +109,10 @@
       }
     },
 
-    openModal(step = 1) {
+    openModal(step = 1, targetCourseKey = null) {
+      if (targetCourseKey) {
+        this.targetCourseKey = targetCourseKey;
+      }
       this.currentStep = step;
       this.render();
       const modal = document.getElementById('archivedGatewayModal');
@@ -86,6 +128,21 @@
         modal.style.display = 'none';
         document.body.style.overflow = '';
       }
+    },
+
+    confirmAndUnlock() {
+      this.checklist.surplusCapital = true;
+      this.checklist.overheadRisks = true;
+      this.checklist.tradingFirst = true;
+
+      const chk1 = document.getElementById('chkSurplusCapital');
+      const chk2 = document.getElementById('chkOverheadRisks');
+      const chk3 = document.getElementById('chkTradingFirst');
+      if (chk1) chk1.checked = true;
+      if (chk2) chk2.checked = true;
+      if (chk3) chk3.checked = true;
+
+      this.unlock();
     },
 
     setStep(stepNum) {
@@ -138,7 +195,7 @@
       const elInterestBar = document.getElementById('gwInterestBarFill');
       const elInterestPctLabel = document.getElementById('gwInterestPctLabel');
 
-      const lang = (window.app && window.app.currentLang) || 'en';
+      const lang = this.getLang();
       const isMl = lang === 'ml';
       if (elEmi) elEmi.textContent = `₹${loan.monthlyEmi.toLocaleString('en-IN')}`;
       if (elPrincipal) elPrincipal.textContent = `₹${this.loanAmount.toLocaleString('en-IN')}`;
@@ -152,7 +209,7 @@
       const modal = document.getElementById('archivedGatewayModal');
       if (!modal) return;
 
-      const lang = (window.app && window.app.currentLang) || 'en';
+      const lang = this.getLang();
       const isMl = lang === 'ml';
       const isAr = lang === 'ar';
 
@@ -405,18 +462,18 @@
                 <i class="fa-solid fa-signature text-primary"></i> ${isMl ? 'തുടരുന്നതിന് മുൻപുള്ള നിർബന്ധിത സമ്മതപത്രം (Tick all 3):' : 'Mandatory Declarations (Check all 3):'}
               </h5>
 
-              <label class="gateway-checkbox-row">
-                <input type="checkbox" onchange="archivedGateway.toggleCheck('surplusCapital', this.checked)" ${this.checklist.surplusCapital ? 'checked' : ''}>
+              <label class="gateway-checkbox-row" style="cursor: pointer;">
+                <input type="checkbox" id="chkSurplusCapital" onchange="archivedGateway.toggleCheck('surplusCapital', this.checked)" onclick="archivedGateway.toggleCheck('surplusCapital', this.checked)" ${this.checklist.surplusCapital ? 'checked' : ''}>
                 <span>${isMl ? '1. എന്റെ കൈവശം ബാങ്ക് വായ്പയെ ആശ്രയിക്കാതെ സ്വന്തമായി മുടക്കാൻ ആവശ്യമായ മിച്ച മൂലധനമുണ്ട്.' : '1. I have sufficient personal capital without resorting to commercial bank debt.'}</span>
               </label>
 
-              <label class="gateway-checkbox-row">
-                <input type="checkbox" onchange="archivedGateway.toggleCheck('overheadRisks', this.checked)" ${this.checklist.overheadRisks ? 'checked' : ''}>
+              <label class="gateway-checkbox-row" style="cursor: pointer;">
+                <input type="checkbox" id="chkOverheadRisks" onchange="archivedGateway.toggleCheck('overheadRisks', this.checked)" onclick="archivedGateway.toggleCheck('overheadRisks', this.checked)" ${this.checklist.overheadRisks ? 'checked' : ''}>
                 <span>${isMl ? '2. യന്ത്രങ്ങളുടെ തകരാറുകൾ, കറന്റ് ബിൽ, തൊഴിലാളി വേതനം, ഡെപ്രിസിയേഷൻ എന്നിവ മൂലമുള്ള വൻ നഷ്ടസാധ്യത ഞാൻ ബോധ്യപ്പെടുന്നു.' : '2. I acknowledge the high fixed overheads, depreciation, and failure risks of physical plants.'}</span>
               </label>
 
-              <label class="gateway-checkbox-row">
-                <input type="checkbox" onchange="archivedGateway.toggleCheck('tradingFirst', this.checked)" ${this.checklist.tradingFirst ? 'checked' : ''}>
+              <label class="gateway-checkbox-row" style="cursor: pointer;">
+                <input type="checkbox" id="chkTradingFirst" onchange="archivedGateway.toggleCheck('tradingFirst', this.checked)" onclick="archivedGateway.toggleCheck('tradingFirst', this.checked)" ${this.checklist.tradingFirst ? 'checked' : ''}>
                 <span>${isMl ? '3. തുടക്കക്കാർ ₹10,000-ൽ താഴെയുള്ള ഫിസിക്കൽ ഗുഡ്സ് ട്രേഡിംഗിൽ വിജയം കണ്ട ശേഷമേ ഇതിലേക്ക് കടക്കാവൂ എന്ന മുന്നറിയിപ്പ് ഞാൻ വായിച്ചു.' : '3. I understand the recommendation for beginners to master under-₹10,000 micro-trading first.'}</span>
               </label>
             </div>
@@ -426,7 +483,7 @@
               <button class="btn btn-outline btn-safe-return" onclick="archivedGateway.closeModal()">
                 <i class="fa-solid fa-shield-heart text-success"></i> ${isMl ? 'സേഫായ ₹10,000 ട്രേഡിംഗ് പഠിക്കാം (ശുപാർശ ചെയ്യുന്നത്)' : 'Stay with Safe ₹10,000 Trading (Recommended)'}
               </button>
-              <button class="btn btn-primary ${allChecked ? '' : 'disabled-btn'}" id="btnGatewayUnlock" ${allChecked ? '' : 'disabled'} onclick="archivedGateway.unlock()">
+              <button class="btn btn-primary" id="btnGatewayUnlock" onclick="archivedGateway.confirmAndUnlock()" style="cursor: pointer;">
                 <i class="fa-solid fa-lock-open"></i> ${isMl ? 'ഞാൻ സമ്മതിക്കുന്നു; റഫറൻസ് അൺലോക്ക് ചെയ്യുക' : 'I Acknowledge Risks — Unlock Reference'}
               </button>
             </div>

@@ -4890,7 +4890,7 @@ const app = {
 
   openArchivedCourse(key) {
     if (window.archivedGateway && !window.archivedGateway.isUnlocked()) {
-      window.archivedGateway.openModal(1);
+      window.archivedGateway.openModal(1, key);
       return;
     }
     const course = (this.archivedCourses && this.archivedCourses[key])
@@ -5485,6 +5485,9 @@ const app = {
 
     this.translateStaticElements();
     this.renderAllViews();
+    if (typeof window !== 'undefined' && window.archivedGateway) {
+      window.archivedGateway.render();
+    }
   },
 
   cycleLanguage() {
@@ -7672,9 +7675,17 @@ const app = {
   }
 };
 
+// Expose app to window immediately
+if (typeof window !== 'undefined') {
+  window.app = app;
+}
+
 // Auto-run on DOMContentLoaded (Browser only)
 if (typeof document !== 'undefined') {
   document.addEventListener('DOMContentLoaded', () => {
+    if (typeof window !== 'undefined') {
+      window.app = app;
+    }
     app.init();
   });
 }
