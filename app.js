@@ -2882,6 +2882,12 @@ const app = {
   currentTierFilter: 'all',
 
   filterBusinessTier(tier) {
+    if (tier === 'archived') {
+      if (window.archivedGateway && !window.archivedGateway.isUnlocked()) {
+        window.archivedGateway.openModal(1);
+        return;
+      }
+    }
     this.currentTierFilter = tier;
     document.querySelectorAll('.tier-tab-btn').forEach(btn => {
       btn.classList.toggle('active', btn.getAttribute('data-tier') === tier);
@@ -4860,6 +4866,10 @@ const app = {
   },
 
   openArchivedCourse(key) {
+    if (window.archivedGateway && !window.archivedGateway.isUnlocked()) {
+      window.archivedGateway.openModal(1);
+      return;
+    }
     if (this.archivedCourses && this.archivedCourses[key]) {
       this.categoriesData[key] = this.archivedCourses[key];
       this.openAcademy(key);
@@ -5569,6 +5579,11 @@ const app = {
           <div class="archived-banner-text">
             <h4 style="margin: 0 0 6px 0; color: #92400e; font-size: 1.15rem; font-weight: 800;">${lang === 'ml' ? 'സൂക്ഷിച്ചിരിക്കുന്ന നിർമ്മാണ യൂണിറ്റുകൾ (Archived Manufacturing Units)' : lang === 'ar' ? 'الوحدات والمصانع المؤرشفة (للاطلاع الأكاديمي فقط)' : 'Archived Manufacturing & Industrial Units (Reference Only)'}</h4>
             <p style="margin: 0; font-size: 0.88rem; color: #78350f; line-height: 1.5;">${lang === 'ml' ? 'വ്യാപാർ ശിക്ഷയുടെ പ്രധാന ശ്രദ്ധ ₹10,000-ൽ താഴെ തുടങ്ങാവുന്ന ഹലാൽ ഭൗതിക ഉൽപ്പന്ന കച്ചവടത്തിലായതിനാൽ, മെഷീൻ നിർമ്മാണ യൂണിറ്റുകളും വൻകിട ഇൻഡസ്ട്രിയൽ പ്ലാന്റുകളും പഠനാവശ്യങ്ങൾക്കായി ഇവിടെ സുരക്ഷിതമായി സൂക്ഷിച്ചിരിക്കുന്നു.' : lang === 'ar' ? 'نظراً لتركيز الأكاديمية الحصري على تجارة البضائع العينية الحلال برأس مال أقل من 10,000 روبية، فقد تم حفظ وحدات التصنيع والمصانع الكبرى هنا للاطلاع والدراسة فقط.' : 'In accordance with our exclusive focus on Halal Physical-Goods Inventory Trading under ₹10,000, manufacturing units and heavy industrial plants are preserved here for reference only.'}</p>
+            <div style="margin-top: 10px;">
+              <button onclick="window.archivedGateway && window.archivedGateway.relock()" style="background: #ffffff; border: 1px solid #cbd5e1; color: #475569; font-size: 0.78rem; font-weight: 600; padding: 4px 12px; border-radius: 6px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;">
+                <i class="fa-solid fa-lock"></i> <span>${lang === 'ml' ? 'ആർക്കൈവ് വീണ്ടും ലോക്ക് ചെയ്യുക' : 'Relock Archive Gateway'}</span>
+              </button>
+            </div>
           </div>
         </div>
       `;
