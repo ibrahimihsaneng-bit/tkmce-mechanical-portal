@@ -4572,10 +4572,19 @@ const app = {
       if (originView === 'home' && vHome && vHome.style.display === 'none') {
         vHome.style.display = 'block';
       }
+      let cardRectTop = null;
+      if (originView === 'home' && !isDeepLink && typeof document !== 'undefined') {
+        const srcCard = document.querySelector(`#facultyCardsGrid [data-academy-key="${nicheKey}"]`);
+        if (srcCard && typeof srcCard.getBoundingClientRect === 'function') {
+          cardRectTop = srcCard.getBoundingClientRect().top;
+        }
+      }
       this._academyReturnContext = {
         view: originView,
         scrollY: isDeepLink ? null : (typeof window !== 'undefined' ? (window.scrollY || window.pageYOffset || 0) : 0),
-        cardKey: nicheKey
+        cardKey: nicheKey,
+        cardRectTop,
+        openedLang: this.currentLang
       };
     }
 
@@ -4693,10 +4702,16 @@ const app = {
     }
 
     if (typeof window !== 'undefined') {
-      if (ctx.scrollY !== null && typeof ctx.scrollY === 'number') {
+      const retCardForAnchor = (originView === 'home' && ctx.cardKey && typeof document !== 'undefined')
+        ? document.querySelector(`#facultyCardsGrid [data-academy-key="${ctx.cardKey}"]`)
+        : null;
+      if (retCardForAnchor && ctx.cardRectTop !== null && ctx.cardRectTop !== undefined && this.currentLang !== ctx.openedLang && typeof retCardForAnchor.getBoundingClientRect === 'function') {
+        const anchoredY = Math.max(0, (retCardForAnchor.getBoundingClientRect().top + (window.scrollY || 0)) - ctx.cardRectTop);
+        window.scrollTo({ top: anchoredY, behavior: 'auto' });
+      } else if (ctx.scrollY !== null && typeof ctx.scrollY === 'number') {
         window.scrollTo({ top: ctx.scrollY, behavior: 'auto' });
       } else if (originView === 'home' && ctx.cardKey) {
-        const cardEl = document.querySelector(`#facultyCardsGrid [data-academy-key="${ctx.cardKey}"]`) || document.getElementById('faculty-section');
+        const cardEl = retCardForAnchor || document.getElementById('faculty-section');
         if (cardEl && typeof cardEl.scrollIntoView === 'function') {
           cardEl.scrollIntoView({ behavior: 'auto', block: 'center' });
         }
