@@ -255,7 +255,7 @@ const app = {
       roadSubtitle: "How to start even if you have zero business background. Follow this structured roadmap to launch safely without losing money.",
 
       // Course Common
-      lblBackToHub: "Back to Academies Overview",
+      lblBackToHub: "Back to Academies",
       mod1Title: "1. Blueprint & Product Science",
       mod2Title: "2. Exact Capital & Budget Breakdown",
       mod3Title: "3. Wholesale Markets & Google Maps",
@@ -444,7 +444,7 @@ const app = {
       roadSubtitle: "ബിസിനസ് പരിചയം ഒട്ടും ഇല്ലെങ്കിലും പണം നഷ്ടപ്പെടാതെ ധൈര്യമായി ബിസിനസ്സ് തുടങ്ങാനുള്ള കൃത്യമായ വഴികാട്ടി.",
 
       // Course Common
-      lblBackToHub: "പഠന ശാഖകളുടെ ഹോം പേജിലേക്ക്",
+      lblBackToHub: "അക്കാദമികളിലേക്ക് തിരികെ",
       mod1Title: "1. ബിസിനസ് അടിത്തറ & ഉൽപ്പന്ന വിവരങ്ങൾ",
       mod2Title: "2. എന്തിനൊക്കെ എത്ര രൂപ? (വിശദമായ ബഡ്ജറ്റ് പട്ടിക)",
       mod3Title: "3. മൊത്തവ്യാപാര മാർക്കറ്റുകൾ, ഫോൺ & ഗൂഗിൾ മാപ്പ്",
@@ -633,7 +633,7 @@ const app = {
       roadSubtitle: "كيف تنطلق وتبيع بنجاح حتى وإن لم تكن لديك أي خبرة سابقة دون خسارة أموالك.",
 
       // Course Common
-      lblBackToHub: "العودة إلى نظرة عامة على الأكاديميات",
+      lblBackToHub: "العودة للأكاديميات",
       mod1Title: "1. أساسيات المنتج وعلم الصنعة",
       mod2Title: "2. تفاصيل الميزانية ورأس المال الدقيق",
       mod3Title: "3. أسواق الجملة وخرائط جوجل",
@@ -2978,8 +2978,52 @@ const app = {
     }
   },
 
+  // Return Context for Side-Slide Academy Drawer
+  _academyReturnContext: null,
+  _pushedAcademyHistory: false,
+  _suppressHashRouteUntil: 0,
+  _academyCloseTimer: null,
+
+  preventHashAnchorJump() {
+    try {
+      const ev = typeof window !== 'undefined' ? window.event : null;
+      if (ev && ev.type === 'click' && ev.target && typeof ev.target.closest === 'function') {
+        const anchor = ev.target.closest('a[href^="#"]');
+        if (anchor) ev.preventDefault();
+      }
+    } catch (e) {}
+  },
+
+  closeOpenMenus() {
+    const navMenu = document.getElementById('mainNavLinks');
+    if (navMenu) navMenu.classList.remove('active');
+    document.querySelectorAll('.nav-dropdown').forEach(d => d.classList.remove('open'));
+    const searchDrop = document.getElementById('globalSearchResultsDropdown');
+    if (searchDrop) searchDrop.style.display = 'none';
+  },
+
+  getContextualBackLabel(originView, lang) {
+    const l = lang || this.currentLang || 'en';
+    if (originView === 'kerala-intel') {
+      return l === 'ml' ? 'കേരള ഇന്റലിലേക്ക് തിരികെ' : l === 'ar' ? 'العودة لخريطة كيرلا' : 'Back to Kerala Intel';
+    }
+    if (originView === 'tools') {
+      return l === 'ml' ? 'ടൂളുകളിലേക്ക് തിരികെ' : l === 'ar' ? 'العودة للأدوات' : 'Back to Tools';
+    }
+    const t = (this.i18n && this.i18n[l]) || {};
+    return t.lblBackToHub || 'Back to Academies';
+  },
+
   // SPA View Routing System
-  navigateTo(viewName) {
+  navigateTo(viewName, options = {}) {
+    this.preventHashAnchorJump();
+    this.closeOpenMenus();
+
+    if (viewName === 'academy') {
+      this.openAcademy(this.currentAcademy || 'attar');
+      return;
+    }
+
     const vHome = document.getElementById('viewHome');
     const vAcademy = document.getElementById('viewAcademy');
     const vTools = document.getElementById('viewTools');
@@ -2987,24 +3031,36 @@ const app = {
 
     if (!vHome || !vAcademy || !vTools) return;
 
-    // Reset view visibility
-    vHome.style.display = 'none';
+    // Cleanly reset any active side-slide academy drawer state
+    if (this._academyCloseTimer) {
+      clearTimeout(this._academyCloseTimer);
+      this._academyCloseTimer = null;
+    }
+    document.documentElement.classList.remove('academy-drawer-open');
+    document.body.classList.remove('academy-drawer-open');
+    vAcademy.classList.remove('academy-drawer-active');
     vAcademy.style.display = 'none';
+    this._academyReturnContext = null;
+    this._pushedAcademyHistory = false;
+
+    // Reset primary view visibility
+    vHome.style.display = 'none';
     vTools.style.display = 'none';
     if (vKeralaIntel) vKeralaIntel.style.display = 'none';
+
+    const shouldScrollTop = !(options && options.skipScroll);
 
     // Handle View States
     if (viewName === 'home') {
       this.currentView = 'home';
       vHome.style.display = 'block';
       this.updateNavActive('navHome');
-      window.location.hash = '#home';
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else if (viewName === 'academy') {
-      this.currentView = 'academy';
-      vAcademy.style.display = 'block';
-      this.updateNavActive('navAcademies');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      try {
+        window.history.replaceState(null, '', '#home');
+      } catch (e) {
+        window.location.hash = '#home';
+      }
+      if (shouldScrollTop) window.scrollTo({ top: 0, behavior: 'smooth' });
     } else if (viewName === 'kerala-intel') {
       this.currentView = 'kerala-intel';
       if (vKeralaIntel) {
@@ -3012,12 +3068,16 @@ const app = {
         if (window.keralaIntel) window.keralaIntel.init();
       }
       this.updateNavActive('navKeralaIntel');
-      window.location.hash = '#kerala-intel';
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      try {
+        window.history.replaceState(null, '', '#kerala-intel');
+      } catch (e) {
+        window.location.hash = '#kerala-intel';
+      }
+      if (shouldScrollTop) window.scrollTo({ top: 0, behavior: 'smooth' });
     } else if (['tools', 'suppliers', 'scripts', 'legal', 'plan', 'calc', 'halalcalc', 'collab'].includes(viewName)) {
       this.currentView = 'tools';
       vTools.style.display = 'block';
-      
+
       if (viewName === 'tools' && window.tradingTools) {
         window.tradingTools.init();
       } else {
@@ -3030,8 +3090,12 @@ const app = {
       else if (viewName === 'plan') this.updateNavActive('navPlanBuilder');
       else this.updateNavActive('navTools');
 
-      window.location.hash = `#${viewName}`;
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      try {
+        window.history.replaceState(null, '', `#${viewName}`);
+      } catch (e) {
+        window.location.hash = `#${viewName}`;
+      }
+      if (shouldScrollTop) window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   },
 
@@ -4474,8 +4538,11 @@ const app = {
     URL.revokeObjectURL(url);
   },
 
-  // Open Dedicated Academy Masterclass
-  openAcademy(nicheKey, targetStep = 1, updateHash = true) {
+  // Open Dedicated Academy Masterclass in Side-Slide Contextual Drawer
+  openAcademy(nicheKey, targetStep = 1, updateHash = true, options = {}) {
+    this.preventHashAnchorJump();
+    this.closeOpenMenus();
+
     if (!this.categoriesData[nicheKey]) {
       if (this.archivedCourses && this.archivedCourses[nicheKey]) {
         this.categoriesData[nicheKey] = this.archivedCourses[nicheKey];
@@ -4488,29 +4555,52 @@ const app = {
       }
     }
     if (!this.categoriesData[nicheKey]) nicheKey = 'attar';
+
+    const vAcademy = document.getElementById('viewAcademy');
+    const vHome = document.getElementById('viewHome');
+    const wasAlreadyInAcademy = (this.currentView === 'academy' && vAcademy && vAcademy.style.display !== 'none');
+
+    if (this._academyCloseTimer) {
+      clearTimeout(this._academyCloseTimer);
+      this._academyCloseTimer = null;
+    }
+
+    // Preserve exact origin scroll position and card anchor before locking body
+    if (!wasAlreadyInAcademy) {
+      const originView = (this.currentView && this.currentView !== 'academy') ? this.currentView : 'home';
+      const isDeepLink = Boolean(options && options.fromDeepLink);
+      if (originView === 'home' && vHome && vHome.style.display === 'none') {
+        vHome.style.display = 'block';
+      }
+      this._academyReturnContext = {
+        view: originView,
+        scrollY: isDeepLink ? null : (typeof window !== 'undefined' ? (window.scrollY || window.pageYOffset || 0) : 0),
+        cardKey: nicheKey
+      };
+    }
+
     this.currentAcademy = nicheKey;
     this.currentView = 'academy';
     this.currentCourseStep = targetStep;
 
-    const vHome = document.getElementById('viewHome');
-    const vAcademy = document.getElementById('viewAcademy');
-    const vTools = document.getElementById('viewTools');
-
-    if (vHome) vHome.style.display = 'none';
-    if (vTools) vTools.style.display = 'none';
-    if (vAcademy) vAcademy.style.display = 'block';
-
     const cat = this.categoriesData[nicheKey];
     const lang = this.currentLang;
+    const localizedTitle = cat.title[lang] || cat.title.en;
 
-    // Update Banner Texts
+    // Update Banner & Sticky Topbar Texts
     const titleEl = document.getElementById('courseMainTitle');
     const tagEl = document.getElementById('courseMainTagline');
     const badgeEl = document.getElementById('courseBadgeNiche');
+    const miniTitleEl = document.getElementById('academyTopbarMiniTitle');
+    const backLblEl = document.getElementById('lblBackToHub');
 
-    if (titleEl) titleEl.textContent = cat.title[lang] || cat.title.en;
+    if (titleEl) titleEl.textContent = localizedTitle;
+    if (miniTitleEl) miniTitleEl.textContent = localizedTitle;
     if (tagEl) tagEl.textContent = cat.tagline[lang] || cat.tagline.en;
     if (badgeEl) badgeEl.textContent = lang === 'ml' ? `പ്രത്യേക പഠന ശാഖ: ${cat.minBudget}` : lang === 'ar' ? `أكاديمية تخصصية • رأس مال: ${cat.minBudget}` : `Specialized Academy • Capital: ${cat.minBudget}`;
+    if (backLblEl) {
+      backLblEl.textContent = this.getContextualBackLabel(this._academyReturnContext ? this._academyReturnContext.view : 'home', lang);
+    }
 
     this.audioMasterclassState.nicheKey = nicheKey;
     this.renderCourseSidebar(nicheKey);
@@ -4522,10 +4612,133 @@ const app = {
       window.platformEnhancements.updateBookmarkButton(nicheKey);
     }
 
-    if (updateHash) {
-      window.history.replaceState(null, '', `#academy/${nicheKey}/${targetStep}`);
+    // Open Side-Slide Drawer without ever scrolling background page to top
+    if (typeof document !== 'undefined') {
+      document.documentElement.classList.add('academy-drawer-open');
+      document.body.classList.add('academy-drawer-open');
     }
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    if (vAcademy) {
+      vAcademy.style.display = 'block';
+      if (!wasAlreadyInAcademy) {
+        vAcademy.scrollTop = 0;
+        vAcademy.classList.remove('academy-drawer-active');
+        void vAcademy.offsetWidth;
+        if (typeof requestAnimationFrame === 'function') {
+          requestAnimationFrame(() => {
+            if (this.currentView === 'academy') {
+              vAcademy.classList.add('academy-drawer-active');
+            }
+          });
+        } else {
+          vAcademy.classList.add('academy-drawer-active');
+        }
+      } else {
+        vAcademy.classList.add('academy-drawer-active');
+        if (!(options && options.preserveDrawerScroll)) {
+          vAcademy.scrollTop = 0;
+        }
+      }
+    }
+
+    if (updateHash && typeof window !== 'undefined' && window.history) {
+      const targetHash = `#academy/${nicheKey}/${targetStep}`;
+      try {
+        if (!wasAlreadyInAcademy) {
+          window.history.pushState({ view: 'academy', niche: nicheKey, step: targetStep }, '', targetHash);
+          this._pushedAcademyHistory = true;
+        } else {
+          window.history.replaceState({ view: 'academy', niche: nicheKey, step: targetStep }, '', targetHash);
+        }
+      } catch (e) {}
+    }
+  },
+
+  // Close Side-Slide Academy Drawer and return directly to exact origin card & scroll offset
+  closeAcademy(fromPopState = false) {
+    const vAcademy = document.getElementById('viewAcademy');
+    if (this.currentView !== 'academy' && (!vAcademy || vAcademy.style.display === 'none')) {
+      return;
+    }
+
+    if (this._academyCloseTimer) {
+      clearTimeout(this._academyCloseTimer);
+      this._academyCloseTimer = null;
+    }
+
+    const ctx = this._academyReturnContext || { view: 'home', scrollY: null, cardKey: this.currentAcademy };
+    this._academyReturnContext = null;
+    const originView = ctx.view || 'home';
+
+    this.currentView = originView;
+    const vHome = document.getElementById('viewHome');
+    const vTools = document.getElementById('viewTools');
+    const vKeralaIntel = document.getElementById('viewKeralaIntel');
+
+    if (originView === 'home') {
+      if (vHome) vHome.style.display = 'block';
+      this.updateNavActive('navHome');
+    } else if (originView === 'kerala-intel') {
+      if (vKeralaIntel) vKeralaIntel.style.display = 'block';
+      this.updateNavActive('navKeralaIntel');
+    } else if (originView === 'tools') {
+      if (vTools) vTools.style.display = 'block';
+      this.updateNavActive('navTools');
+    }
+
+    // Unlock body scroll and immediately restore exact background scroll spot BEFORE drawer reveals it
+    if (typeof document !== 'undefined') {
+      document.documentElement.classList.remove('academy-drawer-open');
+      document.body.classList.remove('academy-drawer-open');
+    }
+
+    if (typeof window !== 'undefined') {
+      if (ctx.scrollY !== null && typeof ctx.scrollY === 'number') {
+        window.scrollTo({ top: ctx.scrollY, behavior: 'auto' });
+      } else if (originView === 'home' && ctx.cardKey) {
+        const cardEl = document.querySelector(`#facultyCardsGrid [data-academy-key="${ctx.cardKey}"]`) || document.getElementById('faculty-section');
+        if (cardEl && typeof cardEl.scrollIntoView === 'function') {
+          cardEl.scrollIntoView({ behavior: 'auto', block: 'center' });
+        }
+      }
+    }
+
+    // Slide drawer sideways back out of view
+    if (vAcademy) {
+      vAcademy.classList.remove('academy-drawer-active');
+      this._academyCloseTimer = setTimeout(() => {
+        if (this.currentView !== 'academy') {
+          vAcademy.style.display = 'none';
+        }
+        this._academyCloseTimer = null;
+      }, 350);
+    }
+
+    // Subtle visual highlight on returned card so eye locks onto where "Open Study Academy" was
+    if (originView === 'home' && ctx.cardKey && typeof document !== 'undefined') {
+      const retCard = document.querySelector(`#facultyCardsGrid [data-academy-key="${ctx.cardKey}"]`);
+      if (retCard) {
+        retCard.classList.remove('card-return-highlight');
+        void retCard.offsetWidth;
+        retCard.classList.add('card-return-highlight');
+        setTimeout(() => retCard.classList.remove('card-return-highlight'), 1900);
+      }
+    }
+
+    if (!fromPopState && typeof window !== 'undefined' && window.history) {
+      if (this._pushedAcademyHistory) {
+        this._pushedAcademyHistory = false;
+        this._suppressHashRouteUntil = Date.now() + 350;
+        window.history.back();
+      } else {
+        const targetHash = originView === 'home' ? '#home' : `#${originView}`;
+        try {
+          window.history.replaceState({ view: originView }, '', targetHash);
+        } catch (e) {}
+      }
+    } else {
+      this._pushedAcademyHistory = false;
+    }
   },
 
   // Set Stepper Step (1 to 8)
@@ -4533,13 +4746,17 @@ const app = {
     if (stepNum < 1) stepNum = 1;
     if (stepNum > 8) stepNum = 8;
     this.currentCourseStep = stepNum;
-    window.history.replaceState(null, '', `#academy/${this.currentAcademy}/${stepNum}`);
+    window.history.replaceState({ view: 'academy', niche: this.currentAcademy, step: stepNum }, '', `#academy/${this.currentAcademy}/${stepNum}`);
     this.renderCourseSidebar(this.currentAcademy);
     this.renderCourseModules(this.currentAcademy);
 
+    const vAcademy = document.getElementById('viewAcademy');
     const stage = document.getElementById('academyStudyStage');
-    if (stage) {
-      stage.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (vAcademy && stage) {
+      const topbar = document.getElementById('academyStickyTopbar');
+      const offset = topbar ? (topbar.offsetHeight + 14) : 68;
+      const targetTop = Math.max(0, stage.offsetTop - offset);
+      vAcademy.scrollTo({ top: targetTop, behavior: 'smooth' });
     }
   },
 
@@ -5391,9 +5608,10 @@ const app = {
     if (isStepper) {
       // GUIDED STEPPER PROCESSING MODE: Render ONLY the active step card
       const stepData = stepModules[activeStep - 1] || stepModules[0];
+      const backLbl = this.getContextualBackLabel((this._academyReturnContext && this._academyReturnContext.view) || 'home', lang);
       const prevBtnHtml = activeStep > 1 
         ? `<button class="btn-step-prev" onclick="app.prevCourseStep()">${t.btnPrevStep || '← Previous Chapter'}</button>` 
-        : `<span></span>`;
+        : `<button class="btn-step-prev" onclick="app.closeAcademy()">← ${backLbl}</button>`;
       
       const nextBtnHtml = activeStep < 8 
         ? `<button class="btn-step-next" onclick="app.nextCourseStep()">${t.btnNextStep || 'Next Chapter →'}</button>` 
@@ -5474,9 +5692,10 @@ const app = {
     document.documentElement.lang = lang;
     document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
 
-    document.body.className = `lang-${lang}`;
+    document.body.classList.remove('lang-en', 'lang-ml', 'lang-ar');
+    document.body.classList.add(`lang-${lang}`);
 
-    document.querySelectorAll('.lang-btn').forEach(btn => {
+    document.querySelectorAll('.lang-btn, .lang-btn-mini').forEach(btn => {
       btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
     });
 
@@ -5505,13 +5724,19 @@ const app = {
     });
   },
 
-  // Hash-based URL Routing Handler
+  // Hash-based & Stack-aware URL Routing Handler
   handleHashRouting() {
-    window.addEventListener('hashchange', () => this.processHash());
-    this.processHash();
+    window.addEventListener('hashchange', () => this.processHash(false));
+    window.addEventListener('popstate', () => this.processHash(false));
+    this.processHash(true);
   },
 
-  processHash() {
+  processHash(isInitialLoad = false) {
+    if (this._suppressHashRouteUntil && Date.now() < this._suppressHashRouteUntil) {
+      this._suppressHashRouteUntil = 0;
+      return;
+    }
+
     let route = window.location.hash.replace(/^#/, '').trim();
     // Support clean pathname routes for SEO (e.g. /academy/attar or /plan)
     if (!route) {
@@ -5521,9 +5746,15 @@ const app = {
       }
     }
 
-    if (!route) {
-      if (this.currentView !== 'academy') {
-        this.navigateTo('home');
+    if (!route || route === 'home') {
+      if (this.currentView === 'academy') {
+        this.closeAcademy(true);
+        return;
+      }
+      if (!route && isInitialLoad) {
+        this.navigateTo('home', { skipScroll: true });
+      } else {
+        this.navigateTo('home', { skipScroll: Boolean(isInitialLoad) });
       }
       return;
     }
@@ -5532,17 +5763,15 @@ const app = {
       const parts = route.split('/');
       const niche = parts[1] || 'attar';
       const step = parts[2] ? parseInt(parts[2], 10) : (this.currentCourseStep || 1);
-      this.openAcademy(niche, step, false);
+      this.openAcademy(niche, step, false, { fromDeepLink: isInitialLoad });
     } else if (route === 'kerala-intel' || route.startsWith('kerala-intel')) {
       const parts = route.split('/');
-      this.navigateTo('kerala-intel');
+      this.navigateTo('kerala-intel', { skipScroll: isInitialLoad });
       if (parts[1] && window.keralaIntel) {
         window.keralaIntel.setDistrict(parts[1]);
       }
     } else if (['tools', 'suppliers', 'scripts', 'legal', 'plan', 'calc'].includes(route)) {
-      this.navigateTo(route);
-    } else if (route === 'home') {
-      this.navigateTo('home');
+      this.navigateTo(route, { skipScroll: isInitialLoad });
     }
     // Anchor tags like #mod-capital do NOT redirect to home!
   },
@@ -5552,7 +5781,7 @@ const app = {
     this.renderFacultyCards();
     this.renderRoadmap();
     if (this.currentView === 'academy') {
-      this.openAcademy(this.currentAcademy, this.currentCourseStep);
+      this.openAcademy(this.currentAcademy, this.currentCourseStep, false, { preserveDrawerScroll: true });
     } else if (this.currentView === 'tools') {
       this.renderToolsDynamicContent(this.currentToolTab);
     }
@@ -5629,7 +5858,7 @@ const app = {
         const tagline = cat.tagline ? (cat.tagline[lang] || cat.tagline.en) : '';
 
         html += `
-          <div class="faculty-card tier-archived" onclick="app.openArchivedCourse('${catKey}')" role="button" tabindex="0" style="cursor: pointer; opacity: 0.95; border: 1px solid #cbd5e1;">
+          <div class="faculty-card tier-archived" data-academy-key="${catKey}" onclick="app.openArchivedCourse('${catKey}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault(); app.openArchivedCourse('${catKey}');}" role="button" tabindex="0" style="cursor: pointer; opacity: 0.95; border: 1px solid #cbd5e1;">
             <div class="faculty-card-cover">
               <img src="${cat.images ? cat.images.cover : 'https://images.unsplash.com/photo-1542744094-3a31f272c490?auto=format&fit=crop&w=800&q=80'}" alt="${title}" loading="lazy">
               <span class="cover-badge" style="background:#fef3c7;color:#92400e;"><i class="fa-solid fa-box-archive"></i> ${cat.minBudget || 'Archived'}</span>
@@ -5687,7 +5916,7 @@ const app = {
       const headerBg = this.categoryHeaderGradients[cat.id] || "linear-gradient(135deg, #065f46 0%, #047857 100%)";
 
       html += `
-        <div class="faculty-card tier-trading" onclick="app.openAcademy('${cat.id}')" role="button" tabindex="0" style="cursor: pointer;">
+        <div class="faculty-card tier-trading" data-academy-key="${cat.id}" onclick="app.openAcademy('${cat.id}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault(); app.openAcademy('${cat.id}');}" role="button" tabindex="0" style="cursor: pointer;">
           <div class="faculty-card-cover">
             <img src="${cat.images ? cat.images.cover : ''}" alt="${title}" loading="lazy" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1542744094-3a31f272c490?auto=format&fit=crop&w=800&q=80';">
             <span class="cover-badge" style="background:#065f46;color:#ffffff;"><i class="fa-solid fa-coins text-warning"></i> ${cat.minBudget}</span>
@@ -7648,14 +7877,16 @@ const app = {
       });
     }
 
-    const dropdownBtn = document.getElementById('navAcademies');
-    if (dropdownBtn) {
-      dropdownBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const parent = dropdownBtn.closest('.nav-dropdown');
-        if (parent) parent.classList.toggle('open');
-      });
-    }
+    ['navAcademies', 'btnSwitchAcademy'].forEach(btnId => {
+      const dropdownBtn = document.getElementById(btnId);
+      if (dropdownBtn) {
+        dropdownBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const parent = dropdownBtn.closest('.nav-dropdown');
+          if (parent) parent.classList.toggle('open');
+        });
+      }
+    });
 
     document.addEventListener('click', (e) => {
       if (!e.target.closest('.nav-dropdown')) {
@@ -7670,6 +7901,14 @@ const app = {
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
         this.closeCommunityModal();
+        const modalIds = ['archivedGatewayModal', 'checklistModal', 'complianceModal', 'platformCustomModal'];
+        const anyOpenModal = modalIds.some(id => {
+          const el = document.getElementById(id);
+          return el && el.style.display && el.style.display !== 'none';
+        });
+        if (!anyOpenModal && this.currentView === 'academy') {
+          this.closeAcademy();
+        }
       }
     });
   }

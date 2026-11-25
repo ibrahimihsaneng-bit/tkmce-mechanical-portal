@@ -132,7 +132,7 @@
   <!-- FontAwesome 6 Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="style.css?v=20261124_20">
-  <link rel="stylesheet" href="theme_upgrade.css?v=20261125_gatev2">
+  <link rel="stylesheet" href="theme_upgrade.css?v=20261125_sidev1">
 </head>
 <body class="lang-en">
 
@@ -689,17 +689,33 @@
   </main>
 
   <!-- =========================================================================
-       VIEW 2: DEDICATED BUSINESS ACADEMY (Complete Standalone Study Course)
+       VIEW 2: DEDICATED BUSINESS ACADEMY (Side-Slide Contextual Study Panel)
        ========================================================================= -->
-  <main class="page-view" id="viewAcademy" style="display: none;">
+  <main class="page-view academy-drawer-view" id="viewAcademy" style="display: none;">
+    <!-- Sticky Top Return & Quick Controls Bar -->
+    <div class="academy-sticky-topbar" id="academyStickyTopbar">
+      <div class="container academy-topbar-inner">
+        <button class="btn-back-hub btn-back-contextual" id="btnBackFromAcademy" onclick="app.closeAcademy()">
+          <i class="fa-solid fa-arrow-left"></i> <span id="lblBackToHub">Back to All Academies</span>
+        </button>
+        <div class="academy-topbar-course-mini" id="academyTopbarMiniTitle">Attar &amp; Artisanal Perfumes</div>
+        <div class="academy-topbar-right">
+          <div class="drawer-lang-pills" aria-label="Select Language">
+            <button class="lang-btn-mini active" data-lang="en" onclick="app.switchLanguage('en')">EN</button>
+            <button class="lang-btn-mini" data-lang="ml" onclick="app.switchLanguage('ml')">മല</button>
+            <button class="lang-btn-mini" data-lang="ar" onclick="app.switchLanguage('ar')">ع</button>
+          </div>
+          <button class="theme-toggle-btn drawer-theme-btn" onclick="platformEnhancements.toggleTheme()" title="Toggle Dark/Light Mode">
+            <i class="fa-solid fa-moon"></i> <span class="theme-text">Dark</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
     <!-- Course Header Banner & Fast Switcher -->
     <section class="course-header-banner" id="courseHeaderBanner">
       <div class="container course-header-content">
         <div class="course-header-top-flex">
-          <button class="btn-back-hub" onclick="app.navigateTo('home')">
-            <i class="fa-solid fa-arrow-left"></i> <span id="lblBackToHub">Back to All Academies</span>
-          </button>
-
           <div class="course-header-actions">
             <!-- 1-Page Printable Action Cheatsheet -->
             <button class="btn-action-cheatsheet" onclick="app.printAcademyCheatsheet(app.currentAcademy)" title="Print 1-Page Business Blueprint">
@@ -1069,6 +1085,6 @@
   <script src="data_industrial_courses.js?v=20261124_20"></script>
   <script src="data_audio_library.js?v=20261124_20"></script>
   <script src="archived_gateway.js?v=20261125_gatev5"></script>
-  <script src="app.js?v=20261125_gatev5"></script>
+  <script src="app.js?v=20261125_sidev1"></script>
 </body>
 </html>
