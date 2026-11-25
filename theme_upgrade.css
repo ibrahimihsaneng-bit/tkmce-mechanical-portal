@@ -1650,6 +1650,9 @@ html[dir="rtl"] .btn-back-contextual i.fa-arrow-left {
 }
 
 @media (max-width: 720px) {
+  .academy-topbar-inner {
+    gap: 8px;
+  }
   .academy-topbar-course-mini {
     display: none;
   }
@@ -1657,14 +1660,30 @@ html[dir="rtl"] .btn-back-contextual i.fa-arrow-left {
     justify-content: flex-start;
   }
   .btn-back-contextual {
-    padding: 7px 12px !important;
-    font-size: 0.78rem !important;
+    flex: 0 1 auto;
+    min-width: 0;
+    max-width: 100%;
+    padding: 6px 10px !important;
+    font-size: 0.73rem !important;
+  }
+  .btn-back-contextual span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .academy-topbar-right {
+    gap: 5px;
+    flex-shrink: 0;
+  }
+  .lang-btn-mini {
+    padding: 3px 6px;
+    font-size: 0.68rem;
   }
   .drawer-theme-btn .theme-text {
     display: none;
   }
   .drawer-theme-btn {
-    padding: 6px 9px !important;
+    padding: 6px 8px !important;
   }
 }
 
