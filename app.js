@@ -2926,8 +2926,12 @@ const app = {
         this.archivedCourses[k] = rawIndustrial[k];
       });
 
-      // Active catalog strictly contains verified Halal Physical Trading Academies
-      this.categoriesData = { ...this.activeTradingAcademies };
+      // Active catalog strictly contains verified Halal Physical Trading Academies,
+      // and archived courses are indexed so they can be opened directly
+      this.categoriesData = {
+        ...this.activeTradingAcademies,
+        ...this.archivedCourses
+      };
 
       if (window.dataAudioLibrary) {
         this.masterclassAudioLibrary = {
@@ -2958,11 +2962,19 @@ const app = {
       const saved = localStorage.getItem('vyapar_lang');
       if (saved && typeof saved === 'string' && ['en', 'ml', 'ar'].includes(saved.trim())) {
         this.currentLang = saved.trim();
-      } else {
-        this.currentLang = 'ml';
+        return;
       }
+      if (typeof window !== 'undefined' && window.location && window.location.search) {
+        const urlParams = new URLSearchParams(window.location.search);
+        const urlLang = urlParams.get('lang');
+        if (urlLang && ['en', 'ml', 'ar'].includes(urlLang.trim())) {
+          this.currentLang = urlLang.trim();
+          return;
+        }
+      }
+      this.currentLang = 'en';
     } catch (e) {
-      this.currentLang = 'ml';
+      this.currentLang = 'en';
     }
   },
 
@@ -4464,6 +4476,17 @@ const app = {
 
   // Open Dedicated Academy Masterclass
   openAcademy(nicheKey, targetStep = 1, updateHash = true) {
+    if (!this.categoriesData[nicheKey]) {
+      if (this.archivedCourses && this.archivedCourses[nicheKey]) {
+        this.categoriesData[nicheKey] = this.archivedCourses[nicheKey];
+      } else if (typeof window !== 'undefined' && window.dataMachineCourses && window.dataMachineCourses[nicheKey]) {
+        this.categoriesData[nicheKey] = window.dataMachineCourses[nicheKey];
+      } else if (typeof window !== 'undefined' && window.dataIndustrialCourses && window.dataIndustrialCourses[nicheKey]) {
+        this.categoriesData[nicheKey] = window.dataIndustrialCourses[nicheKey];
+      } else if (typeof window !== 'undefined' && window.dataRetailCourses && window.dataRetailCourses[nicheKey]) {
+        this.categoriesData[nicheKey] = window.dataRetailCourses[nicheKey];
+      }
+    }
     if (!this.categoriesData[nicheKey]) nicheKey = 'attar';
     this.currentAcademy = nicheKey;
     this.currentView = 'academy';
@@ -4870,8 +4893,16 @@ const app = {
       window.archivedGateway.openModal(1);
       return;
     }
-    if (this.archivedCourses && this.archivedCourses[key]) {
-      this.categoriesData[key] = this.archivedCourses[key];
+    const course = (this.archivedCourses && this.archivedCourses[key])
+      || (typeof window !== 'undefined' && window.dataMachineCourses && window.dataMachineCourses[key])
+      || (typeof window !== 'undefined' && window.dataIndustrialCourses && window.dataIndustrialCourses[key]);
+    if (course) {
+      if (!this.archivedCourses) this.archivedCourses = {};
+      this.archivedCourses[key] = course;
+      this.categoriesData[key] = course;
+      this.openAcademy(key);
+    } else {
+      console.warn('Archived course not found for key:', key);
       this.openAcademy(key);
     }
   },
@@ -5595,7 +5626,7 @@ const app = {
         const tagline = cat.tagline ? (cat.tagline[lang] || cat.tagline.en) : '';
 
         html += `
-          <div class="faculty-card tier-archived" style="opacity: 0.9; border: 1px solid #cbd5e1;">
+          <div class="faculty-card tier-archived" onclick="app.openArchivedCourse('${catKey}')" role="button" tabindex="0" style="cursor: pointer; opacity: 0.95; border: 1px solid #cbd5e1;">
             <div class="faculty-card-cover">
               <img src="${cat.images ? cat.images.cover : 'https://images.unsplash.com/photo-1542744094-3a31f272c490?auto=format&fit=crop&w=800&q=80'}" alt="${title}" loading="lazy">
               <span class="cover-badge" style="background:#fef3c7;color:#92400e;"><i class="fa-solid fa-box-archive"></i> ${cat.minBudget || 'Archived'}</span>
@@ -5609,7 +5640,7 @@ const app = {
               <div style="background: #f8fafc; padding: 10px; border-radius: 6px; font-size: 0.78rem; color: #64748b; margin-bottom: 12px;">
                 <i class="fa-solid fa-circle-info"></i> ${lang === 'ml' ? 'നിർമ്മാണ കോഴ്സ്: റഫറൻസിനായി സൂക്ഷിച്ചിരിക്കുന്നു.' : 'Manufacturing Course: Preserved for archival reference.'}
               </div>
-              <button class="btn-enter-faculty" onclick="app.openArchivedCourse('${catKey}')" style="background:#475569;">
+              <button class="btn-enter-faculty" onclick="event.stopPropagation(); app.openArchivedCourse('${catKey}')" style="background:#475569; width: 100%;">
                 <span>${lang === 'ml' ? 'റഫറൻസ് കാണുക' : 'View Archived Reference'}</span>
                 <i class="fa-solid fa-arrow-right"></i>
               </button>
@@ -5653,7 +5684,7 @@ const app = {
       const headerBg = this.categoryHeaderGradients[cat.id] || "linear-gradient(135deg, #065f46 0%, #047857 100%)";
 
       html += `
-        <div class="faculty-card tier-trading">
+        <div class="faculty-card tier-trading" onclick="app.openAcademy('${cat.id}')" role="button" tabindex="0" style="cursor: pointer;">
           <div class="faculty-card-cover">
             <img src="${cat.images ? cat.images.cover : ''}" alt="${title}" loading="lazy" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1542744094-3a31f272c490?auto=format&fit=crop&w=800&q=80';">
             <span class="cover-badge" style="background:#065f46;color:#ffffff;"><i class="fa-solid fa-coins text-warning"></i> ${cat.minBudget}</span>
@@ -5689,7 +5720,7 @@ const app = {
               ${hlList}
             </ul>
             <div class="faculty-card-footer">
-              <button class="btn-enter-faculty" onclick="app.openAcademy('${cat.id}')">
+              <button class="btn-enter-faculty" onclick="event.stopPropagation(); app.openAcademy('${cat.id}')">
                 <span>${t.btnStartCourse || 'Open Study Academy'}</span>
                 <i class="fa-solid fa-arrow-right"></i>
               </button>

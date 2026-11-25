@@ -44,7 +44,7 @@
       }
 
       if (window.platformEnhancements) {
-        const lang = window.app?.currentLang || 'ml';
+        const lang = window.app?.currentLang || 'en';
         window.platformEnhancements.showToast(
           lang === 'ml' 
             ? '✅ വ്യാവസായിക നിർമ്മാണ റഫറൻസുകൾ അൺലോക്ക് ചെയ്യപ്പെട്ടു!' 
@@ -61,7 +61,12 @@
         window.app.filterBusinessTier('all');
       }
       if (window.platformEnhancements) {
-        window.platformEnhancements.showToast('🔒 ആർക്കൈവ് സെക്ഷൻ വീണ്ടും ലോക്ക് ചെയ്തു.');
+        const lang = window.app?.currentLang || 'en';
+        window.platformEnhancements.showToast(
+          lang === 'ml' 
+            ? '🔒 ആർക്കൈവ് സെക്ഷൻ വീണ്ടും ലോക്ക് ചെയ്തു.' 
+            : '🔒 Archived References Relocked.'
+        );
       }
     },
 
@@ -133,19 +138,21 @@
       const elInterestBar = document.getElementById('gwInterestBarFill');
       const elInterestPctLabel = document.getElementById('gwInterestPctLabel');
 
+      const lang = (window.app && window.app.currentLang) || 'en';
+      const isMl = lang === 'ml';
       if (elEmi) elEmi.textContent = `₹${loan.monthlyEmi.toLocaleString('en-IN')}`;
       if (elPrincipal) elPrincipal.textContent = `₹${this.loanAmount.toLocaleString('en-IN')}`;
       if (elInterest) elInterest.textContent = `₹${loan.totalInterest.toLocaleString('en-IN')}`;
       if (elTotal) elTotal.textContent = `₹${loan.totalPayment.toLocaleString('en-IN')}`;
       if (elInterestBar) elInterestBar.style.width = `${Math.min(loan.interestPctOfPrincipal, 100)}%`;
-      if (elInterestPctLabel) elInterestPctLabel.textContent = `+${loan.interestPctOfPrincipal}% പലിശ ബാധ്യത`;
+      if (elInterestPctLabel) elInterestPctLabel.textContent = `+${loan.interestPctOfPrincipal}% ${isMl ? 'പലിശ ബാധ്യത' : 'Interest Burden'}`;
     },
 
     render() {
       const modal = document.getElementById('archivedGatewayModal');
       if (!modal) return;
 
-      const lang = (window.app && window.app.currentLang) || 'ml';
+      const lang = (window.app && window.app.currentLang) || 'en';
       const isMl = lang === 'ml';
       const isAr = lang === 'ar';
 
@@ -316,7 +323,7 @@
                 <div class="debt-bar-container">
                   <div style="display:flex; justify-content:space-between; font-size:0.72rem; margin-bottom:4px;">
                     <span style="color:#059669; font-weight:700;">100% Principal</span>
-                    <span style="color:#dc2626; font-weight:800;" id="gwInterestPctLabel">+${loan.interestPctOfPrincipal}% പലിശ ബാധ്യത</span>
+                    <span style="color:#dc2626; font-weight:800;" id="gwInterestPctLabel">+${loan.interestPctOfPrincipal}% ${isMl ? 'പലിശ ബാധ്യത' : 'Interest Burden'}</span>
                   </div>
                   <div class="debt-bar-track">
                     <div class="principal-bar-fill"></div>
