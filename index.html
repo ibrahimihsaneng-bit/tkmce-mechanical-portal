@@ -132,7 +132,7 @@
   <!-- FontAwesome 6 Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="style.css?v=20261124_20">
-  <link rel="stylesheet" href="theme_upgrade.css?v=20261125_1">
+  <link rel="stylesheet" href="theme_upgrade.css?v=20261125_gatev2">
 </head>
 <body class="lang-en">
 
@@ -252,7 +252,7 @@
                 <button onclick="app.openComplianceModal()" style="background: none; border: none; color: #059669; font-weight: 700; font-size: 0.82rem; cursor: pointer; display: flex; align-items: center; gap: 6px; padding: 0;">
                   <i class="fa-solid fa-shield-halved"></i> <span id="navComplianceBtnText">7 Halal Trading Pillars Checklist →</span>
                 </button>
-                <a href="#home" class="drop-link-more" onclick="app.navigateTo('home'); app.filterBusinessTier('archived');" style="color: #64748b; font-size: 0.78rem; text-decoration: none;">
+                <a href="#home" class="drop-link-more" onclick="app.navigateTo('home'); if(window.archivedGateway && !window.archivedGateway.isUnlocked()){ window.archivedGateway.openModal(1); } else { app.filterBusinessTier('archived'); }" style="color: #64748b; font-size: 0.78rem; text-decoration: none;">
                   <i class="fa-solid fa-box-archive"></i> <span id="dropArchivedText">Archived Units (Reference) →</span>
                 </a>
               </div>
@@ -581,7 +581,7 @@
           <button class="tier-tab-btn" data-tier="under10k" onclick="app.filterBusinessTier('under10k')">
             <i class="fa-solid fa-box-open text-primary"></i> <span id="tierTabUnder10k">Standard Inventory (₹5k - ₹10k)</span>
           </button>
-          <button class="tier-tab-btn" data-tier="archived" onclick="app.filterBusinessTier('archived')">
+          <button class="tier-tab-btn" data-tier="archived" onclick="if(window.archivedGateway && !window.archivedGateway.isUnlocked()){ window.archivedGateway.openModal(1); } else { app.filterBusinessTier('archived'); }">
             <i class="fa-solid fa-box-archive text-secondary"></i> <span id="tierTabArchived">Archived Units (Reference Only)</span>
           </button>
         </div>
@@ -1068,7 +1068,7 @@
   <script src="data_machine_courses.js?v=20261124_20"></script>
   <script src="data_industrial_courses.js?v=20261124_20"></script>
   <script src="data_audio_library.js?v=20261124_20"></script>
-  <script src="archived_gateway.js?v=20261125_1"></script>
-  <script src="app.js?v=20261125_1"></script>
+  <script src="archived_gateway.js?v=20261125_gatev2"></script>
+  <script src="app.js?v=20261125_gatev2"></script>
 </body>
 </html>
