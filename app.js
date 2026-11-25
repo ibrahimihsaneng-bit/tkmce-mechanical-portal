@@ -5633,7 +5633,7 @@ const app = {
             <div class="faculty-card-cover">
               <img src="${cat.images ? cat.images.cover : 'https://images.unsplash.com/photo-1542744094-3a31f272c490?auto=format&fit=crop&w=800&q=80'}" alt="${title}" loading="lazy">
               <span class="cover-badge" style="background:#fef3c7;color:#92400e;"><i class="fa-solid fa-box-archive"></i> ${cat.minBudget || 'Archived'}</span>
-              <span class="card-tier-pill" style="background:#f1f5f9;color:#475569;"><i class="fa-solid fa-file-lines"></i> ${cat.tier === 'industrial' ? 'Industrial Plant' : 'Machine Unit'}</span>
+              <span class="card-tier-pill" style="background:#f1f5f9;color:#475569;"><i class="fa-solid fa-file-lines"></i> ${cat.tier === 'industrial' ? (lang === 'ml' ? 'ഇൻഡസ്ട്രിയൽ പ്ലാന്റ്' : lang === 'ar' ? 'مصنع صناعي' : 'Industrial Plant') : (lang === 'ml' ? 'മെഷീൻ യൂണിറ്റ്' : lang === 'ar' ? 'وحدة آلات' : 'Machine Unit')}</span>
             </div>
             <div class="faculty-header" style="background: linear-gradient(135deg, #475569 0%, #334155 100%) !important; color: #ffffff !important; padding: 18px 20px;">
               <h3 style="color: #ffffff !important; font-size: 1.15rem; font-weight: 800; margin: 0 0 4px 0;">${title}</h3>
@@ -5641,7 +5641,7 @@ const app = {
             </div>
             <div class="faculty-body">
               <div style="background: #f8fafc; padding: 10px; border-radius: 6px; font-size: 0.78rem; color: #64748b; margin-bottom: 12px;">
-                <i class="fa-solid fa-circle-info"></i> ${lang === 'ml' ? 'നിർമ്മാണ കോഴ്സ്: റഫറൻസിനായി സൂക്ഷിച്ചിരിക്കുന്നു.' : 'Manufacturing Course: Preserved for archival reference.'}
+                <i class="fa-solid fa-circle-info"></i> ${lang === 'ml' ? (cat.tier === 'industrial' ? 'ഇൻഡസ്ട്രിയൽ പ്ലാന്റ്: റഫറൻസിനായി സൂക്ഷിച്ചിരിക്കുന്നു.' : 'മെഷീൻ കോഴ്സ്: റഫറൻസിനായി സൂക്ഷിച്ചിരിക്കുന്നു.') : lang === 'ar' ? (cat.tier === 'industrial' ? 'مصنع صناعي: محفوظ للاطلاع الأكاديمي.' : 'وحدة آلات: محفوظة للاطلاع الأكاديمي.') : (cat.tier === 'industrial' ? 'Industrial Plant: Preserved for archival reference.' : 'Manufacturing Course: Preserved for archival reference.')}
               </div>
               <button class="btn-enter-faculty" onclick="event.stopPropagation(); app.openArchivedCourse('${catKey}')" style="background:#475569; width: 100%;">
                 <span>${lang === 'ml' ? 'റഫറൻസ് കാണുക' : 'View Archived Reference'}</span>

@@ -167,8 +167,8 @@
       const btn = document.getElementById('btnGatewayUnlock');
       const allChecked = this.checklist.surplusCapital && this.checklist.overheadRisks && this.checklist.tradingFirst;
       if (btn) {
-        btn.disabled = !allChecked;
         btn.classList.toggle('disabled-btn', !allChecked);
+        btn.style.opacity = allChecked ? '1' : '0.55';
       }
     },
 
@@ -483,7 +483,7 @@
               <button class="btn btn-outline btn-safe-return" onclick="archivedGateway.closeModal()">
                 <i class="fa-solid fa-shield-heart text-success"></i> ${isMl ? 'സേഫായ ₹10,000 ട്രേഡിംഗ് പഠിക്കാം (ശുപാർശ ചെയ്യുന്നത്)' : 'Stay with Safe ₹10,000 Trading (Recommended)'}
               </button>
-              <button class="btn btn-primary" id="btnGatewayUnlock" onclick="archivedGateway.confirmAndUnlock()" style="cursor: pointer;">
+              <button class="btn btn-primary ${allChecked ? '' : 'disabled-btn'}" id="btnGatewayUnlock" onclick="archivedGateway.confirmAndUnlock()" style="cursor: pointer; opacity: ${allChecked ? '1' : '0.55'}; transition: opacity 0.3s, background 0.3s;">
                 <i class="fa-solid fa-lock-open"></i> ${isMl ? 'ഞാൻ സമ്മതിക്കുന്നു; റഫറൻസ് അൺലോക്ക് ചെയ്യുക' : 'I Acknowledge Risks — Unlock Reference'}
               </button>
             </div>
