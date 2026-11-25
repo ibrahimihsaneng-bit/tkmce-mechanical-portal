@@ -1505,21 +1505,31 @@ html[dir="rtl"] .compact-audio-side-dock {
 }
 
 /* ==========================================================================
-   SIDE-SLIDE DEDICATED ACADEMY DRAWER & CONTEXTUAL RETURN NAVIGATION
+   SIDE-SLIDE UNIVERSAL VIEW STACK DRAWERS & OPTIONAL SYLLABUS TOGGLE
    ========================================================================== */
 html.academy-drawer-open,
 body.academy-drawer-open {
   overflow: hidden !important;
 }
 
+body.academy-drawer-open .floating-lang-dock {
+  display: none !important;
+}
+
+.floating-audio-dock,
+.compact-audio-side-dock {
+  z-index: 1150 !important;
+}
+
 .floating-lang-dock {
   z-index: 1090;
 }
 
-.academy-drawer-view {
+.academy-drawer-view,
+.stack-drawer-view {
   position: fixed !important;
   inset: 0 !important;
-  z-index: 1050 !important;
+  z-index: 1050;
   width: 100% !important;
   height: 100vh !important;
   height: 100dvh !important;
@@ -1535,17 +1545,133 @@ body.academy-drawer-open {
   will-change: transform;
 }
 
-.academy-drawer-view.academy-drawer-active {
+.academy-drawer-view.academy-drawer-active,
+.stack-drawer-view.stack-drawer-active {
   transform: translateX(0) !important;
 }
 
-html[dir="rtl"] .academy-drawer-view {
+html[dir="rtl"] .academy-drawer-view,
+html[dir="rtl"] .stack-drawer-view {
   transform: translateX(-100%);
   box-shadow: 14px 0 42px rgba(15, 23, 42, 0.28);
 }
 
-html[dir="rtl"] .academy-drawer-view.academy-drawer-active {
+html[dir="rtl"] .academy-drawer-view.academy-drawer-active,
+html[dir="rtl"] .stack-drawer-view.stack-drawer-active {
   transform: translateX(0) !important;
+}
+
+/* Optional Toggleable Syllabus Sidebar inside Academy Drawer */
+.btn-syllabus-toggle {
+  background: rgba(16, 185, 129, 0.2);
+  border: 1px solid rgba(52, 211, 153, 0.55);
+  color: #ffffff;
+  padding: 7px 14px;
+  border-radius: var(--radius-full);
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  transition: all 0.2s ease;
+}
+
+.btn-syllabus-toggle:hover,
+.btn-syllabus-toggle.active {
+  background: var(--emerald-600);
+  border-color: var(--emerald-500);
+  color: #ffffff;
+  box-shadow: 0 3px 10px rgba(5, 150, 105, 0.35);
+}
+
+.academy-workspace-layout {
+  grid-template-columns: 1fr !important;
+  max-width: 980px;
+}
+
+.academy-workspace-layout .academy-study-sidebar {
+  display: none !important;
+}
+
+.academy-workspace-layout.syllabus-expanded {
+  max-width: 1200px;
+}
+
+.academy-workspace-layout.syllabus-expanded .academy-study-sidebar {
+  display: block !important;
+  animation: syllabusReveal 0.25s ease-out;
+}
+
+@media (min-width: 993px) {
+  .academy-workspace-layout.syllabus-expanded {
+    grid-template-columns: 320px 1fr !important;
+  }
+}
+
+@keyframes syllabusReveal {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.sidebar-syllabus-close-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 16px;
+  background: #0f172a;
+  color: #f8fafc;
+  font-size: 0.8rem;
+  font-weight: 800;
+}
+
+.sidebar-syllabus-close-btn {
+  background: rgba(255, 255, 255, 0.14);
+  border: none;
+  color: #ffffff;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.sidebar-syllabus-close-btn:hover {
+  background: rgba(255, 255, 255, 0.28);
+}
+
+[data-theme="dark"] .academy-study-sidebar {
+  background: var(--bg-card) !important;
+  border-color: var(--border-light) !important;
+}
+
+[data-theme="dark"] .sidebar-niche-profile,
+[data-theme="dark"] .sidebar-footer-tools {
+  background: var(--bg-card-subtle) !important;
+  border-color: var(--border-light) !important;
+}
+
+[data-theme="dark"] .sidebar-course-name,
+[data-theme="dark"] .chapter-item-title,
+[data-theme="dark"] .sidebar-tool-btn {
+  color: var(--text-main) !important;
+}
+
+[data-theme="dark"] .sidebar-tool-btn {
+  background: var(--bg-card) !important;
+  border-color: var(--border-light) !important;
+}
+
+[data-theme="dark"] .sidebar-chapter-item {
+  border-bottom-color: var(--border-light) !important;
+}
+
+[data-theme="dark"] .sidebar-chapter-item:hover {
+  background: var(--bg-card-subtle) !important;
+}
+
+[data-theme="dark"] .sidebar-chapter-item.active {
+  background: rgba(16, 185, 129, 0.16) !important;
 }
 
 /* Sticky Top Return Bar inside Side-Slide Academy Drawer */
@@ -1711,10 +1837,12 @@ html[dir="rtl"] .btn-back-contextual i.fa-arrow-left {
   body.academy-drawer-open {
     overflow: visible !important;
   }
-  .academy-sticky-topbar {
+  .academy-sticky-topbar,
+  .stack-sticky-topbar {
     display: none !important;
   }
-  .academy-drawer-view {
+  .academy-drawer-view,
+  .stack-drawer-view {
     position: static !important;
     height: auto !important;
     overflow: visible !important;

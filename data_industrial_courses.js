@@ -92,7 +92,7 @@ window.dataIndustrialCourses = {
     "images": {
       "cover": "https://images.unsplash.com/photo-1553279768-865429fa0078?auto=format&fit=crop&w=800&q=80",
       "product": "https://images.unsplash.com/photo-1553279768-865429fa0078?auto=format&fit=crop&w=800&q=80",
-      "sourcing": "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80",
+      "sourcing": "assets/images/step_wholesale_market.jpg",
       "formulation": "https://images.unsplash.com/photo-1553279768-865429fa0078?auto=format&fit=crop&w=800&q=80",
       "packaging": "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=800&q=80"
     },
@@ -582,10 +582,10 @@ window.dataIndustrialCourses = {
       "kinfra": "KINFRA Agro Parks concessional industrial land allotment with pre-cleared industrial licenses"
     },
     "images": {
-      "cover": "https://images.unsplash.com/photo-1544376798-89aa6b82c6cd?auto=format&fit=crop&w=800&q=80",
-      "product": "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?auto=format&fit=crop&w=800&q=80",
-      "sourcing": "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=800&q=80",
-      "formulation": "https://images.unsplash.com/photo-1544376798-89aa6b82c6cd?auto=format&fit=crop&w=800&q=80",
+      "cover": "assets/images/course_virgin_oils_herbal.jpg",
+      "product": "assets/images/course_virgin_oils_herbal.jpg",
+      "sourcing": "assets/images/step_wholesale_market.jpg",
+      "formulation": "assets/images/course_virgin_oils_herbal.jpg",
       "packaging": "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=800&q=80"
     },
     "curriculumHighlights": {
@@ -1068,7 +1068,7 @@ window.dataIndustrialCourses = {
     "images": {
       "cover": "https://images.unsplash.com/photo-1550258987-190a2d41a8ba?auto=format&fit=crop&w=800&q=80",
       "product": "https://images.unsplash.com/photo-1550258987-190a2d41a8ba?auto=format&fit=crop&w=800&q=80",
-      "sourcing": "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80",
+      "sourcing": "assets/images/step_wholesale_market.jpg",
       "formulation": "https://images.unsplash.com/photo-1550258987-190a2d41a8ba?auto=format&fit=crop&w=800&q=80",
       "packaging": "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=800&q=80"
     },
@@ -1563,15 +1563,15 @@ window.dataIndustrialCourses = {
       "kinfra": "KINFRA Agro Parks concessional industrial land allotment with pre-cleared industrial licenses"
     },
     "images": {
-      "cover": "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=800&q=80",
+      "cover": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
       "product": "https://images.unsplash.com/photo-1579154204601-01588f351e67?auto=format&fit=crop&w=800&q=80",
-      "sourcing": "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80",
+      "sourcing": "assets/images/step_wholesale_market.jpg",
       "formulation": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=800&q=80",
-      "packaging": "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=800&q=80"
+      "packaging": "assets/images/course_attar_flacons.jpg"
     },
     "curriculumHighlights": {
-      "en": [
-        "Supercritical thermodynamics: Controlling pressure (300 Bar) and temperature (45°C) so CO2 behaves as liquid solvent and gas simultaneously",
+        "en": [
+          "Supercritical thermodynamics: Controlling pressure (300 Bar) and temperature (45°C) so CO2 behaves as liquid solvent and gas simultaneously",
         "Solvent-free green chemistry: Zero toxic hexane residues, meeting strict European Pharmacopoeia export standards",
         "Selective fractionation: Separating volatile top-note essential oil in Separator 1 and heavy oleoresin in Separator 2",
         "Corporate supply agreements with global flavor houses (Givaudan, Firmenich, Synthite, Kancor)"
@@ -2048,8 +2048,8 @@ window.dataIndustrialCourses = {
     },
     "images": {
       "cover": "https://images.unsplash.com/photo-1566478989037-eec170784d0b?auto=format&fit=crop&w=800&q=80",
-      "product": "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?auto=format&fit=crop&w=800&q=80",
-      "sourcing": "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80",
+      "product": "https://images.unsplash.com/photo-1566478989037-eec170784d0b?auto=format&fit=crop&w=800&q=80",
+      "sourcing": "assets/images/step_wholesale_market.jpg",
       "formulation": "https://images.unsplash.com/photo-1566478989037-eec170784d0b?auto=format&fit=crop&w=800&q=80",
       "packaging": "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=800&q=80"
     },
@@ -2536,9 +2536,9 @@ window.dataIndustrialCourses = {
       "kinfra": "KINFRA Agro Parks concessional industrial land allotment with pre-cleared industrial licenses"
     },
     "images": {
-      "cover": "https://images.unsplash.com/photo-1523362628745-0c100150b504?auto=format&fit=crop&w=800&q=80",
+      "cover": "https://images.unsplash.com/photo-1560023907-5f339617ea30?auto=format&fit=crop&w=800&q=80",
       "product": "https://images.unsplash.com/photo-1560023907-5f339617ea30?auto=format&fit=crop&w=800&q=80",
-      "sourcing": "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80",
+      "sourcing": "assets/images/step_wholesale_market.jpg",
       "formulation": "https://images.unsplash.com/photo-1616118132534-381148898bb4?auto=format&fit=crop&w=800&q=80",
       "packaging": "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=800&q=80"
     },
@@ -3016,7 +3016,7 @@ window.dataIndustrialCourses = {
     "images": {
       "cover": "https://images.unsplash.com/photo-1509358271058-acd22cc93898?auto=format&fit=crop&w=800&q=80",
       "product": "https://images.unsplash.com/photo-1509358271058-acd22cc93898?auto=format&fit=crop&w=800&q=80",
-      "sourcing": "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80",
+      "sourcing": "assets/images/step_wholesale_market.jpg",
       "formulation": "https://images.unsplash.com/photo-1509358271058-acd22cc93898?auto=format&fit=crop&w=800&q=80",
       "packaging": "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=800&q=80"
     },
@@ -3492,9 +3492,9 @@ window.dataIndustrialCourses = {
       "kinfra": "KINFRA Agro Parks concessional industrial land allotment with pre-cleared industrial licenses"
     },
     "images": {
-      "cover": "https://images.unsplash.com/photo-1610557892470-55d9e80c0bce?auto=format&fit=crop&w=800&q=80",
+      "cover": "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=800&q=80",
       "product": "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=800&q=80",
-      "sourcing": "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80",
+      "sourcing": "assets/images/step_wholesale_market.jpg",
       "formulation": "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=800&q=80",
       "packaging": "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=800&q=80"
     },
@@ -3973,7 +3973,7 @@ window.dataIndustrialCourses = {
     "images": {
       "cover": "https://images.unsplash.com/photo-1528750997573-59b89d56f4f7?auto=format&fit=crop&w=800&q=80",
       "product": "https://images.unsplash.com/photo-1528750997573-59b89d56f4f7?auto=format&fit=crop&w=800&q=80",
-      "sourcing": "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80",
+      "sourcing": "assets/images/step_wholesale_market.jpg",
       "formulation": "https://images.unsplash.com/photo-1528750997573-59b89d56f4f7?auto=format&fit=crop&w=800&q=80",
       "packaging": "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=800&q=80"
     },
@@ -4455,9 +4455,9 @@ window.dataIndustrialCourses = {
       "kinfra": "KINFRA Agro Parks concessional industrial land allotment with pre-cleared industrial licenses"
     },
     "images": {
-      "cover": "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=800&q=80",
+      "cover": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=800&q=80",
       "product": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=800&q=80",
-      "sourcing": "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80",
+      "sourcing": "assets/images/step_wholesale_market.jpg",
       "formulation": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=800&q=80",
       "packaging": "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=800&q=80"
     },

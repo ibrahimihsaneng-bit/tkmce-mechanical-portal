@@ -692,11 +692,11 @@ const app = {
       
       // Authentic Real-Life Photography
       images: {
-        cover: "https://images.unsplash.com/photo-1615397349754-cfa2066a298e?auto=format&fit=crop&w=800&q=80",
+        cover: "assets/images/course_attar_flacons.jpg",
         product: "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?auto=format&fit=crop&w=800&q=80",
         sourcing: "https://images.unsplash.com/photo-1596178065887-1198b6148b2b?auto=format&fit=crop&w=800&q=80",
         formulation: "https://images.unsplash.com/photo-1615397349754-cfa2066a298e?auto=format&fit=crop&w=800&q=80",
-        packaging: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=800&q=80"
+        packaging: "assets/images/step_digital_showcase.jpg"
       },
 
       curriculumHighlights: {
@@ -1440,7 +1440,7 @@ const app = {
         cover: "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=800&q=80",
         product: "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=800&q=80",
         sourcing: "https://images.unsplash.com/photo-1627123424574-724758594e93?auto=format&fit=crop&w=800&q=80",
-        formulation: "https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=800&q=80",
+        formulation: "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=800&q=80",
         packaging: "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=800&q=80"
       },
 
@@ -1665,7 +1665,7 @@ const app = {
         cover: "https://images.unsplash.com/photo-1599940824399-b87987ceb72a?auto=format&fit=crop&w=800&q=80",
         product: "https://images.unsplash.com/photo-1599940824399-b87987ceb72a?auto=format&fit=crop&w=800&q=80",
         sourcing: "https://images.unsplash.com/photo-1588668214407-6ea9a6d8c272?auto=format&fit=crop&w=800&q=80",
-        formulation: "https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&w=800&q=80",
+        formulation: "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=800&q=80",
         packaging: "https://images.unsplash.com/photo-1599940824399-b87987ceb72a?auto=format&fit=crop&w=800&q=80"
       },
 
@@ -2941,6 +2941,11 @@ const app = {
       }
     }
     this.initSecurityConsoleWarning();
+    if (typeof window !== 'undefined' && window.history && 'scrollRestoration' in window.history) {
+      try {
+        window.history.scrollRestoration = 'manual';
+      } catch (e) {}
+    }
     this.detectLanguage();
     this.switchLanguage(this.currentLang);
     this.handleHashRouting();
@@ -2978,11 +2983,12 @@ const app = {
     }
   },
 
-  // Return Context for Side-Slide Academy Drawer
-  _academyReturnContext: null,
-  _pushedAcademyHistory: false,
+  // Unified Side-Slide View Stack & Return Preservation
+  _viewStack: [],
+  _drawerCloseTimers: {},
+  _pushedHistoryCount: 0,
   _suppressHashRouteUntil: 0,
-  _academyCloseTimer: null,
+  syllabusOpen: false,
 
   preventHashAnchorJump() {
     try {
@@ -3002,8 +3008,30 @@ const app = {
     if (searchDrop) searchDrop.style.display = 'none';
   },
 
+  _getDrawerElId(viewType) {
+    if (viewType === 'academy') return 'viewAcademy';
+    if (viewType === 'kerala-intel') return 'viewKeralaIntel';
+    if (viewType === 'tools') return 'viewTools';
+    return null;
+  },
+
+  _getTopDrawerOrigin(targetView) {
+    if (!this._viewStack || this._viewStack.length === 0) return 'home';
+    const top = this._viewStack[this._viewStack.length - 1];
+    if (top.view === targetView && this._viewStack.length >= 2) {
+      return this._viewStack[this._viewStack.length - 2].view;
+    }
+    if (top.view === targetView) {
+      return top.originView || 'home';
+    }
+    return top.view || 'home';
+  },
+
   getContextualBackLabel(originView, lang) {
     const l = lang || this.currentLang || 'en';
+    if (originView === 'academy') {
+      return l === 'ml' ? 'കോഴ്സിലേക്ക് തിരികെ' : l === 'ar' ? 'العودة للأكاديمية' : 'Back to Course';
+    }
     if (originView === 'kerala-intel') {
       return l === 'ml' ? 'കേരള ഇന്റലിലേക്ക് തിരികെ' : l === 'ar' ? 'العودة لخريطة كيرلا' : 'Back to Kerala Intel';
     }
@@ -3014,47 +3042,291 @@ const app = {
     return t.lblBackToHub || 'Back to Academies';
   },
 
-  // SPA View Routing System
+  updateSyllabusToggleUI() {
+    const layout = document.getElementById('academyWorkspaceLayout');
+    const btn = document.getElementById('btnToggleSyllabus');
+    const lbl = document.getElementById('lblToggleSyllabus');
+    const lang = this.currentLang || 'en';
+    const step = this.currentCourseStep || 1;
+
+    if (layout) layout.classList.toggle('syllabus-expanded', Boolean(this.syllabusOpen));
+    if (btn) btn.classList.toggle('active', Boolean(this.syllabusOpen));
+    if (lbl) {
+      if (this.syllabusOpen) {
+        lbl.textContent = lang === 'ml'
+          ? 'സിലബസ് മറയ്ക്കുക'
+          : lang === 'ar'
+          ? 'إخفاء المنهج'
+          : 'Hide Syllabus';
+      } else {
+        lbl.textContent = lang === 'ml'
+          ? `സിലബസ് കാണുക (${step}/8)`
+          : lang === 'ar'
+          ? `عرض المنهج (${step}/8)`
+          : `Show Syllabus (${step}/8)`;
+      }
+    }
+  },
+
+  toggleSyllabus(forceState) {
+    this.syllabusOpen = (typeof forceState === 'boolean') ? forceState : !this.syllabusOpen;
+    this.updateSyllabusToggleUI();
+  },
+
+  _pushOrUpdateDrawer(viewType, opts = {}) {
+    const elId = this._getDrawerElId(viewType);
+    const el = elId && document.getElementById(elId);
+    if (!el) return { pushedNew: false };
+
+    const activeCls = viewType === 'academy' ? 'academy-drawer-active' : 'stack-drawer-active';
+    const existingIdx = this._viewStack.findIndex(f => f.view === viewType);
+    const topFrame = this._viewStack.length > 0 ? this._viewStack[this._viewStack.length - 1] : null;
+    const isAlreadyTop = Boolean(topFrame && topFrame.view === viewType);
+
+    if (this._drawerCloseTimers[elId]) {
+      clearTimeout(this._drawerCloseTimers[elId]);
+      this._drawerCloseTimers[elId] = null;
+    }
+
+    if (isAlreadyTop) {
+      el.style.display = 'block';
+      el.classList.add('stack-drawer-active', activeCls);
+      if (opts.resetScrollOnUpdate) el.scrollTop = 0;
+      if (opts.hash && opts.updateHash !== false && typeof window !== 'undefined' && window.history) {
+        try {
+          window.history.replaceState({ stackDepth: this._viewStack.length, view: viewType }, '', opts.hash);
+        } catch (e) {}
+      }
+      return { pushedNew: false, frame: topFrame };
+    }
+
+    // If view was previously lower in stack, bring cleanly by truncating above or moving
+    if (existingIdx !== -1) {
+      while (this._viewStack.length - 1 > existingIdx) {
+        this.closeTopDrawer(true);
+      }
+      const reused = this._viewStack[existingIdx];
+      el.style.display = 'block';
+      el.classList.add('stack-drawer-active', activeCls);
+      return { pushedNew: false, frame: reused };
+    }
+
+    // Capture exact scroll state of whichever layer sits underneath
+    const isFromHome = (this._viewStack.length === 0);
+    const originView = isFromHome ? 'home' : topFrame.view;
+    if (!isFromHome && topFrame.elId) {
+      const prevEl = document.getElementById(topFrame.elId);
+      if (prevEl) topFrame.savedScrollTop = prevEl.scrollTop || 0;
+    }
+
+    const vHome = document.getElementById('viewHome');
+    if (vHome && vHome.style.display === 'none') {
+      vHome.style.display = 'block';
+    }
+
+    let cardRectTop = null;
+    if (isFromHome && !opts.isDeepLink && opts.cardKey && typeof document !== 'undefined') {
+      const srcCard = document.querySelector(`#facultyCardsGrid [data-academy-key="${opts.cardKey}"]`);
+      if (srcCard && typeof srcCard.getBoundingClientRect === 'function') {
+        cardRectTop = srcCard.getBoundingClientRect().top;
+      }
+    }
+
+    const originScrollY = (isFromHome && !opts.isDeepLink && typeof window !== 'undefined')
+      ? (window.scrollY || window.pageYOffset || 0)
+      : null;
+
+    const frame = {
+      view: viewType,
+      elId,
+      originView,
+      originScrollY,
+      savedScrollTop: 0,
+      cardKey: opts.cardKey || null,
+      cardRectTop,
+      openedLang: this.currentLang,
+      pushedHistory: Boolean(opts.updateHash !== false)
+    };
+
+    this._viewStack.push(frame);
+    this.currentView = viewType;
+
+    // Layer z-index cleanly by stack depth (1050, 1060, 1070...)
+    el.style.zIndex = String(1040 + this._viewStack.length * 10);
+
+    if (typeof document !== 'undefined') {
+      document.documentElement.classList.add('academy-drawer-open');
+      document.body.classList.add('academy-drawer-open');
+    }
+
+    el.style.display = 'block';
+    el.scrollTop = 0;
+    el.classList.remove('stack-drawer-active', 'academy-drawer-active');
+    void el.offsetWidth;
+
+    const slideIn = () => {
+      if (this._viewStack.includes(frame)) {
+        el.classList.add('stack-drawer-active', activeCls);
+      }
+    };
+    if (typeof requestAnimationFrame === 'function') {
+      requestAnimationFrame(slideIn);
+    } else {
+      slideIn();
+    }
+
+    if (opts.hash && opts.updateHash !== false && typeof window !== 'undefined' && window.history) {
+      try {
+        window.history.pushState({ stackDepth: this._viewStack.length, view: viewType }, '', opts.hash);
+        this._pushedHistoryCount += 1;
+      } catch (e) {}
+    }
+
+    return { pushedNew: true, frame };
+  },
+
+  closeTopDrawer(fromPopState = false) {
+    if (!this._viewStack || this._viewStack.length === 0) return;
+
+    const frame = this._viewStack.pop();
+    const el = frame.elId && document.getElementById(frame.elId);
+    const prevTop = this._viewStack.length > 0 ? this._viewStack[this._viewStack.length - 1] : null;
+    const targetView = prevTop ? prevTop.view : 'home';
+
+    this.currentView = targetView;
+
+    if (targetView === 'home') {
+      const vHome = document.getElementById('viewHome');
+      if (vHome) vHome.style.display = 'block';
+      this.updateNavActive('navHome');
+
+      if (typeof document !== 'undefined') {
+        document.documentElement.classList.remove('academy-drawer-open');
+        document.body.classList.remove('academy-drawer-open');
+      }
+
+      if (typeof window !== 'undefined') {
+        const retCardForAnchor = (frame.cardKey && typeof document !== 'undefined')
+          ? document.querySelector(`#facultyCardsGrid [data-academy-key="${frame.cardKey}"]`)
+          : null;
+
+        const restoreTargetScroll = () => {
+          if (retCardForAnchor && frame.cardRectTop !== null && frame.cardRectTop !== undefined && this.currentLang !== frame.openedLang && typeof retCardForAnchor.getBoundingClientRect === 'function') {
+            const anchoredY = Math.max(0, (retCardForAnchor.getBoundingClientRect().top + (window.scrollY || 0)) - frame.cardRectTop);
+            window.scrollTo({ top: anchoredY, behavior: 'auto' });
+          } else if (frame.originScrollY !== null && typeof frame.originScrollY === 'number') {
+            window.scrollTo({ top: frame.originScrollY, behavior: 'auto' });
+          } else if (frame.cardKey) {
+            const cardEl = retCardForAnchor || document.getElementById('faculty-section');
+            if (cardEl && typeof cardEl.scrollIntoView === 'function') {
+              cardEl.scrollIntoView({ behavior: 'auto', block: 'center' });
+            }
+          }
+        };
+
+        restoreTargetScroll();
+        setTimeout(restoreTargetScroll, 30);
+        setTimeout(restoreTargetScroll, 120);
+      }
+
+      if (frame.cardKey && typeof document !== 'undefined') {
+        const retCard = document.querySelector(`#facultyCardsGrid [data-academy-key="${frame.cardKey}"]`);
+        if (retCard) {
+          retCard.classList.remove('card-return-highlight');
+          void retCard.offsetWidth;
+          retCard.classList.add('card-return-highlight');
+          setTimeout(() => retCard.classList.remove('card-return-highlight'), 1900);
+        }
+      }
+    } else if (prevTop) {
+      const prevEl = prevTop.elId && document.getElementById(prevTop.elId);
+      if (prevEl) {
+        prevEl.style.display = 'block';
+        prevEl.classList.add('stack-drawer-active');
+        if (prevTop.view === 'academy') prevEl.classList.add('academy-drawer-active');
+        if (typeof prevTop.savedScrollTop === 'number') {
+          prevEl.scrollTop = prevTop.savedScrollTop;
+        }
+      }
+      if (targetView === 'kerala-intel') this.updateNavActive('navKeralaIntel');
+      else if (targetView === 'academy') this.updateNavActive('navAcademies');
+      else this.updateNavActive('navTools');
+    }
+
+    if (el) {
+      el.classList.remove('stack-drawer-active', 'academy-drawer-active');
+      if (this._drawerCloseTimers[frame.elId]) {
+        clearTimeout(this._drawerCloseTimers[frame.elId]);
+      }
+      this._drawerCloseTimers[frame.elId] = setTimeout(() => {
+        if (!this._viewStack.some(f => f.elId === frame.elId)) {
+          el.style.display = 'none';
+        }
+        this._drawerCloseTimers[frame.elId] = null;
+      }, 350);
+    }
+
+    if (!fromPopState && typeof window !== 'undefined' && window.history) {
+      if (frame.pushedHistory && this._pushedHistoryCount > 0) {
+        this._pushedHistoryCount -= 1;
+        this._suppressHashRouteUntil = Date.now() + 350;
+        window.history.back();
+      } else if (!prevTop) {
+        try {
+          window.history.replaceState({ view: 'home' }, '', '#home');
+        } catch (e) {}
+      }
+    } else if (fromPopState && frame.pushedHistory && this._pushedHistoryCount > 0) {
+      this._pushedHistoryCount -= 1;
+    }
+  },
+
+  closeAllDrawers(resetHomeScroll = false) {
+    Object.keys(this._drawerCloseTimers).forEach(id => {
+      if (this._drawerCloseTimers[id]) clearTimeout(this._drawerCloseTimers[id]);
+      this._drawerCloseTimers[id] = null;
+    });
+    ['viewAcademy', 'viewTools', 'viewKeralaIntel'].forEach(id => {
+      const d = document.getElementById(id);
+      if (d) {
+        d.classList.remove('stack-drawer-active', 'academy-drawer-active');
+        d.style.display = 'none';
+      }
+    });
+    this._viewStack = [];
+    this._pushedHistoryCount = 0;
+    if (typeof document !== 'undefined') {
+      document.documentElement.classList.remove('academy-drawer-open');
+      document.body.classList.remove('academy-drawer-open');
+    }
+    const vHome = document.getElementById('viewHome');
+    if (vHome) vHome.style.display = 'block';
+    this.currentView = 'home';
+    this.updateNavActive('navHome');
+    if (resetHomeScroll && typeof window !== 'undefined') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  },
+
+  // SPA View Routing System (Side-Slide Stack Enabled for ALL Views)
   navigateTo(viewName, options = {}) {
     this.preventHashAnchorJump();
     this.closeOpenMenus();
 
     if (viewName === 'academy') {
-      this.openAcademy(this.currentAcademy || 'attar');
+      this.openAcademy(this.currentAcademy || 'attar', 1, !(options && options.updateHash === false), options);
       return;
     }
 
     const vHome = document.getElementById('viewHome');
-    const vAcademy = document.getElementById('viewAcademy');
-    const vTools = document.getElementById('viewTools');
-    const vKeralaIntel = document.getElementById('viewKeralaIntel');
-
-    if (!vHome || !vAcademy || !vTools) return;
-
-    // Cleanly reset any active side-slide academy drawer state
-    if (this._academyCloseTimer) {
-      clearTimeout(this._academyCloseTimer);
-      this._academyCloseTimer = null;
-    }
-    document.documentElement.classList.remove('academy-drawer-open');
-    document.body.classList.remove('academy-drawer-open');
-    vAcademy.classList.remove('academy-drawer-active');
-    vAcademy.style.display = 'none';
-    this._academyReturnContext = null;
-    this._pushedAcademyHistory = false;
-
-    // Reset primary view visibility
-    vHome.style.display = 'none';
-    vTools.style.display = 'none';
-    if (vKeralaIntel) vKeralaIntel.style.display = 'none';
+    if (!vHome) return;
 
     const shouldScrollTop = !(options && options.skipScroll);
+    const updateHash = !(options && options.updateHash === false);
+    const isDeepLink = Boolean(options && options.fromDeepLink);
 
-    // Handle View States
     if (viewName === 'home') {
-      this.currentView = 'home';
-      vHome.style.display = 'block';
-      this.updateNavActive('navHome');
+      this.closeAllDrawers(false);
       try {
         window.history.replaceState(null, '', '#home');
       } catch (e) {
@@ -3062,21 +3334,25 @@ const app = {
       }
       if (shouldScrollTop) window.scrollTo({ top: 0, behavior: 'smooth' });
     } else if (viewName === 'kerala-intel') {
-      this.currentView = 'kerala-intel';
-      if (vKeralaIntel) {
-        vKeralaIntel.style.display = 'block';
-        if (window.keralaIntel) window.keralaIntel.init();
-      }
+      const originLabel = this.getContextualBackLabel(this._getTopDrawerOrigin('kerala-intel'), this.currentLang);
+      this._pushOrUpdateDrawer('kerala-intel', {
+        hash: '#kerala-intel',
+        updateHash,
+        isDeepLink,
+        resetScrollOnUpdate: false
+      });
+      if (window.keralaIntel) window.keralaIntel.init();
+      const lblK = document.getElementById('lblBackFromKerala');
+      if (lblK) lblK.textContent = originLabel;
       this.updateNavActive('navKeralaIntel');
-      try {
-        window.history.replaceState(null, '', '#kerala-intel');
-      } catch (e) {
-        window.location.hash = '#kerala-intel';
-      }
-      if (shouldScrollTop) window.scrollTo({ top: 0, behavior: 'smooth' });
     } else if (['tools', 'suppliers', 'scripts', 'legal', 'plan', 'calc', 'halalcalc', 'collab'].includes(viewName)) {
-      this.currentView = 'tools';
-      vTools.style.display = 'block';
+      const originView = this._getTopDrawerOrigin('tools');
+      this._pushOrUpdateDrawer('tools', {
+        hash: `#${viewName}`,
+        updateHash,
+        isDeepLink,
+        resetScrollOnUpdate: true
+      });
 
       if (viewName === 'tools' && window.tradingTools) {
         window.tradingTools.init();
@@ -3085,17 +3361,19 @@ const app = {
         this.switchToolTab(tabKey);
       }
 
+      const lang = this.currentLang || 'en';
+      const backToolsLbl = document.getElementById('lblBackToHub2');
+      if (backToolsLbl) backToolsLbl.textContent = this.getContextualBackLabel(originView, lang);
+
+      const toolsMini = document.getElementById('toolsTopbarMiniTitle');
+      if (toolsMini) {
+        toolsMini.textContent = lang === 'ml' ? 'സാമ്പത്തിക ഉപകരണങ്ങളും വിപണിയും' : lang === 'ar' ? 'الأدوات المالية ومراكز التوريد' : 'Financial Tools & Sourcing Hubs';
+      }
+
       if (viewName === 'suppliers') this.updateNavActive('navSuppliers');
       else if (viewName === 'scripts') this.updateNavActive('navTemplates');
       else if (viewName === 'plan') this.updateNavActive('navPlanBuilder');
       else this.updateNavActive('navTools');
-
-      try {
-        window.history.replaceState(null, '', `#${viewName}`);
-      } catch (e) {
-        window.location.hash = `#${viewName}`;
-      }
-      if (shouldScrollTop) window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   },
 
@@ -4556,36 +4834,17 @@ const app = {
     }
     if (!this.categoriesData[nicheKey]) nicheKey = 'attar';
 
-    const vAcademy = document.getElementById('viewAcademy');
-    const vHome = document.getElementById('viewHome');
-    const wasAlreadyInAcademy = (this.currentView === 'academy' && vAcademy && vAcademy.style.display !== 'none');
+    const courseChanged = (this.currentAcademy !== nicheKey);
+    const { pushedNew } = this._pushOrUpdateDrawer('academy', {
+      hash: `#academy/${nicheKey}/${targetStep}`,
+      updateHash,
+      isDeepLink: Boolean(options && options.fromDeepLink),
+      cardKey: nicheKey,
+      resetScrollOnUpdate: !(options && options.preserveDrawerScroll)
+    });
 
-    if (this._academyCloseTimer) {
-      clearTimeout(this._academyCloseTimer);
-      this._academyCloseTimer = null;
-    }
-
-    // Preserve exact origin scroll position and card anchor before locking body
-    if (!wasAlreadyInAcademy) {
-      const originView = (this.currentView && this.currentView !== 'academy') ? this.currentView : 'home';
-      const isDeepLink = Boolean(options && options.fromDeepLink);
-      if (originView === 'home' && vHome && vHome.style.display === 'none') {
-        vHome.style.display = 'block';
-      }
-      let cardRectTop = null;
-      if (originView === 'home' && !isDeepLink && typeof document !== 'undefined') {
-        const srcCard = document.querySelector(`#facultyCardsGrid [data-academy-key="${nicheKey}"]`);
-        if (srcCard && typeof srcCard.getBoundingClientRect === 'function') {
-          cardRectTop = srcCard.getBoundingClientRect().top;
-        }
-      }
-      this._academyReturnContext = {
-        view: originView,
-        scrollY: isDeepLink ? null : (typeof window !== 'undefined' ? (window.scrollY || window.pageYOffset || 0) : 0),
-        cardKey: nicheKey,
-        cardRectTop,
-        openedLang: this.currentLang
-      };
+    if ((pushedNew || courseChanged) && !(options && options.preserveSyllabusState)) {
+      this.syllabusOpen = false;
     }
 
     this.currentAcademy = nicheKey;
@@ -4595,6 +4854,7 @@ const app = {
     const cat = this.categoriesData[nicheKey];
     const lang = this.currentLang;
     const localizedTitle = cat.title[lang] || cat.title.en;
+    const originView = this._getTopDrawerOrigin('academy');
 
     // Update Banner & Sticky Topbar Texts
     const titleEl = document.getElementById('courseMainTitle');
@@ -4608,152 +4868,24 @@ const app = {
     if (tagEl) tagEl.textContent = cat.tagline[lang] || cat.tagline.en;
     if (badgeEl) badgeEl.textContent = lang === 'ml' ? `പ്രത്യേക പഠന ശാഖ: ${cat.minBudget}` : lang === 'ar' ? `أكاديمية تخصصية • رأس مال: ${cat.minBudget}` : `Specialized Academy • Capital: ${cat.minBudget}`;
     if (backLblEl) {
-      backLblEl.textContent = this.getContextualBackLabel(this._academyReturnContext ? this._academyReturnContext.view : 'home', lang);
+      backLblEl.textContent = this.getContextualBackLabel(originView, lang);
     }
 
     this.audioMasterclassState.nicheKey = nicheKey;
     this.renderCourseSidebar(nicheKey);
-    // renderStudyStageHeaderBar removed to prevent screen blocking
     this.renderCourseModules(nicheKey);
     this.renderFloatingAudioDock();
+    this.updateSyllabusToggleUI();
+    this.updateNavActive('navAcademies');
 
     if (window.platformEnhancements) {
       window.platformEnhancements.updateBookmarkButton(nicheKey);
     }
-
-    // Open Side-Slide Drawer without ever scrolling background page to top
-    if (typeof document !== 'undefined') {
-      document.documentElement.classList.add('academy-drawer-open');
-      document.body.classList.add('academy-drawer-open');
-    }
-
-    if (vAcademy) {
-      vAcademy.style.display = 'block';
-      if (!wasAlreadyInAcademy) {
-        vAcademy.scrollTop = 0;
-        vAcademy.classList.remove('academy-drawer-active');
-        void vAcademy.offsetWidth;
-        if (typeof requestAnimationFrame === 'function') {
-          requestAnimationFrame(() => {
-            if (this.currentView === 'academy') {
-              vAcademy.classList.add('academy-drawer-active');
-            }
-          });
-        } else {
-          vAcademy.classList.add('academy-drawer-active');
-        }
-      } else {
-        vAcademy.classList.add('academy-drawer-active');
-        if (!(options && options.preserveDrawerScroll)) {
-          vAcademy.scrollTop = 0;
-        }
-      }
-    }
-
-    if (updateHash && typeof window !== 'undefined' && window.history) {
-      const targetHash = `#academy/${nicheKey}/${targetStep}`;
-      try {
-        if (!wasAlreadyInAcademy) {
-          window.history.pushState({ view: 'academy', niche: nicheKey, step: targetStep }, '', targetHash);
-          this._pushedAcademyHistory = true;
-        } else {
-          window.history.replaceState({ view: 'academy', niche: nicheKey, step: targetStep }, '', targetHash);
-        }
-      } catch (e) {}
-    }
   },
 
-  // Close Side-Slide Academy Drawer and return directly to exact origin card & scroll offset
+  // Alias for backwards compatibility: closes top stacked drawer (or academy)
   closeAcademy(fromPopState = false) {
-    const vAcademy = document.getElementById('viewAcademy');
-    if (this.currentView !== 'academy' && (!vAcademy || vAcademy.style.display === 'none')) {
-      return;
-    }
-
-    if (this._academyCloseTimer) {
-      clearTimeout(this._academyCloseTimer);
-      this._academyCloseTimer = null;
-    }
-
-    const ctx = this._academyReturnContext || { view: 'home', scrollY: null, cardKey: this.currentAcademy };
-    this._academyReturnContext = null;
-    const originView = ctx.view || 'home';
-
-    this.currentView = originView;
-    const vHome = document.getElementById('viewHome');
-    const vTools = document.getElementById('viewTools');
-    const vKeralaIntel = document.getElementById('viewKeralaIntel');
-
-    if (originView === 'home') {
-      if (vHome) vHome.style.display = 'block';
-      this.updateNavActive('navHome');
-    } else if (originView === 'kerala-intel') {
-      if (vKeralaIntel) vKeralaIntel.style.display = 'block';
-      this.updateNavActive('navKeralaIntel');
-    } else if (originView === 'tools') {
-      if (vTools) vTools.style.display = 'block';
-      this.updateNavActive('navTools');
-    }
-
-    // Unlock body scroll and immediately restore exact background scroll spot BEFORE drawer reveals it
-    if (typeof document !== 'undefined') {
-      document.documentElement.classList.remove('academy-drawer-open');
-      document.body.classList.remove('academy-drawer-open');
-    }
-
-    if (typeof window !== 'undefined') {
-      const retCardForAnchor = (originView === 'home' && ctx.cardKey && typeof document !== 'undefined')
-        ? document.querySelector(`#facultyCardsGrid [data-academy-key="${ctx.cardKey}"]`)
-        : null;
-      if (retCardForAnchor && ctx.cardRectTop !== null && ctx.cardRectTop !== undefined && this.currentLang !== ctx.openedLang && typeof retCardForAnchor.getBoundingClientRect === 'function') {
-        const anchoredY = Math.max(0, (retCardForAnchor.getBoundingClientRect().top + (window.scrollY || 0)) - ctx.cardRectTop);
-        window.scrollTo({ top: anchoredY, behavior: 'auto' });
-      } else if (ctx.scrollY !== null && typeof ctx.scrollY === 'number') {
-        window.scrollTo({ top: ctx.scrollY, behavior: 'auto' });
-      } else if (originView === 'home' && ctx.cardKey) {
-        const cardEl = retCardForAnchor || document.getElementById('faculty-section');
-        if (cardEl && typeof cardEl.scrollIntoView === 'function') {
-          cardEl.scrollIntoView({ behavior: 'auto', block: 'center' });
-        }
-      }
-    }
-
-    // Slide drawer sideways back out of view
-    if (vAcademy) {
-      vAcademy.classList.remove('academy-drawer-active');
-      this._academyCloseTimer = setTimeout(() => {
-        if (this.currentView !== 'academy') {
-          vAcademy.style.display = 'none';
-        }
-        this._academyCloseTimer = null;
-      }, 350);
-    }
-
-    // Subtle visual highlight on returned card so eye locks onto where "Open Study Academy" was
-    if (originView === 'home' && ctx.cardKey && typeof document !== 'undefined') {
-      const retCard = document.querySelector(`#facultyCardsGrid [data-academy-key="${ctx.cardKey}"]`);
-      if (retCard) {
-        retCard.classList.remove('card-return-highlight');
-        void retCard.offsetWidth;
-        retCard.classList.add('card-return-highlight');
-        setTimeout(() => retCard.classList.remove('card-return-highlight'), 1900);
-      }
-    }
-
-    if (!fromPopState && typeof window !== 'undefined' && window.history) {
-      if (this._pushedAcademyHistory) {
-        this._pushedAcademyHistory = false;
-        this._suppressHashRouteUntil = Date.now() + 350;
-        window.history.back();
-      } else {
-        const targetHash = originView === 'home' ? '#home' : `#${originView}`;
-        try {
-          window.history.replaceState({ view: originView }, '', targetHash);
-        } catch (e) {}
-      }
-    } else {
-      this._pushedAcademyHistory = false;
-    }
+    this.closeTopDrawer(fromPopState);
   },
 
   // Set Stepper Step (1 to 8)
@@ -4761,9 +4893,17 @@ const app = {
     if (stepNum < 1) stepNum = 1;
     if (stepNum > 8) stepNum = 8;
     this.currentCourseStep = stepNum;
-    window.history.replaceState({ view: 'academy', niche: this.currentAcademy, step: stepNum }, '', `#academy/${this.currentAcademy}/${stepNum}`);
+    if (typeof window !== 'undefined' && window.history) {
+      try {
+        window.history.replaceState({ stackDepth: this._viewStack.length, view: 'academy', niche: this.currentAcademy, step: stepNum }, '', `#academy/${this.currentAcademy}/${stepNum}`);
+      } catch (e) {}
+    }
+    if (typeof window !== 'undefined' && window.innerWidth <= 992 && this.syllabusOpen) {
+      this.syllabusOpen = false;
+    }
     this.renderCourseSidebar(this.currentAcademy);
     this.renderCourseModules(this.currentAcademy);
+    this.updateSyllabusToggleUI();
 
     const vAcademy = document.getElementById('viewAcademy');
     const stage = document.getElementById('academyStudyStage');
@@ -4877,6 +5017,12 @@ const app = {
       : `Chapter ${current} of 8 (${pct}% Done)`;
 
     sidebar.innerHTML = `
+      <div class="sidebar-syllabus-close-bar">
+        <span><i class="fa-solid fa-bars-staggered text-success"></i> ${lang === 'ml' ? 'കോഴ്സ് സിലബസ് (8 ഘട്ടങ്ങൾ)' : lang === 'ar' ? 'منهج الدورة (8 فصول)' : 'Course Syllabus (8 Chapters)'}</span>
+        <button class="sidebar-syllabus-close-btn" onclick="app.toggleSyllabus(false)">
+          <i class="fa-solid fa-xmark"></i> ${lang === 'ml' ? 'മറയ്ക്കുക' : lang === 'ar' ? 'إخفاء' : 'Hide'}
+        </button>
+      </div>
       <div class="sidebar-niche-profile">
         <div class="sidebar-img-crop">
           <img src="${cat.images.cover}" alt="${cat.title[lang] || cat.title.en}">
@@ -5286,7 +5432,7 @@ const app = {
         id: "mod-capital",
         stepNum: 2,
         title: t.mod2Title || '2. Exact Capital & Budget Breakdown',
-        heroImg: cat.images.chapter2 || cat.images.costing || cat.images.cover,
+        heroImg: cat.images.chapter2 || cat.images.costing || "assets/images/step_capital_ledger.jpg",
         heroTitle: lang === 'ml' ? 'എന്തിനൊക്കെ എത്ര രൂപ? (വിശദമായ ബഡ്ജറ്റ് പട്ടിക)' : lang === 'ar' ? 'تفاصيل الميزانية ورأس المال الدقيق' : 'Itemized Capital & Budget Ledger',
         heroSub: lang === 'ml' ? 'രണ്ടാമതായി എന്ത് ചെയ്യണം? കയ്യിൽ എത്ര രൂപ വേണം, എന്തിനൊക്കെ എത്ര രൂപ ചെലവാകും എന്ന് കൃത്യമായി പ്ലാൻ ചെയ്യുക.' : lang === 'ar' ? 'ماذا تفعل ثانياً؟ حدد ميزانيتك بدقة واعرف أين تذهب كل روبية لتفادي أي خسائر.' : 'Phase 2: Exact itemized startup costs for Starter and Pro brand tiers.',
         renderContent: () => {
@@ -5353,7 +5499,7 @@ const app = {
         id: "mod-suppliers",
         stepNum: 3,
         title: t.mod3Title || '3. Wholesale Markets & Google Maps',
-        heroImg: cat.images.chapter3 || cat.images.sourcing,
+        heroImg: cat.images.chapter3 || cat.images.sourcing || "assets/images/step_wholesale_market.jpg",
         heroTitle: lang === 'ml' ? 'വിശ്വസനീയ നിർമ്മാതാക്കൾ & അസംസ്കൃത വസ്തുക്കൾ' : lang === 'ar' ? 'المصنعون المعتمدون ومصادر المواد الخام' : 'Verified Manufacturers, Wholesalers & Maps',
         heroSub: lang === 'ml' ? 'മൂന്നാമതായി എന്ത് ചെയ്യണം? മെഷീൻ നിർമ്മാതാക്കളുടെയും അസംസ്കൃത വസ്തുക്കളുടെയും ലൊക്കേഷനുകൾ കണ്ടുപിടിച്ച് നേരിട്ട് ബന്ധപ്പെടുക.' : lang === 'ar' ? 'ماذا تفعل ثالثاً؟ تواصل مباشرة مع مصنعي الماكينات وموردي المواد الخام بالخرائط والواتساب.' : 'Phase 3: Connect directly with verified machinery manufacturers, EPC contractors, and raw material mandis.',
         renderContent: () => {
@@ -5468,7 +5614,7 @@ const app = {
         id: "mod-coaching",
         stepNum: 4,
         title: t.mod4Title || '4. Wholesaler Calling & Chat Coaching',
-        heroImg: cat.images.chapter4 || cat.images.negotiation || "https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=800&q=80",
+        heroImg: cat.images.chapter4 || cat.images.negotiation || "assets/images/step_negotiation_desk.jpg",
         heroTitle: lang === 'ml' ? 'വ്യാപാരികളോട് സംസാരിക്കേണ്ട രീതി' : lang === 'ar' ? 'حوار التفاوض والاتصال مع الموردين' : 'Wholesaler Calling & Chat Coaching',
         heroSub: lang === 'ml' ? 'നാലാമതായി എന്ത് ചെയ്യണം? കടക്കാരെ വിളിച്ച് സാമ്പിളുകൾ ആവശ്യപ്പെടാനും വിലപേശാനുമുള്ള സംസാര രീതി പഠിക്കുക.' : lang === 'ar' ? 'ماذا تفعل رابعاً؟ كيف تتصل بالموردين بثقة وتطلب عينات وتتفاوض على سعر الكيلو.' : 'Phase 4: Battle-tested calling scripts and negotiation masterclass.',
         renderContent: () => `
@@ -5548,7 +5694,7 @@ const app = {
         id: "mod-simulator",
         stepNum: 6,
         title: t.mod6Title || '6. Profit Simulator & Live Visual Graph',
-        heroImg: cat.images.chapter6 || cat.images.legal || "https://images.unsplash.com/photo-1450133064473-71024230f91b?auto=format&fit=crop&w=800&q=80",
+        heroImg: cat.images.chapter6 || cat.images.legal || "assets/images/step_profit_analytics.jpg",
         heroTitle: lang === 'ml' ? 'ലൈവ് ലാഭ ഗ്രാഫും സിമുലേറ്ററും' : lang === 'ar' ? 'حاسبة الأرباح والرسم البياني المباشر' : 'Live Profit Graph & Margin Visualizer',
         heroSub: lang === 'ml' ? 'ആറാമതായി എന്ത് ചെയ്യണം? ഉൽപ്പാദനച്ചെലവും വിൽപന ലാഭവും തത്സമയം കണക്കുകൂട്ടുക.' : lang === 'ar' ? 'ماذا تفعل سادساً؟ شاهد رسماً بيانياً يوضح أرباحك وتكلفة تصنيع كل وحدة بدقة.' : 'Phase 6: Interactive simulator with real-time unit economics and profit margin visualizer.',
         renderContent: () => this.getNicheSimulatorHtml(nicheKey)
@@ -5559,7 +5705,7 @@ const app = {
         id: "mod-portals",
         stepNum: 7,
         title: t.mod7Title || '7. Verified Online Portals, Instagram & Websites',
-        heroImg: cat.images.chapter7 || cat.images.packaging,
+        heroImg: cat.images.chapter7 || cat.images.packaging || "assets/images/step_digital_showcase.jpg",
         heroTitle: lang === 'ml' ? 'സോഷ്യൽ മീഡിയ, വ്യാപാരികളുടെ വെബ്‌സൈറ്റുകൾ & ലിങ്കുകൾ' : lang === 'ar' ? 'بوابات الموردين الرسمية وصفحات إنستغرام وفيسبوك' : 'Verified Online Portals, Instagram & Websites',
         heroSub: lang === 'ml' ? 'ഏഴാമതായി എന്ത് ചെയ്യണം? പ്രമുഖ ബ്രാൻഡുകളുടെ ഇൻസ്റ്റാഗ്രാം, ഫേസ്ബുക്ക് ഗ്രൂപ്പുകൾ, ഇന്ത്യയിലെയും ഗൾഫിലെയും ഒഫീഷ്യൽ സൈറ്റുകൾ പരിശോധിക്കുക.' : lang === 'ar' ? 'ماذا تفعل سابعاً؟ استكشف الحسابات الملهمة على إنستغرام ومجموعات تجار الجملة ومواقع المصانع في الهند والخليج.' : 'Phase 7: Direct verified links to Instagram brands, Facebook wholesale groups, domestic portals, and GCC/international exporters.',
         renderContent: () => this.renderPortalsSection(nicheKey)
@@ -5623,10 +5769,10 @@ const app = {
     if (isStepper) {
       // GUIDED STEPPER PROCESSING MODE: Render ONLY the active step card
       const stepData = stepModules[activeStep - 1] || stepModules[0];
-      const backLbl = this.getContextualBackLabel((this._academyReturnContext && this._academyReturnContext.view) || 'home', lang);
+      const backLbl = this.getContextualBackLabel(this._getTopDrawerOrigin('academy'), lang);
       const prevBtnHtml = activeStep > 1 
         ? `<button class="btn-step-prev" onclick="app.prevCourseStep()">${t.btnPrevStep || '← Previous Chapter'}</button>` 
-        : `<button class="btn-step-prev" onclick="app.closeAcademy()">← ${backLbl}</button>`;
+        : `<button class="btn-step-prev" onclick="app.closeTopDrawer()">← ${backLbl}</button>`;
       
       const nextBtnHtml = activeStep < 8 
         ? `<button class="btn-step-next" onclick="app.nextCourseStep()">${t.btnNextStep || 'Next Chapter →'}</button>` 
@@ -5635,7 +5781,7 @@ const app = {
       html = `
         <article class="course-module-card" id="${stepData.id}">
           <div class="module-photo-hero">
-            <img src="${stepData.heroImg}" alt="${stepData.heroTitle}" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1542744094-3a31f272c490?auto=format&fit=crop&w=800&q=80';">
+            <img src="${stepData.heroImg}" alt="${stepData.heroTitle}" onerror="this.onerror=null; this.src='assets/images/step_capital_ledger.jpg';">
             <div class="module-photo-overlay">
               <span class="module-number-badge" style="display: inline-block; margin-bottom: 6px;">Chapter ${activeStep} of 8</span>
               <h4>${stepData.heroTitle}</h4>
@@ -5663,7 +5809,7 @@ const app = {
       html = stepModules.map(s => `
         <article class="course-module-card mb-4" id="${s.id}">
           <div class="module-photo-hero">
-            <img src="${s.heroImg}" alt="${s.heroTitle}" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1542744094-3a31f272c490?auto=format&fit=crop&w=800&q=80';">
+            <img src="${s.heroImg}" alt="${s.heroTitle}" onerror="this.onerror=null; this.src='assets/images/step_capital_ledger.jpg';">
             <div class="module-photo-overlay">
               <span class="module-number-badge" style="display: inline-block; margin-bottom: 6px;">Chapter ${s.stepNum} of 8</span>
               <h4>${s.heroTitle}</h4>
@@ -5762,8 +5908,10 @@ const app = {
     }
 
     if (!route || route === 'home') {
-      if (this.currentView === 'academy') {
-        this.closeAcademy(true);
+      if (this._viewStack && this._viewStack.length > 0) {
+        while (this._viewStack.length > 0) {
+          this.closeTopDrawer(true);
+        }
         return;
       }
       if (!route && isInitialLoad) {
@@ -5781,12 +5929,12 @@ const app = {
       this.openAcademy(niche, step, false, { fromDeepLink: isInitialLoad });
     } else if (route === 'kerala-intel' || route.startsWith('kerala-intel')) {
       const parts = route.split('/');
-      this.navigateTo('kerala-intel', { skipScroll: isInitialLoad });
+      this.navigateTo('kerala-intel', { skipScroll: isInitialLoad, updateHash: false, fromDeepLink: isInitialLoad });
       if (parts[1] && window.keralaIntel) {
         window.keralaIntel.setDistrict(parts[1]);
       }
     } else if (['tools', 'suppliers', 'scripts', 'legal', 'plan', 'calc'].includes(route)) {
-      this.navigateTo(route, { skipScroll: isInitialLoad });
+      this.navigateTo(route, { skipScroll: isInitialLoad, updateHash: false, fromDeepLink: isInitialLoad });
     }
     // Anchor tags like #mod-capital do NOT redirect to home!
   },
@@ -5795,10 +5943,27 @@ const app = {
   renderAllViews() {
     this.renderFacultyCards();
     this.renderRoadmap();
-    if (this.currentView === 'academy') {
-      this.openAcademy(this.currentAcademy, this.currentCourseStep, false, { preserveDrawerScroll: true });
-    } else if (this.currentView === 'tools') {
+    const lang = this.currentLang || 'en';
+    const hasKeralaInStack = this._viewStack && this._viewStack.some(f => f.view === 'kerala-intel');
+    const hasToolsInStack = this._viewStack && this._viewStack.some(f => f.view === 'tools');
+    const hasAcademyInStack = this._viewStack && this._viewStack.some(f => f.view === 'academy');
+
+    if (hasKeralaInStack && window.keralaIntel) {
+      window.keralaIntel.render();
+      window.keralaIntel.renderDistrictMap();
+      window.keralaIntel.renderDistrictDashboard();
+    }
+    if (hasToolsInStack) {
+      const backToolsLbl = document.getElementById('lblBackToHub2');
+      if (backToolsLbl) backToolsLbl.textContent = this.getContextualBackLabel(this._getTopDrawerOrigin('tools'), lang);
+      const toolsMini = document.getElementById('toolsTopbarMiniTitle');
+      if (toolsMini) {
+        toolsMini.textContent = lang === 'ml' ? 'സാമ്പത്തിക ഉപകരണങ്ങളും വിപണിയും' : lang === 'ar' ? 'الأدوات المالية ومراكز التوريد' : 'Financial Tools & Sourcing Hubs';
+      }
       this.renderToolsDynamicContent(this.currentToolTab);
+    }
+    if (hasAcademyInStack || this.currentView === 'academy') {
+      this.openAcademy(this.currentAcademy, this.currentCourseStep, false, { preserveDrawerScroll: true, preserveSyllabusState: true });
     }
   },
 
@@ -5875,7 +6040,7 @@ const app = {
         html += `
           <div class="faculty-card tier-archived" data-academy-key="${catKey}" onclick="app.openArchivedCourse('${catKey}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault(); app.openArchivedCourse('${catKey}');}" role="button" tabindex="0" style="cursor: pointer; opacity: 0.95; border: 1px solid #cbd5e1;">
             <div class="faculty-card-cover">
-              <img src="${cat.images ? cat.images.cover : 'https://images.unsplash.com/photo-1542744094-3a31f272c490?auto=format&fit=crop&w=800&q=80'}" alt="${title}" loading="lazy">
+              <img src="${cat.images ? cat.images.cover : 'assets/images/step_capital_ledger.jpg'}" alt="${title}" loading="lazy">
               <span class="cover-badge" style="background:#fef3c7;color:#92400e;"><i class="fa-solid fa-box-archive"></i> ${cat.minBudget || 'Archived'}</span>
               <span class="card-tier-pill" style="background:#f1f5f9;color:#475569;"><i class="fa-solid fa-file-lines"></i> ${cat.tier === 'industrial' ? (lang === 'ml' ? 'ഇൻഡസ്ട്രിയൽ പ്ലാന്റ്' : lang === 'ar' ? 'مصنع صناعي' : 'Industrial Plant') : (lang === 'ml' ? 'മെഷീൻ യൂണിറ്റ്' : lang === 'ar' ? 'وحدة آلات' : 'Machine Unit')}</span>
             </div>
@@ -5933,7 +6098,7 @@ const app = {
       html += `
         <div class="faculty-card tier-trading" data-academy-key="${cat.id}" onclick="app.openAcademy('${cat.id}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault(); app.openAcademy('${cat.id}');}" role="button" tabindex="0" style="cursor: pointer;">
           <div class="faculty-card-cover">
-            <img src="${cat.images ? cat.images.cover : ''}" alt="${title}" loading="lazy" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1542744094-3a31f272c490?auto=format&fit=crop&w=800&q=80';">
+            <img src="${cat.images ? cat.images.cover : ''}" alt="${title}" loading="lazy" onerror="this.onerror=null; this.src='assets/images/step_capital_ledger.jpg';">
             <span class="cover-badge" style="background:#065f46;color:#ffffff;"><i class="fa-solid fa-coins text-warning"></i> ${cat.minBudget}</span>
             <span class="card-tier-pill" style="background:#ecfdf5;color:#065f46;border:1px solid #a7f3d0;"><i class="fa-solid fa-certificate"></i> Halal Trading</span>
           </div>
@@ -7921,8 +8086,8 @@ const app = {
           const el = document.getElementById(id);
           return el && el.style.display && el.style.display !== 'none';
         });
-        if (!anyOpenModal && this.currentView === 'academy') {
-          this.closeAcademy();
+        if (!anyOpenModal && this._viewStack && this._viewStack.length > 0) {
+          this.closeTopDrawer();
         }
       }
     });

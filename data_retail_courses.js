@@ -18,18 +18,18 @@ window.dataRetailCourses = {
     "margin": "80% - 250%",
     "topMarkets": "Kozhikode S.M. Street, Mumbai Crawford Market, Kannauj",
     "images": {
-      "cover": "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&w=800&q=80",
-      "product": "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&w=800&q=80",
+      "cover": "assets/images/course_attar_flacons.jpg",
+      "product": "assets/images/course_attar_flacons.jpg?auto=format&fit=crop&w=800&q=80",
       "sourcing": "https://images.unsplash.com/photo-1596178065887-1198b6148b2b?auto=format&fit=crop&w=800&q=80",
       "formulation": "https://images.unsplash.com/photo-1615397349754-cfa2066a298e?auto=format&fit=crop&w=800&q=80",
-      "packaging": "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=800&q=80",
-      "chapter1": "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&w=800&q=80",
-      "chapter2": "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?auto=format&fit=crop&w=800&q=80",
-      "chapter3": "https://images.unsplash.com/photo-1596178065887-1198b6148b2b?auto=format&fit=crop&w=800&q=80",
-      "chapter4": "https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=800&q=80",
+      "packaging": "assets/images/step_digital_showcase.jpg",
+      "chapter1": "assets/images/course_attar_flacons.jpg",
+      "chapter2": "assets/images/step_capital_ledger.jpg",
+      "chapter3": "assets/images/step_wholesale_market.jpg",
+      "chapter4": "assets/images/step_negotiation_desk.jpg",
       "chapter5": "https://images.unsplash.com/photo-1615397349754-cfa2066a298e?auto=format&fit=crop&w=800&q=80",
-      "chapter6": "https://images.unsplash.com/photo-1450133064473-71024230f91b?auto=format&fit=crop&w=800&q=80",
-      "chapter7": "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=800&q=80",
+      "chapter6": "assets/images/step_profit_analytics.jpg",
+      "chapter7": "assets/images/step_digital_showcase.jpg",
       "chapter8": "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80"
     },
     "curriculumHighlights": {
@@ -571,17 +571,17 @@ window.dataRetailCourses = {
     "margin": "45% - 120%",
     "topMarkets": "Surat Millennium Market, Tirupur Cotton Cluster, Kochi Broadway",
     "images": {
-      "cover": "https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?auto=format&fit=crop&w=800&q=80",
-      "product": "https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?auto=format&fit=crop&w=800&q=80",
+      "cover": "assets/images/course_modest_wear.jpg",
+      "product": "assets/images/course_modest_wear.jpg?auto=format&fit=crop&w=800&q=80",
       "sourcing": "https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=800&q=80",
       "formulation": "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?auto=format&fit=crop&w=800&q=80",
       "packaging": "https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=800&q=80",
-      "chapter1": "https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?auto=format&fit=crop&w=800&q=80",
+      "chapter1": "assets/images/course_modest_wear.jpg",
       "chapter2": "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?auto=format&fit=crop&w=800&q=80",
       "chapter3": "https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=800&q=80",
-      "chapter4": "https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=800&q=80",
+      "chapter4": "assets/images/step_negotiation_desk.jpg",
       "chapter5": "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=800&q=80",
-      "chapter6": "https://images.unsplash.com/photo-1450133064473-71024230f91b?auto=format&fit=crop&w=800&q=80",
+      "chapter6": "assets/images/step_profit_analytics.jpg",
       "chapter7": "https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=800&q=80",
       "chapter8": "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80"
     },
@@ -1439,7 +1439,7 @@ window.dataRetailCourses = {
       "cover": "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=800&q=80",
       "product": "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=800&q=80",
       "sourcing": "https://images.unsplash.com/photo-1627123424574-724758594e93?auto=format&fit=crop&w=800&q=80",
-      "formulation": "https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=800&q=80",
+      "formulation": "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=800&q=80",
       "packaging": "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=800&q=80"
     },
     "curriculumHighlights": {
@@ -1798,9 +1798,9 @@ window.dataRetailCourses = {
       "chapter1": "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=800&q=80",
       "chapter2": "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=800&q=80",
       "chapter3": "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=800&q=80",
-      "chapter4": "https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=800&q=80",
+      "chapter4": "assets/images/step_negotiation_desk.jpg",
       "chapter5": "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=800&q=80",
-      "chapter6": "https://images.unsplash.com/photo-1450133064473-71024230f91b?auto=format&fit=crop&w=800&q=80",
+      "chapter6": "assets/images/step_profit_analytics.jpg",
       "chapter7": "https://images.unsplash.com/photo-1602751584552-8ba73aad10e1?auto=format&fit=crop&w=800&q=80",
       "chapter8": "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80"
     },
@@ -2141,14 +2141,14 @@ window.dataRetailCourses = {
       "cover": "https://images.unsplash.com/photo-1599940824399-b87987ceb72a?auto=format&fit=crop&w=800&q=80",
       "product": "https://images.unsplash.com/photo-1599940824399-b87987ceb72a?auto=format&fit=crop&w=800&q=80",
       "sourcing": "https://images.unsplash.com/photo-1588668214407-6ea9a6d8c272?auto=format&fit=crop&w=800&q=80",
-      "formulation": "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=800&q=80",
+      "formulation": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=800&q=80",
       "packaging": "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=800&q=80",
       "chapter1": "https://images.unsplash.com/photo-1599940824399-b87987ceb72a?auto=format&fit=crop&w=800&q=80",
-      "chapter2": "https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&w=800&q=80",
+      "chapter2": "assets/images/step_capital_ledger.jpg",
       "chapter3": "https://images.unsplash.com/photo-1588668214407-6ea9a6d8c272?auto=format&fit=crop&w=800&q=80",
-      "chapter4": "https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=800&q=80",
-      "chapter5": "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=800&q=80",
-      "chapter6": "https://images.unsplash.com/photo-1450133064473-71024230f91b?auto=format&fit=crop&w=800&q=80",
+      "chapter4": "assets/images/step_negotiation_desk.jpg",
+      "chapter5": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=800&q=80",
+      "chapter6": "assets/images/step_profit_analytics.jpg",
       "chapter7": "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=800&q=80",
       "chapter8": "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80"
     },
@@ -2482,361 +2482,368 @@ window.dataRetailCourses = {
     }
   },
   "electronics": {
-    "id": "electronics",
-    "tier": "trading",
-    "tierLabel": {
-      "en": "Retail & Trading",
-      "ml": "ചെറുകിട വ്യാപാരം",
-      "ar": "تجارة التجزئة والتوزيع"
+  "id": "electronics",
+  "tier": "trading",
+  "tierLabel": {
+    "en": "Retail & Trading",
+    "ml": "ചെറുകിട വ്യാപാരം",
+    "ar": "تجارة التجزئة والتوزيع"
+  },
+  "icon": "fa-bowl-food",
+  "headerClass": "electronics-header",
+  "badgeColor": "#0284c7",
+  "title": {
+    "en": "Exotic Dry Fruits, Premium Nuts & Saudi Ajwa Dates Trading",
+    "ml": "പ്രീമിയം ഡ്രൈ ഫ്രൂട്ട്സ് & സൗദി അജ്‌വ ഈത്തപ്പഴ വ്യാപാരം",
+    "ar": "تجارة المكسرات الفاخرة والفواكه المجففة وتمر العجوة"
+  },
+  "tagline": {
+    "en": "High-turnover daily sunnah food reselling. Start with ₹5,000 inventory.",
+    "ml": "നിത്യേന ഡിമാൻഡുള്ള ഡ്രൈ ഫ്രൂട്ട്സ് & ഈത്തപ്പഴ കച്ചവടം. ₹5,000 ഉണ്ടെങ്കിൽ തുടങ്ങാം.",
+    "ar": "تجارة سريعة الدوران للأغذية الصحية وتمور العجوة برأس مال 5,000 روبية."
+  },
+  "minBudget": "₹5,000 - ₹10,000",
+  "margin": "60% - 140%",
+  "topMarkets": "Delhi Khari Baoli, Mumbai APMC Vashi, Kozhikode Valiyangadi, Dubai Al Ras Mandi",
+  "images": {
+    "cover": "assets/images/course_dryfruits_dates.jpg",
+    "product": "assets/images/course_dryfruits_dates.jpg",
+    "sourcing": "assets/images/step_wholesale_market.jpg",
+    "formulation": "assets/images/course_dryfruits_dates.jpg",
+    "packaging": "assets/images/step_digital_showcase.jpg",
+    "chapter1": "assets/images/course_dryfruits_dates.jpg",
+    "chapter2": "assets/images/step_capital_ledger.jpg",
+    "chapter3": "assets/images/step_wholesale_market.jpg",
+    "chapter4": "assets/images/step_negotiation_desk.jpg",
+    "chapter5": "assets/images/course_dryfruits_dates.jpg",
+    "chapter6": "assets/images/step_profit_analytics.jpg",
+    "chapter7": "assets/images/step_digital_showcase.jpg",
+    "chapter8": "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80"
+  },
+  "curriculumHighlights": {
+    "en": [
+      "Direct bulk procurement from Khari Baoli Delhi & Mumbai APMC direct date importers",
+      "Sunnah Ajwa date grading (Grade 1 Jumbo, Regular & Medjool) and freshness standards",
+      "Airtight vacuum food pouches, custom gift box assortments & Islamic wedding hampers",
+      "B2B festive corporate supply and Ramadan retail hampers with healthy margins"
+    ],
+    "ml": [
+      "ഏഷ്യയിലെ ഏറ്റവും വലിയ ഡ്രൈ ഫ്രൂട്ട്സ് മാർക്കറ്റായ ഡൽഹി ഖാരി ബാവോലി, മുംബൈ APMC വാശി എന്നിവയിൽ നിന്നുള്ള നേരിട്ടുള്ള സംഭരണം",
+      "സൗദി അജ്‌വ, മജ്‌ദൂൽ, സഫാവി ഈത്തപ്പഴങ്ങളുടെ ക്വാളിറ്റിയും ഒറിജിനാലിറ്റിയും തിരിച്ചറിയൽ",
+      "വാക്വം സീൽഡ് ഫുഡ് പൗച്ചുകളിലും റോയൽ ഗിഫ്റ്റ് ബോക്സുകളിലും സ്വന്തം ബ്രാൻഡ് നൽകൽ",
+      "വിവാഹങ്ങൾ, റമദാൻ കിറ്റുകൾ, ഗൾഫ് യാത്രക്കാർ എന്നിവർക്കായുള്ള പ്രീമിയം ബോക്സ് പാക്കിംഗ്"
+    ],
+    "ar": [
+      "التوريد المباشر من كبار مستوردي تمور العجوة والمكسرات بسوق خاري باولي بدلهي وسوق فاشي بمومباي",
+      "معايير فرز وتصنيف تمر العجوة والمدجول وجودة المكسرات الطازجة",
+      "تغليف محكم بسحب الهواء وعلب هدايا فاخرة للمناسبات وحفلات الزواج",
+      "تسويق علب الهدايا الصحية وتمور رمضان بهوامش ربحية مجزية"
+    ]
+  },
+  "onlinePortals": {
+    "intro": {
+      "en": "Verified dry fruits and date importers, wholesale mandi networks, and custom packaging suppliers.",
+      "ml": "ഡൽഹിയിലെയും മുംബൈയിലെയും അംഗീകൃത ഡ്രൈ ഫ്രൂട്ട്സ് & ഈത്തപ്പഴ മൊത്തവ്യാപാരികളുടെ വിവരങ്ങൾ.",
+      "ar": "كبار موردي تمور العجوة والمكسرات بالجملة في دلهي ومومباي والخليج."
     },
-    "icon": "fa-bowl-food",
-    "headerClass": "electronics-header",
-    "badgeColor": "#0284c7",
-    "title": {
-      "en": "Exotic Dry Fruits, Premium Nuts & Saudi Ajwa Dates Trading",
-      "ml": "പ്രീമിയം ഡ്രൈ ഫ്രൂട്ട്സ് & സൗദി അജ്‌വ ഈത്തപ്പഴ വ്യാപാരം",
-      "ar": "تجارة المكسرات الفاخرة والفواكه المجففة وتمر العجوة"
-    },
-    "tagline": {
-      "en": "High-turnover daily sunnah food reselling. Start with ₹5,000 inventory.",
-      "ml": "നിത്യേന ഡിമാൻഡുള്ള ഡ്രൈ ഫ്രൂട്ട്സ് & ഈത്തപ്പഴ കച്ചവടം. ₹5,000 ഉണ്ടെങ്കിൽ തുടങ്ങാം.",
-      "ar": "تجارة سريعة الدوران للأغذية الصحية وتمور العجوة برأس مال 5,000 روبية."
-    },
-    "minBudget": "₹5,000 - ₹10,000",
-    "margin": "60% - 140%",
-    "topMarkets": "Delhi Gaffar Market, Mumbai Lamington Road, Shenzhen Direct Agent",
-    "images": {
-      "cover": "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&w=800&q=80",
-      "product": "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&w=800&q=80",
-      "sourcing": "https://images.unsplash.com/photo-1546868871-7041f2a55e12?auto=format&fit=crop&w=800&q=80",
-      "formulation": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80",
-      "packaging": "https://images.unsplash.com/photo-1546868871-7041f2a55e12?auto=format&fit=crop&w=800&q=80"
-    },
-    "curriculumHighlights": {
-      "en": [
-        "Direct procurement from Gaffar Market Delhi & direct importer agents",
-        "BIS safety certification compliance & authentic testing standards",
-        "Custom laser logo branding on matte-finish earbud charging cases",
-        "Safe COD shipping with unboxing video warranty protocols"
-      ],
-      "ml": [
-        "ഡൽഹി ഗഫാർ മാർക്കറ്റിൽ നിന്നും മുംബൈയിൽ നിന്നുമുള്ള നേരിട്ടുള്ള ഇറക്കുമതി ഉറവിടങ്ങൾ",
-        "BIS സർട്ടിഫിക്കേഷനും ബാറ്ററിയുടെ ഈടുനിൽപ്പും പരിശോധിക്കുന്ന വിധം",
-        "ഇയർബഡ്സ് കേസിൽ ലേസർ പ്രിന്റിംഗ് വഴി നിങ്ങളുടെ സ്വന്തം ബ്രാൻഡ് പേര് നൽകൽ",
-        "റീപ്ലേസ്‌മെന്റ് വാറന്റിയും സുരക്ഷിതമായ കൊറിയർ പാക്കിംഗും"
-      ],
-      "ar": [
-        "التوريد المباشر من سوق غفار في دلهي ووكلاء الاستيراد المباشر",
-        "معايير الجودة وشهادة الأمان الهندية BIS واختبار البطاريات",
-        "طباعة شعار علامتك بالليزر على علب السماعات وشواحن الحائط",
-        "سياسة الضمان والاستبدال والشحن المحمي ضد الصدمات"
-      ]
-    },
-    "onlinePortals": {
-      "intro": {
-        "en": "Verified tech importers, direct Gaffar wholesale suppliers and custom laser-branding vendors.",
-        "ml": "ഡൽഹിയിലെയും മുംബൈയിലെയും അംഗീകൃത ഇലക്ട്രോണിക്സ് മൊത്തവ്യാപാരികളുടെ വെബ്‌സൈറ്റുകളും കോൺടാക്ടുകളും.",
-        "ar": "موردو إلكترونيات الجملة المعتمدون في دلهي ومومباي ووكلاء الطباعة بالليزر."
-      },
-      "websites": [
-        {
-          "name": "Gaffar Electronics Hub",
-          "domain": "gaffarmarketdelhi.com",
-          "url": "https://www.google.com/maps/search/?api=1&query=Gaffar+Market+Karol+Bagh+New+Delhi",
-          "region": "Delhi NCR, India",
-          "flag": "🇮🇳",
-          "badge": "Direct Importer Hub",
-          "desc": {
-            "en": "The primary tech accessories wholesale destination in India.",
-            "ml": "ഇന്ത്യയിലെ ഏറ്റവും വലിയ മൊബൈൽ ആക്സസറീസ് മൊത്തവിപണി.",
-            "ar": "أكبر سوق جملة لملحقات الهواتف والتقنية في الهند."
-          }
-        },
-        {
-          "name": "Lamington Tech Souk",
-          "domain": "lamingtonroad.in",
-          "url": "https://www.google.com/maps/search/?api=1&query=Lamington+Road+Grant+Road+Mumbai",
-          "region": "Mumbai, India",
-          "flag": "🇮🇳",
-          "badge": "Premium Audio & Tech",
-          "desc": {
-            "en": "Mumbai's central tech gadget and component wholesale market.",
-            "ml": "മുംബൈയിലെ ഏറ്റവും വലിയ ഇലക്ട്രോണിക്സ് ഗാഡ്ജറ്റ്സ് മാർക്കറ്റ്.",
-            "ar": "سوق التقنية والإلكترونيات المركزي في مومباي."
-          }
-        },
-        {
-          "name": "Shenzhen Direct Trade",
-          "domain": "alibaba.com/gadgets",
-          "url": "https://www.alibaba.com/trade/search?SearchText=tws+earbuds+custom+logo",
-          "region": "Shenzhen / Global",
-          "flag": "🌍",
-          "badge": "OEM Factory Sourcing",
-          "desc": {
-            "en": "Direct Shenzhen OEM manufacturing with custom logo MOQ from 50 pcs.",
-            "ml": "സ്വന്തം ലോഗോ പതിപ്പിച്ച ഇയർബഡുകൾ ഫാക്ടറി നിരക്കിൽ വാങ്ങാം.",
-            "ar": "شراء مباشر من مصانع شنجن مع طباعة شعارك المخصص بكميات تبدأ من 50 حبة."
-          }
-        }
-      ],
-      "instagram": [
-        {
-          "name": "GadgetVibe India",
-          "handle": "@gadgetvibe.in",
-          "url": "https://www.instagram.com/explore/tags/gadgetsindia/",
-          "region": "India",
-          "flag": "🇮🇳",
-          "badge": "Viral Reels Case Study",
-          "desc": {
-            "en": "Showcases how short tech reels generate 200+ daily orders.",
-            "ml": "റീൽസ് വഴി ഗാഡ്ജറ്റുകൾ വിറ്റഴിക്കുന്ന ഇന്ത്യൻ ബ്രാൻഡ്.",
-            "ar": "نموذج ملهم لبيع الأدوات الذكية عبر مقاطع ريلز قصيرة."
-          }
-        }
-      ],
-      "facebook": [
-        {
-          "name": "Delhi Karol Bagh Wholesalers",
-          "members": "95,000+ Members",
-          "url": "https://www.facebook.com/search/groups/?q=gaffar+market+wholesale",
-          "region": "Pan-India",
-          "flag": "🇮🇳",
-          "badge": "Live Price Quotes",
-          "desc": {
-            "en": "Daily live stock clearance quotes from Karol Bagh wholesale shops.",
-            "ml": "ഡൽഹി വ്യാപാരികളുടെ ദിവസേനയുള്ള ഹോൾസെയിൽ സ്റ്റോക്ക് വിവരങ്ങൾ.",
-            "ar": "مجموعة تجار سوق غفار بعروض أسعار يومية مباشرة."
-          }
-        }
-      ]
-    },
-    "blueprint": {
-      "intro": {
-        "en": "Modern consumers are perpetually upgrading tech accessories. Premium wireless earbuds (TWS) with Active Noise Cancellation (ANC), transparent cyber-aesthetic casing, and fast GaN chargers yield remarkable 100%+ net margins when sourced directly from primary importer hubs in Karol Bagh.",
-        "ml": "സ്മാർട്ട്‌ഫോൺ ഉപയോഗിക്കുന്ന എല്ലാവർക്കും ആവശ്യമുള്ള ഒന്നാണ് ബ്ലൂടൂത്ത് ഇയർബഡുകളും ഫാസ്റ്റ് ചാർജറുകളും. ഡൽഹി ഗഫാർ മാർക്കറ്റിൽ നിന്നും ഇറക്കുമതി നിരക്കിൽ ₹280-₹350 രൂപയ്ക്ക് ലഭിക്കുന്ന നല്ല ക്വാളിറ്റിയുള്ള TWS ഇയർബഡുകൾ സ്വന്തം ബ്രാൻഡ് ലോഗോയും വാറന്റിയും നൽകി ₹799 മുതൽ ₹1,299 വരെ ഓൺലൈനായും ഓഫ്‌ലൈനായും വിൽക്കാൻ സാധിക്കും.",
-        "ar": "الملحقات التقنية الاستهلاكية هي الأعلى طلباً اليوم. سماعات البلوتوث TWS بخاصية عزل الضوضاء والتصميم الشفاف تُشترى بسعر 280-350 روبية من دلهي وتُباع بـ 799 إلى 1,299 روبية بهامش ربح يتجاوز 100%."
-      },
-      "fastMovingList": [
-        {
-          "name": {
-            "en": "Cyber Transparent ANC TWS Earbuds (Bluetooth 5.3)",
-            "ml": "സൈബർ ട്രാൻസ്പരന്റ് ANC ഇയർബഡ്സ് (32Hrs Playtime)",
-            "ar": "سماعات بلوتوث شفافة بنظام عزل الضوضاء"
-          },
-          "wholesale": "₹340 / unit (Box pack)",
-          "retail": "₹899 - ₹1,299 / unit",
-          "profit": "₹559 - ₹959 net profit per unit!"
-        },
-        {
-          "name": {
-            "en": "65W GaN Dual Type-C Ultra-Compact Fast Charger",
-            "ml": "65W GaN ഫാസ്റ്റ് ചാർജർ (Dual Port)",
-            "ar": "شاحن سريع GaN بقوة 65 واط بمنفذين"
-          },
-          "wholesale": "₹290 / unit",
-          "retail": "₹699 - ₹899 / unit",
-          "profit": "₹409 - ₹609 net profit per unit"
-        },
-        {
-          "name": {
-            "en": "Magnetic Wireless 10,000mAh Slim Power Bank",
-            "ml": "മാഗ്നെറ്റിക് വയർലെസ്സ് സ്ലിം പവർ ബാങ്ക് (10,000mAh)",
-            "ar": "بنك طاقة مغناطيسي لاسلكي نحيف 10,000 ملي أمبير"
-          },
-          "wholesale": "₹450 / unit",
-          "retail": "₹1,199 - ₹1,499 / unit",
-          "profit": "₹749 - ₹1,049 net profit per unit"
-        },
-        {
-          "name": {
-            "en": "Smart Watch Metal Milanese Loop & Alpine Straps",
-            "ml": "സ്മാർട്ട് വാച്ച് പ്രീമിയം സ്ട്രാപ്പുകൾ (ആൽപൈൻ / മെറ്റൽ ലൂപ്പ്)",
-            "ar": "أحزمة ساعات ذكية فاخرة من الستانلس ستيل والنسيج الجبلي"
-          },
-          "wholesale": "₹65 / strap",
-          "retail": "₹249 - ₹399 / strap",
-          "profit": "₹184 - ₹334 net profit per strap"
-        }
-      ]
-    },
-    "capitalTable": [
+    "websites": [
       {
-        "item": {
-          "en": "Starter Inventory: 30 Pcs TWS Earbuds (Mixed 2 Models)",
-          "ml": "പ്രാരംഭ സ്റ്റോക്ക്: 30 പീസ് TWS ഇയർബഡ്സ് (2 മികച്ച മോഡലുകൾ)",
-          "ar": "المخزون المبدئي: 30 سماعة بلوتوث (موديلين)"
-        },
-        "starter": "₹10,200",
-        "pro": "₹34,000 (100 Pcs Bulk)",
-        "notes": {
-          "en": "Tested BIS certified chipsets with punchy bass",
-          "ml": "ക്വാളിറ്റിയുള്ള ബാറ്ററി ബാക്കപ്പും സൗണ്ടും ഉറപ്പാക്കിയവ",
-          "ar": "شرائح معتمدة تضمن صوتاً نقياً وبطارية تدوم طويلاً"
+        "name": "Khari Baoli Dry Fruit Mandi",
+        "domain": "kharibaoliwholesale.in",
+        "url": "https://www.google.com/maps/search/?api=1&query=Khari+Baoli+Dry+Fruit+Market+Delhi",
+        "region": "Old Delhi, India",
+        "flag": "🇮🇳",
+        "badge": "Asia's Largest Dry Fruit Hub",
+        "desc": {
+          "en": "Asia's largest spice and dry fruits wholesale commodity market.",
+          "ml": "ഏഷ്യയിലെ ഏറ്റവും വലിയ ഡ്രൈ ഫ്രൂട്ട്സ് മൊത്തവിപണി.",
+          "ar": "أكبر سوق جملة للمكسرات والفواكه المجففة في آسيا."
         }
       },
       {
-        "item": {
-          "en": "Sample Stock: 10 Pcs 65W GaN Fast Chargers",
-          "ml": "സാമ്പിൾ സ്റ്റോക്ക്: 10 പീസ് 65W GaN ചാർജറുകൾ",
-          "ar": "مخزون تجريبي: 10 شواحن GaN فائقة السرعة"
-        },
-        "starter": "₹2,900",
-        "pro": "₹11,600 (40 Pcs with customized packaging)",
-        "notes": {
-          "en": "PD/QC compatible with iPhone & Samsung fast charging",
-          "ml": "എല്ലാ മുൻനിര ഫോണുകൾക്കും അനുയോജ്യമായത്",
-          "ar": "متوافق مع أحدث هواتف آيفون وسامسونج"
+        "name": "Mumbai APMC Dry Fruits Market",
+        "domain": "apmcmarketvashi.com",
+        "url": "https://www.google.com/maps/search/?api=1&query=APMC+Market+Vashi+Navi+Mumbai",
+        "region": "Navi Mumbai, India",
+        "flag": "🇮🇳",
+        "badge": "Direct Container Importer",
+        "desc": {
+          "en": "Primary port-entry hub for direct sea-shipments of Saudi Ajwa and Gulf dates.",
+          "ml": "സൗദി ഈത്തപ്പഴങ്ങളുടെ നേരിട്ടുള്ള തുറമുഖ ഇറക്കുമതി ഹബ്ബ്.",
+          "ar": "سوق الاستيراد البحري المباشر لتمور المدينة والخليج."
         }
       },
       {
-        "item": {
-          "en": "Custom Hologram Warranty Seals & Laser Brand Sticker",
-          "ml": "ഹോളോഗ്രാം വാറന്റി സ്റ്റിക്കറുകൾ & ബ്രാൻഡ് ലേബലുകൾ (500 എണ്ണം)",
-          "ar": "ملصقات أمان هولوغرام لمنع التلاعب وشعار العلامة"
-        },
-        "starter": "₹450",
-        "pro": "₹1,800 (Custom metallic embossed boxes)",
-        "notes": {
-          "en": "1 Year Replacement Warranty hologram for customer trust",
-          "ml": "ഉപഭോക്താക്കൾക്ക് വിശ്വാസ്യത നൽകുന്ന വാറന്റി സീൽ",
-          "ar": "يمنح الزبون ثقة كاملة بضمان الاستبدال"
-        }
-      },
-      {
-        "item": {
-          "en": "Air Bubble Inflatable Sleeves & Secure Outer Cartons",
-          "ml": "എയർ ബബിൾ പാക്കിംഗ് സ്ലീവ് & ഷിപ്പിംഗ് ബോക്സുകൾ",
-          "ar": "أكياس هواء فقاعية ماصة للصدمات وكراتين شحن قوية"
-        },
-        "starter": "₹350",
-        "pro": "₹1,200 (200 Pcs branded courier boxes)",
-        "notes": {
-          "en": "Zero damage transit protection for electronics",
-          "ml": "യാത്രയിൽ കേടുപാടുകൾ സംഭവിക്കാത്ത സുരക്ഷിത പാക്കിംഗ്",
-          "ar": "حماية تامة من الصدمات أثناء النقل بالبريد"
+        "name": "Al Ras Dates & Spice Souk",
+        "domain": "dubai-date-market.ae",
+        "url": "https://www.google.com/maps/search/?api=1&query=Al+Ras+Date+Market+Deira+Dubai",
+        "region": "Deira Dubai, UAE",
+        "flag": "🇦🇪",
+        "badge": "Middle East Source Hub",
+        "desc": {
+          "en": "Premier Middle Eastern hub for wholesale Madinah dates and Iranian saffron.",
+          "ml": "ദുബായിലെ പ്രശസ്തമായ ഈത്തപ്പഴ മാർക്കറ്റ്.",
+          "ar": "السوق المركزي لتمور المدينة المنورة والزعفران بدبي."
         }
       }
     ],
-    "totalStarterCost": "₹13,900",
-    "totalProCost": "₹48,600",
-    "formulation": {
-      "costPerUnitBox": {
-        "en": "Unit Economics (Cyber TWS Earbuds): Procurement: ₹340 | Laser Brand Logo & Box: ₹25 | Bubble Bag: ₹8 | Dispatch Cost: ₹45. Total Landed Cost: ₹418. Retail Price: ₹999. Pure Profit: ₹581 per order (138% Return!).",
-        "ml": "ഒരു ഇയർബഡ്സിലെ ലാഭം: ഉൽപ്പന്ന വില: ₹340 | ബ്രാൻഡ് സ്റ്റിക്കർ & ബോക്സ്: ₹25 | സുരക്ഷിത പാക്കിംഗ്: ₹8 | കൊറിയർ: ₹45. ആകെ ചെലവ്: ₹418. വിൽപന വില: ₹999. ഒരു ഓർഡറിലെ ലാഭം: ₹581 (138% ലാഭം!).",
-        "ar": "اقتصاديات السماعة الواحدة: تكلفة الشراء: 340 روبية | الشعار والعلبة: 25 | التغليف: 8 | الشحن: 45. التكلفة الكلية: 418 روبية. سعر البيع: 999 روبية. صافي الربح: 581 روبية لكل حبة!"
-      },
-      "steps": [
-        {
-          "step": 1,
-          "title": {
-            "en": "100% Quality & Audio Latency Testing",
-            "ml": "ഓഡിയോയും ചാർജിംഗും 100% ടെസ്റ്റ് ചെയ്യുക",
-            "ar": "فحص جودة الصوت وسرعة الاستجابة وشحن البطارية"
-          },
-          "desc": {
-            "en": "Test every single unit for Bluetooth 5.3 pairing speed, stereo left-right balance, mic clarity, and fast charging before packing.",
-            "ml": "ഓരോ ഇയർബഡും ജോടിയാകുന്നുണ്ടോ എന്നും, ഇരുവശത്തും തുല്യ സൗണ്ട് ഉണ്ടോ എന്നും, മൈക്ക് കൃത്യമായി പ്രവർത്തിക്കുന്നുണ്ടോ എന്നും പരിശോധിച്ച് ഉറപ്പുവരുത്തുക.",
-            "ar": "تأكد من اقتران السماعتين تزامناً، وعمل الميكروفون بوضوح، وثبات نسبة شحن البطارية قبل التغليف."
-          }
-        },
-        {
-          "step": 2,
-          "title": {
-            "en": "Holographic Anti-Tamper Warranty Seal Application",
-            "ml": "ഹോളോഗ്രാഫിക് വാറന്റി സീൽ ഒട്ടിക്കുക",
-            "ar": "لصق ختم الضمان الهولوغرامي المقاوم للعبث"
-          },
-          "desc": {
-            "en": "Affix your numbered holographic seal over the box opening seam to guarantee genuine un-opened stock.",
-            "ml": "ഉപഭോക്താക്കൾക്ക് മുൻപ് ആരും ബോക്സ് തുറന്നിട്ടില്ല എന്ന് തെളിയിക്കുന്ന സീരിയൽ നമ്പർ ഉള്ള വാറന്റി സീൽ ഒട്ടിക്കുക.",
-            "ar": "ألصق ختم الضمان على فتحة العلبة لضمان استلام الزبون لمنتج جديد ومحمي."
-          }
-        },
-        {
-          "step": 3,
-          "title": {
-            "en": "Inflatable Bubble Air-Column Wrapping",
-            "ml": "എയർ-കോളം പാക്കിംഗിൽ സുരക്ഷിതമാക്കുക",
-            "ar": "التغليف داخل أكياس هوائية صامدة للصدمات"
-          },
-          "desc": {
-            "en": "Insert the product into an air-column inflatable sleeve to absorb drops up to 10 feet during rough courier transit.",
-            "ml": "കൊറിയർ യാത്രയിൽ വീണാലും പൊട്ടാത്ത രീതിയിൽ എയർ-കോളം സ്ലീവിൽ ഇട്ട് സുരക്ഷിതമായി ടാപ്പ് ചെയ്യുക.",
-            "ar": "ضع علبة المنتج داخل غلاف الوسائد الهوائية لامتصاص الصدمات أثناء النقل بالبريد."
-          }
-        },
-        {
-          "step": 4,
-          "title": {
-            "en": "Quick-Start Card & QR Code for VIP Support",
-            "ml": "സപ്പോർട്ട് നൽകുന്ന QR കോഡ് ഇൻസേർട്ട് കാർഡ്",
-            "ar": "إرفاق بطاقة تعليمات التشغيل السريع مع رمز الاستجابة QR"
-          },
-          "desc": {
-            "en": "Include a sleek thank-you card with a QR code directing customers to your WhatsApp for instant warranty registration.",
-            "ml": "വാറന്റി രജിസ്റ്റർ ചെയ്യാനും സഹായത്തിനും വാട്സ്ആപ്പിലേക്ക് ബന്ധപ്പെടാനുള്ള QR കോഡ് അടങ്ങിയ കാർഡ് അകത്ത് വെയ്ക്കുക.",
-            "ar": "أرفق بطاقة شكر أنيقة تتضمن رمز QR لتفعيل الضمان عبر الواتساب وتقديم خدمة عملاء فورية."
-          }
+    "instagram": [
+      {
+        "name": "Ajwa Organics & Dryfruits",
+        "handle": "@ajwa_organics_kerala",
+        "url": "https://www.instagram.com/explore/tags/dryfruitsindia/",
+        "region": "Kerala, India",
+        "flag": "🇮🇳",
+        "badge": "Wedding Hamper Inspiration",
+        "desc": {
+          "en": "Case study of curated wooden date boxes generating ₹2L+ monthly profit.",
+          "ml": "പ്രീമിയം ഈത്തപ്പഴ ബോക്സുകൾ വഴി വൻ വിറ്റുവരവുണ്ടാക്കുന്ന മാതൃക.",
+          "ar": "نموذج ملهم لبيع علب هدايا التمور الفاخرة للأعراس والمناسبات."
         }
-      ]
-    },
-    "tradingType": "wholesale_inventory_retail_resale",
-    "physicalGoods": true,
-    "isManufacturing": false,
-    "pilotBudgetMax": 10000,
-    "halalCompliance": {
-      "isCompliant": true,
-      "status": "verified_halal_trading",
-      "tradingModel": "Wholesale Inventory Purchase -> Actual Physical Possession (Qabd) -> Direct Retail Reselling",
-      "possessionMethod": {
-        "en": "Exotic dry fruits, premium roasted nuts, and authentic Saudi Ajwa dates are sourced wholesale, weighed, sealed, and held in stock.",
-        "ml": "പ്രീമിയം ഡ്രൈ ഫ്രൂട്ട്സ്, നട്സ്, ഒറിജിനൽ മദീന അജ്‌വ ഈത്തപ്പഴം എന്നിവ മൊത്തവിലയിൽ വാങ്ങി നേരിട്ട് കയ്യിൽ വെച്ച് വിൽക്കുന്നു.",
-        "ar": "المكسرات المحمصة الفاخرة وتمور العجوة الأصلية يتم شراؤها ووزنها وتخزينها قبل بيعها."
-      },
-      "antiCounterfeitPolicy": {
-        "en": "100% genuine Grade-A nuts and certified imported dates. Honest harvest dates and origin disclosure.",
-        "ml": "ഒന്നാംതരം ഒറിജിനൽ ഡ്രൈ ഫ്രൂട്ട്സ്. ഗ്രേഡും പാക്കിംഗ് തീയതിയും കൃത്യമായി ഉപഭോക്താവിനെ അറിയിക്കുക.",
-        "ar": "مكسرات وتمور فاخرة أصلية 100% مع بيان سنة الحصاد والمصدر بدقة دون خلط أو تدليس."
-      },
-      "pillars": [
-        {
-          "id": "pillar_halal_substance",
-          "pass": true,
-          "noteEn": "Permissible pure physical commodity (Tahir & Mutaqawwam)."
-        },
-        {
-          "id": "pillar_ownership",
-          "pass": true,
-          "noteEn": "Purchased wholesale with full legal title."
-        },
-        {
-          "id": "pillar_possession",
-          "pass": true,
-          "noteEn": "Held in actual physical possession before customer sale."
-        },
-        {
-          "id": "pillar_zero_riba",
-          "pass": true,
-          "noteEn": "100% cash-flow financed under ₹10,000. No interest or debt."
-        },
-        {
-          "id": "pillar_defect_disclosure",
-          "pass": true,
-          "noteEn": "Truthful description with full customer inspection and return rights."
-        },
-        {
-          "id": "pillar_anti_counterfeit",
-          "pass": true,
-          "noteEn": "Strictly authentic goods; zero counterfeit or replica brand logos."
-        },
-        {
-          "id": "pillar_delivery_daman",
-          "pass": true,
-          "noteEn": "Seller assumes transit damage liability until safe customer receipt."
+      }
+    ],
+    "facebook": [
+      {
+        "name": "Indian Dry Fruits & Nuts Wholesalers",
+        "members": "65,000+ Members",
+        "url": "https://www.facebook.com/search/groups/?q=dry+fruits+wholesale+india",
+        "region": "Pan-India",
+        "flag": "🇮🇳",
+        "badge": "Daily Mandi Rates",
+        "desc": {
+          "en": "Daily live mandi price quotes for cashews, almonds, pistachios, and dates.",
+          "ml": "ദിവസേനയുള്ള കശുവണ്ടി, ബദാം, ഈത്തപ്പഴ നിരക്കുകൾ അറിയാം.",
+          "ar": "مجموعة يومية لبورصة أسعار المكسرات والتمور بالجملة."
         }
-      ]
-    }
+      }
+    ]
   },
+  "blueprint": {
+    "intro": {
+      "en": "Dry fruits and Saudi dates represent one of the highest daily cash-flow businesses in Kerala and India. Sourced in bulk directly from Khari Baoli Delhi (Asia's largest dry fruit mandi) or direct sea-container importers at Mumbai APMC Vashi, premium Ajwa dates, Afghan figs, jumbo cashews, and California almonds yield 60% to 140% markups when hygienically sorted, packed in resealable kraft pouches or royal gift caskets, and sold to households, wedding parties, and health-conscious families.",
+      "ml": "കേരളത്തിൽ അനുദിനം ഡിമാൻഡ് കൂടിക്കൊണ്ടിരിക്കുന്ന ഏറ്റവും മികച്ച സുന്നത്ത് ബിസിനസ്സാണ് പ്രീമിയം ഡ്രൈ ഫ്രൂട്ട്സും സൗദി ഈത്തപ്പഴങ്ങളും. ഡൽഹി ഖാരി ബാവോലിയിൽ നിന്നോ മുംബൈ വാശി മാർക്കറ്റിൽ നിന്നോ കിലോയ്ക്ക് കുറഞ്ഞ വിലയ്ക്ക് നേരിട്ട് വാങ്ങി സ്വന്തം ലേബലിൽ സീൽഡ് പൗച്ചുകളിലാക്കി വിറ്റാൽ 60% മുതൽ 140% വരെ മികച്ച ലാഭം നേടാം.",
+      "ar": "تجارة التمور والمكسرات الفاخرة من أنجح التجارات اليومية في كيرالا والهند. شراؤها بالجملة من سوق خاري باولي بدلهي أو سوق فاشي بمومباي وإعادة تعبئتها في أكياس مفرغة من الهواء أو علب هدايا فاخرة يحقق هامش ربح يتراوح بين 60% إلى 140%."
+    },
+    "fastMovingList": [
+      {
+        "name": {
+          "en": "Original Saudi Madinah Ajwa Dates (Grade 1 Jumbo)",
+          "ml": "ഒറിജിനൽ സൗദി മദീന അജ്‌വ ഈത്തപ്പഴം (Grade 1)",
+          "ar": "تمر عجوة المدينة الأصلي (نخب أول فاخر)"
+        },
+        "wholesale": "₹620 / kg (Bulk box)",
+        "retail": "₹1,200 - ₹1,600 / kg",
+        "profit": "₹580 - ₹980 net profit per kg!"
+      },
+      {
+        "name": {
+          "en": "Jumbo W240 Goa/Kollam Roasted Cashews (Non-Salted/Salted)",
+          "ml": "കൊല്ലം ജംബോ W240 കശുവണ്ടി പരിപ്പ് (1kg pack)",
+          "ar": "كاجو جامبو محمص فاخر W240"
+        },
+        "wholesale": "₹680 / kg",
+        "retail": "₹1,050 - ₹1,300 / kg",
+        "profit": "₹370 - ₹620 net profit per kg"
+      },
+      {
+        "name": {
+          "en": "California Nonpareil Premium Almonds (Badam Giri)",
+          "ml": "കാലിഫോർണിയ ബദാം ഗിരി (100% സ്വീറ്റ് & ക്രിസ്പി)",
+          "ar": "لوز كاليفورنيا الفاخر مقشر نخب أول"
+        },
+        "wholesale": "₹580 / kg",
+        "retail": "₹890 - ₹1,150 / kg",
+        "profit": "₹310 - ₹570 net profit per kg"
+      },
+      {
+        "name": {
+          "en": "Royal Sunnah Gift Assortment (Ajwa, Fig, Almond, Pista in Velvet Box)",
+          "ml": "റോയൽ സുന്നത്ത് ഡ്രൈ ഫ്രൂട്ട്സ് ഗിഫ്റ്റ് ബോക്സ് (500g)",
+          "ar": "صندوق الهدايا الملكي المشكل (عجوة، تين، لوز، فستق)"
+        },
+        "wholesale": "₹380 / box (Items + Casket)",
+        "retail": "₹850 - ₹1,250 / box",
+        "profit": "₹470 - ₹870 net profit per box!"
+      }
+    ]
+  },
+  "capitalTable": [
+    {
+      "item": {
+        "en": "Starter Inventory (5kg Ajwa, 5kg Almonds, 5kg Cashews, 2kg Figs)",
+        "ml": "പ്രാരംഭ സ്റ്റോക്ക് (5kg അജ്‌വ, 5kg ബദാം, 5kg കശുവണ്ടി, 2kg അത്തിപ്പഴം)",
+        "ar": "المخزون الأولي المتنوع (عجوة، لوز، كاجو، تين)"
+      },
+      "starter": "₹4,200",
+      "pro": "₹14,500",
+      "notes": {
+        "en": "17kg starter bulk lot from wholesale mandi",
+        "ml": "17kg ആദ്യ ബാച്ച് മൊത്ത വിപണിയിൽ നിന്ന്",
+        "ar": "دفعة أولى 17 كغ بسعر الجملة المباشر"
+      }
+    },
+    {
+      "item": {
+        "en": "Zip-Lock Stand-up Kraft Pouches (250g & 500g with Clear Window, 100 pcs)",
+        "ml": "ക്രാഫ്റ്റ് സ്റ്റാൻഡ്-അപ്പ് പൗച്ചുകൾ (100 എണ്ണം)",
+        "ar": "أكياس كرافت بنافذة شفافة وسحاب للإغلاق (100 كيس)"
+      },
+      "starter": "₹450",
+      "pro": "₹1,200",
+      "notes": {
+        "en": "₹4.50 per heavy food-grade barrier pouch",
+        "ml": "ഒരു പൗച്ചിന് ₹4.50 നിരക്കിൽ",
+        "ar": "أكياس صحية لحفظ الطزاجة بـ 4.5 روبية للكيس"
+      }
+    },
+    {
+      "item": {
+        "en": "Custom Waterproof Vinyl Brand Labels (200 pcs with Date/Batch space)",
+        "ml": "ബ്രാൻഡ് സ്റ്റിക്കറുകൾ (200 എണ്ണം)",
+        "ar": "ملصقات العلامة التجارية المقاومة للرطوبة (200 ملصق)"
+      },
+      "starter": "₹280",
+      "pro": "₹650",
+      "notes": {
+        "en": "Sivakasi / Calicut sticker print",
+        "ml": "പ്രാദേശിക പ്രിന്റിംഗ് പ്രസ്സിൽ നിന്ന്",
+        "ar": "طباعة محلية سريعة"
+      }
+    },
+    {
+      "item": {
+        "en": "Hand Impulse Heat Sealer (8-inch food grade)",
+        "ml": "ഹാൻഡ് ഇംപൾസ് ഹീറ്റ് സീലർ",
+        "ar": "جهاز لحام حراري يدوي للأكياس"
+      },
+      "starter": "₹750",
+      "pro": "₹1,600",
+      "notes": {
+        "en": "One-time equipment purchase",
+        "ml": "ഒറ്റത്തവണ ചെലവ് മാത്രം",
+        "ar": "شراء لمرة واحدة فقط"
+      }
+    }
+  ],
+  "totalStarterCost": "₹5,680",
+  "totalProCost": "₹17,950",
+  "formulation": {
+    "costPerUnitBox": {
+      "en": "500g Ajwa Date Pouch Cost: ₹310 dates + ₹4.50 pouch + ₹1.40 label + ₹3 silica packet = ₹318.90 total. Sells for ₹650 - ₹799 (Over 100% net markup!).",
+      "ml": "500g അജ്‌വ പൗച്ചിന്റെ ചെലവ്: ₹310 ഈത്തപ്പഴം + ₹4.50 പൗച്ച് + ₹1.40 സ്റ്റിക്കർ = ₹318.90. വിൽപന ₹650 - ₹799 (100%-ൽ അധികം ലാഭം!).",
+      "ar": "تكلفة كيس تمر العجوة 500 غرام: 310 روبية تمر + 4.5 روبية كيس + 1.4 روبية ملصق = 318.90 روبية. يُباع بـ 650 إلى 799 روبية (هامش ربح صافي يتجاوز 100%!)."
+    },
+    "steps": [
+      {
+        "step": 1,
+        "title": {
+          "en": "Hygienic Inspection & Moisture Check",
+          "ml": "ഗുണനിലവാര പരിശോധന & ക്വാളിറ്റി ചെക്ക്",
+          "ar": "فحص الجودة ونسبة الرطوبة والطزاجة"
+        },
+        "desc": {
+          "en": "Inspect date skin texture, firmness, and natural dark hue. Reject squashed or over-dry units.",
+          "ml": "ഈത്തപ്പഴത്തിന്റെ മൃദുത്വവും കറുപ്പ് നിറവും പരിശോധിച്ച് മികച്ചവ മാത്രം വേർതിരിക്കുക.",
+          "ar": "فرز الحبات بعناية واستبعاد أي حبات جافة أو غير متناسقة."
+        }
+      },
+      {
+        "step": 2,
+        "title": {
+          "en": "Digital Precision Weighing (250g / 500g / 1kg)",
+          "ml": "ഡിജിറ്റൽ ത്രാസിൽ കൃത്യമായി തൂക്കൽ",
+          "ar": "الوزن الدقيق بميزان رقمي حساس"
+        },
+        "desc": {
+          "en": "Use a certified digital gram scale to weigh exact portions, adding 5g extra to ensure full weight honesty.",
+          "ml": "ഡിജിറ്റൽ ത്രാസിൽ കൃത്യമായ അളവിൽ തൂക്കുക. എപ്പോഴും 5g കൂടുതൽ നൽകുന്നത് ബിസിനസ്സിൽ ബറകത്ത് നൽകും.",
+          "ar": "زن الكمية بدقة وأضف 5 غرامات إضافية كأمانة وبركة للمشتري."
+        }
+      },
+      {
+        "step": 3,
+        "title": {
+          "en": "Stand-up Pouch Filling & Nitrogen/Silica Insert",
+          "ml": "പൗച്ചിൽ നിറയ്ക്കലും ഈർപ്പം തടയലും",
+          "ar": "التعبئة في أكياس كرافت وحفظ النضارة"
+        },
+        "desc": {
+          "en": "Fill dates or nuts neatly into kraft pouches. Slip in an organic food-grade oxygen absorber for maximum crunch.",
+          "ml": "ക്രാഫ്റ്റ് പൗച്ചുകളിലേക്ക് ഭംഗിയായി നിരത്തി വെച്ച് സീൽ ചെയ്യുക.",
+          "ar": "ضع التمور والمكسرات بتناسق داخل الكيس مع قرص حفظ الأطعمة من الرطوبة."
+        }
+      },
+      {
+        "step": 4,
+        "title": {
+          "en": "Airtight Heat Sealing & Brand Stamping",
+          "ml": "ഹീറ്റ് സീലിംഗും ലേബൽ ഒട്ടിക്കലും",
+          "ar": "اللحام الحراري المحكم ولصق العلامة التجارية"
+        },
+        "desc": {
+          "en": "Press for 2 seconds with the impulse sealer above the zip-lock to provide tamper-proof assurance. Affix your brand label.",
+          "ml": "ഇംപൾസ് സീലർ ഉപയോഗിച്ച് മുകൾഭാഗം ഭദ്രമായി സീൽ ചെയ്ത് നിങ്ങളുടെ ബ്രാൻഡ് ലേബൽ ഒട്ടിക്കുക.",
+          "ar": "الحم الطرف العلوي فوق السحاب لجعل العبوة محكمة ومحمية من التلاعب وضع شعارك في المنتصف."
+        }
+      }
+    ]
+  },
+  "physicalGoods": true,
+  "isManufacturing": false,
+  "pilotBudgetMax": 10000,
+  "halalCompliance": {
+    "isCompliant": true,
+    "status": "verified_halal_trading",
+    "tradingModel": "Bulk Procurement -> Physical Sorting & Kraft Pouch Packaging -> Retail Resale",
+    "possessionMethod": {
+      "en": "Whole nuts and Saudi dates are purchased in bulk boxes from wholesale mandis, physically stored at home, weighed, sealed in brand pouches, and possessed before dispatch.",
+      "ml": "ഡ്രൈ ഫ്രൂട്ട്സുകളും ഈത്തപ്പഴങ്ങളും മൊത്തവിപണിയിൽ നിന്ന് വാങ്ങി വീട്ടിൽ നേരിട്ട് കൈവശം സൂക്ഷിച്ചു പൗച്ചുകളിലാക്കിയ ശേഷമേ വിൽക്കുന്നുള്ളൂ.",
+      "ar": "يتم شراء التمور والمكسرات بالجملة واستلامها وتخزينها وتعبئتها في أكياس مستقلة قبل بيعها وشحنها."
+    },
+    "antiCounterfeitPolicy": {
+      "en": "100% authentic Grade 1 Saudi Ajwa and premium nuts. Zero false origin claims or adulteration.",
+      "ml": "100% ശുദ്ധമായ സൗദി അജ്‌വ ഈത്തപ്പഴങ്ങളും പ്രീമിയം നട്സുകളും മാത്രം വിൽക്കുന്നു.",
+      "ar": "تمور عجوة أصلية ومكسرات طازجة 100% بدون أي خلط أو غش."
+    },
+    "pillars": [
+      {
+        "id": "pillar_halal_substance",
+        "pass": true,
+        "noteEn": "Permissible wholesome natural food commodity (Tayyib & Halal)."
+      },
+      {
+        "id": "pillar_ownership",
+        "pass": true,
+        "noteEn": "Purchased wholesale with full title."
+      },
+      {
+        "id": "pillar_possession",
+        "pass": true,
+        "noteEn": "Held in actual physical possession before customer sale."
+      },
+      {
+        "id": "pillar_zero_riba",
+        "pass": true,
+        "noteEn": "100% cash-flow financed under ₹10,000. No interest or debt."
+      },
+      {
+        "id": "pillar_defect_disclosure",
+        "pass": true,
+        "noteEn": "Truthful grade specification with full return rights."
+      },
+      {
+        "id": "pillar_anti_counterfeit",
+        "pass": true,
+        "noteEn": "Authentic Saudi harvest only."
+      },
+      {
+        "id": "pillar_delivery_daman",
+        "pass": true,
+        "noteEn": "Seller assumes transit damage liability until safe customer receipt."
+      }
+    ]
+  }
+},
   "cookware": {
     "id": "cookware",
     "tier": "trading",
@@ -2862,11 +2869,11 @@ window.dataRetailCourses = {
     "margin": "50% - 110%",
     "topMarkets": "Salem Steel Market, Jaggi Market Moradabad, Palakkad Traditional Foundry",
     "images": {
-      "cover": "https://images.unsplash.com/photo-1584269600464-37b1b58a9fe7?auto=format&fit=crop&w=800&q=80",
-      "product": "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=800&q=80",
-      "sourcing": "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=800&q=80",
+      "cover": "assets/images/course_castiron_cookware.jpg",
+      "product": "assets/images/course_castiron_cookware.jpg",
+      "sourcing": "assets/images/step_wholesale_market.jpg",
       "formulation": "https://images.unsplash.com/photo-1590794056226-79ef3a8147e1?auto=format&fit=crop&w=800&q=80",
-      "packaging": "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=800&q=80"
+      "packaging": "assets/images/step_digital_showcase.jpg"
     },
     "curriculumHighlights": {
       "en": [
@@ -3520,11 +3527,11 @@ window.dataRetailCourses = {
     "margin": "80% - 200%",
     "topMarkets": "Thrissur Ayurvedic Raw Herbs Mandi, Kannauj Pure Floral Hydrosols, Khari Baoli",
     "images": {
-      "cover": "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=800&q=80",
+      "cover": "assets/images/course_virgin_oils_herbal.jpg",
       "product": "https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=800&q=80",
       "sourcing": "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=800&q=80",
       "formulation": "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=800&q=80",
-      "packaging": "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=800&q=80"
+      "packaging": "assets/images/step_digital_showcase.jpg"
     },
     "curriculumHighlights": {
       "en": [
@@ -3860,15 +3867,15 @@ window.dataRetailCourses = {
     "images": {
       "cover": "https://images.unsplash.com/photo-1549007994-cb92caebd54b?auto=format&fit=crop&w=800&q=80",
       "product": "https://images.unsplash.com/photo-1549007994-cb92caebd54b?auto=format&fit=crop&w=800&q=80",
-      "sourcing": "https://images.unsplash.com/photo-1578849278619-e73505e9610f?auto=format&fit=crop&w=800&q=80",
+      "sourcing": "assets/images/step_wholesale_market.jpg",
       "formulation": "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=800&q=80",
       "packaging": "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?auto=format&fit=crop&w=800&q=80",
       "chapter1": "https://images.unsplash.com/photo-1549007994-cb92caebd54b?auto=format&fit=crop&w=800&q=80",
       "chapter2": "https://images.unsplash.com/photo-1511381939415-e44015466834?auto=format&fit=crop&w=800&q=80",
-      "chapter3": "https://images.unsplash.com/photo-1578849278619-e73505e9610f?auto=format&fit=crop&w=800&q=80",
-      "chapter4": "https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=800&q=80",
+      "chapter3": "assets/images/step_wholesale_market.jpg",
+      "chapter4": "assets/images/step_negotiation_desk.jpg",
       "chapter5": "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=800&q=80",
-      "chapter6": "https://images.unsplash.com/photo-1450133064473-71024230f91b?auto=format&fit=crop&w=800&q=80",
+      "chapter6": "assets/images/step_profit_analytics.jpg",
       "chapter7": "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?auto=format&fit=crop&w=800&q=80",
       "chapter8": "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80"
     },
@@ -4109,14 +4116,14 @@ window.dataRetailCourses = {
       "cover": "https://images.unsplash.com/photo-1603006905003-be475563bc59?auto=format&fit=crop&w=800&q=80",
       "product": "https://images.unsplash.com/photo-1603006905003-be475563bc59?auto=format&fit=crop&w=800&q=80",
       "sourcing": "https://images.unsplash.com/photo-1508746829417-e6f548d8d6ed?auto=format&fit=crop&w=800&q=80",
-      "formulation": "https://images.unsplash.com/photo-1601055903647-ddf1ee9701b7?auto=format&fit=crop&w=800&q=80",
+      "formulation": "https://images.unsplash.com/photo-1603006905003-be475563bc59?auto=format&fit=crop&w=800&q=80",
       "packaging": "https://images.unsplash.com/photo-1605651202774-7d573fd3f12d?auto=format&fit=crop&w=800&q=80",
       "chapter1": "https://images.unsplash.com/photo-1603006905003-be475563bc59?auto=format&fit=crop&w=800&q=80",
       "chapter2": "https://images.unsplash.com/photo-1570823635306-250abb06d4b3?auto=format&fit=crop&w=800&q=80",
       "chapter3": "https://images.unsplash.com/photo-1508746829417-e6f548d8d6ed?auto=format&fit=crop&w=800&q=80",
-      "chapter4": "https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=800&q=80",
-      "chapter5": "https://images.unsplash.com/photo-1601055903647-ddf1ee9701b7?auto=format&fit=crop&w=800&q=80",
-      "chapter6": "https://images.unsplash.com/photo-1450133064473-71024230f91b?auto=format&fit=crop&w=800&q=80",
+      "chapter4": "assets/images/step_negotiation_desk.jpg",
+      "chapter5": "https://images.unsplash.com/photo-1603006905003-be475563bc59?auto=format&fit=crop&w=800&q=80",
+      "chapter6": "assets/images/step_profit_analytics.jpg",
       "chapter7": "https://images.unsplash.com/photo-1605651202774-7d573fd3f12d?auto=format&fit=crop&w=800&q=80",
       "chapter8": "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80"
     },

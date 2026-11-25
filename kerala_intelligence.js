@@ -62,10 +62,15 @@ const keralaIntel = {
     this.renderDistrictDashboard();
     this.updateActivePill(districtId);
     
-    // Smooth scroll to district dashboard on mobile
+    // Smooth scroll inside Kerala drawer to district dashboard on mobile
     if (window.innerWidth < 768) {
+      const viewEl = document.getElementById('viewKeralaIntel');
       const dashEl = document.getElementById('keralaDistrictDashboard');
-      if (dashEl) dashEl.scrollIntoView({ behavior: 'smooth' });
+      if (viewEl && dashEl) {
+        const topbar = document.getElementById('keralaStickyTopbar');
+        const offset = topbar ? (topbar.offsetHeight + 10) : 60;
+        viewEl.scrollTo({ top: Math.max(0, dashEl.offsetTop - offset), behavior: 'smooth' });
+      }
     }
   },
 
@@ -101,8 +106,37 @@ const keralaIntel = {
     if (!container) return;
 
     const lang = (window.app && window.app.currentLang) || 'en';
+    const isDark = (typeof document !== 'undefined' && document.documentElement.getAttribute('data-theme') === 'dark');
+    const backLbl = (window.app && typeof window.app.getContextualBackLabel === 'function')
+      ? window.app.getContextualBackLabel((window.app._getTopDrawerOrigin ? window.app._getTopDrawerOrigin('kerala-intel') : 'home'), lang)
+      : (lang === 'ml' ? 'തിരികെ പോകുക' : lang === 'ar' ? 'العودة' : 'Back to Home');
+    const miniTitle = lang === 'ml'
+      ? 'കേരള 14 ജില്ലാ ഇന്റലിജൻസ്'
+      : lang === 'ar'
+      ? 'خريطة كيرالا (14 مقاطعة)'
+      : 'Kerala 14 Districts Trading Intel';
 
     container.innerHTML = `
+      <!-- Sticky Top Return & Quick Controls Bar -->
+      <div class="academy-sticky-topbar stack-sticky-topbar" id="keralaStickyTopbar">
+        <div class="container academy-topbar-inner">
+          <button class="btn-back-hub btn-back-contextual" id="btnBackFromKerala" onclick="app.closeTopDrawer()">
+            <i class="fa-solid fa-arrow-left"></i> <span id="lblBackFromKerala">${backLbl}</span>
+          </button>
+          <div class="academy-topbar-course-mini" id="keralaTopbarMiniTitle">${miniTitle}</div>
+          <div class="academy-topbar-right">
+            <div class="drawer-lang-pills" aria-label="Select Language">
+              <button class="lang-btn-mini ${lang === 'en' ? 'active' : ''}" data-lang="en" onclick="app.switchLanguage('en')">EN</button>
+              <button class="lang-btn-mini ${lang === 'ml' ? 'active' : ''}" data-lang="ml" onclick="app.switchLanguage('ml')">മല</button>
+              <button class="lang-btn-mini ${lang === 'ar' ? 'active' : ''}" data-lang="ar" onclick="app.switchLanguage('ar')">ع</button>
+            </div>
+            <button class="theme-toggle-btn drawer-theme-btn" onclick="platformEnhancements.toggleTheme()" title="Toggle Dark/Light Mode">
+              <i class="fa-solid ${isDark ? 'fa-sun text-warning' : 'fa-moon'}"></i> <span class="theme-text">${isDark ? 'Light' : 'Dark'}</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
       <!-- Kerala Intelligence Header Banner -->
       <section class="kerala-intel-header">
         <div class="container">
