@@ -38,11 +38,7 @@
       this.closeModal();
 
       if (window.app) {
-        window.app.currentTierFilter = 'archived';
-        document.querySelectorAll('.tier-tab-btn').forEach(btn => {
-          btn.classList.toggle('active', btn.getAttribute('data-tier') === 'archived');
-        });
-        window.app.renderFacultyCards();
+        window.app.filterBusinessTier('archived');
         const el = document.getElementById('faculty-section');
         if (el) el.scrollIntoView({ behavior: 'smooth' });
       }
