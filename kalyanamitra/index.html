@@ -1,0 +1,2221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KalyanaMitra Kerala | All-in-One Wedding Cost Estimator & Wholesale Vendor Marketplace</title>
+  <meta name="description" content="Calculate Kerala wedding food quantities, meat, vegetables, utensil rentals, pandal and house painting costs. Connect directly with wholesale vendors across all 14 Kerala districts on WhatsApp with zero middlemen.">
+  
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            emerald: {
+              850: '#064e3b',
+              900: '#022c22'
+            },
+            gold: {
+              400: '#fbbf24',
+              500: '#f59e0b',
+              600: '#d97706'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- Google Fonts & Lucide Icons -->
+  <link rel="stylesheet" href="style.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-[#fbfbf9] text-slate-800 antialiased flex flex-col min-h-screen">
+
+  <!-- Top Gold Kasavu Accent Strip -->
+  <div class="kerala-kasavu-strip"></div>
+
+  <!-- Live Kerala Mandi Price Ticker Ribbon -->
+  <div class="bg-emerald-950 text-emerald-200 text-xs py-2 px-4 border-b border-emerald-900 overflow-x-auto whitespace-nowrap no-scrollbar">
+    <div class="max-w-7xl mx-auto flex items-center justify-between gap-6">
+      <div class="flex items-center gap-2 text-amber-300 font-extrabold uppercase tracking-wider text-[11px] shrink-0">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span>Kerala Mandi Live Index:</span>
+      </div>
+      <div id="liveTickerBar" class="flex items-center gap-6 text-[11px] font-medium text-slate-300 overflow-x-auto no-scrollbar">
+        <!-- Rendered dynamically from DAILY_COMMODITY_TICKER -->
+      </div>
+      <div class="flex items-center gap-3 shrink-0">
+        <span class="text-[10px] text-emerald-400 font-medium hidden xl:inline">Chalai • Broadway • Palayam • Kasaragod</span>
+        <button id="btnToggleViewMode" onclick="toggleFullPageView()" class="text-[10px] font-bold bg-emerald-900 hover:bg-emerald-800 text-amber-300 px-2.5 py-0.5 rounded border border-emerald-700 transition-all cursor-pointer">
+          View All Sections
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Main Navigation Header + Responsive Menu Bar -->
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-3">
+      
+      <!-- Brand Logo -->
+      <a href="#home" onclick="navigateToSection('home'); return false;" class="flex items-center gap-2.5 group shrink-0">
+        <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-gradient-to-tr from-emerald-800 to-emerald-600 flex items-center justify-center text-white shadow-md shadow-emerald-900/20 group-hover:scale-105 transition-transform">
+          <i data-lucide="utensils-crossed" class="w-5 h-5 sm:w-6 sm:h-6 text-amber-300"></i>
+        </div>
+        <div>
+          <div class="flex items-center gap-1.5">
+            <span class="text-xl sm:text-2xl font-extrabold tracking-tight text-emerald-900 brand-font">Kalyana<span class="text-amber-600">Mitra</span></span>
+            <span class="text-[10px] font-bold uppercase tracking-wider bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full border border-emerald-300">Kerala</span>
+          </div>
+          <p class="text-[11px] text-slate-500 font-medium hidden sm:block">Wedding Estimator, Halls, Crews &amp; Wholesale Hub</p>
+        </div>
+      </a>
+
+      <!-- Desktop Menu Bar (Section Switcher) -->
+      <nav id="desktopMenuNav" class="hidden lg:flex items-center gap-1 xl:gap-2 text-[11px] xl:text-xs font-bold text-slate-600 whitespace-nowrap">
+        <button onclick="navigateToSection('home')" data-nav="home" class="nav-tab-btn px-2.5 py-1.5 xl:px-3 xl:py-2 rounded-xl bg-emerald-800 text-white shadow-sm transition-all flex items-center gap-1.5">
+          <i data-lucide="home" class="w-3.5 h-3.5 text-amber-300"></i> Home
+        </button>
+        <button onclick="navigateToSection('food')" data-nav="food" class="nav-tab-btn px-2.5 py-1.5 xl:px-3 xl:py-2 rounded-xl hover:bg-slate-100 text-slate-700 transition-all flex items-center gap-1.5">
+          <i data-lucide="chef-hat" class="w-3.5 h-3.5 text-emerald-600"></i> Food Items
+        </button>
+        <button onclick="navigateToSection('goods')" data-nav="goods" class="nav-tab-btn px-2.5 py-1.5 xl:px-3 xl:py-2 rounded-xl hover:bg-slate-100 text-slate-700 transition-all flex items-center gap-1.5">
+          <i data-lucide="package" class="w-3.5 h-3.5 text-amber-600"></i> Goods &amp; Rentals
+        </button>
+        <button onclick="navigateToSection('people')" data-nav="people" class="nav-tab-btn px-2.5 py-1.5 xl:px-3 xl:py-2 rounded-xl hover:bg-slate-100 text-slate-700 transition-all flex items-center gap-1.5">
+          <i data-lucide="users" class="w-3.5 h-3.5 text-emerald-600"></i> People &amp; Crews
+        </button>
+        <button onclick="navigateToSection('halls')" data-nav="halls" class="nav-tab-btn px-2.5 py-1.5 xl:px-3 xl:py-2 rounded-xl hover:bg-slate-100 text-slate-700 transition-all flex items-center gap-1.5">
+          <i data-lucide="landmark" class="w-3.5 h-3.5 text-blue-600"></i> Halls &amp; Fees
+        </button>
+        <button onclick="navigateToSection('planners')" data-nav="planners" class="nav-tab-btn px-2.5 py-1.5 xl:px-3 xl:py-2 rounded-xl hover:bg-slate-100 text-slate-700 transition-all flex items-center gap-1.5">
+          <i data-lucide="wallet" class="w-3.5 h-3.5 text-purple-600"></i> Planners
+        </button>
+        <button onclick="navigateToSection('kasaragod')" data-nav="kasaragod" class="nav-tab-btn px-2.5 py-1.5 xl:px-3 xl:py-2 rounded-xl bg-amber-50 hover:bg-amber-100 text-amber-950 border border-amber-300 transition-all flex items-center gap-1.5">
+          <i data-lucide="map-pin" class="w-3.5 h-3.5 text-emerald-700"></i> District Hubs
+        </button>
+      </nav>
+
+      <!-- Action Buttons -->
+      <div class="flex items-center gap-2 shrink-0">
+        <button onclick="openVendorRegisterModal()" class="hidden 2xl:inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-emerald-800 bg-emerald-50 hover:bg-emerald-100 px-3 py-2 rounded-lg border border-emerald-300 transition-all">
+          <i data-lucide="user-plus" class="w-3.5 h-3.5"></i> Register Crew/Shop
+        </button>
+        <button onclick="navigateToSection('food')" class="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-white bg-emerald-800 hover:bg-emerald-900 px-3.5 py-2 rounded-lg shadow-sm transition-all shrink-0">
+          <span>Start Estimate</span>
+          <i data-lucide="arrow-right" class="w-3.5 h-3.5 text-amber-300"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile & Tablet Scrollable Menu Bar -->
+    <div id="mobileMenuBar" class="lg:hidden border-t border-slate-200 bg-slate-50/95 px-3 py-2 flex items-center gap-2 overflow-x-auto no-scrollbar whitespace-nowrap">
+      <button onclick="navigateToSection('home')" data-nav="home" class="nav-tab-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-emerald-800 text-white shrink-0">🏠 Home</button>
+      <button onclick="navigateToSection('food')" data-nav="food" class="nav-tab-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-white text-slate-700 border border-slate-200 shrink-0">🍛 Food Items</button>
+      <button onclick="navigateToSection('goods')" data-nav="goods" class="nav-tab-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-white text-slate-700 border border-slate-200 shrink-0">📦 Goods &amp; Rentals</button>
+      <button onclick="navigateToSection('people')" data-nav="people" class="nav-tab-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-white text-slate-700 border border-slate-200 shrink-0">👷 People &amp; Crews</button>
+      <button onclick="navigateToSection('halls')" data-nav="halls" class="nav-tab-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-white text-slate-700 border border-slate-200 shrink-0">🏛️ Halls &amp; Fees</button>
+      <button onclick="navigateToSection('planners')" data-nav="planners" class="nav-tab-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-white text-slate-700 border border-slate-200 shrink-0">🧮 Planners</button>
+      <button onclick="navigateToSection('kasaragod')" data-nav="kasaragod" class="nav-tab-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-amber-50 text-amber-950 border border-amber-300 shrink-0">📍 District Hubs</button>
+    </div>
+  </header>
+
+<main id="mainAppContainer" class="flex-1">
+<div id="view-home" class="app-section-view" data-section="home">
+  <!-- Hero Banner Section -->
+  <section id="hero" class="relative hero-gradient py-12 sm:py-16 border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+        
+        <!-- Left Hero Copy -->
+        <div class="lg:col-span-7 space-y-6">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-50 border border-amber-300 text-amber-900 text-xs font-bold tracking-wide">
+            <span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
+            100% Zero-Commission • Direct Wholesale Sourcing For Kerala Weddings
+          </div>
+
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-tight">
+            Plan Kerala Wedding Costs <br class="hidden sm:inline">
+            <span class="text-emerald-800 underline decoration-amber-400 decoration-wavy decoration-2">At Wholesale Prices</span>
+          </h1>
+
+          <p class="text-lg text-slate-600 max-w-2xl leading-relaxed">
+            Eliminate middleman markups! Calculate exact quantities of <strong>mutton, beef, fish, rice, vegetables, big cooking degchis, pandals, and home painting</strong> for your wedding. Connect directly with verified wholesalers across all 14 Kerala districts via WhatsApp.
+          </p>
+
+          <div class="flex flex-wrap gap-4 pt-2">
+            <a href="#food" onclick="navigateToSection('food'); return false;" class="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl bg-emerald-800 hover:bg-emerald-900 text-white font-bold text-base shadow-lg shadow-emerald-900/20 hover:scale-102 transition-all">
+              <i data-lucide="chef-hat" class="w-5 h-5 text-amber-300"></i>
+              <span>Calculate Food & BOM</span>
+            </a>
+            <button onclick="requestLiveLocation()" class="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold text-base shadow-md shadow-amber-500/20 hover:scale-102 transition-all">
+              <i data-lucide="crosshair" class="w-5 h-5 text-slate-950"></i>
+              <span>Detect My Live Location</span>
+            </button>
+            <a href="#people" onclick="navigateToSection('people'); return false;" class="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl bg-white hover:bg-slate-50 text-slate-800 font-bold text-base border border-slate-300 shadow-sm transition-all">
+              <i data-lucide="map-pin" class="w-5 h-5 text-emerald-600"></i>
+              <span>Browse People &amp; Vendors</span>
+            </a>
+            <button onclick="switchToKasaragodHub()" class="inline-flex items-center gap-2 px-4 py-3 rounded-xl bg-amber-50 hover:bg-amber-100 text-amber-950 font-bold text-xs sm:text-sm border border-amber-300 shadow-sm transition-all">
+              <span class="w-2 h-2 rounded-full bg-emerald-600 animate-pulse"></span>
+              <span>Flagship Hubs: Kasaragod • Kozhikode • Kannur • Malappuram • Wayanad</span>
+            </button>
+          </div>
+
+
+          <!-- Feature Highlights / Trust Metrics -->
+          <div class="grid grid-cols-3 gap-4 pt-6 border-t border-slate-200">
+            <div>
+              <div class="text-2xl font-black text-emerald-800">14 Districts</div>
+              <div class="text-xs text-slate-500 font-medium">Chalai, Broadway, Palayam & more</div>
+            </div>
+            <div>
+              <div class="text-2xl font-black text-amber-600">30% - 40%</div>
+              <div class="text-xs text-slate-500 font-medium">Direct wholesale cost savings</div>
+            </div>
+            <div>
+              <div class="text-2xl font-black text-slate-800">1-Click WhatsApp</div>
+              <div class="text-xs text-slate-500 font-medium">Direct enquiry with shop owners</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Hero Interactive Quick Estimator Card -->
+        <div class="lg:col-span-5">
+          <div class="glass-panel p-6 sm:p-8 rounded-2xl border border-slate-300 shadow-xl relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-32 h-32 bg-amber-400/10 rounded-full blur-2xl"></div>
+            
+            <div class="flex items-center justify-between pb-4 border-b border-slate-100">
+              <div class="flex items-center gap-2">
+                <i data-lucide="zap" class="w-5 h-5 text-amber-500"></i>
+                <h3 class="font-bold text-slate-900">Instant Estimate Snapshot</h3>
+              </div>
+              <span class="text-xs font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">Live Formula</span>
+            </div>
+
+            <div class="space-y-5 pt-4">
+              <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1.5">Select Feast Type</label>
+                <select id="heroMenuSelect" class="w-full bg-slate-50 border border-slate-300 rounded-lg px-3.5 py-2.5 text-sm font-semibold text-slate-800 focus:ring-2 focus:ring-emerald-600 outline-none">
+                  <option value="malabar_mutton_biryani">Malabar Mutton Dum Biryani Feast</option>
+                  <option value="malabar_chicken_biryani">Malabar Chicken Dum Biryani Feast</option>
+                  <option value="kerala_sadya">Grand Royal Kerala Sadya (24 Items)</option>
+                  <option value="travancore_nonveg_feast">Travancore Non-Veg Feast (Porotta & Beef)</option>
+                </select>
+              </div>
+
+              <div>
+                <div class="flex justify-between items-center mb-1.5">
+                  <label class="text-xs font-bold uppercase tracking-wider text-slate-500">Number of Guests</label>
+                  <span id="heroGuestDisplay" class="text-sm font-extrabold text-emerald-800">500 Guests</span>
+                </div>
+                <input type="range" id="heroGuestSlider" min="100" max="2500" step="50" value="500" class="w-full h-2 bg-slate-200 rounded-lg cursor-pointer">
+              </div>
+
+              <!-- Snapshot Results -->
+              <div class="bg-slate-50 rounded-xl p-4 border border-slate-200 space-y-2.5">
+                <div class="flex justify-between text-xs text-slate-600">
+                  <span>Self-Procured Wholesale Raw Goods:</span>
+                  <span id="heroRawCost" class="font-bold text-slate-900">₹1,10,000</span>
+                </div>
+                <div class="flex justify-between text-xs text-slate-600">
+                  <span>Master Cook & Kitchen Team Labour:</span>
+                  <span id="heroLabourCost" class="font-bold text-slate-900">₹22,500</span>
+                </div>
+                <div class="border-t border-slate-200 pt-2 flex justify-between items-center">
+                  <span class="text-xs font-bold text-slate-700">Self-Managed Total:</span>
+                  <span id="heroDirectTotal" class="text-base font-extrabold text-emerald-800">₹1,32,500</span>
+                </div>
+                <div class="flex justify-between text-xs text-slate-500">
+                  <span>Average Full Catering Package:</span>
+                  <span id="heroCateringCost" class="line-through">₹1,90,000</span>
+                </div>
+              </div>
+
+              <div class="p-3 bg-amber-50 rounded-lg border border-amber-200 flex items-center justify-between">
+                <span class="text-xs font-bold text-amber-900">Estimated Direct Savings:</span>
+                <span id="heroSavings" class="text-base font-black text-emerald-800">Save ~₹57,500</span>
+              </div>
+
+              <button onclick="navigateToSection('food', 'calculator')" class="w-full py-2.5 bg-emerald-800 hover:bg-emerald-900 text-white font-bold rounded-lg text-sm transition-all flex items-center justify-center gap-2">
+                <span>View Full Itemized Ingredients List</span>
+                <i data-lucide="chevron-down" class="w-4 h-4"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Home Overview Directory (Summary Details Only — Clean Launchpad to All Sections) -->
+  <section id="home-overview-directory" class="py-14 bg-white border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto text-center space-y-3 mb-10">
+        <span class="text-xs font-extrabold uppercase tracking-wider bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full border border-emerald-200">
+          Platform Modules Overview
+        </span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+          What Is Inside KalyanaMitra Kerala?
+        </h2>
+        <p class="text-sm sm:text-base text-slate-600">
+          Everything required for a complete Kerala wedding is neatly classified into separate Menu Bar sections below. Pick any section to open its tools, rates, and direct contacts.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        
+        <!-- Card 1: Food -->
+        <div onclick="navigateToSection('food')" class="vendor-card bg-slate-50/70 hover:bg-white rounded-2xl p-6 cursor-pointer flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <div class="w-11 h-11 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center">
+                <i data-lucide="chef-hat" class="w-6 h-6"></i>
+              </div>
+              <span class="text-[11px] font-extrabold bg-emerald-100 text-emerald-900 px-2.5 py-0.5 rounded-full">4 Food Classes</span>
+            </div>
+            <h3 class="text-lg font-extrabold text-slate-900">Food Items &amp; Quantity Calculator</h3>
+            <p class="text-xs text-slate-600 mt-2 leading-relaxed">
+              Strictly classified food ingredients (<strong>Meat &amp; Sea Fish</strong>, <strong>Fresh Vegetables &amp; Leaves</strong>, <strong>Grains, Spices, Ghee &amp; Dairy</strong>, <strong>Payasam, Drinks &amp; Water/Ice</strong>), Culinary BOM by guest count, and Master Cook wages.
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-200 flex items-center justify-between text-xs font-bold text-emerald-800">
+            <span>Open Food Items &amp; BOM</span>
+            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </div>
+        </div>
+
+        <!-- Card 2: Goods -->
+        <div onclick="navigateToSection('goods')" class="vendor-card bg-slate-50/70 hover:bg-white rounded-2xl p-6 cursor-pointer flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <div class="w-11 h-11 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center">
+                <i data-lucide="package" class="w-6 h-6"></i>
+              </div>
+              <span class="text-[11px] font-extrabold bg-amber-100 text-amber-900 px-2.5 py-0.5 rounded-full">Rent vs Wholesale Buy</span>
+            </div>
+            <h3 class="text-lg font-extrabold text-slate-900">Wedding Goods, Plates &amp; Pandals</h3>
+            <p class="text-xs text-slate-600 mt-2 leading-relaxed">
+              Physical materials &amp; event hardware: <strong>Melamine/Steel Thalis &amp; Glasses</strong>, <strong>20kg Biryani Chembus, Urulis, Moulds &amp; Commercial LPG</strong>, <strong>Shamiana Pandals, Chairs &amp; 25kVA Generators</strong>, plus Stage Decor packages.
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-200 flex items-center justify-between text-xs font-bold text-emerald-800">
+            <span>Open Goods &amp; Rentals</span>
+            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </div>
+        </div>
+
+        <!-- Card 3: People -->
+        <div onclick="navigateToSection('people')" class="vendor-card bg-slate-50/70 hover:bg-white rounded-2xl p-6 cursor-pointer flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <div class="w-11 h-11 rounded-xl bg-blue-100 text-blue-800 flex items-center justify-center">
+                <i data-lucide="users" class="w-6 h-6"></i>
+              </div>
+              <span class="text-[11px] font-extrabold bg-blue-100 text-blue-900 px-2.5 py-0.5 rounded-full">208 People &amp; 9 Roles</span>
+            </div>
+            <h3 class="text-lg font-extrabold text-slate-900">Wedding People, Crews &amp; Wholesalers</h3>
+            <p class="text-xs text-slate-600 mt-2 leading-relaxed">
+              Direct phone &amp; WhatsApp access across all 14 Kerala districts (Flagship: Kasaragod, Kozhikode, Kannur, Malappuram &amp; Wayanad) for <strong>Master Cooks &amp; Servers</strong>, <strong>Photo/4K Drone</strong>, <strong>Bridal Makeup &amp; Mehndi</strong>, <strong>Chenda Melam &amp; Oppana</strong>, <strong>Decor, Sound, Electricians &amp; Plumbers</strong>, <strong>Painters &amp; Cleaners</strong>, <strong>Market Wholesalers</strong> &amp; <strong>Drivers</strong>.
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-200 flex items-center justify-between text-xs font-bold text-emerald-800">
+            <span>Find People &amp; Crews</span>
+            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </div>
+        </div>
+
+        <!-- Card 4: Halls & Fees -->
+        <div onclick="navigateToSection('halls')" class="vendor-card bg-slate-50/70 hover:bg-white rounded-2xl p-6 cursor-pointer flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <div class="w-11 h-11 rounded-xl bg-purple-100 text-purple-800 flex items-center justify-center">
+                <i data-lucide="landmark" class="w-6 h-6"></i>
+              </div>
+              <span class="text-[11px] font-extrabold bg-purple-100 text-purple-900 px-2.5 py-0.5 rounded-full">76 Auditoriums</span>
+            </div>
+            <h3 class="text-lg font-extrabold text-slate-900">Wedding Halls, Seating &amp; Fees</h3>
+            <p class="text-xs text-slate-600 mt-2 leading-relaxed">
+              Compare <strong>76 Auditoriums, Convention Centres &amp; Community Mandapams</strong> across <strong>Kasaragod, Kozhikode, Kannur, Malappuram &amp; Wayanad</strong> with day rent (<strong>₹16,000 – ₹2,50,000+</strong>), AC/Generator extra rules, parking, live Dining Batch (പന്തി) calculations &amp; Side-by-Side Hall Comparator.
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-200 flex items-center justify-between text-xs font-bold text-emerald-800">
+            <span>Compare Halls &amp; Fees</span>
+            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </div>
+        </div>
+
+        <!-- Card 5: Planners -->
+        <div onclick="navigateToSection('planners')" class="vendor-card bg-slate-50/70 hover:bg-white rounded-2xl p-6 cursor-pointer flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <div class="w-11 h-11 rounded-xl bg-rose-100 text-rose-800 flex items-center justify-center">
+                <i data-lucide="wallet" class="w-6 h-6"></i>
+              </div>
+              <span class="text-[11px] font-extrabold bg-rose-100 text-rose-900 px-2.5 py-0.5 rounded-full">Budget + Checklist</span>
+            </div>
+            <h3 class="text-lg font-extrabold text-slate-900">Smart Budget, Timeline &amp; Food Rescue</h3>
+            <p class="text-xs text-slate-600 mt-2 leading-relaxed">
+              Allocate your total wedding budget automatically across Food, Pandal, Utensils, Home Prep &amp; Logistics, track your 30-Day Wedding Checklist, and connect surplus untouched food to volunteer Food Rescue teams across 14 districts.
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-200 flex items-center justify-between text-xs font-bold text-emerald-800">
+            <span>Open Planners &amp; Timeline</span>
+            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </div>
+        </div>
+
+        <!-- Card 6: North Kerala District Hubs -->
+        <div onclick="navigateToSection('kasaragod')" class="vendor-card bg-gradient-to-br from-amber-50 to-emerald-50 border-2 border-emerald-500/40 rounded-2xl p-6 cursor-pointer flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <div class="w-11 h-11 rounded-xl bg-emerald-800 text-amber-300 flex items-center justify-center">
+                <i data-lucide="map-pin" class="w-6 h-6"></i>
+              </div>
+              <span class="text-[11px] font-extrabold bg-amber-400 text-slate-950 px-2.5 py-0.5 rounded-full">5 Flagship Districts</span>
+            </div>
+            <h3 class="text-lg font-extrabold text-slate-900">Kasaragod, Kozhikode, Kannur, Malappuram &amp; Wayanad</h3>
+            <p class="text-xs text-slate-700 mt-2 leading-relaxed">
+              Complete Taluk, Municipality &amp; Panchayat coverage for <strong>Kasaragod, Kozhikode, Kannur, Malappuram &amp; Wayanad</strong>. Jump straight to a flagship district:
+            </p>
+            <div class="flex flex-wrap gap-1.5 mt-3">
+              <button onclick="event.stopPropagation(); selectHubDistrict('kasaragod', true);" class="px-2.5 py-1 rounded-lg bg-emerald-800 hover:bg-emerald-900 text-white text-[11px] font-bold">Kasaragod</button>
+              <button onclick="event.stopPropagation(); selectHubDistrict('kozhikode', true);" class="px-2.5 py-1 rounded-lg bg-white hover:bg-emerald-100 text-emerald-900 border border-emerald-300 text-[11px] font-bold">Kozhikode</button>
+              <button onclick="event.stopPropagation(); selectHubDistrict('kannur', true);" class="px-2.5 py-1 rounded-lg bg-white hover:bg-emerald-100 text-emerald-900 border border-emerald-300 text-[11px] font-bold">Kannur</button>
+              <button onclick="event.stopPropagation(); selectHubDistrict('malappuram', true);" class="px-2.5 py-1 rounded-lg bg-white hover:bg-emerald-100 text-emerald-900 border border-emerald-300 text-[11px] font-bold">Malappuram</button>
+              <button onclick="event.stopPropagation(); selectHubDistrict('wayanad', true);" class="px-2.5 py-1 rounded-lg bg-white hover:bg-emerald-100 text-emerald-900 border border-emerald-300 text-[11px] font-bold">Wayanad</button>
+            </div>
+          </div>
+          <div class="mt-4 pt-3 border-t border-emerald-200 flex items-center justify-between text-xs font-extrabold text-emerald-900">
+            <span>Explore Every City &amp; Village</span>
+            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</div>
+<div id="view-food" class="app-section-view hidden" data-section="food">
+
+  <!-- Section Header & Classified Food Items Explorer -->
+  <section id="classified-food-catalog" class="py-12 bg-gradient-to-b from-emerald-50/70 to-white border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+      <div class="flex flex-wrap items-center justify-between gap-3">
+        <button onclick="navigateToSection('home')" class="inline-flex items-center gap-1.5 text-xs font-bold text-slate-600 hover:text-emerald-800 bg-white px-3 py-1.5 rounded-lg border border-slate-200 shadow-sm">
+          <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i> Back to Home Overview
+        </button>
+        <div class="flex flex-wrap gap-2">
+          <button onclick="navigateToSection('goods')" class="text-xs font-bold text-amber-900 bg-amber-100 hover:bg-amber-200 px-3 py-1.5 rounded-lg border border-amber-300">Next: Wedding Goods &amp; Plates →</button>
+          <button onclick="navigateToSection('people')" class="text-xs font-bold text-emerald-900 bg-emerald-100 hover:bg-emerald-200 px-3 py-1.5 rounded-lg border border-emerald-300">Find Food Suppliers &amp; Cooks →</button>
+        </div>
+      </div>
+
+      <div class="max-w-3xl mx-auto text-center space-y-2">
+        <span class="text-xs font-extrabold uppercase tracking-wider bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full border border-emerald-200">
+          Classified Domain 1 • Strictly Food Items Only
+        </span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+          Classified Wedding Food &amp; Raw Ingredients Directory
+        </h2>
+        <p class="text-sm sm:text-base text-slate-600">
+          All wedding food supplies grouped clearly into 4 procurement classes: <strong>Meat &amp; Sea Fish</strong>, <strong>Fresh Vegetables &amp; Leaves</strong>, <strong>Grains, Oil, Spices &amp; Dairy</strong>, and <strong>Payasam, Drinks, Bakery &amp; Water/Ice</strong>.
+        </p>
+      </div>
+
+      <div class="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-sm space-y-3">
+        <div class="flex flex-col md:flex-row gap-3 items-center justify-between">
+          <div class="flex flex-wrap gap-2" id="foodClassPillContainer">
+            <button onclick="setFoodClassFilter('all')" class="food-class-pill px-3.5 py-1.5 rounded-xl text-xs font-extrabold bg-emerald-800 text-white transition-all">All Food Classes (16)</button>
+            <button onclick="setFoodClassFilter('meat_fish')" class="food-class-pill px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all">🥩 Meat, Poultry &amp; Sea Fish</button>
+            <button onclick="setFoodClassFilter('vegetables_leaves')" class="food-class-pill px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all">🥦 Vegetables &amp; Plantain Leaves</button>
+            <button onclick="setFoodClassFilter('grains_spices_dairy')" class="food-class-pill px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all">🍚 Grains, Spices, Ghee &amp; Dairy</button>
+            <button onclick="setFoodClassFilter('drinks_sweets_water')" class="food-class-pill px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all">🍮 Payasam, Drinks, Bakery &amp; Water</button>
+          </div>
+          <div class="relative w-full md:w-72">
+            <input type="text" id="classifiedFoodSearchInput" oninput="filterClassifiedFood(this.value)" placeholder="Search Mutton, Rice, Ghee, Water..." class="w-full bg-slate-50 border border-slate-300 rounded-xl pl-9 pr-3 py-2 text-xs font-semibold text-slate-800 focus:ring-2 focus:ring-emerald-600 outline-none">
+            <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3 top-2.5"></i>
+          </div>
+        </div>
+      </div>
+
+      <div id="classifiedFoodGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <!-- Populated dynamically from FOOD_ITEMS_CLASSIFIED -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 1: Detailed Food & BOM Estimator -->
+  <section id="calculator" class="py-16 bg-white border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="max-w-3xl mx-auto text-center space-y-3 mb-12">
+        <span class="text-xs font-bold uppercase tracking-wider bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full border border-emerald-200">
+          Culinary Bill of Materials (BOM)
+        </span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+          Wedding Food Quantity & Cost Estimator
+        </h2>
+        <p class="text-slate-600 text-base">
+          Know exactly how many kilograms of mutton, beef, fish, rice, oil, and spices you need for your wedding guests based on authentic Kerala master cook culinary formulas. No food shortage, zero wastage!
+        </p>
+      </div>
+
+      <!-- Controls Panel -->
+      <div class="bg-slate-50 p-6 sm:p-8 rounded-2xl border border-slate-200 mb-8">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+          
+          <!-- Menu Selection -->
+          <div class="md:col-span-6 space-y-2">
+            <label class="block text-sm font-bold text-slate-700">Choose Kerala Wedding Menu</label>
+            <div class="grid grid-cols-2 gap-2" id="menuButtonContainer">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+
+          <!-- Guest Count Input -->
+          <div class="md:col-span-6 space-y-2 bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+            <div class="flex justify-between items-center">
+              <label class="text-sm font-bold text-slate-800">Total Wedding Guests</label>
+              <div class="flex items-center gap-2">
+                <input type="number" id="calcGuestInput" min="50" max="5000" step="25" value="500" class="w-24 text-right px-2 py-1 border border-slate-300 rounded font-bold text-emerald-800 text-base focus:ring-2 focus:ring-emerald-600 outline-none">
+                <span class="text-xs font-semibold text-slate-500">Persons</span>
+              </div>
+            </div>
+            <input type="range" id="calcGuestSlider" min="50" max="3000" step="50" value="500" class="w-full h-2 bg-slate-200 rounded-lg cursor-pointer">
+            <div class="flex justify-between text-[11px] font-semibold text-slate-400">
+              <span>100 (Intimate)</span>
+              <span>500 (Standard)</span>
+              <span>1,000 (Grand)</span>
+              <span>2,500+ (Mega Feast)</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Financial Comparison Metrics -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+        <div class="p-5 rounded-xl bg-white border border-slate-200 shadow-sm">
+          <div class="text-xs font-bold text-slate-500 uppercase tracking-wider">Raw Material Sourcing</div>
+          <div id="statRawCost" class="text-2xl font-black text-slate-900 mt-1">₹1,10,000</div>
+          <p class="text-xs text-slate-500 mt-1">Direct from wholesale mandi / meat port</p>
+        </div>
+
+        <div class="p-5 rounded-xl bg-white border border-slate-200 shadow-sm">
+          <div class="text-xs font-bold text-slate-500 uppercase tracking-wider">Cook & Assistants Labour</div>
+          <div id="statLabourCost" class="text-2xl font-black text-slate-900 mt-1">₹22,500</div>
+          <p class="text-xs text-slate-500 mt-1">Est. ₹45/plate for expert master cook team</p>
+        </div>
+
+        <div class="p-5 rounded-xl bg-emerald-50 border border-emerald-200 shadow-sm">
+          <div class="text-xs font-bold text-emerald-800 uppercase tracking-wider">Self-Managed Total</div>
+          <div id="statDirectTotal" class="text-2xl font-black text-emerald-900 mt-1">₹1,32,500</div>
+          <p class="text-xs text-emerald-700 mt-1">Total out-of-pocket wedding food expense</p>
+        </div>
+
+        <div class="p-5 rounded-xl bg-amber-50 border border-amber-300 shadow-sm">
+          <div class="text-xs font-bold text-amber-900 uppercase tracking-wider">Estimated Savings</div>
+          <div id="statSavings" class="text-2xl font-black text-amber-700 mt-1">₹57,500 Saved</div>
+          <p class="text-xs text-amber-800 mt-1">Compared to full catering contract quote</p>
+        </div>
+      </div>
+
+      <!-- Itemized Bill of Materials (BOM) Table -->
+      <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden mb-6">
+        <div class="px-6 py-4 bg-slate-50 border-b border-slate-200 flex flex-wrap items-center justify-between gap-3">
+          <div>
+            <h3 id="bomTableTitle" class="text-lg font-bold text-slate-900">Itemized Raw Ingredients List for 500 Guests</h3>
+            <p id="bomTableSubtitle" class="text-xs text-slate-500">Calculated based on standard Kerala catering ratios</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="addBOMToProcurementSheet()" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-amber-500 hover:bg-amber-400 text-slate-950 text-xs font-bold shadow-sm transition-all">
+              <i data-lucide="plus-circle" class="w-4 h-4"></i>
+              <span>Add All to My Sourcing Sheet</span>
+            </button>
+            <button onclick="shareBOMOnWhatsApp()" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold transition-all shadow-sm">
+              <i data-lucide="share-2" class="w-4 h-4"></i>
+              <span>Share via WhatsApp</span>
+            </button>
+            <button onclick="triggerPrintableOrderSheet()" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg border border-slate-300 bg-white hover:bg-slate-50 text-slate-700 text-xs font-semibold">
+              <i data-lucide="printer" class="w-4 h-4"></i>
+              <span>Print List</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="bg-slate-100/75 border-b border-slate-200 text-xs font-bold uppercase tracking-wider text-slate-600">
+                <th class="py-3.5 px-6">Ingredient / Item</th>
+                <th class="py-3.5 px-4 text-center">Required Quantity</th>
+                <th class="py-3.5 px-4 text-right">Wholesale Benchmark Rate</th>
+                <th class="py-3.5 px-6 text-right">Estimated Cost</th>
+                <th class="py-3.5 px-6 hidden sm:table-cell">Procurement Notes</th>
+              </tr>
+            </thead>
+            <tbody id="bomTableBody" class="divide-y divide-slate-100 text-sm">
+              <!-- Rendered via JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Master Cook & Kitchen Staff Labour Wage Estimator (Kerala Standard Rates) -->
+      <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-7 mb-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-slate-200 gap-3">
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="text-xs font-extrabold uppercase tracking-wider px-2.5 py-0.5 rounded bg-emerald-100 text-emerald-800 border border-emerald-200">Labour Benchmark</span>
+              <h3 class="text-xl font-extrabold text-slate-900">Kerala Master Cook & Kitchen Labour Wages Guide</h3>
+            </div>
+            <p class="text-xs text-slate-500 mt-1">
+              When sourcing raw goods yourself, here is the realistic wage standard for independent cooking crews in Kerala (പാചക തൊഴിലാളി കൂലി നിരക്ക്).
+            </p>
+          </div>
+          <div class="text-left sm:text-right">
+            <span class="text-xs text-slate-500 font-semibold block">Total Estimated Labour:</span>
+            <span id="labourTotalCost" class="text-2xl font-black text-emerald-900">₹41,400</span>
+            <span id="labourAvgPerPlate" class="text-xs font-bold text-slate-500 block">(~₹83 / plate total)</span>
+          </div>
+        </div>
+
+        <!-- Role-wise Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3.5 my-5">
+          <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 space-y-1">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-slate-500">Master Chef (മേസ്തിരി)</div>
+            <div id="labourHeadChefFee" class="text-lg font-black text-slate-900">₹20,000</div>
+            <div id="labourHeadChefRate" class="text-[11px] text-emerald-700 font-semibold">₹40 / plate (Dum Biryani)</div>
+            <p class="text-[10px] text-slate-400">Head recipe owner & dum specialist</p>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 space-y-1">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-slate-500">Cook Assistants (സഹായികൾ)</div>
+            <div id="labourAssistantCost" class="text-lg font-black text-slate-900">₹4,800</div>
+            <div id="labourAssistantCount" class="text-[11px] text-slate-700 font-semibold">4 Cooks @ ₹1,200/day</div>
+            <p class="text-[10px] text-slate-400">Vegetable cutting, fire & stirring</p>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 space-y-1">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-slate-500">Serving Crew (വിളമ്പുകാർ)</div>
+            <div id="labourServerCost" class="text-lg font-black text-slate-900">₹10,800</div>
+            <div id="labourServerCount" class="text-[11px] text-slate-700 font-semibold">12 Staff @ ₹900/day</div>
+            <p class="text-[10px] text-slate-400">Table & buffet line food service</p>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 space-y-1">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-slate-500">Dishwashers (പാത്രം ക്ലീനിംഗ്)</div>
+            <div id="labourCleanerCost" class="text-lg font-black text-slate-900">₹4,000</div>
+            <div id="labourCleanerCount" class="text-[11px] text-slate-700 font-semibold">4 Workers @ ₹1,000/day</div>
+            <p class="text-[10px] text-slate-400">Heavy chembu & plate sanitization</p>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 space-y-1">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-slate-500">Welcome Drinks / Tea</div>
+            <div id="labourTeaCost" class="text-lg font-black text-slate-900">₹1,800</div>
+            <div id="labourTeaCount" class="text-[11px] text-slate-700 font-semibold">2 Staff @ ₹900/day</div>
+            <p class="text-[10px] text-slate-400">Live Sulaimani & juice counter</p>
+          </div>
+        </div>
+
+        <!-- Labour Footer & Actions -->
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-3 pt-3 border-t border-slate-100 text-xs">
+          <div class="flex items-center gap-2 text-slate-600">
+            <i data-lucide="users" class="w-4 h-4 text-emerald-700"></i>
+            <span>Recommended Kitchen Crew Size: <strong id="labourTotalStaff" class="text-slate-900 font-bold">23 Members</strong> for smooth food flow</span>
+          </div>
+          <div class="flex items-center gap-2 w-full sm:w-auto">
+            <button onclick="addLabourToProcurementSheet()" class="w-full sm:w-auto px-4 py-2 rounded-lg bg-emerald-800 hover:bg-emerald-900 text-white font-bold transition-all shadow-sm flex items-center justify-center gap-1.5">
+              <i data-lucide="plus-circle" class="w-3.5 h-3.5 text-amber-300"></i>
+              <span>Add Kitchen Labour to Sourcing Sheet</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Quick Action: Find Wholesalers for this Menu -->
+      <div class="p-4 rounded-xl bg-amber-50/70 border border-amber-200 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-lg bg-amber-100 flex items-center justify-center text-amber-800 shrink-0">
+            <i data-lucide="shopping-cart" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h4 class="text-sm font-bold text-slate-900">Ready to buy these raw goods at wholesale rates?</h4>
+            <p class="text-xs text-slate-600">Check verified wholesale markets in your district with 1-click WhatsApp enquiry.</p>
+          </div>
+        </div>
+        <a href="#people" onclick="navigateToSection('people', 'vendor-directory'); return false;" class="px-5 py-2.5 rounded-lg bg-emerald-800 hover:bg-emerald-900 text-white font-bold text-xs shrink-0 shadow-sm transition-all">
+          Find Wholesalers Near Me
+        </a>
+      </div>
+
+    </div>
+  </section>
+  <!-- Section 3B: Wholesale Vegetable Mandi & Direct Bulk Buy Catalog -->
+  <section id="wholesale-vegetables" class="py-16 bg-slate-50 border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="max-w-3xl mx-auto text-center space-y-3 mb-10">
+        <span class="text-xs font-bold uppercase tracking-wider bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full border border-emerald-200">
+          Direct Farm & Mandi Sourcing
+        </span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+          Wholesale Vegetables & Plantain Leaves (Bulk Buy)
+        </h2>
+        <p class="text-slate-600 text-base">
+          Buy full gunny sacks and plastic crates directly at Kerala APMC Mandi prices. Need an emergency sack of onions in 1 hour or pre-booking a lorry load for a 1,000-guest Sadya? Direct phone numbers below!
+        </p>
+
+        <!-- Vegetable Filter & Search Bar -->
+        <div class="max-w-md mx-auto mt-4">
+          <div class="relative">
+            <input type="text" id="vegSearchInput" oninput="filterVegetables(this.value)" placeholder="Search vegetables (e.g. Onion, Yam, Tomato, Leaves)..." class="w-full bg-white border border-slate-300 rounded-xl pl-10 pr-4 py-2.5 text-xs font-semibold text-slate-800 shadow-sm focus:ring-2 focus:ring-emerald-600 outline-none">
+            <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3.5 top-3"></i>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Vegetable Catalog Grid -->
+      <div id="vegetablesCatalogGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
+        <!-- Rendered dynamically from WHOLESALE_VEGETABLE_CATALOG -->
+      </div>
+
+      <!-- Quick Wholesale Veg Action & Merchant Phone Banner -->
+      <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="flex items-center gap-4">
+          <div class="w-12 h-12 rounded-xl bg-emerald-100 flex items-center justify-center text-emerald-800 shrink-0">
+            <i data-lucide="phone-call" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <h4 class="text-base font-bold text-slate-900">Need Bulk Vegetables or 500+ Plantain Leaves Right Now?</h4>
+            <p class="text-xs text-slate-500">Call local wholesale vegetable yards directly for immediate dispatch or custom grading.</p>
+          </div>
+        </div>
+        <div class="flex flex-wrap items-center gap-3 shrink-0">
+          <a href="tel:+919847123456" class="px-5 py-2.5 rounded-xl bg-emerald-800 hover:bg-emerald-900 text-white font-bold text-xs flex items-center gap-2 shadow-sm">
+            <i data-lucide="phone" class="w-4 h-4"></i>
+            <span>Call Central Mandi: 98471 23456</span>
+          </a>
+          <button onclick="enquireAllVegetablesWhatsApp()" class="px-5 py-2.5 rounded-xl whatsapp-btn font-bold text-xs flex items-center gap-2 shadow-sm">
+            <i data-lucide="message-circle" class="w-4 h-4 fill-white text-emerald-500"></i>
+            <span>WhatsApp Wholesale Veg Order</span>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</div>
+<div id="view-goods" class="app-section-view hidden" data-section="goods">
+
+  <!-- Section Header & Classified Wedding Goods Explorer -->
+  <section id="classified-goods-catalog" class="py-12 bg-gradient-to-b from-amber-50/60 to-white border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+      <div class="flex flex-wrap items-center justify-between gap-3">
+        <button onclick="navigateToSection('home')" class="inline-flex items-center gap-1.5 text-xs font-bold text-slate-600 hover:text-emerald-800 bg-white px-3 py-1.5 rounded-lg border border-slate-200 shadow-sm">
+          <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i> Back to Home Overview
+        </button>
+        <div class="flex flex-wrap gap-2">
+          <button onclick="navigateToSection('food')" class="text-xs font-bold text-emerald-900 bg-emerald-100 hover:bg-emerald-200 px-3 py-1.5 rounded-lg border border-emerald-300">← Back to Food Items</button>
+          <button onclick="navigateToSection('people')" class="text-xs font-bold text-amber-900 bg-amber-100 hover:bg-amber-200 px-3 py-1.5 rounded-lg border border-amber-300">Find Vessel, Pandal &amp; Lighting Crews →</button>
+        </div>
+      </div>
+
+      <div class="max-w-3xl mx-auto text-center space-y-2">
+        <span class="text-xs font-extrabold uppercase tracking-wider bg-amber-100 text-amber-900 px-3 py-1 rounded-full border border-amber-200">
+          Classified Domain 2 • Physical Materials, Plates, Vessels &amp; Equipment
+        </span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+          Classified Wedding Goods, Utensils &amp; Event Materials
+        </h2>
+        <p class="text-sm sm:text-base text-slate-600">
+          Strictly separated from edible foods: <strong>Dining Crockery &amp; Plates</strong>, <strong>Cooking Vessels, Moulds &amp; LPG</strong>, <strong>Pandal, Seating &amp; Generators</strong>, and <strong>Home Paint &amp; Stage Supplies</strong>.
+        </p>
+      </div>
+
+      <div class="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-sm space-y-3">
+        <div class="flex flex-col md:flex-row gap-3 items-center justify-between">
+          <div class="flex flex-wrap gap-2" id="goodsClassPillContainer">
+            <button onclick="setGoodsClassFilter('all')" class="goods-class-pill px-3.5 py-1.5 rounded-xl text-xs font-extrabold bg-emerald-800 text-white transition-all">All Wedding Goods (11)</button>
+            <button onclick="setGoodsClassFilter('crockery')" class="goods-class-pill px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all">🍽️ Plates, Thalis &amp; Glasses</button>
+            <button onclick="setGoodsClassFilter('vessels_fuel')" class="goods-class-pill px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all">🍲 Biryani Chembus, Urulis, Moulds &amp; Gas</button>
+            <button onclick="setGoodsClassFilter('pandal_power')" class="goods-class-pill px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all">⛺ Shamiana Pandals, Chairs &amp; 25kVA Genset</button>
+            <button onclick="setGoodsClassFilter('prep_decor')" class="goods-class-pill px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all">🎨 Home Paint Drums &amp; Stage Props</button>
+          </div>
+          <div class="relative w-full md:w-72">
+            <input type="text" id="classifiedGoodsSearchInput" oninput="filterClassifiedGoods(this.value)" placeholder="Search Chembu, Uruli, Mould, Chairs..." class="w-full bg-slate-50 border border-slate-300 rounded-xl pl-9 pr-3 py-2 text-xs font-semibold text-slate-800 focus:ring-2 focus:ring-emerald-600 outline-none">
+            <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3 top-2.5"></i>
+          </div>
+        </div>
+      </div>
+
+      <div id="classifiedGoodsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <!-- Populated dynamically from GOODS_CLASSIFIED_CATALOG -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3C: Plates, Glasses & Cooking Vessels: Buy Wholesale or Rent -->
+  <section id="utensils-buy-rent" class="py-16 bg-white border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="max-w-3xl mx-auto text-center space-y-3 mb-8">
+        <span class="text-xs font-bold uppercase tracking-wider bg-amber-100 text-amber-900 px-3 py-1 rounded-full border border-amber-200">
+          Dual Option: Daily Rental vs Permanent Buy
+        </span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+          Wedding Plates, Glassware & Cooking Vessels
+        </h2>
+        <p class="text-slate-600 text-base">
+          Renting for a single wedding function or buying wholesale cartons for auditorium/family long-term use? Compare both options side-by-side with verified vendor phone numbers.
+        </p>
+
+        <!-- Rent vs Buy Toggle -->
+        <div class="inline-flex p-1 bg-slate-100 rounded-xl border border-slate-200 mt-4">
+          <button id="toggleModeRent" onclick="setUtensilViewMode('rent')" class="px-5 py-2 rounded-lg text-xs font-extrabold bg-emerald-800 text-white shadow-sm transition-all flex items-center gap-2">
+            <i data-lucide="calendar" class="w-4 h-4"></i>
+            <span>Option 1: Rent Per Day (For Wedding)</span>
+          </button>
+          <button id="toggleModeBuy" onclick="setUtensilViewMode('buy')" class="px-5 py-2 rounded-lg text-xs font-extrabold text-slate-600 hover:text-slate-900 transition-all flex items-center gap-2">
+            <i data-lucide="shopping-bag" class="w-4 h-4"></i>
+            <span>Option 2: Buy Wholesale Cartons (Permanent)</span>
+          </button>
+        </div>
+
+        <!-- Utensils Search Bar -->
+        <div class="max-w-md mx-auto mt-4">
+          <div class="relative">
+            <input type="text" id="utensilSearchInput" oninput="filterUtensils(this.value)" placeholder="Search plates, thali, tumblers, chembu, uruli..." class="w-full bg-slate-50 border border-slate-300 rounded-xl pl-10 pr-4 py-2 text-xs font-semibold text-slate-800 shadow-sm focus:ring-2 focus:ring-emerald-600 outline-none">
+            <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3.5 top-2.5"></i>
+          </div>
+        </div>
+      </div>
+
+      <!-- Utensils Dual Cards Grid -->
+      <div id="utensilsDualCatalogGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+        <!-- Populated dynamically via JS -->
+      </div>
+
+    </div>
+  </section>
+  <!-- Section 4: Rentals & Pre-Wedding Home Prep Rate Cards -->
+  <section id="rentals-prep" class="py-16 bg-slate-50 border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="max-w-3xl mx-auto text-center space-y-3 mb-12">
+        <span class="text-xs font-bold uppercase tracking-wider bg-slate-200 text-slate-800 px-3 py-1 rounded-full">
+          Rate Cards & Transparency
+        </span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+          Vessel Rentals, Pandals & Pre-Wedding Home Works
+        </h2>
+        <p class="text-slate-600 text-base">
+          Standard market benchmarks across Kerala for cooking vessels, dining crockery, shamiana pandals, and home painting so you never get overcharged.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        
+        <!-- Left: Utensils, Plates & Pandal Rentals -->
+        <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+          <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+            <h3 class="text-lg font-bold text-slate-900 flex items-center gap-2">
+              <i data-lucide="utensils" class="w-5 h-5 text-emerald-700"></i>
+              Catering Vessels & Dining Rentals
+            </h3>
+            <span class="text-xs font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">Per Day Rates</span>
+          </div>
+
+          <div class="divide-y divide-slate-100 text-sm">
+            <div class="py-3 flex justify-between items-center">
+              <div>
+                <span class="font-bold text-slate-800">Melamine / Stainless Steel Dinner Plates</span>
+                <p class="text-xs text-slate-500">Washed, sanitized and packed in crates</p>
+              </div>
+              <div class="text-right">
+                <span class="font-black text-emerald-800">₹3.50 / day</span>
+                <span class="block text-[11px] text-slate-400 line-through">MRP: ₹6.00</span>
+              </div>
+            </div>
+
+            <div class="py-3 flex justify-between items-center">
+              <div>
+                <span class="font-bold text-slate-800">Water & Juice Glass Tumblers</span>
+                <p class="text-xs text-slate-500">Clear glass tumblers for dining table</p>
+              </div>
+              <div class="text-right">
+                <span class="font-black text-emerald-800">₹2.00 / day</span>
+                <span class="block text-[11px] text-slate-400 line-through">MRP: ₹4.00</span>
+              </div>
+            </div>
+
+            <div class="py-3 flex justify-between items-center">
+              <div>
+                <span class="font-bold text-slate-800">Giant Biryani Chembu / Degchi</span>
+                <p class="text-xs text-slate-500">Heavy cast bottom for 10-15kg rice dum</p>
+              </div>
+              <div class="text-right">
+                <span class="font-black text-emerald-800">₹280 / day</span>
+                <span class="block text-[11px] text-slate-400 line-through">MRP: ₹500</span>
+              </div>
+            </div>
+
+            <div class="py-3 flex justify-between items-center">
+              <div>
+                <span class="font-bold text-slate-800">Bronze / Aluminium Uruli (Large)</span>
+                <p class="text-xs text-slate-500">Ideal for payasam, roasting beef & chicken</p>
+              </div>
+              <div class="text-right">
+                <span class="font-black text-emerald-800">₹350 / day</span>
+                <span class="block text-[11px] text-slate-400 line-through">MRP: ₹650</span>
+              </div>
+            </div>
+
+            <div class="py-3 flex justify-between items-center">
+              <div>
+                <span class="font-bold text-slate-800">VIP Banquet Cushion Chairs</span>
+                <p class="text-xs text-slate-500">Heavy steel frame with white/gold seat covers</p>
+              </div>
+              <div class="text-right">
+                <span class="font-black text-emerald-800">₹12.00 / day</span>
+                <span class="block text-[11px] text-slate-400 line-through">MRP: ₹22</span>
+              </div>
+            </div>
+
+            <div class="py-3 flex justify-between items-center">
+              <div>
+                <span class="font-bold text-slate-800">Waterproof Aluminium Pipe Shamiana</span>
+                <p class="text-xs text-slate-500">Heavy rain-protection ceiling with frills</p>
+              </div>
+              <div class="text-right">
+                <span class="font-black text-emerald-800">₹6.50 / sq.ft</span>
+                <span class="block text-[11px] text-slate-400 line-through">MRP: ₹12</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Pre-Wedding Home Painting & Deep Cleaning Calculator -->
+        <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm space-y-5">
+          <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+            <h3 class="text-lg font-bold text-slate-900 flex items-center gap-2">
+              <i data-lucide="paint-roller" class="w-5 h-5 text-amber-600"></i>
+              Pre-Wedding House Painting & Cleaning
+            </h3>
+            <span class="text-xs font-semibold text-amber-800 bg-amber-50 px-2 py-0.5 rounded border border-amber-200">Labour Benchmark</span>
+          </div>
+
+          <p class="text-xs text-slate-500">
+            In Kerala, almost every family repaints and cleans their house before a wedding. Here is the realistic cost estimator based on your house size:
+          </p>
+
+          <div class="space-y-4">
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1.5">Select Built-up House Area</label>
+              <select id="houseSizeSelect" onchange="calculateHousePrepCost()" class="w-full bg-slate-50 border border-slate-300 rounded-lg px-3.5 py-2.5 text-sm font-semibold text-slate-800 focus:ring-2 focus:ring-emerald-600 outline-none">
+                <option value="1200">Small House (Up to 1,200 sq.ft - Single Floor)</option>
+                <option value="1800" selected>Standard House (1,500 - 1,800 sq.ft - 2 Floors)</option>
+                <option value="2500">Large House (2,200 - 2,500 sq.ft - 2 Floors)</option>
+                <option value="3500">Grand Villa / Mansion (3,000+ sq.ft)</option>
+              </select>
+            </div>
+
+            <!-- Cost Estimates -->
+            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2.5 text-sm">
+              <div class="flex justify-between items-center">
+                <span class="text-slate-600">Interior Paint Labour (2 Coats + Touchup):</span>
+                <span id="houseInteriorLabour" class="font-bold text-slate-900">₹16,500</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-slate-600">Exterior Wash & Paint Labour:</span>
+                <span id="houseExteriorLabour" class="font-bold text-slate-900">₹14,000</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-slate-600">Full House Deep Cleaning & Floor Buffing:</span>
+                <span id="houseCleaningCost" class="font-bold text-slate-900">₹6,500</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-slate-600">Yard Clearance & Leveling:</span>
+                <span id="houseYardCost" class="font-bold text-slate-900">₹3,500</span>
+              </div>
+              <div class="border-t border-slate-200 pt-2 flex justify-between items-center">
+                <span class="font-extrabold text-slate-800">Total House Preparation Cost:</span>
+                <span id="houseTotalCost" class="text-base font-black text-amber-800">₹40,500</span>
+              </div>
+            </div>
+
+            <div class="p-3 bg-emerald-50 rounded-lg border border-emerald-200 text-xs text-emerald-800">
+              💡 <strong>Pro Tip:</strong> Book local painting contractors 3 to 4 weeks prior to the wedding date to get better labour rates before season rush.
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Wedding Stage Decor Themes & Pandal Customizer -->
+      <div class="mt-12 bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-sm">
+        <div class="max-w-3xl mx-auto text-center space-y-2 mb-8">
+          <span class="text-xs font-extrabold uppercase tracking-wider bg-amber-100 text-amber-900 px-3 py-1 rounded-full border border-amber-200">
+            Stage & Pandal Architecture
+          </span>
+          <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+            Kerala Wedding Stage Decor Themes & Transparent Packages
+          </h3>
+          <p class="text-slate-600 text-xs sm:text-sm">
+            Decorators often charge ₹50,000 to ₹1,50,000 without itemized transparency. Here are authentic Kerala market benchmarks with itemized inclusions:
+          </p>
+        </div>
+
+        <!-- 3 Decor Theme Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
+          
+          <!-- Theme 1 -->
+          <div onclick="selectDecorTheme('decor_traditional_kasavu')" id="themeCard_decor_traditional_kasavu" class="p-5 rounded-2xl border-2 border-emerald-800 bg-emerald-50/30 cursor-pointer transition-all hover:shadow-md space-y-3 relative">
+            <div class="flex justify-between items-start">
+              <span class="text-[10px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded bg-amber-100 text-amber-900 border border-amber-200">Traditional</span>
+              <span class="text-xs font-bold text-slate-400 line-through">MRP: ₹38,000</span>
+            </div>
+            <h4 class="text-base font-extrabold text-slate-900">Traditional Kasavu & Marigold Mandapam</h4>
+            <p class="text-xs text-slate-600 line-clamp-2">Authentic Kerala temple aesthetic with brass Nilavilakku, golden marigold torans & banana trunks.</p>
+            <div class="pt-2 border-t border-slate-200 flex justify-between items-center">
+              <span class="text-xs text-slate-500 font-medium">Wholesale Standard:</span>
+              <span class="text-xl font-black text-emerald-900">₹22,000</span>
+            </div>
+          </div>
+
+          <!-- Theme 2 -->
+          <div onclick="selectDecorTheme('decor_royal_arabian')" id="themeCard_decor_royal_arabian" class="p-5 rounded-2xl border border-slate-200 bg-white cursor-pointer transition-all hover:shadow-md space-y-3 relative">
+            <div class="flex justify-between items-start">
+              <span class="text-[10px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 border border-emerald-200">Malabar Grand</span>
+              <span class="text-xs font-bold text-slate-400 line-through">MRP: ₹55,000</span>
+            </div>
+            <h4 class="text-base font-extrabold text-slate-900">Royal Arabian Nikah & Reception Stage</h4>
+            <p class="text-xs text-slate-600 line-clamp-2">Opulent Malabar Islamic Nikah stage with rich velvet drapes and crystal chandeliers.</p>
+            <div class="pt-2 border-t border-slate-200 flex justify-between items-center">
+              <span class="text-xs text-slate-500 font-medium">Wholesale Standard:</span>
+              <span class="text-xl font-black text-emerald-900">₹32,000</span>
+            </div>
+          </div>
+
+          <!-- Theme 3 -->
+          <div onclick="selectDecorTheme('decor_modern_floral_arch')" id="themeCard_decor_modern_floral_arch" class="p-5 rounded-2xl border border-slate-200 bg-white cursor-pointer transition-all hover:shadow-md space-y-3 relative">
+            <div class="flex justify-between items-start">
+              <span class="text-[10px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded bg-purple-100 text-purple-800 border border-purple-200">Contemporary</span>
+              <span class="text-xs font-bold text-slate-400 line-through">MRP: ₹46,000</span>
+            </div>
+            <h4 class="text-base font-extrabold text-slate-900">Modern Pastel Floral Arch & Fairy Lights</h4>
+            <p class="text-xs text-slate-600 line-clamp-2">Chic European botanical stage with dual circular arches, fairy lights & customized acrylic board.</p>
+            <div class="pt-2 border-t border-slate-200 flex justify-between items-center">
+              <span class="text-xs text-slate-500 font-medium">Wholesale Standard:</span>
+              <span class="text-xl font-black text-emerald-900">₹26,000</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Selected Theme Inclusions & Pandal Area Calculator -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start bg-slate-50 p-6 sm:p-7 rounded-2xl border border-slate-200">
+          
+          <!-- Inclusions List -->
+          <div class="lg:col-span-7 space-y-3">
+            <div class="flex items-center justify-between">
+              <h4 id="selectedThemeTitle" class="text-base font-bold text-slate-900">Included in Traditional Kasavu Mandapam (₹22,000):</h4>
+              <span class="text-xs font-semibold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded">All-Inclusive</span>
+            </div>
+            <ul id="selectedThemeInclusions" class="space-y-2 text-xs text-slate-700">
+              <!-- Rendered via JS -->
+            </ul>
+          </div>
+
+          <!-- Pandal & Extras Calculator -->
+          <div class="lg:col-span-5 bg-white p-5 rounded-xl border border-slate-200 space-y-4">
+            <h5 class="text-xs font-bold uppercase tracking-wider text-slate-700 flex items-center gap-1.5">
+              <i data-lucide="tent" class="w-4 h-4 text-emerald-700"></i> Add Home Yard Shamiana Pandal
+            </h5>
+
+            <div>
+              <div class="flex justify-between text-xs font-semibold text-slate-700 mb-1">
+                <span>Pandal Roof Area:</span>
+                <span id="pandalAreaDisplay" class="font-bold text-emerald-800">1,500 sq.ft (₹9,750)</span>
+              </div>
+              <input type="range" id="pandalAreaSlider" min="500" max="4000" step="250" value="1500" oninput="updateDecorAndPandalCost()" class="w-full h-2 bg-slate-200 rounded-lg cursor-pointer">
+              <span class="text-[10px] text-slate-400">Rate: ₹6.50/sq.ft for heavy waterproof aluminum truss shamiana</span>
+            </div>
+
+            <div class="space-y-2 text-xs">
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="checkbox" id="checkMistFans" onchange="updateDecorAndPandalCost()" checked class="w-4 h-4 rounded text-emerald-700 focus:ring-emerald-600">
+                <span class="text-slate-700 font-medium">Add 4 Heavy Mist Cooling Fans (+₹4,800)</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="checkbox" id="checkGenerator" onchange="updateDecorAndPandalCost()" class="w-4 h-4 rounded text-emerald-700 focus:ring-emerald-600">
+                <span class="text-slate-700 font-medium">Add 25kVA Silent Generator Backup (+₹5,500)</span>
+              </label>
+            </div>
+
+            <div class="border-t border-slate-200 pt-3 flex justify-between items-center">
+              <span class="text-xs font-extrabold text-slate-700">Total Stage & Pandal Package:</span>
+              <span id="totalDecorPackagePrice" class="text-xl font-black text-emerald-900">₹36,550</span>
+            </div>
+
+            <button onclick="addDecorToProcurementSheet()" class="w-full py-2.5 rounded-xl bg-emerald-800 hover:bg-emerald-900 text-white font-bold text-xs shadow-md transition-all flex items-center justify-center gap-1.5">
+              <i data-lucide="plus-circle" class="w-4 h-4 text-amber-300"></i>
+              <span>Add Stage & Pandal to Sourcing Sheet</span>
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+
+
+    </div>
+  </section>
+</div>
+<div id="view-people" class="app-section-view hidden" data-section="people">
+
+  <div class="bg-slate-50 border-b border-slate-200 py-3">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-wrap items-center justify-between gap-2">
+      <button onclick="navigateToSection('home')" class="inline-flex items-center gap-1.5 text-xs font-bold text-slate-600 hover:text-emerald-800 bg-white px-3 py-1.5 rounded-lg border border-slate-200 shadow-sm">
+        <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i> Back to Home Overview
+      </button>
+      <div class="text-xs font-bold text-slate-600">
+        Showing <span class="text-emerald-800 font-black">All Wedding Service People, Cooks, Photo, Makeup, Decor, Merchants &amp; Drivers</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 3: Hyperlocal Kerala Wholesale Directory (14 Districts) -->
+  <section id="vendor-directory" class="py-16 bg-white border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="max-w-3xl mx-auto text-center space-y-3 mb-10">
+        <span class="text-xs font-bold uppercase tracking-wider bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full border border-emerald-200">
+          Complete Wedding People, Workers &amp; Wholesale Marketplace (97 Contacts)
+        </span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+          Wedding People, Crews &amp; Wholesale Markets Near You
+        </h2>
+        <p class="text-slate-600 text-base">
+          Hire Master Cooks (മേസ്തിരി), Serving Crew, Photographers, 4K Drone, Bridal Makeup &amp; Mehndi Artists, Chenda Melam/Oppana, Sound &amp; Electricians, Painters, Bakers, Hall Managers, Goods Drivers &amp; Wholesale Market Merchants directly on WhatsApp.
+        </p>
+      </div>
+
+      <!-- Live GPS Location Tracker Bar -->
+      <div class="bg-gradient-to-r from-emerald-900 via-emerald-800 to-emerald-900 text-white p-5 sm:p-6 rounded-2xl shadow-xl border border-emerald-700/50 mb-8 flex flex-col md:flex-row items-center justify-between gap-5 relative overflow-hidden">
+        <div class="absolute right-0 top-0 w-64 h-64 bg-amber-400/10 rounded-full blur-3xl pointer-events-none"></div>
+        
+        <div class="flex items-start gap-4">
+          <div class="w-12 h-12 rounded-xl bg-amber-500/20 border border-amber-400/40 flex items-center justify-center text-amber-300 shrink-0">
+            <i data-lucide="crosshair" class="w-6 h-6 animate-pulse"></i>
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <h3 class="text-lg font-bold text-white tracking-tight">Trace My Live Location in Kerala</h3>
+              <span id="locationStatusBadge" class="text-[10px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded bg-white/10 text-emerald-200 border border-white/10">GPS Ready</span>
+            </div>
+            <p id="locationStatusText" class="text-xs text-emerald-100/90 mt-1 max-w-xl leading-relaxed">
+              Click below to grant browser location permission. The engine will detect your Kerala district & coordinates, calculate exact distance (km) to all wholesale markets, and analyze the cheapest local rates.
+            </p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3 shrink-0 w-full md:w-auto">
+          <button id="btnDetectLocation" onclick="requestLiveLocation()" class="w-full md:w-auto px-5 py-3 rounded-xl bg-amber-400 hover:bg-amber-300 text-emerald-950 font-black text-xs uppercase tracking-wider shadow-lg shadow-amber-400/20 transition-all flex items-center justify-center gap-2">
+            <i data-lucide="navigation" class="w-4 h-4"></i>
+            <span id="btnDetectLocationText">Detect My Live GPS Location</span>
+          </button>
+          <button id="btnResetLocation" onclick="resetLiveLocation()" class="hidden px-3.5 py-3 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-bold transition-all" title="Clear Location Filter">
+            <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Live Location & Price Comparison Card (Unfolds when GPS active) -->
+      <div id="liveLocationAnalysisCard" class="hidden mb-8 p-6 rounded-2xl bg-gradient-to-br from-amber-50/80 via-white to-emerald-50/50 border-2 border-emerald-600/30 shadow-md">
+        <div class="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-slate-200">
+          <div class="flex items-center gap-2.5">
+            <div class="w-3 h-3 rounded-full bg-emerald-500 animate-ping"></div>
+            <div>
+              <span class="text-xs font-bold uppercase tracking-wider text-emerald-800">Live GPS Location Active</span>
+              <h3 id="detectedLocationHeading" class="text-xl font-extrabold text-slate-900">Detected: Kozhikode District</h3>
+            </div>
+          </div>
+          <div id="detectedCoordinatesBadge" class="text-xs font-mono font-bold text-slate-600 bg-white px-3 py-1.5 rounded-lg border border-slate-200 shadow-sm">
+            Coordinates: 11.2588° N, 75.7804° E
+          </div>
+        </div>
+
+        <div class="mt-4">
+          <div class="flex items-center justify-between mb-3">
+            <h4 class="text-xs font-extrabold uppercase tracking-wider text-slate-700 flex items-center gap-1.5">
+              <i data-lucide="trending-down" class="w-4 h-4 text-emerald-600"></i>
+              Best & Nearest Wholesale Rates Near Your Location:
+            </h4>
+            <span class="text-[11px] text-slate-500">Sorted by proximity (shortest travel distance)</span>
+          </div>
+
+          <div id="nearestRatesGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            <!-- Rendered dynamically -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Procurement Timeline Mode Switcher (Emergency vs Advance Booking) -->
+      <div class="mb-6 p-4 rounded-2xl bg-white border border-slate-200 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-amber-100 flex items-center justify-center text-amber-800 shrink-0">
+            <i data-lucide="clock" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h4 class="text-sm font-bold text-slate-900">Choose Procurement Timeline</h4>
+            <p class="text-xs text-slate-500">Need items right now for a wedding emergency, or planning 2-4 weeks ahead for maximum discount?</p>
+          </div>
+        </div>
+
+        <div class="inline-flex p-1 bg-slate-100 rounded-xl border border-slate-200 shrink-0">
+          <button id="timelineModeAll" onclick="setTimelineMode('all')" class="px-3.5 py-1.5 rounded-lg text-xs font-bold bg-white text-slate-800 shadow-sm transition-all">
+            All Vendors
+          </button>
+          <button id="timelineModeUrgent" onclick="setTimelineMode('urgent')" class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-slate-600 hover:text-slate-900 transition-all flex items-center gap-1.5">
+            <i data-lucide="zap" class="w-3.5 h-3.5 text-amber-500"></i>
+            <span>Need Immediately (Same-Day)</span>
+          </button>
+          <button id="timelineModeAdvance" onclick="setTimelineMode('advance')" class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-slate-600 hover:text-slate-900 transition-all flex items-center gap-1.5">
+            <i data-lucide="calendar" class="w-3.5 h-3.5 text-emerald-600"></i>
+            <span>Advance Booking (2-4 Wks)</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- District & Category Filters -->
+      <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 mb-8 space-y-4">
+        
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
+          <!-- District Selector -->
+          <div class="md:col-span-4">
+            <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1.5">Select Kerala District</label>
+            <div class="relative">
+              <select id="districtFilterSelect" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-sm font-bold text-slate-800 focus:ring-2 focus:ring-emerald-600 outline-none appearance-none">
+                <option value="all">All Kerala Districts (14 Districts)</option>
+                <!-- Populated via JS -->
+              </select>
+              <i data-lucide="map-pin" class="w-4 h-4 text-emerald-600 absolute right-4 top-3.5 pointer-events-none"></i>
+            </div>
+          </div>
+
+          <!-- Max Distance Radius Filter -->
+          <div class="md:col-span-3">
+            <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1.5">Distance Radius</label>
+            <div class="relative">
+              <select id="radiusFilterSelect" onchange="handleRadiusChange(event)" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-sm font-bold text-slate-800 focus:ring-2 focus:ring-emerald-600 outline-none appearance-none">
+                <option value="all">Any Distance in Kerala</option>
+                <option value="10">Within 10 km (Hyperlocal)</option>
+                <option value="25">Within 25 km</option>
+                <option value="50">Within 50 km (District Wide)</option>
+              </select>
+              <i data-lucide="compass" class="w-4 h-4 text-amber-600 absolute right-4 top-3.5 pointer-events-none"></i>
+            </div>
+          </div>
+
+          <!-- Search Input -->
+          <div class="md:col-span-5">
+            <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1.5">Search by Item, Role, City or Village</label>
+            <div class="relative">
+              <input type="text" id="vendorSearchInput" placeholder="Search Mutton, Cooks, Thalassery, Vadakara, Payyanur, Bellur, താമരശ്ശേരി, കണ്ണൂർ..." class="w-full bg-white border border-slate-300 rounded-xl pl-10 pr-4 py-2.5 text-sm font-semibold text-slate-800 focus:ring-2 focus:ring-emerald-600 outline-none">
+              <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5"></i>
+            </div>
+          </div>
+        </div>
+
+        <!-- Category Pills & Sort -->
+        <div class="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-slate-200">
+          <div class="flex flex-wrap gap-2" id="categoryPillContainer">
+            <button onclick="setCategoryFilter('all')" class="cat-pill active px-3.5 py-1.5 rounded-lg text-xs font-bold bg-emerald-800 text-white transition-all">All Categories</button>
+            <button onclick="setCategoryFilter('meat')" class="cat-pill px-3.5 py-1.5 rounded-lg text-xs font-bold bg-white text-slate-700 border border-slate-300 hover:border-emerald-600 transition-all">🥩 Meat & Seafood</button>
+            <button onclick="setCategoryFilter('vegetables')" class="cat-pill px-3.5 py-1.5 rounded-lg text-xs font-bold bg-white text-slate-700 border border-slate-300 hover:border-emerald-600 transition-all">🥦 Wholesale Vegetables</button>
+            <button onclick="setCategoryFilter('rentals')" class="cat-pill px-3.5 py-1.5 rounded-lg text-xs font-bold bg-white text-slate-700 border border-slate-300 hover:border-emerald-600 transition-all">🎪 Pandal & Vessels</button>
+            <button onclick="setCategoryFilter('home_prep')" class="cat-pill px-3.5 py-1.5 rounded-lg text-xs font-bold bg-white text-slate-700 border border-slate-300 hover:border-emerald-600 transition-all">🎨 Painting & Cleaning</button>
+            <button onclick="setCategoryFilter('logistics')" class="cat-pill px-3.5 py-1.5 rounded-lg text-xs font-bold bg-white text-slate-700 border border-slate-300 hover:border-emerald-600 transition-all">🚚 Transport & Logistics</button>
+          </div>
+
+          <!-- Sort Order Selector -->
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-bold text-slate-500 whitespace-nowrap">Sort by:</span>
+            <select id="sortOrderSelect" onchange="handleSortChange(event)" class="bg-white border border-slate-300 rounded-lg px-2.5 py-1.5 text-xs font-bold text-slate-700 focus:ring-2 focus:ring-emerald-600 outline-none">
+              <option value="nearest">Nearest Distance (GPS)</option>
+              <option value="rating">Top Rated</option>
+              <option value="name">Shop Name</option>
+            </select>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Hyperlocal Town Hubs Bar (Kasaragod • Kozhikode • Kannur) -->
+      <div id="kasaragodTownFilterBar" class="hidden mb-6 p-5 rounded-2xl bg-gradient-to-r from-amber-500/10 via-emerald-500/10 to-amber-500/10 border-2 border-emerald-600/30 shadow-sm">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
+          <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-600 animate-pulse"></span>
+            <h4 id="hyperlocalTownBarTitle" class="text-xs font-black uppercase tracking-wider text-emerald-950">Kasaragod All-District Cities, Towns &amp; Village Hubs:</h4>
+            <span id="hyperlocalTownBarBadge" class="text-[10px] font-bold bg-amber-200 text-amber-900 px-2 py-0.5 rounded border border-amber-300">മുഴുവൻ കാസർകോട് • 66+ Contacts</span>
+          </div>
+          <span id="hyperlocalTownBarSubtitle" class="text-[11px] font-semibold text-emerald-800">All 4 Taluks covered: Kasaragod, Kanhangad, Hosangadi, Uppala, Kumbla, Nileshwar, Cheruvathur, Badiyadka, Mulleria, Bellur &amp; Vellarikundu</span>
+        </div>
+        <div class="flex flex-wrap gap-2" id="kasaragodTownPillContainer">
+          <!-- Rendered dynamically via JS -->
+        </div>
+      </div>
+
+      <!-- District Main Wholesale Market Notice Banner -->
+      <div id="districtMarketNotice" class="mb-6 p-4 rounded-xl bg-emerald-50 border border-emerald-200 hidden">
+        <!-- Rendered dynamically -->
+      </div>
+
+      <!-- Vendor Cards Grid -->
+      <div id="vendorCardsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Populated via JS -->
+      </div>
+
+    </div>
+  </section>
+  <!-- Section 5: Doorstep Delivery & Transport Logistics Network -->
+  <section class="py-16 bg-white border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="bg-gradient-to-br from-emerald-900 to-emerald-800 rounded-3xl p-8 sm:p-12 text-white relative overflow-hidden shadow-2xl">
+        <div class="absolute -right-10 -bottom-10 w-80 h-80 bg-amber-400/10 rounded-full blur-3xl"></div>
+        
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
+          <div class="lg:col-span-8 space-y-4">
+            <span class="px-3 py-1 rounded-full bg-emerald-700/80 border border-emerald-500 text-amber-300 text-xs font-bold uppercase tracking-wider">
+              Doorstep Delivery Support
+            </span>
+            <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight">
+              Get Bulk Meat, Vegetables & Rentals Delivered Straight to Your Wedding House
+            </h2>
+            <p class="text-emerald-100 text-base leading-relaxed">
+              Don't spend precious wedding days driving between market mandis! We link you directly with local Tata Ace, Piaggio Ape, and Mahindra Bolero pickup drivers in your panchayat who will pick up the goods from wholesale markets and unload them at your home.
+            </p>
+            <div class="flex flex-wrap gap-4 pt-2">
+              <a href="#vendor-directory" onclick="setCategoryFilter('logistics'); document.getElementById('vendor-directory').scrollIntoView({behavior:'smooth'}); return false;" class="px-6 py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-emerald-950 font-bold text-sm shadow-md transition-all">
+                Find Local Goods Transport Drivers
+              </a>
+            </div>
+          </div>
+
+          <div class="lg:col-span-4 bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 space-y-3">
+            <h4 class="font-bold text-amber-300 text-sm uppercase tracking-wider">Standard Kerala Goods Rates:</h4>
+            <div class="space-y-2 text-xs text-emerald-100">
+              <div class="flex justify-between border-b border-white/10 pb-1.5">
+                <span>Wholesale Mandi to Home (Up to 10 km):</span>
+                <span class="font-bold text-white">₹500 - ₹700 flat</span>
+              </div>
+              <div class="flex justify-between border-b border-white/10 pb-1.5">
+                <span>Per Extra KM beyond 10 km:</span>
+                <span class="font-bold text-white">₹20 - ₹24 / km</span>
+              </div>
+              <div class="flex justify-between">
+                <span>Loading & Unloading helper (Optional):</span>
+                <span class="font-bold text-white">₹300 - ₹500</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</div>
+<div id="view-halls" class="app-section-view hidden" data-section="halls">
+
+  <section id="auditorium-estimator" class="py-12 bg-slate-50 border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-wrap items-center justify-between gap-3 mb-6">
+        <button onclick="navigateToSection('home')" class="inline-flex items-center gap-1.5 text-xs font-bold text-slate-600 hover:text-emerald-800 bg-white px-3 py-1.5 rounded-lg border border-slate-200 shadow-sm">
+          <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i> Back to Home Overview
+        </button>
+        <div class="flex items-center gap-3 bg-white px-4 py-2 rounded-xl border border-slate-200 shadow-sm">
+          <label class="text-xs font-bold text-slate-700">Adjust Hall Guest Count:</label>
+          <input type="number" id="hallsGuestSyncInput" min="100" max="3000" step="50" value="600" oninput="syncHallGuestCount(this.value)" class="w-20 px-2 py-1 border border-slate-300 rounded-lg text-xs font-black text-emerald-900">
+          <button onclick="navigateToSection('people', 'vendor-directory'); setCategoryFilter('logistics');" class="text-xs font-bold text-emerald-800 hover:underline">Need Hall Desk / Drivers →</button>
+        </div>
+      </div>
+      <!-- Auditorium & Dining Batch (പന്തി) Capacity Estimator -->
+      <div class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-sm">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-slate-200 gap-3">
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="text-xs font-extrabold uppercase tracking-wider px-2.5 py-0.5 rounded bg-blue-100 text-blue-800 border border-blue-200">Venue & Dining Logistics</span>
+              <h3 class="text-xl font-extrabold text-slate-900">Auditorium & Dining Batch (പന്തി) Capacity Estimator</h3>
+            </div>
+            <p class="text-xs text-slate-500 mt-1">
+              Prevent wedding dining hall chaos! Realistic calculations for dining seats, rolling batches, auditorium hall area, and car parking.
+            </p>
+          </div>
+          <div class="text-xs font-bold text-slate-600 bg-slate-50 px-3 py-1.5 rounded-lg border border-slate-200">
+            Based on <span id="capGuestDisplay" class="text-emerald-800 font-black">600 Guests</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 my-6">
+          <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+            <div class="text-xs font-bold text-slate-500 uppercase tracking-wider">Dining Seats Required</div>
+            <div id="capDiningSeats" class="text-2xl font-black text-slate-900 mt-1">150 Seats</div>
+            <p class="text-xs text-slate-500 mt-1">~25% seating ratio prevents long waiting lines</p>
+          </div>
+
+          <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+            <div class="text-xs font-bold text-slate-500 uppercase tracking-wider">Batches / Rounds (പന്തികൾ)</div>
+            <div id="capBatchesCount" class="text-2xl font-black text-slate-900 mt-1">4 Batches</div>
+            <p id="capDiningDuration" class="text-xs text-slate-500 mt-1">~2.1 Hours total dining window</p>
+          </div>
+
+          <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+            <div class="text-xs font-bold text-slate-500 uppercase tracking-wider">Min. Auditorium Area</div>
+            <div id="capAuditoriumArea" class="text-2xl font-black text-slate-900 mt-1">4,500 sq.ft</div>
+            <p id="capMainHallCapacity" class="text-xs text-slate-500 mt-1">For ~390 floating guests at peak</p>
+          </div>
+
+          <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+            <div class="text-xs font-bold text-slate-500 uppercase tracking-wider">Parking & Water Taps</div>
+            <div id="capParkingSlots" class="text-2xl font-black text-slate-900 mt-1">72 Cars / 90 Bikes</div>
+            <p id="capHandwashTaps" class="text-xs font-bold text-emerald-700 mt-1">Min. 8 Handwash Taps needed</p>
+          </div>
+        </div>
+
+        <div class="p-3.5 bg-amber-50 rounded-xl border border-amber-200 text-xs text-amber-900 flex items-start gap-2.5">
+          <i data-lucide="info" class="w-4 h-4 text-amber-700 shrink-0 mt-0.5"></i>
+          <div>
+            <strong>Kerala Dining Hall Advice:</strong> For traditional Sadya, each batch takes ~25 minutes to dine plus 8 minutes for table clearing and leaf wiping. Stagger close relatives (11:45 AM) from general reception guests (12:30 PM) to ensure uninterrupted dining comfort.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section id="kasaragod-halls-section" class="py-14 bg-white border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Sub-Module 2: Kasaragod Wedding Halls, Auditoriums & Fee Explorer -->
+      <div id="kasaragod-wedding-halls" class="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-sm space-y-6">
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-4 border-b border-slate-100">
+          <div>
+            <span class="text-[11px] font-extrabold uppercase tracking-wider px-2.5 py-0.5 rounded bg-amber-100 text-amber-900 border border-amber-200">
+              Auditoriums &amp; Kalyana Mandapam Fees (കല്യാണ ഹാളുകളും വാടകയും)
+            </span>
+            <h3 class="text-2xl font-extrabold text-slate-900 mt-1">
+              Kerala Wedding Halls, Convention Centres &amp; Day Rent Guide
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-600 mt-1">
+              Compare 76 venues across <strong>Kasaragod (25), Kozhikode (15), Kannur (16), Malappuram (12) &amp; Wayanad (8)</strong>: AC vs Non-AC fees, dining batch (പന്തി) count, parking, catering policies &amp; Side-by-Side Hall Comparator.
+            </p>
+          </div>
+          <div class="bg-emerald-50 border border-emerald-200 px-4 py-2.5 rounded-xl text-xs shrink-0">
+            <span class="text-emerald-800 font-semibold block">Batch Calculation Synced For:</span>
+            <strong id="hallGuestSyncDisplay" class="text-base font-black text-emerald-950">600 Wedding Guests</strong>
+          </div>
+        </div>
+
+        <!-- Hall Filter Controls -->
+        <div class="bg-slate-50 p-4 sm:p-5 rounded-2xl border border-slate-200 space-y-4">
+          <div class="grid grid-cols-1 md:grid-cols-12 gap-3.5 items-end">
+            <div class="md:col-span-3">
+              <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-1">District</label>
+              <select id="hallDistrictSelect" onchange="handleHallDistrictChange()" class="w-full bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs font-bold text-slate-800 focus:ring-2 focus:ring-emerald-600 outline-none">
+                <option value="all">All 5 Flagship Districts (76 Venues)</option>
+                <option value="kasaragod">Kasaragod (25 Halls)</option>
+                <option value="kozhikode">Kozhikode (15 Halls)</option>
+                <option value="kannur">Kannur (16 Halls)</option>
+                <option value="malappuram">Malappuram (12 Halls)</option>
+                <option value="wayanad">Wayanad (8 Halls)</option>
+              </select>
+            </div>
+
+            <div class="md:col-span-3">
+              <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-1">Region / City Cluster</label>
+              <select id="hallRegionSelect" onchange="handleHallFilterChange()" class="w-full bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs font-bold text-slate-800 focus:ring-2 focus:ring-emerald-600 outline-none">
+                <option value="all">All Regions</option>
+              </select>
+            </div>
+
+            <div class="md:col-span-2">
+              <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-1">Min Seating</label>
+              <select id="hallSeatingSelect" onchange="handleHallFilterChange()" class="w-full bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs font-bold text-slate-800 focus:ring-2 focus:ring-emerald-600 outline-none">
+                <option value="0">Any Seating</option>
+                <option value="450">450+ Seats</option>
+                <option value="650">650+ Seats</option>
+                <option value="1000">1,000+ Mega</option>
+              </select>
+            </div>
+
+            <div class="md:col-span-4">
+              <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-1">Search Hall Name or Village</label>
+              <div class="relative">
+                <input type="text" id="hallSearchInput" oninput="handleHallSearchInput(this.value)" placeholder="Search Palladium, Calicut Trade, Sadhoo, Vadakara..." class="w-full bg-white border border-slate-300 rounded-xl pl-9 pr-4 py-2.5 text-xs font-semibold text-slate-800 focus:ring-2 focus:ring-emerald-600 outline-none">
+                <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3 top-2.5"></i>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-slate-200">
+            <div class="flex flex-wrap gap-2" id="hallTierPillContainer">
+              <button onclick="setHallTierFilter('all')" class="hall-tier-pill px-3 py-1.5 rounded-lg text-xs font-extrabold bg-emerald-800 text-white transition-all">All Fee Tiers</button>
+              <button onclick="setHallTierFilter('budget')" class="hall-tier-pill px-3 py-1.5 rounded-lg text-xs font-bold bg-white text-slate-700 border border-slate-300 hover:border-emerald-600 transition-all">Budget (₹16k–₹35k)</button>
+              <button onclick="setHallTierFilter('mid')" class="hall-tier-pill px-3 py-1.5 rounded-lg text-xs font-bold bg-white text-slate-700 border border-slate-300 hover:border-emerald-600 transition-all">Mid-Range (₹35k–₹75k)</button>
+              <button onclick="setHallTierFilter('premium')" class="hall-tier-pill px-3 py-1.5 rounded-lg text-xs font-bold bg-white text-slate-700 border border-slate-300 hover:border-emerald-600 transition-all">Grand AC Convention (₹55k–₹2L+)</button>
+            </div>
+            <span id="hallResultCountBadge" class="text-xs font-bold text-slate-600">Showing 25 Kasaragod Halls</span>
+          </div>
+        </div>
+
+        <!-- Halls Grid -->
+        <div id="kasaragodHallsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <!-- Populated dynamically from KASARAGOD_WEDDING_HALLS -->
+        </div>
+
+        <!-- Kasaragod Hall Fee Transparency Checklist -->
+        <div class="bg-amber-50/80 border border-amber-200 rounded-2xl p-5 grid grid-cols-1 md:grid-cols-3 gap-4 text-xs text-amber-950">
+          <div class="flex items-start gap-2.5">
+            <i data-lucide="zap" class="w-4 h-4 text-amber-700 shrink-0 mt-0.5"></i>
+            <div>
+              <strong>AC &amp; Generator Surcharges:</strong> Many AC auditoriums quote a base slot rate and bill KSEB electricity + diesel generator backup separately (approx. ₹1,200–₹2,500/hr). Always lock a capped AC package.
+            </div>
+          </div>
+          <div class="flex items-start gap-2.5">
+            <i data-lucide="utensils" class="w-4 h-4 text-emerald-700 shrink-0 mt-0.5"></i>
+            <div>
+              <strong>Kitchen &amp; Cleaning Fees:</strong> Check whether dawn 4:00 AM cooking entry, LPG burner frames, and post-feast Haritha waste cleaning (₹3,000–₹8,000) are included in the hall rent.
+            </div>
+          </div>
+          <div class="flex items-start gap-2.5">
+            <i data-lucide="shield-check" class="w-4 h-4 text-blue-700 shrink-0 mt-0.5"></i>
+            <div>
+              <strong>Outside Catering Savings:</strong> Traditional mandapams &amp; mid-range halls let you bring your own Master Cook and self-sourced wholesale ingredients — saving ₹1,00,000+ over fixed-caterer halls.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+<div id="view-planners" class="app-section-view hidden" data-section="planners">
+
+  <div class="bg-white border-b border-slate-200 py-3">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-wrap items-center justify-between gap-2">
+      <button onclick="navigateToSection('home')" class="inline-flex items-center gap-1.5 text-xs font-bold text-slate-600 hover:text-emerald-800 bg-slate-50 px-3 py-1.5 rounded-lg border border-slate-200 shadow-sm">
+        <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i> Back to Home Overview
+      </button>
+      <div class="flex flex-wrap gap-2 text-xs">
+        <a href="#budget-optimizer" class="px-2.5 py-1 rounded bg-amber-50 text-amber-900 font-bold border border-amber-200">Budget Split</a>
+        <a href="#wedding-timeline" class="px-2.5 py-1 rounded bg-blue-50 text-blue-900 font-bold border border-blue-200">Timeline Checklist</a>
+        <a href="#food-rescue" class="px-2.5 py-1 rounded bg-emerald-50 text-emerald-900 font-bold border border-emerald-200">Food Rescue</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2: "Plan Within My Budget" Smart Optimizer -->
+  <section id="budget-optimizer" class="py-16 bg-slate-50 border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="max-w-3xl mx-auto text-center space-y-3 mb-12">
+        <span class="text-xs font-bold uppercase tracking-wider bg-amber-100 text-amber-900 px-3 py-1 rounded-full border border-amber-200">
+          Smart Financial Allocation
+        </span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+          Plan Within My Budget (ബഡ്ജറ്റ് പ്ലാനർ)
+        </h2>
+        <p class="text-slate-600 text-base">
+          Enter how much money you want to spend and your guest count. Our engine calculates the optimal allocation across food, pandal, utensils, house painting, and gives customized recommendations to prevent overspending.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        
+        <!-- Left: Input Controls -->
+        <div class="lg:col-span-5 bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm space-y-6">
+          <h3 class="text-lg font-bold text-slate-900 pb-2 border-b border-slate-100 flex items-center gap-2">
+            <i data-lucide="sliders" class="w-5 h-5 text-amber-600"></i>
+            Enter Your Budget & Event Scope
+          </h3>
+
+          <div>
+            <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1.5">Total Target Budget (₹)</label>
+            <div class="relative">
+              <span class="absolute left-3.5 top-3 text-slate-400 font-bold">₹</span>
+              <input type="number" id="budgetInputAmount" step="10000" min="50000" max="3000000" value="300000" class="w-full pl-8 pr-4 py-2.5 border border-slate-300 rounded-lg text-lg font-extrabold text-slate-900 focus:ring-2 focus:ring-emerald-600 outline-none">
+            </div>
+            <!-- Quick Preset Buttons -->
+            <div class="flex gap-2 mt-2">
+              <button onclick="setBudgetPreset(150000)" class="text-[11px] font-semibold px-2.5 py-1 bg-slate-100 hover:bg-slate-200 rounded text-slate-700">₹1.5 Lakhs</button>
+              <button onclick="setBudgetPreset(300000)" class="text-[11px] font-semibold px-2.5 py-1 bg-slate-100 hover:bg-slate-200 rounded text-slate-700">₹3 Lakhs</button>
+              <button onclick="setBudgetPreset(500000)" class="text-[11px] font-semibold px-2.5 py-1 bg-slate-100 hover:bg-slate-200 rounded text-slate-700">₹5 Lakhs</button>
+              <button onclick="setBudgetPreset(800000)" class="text-[11px] font-semibold px-2.5 py-1 bg-slate-100 hover:bg-slate-200 rounded text-slate-700">₹8 Lakhs</button>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1.5">Expected Guest Count</label>
+            <div class="relative">
+              <input type="number" id="budgetInputGuests" step="50" min="100" max="3000" value="600" class="w-full px-3.5 py-2.5 border border-slate-300 rounded-lg text-base font-bold text-slate-900 focus:ring-2 focus:ring-emerald-600 outline-none">
+            </div>
+          </div>
+
+          <button onclick="runBudgetOptimization()" class="w-full py-3 bg-emerald-800 hover:bg-emerald-900 text-white font-bold rounded-xl shadow-md shadow-emerald-900/20 transition-all flex items-center justify-center gap-2">
+            <i data-lucide="refresh-cw" class="w-4 h-4"></i>
+            <span>Calculate Smart Allocation</span>
+          </button>
+        </div>
+
+        <!-- Right: Smart Allocation Results -->
+        <div class="lg:col-span-7 bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm space-y-6">
+          <div class="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-slate-100">
+            <div>
+              <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Available Per Guest</span>
+              <div id="resPerGuest" class="text-3xl font-black text-emerald-800">₹500 / person</div>
+            </div>
+            <div id="resBudgetBadge" class="px-3.5 py-1 rounded-full text-xs font-extrabold uppercase tracking-wider badge-gold">
+              Optimal Budget
+            </div>
+          </div>
+
+          <!-- Allocation Category Cards -->
+          <div class="space-y-3">
+            <h4 class="text-xs font-bold uppercase tracking-wider text-slate-500">Recommended Budget Split</h4>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div class="p-3.5 rounded-xl border border-slate-100 bg-slate-50/70">
+                <div class="flex justify-between items-center text-xs font-semibold text-slate-600">
+                  <span class="flex items-center gap-1.5"><i data-lucide="drumstick" class="w-4 h-4 text-emerald-600"></i> Food & Cooking (48%)</span>
+                </div>
+                <div id="allocFood" class="text-lg font-black text-slate-900 mt-1">₹1,44,000</div>
+                <span class="text-[11px] text-slate-500">Raw materials + Cook master fee</span>
+              </div>
+
+              <div class="p-3.5 rounded-xl border border-slate-100 bg-slate-50/70">
+                <div class="flex justify-between items-center text-xs font-semibold text-slate-600">
+                  <span class="flex items-center gap-1.5"><i data-lucide="tent" class="w-4 h-4 text-amber-600"></i> Pandal & Lights (22%)</span>
+                </div>
+                <div id="allocPandal" class="text-lg font-black text-slate-900 mt-1">₹66,000</div>
+                <span class="text-[11px] text-slate-500">Waterproof shamiana, chairs, stage</span>
+              </div>
+
+              <div class="p-3.5 rounded-xl border border-slate-100 bg-slate-50/70">
+                <div class="flex justify-between items-center text-xs font-semibold text-slate-600">
+                  <span class="flex items-center gap-1.5"><i data-lucide="sparkles" class="w-4 h-4 text-purple-600"></i> House Prep (12%)</span>
+                </div>
+                <div id="allocHome" class="text-lg font-black text-slate-900 mt-1">₹36,000</div>
+                <span class="text-[11px] text-slate-500">Painting, touch-up & deep cleaning</span>
+              </div>
+
+              <div class="p-3.5 rounded-xl border border-slate-100 bg-slate-50/70">
+                <div class="flex justify-between items-center text-xs font-semibold text-slate-600">
+                  <span class="flex items-center gap-1.5"><i data-lucide="utensils" class="w-4 h-4 text-blue-600"></i> Utensils & Gas (10%)</span>
+                </div>
+                <div id="allocRentals" class="text-lg font-black text-slate-900 mt-1">₹30,000</div>
+                <span class="text-[11px] text-slate-500">Plates, chembus, urulis, LPG</span>
+              </div>
+            </div>
+
+            <div class="p-3 rounded-xl border border-slate-100 bg-slate-50/70 flex justify-between items-center text-xs">
+              <span class="font-semibold text-slate-600 flex items-center gap-1.5">
+                <i data-lucide="truck" class="w-4 h-4 text-slate-500"></i> Logistics & Emergency Buffer (8%)
+              </span>
+              <span id="allocLogistics" class="font-extrabold text-slate-900">₹24,000</span>
+            </div>
+          </div>
+
+          <!-- Expert Advice Box -->
+          <div class="p-4 rounded-xl bg-emerald-50/80 border border-emerald-200 space-y-2">
+            <h4 class="text-xs font-bold text-emerald-900 uppercase tracking-wider flex items-center gap-1.5">
+              <i data-lucide="lightbulb" class="w-4 h-4 text-amber-500"></i> Kerala Wedding Cost-Saving Strategy
+            </h4>
+            <div id="budgetAdviceList" class="space-y-1.5 text-xs text-emerald-800">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 6: Day-Wise Master Wedding Procurement Timeline & Interactive Checklist -->
+  <section id="wedding-timeline" class="py-16 bg-slate-50 border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="max-w-3xl mx-auto text-center space-y-3 mb-12">
+        <span class="text-xs font-bold uppercase tracking-wider bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full border border-emerald-200">
+          Wedding Master Schedule
+        </span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+          Day-Wise Wedding Procurement Checklist (കല്യാണ ടൈംലൈൻ)
+        </h2>
+        <p class="text-slate-600 text-base">
+          Never miss a single procurement step! From booking the pandal 30 days ahead to morning slaughterhouse meat delivery on the wedding day. Tick off completed tasks as your wedding preparations progress.
+        </p>
+      </div>
+
+      <!-- Timeline Stages Container -->
+      <div id="weddingTimelineContainer" class="space-y-6 max-w-4xl mx-auto">
+        <!-- Rendered dynamically from WEDDING_PROCUREMENT_TIMELINE -->
+      </div>
+
+      <!-- Print / Reset Checklist bar -->
+      <div class="max-w-4xl mx-auto mt-6 flex justify-between items-center text-xs text-slate-500">
+        <span>Progress is automatically saved in your browser.</span>
+        <div class="flex gap-3">
+          <button onclick="resetChecklist()" class="hover:text-rose-600 font-semibold flex items-center gap-1">
+            <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i> Reset Checklist
+          </button>
+          <button onclick="window.print()" class="hover:text-emerald-800 font-bold flex items-center gap-1">
+            <i data-lucide="printer" class="w-3.5 h-3.5"></i> Print Master Checklist
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+  <!-- Section 7: Kerala Leftover Food Rescue & Donation Network -->
+  <section id="food-rescue" class="py-16 bg-white border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="bg-gradient-to-br from-amber-50 via-white to-emerald-50 rounded-3xl p-8 sm:p-12 border-2 border-emerald-600/30 shadow-xl relative overflow-hidden">
+        <div class="absolute right-0 top-0 w-80 h-80 bg-emerald-400/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-3xl mb-8 space-y-3">
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-100 text-emerald-900 text-xs font-extrabold uppercase tracking-wider border border-emerald-300">
+            <i data-lucide="heart" class="w-3.5 h-3.5 text-rose-500 fill-rose-500"></i> Zero Food Waste Initiative
+          </span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+            Surplus Wedding Food? Connect with Local Food Rescue
+          </h2>
+          <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
+            In Kerala weddings, 50 to 150 plates of untouched Biryani or Sadya often remain leftover. Instead of letting clean food get wasted, call verified volunteer rescue networks in your district. They will pick up untouched hot food and distribute it to orphanages, destitute homes, and shelters within 30-45 minutes.
+          </p>
+        </div>
+
+        <!-- Food Rescue Contacts Grid -->
+        <div id="foodRescueGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+          <!-- Rendered dynamically from FOOD_RESCUE_NETWORK -->
+        </div>
+
+        <div class="p-4 rounded-xl bg-white/80 border border-slate-200 text-xs text-slate-600 flex items-center justify-between flex-wrap gap-3">
+          <span class="flex items-center gap-2">
+            <i data-lucide="shield-check" class="w-4 h-4 text-emerald-600"></i>
+            Strict hygiene rule: Only untouched food packed in clean chembus/warmers is accepted.
+          </span>
+          <span class="font-bold text-emerald-900">100% Free Volunteer Service</span>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+</div>
+<div id="view-kasaragod" class="app-section-view hidden" data-section="kasaragod">
+
+  <div class="bg-white border-b border-slate-200 py-3">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-wrap items-center justify-between gap-2">
+      <button onclick="navigateToSection('home')" class="inline-flex items-center gap-1.5 text-xs font-bold text-slate-600 hover:text-emerald-800 bg-slate-50 px-3 py-1.5 rounded-lg border border-slate-200 shadow-sm">
+        <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i> Back to Home Overview
+      </button>
+      <div id="hubBreadcrumbCoverage" class="text-xs font-bold text-emerald-900">
+        Flagship District Coverage: 4 Taluks • 3 Municipalities • 38 Grama Panchayats
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2B: Northern Kerala Flagship Wedding Hubs (Kasaragod • Kozhikode • Kannur Complete Coverage) -->
+  <section id="kasaragod-hub" class="py-12 sm:py-16 bg-gradient-to-b from-amber-50/50 via-white to-emerald-50/40 border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+
+      <!-- 5-District Flagship Switcher Bar -->
+      <div class="bg-white border border-slate-200 rounded-2xl p-3 sm:p-4 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div>
+          <span class="text-[10px] font-extrabold uppercase tracking-wider text-emerald-800 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded">Flagship District Switcher (കേരള മോഡൽ ഹബ്ബുകൾ)</span>
+          <div class="text-xs sm:text-sm font-bold text-slate-800 mt-1">Select a Flagship District for Full Taluk, Panchayat, Village, Hall &amp; Wholesale Market Coverage</div>
+        </div>
+        <div class="flex flex-wrap items-center gap-2" id="hubDistrictSwitcherBar">
+          <button id="hubSwitch-kasaragod" onclick="selectHubDistrict('kasaragod')" class="hub-district-btn px-4 py-2 rounded-xl text-xs font-extrabold bg-emerald-800 text-white shadow-sm transition-all flex items-center gap-1.5">
+            <span>🌴 Kasaragod (കാസർകോട്)</span>
+          </button>
+          <button id="hubSwitch-kozhikode" onclick="selectHubDistrict('kozhikode')" class="hub-district-btn px-4 py-2 rounded-xl text-xs font-bold bg-slate-100 hover:bg-slate-200 text-slate-700 transition-all flex items-center gap-1.5">
+            <span>🍛 Kozhikode (കോഴിക്കോട്)</span>
+          </button>
+          <button id="hubSwitch-kannur" onclick="selectHubDistrict('kannur')" class="hub-district-btn px-4 py-2 rounded-xl text-xs font-bold bg-slate-100 hover:bg-slate-200 text-slate-700 transition-all flex items-center gap-1.5">
+            <span>🥥 Kannur (കണ്ണൂർ)</span>
+          </button>
+          <button id="hubSwitch-malappuram" onclick="selectHubDistrict('malappuram')" class="hub-district-btn px-4 py-2 rounded-xl text-xs font-bold bg-slate-100 hover:bg-slate-200 text-slate-700 transition-all flex items-center gap-1.5">
+            <span>🕌 Malappuram (മലപ്പുറം)</span>
+          </button>
+          <button id="hubSwitch-wayanad" onclick="selectHubDistrict('wayanad')" class="hub-district-btn px-4 py-2 rounded-xl text-xs font-bold bg-slate-100 hover:bg-slate-200 text-slate-700 transition-all flex items-center gap-1.5">
+            <span>⛰️ Wayanad (വയനാട്)</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Flagship District Header & Metrics -->
+      <div class="bg-gradient-to-r from-emerald-950 via-emerald-900 to-slate-900 text-white rounded-3xl p-6 sm:p-10 shadow-2xl border border-emerald-700/60 relative overflow-hidden">
+        <div class="absolute right-0 top-0 w-96 h-96 bg-amber-400/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div class="lg:col-span-8 space-y-3">
+            <div class="inline-flex flex-wrap items-center gap-2">
+              <span id="hubFlagshipBadge" class="px-3 py-1 rounded-full bg-amber-400 text-slate-950 text-[11px] font-black uppercase tracking-wider">
+                Flagship District Rollout #1
+              </span>
+              <span id="hubRegionTagMl" class="px-3 py-1 rounded-full bg-white/10 text-emerald-200 border border-white/20 text-[11px] font-bold">
+                കാസർകോട് ജില്ലാ സമ്പൂർണ്ണ വെഡ്ഡിംഗ് ഗൈഡ്
+              </span>
+            </div>
+            <h2 id="hubMainTitle" class="text-3xl sm:text-4xl font-black tracking-tight">
+              Complete Kasaragod Wedding Intelligence: Every City, Village &amp; Hall Fee
+            </h2>
+            <p id="hubMainSubtitle" class="text-sm sm:text-base text-emerald-100/90 leading-relaxed max-w-3xl">
+              Built as our model Kerala district covering <strong>all 4 Taluks, 3 Municipalities, 38 Grama Panchayats, and rural villages</strong> (from Manjeshwar, Hosangadi, Uppala, Kumbla, Bayar, Perla, Badiyadka &amp; Bellur to Kasaragod Town, Maipady, Cherkala, Uduma, Kanhangad, Nileshwar, Cheruvathur, Trikaripur &amp; Vellarikundu). Compare <strong>Wedding Hall Rents &amp; Seating</strong> and locate the nearest wholesale markets for every village.
+            </p>
+            <div class="flex flex-wrap gap-3 pt-2">
+              <a href="#kasaragod-village-finder" class="px-4 py-2 rounded-xl bg-white/15 hover:bg-white/25 text-white text-xs font-bold border border-white/20 transition-all flex items-center gap-1.5">
+                <i data-lucide="map" class="w-4 h-4 text-amber-300"></i>
+                <span>Find Your Village / City Hub</span>
+              </a>
+              <button onclick="jumpToRegionalHalls('all')" class="px-4 py-2 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 text-xs font-black transition-all flex items-center gap-1.5 shadow-md">
+                <i data-lucide="landmark" class="w-4 h-4"></i>
+                <span id="hubHallsBtnLabel">Compare 25 Wedding Halls &amp; Fees</span>
+              </button>
+              <button onclick="openAllKasaragodShops()" class="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition-all flex items-center gap-1.5 shadow-md">
+                <i data-lucide="store" class="w-4 h-4 text-amber-200"></i>
+                <span id="hubShopsBtnLabel">Browse 66+ Kasaragod People &amp; Shops</span>
+              </button>
+              <button id="btnKsdEmergencySos" onclick="openKasaragodEmergencyModal()" class="px-4 py-2 rounded-xl bg-rose-600 hover:bg-rose-500 text-white text-xs font-black transition-all flex items-center gap-1.5 shadow-md">
+                <i data-lucide="phone-call" class="w-4 h-4 text-amber-200"></i>
+                <span>Wedding SOS (Gas, Ice, Water)</span>
+              </button>
+              <button id="btnKsdFeastCalculator" onclick="openKasaragodFeastModal()" class="px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 text-xs font-black transition-all flex items-center gap-1.5 shadow-md">
+                <i data-lucide="chef-hat" class="w-4 h-4"></i>
+                <span>Neychoru &amp; Feast Calculator</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="lg:col-span-4 grid grid-cols-2 gap-3">
+            <div class="bg-white/10 backdrop-blur-md p-4 rounded-2xl border border-white/15">
+              <div id="hubStat1Val" class="text-2xl font-black text-amber-300">4 Taluks</div>
+              <div id="hubStat1Desc" class="text-[11px] text-emerald-100 font-medium">Manjeshwaram, Kasaragod, Hosdurg &amp; Vellarikundu</div>
+            </div>
+            <div class="bg-white/10 backdrop-blur-md p-4 rounded-2xl border border-white/15">
+              <div id="hubStat2Val" class="text-2xl font-black text-emerald-300">38 Panchayats</div>
+              <div id="hubStat2Desc" class="text-[11px] text-emerald-100 font-medium">+ 3 Municipalities &amp; 100+ local villages</div>
+            </div>
+            <div class="bg-white/10 backdrop-blur-md p-4 rounded-2xl border border-white/15">
+              <div id="hubStat3Val" class="text-2xl font-black text-white">25 Halls</div>
+              <div id="hubStat3Desc" class="text-[11px] text-emerald-100 font-medium">Convention centres &amp; mandapams with fees</div>
+            </div>
+            <div class="bg-white/10 backdrop-blur-md p-4 rounded-2xl border border-white/15">
+              <div id="hubStat4Val" class="text-2xl font-black text-amber-300">66+ Vendors</div>
+              <div id="hubStat4Desc" class="text-[11px] text-emerald-100 font-medium">Direct wholesale meat, veg, pandal &amp; pickup</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sub-Module 1: Complete District City, Panchayat & Small Village Hub Finder -->
+      <div id="kasaragod-village-finder" class="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-sm space-y-6">
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-4 border-b border-slate-100">
+          <div>
+            <span class="text-[11px] font-extrabold uppercase tracking-wider px-2.5 py-0.5 rounded bg-emerald-100 text-emerald-800 border border-emerald-200">
+              Village-to-Market Mapping (എല്ലാ ഗ്രാമങ്ങളും പഞ്ചായത്തുകളും)
+            </span>
+            <h3 id="hubFinderTitle" class="text-2xl font-extrabold text-slate-900 mt-1">
+              Find Wholesale Markets &amp; Halls for Any Town or Village in Kasaragod
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-600 mt-1">
+              Whether you live in a major commercial city or a rural border village, enter your place name below to see your closest wholesale mandi, meat hub, and wedding venues.
+            </p>
+          </div>
+          <div class="w-full lg:w-96">
+            <div class="relative">
+              <input type="text" id="kasaragodVillageSearchInput" oninput="filterKasaragodVillages(this.value)" placeholder="Type village/town: Bellur, Perla, Hosangadi, Cheruvathur, ബെള്ളൂർ..." class="w-full bg-slate-50 border border-slate-300 rounded-xl pl-10 pr-4 py-2.5 text-xs sm:text-sm font-semibold text-slate-800 focus:ring-2 focus:ring-emerald-600 outline-none">
+              <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3.5 top-3"></i>
+            </div>
+          </div>
+        </div>
+
+        <!-- Taluk Filter Pills & Quick Village Shortcuts -->
+        <div class="space-y-3">
+          <div class="flex flex-wrap items-center gap-2" id="kasaragodTalukPillContainer">
+            <button onclick="setKasaragodTalukFilter('all')" class="ksd-taluk-pill px-3.5 py-1.5 rounded-xl text-xs font-extrabold bg-emerald-800 text-white shadow-sm transition-all">All 4 Taluks (Full District)</button>
+            <button onclick="setKasaragodTalukFilter('Manjeshwaram')" class="ksd-taluk-pill px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-100 hover:bg-slate-200 text-slate-700 transition-all">Manjeshwaram Taluk (North &amp; Border)</button>
+            <button onclick="setKasaragodTalukFilter('Kasaragod')" class="ksd-taluk-pill px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-100 hover:bg-slate-200 text-slate-700 transition-all">Kasaragod Taluk (Central &amp; Midland)</button>
+            <button onclick="setKasaragodTalukFilter('Hosdurg')" class="ksd-taluk-pill px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-100 hover:bg-slate-200 text-slate-700 transition-all">Hosdurg Taluk (Kanhangad, Nileshwar &amp; South)</button>
+            <button onclick="setKasaragodTalukFilter('Vellarikundu')" class="ksd-taluk-pill px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-100 hover:bg-slate-200 text-slate-700 transition-all">Vellarikundu Taluk (Eastern High-Range)</button>
+          </div>
+
+          <div id="hubQuickVillageChips" class="flex flex-wrap items-center gap-1.5 text-[11px]">
+            <span class="font-bold text-slate-500 mr-1">Quick Village Test:</span>
+            <button onclick="quickSelectKasaragodVillage('Bellur')" class="px-2.5 py-1 rounded-lg bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-200 font-semibold">Bellur (ബെള്ളൂർ)</button>
+            <button onclick="quickSelectKasaragodVillage('Perla')" class="px-2.5 py-1 rounded-lg bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-200 font-semibold">Perla &amp; Badiyadka</button>
+            <button onclick="quickSelectKasaragodVillage('Hosangadi')" class="px-2.5 py-1 rounded-lg bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-200 font-semibold">Hosangadi &amp; Manjeshwar</button>
+            <button onclick="quickSelectKasaragodVillage('Maipady')" class="px-2.5 py-1 rounded-lg bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-200 font-semibold">Maipady (മായ്പ്പാടി)</button>
+            <button onclick="quickSelectKasaragodVillage('Uppala')" class="px-2.5 py-1 rounded-lg bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-200 font-semibold">Uppala</button>
+            <button onclick="quickSelectKasaragodVillage('Seethangoli')" class="px-2.5 py-1 rounded-lg bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-200 font-semibold">Seethangoli</button>
+            <button onclick="quickSelectKasaragodVillage('Uduma')" class="px-2.5 py-1 rounded-lg bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-200 font-semibold">Uduma &amp; Bekal</button>
+            <button onclick="quickSelectKasaragodVillage('Cheruvathur')" class="px-2.5 py-1 rounded-lg bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-200 font-semibold">Cheruvathur &amp; Trikaripur</button>
+            <button onclick="quickSelectKasaragodVillage('Odayanchal')" class="px-2.5 py-1 rounded-lg bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-200 font-semibold">Odayanchal &amp; Rajapuram</button>
+            <button onclick="quickSelectKasaragodVillage('')" class="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold">Clear Search</button>
+          </div>
+        </div>
+
+        <!-- Village / Zone Cards Grid -->
+        <div id="kasaragodVillageGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <!-- Populated dynamically from KASARAGOD_COVERAGE_DIRECTORY -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+</main>
+  <!-- Floating "My Wedding Sourcing Sheet" Badge -->
+  <div id="floatingCartPill" onclick="openProcurementDrawer()" class="fixed bottom-6 right-6 z-40 bg-emerald-900 hover:bg-emerald-800 text-white p-3.5 px-5 rounded-2xl shadow-2xl border border-amber-400/60 cursor-pointer flex items-center gap-3 transition-all hover:scale-105 group">
+    <div class="relative">
+      <i data-lucide="clipboard-list" class="w-6 h-6 text-amber-300"></i>
+      <span id="cartCountBadge" class="absolute -top-2 -right-2 bg-amber-400 text-slate-950 font-black text-[10px] w-5 h-5 rounded-full flex items-center justify-center shadow-md">0</span>
+    </div>
+    <div class="text-left hidden sm:block">
+      <div class="text-xs font-bold text-white group-hover:text-amber-200">My Wedding Sourcing Sheet</div>
+      <div id="cartTotalSummary" class="text-[11px] text-emerald-200 font-medium">0 Items • Click to View</div>
+    </div>
+  </div>
+
+  <!-- Slide-Over Procurement Sheet Drawer -->
+  <div id="procurementDrawer" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-end">
+    <div class="bg-white h-full max-w-md w-full p-6 sm:p-7 shadow-2xl border-l border-slate-200 flex flex-col justify-between overflow-y-auto">
+      
+      <div>
+        <div class="flex items-center justify-between pb-4 border-b border-slate-200">
+          <div class="flex items-center gap-2.5">
+            <div class="w-9 h-9 rounded-xl bg-emerald-100 flex items-center justify-center text-emerald-800">
+              <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+            </div>
+            <div>
+              <h3 class="text-lg font-bold text-slate-900">My Wedding Sourcing Sheet</h3>
+              <p class="text-xs text-slate-500">Customized procurement list for wholesalers</p>
+            </div>
+          </div>
+          <button onclick="closeProcurementDrawer()" class="text-slate-400 hover:text-slate-700 p-1">
+            <i data-lucide="x" class="w-5 h-5"></i>
+          </button>
+        </div>
+
+        <!-- Items Container -->
+        <div id="drawerItemsList" class="divide-y divide-slate-100 my-4 max-h-[55vh] overflow-y-auto space-y-1">
+          <!-- Populated dynamically via JS -->
+        </div>
+      </div>
+
+      <!-- Drawer Footer & Actions -->
+      <div class="pt-4 border-t border-slate-200 space-y-3">
+        <div class="flex justify-between items-center">
+          <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Est. Wholesale Total:</span>
+          <span id="drawerTotalCost" class="text-xl font-black text-emerald-900">₹0</span>
+        </div>
+
+        <div class="space-y-2">
+          <button onclick="exportProcurementListWhatsApp()" class="w-full whatsapp-btn py-3 px-4 rounded-xl font-bold text-xs flex items-center justify-center gap-2 shadow-md">
+            <i data-lucide="message-circle" class="w-4 h-4 fill-white text-emerald-500"></i>
+            <span>Export & Send Sourcing Sheet via WhatsApp</span>
+          </button>
+          
+          <div class="flex gap-2">
+            <button onclick="triggerPrintableOrderSheet()" class="flex-1 py-2 rounded-lg border border-slate-300 hover:bg-slate-50 text-slate-700 text-xs font-semibold flex items-center justify-center gap-1.5">
+              <i data-lucide="printer" class="w-3.5 h-3.5"></i>
+              <span>Print / Save PDF Sheet</span>
+            </button>
+            <button onclick="clearProcurementList()" class="py-2 px-3 rounded-lg border border-rose-200 text-rose-600 hover:bg-rose-50 text-xs font-semibold">
+              Clear All
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Printable Order Sheet Container (Rendered during Print / PDF Export) -->
+  <div id="printableOrderSheet" class="hidden">
+    <!-- Rendered dynamically by triggerPrintableOrderSheet() -->
+  </div>
+
+
+  <!-- Vendor Registration Modal (Simple Free Listing) -->
+  <div id="vendorModal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-slate-200 relative max-h-[90vh] overflow-y-auto">
+      
+      <button onclick="closeVendorRegisterModal()" class="absolute top-5 right-5 text-slate-400 hover:text-slate-700">
+        <i data-lucide="x" class="w-6 h-6"></i>
+      </button>
+
+      <div class="space-y-2 mb-6">
+        <div class="w-10 h-10 rounded-xl bg-emerald-100 flex items-center justify-center text-emerald-800">
+          <i data-lucide="store" class="w-5 h-5"></i>
+        </div>
+        <h3 class="text-2xl font-bold text-slate-900">List Your Shop on KalyanaMitra</h3>
+        <p class="text-xs text-slate-500">
+          Are you a meat wholesaler, vegetable mandi, pandal decorator, or painter in Kerala? Join our directory for direct customer WhatsApp enquiries.
+        </p>
+      </div>
+
+      <form id="vendorRegisterForm" onsubmit="handleVendorRegister(event)" class="space-y-4 text-sm">
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Business / Shop Name *</label>
+          <input type="text" required placeholder="e.g. Malabar Fresh Mutton Wholesalers" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-emerald-600 outline-none">
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Owner Name *</label>
+            <input type="text" required placeholder="e.g. Shamsudheen" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-emerald-600 outline-none">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">District *</label>
+            <select id="modalDistrictSelect" required class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-emerald-600 outline-none">
+              <!-- Populated via JS -->
+            </select>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">WhatsApp Number *</label>
+            <input type="tel" required placeholder="e.g. 9847123456" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-emerald-600 outline-none">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Category *</label>
+            <select required class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-emerald-600 outline-none">
+              <option value="meat">Meat & Seafood Wholesaler</option>
+              <option value="vegetables">Wholesale Vegetables & Spices</option>
+              <option value="rentals">Pandal, Plates & Cooking Vessels</option>
+              <option value="home_prep">House Painting & Deep Cleaning</option>
+              <option value="cooks">Master Cooks &amp; Serving Crew</option>
+              <option value="media_arts">Photo, Video, Drone, Makeup, Mehndi &amp; Arts</option>
+              <option value="decor_tech">Stage Decor, Sound, Light &amp; Electrical</option>
+              <option value="sweets_drinks">Payasam, Bakery, Welcome Drinks &amp; Water/Ice</option>
+              <option value="logistics">Goods Vehicle / Transport &amp; Hall Desk</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Market Location / Landmark *</label>
+          <input type="text" required placeholder="e.g. Palayam Wholesale Market, Kozhikode" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-emerald-600 outline-none">
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Key Items & Wholesale Prices</label>
+          <textarea rows="2" placeholder="e.g. Tender goat mutton ₹710/kg, Beef ₹360/kg, Home delivery available" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-emerald-600 outline-none"></textarea>
+        </div>
+
+        <button type="submit" class="w-full py-3 bg-emerald-800 hover:bg-emerald-900 text-white font-bold rounded-lg shadow-md transition-all">
+          Submit Shop For Free Listing
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-slate-900 text-slate-400 text-sm mt-auto">
+    <div class="kerala-kasavu-strip"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        
+        <div class="space-y-3">
+          <div class="flex items-center gap-2">
+            <span class="text-2xl font-black text-white brand-font">Kalyana<span class="text-amber-400">Mitra</span></span>
+            <span class="text-[10px] font-bold uppercase tracking-wider bg-emerald-900 text-emerald-300 px-2 py-0.5 rounded border border-emerald-700">Kerala</span>
+          </div>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            The dedicated wedding cost estimator & wholesale aggregator designed exclusively for Kerala families. Connecting buyers with real local markets with zero middlemen commissions.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="text-white font-bold text-xs uppercase tracking-wider mb-3">Districts Covered</h4>
+          <ul class="text-xs space-y-1.5 text-slate-400">
+            <li class="text-amber-300 font-semibold">Kasaragod Flagship (All 4 Taluks, 38 Panchayats & Halls)</li>
+            <li>Thiruvananthapuram (Chalai Market)</li>
+            <li>Ernakulam (Broadway Market)</li>
+            <li>Kozhikode (Palayam & Big Bazaar)</li>
+            <li>Thrissur (Sakthan Market)</li>
+            <li>Malappuram (Manjeri & Tirur)</li>
+            <li>Kannur, Palakkad & All 14 Districts</li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-white font-bold text-xs uppercase tracking-wider mb-3">Core Modules</h4>
+          <ul class="text-xs space-y-1.5 text-slate-400">
+            <li><a href="#food" onclick="navigateToSection('food'); return false;" class="hover:text-white">Classified Food Items &amp; BOM</a></li>
+            <li><a href="#goods" onclick="navigateToSection('goods'); return false;" class="hover:text-white">Classified Goods &amp; Rentals</a></li>
+            <li><a href="#people" onclick="navigateToSection('people'); return false;" class="hover:text-white">Wedding People &amp; Crew Directory</a></li>
+            <li><a href="#halls" onclick="navigateToSection('halls'); return false;" class="hover:text-white">Wedding Halls &amp; Fees Guide</a></li>
+            <li><a href="#planners" onclick="navigateToSection('planners'); return false;" class="hover:text-white">Budget Optimizer &amp; Timeline</a></li>
+            <li><a href="#kasaragod" onclick="navigateToSection('kasaragod'); return false;" class="hover:text-white">Flagship District Hubs (5 Districts)</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-white font-bold text-xs uppercase tracking-wider mb-3">Direct Connect</h4>
+          <p class="text-xs text-slate-400 mb-3">
+            Connecting directly with local vendors via WhatsApp prevents commission losses and gives you authentic wholesale rates.
+          </p>
+          <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-emerald-950 border border-emerald-800 text-emerald-400 text-xs font-semibold">
+            <i data-lucide="shield-check" class="w-4 h-4"></i>
+            <span>Verified Local Contact Database</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="border-t border-slate-800 mt-8 pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
+        <div>
+          © 2026 KalyanaMitra Kerala. All instructions & interface in English for Kerala users.
+        </div>
+        <div class="flex gap-4">
+          <a href="#home" onclick="navigateToSection('home'); return false;" class="hover:text-slate-300">Home</a>
+          <a href="#food" onclick="navigateToSection('food'); return false;" class="hover:text-slate-300">Food</a>
+          <a href="#goods" onclick="navigateToSection('goods'); return false;" class="hover:text-slate-300">Goods</a>
+          <a href="#people" onclick="navigateToSection('people'); return false;" class="hover:text-slate-300">People</a>
+          <a href="#halls" onclick="navigateToSection('halls'); return false;" class="hover:text-slate-300">Halls</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating Hall Comparison Bar -->
+  <div id="hallCompareFloatingBar" class="hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-40 bg-slate-950/95 text-white backdrop-blur-md px-5 py-3 rounded-2xl shadow-2xl border border-amber-400/80 flex items-center gap-4 transition-all max-w-[90vw]">
+    <div class="flex items-center gap-2">
+      <i data-lucide="scale" class="w-5 h-5 text-amber-300"></i>
+      <span class="text-xs font-extrabold text-white"><span id="compareSelectedCount">0</span>/3 Halls Selected to Compare</span>
+    </div>
+    <div class="flex items-center gap-2">
+      <button onclick="openHallCompareModal()" class="px-4 py-1.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs transition-all shadow-md flex items-center gap-1.5">
+        <i data-lucide="columns-2" class="w-3.5 h-3.5"></i> Compare Side-by-Side
+      </button>
+      <button onclick="clearHallCompare()" class="px-2.5 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-slate-300 text-xs font-bold transition-all">
+        Clear
+      </button>
+    </div>
+  </div>
+
+  <!-- Side-by-Side Hall Comparison Modal -->
+  <div id="hallCompareModal" class="hidden fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-5xl w-full max-h-[90vh] overflow-hidden flex flex-col shadow-2xl border border-slate-200">
+      <div class="p-5 sm:p-6 bg-slate-900 text-white flex items-center justify-between border-b border-slate-800">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-amber-400 text-slate-950 flex items-center justify-center font-black">
+            <i data-lucide="scale" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h3 class="text-lg font-black tracking-tight">Side-by-Side Wedding Hall Comparator</h3>
+            <p class="text-xs text-slate-300">Compare Rent, Seating, Dining Batches, AC Surcharges &amp; Outside Kitchen Policies</p>
+          </div>
+        </div>
+        <button onclick="closeHallCompareModal()" class="w-9 h-9 rounded-xl bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-all">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+      <div id="hallCompareModalBody" class="p-6 overflow-y-auto">
+        <!-- Dynamic Comparison Table -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Kasaragod Village Logistics & Mandi Dossier Modal -->
+  <div id="villageLogisticsModal" class="hidden fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-hidden flex flex-col shadow-2xl border border-slate-200">
+      <div class="p-5 sm:p-6 bg-slate-900 text-white flex items-center justify-between border-b border-slate-800">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-emerald-600 text-white flex items-center justify-center font-black">
+            <i data-lucide="map-pin" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h3 id="villageLogisticsModalTitle" class="text-lg font-black tracking-tight">Village Logistics &amp; Mandi Dossier</h3>
+            <p id="villageLogisticsModalSubtitle" class="text-xs text-slate-300">Nearest wholesale lifeline, travel times &amp; emergency supply depots</p>
+          </div>
+        </div>
+        <button onclick="closeVillageLogisticsModal()" class="w-9 h-9 rounded-xl bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-all">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+      <div id="villageLogisticsModalBody" class="p-6 overflow-y-auto space-y-4">
+        <!-- Rendered dynamically via renderVillageLogisticsModalBody() -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Kasaragod Emergency Wedding Lifeline SOS Modal -->
+  <div id="kasaragodEmergencyModal" class="hidden fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-3xl w-full max-h-[90vh] overflow-hidden flex flex-col shadow-2xl border border-slate-200">
+      <div class="p-5 sm:p-6 bg-gradient-to-r from-rose-900 via-rose-800 to-slate-900 text-white flex items-center justify-between border-b border-rose-950">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-rose-500 text-white flex items-center justify-center font-black animate-pulse">
+            <i data-lucide="phone-call" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h3 class="text-lg font-black tracking-tight">Kasaragod Wedding Day Emergency SOS (അടിയന്തര സേവനങ്ങൾ)</h3>
+            <p class="text-xs text-rose-200">Immediate 24/7 fast-dispatch contacts for Cooking Gas, Preservation Ice, Mobile Generators &amp; Water</p>
+          </div>
+        </div>
+        <button onclick="closeKasaragodEmergencyModal()" class="w-9 h-9 rounded-xl bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-all">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+      <div id="kasaragodEmergencyModalBody" class="p-6 overflow-y-auto space-y-4">
+        <!-- Rendered dynamically from KASARAGOD_EMERGENCY_SERVICES -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Kasaragod Traditional Wedding Feast & Neychoru Calculator Modal -->
+  <div id="kasaragodFeastModal" class="hidden fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-3xl w-full max-h-[90vh] overflow-hidden flex flex-col shadow-2xl border border-slate-200">
+      <div class="p-5 sm:p-6 bg-slate-900 text-white flex items-center justify-between border-b border-slate-800">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-amber-400 text-slate-950 flex items-center justify-center font-black">
+            <i data-lucide="chef-hat" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h3 class="text-lg font-black tracking-tight">Kasaragod Traditional Feast &amp; Neychoru Calculator</h3>
+            <p class="text-xs text-amber-200">Authentic Malabar-Beary Dum Ghee Rice ratios &amp; evening tea snacks for your exact guest count</p>
+          </div>
+        </div>
+        <button onclick="closeKasaragodFeastModal()" class="w-9 h-9 rounded-xl bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-all">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+      <div id="kasaragodFeastModalBody" class="p-6 overflow-y-auto space-y-5">
+        <!-- Rendered dynamically via renderKasaragodFeastModalBody() -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+  <script>
+    // Initialize Lucide icons
+    lucide.createIcons();
+  </script>
+</body>
+</html>

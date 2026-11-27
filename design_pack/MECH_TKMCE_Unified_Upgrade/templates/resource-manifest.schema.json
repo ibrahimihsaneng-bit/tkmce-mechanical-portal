@@ -1,0 +1,197 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Proposed resource import manifest",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "resources"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "resources": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "scheme",
+          "semester",
+          "courseCode",
+          "destination",
+          "type",
+          "title",
+          "status",
+          "version",
+          "source",
+          "files"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]+$"
+          },
+          "scheme": {
+            "type": "string",
+            "minLength": 1
+          },
+          "semester": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 8
+          },
+          "courseCode": {
+            "type": "string",
+            "minLength": 1
+          },
+          "destination": {
+            "type": "object",
+            "required": [
+              "kind",
+              "number"
+            ],
+            "properties": {
+              "kind": {
+                "enum": [
+                  "course",
+                  "module",
+                  "experiment",
+                  "project"
+                ]
+              },
+              "number": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "minimum": 1
+              },
+              "topicId": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            }
+          },
+          "type": {
+            "enum": [
+              "detailed-notes",
+              "short-notes",
+              "pyq",
+              "model-answers",
+              "formulas",
+              "numericals",
+              "diagram",
+              "lab-notes",
+              "video-link",
+              "reference"
+            ]
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1
+          },
+          "status": {
+            "const": "draft"
+          },
+          "version": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "source": {
+            "type": "object",
+            "required": [
+              "name",
+              "licence"
+            ],
+            "properties": {
+              "name": {
+                "type": "string",
+                "minLength": 1
+              },
+              "url": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "licence": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          },
+          "files": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "path",
+                "sha256",
+                "mime"
+              ],
+              "properties": {
+                "path": {
+                  "type": "string",
+                  "pattern": "^files/.+$"
+                },
+                "sha256": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "pattern": "^[a-fA-F0-9]{64}$"
+                },
+                "mime": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "images": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "path",
+                "sourceUrl",
+                "licence",
+                "caption",
+                "alt"
+              ],
+              "properties": {
+                "path": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "sourceUrl": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "licence": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "caption": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "alt": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "creator": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

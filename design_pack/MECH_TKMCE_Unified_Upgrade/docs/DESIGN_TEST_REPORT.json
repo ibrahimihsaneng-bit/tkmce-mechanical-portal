@@ -1,0 +1,74 @@
+[
+  {
+    "screen": "01-focus-overview-desktop",
+    "viewport": 1440,
+    "overflow": false,
+    "pageErrors": []
+  },
+  {
+    "screen": "02-protection-desktop",
+    "viewport": 1440,
+    "overflow": false,
+    "pageErrors": []
+  },
+  {
+    "screen": "03-schedule-desktop",
+    "viewport": 1440,
+    "overflow": false,
+    "pageErrors": []
+  },
+  {
+    "screen": "04-history-desktop",
+    "viewport": 1440,
+    "overflow": false,
+    "pageErrors": []
+  },
+  {
+    "screen": "05-quiet-reader-desktop",
+    "viewport": 1440,
+    "overflow": false,
+    "pageErrors": []
+  },
+  {
+    "screen": "06-resource-upload-desktop",
+    "viewport": 1440,
+    "overflow": false,
+    "pageErrors": []
+  },
+  {
+    "screen": "07-resource-review-desktop",
+    "viewport": 1440,
+    "overflow": false,
+    "pageErrors": []
+  },
+  {
+    "screen": "08-focus-overview-mobile",
+    "viewport": 390,
+    "overflow": false,
+    "pageErrors": []
+  },
+  {
+    "screen": "09-protection-mobile",
+    "viewport": 390,
+    "overflow": false,
+    "pageErrors": []
+  },
+  {
+    "screen": "10-resource-upload-mobile",
+    "viewport": 390,
+    "overflow": false,
+    "pageErrors": []
+  },
+  {
+    "screen": "11-quiet-reader-mobile",
+    "viewport": 390,
+    "overflow": false,
+    "pageErrors": []
+  },
+  {
+    "screen": "12-intervention-mobile",
+    "viewport": 390,
+    "overflow": false,
+    "pageErrors": []
+  }
+]

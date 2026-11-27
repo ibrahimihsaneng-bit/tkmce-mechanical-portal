@@ -1,0 +1,5 @@
+# Original UI reference screens
+
+Open `index.html` in a browser (no build step). Use Focus Studio tabs for Overview, Protection, Schedule and History. Open `reader.html` for the immersive reader; `upload.html` and `review.html` demonstrate the contributor flow; `intervention.html` shows the example blocker screen. The CSS is reusable as a visual reference. These are HTML/CSS design mockups with navigation and local filename preview, not a production app. Sample stats, course titles and file data are illustrative; no timer runs, file is uploaded, or system restriction is applied. Main portal links are placeholders because the actual repository is not included.
+
+Screenshots in `previews/` are rendered from these files. Use them as implementation targets, adapting to actual components and curriculum. Focus screens use a distinct calm forest-and-paper palette; keep the existing website's overall identity. Use one Focus Studio entry with internal tabs; show upload tools only to authorised contributors. Keep the reader minimal and its exit obvious. No generated academic diagrams are included.

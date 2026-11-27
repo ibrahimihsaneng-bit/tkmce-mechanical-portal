@@ -13,6 +13,32 @@
 
   // Global Application State (Persisted in localStorage)
   const AppState = {
+    // Unified Focus Studio State
+    focusTab: 'overview', // overview, protection, schedule, history, reader
+    focusPreset: 'deep', // quick, pomodoro, deep, marathon, paper, custom
+    focusStudyMinutes: 50,
+    focusBreakMinutes: 10,
+    focusIntensity: localStorage.getItem('mech_focus_intensity') || 'gentle', // gentle, deep, strict
+    focusGoal: localStorage.getItem('mech_focus_goal') || 'Understand conduction and solve 3 problems',
+    focusRules: JSON.parse(localStorage.getItem('mech_focus_rules') || '{"shorts": true, "allowlist": true, "budget": 30, "phoneAway": true}'),
+    focusSchedules: JSON.parse(localStorage.getItem('mech_focus_schedules') || '[{"name": "Morning revision", "days": "Mon–Fri", "time": "06:00–06:25", "subject": "24MET401", "type": "Quick revision"}, {"name": "Evening deep focus", "days": "Mon–Fri", "time": "18:00–18:50", "subject": "24MET501", "type": "Heat Transfer"}, {"name": "Weekend practice", "days": "Sat", "time": "09:00–10:00", "subject": "24MET401", "type": "Numerical practice"}]'),
+    
+    // Resource Manager State
+    resourceStep: 1, // 1: destination, 2: files, 3: review, 4: publish
+    resourceData: {
+      scheme: 'Autonomous 2024',
+      semester: 'S4',
+      subject: '24MET401',
+      module: 'Module 1',
+      topic: 'Entire module',
+      type: 'Detailed notes',
+      title: 'Mechanics of Deformable Solids — Module 1',
+      author: 'TKMCE Mechanical Faculty',
+      license: 'Verified institutional faculty',
+      files: []
+    },
+    publishedResources: JSON.parse(localStorage.getItem('mech_published_resources') || '[]'),
+
     currentView: 'dashboard',
     selectedSemester: 'S4',
     selectedSubject: '24MET401',
@@ -127,7 +153,7 @@
 
   // Cache views
   function cacheDOMElements() {
-    const viewIds = ['dashboard', 'semesters', 'notes', 'pyqs', 'formulas', 'exams', 'planner', 'gate', 'lab', 'bookmarks', 'downloads', 'settings', 'focus'];
+    const viewIds = ['dashboard', 'semesters', 'notes', 'pyqs', 'formulas', 'exams', 'planner', 'gate', 'lab', 'bookmarks', 'downloads', 'settings', 'focus', 'resources', 'intervention'];
     viewIds.forEach(id => {
       views[id] = document.getElementById('view-' + id);
     });
@@ -228,6 +254,8 @@
       semesters: 'Semesters & notes',
       notes: 'Digital Textbook',
       focus: 'Focus Studio',
+      resources: 'Resource Manager',
+      intervention: 'Focus Intervention',
       pyqs: 'PYQ Vault',
       formulas: 'Formula Library',
       exams: 'Practice Centre',
@@ -267,7 +295,27 @@
         renderStudyNotes();
         break;
       case 'focus':
+        if (parts[1]) {
+          if (parts[1] === 'reader') {
+            AppState.focusPhase = 'focus';
+            AppState.focusTab = 'reader';
+          } else {
+            AppState.focusTab = parts[1];
+          }
+        }
         renderFocusStudio();
+        break;
+      case 'resources':
+        if (parts[1]) {
+          if (parts[1] === 'review') AppState.resourceStep = 3;
+          else if (parts[1] === 'upload') AppState.resourceStep = 2;
+          else if (parts[1] === 'manage') AppState.resourceStep = 4;
+          else AppState.resourceStep = 1;
+        }
+        renderResourceManager();
+        break;
+      case 'intervention':
+        renderInterventionScreen();
         break;
       case 'pyqs':
         renderPYQVault();

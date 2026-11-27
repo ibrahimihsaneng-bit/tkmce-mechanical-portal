@@ -2,6 +2,10 @@
   "cleanUrls": true,
   "rewrites": [
     {
+      "source": "/kalyanamitra",
+      "destination": "/kalyanamitra/index.html"
+    },
+    {
       "source": "/focus",
       "destination": "/focus/index.html"
     },

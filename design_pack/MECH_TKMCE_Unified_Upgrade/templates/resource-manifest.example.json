@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "resources": [
+    {
+      "id": "example-s4-24met401-m01-notes",
+      "scheme": "autonomous-2024",
+      "semester": 4,
+      "courseCode": "24MET401",
+      "destination": {"kind": "module", "number": 1, "topicId": null},
+      "type": "detailed-notes",
+      "title": "Module 1 notes — illustrative entry",
+      "status": "draft",
+      "version": 1,
+      "source": {"name": "Replace with actual author or source", "url": null, "licence": "unverified"},
+      "files": [{"path": "files/module-01.pdf", "sha256": null, "mime": "application/pdf"}],
+      "images": []
+    }
+  ]
+}
