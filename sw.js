@@ -1,4 +1,4 @@
-const CACHE_NAME = 'mech-tkmce-v3.5-restored-complete-notes-and-resources';
+const CACHE_NAME = 'mech-tkmce-v3.6-s3-mat301-complete-notes-and-pyqs';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
