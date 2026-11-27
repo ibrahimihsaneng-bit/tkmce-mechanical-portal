@@ -1,0 +1,25 @@
+{
+  "name": "TKMCE Mechanical Engineering Portal",
+  "short_name": "TKM MECH",
+  "description": "Comprehensive autonomous 2024 scheme syllabus, notes, and study resources for TKMCE Mechanical Engineering students.",
+  "start_url": "./tkm_portal.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#0b0f19",
+  "theme_color": "#4f46e5",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

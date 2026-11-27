@@ -1,0 +1,180 @@
+{
+  "24MET401": {
+    "Module 1": [
+      {
+        "exam": "TKMCE Autonomous ESE (10 Marks)",
+        "question": "At a point in a strained material, the normal stresses on two mutually perpendicular planes are 80 MPa (tensile) and 40 MPa (compressive), accompanied by a shear stress of 30 MPa. Using analytical method and Mohr's circle, determine: (i) Principal stresses and their orientations, (ii) Maximum shear stress and orientation of the planes on which it acts.",
+        "solution": "<strong>Step 1: Given Data & Sign Conventions</strong><br>\nσx = +80 MPa (Tensile), σy = -40 MPa (Compressive), τxy = +30 MPa.<br><br>\n<strong>Step 2: Center and Radius of Mohr's Circle</strong><br>\nCenter C = ((σx + σy)/2, 0) = ((80 - 40)/2, 0) = <strong>(+20 MPa, 0)</strong><br>\nRadius R = √[((σx - σy)/2)² + τxy²] = √[((80 - (-40))/2)² + 30²] = √[60² + 30²] = √[3600 + 900] = √4500 = <strong>67.08 MPa</strong>.<br><br>\n<strong>Step 3: Principal Stresses</strong><br>\nMajor Principal Stress: σ₁ = C + R = 20 + 67.08 = <strong>87.08 MPa (Tensile)</strong><br>\nMinor Principal Stress: σ₂ = C - R = 20 - 67.08 = <strong>-47.08 MPa (Compressive)</strong><br><br>\n<strong>Step 4: Orientation of Principal Planes</strong><br>\ntan(2θp) = 2τxy / (σx - σy) = (2 × 30) / (80 - (-40)) = 60 / 120 = 0.5<br>\n2θp = arctan(0.5) = 26.565° ⟹ <strong>θp1 = 13.28°</strong> and <strong>θp2 = 13.28° + 90° = 103.28°</strong>.<br><br>\n<strong>Step 5: Maximum Shear Stress</strong><br>\nτmax = R = <strong>67.08 MPa</strong>, acting on planes inclined at 45° to principal planes: <strong>θs = 13.28° + 45° = 58.28°</strong>."
+      },
+      {
+        "exam": "Series Exam 1 (5 Marks)",
+        "question": "State Cauchy's stress formula and derive the 3D equilibrium equations in Cartesian coordinates.",
+        "solution": "<strong>1. Cauchy's Stress Formula:</strong><br>\nTᵢ⁽ⁿ⁾ = σⱼᵢ · nⱼ. On an oblique plane with unit normal vector <strong>n</strong> = (n_x, n_y, n_z), the traction components are:<br>\nT_x = σ_x n_x + τ_yx n_y + τ_zx n_z<br>\nT_y = τ_xy n_x + σ_y n_y + τ_zy n_z<br>\nT_z = τ_xz n_x + τ_yz n_y + σ_z n_z<br><br>\n<strong>2. Equations of Equilibrium:</strong><br>\nConsidering forces on an infinitesimal element (dx·dy·dz) under body forces (X, Y, Z):<br>\n∂σ_x/∂x + ∂τ_yx/∂y + ∂τ_zx/∂z + X = 0<br>\n∂τ_xy/∂x + ∂σ_y/∂y + ∂τ_zy/∂z + Y = 0<br>\n∂τ_xz/∂x + ∂τ_yz/∂y + ∂σ_z/∂z + Z = 0<br>\nAnd moment equilibrium ΣM = 0 proves complementary shear equality: τ_xy = τ_yx, τ_yz = τ_zy, τ_zx = τ_xz."
+      }
+    ],
+    "Module 2": [
+      {
+        "exam": "TKMCE Autonomous ESE (10 Marks)",
+        "question": "A steel bar of 25 mm diameter and 1.5 m length is held rigidly between two rigid supports. If the temperature is raised by 60°C, determine the stress and reaction force developed. Take E = 200 GPa and α = 12 × 10⁻⁶ /°C. Also calculate stress if the supports yield by 0.5 mm.",
+        "solution": "<strong>Step 1: When Supports are Completely Rigid (Yielding = 0)</strong><br>\nThermal expansion is fully prevented. Thermal stress is compressive:<br>\nσ = E · α · ΔT = (200 × 10³ MPa) × (12 × 10⁻⁶) × 60 = <strong>144 MPa (Compressive)</strong>.<br>\nArea A = π/4 × (25)² = 490.87 mm².<br>\nReaction force P = σ · A = 144 × 490.87 = <strong>70,685 N = 70.69 kN</strong>.<br><br>\n<strong>Step 2: When Supports Yield by λ = 0.5 mm</strong><br>\nFree thermal elongation δ_th = L · α · ΔT = 1500 mm × (12 × 10⁻⁶) × 60 = 1.08 mm.<br>\nNet prevented expansion = δ_th - λ = 1.08 - 0.5 = 0.58 mm.<br>\nEffective strain ε_net = 0.58 / 1500 = 0.0003867.<br>\nResulting Stress σ' = ε_net · E = 0.0003867 × 200,000 = <strong>77.33 MPa (Compressive)</strong>.<br>\nReduced Reaction Force P' = 77.33 × 490.87 = <strong>37.96 kN</strong>."
+      }
+    ],
+    "Module 3": [
+      {
+        "exam": "TKMCE Autonomous ESE (10 Marks)",
+        "question": "A solid circular shaft transmits 75 kW power at 200 RPM. The allowable shear stress is limited to 50 MPa and the maximum angle of twist is not to exceed 1° in a length of 20 times the diameter. Find the required diameter of the shaft. Take G = 80 GPa.",
+        "solution": "<strong>Step 1: Calculate Transmitted Torque (T)</strong><br>\nPower P = 2πNT / 60 ⟹ T = (60 × 75,000) / (2π × 200) = 3580.98 N·m = <strong>3.581 × 10⁶ N·mm</strong>.<br><br>\n<strong>Step 2: Diameter Based on Shear Strength (τ ≤ 50 MPa)</strong><br>\nT = (π/16) · τ · d³ ⟹ d³ = (16 × 3.581 × 10⁶) / (π × 50) = 364,748 mm³.<br>\nd₁ = (364,748)¹/³ = <strong>71.45 mm</strong>.<br><br>\n<strong>Step 3: Diameter Based on Torsional Rigidity (θ ≤ 1°)</strong><br>\nθ = 1° = 1 × (π/180) = 0.01745 radians. Length L = 20d.<br>\nT / J = Gθ / L ⟹ T / (π d⁴ / 32) = Gθ / (20d).<br>\nSimplifying: d³ = (32 × T × 20) / (π × G × θ) = (32 × 3.581 × 10⁶ × 20) / (π × 80,000 × 0.01745) = 522,540 mm³.<br>\nd₂ = (522,540)¹/³ = <strong>80.54 mm</strong>.<br><br>\n<strong>Step 4: Final Selection</strong><br>\nTaking the larger of the two criteria to satisfy both strength and stiffness:<br>\n<strong>Recommended Diameter d = 82 mm (or standard 85 mm)</strong>."
+      }
+    ],
+    "Module 4": [
+      {
+        "exam": "Series Exam 2 (10 Marks)",
+        "question": "A simply supported beam of 4 m span carries a uniformly distributed load of 20 kN/m over its entire length. The cross-section is an I-section with flanges 150 mm × 20 mm and web 260 mm × 10 mm (overall depth 300 mm). Calculate: (i) Maximum bending stress, (ii) Maximum shear stress at neutral axis.",
+        "solution": "<strong>Step 1: Maximum Bending Moment & Shear Force</strong><br>\nMax Bending Moment M_max = wL²/8 = (20 × 4²)/8 = <strong>40 kN·m = 40 × 10⁶ N·mm</strong> at midspan.<br>\nMax Shear Force V_max = wL/2 = (20 × 4)/2 = <strong>40 kN = 40,000 N</strong> at supports.<br><br>\n<strong>Step 2: Moment of Inertia (I_NA)</strong><br>\nOverall dimensions: B = 150 mm, D = 300 mm. Web width b_w = 10 mm, depth d_w = 260 mm.<br>\nI_NA = (B·D³ - b·d³)/12 where b = B - b_w = 150 - 10 = 140 mm.<br>\nI_NA = (150 × 300³ - 140 × 260³)/12 = (4,050,000,000 - 2,460,640,000)/12 = <strong>132.45 × 10⁶ mm⁴</strong>.<br><br>\n<strong>Step 3: Maximum Bending Stress (at extreme fiber y = 150 mm)</strong><br>\nσ_max = (M · y_max) / I_NA = (40 × 10⁶ × 150) / (132.45 × 10⁶) = <strong>45.30 MPa</strong>.<br><br>\n<strong>Step 4: Maximum Shear Stress (at Neutral Axis)</strong><br>\nA'ȳ above NA = [Flange area × distance] + [Half-web area × distance]<br>\n= (150 × 20 × 140) + (10 × 130 × 65) = 420,000 + 84,500 = 504,500 mm³.<br>\nτ_max = (V · A'ȳ) / (I_NA · b_w) = (40,000 × 504,500) / (132.45 × 10⁶ × 10) = <strong>15.24 MPa</strong>."
+      }
+    ],
+    "Module 5": [
+      {
+        "exam": "TKMCE Autonomous ESE (10 Marks)",
+        "question": "A hollow cast iron column of 200 mm external diameter and 20 mm metal thickness is 4.5 m long with both ends fixed. Calculate the Euler critical buckling load. Take E = 100 GPa. What is the safe load with a Factor of Safety of 3? Compare with Rankine's load if σc = 550 MPa and a = 1/1600.",
+        "solution": "<strong>Step 1: Cross-Sectional Geometry</strong><br>\nOuter diameter D = 200 mm, thickness t = 20 mm ⟹ Inner diameter d = 160 mm.<br>\nArea A = π/4 × (200² - 160²) = 11,309.7 mm².<br>\nMoment of Inertia I = π/64 × (200⁴ - 160⁴) = π/64 × (1,600,000,000 - 655,360,000) = <strong>46.38 × 10⁶ mm⁴</strong>.<br>\nRadius of gyration k = √(I/A) = √(46.38 × 10⁶ / 11,309.7) = <strong>64.03 mm</strong>.<br><br>\n<strong>Step 2: Effective Length (Both Ends Fixed)</strong><br>\nLe = L / 2 = 4500 / 2 = <strong>2250 mm</strong>.<br>\nSlenderness ratio λ = Le / k = 2250 / 64.03 = <strong>35.14</strong>.<br><br>\n<strong>Step 3: Euler's Critical Load</strong><br>\nP_cr = π²EI / Le² = (π² × 100,000 × 46.38 × 10⁶) / (2250)² = <strong>9,042,883 N = 9,042.88 kN</strong>.<br>\nSafe Euler Load (FoS = 3) = 9042.88 / 3 = <strong>3,014.29 kN</strong>.<br><br>\n<strong>Step 4: Rankine Critical Load</strong><br>\nCrushing load P_c = σc × A = 550 × 11,309.7 = 6,220,335 N = 6,220.34 kN.<br>\nP_Rankine = P_c / [1 + a · (Le/k)²] = 6220.34 / [1 + (1/1600) × 35.14²] = 6220.34 / [1 + 0.7717] = <strong>3,510.94 kN</strong>.<br>\nSafe Rankine Load = 3510.94 / 3 = <strong>1,170.31 kN</strong>.<br>\n<em>(Rankine load is more realistic for intermediate columns as Euler overestimates capacity when λ is moderate).</em>"
+      }
+    ]
+  },
+  "24MET402": {
+    "Module 1": [
+      {
+        "exam": "TKMCE Autonomous ESE (8 Marks)",
+        "question": "Explain Abbe's principle of alignment. How does misalignment cause measurement error? Calculate the Abbe error if a scale of 100 mm has an angular tilt of 0.05° at a height offset of 25 mm.",
+        "solution": "<strong>1. Abbe's Principle:</strong> The line of measurement and the reference scale axis must be collinear. Any spatial offset 'h' between the scale and the workpiece creates an Abbe error if angular pitch/tilt θ occurs during slider motion.<br><br><strong>2. Error Formulation:</strong><br>Abbe Error ε = h · tan(θ) ≈ h · θ (for small angles).<br>Given: offset h = 25 mm, tilt θ = 0.05° = 0.05 × (π/180) = 0.0008726 rad.<br>Abbe Error ε = 25 mm × 0.0008726 = <strong>0.0218 mm = 21.8 μm</strong>.<br><em>Vernier calipers suffer from Abbe error because measuring jaws are offset from the beam scale.</em>"
+      }
+    ],
+    "Module 2": [
+      {
+        "exam": "TKMCE Autonomous ESE (10 Marks)",
+        "question": "Design general GO and NO-GO plug gauges for checking a hole of nominal size 50H7. Given: Basic size = 50 mm, IT7 = 16i where i = 0.45 ∛D + 0.001D (μm). Fundamental deviation of H hole = 0. Gauge tolerance = 10% of work tolerance.",
+        "solution": "<strong>Step 1: Standard Tolerance Unit (i)</strong><br>D = √(30 × 50) = 38.73 mm (for diameter step 30-50 mm).<br>i = 0.45 ∛(38.73) + 0.001(38.73) = 0.45 × 3.383 + 0.0387 = 1.561 μm.<br>IT7 = 16i = 16 × 1.561 = <strong>25 μm = 0.025 mm</strong>.<br><br><strong>Step 2: Workpiece Limits (50H7)</strong><br>Lower Deviation EI = 0 ⟹ Lower Limit (MMC) = 50.000 mm.<br>Upper Deviation ES = +0.025 mm ⟹ Upper Limit (LMC) = 50.025 mm.<br><br><strong>Step 3: Gauge Limits (Taylor's Principle)</strong><br>Gauge tolerance = 10% of 0.025 = 0.0025 mm.<br><strong>GO Plug Gauge (checks MMC):</strong> 50.000 mm (+0.0025 / 0 mm).<br><strong>NO-GO Plug Gauge (checks LMC):</strong> 50.025 mm (0 / -0.0025 mm)."
+      }
+    ],
+    "Module 3": [
+      {
+        "exam": "Series Exam 2 (8 Marks)",
+        "question": "A surface profilometer measurement gave the following ordinate heights (in μm) over a 4 mm sampling length: 2.1, 4.3, 1.2, 5.5, 3.4, 2.8, 1.9, 4.8. Calculate the Center Line Average (Ra) and Root Mean Square (Rq) roughness.",
+        "solution": "<strong>1. Mean Line Calculation:</strong><br>Σy = 2.1 + 4.3 + 1.2 + 5.5 + 3.4 + 2.8 + 1.9 + 4.8 = 26.0 μm.<br>Mean ȳ = 26.0 / 8 = 3.25 μm.<br><br><strong>2. Deviations |yᵢ - ȳ|:</strong><br>|2.1 - 3.25| = 1.15; |4.3 - 3.25| = 1.05; |1.2 - 3.25| = 2.05; |5.5 - 3.25| = 2.25;<br>|3.4 - 3.25| = 0.15; |2.8 - 3.25| = 0.45; |1.9 - 3.25| = 1.35; |4.8 - 3.25| = 1.55.<br>Σ|dev| = 10.0 μm.<br><strong>Ra = Σ|yᵢ - ȳ| / n = 10.0 / 8 = 1.25 μm</strong>.<br><br><strong>3. RMS Roughness (Rq):</strong><br>Σ(dev)² = 1.15² + 1.05² + 2.05² + 2.25² + 0.15² + 0.45² + 1.35² + 1.55² = 1.32 + 1.10 + 4.20 + 5.06 + 0.02 + 0.20 + 1.82 + 2.40 = 16.12 μm².<br><strong>Rq = √(16.12 / 8) = √2.015 = 1.42 μm</strong>."
+      }
+    ],
+    "Module 4": [
+      {
+        "exam": "TKMCE Autonomous ESE (8 Marks)",
+        "question": "Explain the construction and working principle of a Linear Variable Differential Transformer (LVDT). What is null voltage and why does it occur?",
+        "solution": "<strong>1. Construction:</strong> One primary coil P excited by AC voltage (1-10 kHz, 3-15 V) flanked symmetrically by two identical secondary coils S1 and S2 connected in series-opposition. A high-permeability nickel-iron core slides inside the non-magnetic bobbin.<br><br><strong>2. Working Principle:</strong><br>Differential output Vout = E_S1 - E_S2.<br>At center (null position), magnetic flux linkage to S1 and S2 is equal: E_S1 = E_S2 ⟹ Vout = 0.<br>Displacement x in either direction increases flux in one secondary while reducing the other, yielding linear AC voltage output proportional to x with 180° phase shift indicating direction.<br><br><strong>3. Residual Null Voltage:</strong> Caused by slight harmonic distortion in AC source, stray magnetic fields, and microscopic winding asymmetries."
+      }
+    ],
+    "Module 5": [
+      {
+        "exam": "TKMCE Autonomous ESE (10 Marks)",
+        "question": "In a 2² factorial experiment to optimize surface finish, two cutting speeds (100, 200 m/min) and two feeds (0.1, 0.2 mm/rev) were evaluated with two replications. Outline the ANOVA table format and explain how to calculate the F-statistic to determine factor significance.",
+        "solution": "<strong>1. 2² Factorial Formulation:</strong><br>Treatment combinations: (1) low/low, a high/low, b low/high, ab high/high with n=2 replicates (Total runs N = 8).<br><br><strong>2. Sum of Squares:</strong><br>SS_Total = Σ y² - (G²/N)<br>SS_Speed = [ (a + ab) - ((1) + b) ]² / (4n)<br>SS_Feed = [ (b + ab) - ((1) + a) ]² / (4n)<br>SS_Interaction = [ (ab + (1)) - (a + b) ]² / (4n)<br>SS_Error = SS_Total - (SS_Speed + SS_Feed + SS_Interaction).<br><br><strong>3. F-Ratio Test:</strong><br>MS_Factor = SS_Factor / df (where df = 1 for each factor).<br>MS_Error = SS_Error / df_error (where df_error = 4(n-1) = 4).<br>F_calc = MS_Factor / MS_Error.<br>If F_calc > F_critical(1, 4) at α = 0.05, the cutting factor has a statistically significant effect on surface finish."
+      }
+    ]
+  },
+  "24MEP403": {
+    "Module 1": [
+      {
+        "exam": "TKMCE Autonomous ESE (10 Marks)",
+        "question": "A cubical casting of size 100 mm × 100 mm × 100 mm solidifies in 5 minutes. Find the solidification time for a 100 mm × 100 mm × 200 mm rectangular casting under identical mold conditions using Chvorinov's rule.",
+        "solution": "<strong>1. Chvorinov's Rule:</strong> t_s = C · (V / A)².<br><br><strong>2. For Cubical Casting (100 mm):</strong><br>Volume V₁ = 100³ = 1,000,000 mm³.<br>Surface Area A₁ = 6 × 100² = 60,000 mm².<br>Modulus (V/A)₁ = 1,000,000 / 60,000 = 16.67 mm.<br>Given t_s1 = 5 min ⟹ C = 5 / (16.67)² = 5 / 277.78 = 0.018 min/mm².<br><br><strong>3. For Rectangular Casting (100 × 100 × 200 mm):</strong><br>Volume V₂ = 100 × 100 × 200 = 2,000,000 mm³.<br>Surface Area A₂ = 2(100×100 + 100×200 + 100×200) = 2(10,000 + 20,000 + 20,000) = 100,000 mm².<br>Modulus (V/A)₂ = 2,000,000 / 100,000 = 20.0 mm.<br><br><strong>4. Solidification Time:</strong><br>t_s2 = C · (V/A)₂² = 0.018 × (20)² = <strong>7.20 minutes</strong>."
+      }
+    ]
+  },
+  "24MEJ404": {
+    "Module 1": [
+      {
+        "exam": "TKMCE Autonomous ESE (10 Marks)",
+        "question": "A composite furnace wall consists of 100 mm firebrick (k = 1.2 W/m·K) and 150 mm insulating brick (k = 0.15 W/m·K). Inside gas temperature is 1200°C with h_in = 30 W/m²·K, and outside air is 30°C with h_out = 15 W/m²·K. Calculate: (i) Heat loss per m² wall area, (ii) Interface temperature between bricks.",
+        "solution": "<strong>Step 1: Thermal Resistances per unit area (A = 1 m²)</strong><br>R_in = 1 / h_in = 1 / 30 = 0.0333 K/W.<br>R_firebrick = L₁ / k₁ = 0.100 / 1.2 = 0.0833 K/W.<br>R_insulation = L₂ / k₂ = 0.150 / 0.15 = 1.0000 K/W.<br>R_out = 1 / h_out = 1 / 15 = 0.0667 K/W.<br>Total Resistance R_total = 0.0333 + 0.0833 + 1.0000 + 0.0667 = <strong>1.1833 K/W</strong>.<br><br><strong>Step 2: Heat Loss Rate (q)</strong><br>q = ΔT_overall / R_total = (1200 - 30) / 1.1833 = 1170 / 1.1833 = <strong>988.76 W/m²</strong>.<br><br><strong>Step 3: Interface Temperature (T_int)</strong><br>Inside wall surface T₁ = T_gas - q · R_in = 1200 - (988.76 × 0.0333) = 1167.07°C.<br>Interface T_int = T₁ - q · R_firebrick = 1167.07 - (988.76 × 0.0833) = <strong>1084.7°C</strong>."
+      }
+    ]
+  },
+  "24MET501": {
+    "Module 1": [
+      {
+        "exam": "TKMCE Autonomous ESE (10 Marks)",
+        "question": "A cantilever steel machine component is subjected to a completely reversed bending load of ±30 kN. The material has Sut = 600 MPa, Sy = 450 MPa, and an uncorrected endurance limit Se' = 300 MPa. Surface factor ka = 0.85, size factor kb = 0.88, reliability factor kc = 0.897 (90% reliability). Fatigue notch factor Kf = 1.4. Calculate the required section modulus for infinite life with a Factor of Safety of 2.",
+        "solution": "<strong>Step 1: Corrected Endurance Limit (Se)</strong><br>Se = ka · kb · kc · Se' = 0.85 × 0.88 × 0.897 × 300 = <strong>201.29 MPa</strong>.<br><br><strong>Step 2: Completely Reversed Loading (σm = 0)</strong><br>Since mean stress σm = 0, Soderberg and Goodman lines coincide.<br>Design allowable stress: σ_allow = Se / (Kf · FoS) = 201.29 / (1.4 × 2) = <strong>71.89 MPa</strong>.<br><br><strong>Step 3: Required Section Modulus (Z)</strong><br>If maximum bending moment at fixed support is M = 30 kN × L, then Z_req = M_max / σ_allow = (30 × 10³ × L) / 71.89 mm³."
+      }
+    ]
+  },
+  "24MEJ502": {
+    "Module 1": [
+      {
+        "exam": "TKMCE Autonomous ESE (10 Marks)",
+        "question": "In a steam power plant operating on ideal reheat Rankine cycle, steam enters high pressure turbine at 8 MPa, 500°C and expands to 2 MPa. It is then reheated to 500°C before entering LP turbine. Condenser pressure is 10 kPa. Calculate the thermal efficiency and net power output for steam flow rate of 20 kg/s.",
+        "solution": "<strong>1. Enthalpies from Steam Tables:</strong><br>h₁ (8 MPa, 500°C) = 3399.5 kJ/kg, s₁ = 6.7266 kJ/kg·K.<br>h₂ (at 2 MPa, isentropic) = 2963.5 kJ/kg.<br>h₃ (reheated to 2 MPa, 500°C) = 3468.3 kJ/kg, s₃ = 7.4337 kJ/kg·K.<br>h₄ (at 10 kPa, isentropic) = 2415.8 kJ/kg.<br>h₅ (saturated liquid at 10 kPa) = 191.8 kJ/kg.<br>Pump work W_p = v_f(8000 - 10) ≈ 8.0 kJ/kg ⟹ h₆ = 199.8 kJ/kg.<br><br><strong>2. Turbines Work & Heat Input:</strong><br>W_HP = h₁ - h₂ = 3399.5 - 2963.5 = 436.0 kJ/kg.<br>W_LP = h₃ - h₄ = 3468.3 - 2415.8 = 1052.5 kJ/kg.<br>W_net = (436.0 + 1052.5) - 8.0 = <strong>1480.5 kJ/kg</strong>.<br>Q_in = (h₁ - h₆) + (h₃ - h₂) = (3399.5 - 199.8) + (3468.3 - 2963.5) = 3199.7 + 504.8 = <strong>3704.5 kJ/kg</strong>.<br><br><strong>3. Thermal Efficiency:</strong><br>η_th = W_net / Q_in = 1480.5 / 3704.5 = <strong>39.96% (~40.0%)</strong>.<br>Net Power Output P = ṁ × W_net = 20 kg/s × 1480.5 kW = <strong>29,610 kW = 29.61 MW</strong>."
+      }
+    ]
+  },
+  "24MET503": {
+    "Module 1": [
+      {
+        "exam": "TKMCE Autonomous ESE (8 Marks)",
+        "question": "A four-bar mechanism has links of lengths: fixed link a = 100 mm, driving crank b = 40 mm, coupler c = 80 mm, follower d = 70 mm. Using Grashof's theorem, determine if it is a Grashof mechanism and identify the type of mechanism obtained when: (i) Shortest link is crank, (ii) Link adjacent to shortest is fixed.",
+        "solution": "<strong>1. Grashof's Criterion:</strong><br>Shortest link s = 40 mm (crank b).<br>Longest link l = 100 mm (fixed link a).<br>Other two links: p = 80 mm (coupler), q = 70 mm (follower).<br>Sum s + l = 40 + 100 = 140 mm.<br>Sum p + q = 80 + 70 = 150 mm.<br>Since (s + l) < (p + q) [140 < 150], <strong>the mechanism satisfies Grashof's law!</strong><br><br><strong>2. Inversions:</strong><br>(i) When the link adjacent to shortest link is fixed (fixed link a = 100 mm adjacent to b = 40 mm), the shortest link can make a complete 360° rotation: <strong>Crank-Rocker Mechanism</strong>.<br>(ii) If the shortest link itself is fixed, both adjacent links can rotate fully: <strong>Double-Crank (Drag-Link) Mechanism</strong>."
+      }
+    ]
+  },
+  "24MEP504": {
+    "Module 1": [
+      {
+        "exam": "TKMCE Autonomous ESE (10 Marks)",
+        "question": "Solve the following Linear Programming Problem graphically: Maximize Z = 3x₁ + 5x₂ subject to x₁ + 2x₂ ≤ 20, x₁ + x₂ ≤ 15, x₂ ≤ 6, and x₁, x₂ ≥ 0.",
+        "solution": "<strong>Step 1: Plotting Constraint Boundaries</strong><br>Line 1: x₁ + 2x₂ = 20 ⟹ Intercepts (20, 0) and (0, 10).<br>Line 2: x₁ + x₂ = 15 ⟹ Intercepts (15, 0) and (0, 15).<br>Line 3: x₂ = 6 ⟹ Horizontal line through y = 6.<br><br><strong>Step 2: Corner Points of Feasible Region</strong><br>A (0, 0) ⟹ Z = 0.<br>B (15, 0) ⟹ Z = 3(15) + 5(0) = 45.<br>C: Intersection of Line 1 and Line 2: (x₁ + 2x₂ = 20) - (x₁ + x₂ = 15) ⟹ x₂ = 5, x₁ = 10 ⟹ Point (10, 5) ⟹ Z = 3(10) + 5(5) = <strong>55</strong>.<br>D: Intersection of Line 1 (x₁ = 20 - 2(6) = 8) and x₂ = 6 ⟹ Point (8, 6) ⟹ Z = 3(8) + 5(6) = 24 + 30 = <strong>54</strong>.<br>E (0, 6) ⟹ Z = 3(0) + 5(6) = 30.<br><br><strong>Step 3: Optimal Solution</strong><br>Maximum value of Z is <strong>55</strong> occurring at <strong>x₁* = 10, x₂* = 5</strong>."
+      }
+    ]
+  },
+  "24MET601": {
+    "Module 1": [
+      {
+        "exam": "TKMCE Autonomous ESE (8 Marks)",
+        "question": "Explain Heinrich's 1:29:300 ratio and Domino Theory of accident causation. How does modern proactive safety intervention break the chain of events?",
+        "solution": "<strong>1. Heinrich's Safety Ratio:</strong> For every 330 similar accidents:<br>• 1 results in a Major / Fatal disabling injury.<br>• 29 result in Minor lost-time injuries.<br>• 300 result in Near-Miss incidents / No-injury property damage.<br><em>Key Takeaway: Addressing the 300 unsafe behaviors eliminates the foundation leading to the single fatality.</em><br><br><strong>2. Domino Sequence:</strong><br>Ancestry/Social environment ⟹ Fault of person ⟹ Unsafe Act / Mechanical Hazard ⟹ Accident ⟹ Injury.<br><br><strong>3. Proactive Intervention:</strong> Modern safety removes the middle domino (Unsafe Act / Unsafe Condition) through engineering controls, interlocks, and behavioural safety audits, preventing downstream accident triggers."
+      }
+    ]
+  },
+  "24MEP602": {
+    "Module 1": [
+      {
+        "exam": "TKMCE Autonomous ESE (10 Marks)",
+        "question": "A triangle with vertices A(2, 2), B(6, 2), C(4, 6) is rotated by 90° counter-clockwise about the point P(2, 2). Formulate the concatenated 3×3 transformation matrix using homogeneous coordinates and calculate the transformed coordinates of the triangle.",
+        "solution": "<strong>Step 1: Transformation Steps</strong><br>1. Translate point P(2, 2) to origin: [T(-2, -2)]<br>2. Rotate by θ = +90° about origin: [R(90°)] where cos 90° = 0, sin 90° = 1.<br>3. Translate back to P(2, 2): [T(+2, +2)].<br><br><strong>Step 2: Concatenated Matrix [M]</strong><br>[M] = [T(-2, -2)] · [R(90°)] · [T(2, 2)]<br>In homogeneous row-vector matrix convention:<br>[M] = [ 0  1  0 ;  -1  0  0 ;  4  0  1 ].<br><br><strong>Step 3: Coordinate Multiplication [X'] = [X] · [M]</strong><br>For A(2, 2): [2  2  1] · [M] = [ 2(0)+2(-1)+4 , 2(1)+2(0)+0 , 1 ] = <strong>A'(2, 2)</strong> (remains invariant as pivot point).<br>For B(6, 2): [6  2  1] · [M] = [ 6(0)+2(-1)+4 , 6(1)+2(0)+0 , 1 ] = <strong>B'(2, 6)</strong>.<br>For C(4, 6): [4  6  1] · [M] = [ 4(0)+6(-1)+4 , 4(1)+6(0)+0 , 1 ] = <strong>C'(-2, 4)</strong>."
+      }
+    ]
+  },
+  "24MEP603": {
+    "Module 1": [
+      {
+        "exam": "TKMCE Autonomous ESE (8 Marks)",
+        "question": "Write an ISO standard CNC manual part program to perform external profile turning on a cylindrical bar of 50 mm diameter reducing to 30 mm over a length of 40 mm with a 2 mm × 45° chamfer at the entry edge.",
+        "solution": "<strong>CNC Turning Part Program:</strong><br>\n<pre style=\"background:#0f172a; padding:10px; border-radius:6px; color:#38bdf8;\">\n%\nO1001 (CYLINDRICAL TURNING & CHAMFER)\nG21 G90 G95 (Metric, Absolute, Feed mm/rev)\nG28 U0 W0 (Return to Machine Home)\nT0101 (Select Tool 1 with Offset 1)\nG96 S180 M03 (Constant Surface Speed 180 m/min, Spindle CW)\nG50 S2500 (Max Spindle Speed Clamp 2500 RPM)\nG00 X55.0 Z2.0 M08 (Rapid to Approach Point, Coolant ON)\nG01 Z0.0 F0.2 (Face Contact)\nG01 X26.0 (Face Down to Chamfer Start)\nG01 X30.0 Z-2.0 F0.1 (Cut 2mm x 45 deg Chamfer)\nG01 Z-40.0 F0.15 (Turn Diameter 30mm over 40mm length)\nG01 X52.0 (Retract Transversely)\nG00 X100.0 Z50.0 M09 (Rapid Safe Clearance, Coolant OFF)\nG28 U0 W0 (Home Position)\nM05 (Spindle Stop)\nM30 (Program End & Rewind)\n%\n</pre>"
+      }
+    ]
+  },
+  "24MEP701": {
+    "Module 1": [
+      {
+        "exam": "TKMCE Autonomous ESE (10 Marks)",
+        "question": "An aircraft air refrigeration system operating on Bell-Coleman cycle maintains cabin at 1.0 bar and 20°C. Ambient air at 0.8 bar and 5°C is compressed to 3.5 bar with compressor isentropic efficiency of 85%. Air is cooled to 40°C in heat exchanger before expanding to 1.0 bar in turbine with isentropic efficiency of 80%. Find the COP of the system and refrigeration capacity for 15 kg/min airflow. Take γ = 1.4, cp = 1.005 kJ/kg·K.",
+        "solution": "<strong>Step 1: Compression Process (1 to 2)</strong><br>T₂' = T₁ · (p₂/p₁)^((γ-1)/γ) = (278 K) × (3.5 / 0.8)^0.2857 = 278 × 1.528 = 424.8 K.<br>Actual T₂ = T₁ + (T₂' - T₁)/η_c = 278 + (424.8 - 278)/0.85 = <strong>450.7 K (177.7°C)</strong>.<br><br><strong>Step 2: Heat Exchanger Cooling (2 to 3)</strong><br>T₃ = 40°C = 313 K at 3.5 bar.<br><br><strong>Step 3: Expansion Process (3 to 4)</strong><br>T₄' = T₃ · (p₄/p₃)^((γ-1)/γ) = 313 × (1.0 / 3.5)^0.2857 = 313 × 0.6989 = 218.8 K.<br>Actual T₄ = T₃ - η_t(T₃ - T₄') = 313 - 0.80(313 - 218.8) = <strong>237.6 K (-35.4°C)</strong>.<br><br><strong>Step 4: Refrigerating Effect & Work</strong><br>q_e = cp · (T_cabin - T₄) = 1.005 × (293 - 237.6) = <strong>55.68 kJ/kg</strong>.<br>w_c = cp · (T₂ - T₁) = 1.005 × (450.7 - 278) = 173.56 kJ/kg.<br>w_t = cp · (T₃ - T₄) = 1.005 × (313 - 237.6) = 75.78 kJ/kg.<br>w_net = w_c - w_t = 173.56 - 75.78 = <strong>97.78 kJ/kg</strong>.<br><br><strong>Step 5: COP and Capacity</strong><br>COP = q_e / w_net = 55.68 / 97.78 = <strong>0.57</strong>.<br>Refrigerating Capacity Q = ṁ · q_e = (15/60 kg/s) × 55.68 = 13.92 kW = <strong>3.96 TR</strong>."
+      }
+    ]
+  },
+  "24MEP702": {
+    "Module 1": [
+      {
+        "exam": "TKMCE Autonomous ESE (8 Marks)",
+        "question": "A student startup in TKMCE develops an IoT vibration diagnostic device for industrial motors. Total Addressable Market (TAM) is 500,000 factories across India. Serviceable Available Market (SAM) in South India is 80,000 factories. The startup aims to capture 5% of SAM in Year 1. Each device subscription generates ₹24,000 annual revenue. If Customer Acquisition Cost (CAC) is ₹6,000 and gross margin is 75%, calculate: (i) SOM revenue, (ii) Customer Lifetime Value (LTV) for average 3-year lifetime, (iii) Startup unit economics viability (LTV/CAC ratio).",
+        "solution": "<strong>Step 1: Market Sizing (SOM)</strong><br>SOM (Serviceable Obtainable Market) = 5% of 80,000 = <strong>4,000 customer accounts</strong>.<br>Year 1 SOM Annual Revenue = 4,000 × ₹24,000 = <strong>₹9.60 Crores</strong>.<br><br><strong>Step 2: Customer Lifetime Value (LTV)</strong><br>Annual Gross Margin per customer = ₹24,000 × 75% = ₹18,000.<br>LTV for 3 years = ₹18,000 × 3 = <strong>₹54,000</strong>.<br><br><strong>Step 3: Unit Economics (LTV / CAC)</strong><br>LTV / CAC = ₹54,000 / ₹6,000 = <strong>9.0</strong>.<br>CAC Payback Period = ₹6,000 / (₹18,000 / 12) = <strong>4 months</strong>.<br><br><strong>Conclusion:</strong><br>Since LTV/CAC (9.0) > 3.0 and Payback (4 months) < 12 months, the hardware-SaaS business model possesses exceptional unit economics and venture investability."
+      }
+    ]
+  }
+}

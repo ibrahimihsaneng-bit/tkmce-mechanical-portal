@@ -1,0 +1,3999 @@
+{
+  "S3": {
+    "title": "Semester 3 (2024 Scheme)",
+    "subjects": {
+      "24MAT301": {
+        "slot": "A",
+        "code": "24MAT301",
+        "name": "Probability Distributions and Complex Analysis",
+        "modules": {
+          "Module 1": {
+            "topics": [
+              {
+                "id": "1.1",
+                "text": "Discrete random variables and their probability distributions"
+              },
+              {
+                "id": "1.2",
+                "text": "Discrete random variables and their probability distributions(continued)"
+              },
+              {
+                "id": "1.3",
+                "text": "Expectation, mean and variance"
+              },
+              {
+                "id": "1.4",
+                "text": "Binomial distribution-mean and variance"
+              },
+              {
+                "id": "1.5",
+                "text": "Problems on Binomial distribution"
+              },
+              {
+                "id": "1.6",
+                "text": "Problems on Binomial distribution (continued)"
+              },
+              {
+                "id": "1.7",
+                "text": "Poisson distribution- Poisson approximation to binomial"
+              },
+              {
+                "id": "1.8",
+                "text": "Poisson distribution- mean and variance"
+              },
+              {
+                "id": "1.9",
+                "text": "Problems on Poisson distribution"
+              }
+            ],
+            "pdf_page": 4,
+            "image_path": "./syllabus_images/24MAT301_mod1.png"
+          },
+          "Module 2": {
+            "topics": [
+              {
+                "id": "2.1",
+                "text": "Continuous random variables and their probability distributions"
+              },
+              {
+                "id": "2.2",
+                "text": "Continuous random variables and their probability distributions(continued)"
+              },
+              {
+                "id": "2.3",
+                "text": "Expectation, mean and variance"
+              },
+              {
+                "id": "2.4",
+                "text": "Expectation, mean and variance(continued)"
+              },
+              {
+                "id": "2.5",
+                "text": "Uniform distribution – derivation of mean and variance"
+              },
+              {
+                "id": "2.6",
+                "text": "Problems on Uniform distribution"
+              },
+              {
+                "id": "2.7",
+                "text": "Normal distribution"
+              },
+              {
+                "id": "2.8",
+                "text": "Problems on Normal distribution"
+              },
+              {
+                "id": "2.9",
+                "text": "Problems on Normal distribution (continued)"
+              }
+            ],
+            "pdf_page": 5,
+            "image_path": "./syllabus_images/24MAT301_mod2.png"
+          },
+          "Module 3": {
+            "topics": [
+              {
+                "id": "3.1",
+                "text": "Population and samples, Sampling distribution of the mean and proportion (for large samples only)"
+              },
+              {
+                "id": "3.2",
+                "text": "Confidence interval for single mean"
+              },
+              {
+                "id": "3.3",
+                "text": "Confidence interval for single proportion"
+              },
+              {
+                "id": "3.4",
+                "text": "Test of Hypotheses: Large sample test for single mean"
+              },
+              {
+                "id": "3.5",
+                "text": "Large sample test for single proportion"
+              },
+              {
+                "id": "3.6",
+                "text": "Large sample test for equality of means"
+              },
+              {
+                "id": "3.7",
+                "text": "Small sample tests for single mean of normal population"
+              },
+              {
+                "id": "3.8",
+                "text": "Small sample t-tests for equality of means"
+              },
+              {
+                "id": "3.9",
+                "text": "Small sample t-tests for equality of means (continued"
+              }
+            ],
+            "pdf_page": 6,
+            "image_path": "./syllabus_images/24MAT301_mod3.png"
+          },
+          "Module 4": {
+            "topics": [
+              {
+                "id": "4.1",
+                "text": "Circles and disks, half planes, Complex functions"
+              },
+              {
+                "id": "4.2",
+                "text": "Limit and continuity of complex functions"
+              },
+              {
+                "id": "4.3",
+                "text": "Derivatives of complex functions"
+              },
+              {
+                "id": "4.4",
+                "text": "Analytic functions"
+              },
+              {
+                "id": "4.5",
+                "text": "Cauchy-Riemann equations"
+              },
+              {
+                "id": "4.6",
+                "text": "Cauchy-Riemann equations(continued)"
+              },
+              {
+                "id": "4.7",
+                "text": "Harmonic functions"
+              },
+              {
+                "id": "4.8",
+                "text": "Finding harmonic conjugate"
+              },
+              {
+                "id": "4.9",
+                "text": "Finding harmonic conjugate(continued)"
+              }
+            ],
+            "pdf_page": 7,
+            "image_path": "./syllabus_images/24MAT301_mod4.png"
+          },
+          "Module 5": {
+            "topics": [
+              {
+                "id": "5.1",
+                "text": "Cauchy’s integral theorem (without proof) on simply connected domain"
+              },
+              {
+                "id": "5.2",
+                "text": "Cauchy’s Integral formula (without proof)"
+              },
+              {
+                "id": "5.3",
+                "text": "Cauchy’s Integral formula for derivatives of analytic functions"
+              },
+              {
+                "id": "5.4",
+                "text": "Taylor’s series and Maclaurin series"
+              },
+              {
+                "id": "5.5",
+                "text": "Laurent series"
+              },
+              {
+                "id": "5.6",
+                "text": "Poles and Residues"
+              },
+              {
+                "id": "5.7",
+                "text": "Evaluation of residues"
+              },
+              {
+                "id": "5.8",
+                "text": "Evaluation of residues (continued)"
+              },
+              {
+                "id": "5.9",
+                "text": "Cauchy's residue theorem"
+              }
+            ],
+            "pdf_page": 8,
+            "image_path": "./syllabus_images/24MAT301_mod5.png"
+          }
+        },
+        "pdf_page": 3
+      },
+      "24EST312": {
+        "slot": "K",
+        "code": "24EST312",
+        "name": "Sustainable Engineering",
+        "modules": {
+          "Module 1": {
+            "topics": [
+              {
+                "id": "1.1",
+                "text": "Introduction, Social, environmental and economic sustainability concepts."
+              },
+              {
+                "id": "1.2",
+                "text": "Technology and Sustainable development. 1(S)"
+              },
+              {
+                "id": "1.3",
+                "text": "Millennium Development Goals (MDGs) and Sustainable Development Goals (SDGs)"
+              },
+              {
+                "id": "1.4",
+                "text": "Clean Development Mechanism (CDM)."
+              }
+            ],
+            "pdf_page": 12,
+            "image_path": "./syllabus_images/24EST312_mod1.png"
+          },
+          "Module 2": {
+            "topics": [
+              {
+                "id": "2.1",
+                "text": "Basic concepts of Conventional and non-conventional energy,"
+              },
+              {
+                "id": "2.2",
+                "text": "Solar energy, Wind energy,"
+              },
+              {
+                "id": "2.3",
+                "text": "Fuel cells."
+              },
+              {
+                "id": "2.4",
+                "text": "Small hydro plants, and biofuels"
+              },
+              {
+                "id": "2.5",
+                "text": "Energy derived from oceans and Geothermal energy."
+              }
+            ],
+            "pdf_page": 13,
+            "image_path": "./syllabus_images/24EST312_mod2.png"
+          },
+          "Module 3": {
+            "topics": [
+              {
+                "id": "3.1",
+                "text": "ISO 14001:2015 framework and benefits. 1(S)"
+              },
+              {
+                "id": "3.2",
+                "text": "Scope and Goal of Life Cycle Analysis (LCA),"
+              },
+              {
+                "id": "3.3",
+                "text": "Circular economy, Bio-mimicking."
+              },
+              {
+                "id": "3.4",
+                "text": "Environment Impact Assessment (EIA),"
+              },
+              {
+                "id": "3.5",
+                "text": "Industrial Ecology, Industrial Symbiosis."
+              }
+            ],
+            "pdf_page": 14,
+            "image_path": "./syllabus_images/24EST312_mod3.png"
+          },
+          "Module 4": {
+            "topics": [
+              {
+                "id": "4.1",
+                "text": "Design for Sustainability:- Design for high energy efficiency,"
+              },
+              {
+                "id": "4.2",
+                "text": "resource conservation, durability,"
+              },
+              {
+                "id": "4.3",
+                "text": "Easier manufacturing, better service, re-use, recycle & re- manufacture,"
+              },
+              {
+                "id": "4.4",
+                "text": "safe disposal and design using low impact materials"
+              }
+            ],
+            "pdf_page": 15,
+            "image_path": "./syllabus_images/24EST312_mod4.png"
+          },
+          "Module 5": {
+            "topics": [
+              {
+                "id": "5.1",
+                "text": "Technologies and systems with energy conservations and minimum  energy consumption,"
+              },
+              {
+                "id": "5.2",
+                "text": "Emission control systems,"
+              },
+              {
+                "id": "5.3",
+                "text": "Sustainability in material selection and utilization."
+              },
+              {
+                "id": "5.4",
+                "text": "Case studies in automotive industry, product design. 1(S)"
+              }
+            ],
+            "pdf_page": 16,
+            "image_path": "./syllabus_images/24EST312_mod5.png"
+          }
+        },
+        "pdf_page": 11
+      },
+      "24MEJ303": {
+        "slot": "B",
+        "code": "24MEJ303",
+        "name": "Engineering Materials & Applications",
+        "modules": {
+          "Module 1": {
+            "topics": [
+              {
+                "id": "1.1",
+                "text": "Metals, polymers, ceramics and composites; Relevant properties (physical, mechanical, thermal, electrical, chemical)"
+              },
+              {
+                "id": "1.2",
+                "text": "Cost; Range of applications;"
+              },
+              {
+                "id": "1.3",
+                "text": "Mechanical properties & Testing: Young’s modulus; Tensile Testing,"
+              },
+              {
+                "id": "1.4",
+                "text": "Yielding and yield strength; ductility, resilience, toughness"
+              },
+              {
+                "id": "1.5",
+                "text": "Compression test, Fatigue Test, SN curve, endurance limits"
+              },
+              {
+                "id": "1.6",
+                "text": "Atomic bonding – types, Crystallography, BC, BCC, FCC unit cells"
+              },
+              {
+                "id": "1.7",
+                "text": "APF & Theoretical Density calculations, Miller indices,"
+              },
+              {
+                "id": "1.8",
+                "text": "Crystalline defects – brief review Self-Study"
+              }
+            ],
+            "pdf_page": 16,
+            "image_path": "./syllabus_images/24MEJ303_mod1.png"
+          },
+          "Module 2": {
+            "topics": [
+              {
+                "id": "2.1",
+                "text": "Metals & Alloys: Iron and steel alloys; Stainless steel;"
+              },
+              {
+                "id": "2.2",
+                "text": "Aluminum Alloys; Titanium alloys"
+              },
+              {
+                "id": "2.3",
+                "text": "Phase diagrams: Lever rule, simple problems, Iron Iron-carbide phase diagram"
+              },
+              {
+                "id": "2.4",
+                "text": "Development of microstructure in iron-carbon alloys, Invariant Reactions, Pearlite, Bainite, Martensite"
+              },
+              {
+                "id": "2.5",
+                "text": "Phase transformation, Isothermal transformation diagram, TTT and CCT diagrams, applications"
+              }
+            ],
+            "pdf_page": 17,
+            "image_path": "./syllabus_images/24MEJ303_mod2.png"
+          },
+          "Module 3": {
+            "topics": [
+              {
+                "id": "3.1",
+                "text": "Strengthening Mechanisms: solid solution strengthening, work hardening, grain-boundary and precipitation strengthening"
+              },
+              {
+                "id": "3.2",
+                "text": "Heat treatment of steel: Annealing, normalizing, Tempering, Austempering, Martempering"
+              },
+              {
+                "id": "3.3",
+                "text": "Case hardening: Carburizing, nitriding, cyaniding, carbo-nitriding"
+              },
+              {
+                "id": "3.4",
+                "text": "Flame and induction hardening, vacuum and plasma hardening"
+              }
+            ],
+            "pdf_page": 18,
+            "image_path": "./syllabus_images/24MEJ303_mod3.png"
+          },
+          "Module 4": {
+            "topics": [
+              {
+                "id": "4.1",
+                "text": "Polymers – Classification and applications; Polymerization techniques"
+              },
+              {
+                "id": "4.2",
+                "text": "Ceramics – Classifications and applications"
+              },
+              {
+                "id": "4.3",
+                "text": "Bio-ceramics and Glasses; Self-Study"
+              },
+              {
+                "id": "4.4",
+                "text": "Composites – Reinforcement, matrix, metal matrix composites, ceramic matrix composites, polymer composites"
+              },
+              {
+                "id": "4.5",
+                "text": "Other advanced materials – biomaterials"
+              },
+              {
+                "id": "4.6",
+                "text": "Optical materials Self-Study"
+              }
+            ],
+            "pdf_page": 19,
+            "image_path": "./syllabus_images/24MEJ303_mod4.png"
+          },
+          "Module 5": {
+            "topics": [
+              {
+                "id": "5.1",
+                "text": "Conducting and resisting materials – types, properties and applications;"
+              },
+              {
+                "id": "5.2",
+                "text": "Semiconducting materials – properties and applications Self-Study"
+              },
+              {
+                "id": "5.3",
+                "text": "Magnetic materials – Soft and hard magnetic materials and applications;"
+              },
+              {
+                "id": "5.4",
+                "text": "Smart materials; Sensors and actuators;"
+              },
+              {
+                "id": "5.5",
+                "text": "Piezoelectric materials Self-Study"
+              },
+              {
+                "id": "5.6",
+                "text": "Magnetostrictive and electro strictive materials."
+              }
+            ],
+            "pdf_page": 20,
+            "image_path": "./syllabus_images/24MEJ303_mod5.png"
+          }
+        },
+        "pdf_page": 15
+      },
+      "24MEP304": {
+        "slot": "C",
+        "code": "24MEP304",
+        "name": "Fluid Mechanics & Hydraulic Machines",
+        "modules": {
+          "Module 1": {
+            "topics": [
+              {
+                "id": "1.1",
+                "text": "Properties of Fluid: Definition of fluid, properties of fluids - density, specific weight, viscosity - Newton’s law of viscosity, vapor pressure."
+              },
+              {
+                "id": "1.2",
+                "text": "Physical properties of fluids -Problems"
+              },
+              {
+                "id": "1.3",
+                "text": "Pascal’s Law, Hydrostatic law. Pressure and its measurement using manometers. (Problems)"
+              },
+              {
+                "id": "1.4",
+                "text": "Dimensional Analysis: Dimensionally homogeneous equations; Buckingham Pi Theorem; Calculation of dimensionless parameters."
+              },
+              {
+                "id": "1.5",
+                "text": "Buckingham Pi Theorem; Calculation of dimensionless parameters -Problems"
+              },
+              {
+                "id": "1.6",
+                "text": "Similarity- geometric similarity, dynamic similarity, kinematic similarity, model testing, model laws, undistorted and distorted models."
+              },
+              {
+                "id": "1.7",
+                "text": "Similarity-problems"
+              }
+            ],
+            "pdf_page": 25,
+            "image_path": "./syllabus_images/24MEP304_mod1.png"
+          },
+          "Module 2": {
+            "topics": [
+              {
+                "id": "2.1",
+                "text": "Fluid Kinematics: Kinematics of fluid flow: Eulerian and Larangian approaches, classification of fluid flow, steady, unsteady."
+              },
+              {
+                "id": "2.2",
+                "text": "Uniform, non -uniform, laminar, turbulent, rotational, irrotational flows, streamlines, path lines, streak lines, stream tubes,"
+              },
+              {
+                "id": "2.3",
+                "text": "Velocity and acceleration in fluid, circulation and vorticity, stream function and potential function."
+              },
+              {
+                "id": "2.4",
+                "text": "Velocity and acceleration in fluid, circulation and vorticity, stream function and potential function.-Problems"
+              },
+              {
+                "id": "2.5",
+                "text": "Momentum Equation: Euler's equation, Bernoulli's equation, hydraulic coefficients, venturi meter."
+              },
+              {
+                "id": "2.6",
+                "text": "hydraulic coefficients, venturi meter . orifice meter, Pitot tube - Problems"
+              },
+              {
+                "id": "2.7",
+                "text": "Orifice meter, flow over triangular and rectangular notches (description only), pitot tube, water meter (construction and working) (Detailed study of flow measuring devices to be handled in the Laboratory)"
+              }
+            ],
+            "pdf_page": 26,
+            "image_path": "./syllabus_images/24MEP304_mod2.png"
+          },
+          "Module 3": {
+            "topics": [
+              {
+                "id": "3.1",
+                "text": "Laminar and Turbulent Flow: Type of flow – Reynolds experiments, (lab Class -Practical.) Reynolds number."
+              },
+              {
+                "id": "3.2",
+                "text": "Hagen-Poiseuille equation, laminar flow through circular pipes."
+              },
+              {
+                "id": "3.3",
+                "text": "Hagen-Poiseuille equation, laminar flow through circular pipes. -Problems"
+              },
+              {
+                "id": "3.4",
+                "text": "Turbulent flow Frictional losses in pipe flow-Darcy’s and Chezy’s equation,"
+              },
+              {
+                "id": "3.5",
+                "text": "Major and minor losses-Problems"
+              },
+              {
+                "id": "3.6",
+                "text": "Darcy’s and Chezy’s equation. Problems)"
+              },
+              {
+                "id": "3.7",
+                "text": "Boundary layer concept (Theory only)"
+              }
+            ],
+            "pdf_page": 27,
+            "image_path": "./syllabus_images/24MEP304_mod3.png"
+          },
+          "Module 4": {
+            "topics": [
+              {
+                "id": "4.1",
+                "text": "Impact of jets-Theory of rotodynamic machines-Computation of force exerted on a stationary vertical flat plate."
+              },
+              {
+                "id": "4.2",
+                "text": "Computation of force exerted on a stationary vertical flat plate."
+              },
+              {
+                "id": "4.3",
+                "text": "Force exerted and efficiency on a moving curved plate (no derivation)"
+              },
+              {
+                "id": "4.4",
+                "text": "Force exerted and efficiency on a moving curved plate-Problems"
+              },
+              {
+                "id": "4.5",
+                "text": "Hydraulic Turbines: Classification of turbine -Pelton Wheel, Francis and Kaplan -working, (Detailed study of turbines to be handled in the Laboratory)"
+              },
+              {
+                "id": "4.6",
+                "text": "Velocity triangle, efficiencies and specific speed- Theory"
+              },
+              {
+                "id": "4.7",
+                "text": "Velocity triangle, efficiencies and specific speed -Problems"
+              },
+              {
+                "id": "4.8",
+                "text": "Selection and design of turbines."
+              }
+            ],
+            "pdf_page": 28,
+            "image_path": "./syllabus_images/24MEP304_mod4.png"
+          },
+          "Module 5": {
+            "topics": [
+              {
+                "id": "5.1",
+                "text": "Hydraulic Pumps : Classification of pumps- centrifugal pump, (Detailed study of pumps to be handled in the Laboratory)."
+              },
+              {
+                "id": "5.2",
+                "text": "Velocity triangles-Problems"
+              },
+              {
+                "id": "5.3",
+                "text": "manometric head- work done and efficiency computation."
+              },
+              {
+                "id": "5.4",
+                "text": "Cavitation in centrifugal pumps- Self Study, NPSH required and available."
+              },
+              {
+                "id": "5.5",
+                "text": "Performance characteristics, specific Speed- Problems"
+              },
+              {
+                "id": "5.6",
+                "text": "Reciprocating pump – working principle. (Detailed study of reciprocating pump to be handled in the Laboratory)."
+              }
+            ],
+            "pdf_page": 29,
+            "image_path": "./syllabus_images/24MEP304_mod5.png"
+          }
+        },
+        "pdf_page": 24
+      },
+      "24MEP305": {
+        "slot": "D",
+        "code": "24MEP305",
+        "name": "Mechanics of Machinery",
+        "modules": {
+          "Module 1": {
+            "topics": [
+              {
+                "id": "1.1",
+                "text": "Introduction and Review of Thermodynamics Role of Thermodynamics and its applications in Engineering and Science Basic Concepts: Macroscopic and Microscopic viewpoints, and steady flow process(problems),internal energy, enthalpy"
+              },
+              {
+                "id": "1.2",
+                "text": "Concept of Continuum, Types of Thermodynamic Systems. Thermodynamic Equilibrium- State, Property, Process, Cycle"
+              },
+              {
+                "id": "1.3",
+                "text": "Quasi static Process,– Work and Heat, Point and Path functions. Zeroth Law of Thermodynamics."
+              },
+              {
+                "id": "1.4",
+                "text": "First law of Thermodynamics applied to non flow process"
+              },
+              {
+                "id": "1.5",
+                "text": "First law of Thermodynamics applied to flow process"
+              }
+            ],
+            "pdf_page": 34,
+            "image_path": "./syllabus_images/24MEP305_mod1.png"
+          },
+          "Module 2": {
+            "topics": [
+              {
+                "id": "2.1",
+                "text": "Second Law of Thermodynamics: Kelvin-Planck and Clausius Statements and their Equivalence."
+              },
+              {
+                "id": "2.2",
+                "text": "Reversible Process, Causes of Irreversibility. Entropy, Principle of increase of entropy(basic concepts only).Carnot cycle(problems)"
+              },
+              {
+                "id": "2.3",
+                "text": "Pure Substances: Phase Transformations, Triple point, properties during change of phase, p-v-T surface, T-v, p-v and p-T diagram of pure substance."
+              },
+              {
+                "id": "2.4",
+                "text": "Saturation pressure and Temperature, T-h and T-s diagrams, h-s diagrams or Mollier Charts, Dryness Fraction, steam tables. Property calculations using steam tables."
+              }
+            ],
+            "pdf_page": 35,
+            "image_path": "./syllabus_images/24MEP305_mod2.png"
+          },
+          "Module 3": {
+            "topics": [
+              {
+                "id": "3.1",
+                "text": "IC Engine working: Four stroke SI and CI engine,Air standard Otto and Diesel Cycle( no derivation) ."
+              },
+              {
+                "id": "3.2",
+                "text": "Gas power cycles: Brayton cycle: Intercooling"
+              },
+              {
+                "id": "3.3",
+                "text": "Brayton cycle with Reheat, Regenerative (self-study)."
+              },
+              {
+                "id": "3.4",
+                "text": "Vapor power cycle, simple Rankine cycle, concept of reheat"
+              },
+              {
+                "id": "3.5",
+                "text": "Vapor power cycle, Rankine cycle with regenerative (Concept only)Binary vapor cycle(self-study)."
+              }
+            ],
+            "pdf_page": 36,
+            "image_path": "./syllabus_images/24MEP305_mod3.png"
+          },
+          "Module 4": {
+            "topics": [
+              {
+                "id": "4.1",
+                "text": "Flow of steam through nozzle, Steam turbines: classification, velocity diagrams:"
+              },
+              {
+                "id": "4.2",
+                "text": "Impulse and reaction turbine, work done, efficiency, condition for maximum efficiency (Self-study)"
+              },
+              {
+                "id": "4.3",
+                "text": "Stage efficiency. Steam turbine performance-reheat factor, degree of reaction"
+              },
+              {
+                "id": "4.4",
+                "text": "Governing of turbines. (Self-study) compounding of turbine pressure velocity variation"
+              }
+            ],
+            "pdf_page": 37,
+            "image_path": "./syllabus_images/24MEP305_mod4.png"
+          },
+          "Module 5": {
+            "topics": [
+              {
+                "id": "5.1",
+                "text": "Compressors: classification of compressors, reciprocating compressor-single stage compressor."
+              },
+              {
+                "id": "5.2",
+                "text": "Reciprocating compressor: equation for work with and without clearance volume, efficiencies"
+              },
+              {
+                "id": "5.3",
+                "text": "Multistage compressor, intercooler, free air delivered (FAD)."
+              },
+              {
+                "id": "5.4",
+                "text": "Centrifugal compressor working, velocity diagram, work done, power required, isentropic efficiency,"
+              },
+              {
+                "id": "5.5",
+                "text": "Slip factor, surging and choking, Axial compressors."
+              }
+            ],
+            "pdf_page": 38,
+            "image_path": "./syllabus_images/24MEP305_mod5.png"
+          }
+        },
+        "pdf_page": 33
+      },
+      "24HUT313": {
+        "slot": "E",
+        "code": "24HUT313",
+        "name": "Universal Human Values",
+        "modules": {
+          "Module 1": {
+            "topics": [
+              {
+                "id": "1.1",
+                "text": "Engineering and economics- Definition and scope of engineering economics-Basic concepts in economics"
+              },
+              {
+                "id": "1.2",
+                "text": "Scarcity and choice-Production possibility curve-Firm and its objectives."
+              },
+              {
+                "id": "1.3",
+                "text": "Types of firm-Utility- Law of diminishing marginal utility"
+              },
+              {
+                "id": "1.4",
+                "text": "Demand and its determinants- Law of demand"
+              },
+              {
+                "id": "1.5",
+                "text": "Elasticity of demand-measurement of elasticity and its applications"
+              },
+              {
+                "id": "1.6",
+                "text": "Supply-Law of supply and its determinants"
+              },
+              {
+                "id": "1.7",
+                "text": "Equilibrium- changes in demand and supply and its effects."
+              },
+              {
+                "id": "1.8",
+                "text": "Consumer surplus and producer surplus- Taxation and deadweight loss."
+              }
+            ],
+            "pdf_page": 41,
+            "image_path": "./syllabus_images/24HUT313_mod1.png"
+          },
+          "Module 2": {
+            "topics": [
+              {
+                "id": "2.1",
+                "text": "Production function- Law of variable proportion"
+              },
+              {
+                "id": "2.2",
+                "text": "Economies of scale- internal and external economies"
+              },
+              {
+                "id": "2.3",
+                "text": "Cost concepts-social cost-private cost and external cost- Explicit and Implicit cost sunk cost."
+              },
+              {
+                "id": "2.4",
+                "text": "Short run and long run cost curves- cost function"
+              },
+              {
+                "id": "2.5",
+                "text": "Revenue concepts-shut down point"
+              },
+              {
+                "id": "2.6",
+                "text": "Break even analysis"
+              },
+              {
+                "id": "2.7",
+                "text": "Break even analysis- problems"
+              }
+            ],
+            "pdf_page": 42,
+            "image_path": "./syllabus_images/24HUT313_mod2.png"
+          },
+          "Module 3": {
+            "topics": [
+              {
+                "id": "3.1",
+                "text": "Business forecasting-Introduction"
+              },
+              {
+                "id": "3.2",
+                "text": "Elementary techniques in business forecasting-Survey techniques-Expert opinion-Least square method."
+              },
+              {
+                "id": "3.3",
+                "text": "Social responsibility of private business"
+              },
+              {
+                "id": "3.4",
+                "text": "Business financing –sources of capital-Capital and money markets"
+              },
+              {
+                "id": "3.5",
+                "text": "International financing- FDI-FPI-FII"
+              },
+              {
+                "id": "3.6",
+                "text": "Basic principles of taxation-direct tax-indirect tax-GST-tax evasion."
+              }
+            ],
+            "pdf_page": 43,
+            "image_path": "./syllabus_images/24HUT313_mod3.png"
+          },
+          "Module 4": {
+            "topics": [
+              {
+                "id": "4.1",
+                "text": "Indian economy brief overview of Post-independence period- Plans"
+              },
+              {
+                "id": "4.2",
+                "text": "Post reform growth, structure of productive activity-issues of inclusion."
+              },
+              {
+                "id": "4.3",
+                "text": "Circular flow of income-two sector and multi sector model"
+              },
+              {
+                "id": "4.4",
+                "text": "National income- Three sectors of an economy"
+              },
+              {
+                "id": "4.5",
+                "text": "Methods of measuring national income-Problems"
+              },
+              {
+                "id": "4.6",
+                "text": "Inflation-causes and effects- measures to control inflation- monetary methods."
+              },
+              {
+                "id": "4.7",
+                "text": "Credit control methods-SLR- CRR-Open market operation- Repo and reverse repo – fiscal policies."
+              }
+            ],
+            "pdf_page": 44,
+            "image_path": "./syllabus_images/24HUT313_mod4.png"
+          },
+          "Module 5": {
+            "topics": [
+              {
+                "id": "5.1",
+                "text": "Economics and the Environment - Environment and development-basic issues"
+              },
+              {
+                "id": "5.2",
+                "text": "The cost of economic growth and environmental degradation."
+              },
+              {
+                "id": "5.3",
+                "text": "Sustainable policy approach -Population growth and environmental linkages-policy measures."
+              },
+              {
+                "id": "5.4",
+                "text": "International trade- balance of payment-components"
+              },
+              {
+                "id": "5.5",
+                "text": "Balance of payments deficit and devaluation"
+              },
+              {
+                "id": "5.6",
+                "text": "India’s external debt- measures to reduce external debt"
+              },
+              {
+                "id": "5.7",
+                "text": "Developing country borrowing and debt -Capital inflow to developing countries-The problem of default."
+              }
+            ],
+            "pdf_page": 45,
+            "image_path": "./syllabus_images/24HUT313_mod5.png"
+          }
+        },
+        "pdf_page": 40
+      },
+      "24MCT307": {
+        "slot": "F",
+        "code": "24MCT307",
+        "name": "Indian Constitution",
+        "modules": {
+          "Module 1": {
+            "topics": [
+              {
+                "id": "1.1",
+                "text": "Introduction to Mechanics – Mechanics of Rigid Bodies (EMS), Mechanics of deformable Bodies (MoS) and Mechanics of fluids (FM). Relevance of Engineering Mechanics, introduction to studies of bodies at rest (Statics) and studies of bodies in motion (Dynamics). Rigid bodies, Principle of transmissibility of forces, Principle of superposition, law of action and reaction."
+              },
+              {
+                "id": "1.2",
+                "text": "Free body diagrams (FBDs) – concept and examples, Exercise problems on drawing FBDs."
+              },
+              {
+                "id": "1.3",
+                "text": "Resolution of forces – rectangular components. Resultant of two forces - Parallelogram law."
+              },
+              {
+                "id": "1.4",
+                "text": "System of coplanar forces – concurrent and non- concurrent forces. Resultant force of a system of concurrent coplanar forces – method of projections."
+              },
+              {
+                "id": "1.5",
+                "text": "Teacher assisted problem solving on resultant of system of concurrent coplanar forces."
+              },
+              {
+                "id": "1.6",
+                "text": "Equilibrium – equations for a body subjected to a system of concurrent coplanar forces. Equilibrant."
+              }
+            ],
+            "pdf_page": 46,
+            "image_path": "./syllabus_images/24MCT307_mod1.png"
+          },
+          "Module 2": {
+            "topics": [
+              {
+                "id": "2.1",
+                "text": "Moment of a force, Varignon’s Theorem of moments. Parallel coplanar forces – couple."
+              },
+              {
+                "id": "2.2",
+                "text": "Resultant of non-concurrent coplanar forces"
+              },
+              {
+                "id": "2.3",
+                "text": "Equilibrium of bodies subjected to general coplanar force system - equilibrium equations."
+              },
+              {
+                "id": "2.4",
+                "text": "Introduction to Friction – sliding friction - Coulomb’s laws of friction – analysis of single bodies. Ladder friction"
+              },
+              {
+                "id": "2.5",
+                "text": "Teacher assisted problem solving"
+              }
+            ],
+            "pdf_page": 47,
+            "image_path": "./syllabus_images/24MCT307_mod2.png"
+          },
+          "Module 3": {
+            "topics": [
+              {
+                "id": "3.1",
+                "text": "Centroid – Concept, Centroid of simple and regular geometrical shapes – Rectangle, right angled triangle, circle, semi-circle."
+              },
+              {
+                "id": "3.2",
+                "text": "Location of centroids using principle of moments. Centroid of composite areas- examples for illustration – problems"
+              },
+              {
+                "id": "3.3",
+                "text": "Moment of inertia -Concept, Moment of inertia of simple figures using integration. Parallel axis theorem – Demonstration. Perpendicular axis theorem – polar moment of inertia. Radius of gyration."
+              },
+              {
+                "id": "3.4",
+                "text": "Beams- Types, Support conditions, Loads on beams- Concentrated and UDL. Simple beam subject to concentrated vertical loads and UDL- support reactions."
+              },
+              {
+                "id": "3.5",
+                "text": "Teacher assisted problem solving."
+              }
+            ],
+            "pdf_page": 48,
+            "image_path": "./syllabus_images/24MCT307_mod3.png"
+          },
+          "Module 4": {
+            "topics": [
+              {
+                "id": "4.1",
+                "text": "Mass moment of inertia – ring, disc, cylinder (concept and equation). Introduction to dynamics – kinematics and kinetics. Newtons Laws – review."
+              },
+              {
+                "id": "4.2",
+                "text": "D’Alembert’s principle - Illustration of the concepts using one numerical exercise from motion on horizontal and inclined surfaces"
+              },
+              {
+                "id": "4.3",
+                "text": "Motion of connected bodies – problems."
+              },
+              {
+                "id": "4.4",
+                "text": "Teacher assisted problem solving."
+              }
+            ],
+            "pdf_page": 49,
+            "image_path": "./syllabus_images/24MCT307_mod4.png"
+          },
+          "Module 5": {
+            "topics": [
+              {
+                "id": "5.1",
+                "text": "Concepts of impulse momentum equation and work energy equation. Curvilinear translation – Review of Kinematics."
+              },
+              {
+                "id": "5.2",
+                "text": "Curvilinear translation – Kinetics – equations."
+              },
+              {
+                "id": "5.3",
+                "text": "Rotation – kinematics and kinetics of rotation- equation of motion for a rigid body rotating about a fixed axis, motion of cylinder/disc – rolling without slip. Plane motion of rigid body – instantaneous centre of rotation (concept only)."
+              },
+              {
+                "id": "5.4",
+                "text": "Teacher assisted problem solving."
+              }
+            ],
+            "pdf_page": 50,
+            "image_path": "./syllabus_images/24MCT307_mod5.png"
+          }
+        },
+        "pdf_page": 45
+      }
+    }
+  },
+  "S4": {
+    "title": "Semester 4 (2024 Scheme)",
+    "subjects": {
+      "24MET401": {
+        "slot": "A",
+        "code": "24MET401",
+        "name": "Mechanics of Deformable Solids",
+        "modules": {
+          "Module 1": {
+            "topics": [
+              {
+                "id": "1.1",
+                "text": "Deformation behaviour of elastic solids in equilibrium under the action of a system of forces, method of sections."
+              },
+              {
+                "id": "1.2",
+                "text": "Stress vectors on Cartesian coordinate planes passing through a point, stress at a point in the form of a matrix."
+              },
+              {
+                "id": "1.3",
+                "text": "Equality of cross shear, Cauchy's equation."
+              },
+              {
+                "id": "1.4",
+                "text": "Displacement, gradient of displacement, Cartesian strain matrix"
+              },
+              {
+                "id": "1.5",
+                "text": "Strain- displacement relations (small-strain only), Simple problems to find strain matrix."
+              },
+              {
+                "id": "1.6",
+                "text": "Tutorial Session"
+              },
+              {
+                "id": "1.7",
+                "text": "Stress tensor and strain tensor for plane stress and plane strain conditions."
+              },
+              {
+                "id": "1.8",
+                "text": "Principal planes and principal stress, meaning of stress invariants, maximum shear stress"
+              },
+              {
+                "id": "1.9",
+                "text": "Mohr’s circle construction"
+              },
+              {
+                "id": "1.10",
+                "text": "Problems for 2D case using Mohr circle"
+              },
+              {
+                "id": "1.11",
+                "text": "Determination of Principal Stresses using Computational Tool"
+              }
+            ],
+            "pdf_page": 75,
+            "image_path": "./syllabus_images/24MET401_mod1.png"
+          },
+          "Module 2": {
+            "topics": [
+              {
+                "id": "2.1",
+                "text": "Stress–Strain curves of Ductile and Brittle Materials, Poisson’s ratio."
+              },
+              {
+                "id": "2.2",
+                "text": "Constitutive equations-generalized Hooke’s law, equations for linear elastic isotropic solids in terms of Young’s Modulus and Poisson’s ratio,"
+              },
+              {
+                "id": "2.3",
+                "text": "Hooke’s law for Plane stress and plane strain conditions. Relations between elastic constants E, G, ν and K."
+              },
+              {
+                "id": "2.4",
+                "text": "Calculation of stress and strain in axially loaded members"
+              },
+              {
+                "id": "2.5",
+                "text": "Calculation of deformation in axially loaded members"
+              },
+              {
+                "id": "2.6",
+                "text": "Thermal stress and thermal strain."
+              },
+              {
+                "id": "2.7",
+                "text": "Tutorial Problems from thermal stresses and strains"
+              },
+              {
+                "id": "2.8",
+                "text": "Statically indeterminate problems."
+              },
+              {
+                "id": "2.9",
+                "text": "Statically indeterminate problems"
+              }
+            ],
+            "pdf_page": 76,
+            "image_path": "./syllabus_images/24MET401_mod2.png"
+          },
+          "Module 3": {
+            "topics": [
+              {
+                "id": "3.1",
+                "text": "Torsional deformation of circular shafts, assumptions for shafts subjected to torsion within elastic deformation range,"
+              },
+              {
+                "id": "3.2",
+                "text": "Derivation of torsion formula, Torsional rigidity, Polar moment of inertia,"
+              },
+              {
+                "id": "3.3",
+                "text": "Basic design of transmission shafts."
+              },
+              {
+                "id": "3.4",
+                "text": "Simple problems to estimate the stress in solid and hollow shafts."
+              },
+              {
+                "id": "3.5",
+                "text": "Shear force and bending moment diagrams for cantilever"
+              },
+              {
+                "id": "3.6",
+                "text": "Tutorial problems based on loading of cantilever."
+              },
+              {
+                "id": "3.7",
+                "text": "Shear force and bending moment diagrams for simply supported beams."
+              },
+              {
+                "id": "3.8",
+                "text": "Shear force and bending moment diagrams for simply supported beams."
+              },
+              {
+                "id": "3.9",
+                "text": "Differential equations between load, shear force and bending moment."
+              },
+              {
+                "id": "3.10",
+                "text": "Use of computational tools for drawing shear force and bending moment diagrams (Group work)"
+              }
+            ],
+            "pdf_page": 77,
+            "image_path": "./syllabus_images/24MET401_mod3.png"
+          },
+          "Module 4": {
+            "topics": [
+              {
+                "id": "4.1",
+                "text": "Normal and shear stress in beams: Derivation of flexural formula, section modulus, flexural rigidity"
+              },
+              {
+                "id": "4.2",
+                "text": "Numerical problems to evaluate bending stress"
+              },
+              {
+                "id": "4.3",
+                "text": "Economic sections"
+              },
+              {
+                "id": "4.4",
+                "text": "Shear stress formula for beams, shear stress distribution for a rectangular section."
+              },
+              {
+                "id": "4.5",
+                "text": "Tutorial on shear stress distribution"
+              },
+              {
+                "id": "4.6",
+                "text": "Deflection of beams: Differential equation for elastic curve, Concept of double integration method"
+              },
+              {
+                "id": "4.7",
+                "text": "Deflection of beams using Macauley’s method (concentrated or uniformly distributed load)"
+              },
+              {
+                "id": "4.8",
+                "text": "Deflection of beams using Macauley’s method (combined concentrated and uniformly distributed load)"
+              },
+              {
+                "id": "4.9",
+                "text": "Tutorial problems to find deflection"
+              },
+              {
+                "id": "4.10",
+                "text": "Design of beams for a given loading"
+              }
+            ],
+            "pdf_page": 78,
+            "image_path": "./syllabus_images/24MET401_mod4.png"
+          },
+          "Module 5": {
+            "topics": [
+              {
+                "id": "5.1",
+                "text": "Fundamentals of buckling and stability, critical load, equilibrium diagram for buckling of an idealized structure"
+              },
+              {
+                "id": "5.2",
+                "text": "Buckling of columns with pinned ends"
+              },
+              {
+                "id": "5.3",
+                "text": "Euler’s buckling theory for long columns,Effect of end conditions"
+              },
+              {
+                "id": "5.4",
+                "text": "Critical stress, slenderness ratio, Rankine’s formula for short columns."
+              },
+              {
+                "id": "5.5",
+                "text": "Tutorial problems on column buckling"
+              },
+              {
+                "id": "5.6",
+                "text": "Stresses due to combined loads (axial, bending and torsion)"
+              },
+              {
+                "id": "5.7",
+                "text": "Stresses due to combined loads (axial, bending and torsion)"
+              },
+              {
+                "id": "5.8",
+                "text": "Practical problems involving combined loading - Case study report submission (Group work)"
+              }
+            ],
+            "pdf_page": 79,
+            "image_path": "./syllabus_images/24MET401_mod5.png"
+          }
+        },
+        "pdf_page": 74
+      },
+      "24MET402": {
+        "slot": "B",
+        "code": "24MET402",
+        "name": "Measurements and Metrology",
+        "modules": {
+          "Module 1": {
+            "topics": [
+              {
+                "id": "1.1",
+                "text": "Measurement Purpose and Parameters: Purposes of measurements – Introductory session on Metrology."
+              },
+              {
+                "id": "1.2",
+                "text": "Parameters and Definitions: Accuracy, precision, range, resolution, Errors in Measurement, types of errors. Abbe’s Principle, uncertainty and error sources; Calibration principles."
+              },
+              {
+                "id": "1.3",
+                "text": "Measurement Principles: Linear and angular measurements – Slip gauges, Angle gauges, Angle Dekkor; Clinometer – Features and use of these for measurements."
+              },
+              {
+                "id": "1.4",
+                "text": "Comparators – Mechanical, Electrical, Optical and Pneumatic types – Features and use of these for measurements. (Self-study topic, based on overall discussion)"
+              },
+              {
+                "id": "1.5",
+                "text": "Mechanical Measurements with equipment such as Vernier calipers, micrometers, bevel protractor and sine bar (Demonstration in lab/class)"
+              }
+            ],
+            "pdf_page": 83,
+            "image_path": "./syllabus_images/24MET402_mod1.png"
+          },
+          "Module 2": {
+            "topics": [
+              {
+                "id": "2.1",
+                "text": "Limits, Fit and Tolerances: Definitions – Limits, fits, tolerance, fundamental deviation. Tolerance zone and grades. Hole and shaft based systems."
+              },
+              {
+                "id": "2.2",
+                "text": "Limit gauges – Features and use of Plug, ring, snap, position and feeler gauges for applications. Gauge design - Taylor's principle of gauging."
+              },
+              {
+                "id": "2.3",
+                "text": "Geometric tolerances and representation. Design of tolerances for various applications. Tolerance analysis in manufacturing and assembly."
+              },
+              {
+                "id": "2.4",
+                "text": "Numerical problems on tolerance, fits, gauge design and GD&T (Assignment shall be given based on this topic.)"
+              },
+              {
+                "id": "2.5",
+                "text": "Role of metrology in Design for Manufacturing (Self-study topic)."
+              }
+            ],
+            "pdf_page": 84,
+            "image_path": "./syllabus_images/24MET402_mod2.png"
+          },
+          "Module 3": {
+            "topics": [
+              {
+                "id": "3.1",
+                "text": "Form and Surface Metrology: Form metrology – Form Measurement – Straightness, flatness, roundness – Measurement method and presenting the error."
+              },
+              {
+                "id": "3.2",
+                "text": "Features of CMM, 3D scanning, Autocollimator (Demonstration of measurement with these instruments in lab)"
+              },
+              {
+                "id": "3.3",
+                "text": "Interferometer – Principle, uses in measurement and calibration."
+              },
+              {
+                "id": "3.4",
+                "text": "Surface metrology – Surface profiler, Roughness parameters: Ra, Rq, Rt, Rz and the method of computation."
+              },
+              {
+                "id": "3.5",
+                "text": "Principles and Features of Optical microscopes, Laser scanning microscopes, Scanning Electron Microscopy (SEM), Raman spectroscopy for measurements. (Overview discussion, Self -study topic)"
+              }
+            ],
+            "pdf_page": 85,
+            "image_path": "./syllabus_images/24MET402_mod3.png"
+          },
+          "Module 4": {
+            "topics": [
+              {
+                "id": "4.1",
+                "text": "Electrical Measurements and Instruments: Transducers – Types, characteristics. Strain gages – Principle, types, applications."
+              },
+              {
+                "id": "4.2",
+                "text": "Displacement transducers, LVDT. Instrumentation amplifier; Isolation amplifier – basic principles only."
+              },
+              {
+                "id": "4.3",
+                "text": "Digital data acquisition system - Interfacing transducers to electronics control and measuring system (Shall be demonstrated in lab.)"
+              },
+              {
+                "id": "4.4",
+                "text": "Thermal and Flow Measurement: Measurement of temperature - Thermocouple; Resistance Temperature Detectors (RTD); Thermistors; Pyrometers."
+              },
+              {
+                "id": "4.5",
+                "text": "Flow obstruction methods; Magnetic flow meters."
+              }
+            ],
+            "pdf_page": 86,
+            "image_path": "./syllabus_images/24MET402_mod4.png"
+          },
+          "Module 5": {
+            "topics": [
+              {
+                "id": "5.1",
+                "text": "Design of Experiments and Statistical Analysis: Design of Experiments (DOE) techniques; Taguchi orthogonal arrays."
+              },
+              {
+                "id": "5.2",
+                "text": "Factorial design – Features, 2-factor design, examples. ANOVA."
+              },
+              {
+                "id": "5.3",
+                "text": "Response equations, Regression models – linear model, examples."
+              },
+              {
+                "id": "5.4",
+                "text": "Error probability density function of a system of non-ideal elements; Error reduction techniques."
+              }
+            ],
+            "pdf_page": 87,
+            "image_path": "./syllabus_images/24MET402_mod5.png"
+          }
+        },
+        "pdf_page": 82
+      },
+      "24MEP403": {
+        "slot": "C",
+        "code": "24MEP403",
+        "name": "Manufacturing Processes",
+        "modules": {
+          "Module 1": {
+            "topics": [
+              {
+                "id": "1.1",
+                "text": "Manufacturing Processes and Classification: Introduction, manufacturing processes, Basic classification, Relative advantages and limitations"
+              },
+              {
+                "id": "1.2",
+                "text": "Material Shaping Processes: Metal casting (sand casting, die and investment casting: Basic steps, Advantages, Disadvantages, Industrial applications) Preparation of pattern and mould"
+              },
+              {
+                "id": "1.3",
+                "text": "Engineering analysis of casting: (Heating molten metal, Pouring of molten metal- Application of Bernoullis theorem and Continuity law, Mould filling time, Volume flow rate, Solidification time-Chvorinov’s rule)"
+              },
+              {
+                "id": "1.4",
+                "text": "Riser design, Casting defects, Product design considerations in metal casting"
+              },
+              {
+                "id": "1.5",
+                "text": "Thermoplastic and thermosetting plastic processes (injection molding process and blow molding process- Process and equipment, industrial applications)"
+              }
+            ],
+            "pdf_page": 89,
+            "image_path": "./syllabus_images/24MEP403_mod1.png"
+          },
+          "Module 2": {
+            "topics": [
+              {
+                "id": "2.1",
+                "text": "Bulk metal forming (forging, rolling, extrusion, wire drawing- Process, features, industrial applications)"
+              },
+              {
+                "id": "2.2",
+                "text": "Analysis of open die forging, Analysis of flat rolling process- (Force and power calculation)"
+              },
+              {
+                "id": "2.3",
+                "text": "Sheet metal forming (shearing, deep drawing, bending- Process, features, industrial applications)"
+              },
+              {
+                "id": "2.4",
+                "text": "Other (non-conventional) Manufacturing Processes: Electrical Discharge Machining & Wire EDM - Principle, Process, Advantages, Disadvantages, industrial applications"
+              },
+              {
+                "id": "2.5",
+                "text": "Abrasive Water Jet Machining - Principle, Process, Advantages, Disadvantages, industrial applications Electro-Chemical Machining- Principle, Process, Feed rate and machining time estimation based on Faradays Law, Advantages, Disadvantages, industrial applications"
+              },
+              {
+                "id": "2.6",
+                "text": "Ultrasonic Machining- - Principle, Process, Advantages, Disadvantages, industrial applications Electron Beam Machining- Principle, Process, Advantages, Disadvantages, industrial applications"
+              },
+              {
+                "id": "2.7",
+                "text": "Laser Beam Machining & Plasma Arc Machining- Principle, Process, Advantages, Disadvantages, industrial applications"
+              }
+            ],
+            "pdf_page": 90,
+            "image_path": "./syllabus_images/24MEP403_mod2.png"
+          },
+          "Module 3": {
+            "topics": [
+              {
+                "id": "3.1",
+                "text": "Material Removal Processes: Classification of material removal processes, Turning, cutting conditions in turning- cutting time, Material removal rate"
+              },
+              {
+                "id": "3.2",
+                "text": "Drilling, cutting conditions in drilling- - cutting time, Material removal rate, cost computation"
+              },
+              {
+                "id": "3.3",
+                "text": "Milling, types of milling, Cutting conditions in milling- machining time, material removal rate Grinding and other finishing processes"
+              },
+              {
+                "id": "3.4",
+                "text": "Single and multi-point cutting tools, Single point cutting tool nomenclature, cutting tool materials, Cutting fluid properties, machinability Types of chips, ASA system"
+              },
+              {
+                "id": "3.5",
+                "text": "Types of tool wear, Tool life and Taylors tool life equation"
+              },
+              {
+                "id": "3.6",
+                "text": "Machining process modeling (including simulation and industrial case study): Orthogonal cutting, various force components; Chip formation, Tool wear and tool life, Economics of machining"
+              }
+            ],
+            "pdf_page": 91,
+            "image_path": "./syllabus_images/24MEP403_mod3.png"
+          },
+          "Module 4": {
+            "topics": [
+              {
+                "id": "4.1",
+                "text": "Joining and Fastening Processes: Welding: Types of welding processes, types of weld joint configurations Arc welding: Process, Estimation of Power consumption and rate of heat generation"
+              },
+              {
+                "id": "4.2",
+                "text": "Arc welding using consumable electrodes: Shielded metal arc welding and GMAW (MIG)- Process, industrial applications"
+              },
+              {
+                "id": "4.3",
+                "text": "GTAW (TIG)- Process, industrial applications"
+              },
+              {
+                "id": "4.4",
+                "text": "Solid state joining- Process, types"
+              },
+              {
+                "id": "4.5",
+                "text": "Brazing and soldering, Adhesive bonding - Process, types"
+              },
+              {
+                "id": "4.6",
+                "text": "Weld defects, Weld inspection and testing, Design considerations in welding"
+              },
+              {
+                "id": "4.7",
+                "text": "Welding process modeling (including simulation and industrial case study): Process simulation; Parametric variation study"
+              }
+            ],
+            "pdf_page": 92,
+            "image_path": "./syllabus_images/24MEP403_mod4.png"
+          },
+          "Module 5": {
+            "topics": [
+              {
+                "id": "5.1",
+                "text": "Powder metallurgy: Basics processing steps, advantages, disadvantages, industrial applications"
+              },
+              {
+                "id": "5.2",
+                "text": "Additive Manufacturing Processes: Classification, Extrusion & vat polymerization, Powder bed fusion - Process, Advantages, disadvantages, industrial applications"
+              },
+              {
+                "id": "5.3",
+                "text": "Direct energy deposition, binder jetting process, lamination processes- Process, Advantages, disadvantages, industrial applications"
+              },
+              {
+                "id": "5.4",
+                "text": "Modelling of layer-by-layer manufacturing approach- Cycle time, cost estimation"
+              },
+              {
+                "id": "5.5",
+                "text": "Additive manufacturing process modeling (including industrial case study): Part modeling, cycle time and cost estimation, Defects in 3-D printed products [S]"
+              }
+            ],
+            "pdf_page": 93,
+            "image_path": "./syllabus_images/24MEP403_mod5.png"
+          }
+        },
+        "pdf_page": 88
+      },
+      "24MEJ404": {
+        "slot": "D",
+        "code": "24MEJ404",
+        "name": "Heat Transfer and Thermal Machines",
+        "modules": {
+          "Module 1": {
+            "topics": [
+              {
+                "id": "1.1",
+                "text": "Introduction: Modes of heat transfer; Examples of equipment (like air conditioner and air cooler) involving heat transfer"
+              },
+              {
+                "id": "1.2",
+                "text": "Conduction Heat Transfer: General heat conduction equation- Cartesian co-ordinate system."
+              },
+              {
+                "id": "1.3",
+                "text": "Steady 1D solution for conduction heat transfer in Cartesian co-ordinate system. (with and without heat generation)"
+              },
+              {
+                "id": "1.4",
+                "text": "General heat conduction equation - cylindrical co-ordinate system. Steady 1D solution for conduction heat transfer in cylindrical; (without heat generation)"
+              },
+              {
+                "id": "1.5",
+                "text": "General heat conduction equation - cylindrical co-ordinate system. Steady 1D solution for conduction heat transfer in cylindrical geometry; (with heat generation) Self-study"
+              },
+              {
+                "id": "1.6",
+                "text": "Concept of conduction and film resistances; Critical insulation thickness"
+              }
+            ],
+            "pdf_page": 97,
+            "image_path": "./syllabus_images/24MEJ404_mod1.png"
+          },
+          "Module 2": {
+            "topics": [
+              {
+                "id": "2.1",
+                "text": "Convection Heat Transfer: Basic equations; Boundary layers; Forced convection; External and internal flows; Self-study"
+              },
+              {
+                "id": "2.2",
+                "text": "Natural convective heat transfer; Dimensionless parameters for forced and free convection heat transfer;"
+              },
+              {
+                "id": "2.3",
+                "text": "Correlations for forced convection Correlations for free convection"
+              },
+              {
+                "id": "2.4",
+                "text": "Estimating heat transfer rates in laminar and turbulent flow situations using appropriate correlations for free convection."
+              },
+              {
+                "id": "2.5",
+                "text": "Estimating heat transfer rates in laminar and turbulent flow situations using appropriate correlations for forced convection."
+              }
+            ],
+            "pdf_page": 98,
+            "image_path": "./syllabus_images/24MEJ404_mod2.png"
+          },
+          "Module 3": {
+            "topics": [
+              {
+                "id": "3.1",
+                "text": "Radiation Heat Transfer : Interaction of radiation with materials; Definitions of radiative properties; Stefan Boltzmann’s law; Black and grey body radiation; Self study"
+              },
+              {
+                "id": "3.2",
+                "text": "Calculation of radiation heat transfer between surfaces using radiative properties (black body) 2 Calculation of radiation heat transfer between surfaces using radiative properties (black body)"
+              },
+              {
+                "id": "3.3",
+                "text": "View factor - computation for simple geometries, the radiosity method for different"
+              },
+              {
+                "id": "3.4",
+                "text": "Concept of Radiation shield"
+              },
+              {
+                "id": "3.5",
+                "text": "Effect of Radiation shield on heat transfer"
+              }
+            ],
+            "pdf_page": 99,
+            "image_path": "./syllabus_images/24MEJ404_mod3.png"
+          },
+          "Module 4": {
+            "topics": [
+              {
+                "id": "4.1",
+                "text": "Heat Exchanger Design: Function, classification and configuration of heat exchangers Self study"
+              },
+              {
+                "id": "4.2",
+                "text": "Evaluation of mean temperature difference, Heat exchanger effectiveness"
+              },
+              {
+                "id": "4.3",
+                "text": "Analysis of heat exchangers"
+              },
+              {
+                "id": "4.4",
+                "text": "Design - Determination of number of passes, geometrical parameter and configuration - selection of heat exchangers."
+              },
+              {
+                "id": "4.5",
+                "text": "Boiling: Pool boiling; Flow boiling"
+              },
+              {
+                "id": "4.6",
+                "text": "Condensation: Film and drop wise condensation"
+              }
+            ],
+            "pdf_page": 100,
+            "image_path": "./syllabus_images/24MEJ404_mod4.png"
+          },
+          "Module 5": {
+            "topics": [
+              {
+                "id": "5.1",
+                "text": "Introduction to mass transfer - Molecular diffusion in fluids - Steady state molecular diffusion in fluids under stagnant and laminar flow conditions - Fick’s law of diffusion"
+              },
+              {
+                "id": "5.2",
+                "text": "Types of solid diffusion- Equimolar counter-diffusion- Self study"
+              },
+              {
+                "id": "5.3",
+                "text": "Mass transfer coefficients in laminar and turbulent flows-"
+              },
+              {
+                "id": "5.4",
+                "text": "Correlation for convective mass transfer coefficient- Correlation of mass transfer coefficients for single cylinder-"
+              }
+            ],
+            "pdf_page": 101,
+            "image_path": "./syllabus_images/24MEJ404_mod5.png"
+          }
+        },
+        "pdf_page": 96
+      },
+      "24HUT415": {
+        "slot": "E",
+        "code": "24HUT415",
+        "name": "Management I – Finance and Accounting",
+        "modules": {
+          "Module 1": {
+            "topics": [
+              {
+                "id": "1.1",
+                "text": "Introduction to Book-keeping and Accounting"
+              },
+              {
+                "id": "1.2",
+                "text": "Accounting Process – Purpose of accounting, accounting standards."
+              },
+              {
+                "id": "1.3",
+                "text": "Classification of accounting, Double entry system of accounting"
+              },
+              {
+                "id": "1.4",
+                "text": "Concepts and Conventions"
+              },
+              {
+                "id": "1.5",
+                "text": "Preparation of Journal, Ledger and Trial Balance."
+              }
+            ],
+            "pdf_page": 108,
+            "image_path": "./syllabus_images/24HUT415_mod1.png"
+          },
+          "Module 2": {
+            "topics": [
+              {
+                "id": "2.1",
+                "text": "Introduction of Financial statements"
+              },
+              {
+                "id": "2.2",
+                "text": "Preparation of Profit & Loss Account, Cash flow statement and types-operating, investing and financing."
+              },
+              {
+                "id": "2.3",
+                "text": "Balance Sheet (Simple problems)."
+              },
+              {
+                "id": "2.4",
+                "text": "Introduction to Accounting Software."
+              },
+              {
+                "id": "2.5",
+                "text": "Simple problems based on accounting software."
+              }
+            ],
+            "pdf_page": 109,
+            "image_path": "./syllabus_images/24HUT415_mod2.png"
+          },
+          "Module 3": {
+            "topics": [
+              {
+                "id": "3.1",
+                "text": "Introduction to Financial Management and functions, financial goals, financial planning and control."
+              },
+              {
+                "id": "3.2",
+                "text": "Financial ratios - Liquidity ratios , Leverage ratios , Efficiency ratios, Profitability ratios. Market value ratios."
+              },
+              {
+                "id": "3.3",
+                "text": "Profit and Wealth Maximization, Portfolio Management"
+              },
+              {
+                "id": "3.4",
+                "text": "Investment plan – Long-term investment –Gold, stocks, bonds, real estate, investments made in other companies. PPF, NPS Trademarks and patents"
+              },
+              {
+                "id": "3.5",
+                "text": "Short-term investment- money market accounts, high -yield savings accounts, government bonds, and Treasury bills."
+              },
+              {
+                "id": "3.6",
+                "text": "Portfolio Management Financing and Dividend Decisions"
+              },
+              {
+                "id": "3.7",
+                "text": "Case study: Abakkus Fund - Sunil Singhania an Indian investor."
+              }
+            ],
+            "pdf_page": 110,
+            "image_path": "./syllabus_images/24HUT415_mod3.png"
+          },
+          "Module 4": {
+            "topics": [
+              {
+                "id": "4.1",
+                "text": "Introduction to Banking Systems-Functions –Structure of Banking System – Types"
+              },
+              {
+                "id": "4.2",
+                "text": "Rural Financing – Banker and Customer Relationship – customer satisfaction Legal and Ethical aspects."
+              },
+              {
+                "id": "4.3",
+                "text": "Deposit Mobilization – Loans and Advances – Assets and Liabilities."
+              },
+              {
+                "id": "4.4",
+                "text": "Fund transfer- Endorsement and Crossing of Cheque, Electronic fund transfer."
+              },
+              {
+                "id": "4.5",
+                "text": "Case study: Washington Mutual Bank- Failure on Sept"
+              }
+            ],
+            "pdf_page": 111,
+            "image_path": "./syllabus_images/24HUT415_mod4.png"
+          },
+          "Module 5": {
+            "topics": [
+              {
+                "id": "5.1",
+                "text": "Introduction to Budget- Expenditure, Deficit, Fiscal deficit, Revenue deficit"
+              },
+              {
+                "id": "5.2",
+                "text": "Types- Master Budget, Operating Budget, Financial Budget, Cash Budget, Static Budget, Flexible Budget, Capital Expenditure Budget, Program Budgets, Zero-Based Budgeting"
+              },
+              {
+                "id": "5.3",
+                "text": "Classifications- Activity-Based Budget, Add -On Budget, Bracket Budget, Rolling Budget, Rolling Forecast, Incremental Budget, Strategic Budget, Stretch Budget, Supplemental Budget, Target Budget"
+              },
+              {
+                "id": "5.4",
+                "text": "Financial Budget – Types – Balanced budget, Surplus budget, Deficit budget , Union budget and State budget . Budget analysis- Frequency, Variance, forecast and required changes."
+              }
+            ],
+            "pdf_page": 112,
+            "image_path": "./syllabus_images/24HUT415_mod5.png"
+          }
+        },
+        "pdf_page": 107
+      },
+      "24MCT406": {
+        "slot": "F",
+        "code": "24MCT406",
+        "name": "Environmental Sciences",
+        "modules": {
+          "Module 1": {
+            "topics": [
+              {
+                "id": "1.1",
+                "text": "Introduction- Definition and scope of environmental science - Interdisciplinary nature of the field"
+              },
+              {
+                "id": "1.2",
+                "text": "Ecosystem structure and function - Biodiversity and its importance"
+              },
+              {
+                "id": "1.3",
+                "text": "Threats to biodiversity (habitat loss, invasive species, overexploitation)"
+              },
+              {
+                "id": "1.4",
+                "text": "Man and Environment – Health and Environment – Environmental Ethics"
+              },
+              {
+                "id": "1.5",
+                "text": "Sustainable development – Social, economic and environmental dimensions – Need for Sustainable development, Sustainable Development Goals (SDGs)"
+              }
+            ],
+            "pdf_page": 113,
+            "image_path": "./syllabus_images/24MCT406_mod1.png"
+          },
+          "Module 2": {
+            "topics": [
+              {
+                "id": "2.1",
+                "text": "Air pollutants – classification, sources and impacts -"
+              },
+              {
+                "id": "2.2",
+                "text": "Clean air act and national ambient air quality standards (NAAQS) - Air quality index"
+              },
+              {
+                "id": "2.3",
+                "text": "Emission reduction strategies - Understanding and improving indoor air quality"
+              },
+              {
+                "id": "2.4",
+                "text": "Ground level ozone and photochemical smog"
+              },
+              {
+                "id": "2.5",
+                "text": "Ozone layer depletion and the Montreal Protocol, Global warming"
+              },
+              {
+                "id": "2.6",
+                "text": "Noise Pollution: Sources and effects of noise; quantification of noise pollution (Leq, LAeq, etc.)"
+              },
+              {
+                "id": "2.7",
+                "text": "Control and regulation rules in India"
+              }
+            ],
+            "pdf_page": 114,
+            "image_path": "./syllabus_images/24MCT406_mod2.png"
+          },
+          "Module 3": {
+            "topics": [
+              {
+                "id": "3.1",
+                "text": "Sources and availability of freshwater - Water conservation strategies."
+              },
+              {
+                "id": "3.2",
+                "text": "Water pollution and its impacts – Water Quality Standards (IS 10500)"
+              },
+              {
+                "id": "3.3",
+                "text": "Water quality index; Overview of water treatment plant"
+              },
+              {
+                "id": "3.4",
+                "text": "Sustainable water use and conflicts over water resources"
+              },
+              {
+                "id": "3.5",
+                "text": "Wastewater sources and quality"
+              },
+              {
+                "id": "3.6",
+                "text": "Wastewater disposal – Oxygen sag curve"
+              },
+              {
+                "id": "3.7",
+                "text": "Applicable wastewater discharge standards and typical flow schemes for sewage treatment plant"
+              },
+              {
+                "id": "3.8",
+                "text": "Decentralized wastewater treatment"
+              },
+              {
+                "id": "3.9",
+                "text": "Natural methods of wastewater treatment"
+              }
+            ],
+            "pdf_page": 115,
+            "image_path": "./syllabus_images/24MCT406_mod3.png"
+          },
+          "Module 4": {
+            "topics": [
+              {
+                "id": "4.1",
+                "text": "Waste Management: Consumerism and our throw -away culture"
+              },
+              {
+                "id": "4.2",
+                "text": "Characteristics of municipal solid waste; CPHEEO guidelines for solid waste management (overview only);"
+              },
+              {
+                "id": "4.3",
+                "text": "Waste disposal methods (landfill, incineration, recycling)"
+              },
+              {
+                "id": "4.4",
+                "text": "Sustainable practices in waste management - Transition to zero waste lifestyle – Circular Economy"
+              },
+              {
+                "id": "4.5",
+                "text": "Hazardous and e -waste identification and management - Recycling"
+              },
+              {
+                "id": "4.6",
+                "text": "Waste-to-energy technologies – regulations for hazardous waste management in India (overview only)"
+              },
+              {
+                "id": "4.7",
+                "text": "Biomedical waste and its management"
+              }
+            ],
+            "pdf_page": 116,
+            "image_path": "./syllabus_images/24MCT406_mod4.png"
+          },
+          "Module 5": {
+            "topics": [
+              {
+                "id": "5.1",
+                "text": "Climate Change: Evidence, causes and effects, Carbon footprint, Global warming potential"
+              },
+              {
+                "id": "5.2",
+                "text": "Role of IPCC in the understanding of climate change"
+              },
+              {
+                "id": "5.3",
+                "text": "Global climate agreements – The United Nations Framework Convention on Climate Change, the Kyoto Protocol, and the Paris Agreement"
+              },
+              {
+                "id": "5.4",
+                "text": "Mitigation strategies – carbon capture, utilization and storage"
+              },
+              {
+                "id": "5.5",
+                "text": "Adapting to climate change"
+              },
+              {
+                "id": "5.6",
+                "text": "Renewable Energy- Solar energy"
+              },
+              {
+                "id": "5.7",
+                "text": "Biomass, Wind energy"
+              },
+              {
+                "id": "5.8",
+                "text": "New Energy sources"
+              }
+            ],
+            "pdf_page": 117,
+            "image_path": "./syllabus_images/24MCT406_mod5.png"
+          }
+        },
+        "pdf_page": 112
+      },
+      "24BYT408": {
+        "slot": "I",
+        "code": "24BYT408",
+        "name": "Biology for Engineers",
+        "modules": {
+          "Module 1": {
+            "topics": [
+              {
+                "id": "1.1",
+                "text": "Introduction to Biological Concepts, relevance of biology in mechanical engineering,"
+              },
+              {
+                "id": "1.2",
+                "text": "Role of Biology in Next Generation Technology Development, Basic principles of cell biology– Cell Structure – Cell Potential"
+              },
+              {
+                "id": "1.3",
+                "text": "Introduction to nervous system components and function"
+              },
+              {
+                "id": "1.4",
+                "text": "Potassium channels – Neuron function – Central Nervous Systems"
+              },
+              {
+                "id": "1.5",
+                "text": "Evolution of Artificial Neural Networks, Machine Learning techniques. (dicussion topic)"
+              }
+            ],
+            "pdf_page": 119,
+            "image_path": "./syllabus_images/24BYT408_mod1.png"
+          },
+          "Module 2": {
+            "topics": [
+              {
+                "id": "2.1",
+                "text": "Circulatory system-Components and function. Heart as a pump system -Structure."
+              },
+              {
+                "id": "2.2",
+                "text": "Heart as a pump system - electrical signaling – ECG monitoring and heart related issues,"
+              },
+              {
+                "id": "2.3",
+                "text": "Blood- Mechanical properties, Blood flow mechanics, Blockages of blood vessels, role of blood as Biological Heat Exchangers"
+              },
+              {
+                "id": "2.4",
+                "text": "Respiratory system, components and function."
+              },
+              {
+                "id": "2.5",
+                "text": "Lungs as purification system (Structure, gas exchange mechanisms,"
+              },
+              {
+                "id": "2.6",
+                "text": "Biomechanical devices -spirometry, Ventilators, Heart -lung machine."
+              }
+            ],
+            "pdf_page": 120,
+            "image_path": "./syllabus_images/24BYT408_mod2.png"
+          },
+          "Module 3": {
+            "topics": [
+              {
+                "id": "3.1",
+                "text": "Urinary System, components and function. Kidney as a filtration system (Structure, mechanism of filtration, Dialysis systems)."
+              },
+              {
+                "id": "3.2",
+                "text": "Heat balance in a biological system -Source of heat generation in body. Biological Mechanisms to control heat balance of body"
+              },
+              {
+                "id": "3.3",
+                "text": "Sensing Techniques: – Understanding of Sense organs working."
+              },
+              {
+                "id": "3.4",
+                "text": "Sensing mechanisms – Sensor Development issues"
+              },
+              {
+                "id": "3.5",
+                "text": "Digital Camera – Eye Comparison, (Discussion topic)"
+              }
+            ],
+            "pdf_page": 121,
+            "image_path": "./syllabus_images/24BYT408_mod3.png"
+          },
+          "Module 4": {
+            "topics": [
+              {
+                "id": "4.1",
+                "text": "Musculoskeletal System (Structure, mechanisms,"
+              },
+              {
+                "id": "4.2",
+                "text": "Engineering solutions to musculoskeletal disorders - assistive devices, exoskeletons."
+              },
+              {
+                "id": "4.3",
+                "text": "Mechanics of bones, muscles and joints, Application of biomechanics in the design of prosthetics and orthopedic devices."
+              },
+              {
+                "id": "4.4",
+                "text": "Introduction to biomaterials, properties of biomaterials"
+              },
+              {
+                "id": "4.5",
+                "text": "Biomaterials in medical devices and implants."
+              }
+            ],
+            "pdf_page": 122,
+            "image_path": "./syllabus_images/24BYT408_mod4.png"
+          },
+          "Module 5": {
+            "topics": [
+              {
+                "id": "5.1",
+                "text": "Nature optimization of biological systems: Evolutionary Optimization Biomimicry ."
+              },
+              {
+                "id": "5.2",
+                "text": "Bioinspired Design -Gecko-Inspired Adhesives, Spider Silk - Inspired Fibers."
+              },
+              {
+                "id": "5.3",
+                "text": "Bone-Inspired Materials, Leaf Vein -Inspired NBird Wing - Inspired Aircraft Wingsetworks,"
+              },
+              {
+                "id": "5.4",
+                "text": "Genetics: Concepts of recessiveness and dominance. Concept of mapping of phenotype to genes, The principles of natural selection-engineering application (genetic algorithm)"
+              }
+            ],
+            "pdf_page": 123,
+            "image_path": "./syllabus_images/24BYT408_mod5.png"
+          }
+        },
+        "pdf_page": 118
+      }
+    }
+  },
+  "S5": {
+    "title": "Semester 5 (2024 Scheme)",
+    "subjects": {
+      "24MET501": {
+        "slot": "A",
+        "code": "24MET501",
+        "name": "Production & Operations Management",
+        "modules": {
+          "Module 1": {
+            "topics": [
+              {
+                "id": "1.1",
+                "text": "Introduction to Production and Operations Management; Functions, Systems- Concept of Production"
+              },
+              {
+                "id": "1.2",
+                "text": "Types of production systems- Continuous Flow, Mass, Batch, Job shop productions. (Explain with industrial examples) (Assignment: Students have to select an industry and identify the production system adopted for a product produced in that industry )"
+              },
+              {
+                "id": "1.3",
+                "text": "Roles of supervisors and production managers."
+              },
+              {
+                "id": "1.4",
+                "text": "Productivity- Factors influencing productivity, Productivity computation – Labour Productivity, Capital Productivity, Profit Productivity"
+              },
+              {
+                "id": "1.5",
+                "text": "Problems on Productivity. Productivity improvement techniques -Technology based, Employee based, Product based,Process based,Management based"
+              }
+            ],
+            "pdf_page": 167,
+            "image_path": "./syllabus_images/24MET501_mod1.png"
+          },
+          "Module 2": {
+            "topics": [
+              {
+                "id": "2.1",
+                "text": "Product Development -Steps in product Design and development"
+              },
+              {
+                "id": "2.2",
+                "text": "Ergonomic Consideration in Product Design, Product Life Cycle"
+              },
+              {
+                "id": "2.3",
+                "text": "Value Analysis/Engineering -Types of value, value analysis procedure"
+              },
+              {
+                "id": "2.4",
+                "text": "Standardization, Simplification, Diversification, Make or buy Decision-"
+              },
+              {
+                "id": "2.5",
+                "text": "Functional aspects of make or buy decision -Purchasing procedure , Product Mix Decisions,"
+              },
+              {
+                "id": "2.6",
+                "text": "Economic aspects- C-V-P analysis-Margin of Safety-Margin of Profit."
+              },
+              {
+                "id": "2.7",
+                "text": "Problems"
+              }
+            ],
+            "pdf_page": 168,
+            "image_path": "./syllabus_images/24MET501_mod2.png"
+          },
+          "Module 3": {
+            "topics": [
+              {
+                "id": "3.1",
+                "text": "Production Planning and Control: Functions of PPC, Production planning, Procedure"
+              },
+              {
+                "id": "3.2",
+                "text": "Aggregate planning : different strategies - chase, flexibility, level; Master production schedule."
+              },
+              {
+                "id": "3.3",
+                "text": "Material Requirement Planning (MRP) -functions, Bill of materials (Demonstration of preparation of BOM of any simple product)"
+              },
+              {
+                "id": "3.4",
+                "text": "Manufacturing Resources Planning (MRP II),Capacity Requirement Planning ,Process planning, Production control."
+              },
+              {
+                "id": "3.5",
+                "text": "Inventory Management: Inventory cost relationships, Economic order Quantity-Derivation, Basic inventory model"
+              },
+              {
+                "id": "3.6",
+                "text": "Deterministic inventory models -P system ,Q system (Problems)"
+              },
+              {
+                "id": "3.7",
+                "text": "Selective inventory control techniques -ABC analysis , HML analysis, VED analysis, SDE analysis (Problems)"
+              }
+            ],
+            "pdf_page": 169,
+            "image_path": "./syllabus_images/24MET501_mod3.png"
+          },
+          "Module 4": {
+            "topics": [
+              {
+                "id": "4.1",
+                "text": "Factory Management: Facility Location – Factors affecting Site Selection, Single and Multi Facility Location"
+              },
+              {
+                "id": "4.2",
+                "text": "Types of layouts - Product, Process, Mixed, Project; line balancing; material flow and handling"
+              },
+              {
+                "id": "4.3",
+                "text": "Assignment: Students have to select an industry and identify the layout and material handling adopted in that industry"
+              },
+              {
+                "id": "4.4",
+                "text": "Advanced factory systems: Flexible Manufacturing System - significance in modern manufacturing, Types of flexibility in manufacturing processes, Important acts, regularities and safety norms"
+              },
+              {
+                "id": "4.5",
+                "text": "Reliability assessment of processes-Introduction to Reliability in Factory Management, Identification of Critical Components and Processes"
+              },
+              {
+                "id": "4.6",
+                "text": "Block chain-Importance of block chain in factory management-Supply chain visibility and traceability with block chain in factory management, Energy management, Efficiency & throughput, Overall equipment effectiveness ==="
+              },
+              {
+                "id": "4.7",
+                "text": "Lean manufacturing –concepts of waste in LM, Introduction to LM tools.JIT(Basic concepts)"
+              }
+            ],
+            "pdf_page": 170,
+            "image_path": "./syllabus_images/24MET501_mod4.png"
+          },
+          "Module 5": {
+            "topics": [
+              {
+                "id": "5.1",
+                "text": "Operations Management: Sequencing and scheduling (Basic concepts) – makespan, flow time, lateness, tardiness, earliness"
+              },
+              {
+                "id": "5.2",
+                "text": "Dispatching rules -SPT,LPT, EDD, FIFO,LIFO (Simple problems)"
+              },
+              {
+                "id": "5.3",
+                "text": "Flow shop scheduling, Job shop scheduling(Basic concepts)"
+              },
+              {
+                "id": "5.4",
+                "text": "Quality control and Inspection- Quality Assurance, process capability, Statistical quality control – causes of variation in quality"
+              },
+              {
+                "id": "5.5",
+                "text": "Control charts for X and R."
+              },
+              {
+                "id": "5.6",
+                "text": "Introduction to concepts of, TQM, ISO, ISM, Six Sigma and Quality circles (Brief description only)."
+              }
+            ],
+            "pdf_page": 171,
+            "image_path": "./syllabus_images/24MET501_mod5.png"
+          }
+        },
+        "pdf_page": 166
+      },
+      "24MEJ502": {
+        "slot": "B",
+        "code": "24MEJ502",
+        "name": "Machine Element & System Design",
+        "modules": {
+          "Module 1": {
+            "topics": [
+              {
+                "id": "1.1",
+                "text": "Introduction to Design- Definition, steps in design process, Materials and their properties-material selection."
+              },
+              {
+                "id": "1.2",
+                "text": "Stresses in machine parts–normal, shear, bending and torsional stresses, combined stresses review)"
+              },
+              {
+                "id": "1.3",
+                "text": "Safety considerations in design, Factor of safety, Theories of Failure- Rankine’s Theory"
+              },
+              {
+                "id": "1.4",
+                "text": "Guest’s Theory, Saint Venant Theory"
+              },
+              {
+                "id": "1.5",
+                "text": "Von Mises and Hencky Theory"
+              }
+            ],
+            "pdf_page": 174,
+            "image_path": "./syllabus_images/24MEJ502_mod1.png"
+          },
+          "Module 2": {
+            "topics": [
+              {
+                "id": "2.1",
+                "text": "Stress Concentration–effects and methods to reduce–stress concentration factor"
+              },
+              {
+                "id": "2.2",
+                "text": "Design for fatigue loading – endurance limit stress- Factors affecting endurance limit ==="
+              },
+              {
+                "id": "2.3",
+                "text": "Fatigue stress concentration factor, notch sensitivity"
+              },
+              {
+                "id": "2.4",
+                "text": "Combined steady and variable stress- Gerber, Goodman & Soderberg methods"
+              },
+              {
+                "id": "2.5",
+                "text": "Combined steady and variable stress- Gerber, Goodman & Soderberg methods"
+              }
+            ],
+            "pdf_page": 175,
+            "image_path": "./syllabus_images/24MEJ502_mod2.png"
+          },
+          "Module 3": {
+            "topics": [
+              {
+                "id": "3.1",
+                "text": "Shafts design- stresses in shafts- causes of failure in shafts"
+              },
+              {
+                "id": "3.2",
+                "text": "Design based on strength and rigidity"
+              },
+              {
+                "id": "3.3",
+                "text": "Design for static and fatigue loads"
+              },
+              {
+                "id": "3.4",
+                "text": "Design for static and fatigue loads"
+              }
+            ],
+            "pdf_page": 176,
+            "image_path": "./syllabus_images/24MEJ502_mod3.png"
+          },
+          "Module 4": {
+            "topics": [
+              {
+                "id": "4.1",
+                "text": "Gears: Materials of gears, terminology of spur Gear, Gear tooth failures"
+              },
+              {
+                "id": "4.2",
+                "text": "Beam strength of Gear tooth, Estimation of module"
+              },
+              {
+                "id": "4.3",
+                "text": "Buckingham’s equation for dynamic load, wear load, endurance strength of tooth, Gear proportions"
+              },
+              {
+                "id": "4.4",
+                "text": "Design procedure of Spur gear"
+              },
+              {
+                "id": "4.5",
+                "text": "Design procedure of Spur gear"
+              }
+            ],
+            "pdf_page": 177,
+            "image_path": "./syllabus_images/24MEJ502_mod4.png"
+          },
+          "Module 5": {
+            "topics": [
+              {
+                "id": "5.1",
+                "text": "Overview of significance of bearing in mechanical systems, Types of bearings and applications"
+              },
+              {
+                "id": "5.2",
+                "text": "Sliding contact bearing: Lubrication, lubricants, viscosity, journal bearings, hydrodynamic theory, Petroff’s equation"
+              },
+              {
+                "id": "5.3",
+                "text": "bearing characteristic number, Sommerfeld number, Heat generated in bearings, Heat dissipated by bearings"
+              },
+              {
+                "id": "5.4",
+                "text": "Design procedure of Journal bearings"
+              },
+              {
+                "id": "5.5",
+                "text": "Design procedure of Journal bearings"
+              }
+            ],
+            "pdf_page": 178,
+            "image_path": "./syllabus_images/24MEJ502_mod5.png"
+          }
+        },
+        "pdf_page": 173
+      },
+      "24MET503": {
+        "slot": "C",
+        "code": "24MET503",
+        "name": "Kinematics & Dynamics of Machines",
+        "modules": {
+          "Module 1": {
+            "topics": [
+              {
+                "id": "1.1",
+                "text": "Introduction to mechanism- Types of kinematic links and pairs, types of constrained motions."
+              },
+              {
+                "id": "1.2",
+                "text": "Types of joints, higher and lower pairs, kinematic chain and mechanism, 1 hr ==="
+              },
+              {
+                "id": "1.3",
+                "text": "Degrees of freedom, Kutzbach criterion, Grashoff’s law"
+              },
+              {
+                "id": "1.4",
+                "text": "Mechanism and inversion of mechanism- Inversion of four bar with examples."
+              },
+              {
+                "id": "1.5",
+                "text": "Inversion of single slider with examples."
+              },
+              {
+                "id": "1.6",
+                "text": "Inversion of double slider with examples."
+              },
+              {
+                "id": "1.7",
+                "text": "Transmission angle."
+              },
+              {
+                "id": "1.8",
+                "text": "For internal assessment model motion generation of 4 bar chain and single slider crank mechanism."
+              }
+            ],
+            "pdf_page": 182,
+            "image_path": "./syllabus_images/24MET503_mod1.png"
+          },
+          "Module 2": {
+            "topics": [
+              {
+                "id": "2.1",
+                "text": "Velocity analysis of four bar mechanism (relative velocity method)"
+              },
+              {
+                "id": "2.2",
+                "text": "Velocity analysis of slider crank mechanism (relative velocity method)"
+              },
+              {
+                "id": "2.3",
+                "text": "Acceleration analysis of four bar mechanism"
+              },
+              {
+                "id": "2.4",
+                "text": "Acceleration analysis of slider crank mechanism"
+              },
+              {
+                "id": "2.5",
+                "text": "Problem on velocity and acceleration analysis."
+              },
+              {
+                "id": "2.6",
+                "text": "Cam- Cam terminologies, types of Cam/Followers."
+              },
+              {
+                "id": "2.7",
+                "text": "Types of motion of follower-uniform velocity (displacement, velocity and acceleration diagram"
+              },
+              {
+                "id": "2.8",
+                "text": "Types of motion of follower-Simple harmonic and uniform acceleration (displacement, velocity, and acceleration diagram)"
+              },
+              {
+                "id": "2.9",
+                "text": "Problems on cam profile (Knife edge/Radial roller follower)"
+              },
+              {
+                "id": "2.10",
+                "text": "Problems on cam profile (offset roller follower)"
+              }
+            ],
+            "pdf_page": 183,
+            "image_path": "./syllabus_images/24MET503_mod2.png"
+          },
+          "Module 3": {
+            "topics": [
+              {
+                "id": "3.1",
+                "text": "Introduction to Static force and dynamic force analysis- condition of static force analysis (two force, three force, four force member and two force-torque member)"
+              },
+              {
+                "id": "3.2",
+                "text": "Problem on Static force analysis of 4 bar mechanism"
+              },
+              {
+                "id": "3.3",
+                "text": "Problem on Static force analysis of slider crank mechanism"
+              },
+              {
+                "id": "3.4",
+                "text": "Dynamic force analysis -Force analysis in reciprocating engine - piston effort, connecting rod force, bearing reaction and turning moment. 2 hr ==="
+              },
+              {
+                "id": "3.5",
+                "text": "Problems on dynamic force analysis in vertical reciprocating engine (Analytical method)."
+              }
+            ],
+            "pdf_page": 184,
+            "image_path": "./syllabus_images/24MET503_mod3.png"
+          },
+          "Module 4": {
+            "topics": [
+              {
+                "id": "4.1",
+                "text": "Gear train- types of gear train- gear ratio."
+              },
+              {
+                "id": "4.2",
+                "text": "Epicyclic gear train and its problems"
+              },
+              {
+                "id": "4.3",
+                "text": "Difference between static and dynamic balancing, static balancing of several masses in same plane."
+              },
+              {
+                "id": "4.4",
+                "text": "Balancing of several rotating masses in different planes."
+              },
+              {
+                "id": "4.5",
+                "text": "Problems on Balancing of several rotating masses in different planes."
+              },
+              {
+                "id": "4.6",
+                "text": "Problems on Balancing of several rotating masses in different planes (when shaft is completely balanced)."
+              }
+            ],
+            "pdf_page": 185,
+            "image_path": "./syllabus_images/24MET503_mod4.png"
+          },
+          "Module 5": {
+            "topics": [
+              {
+                "id": "5.1",
+                "text": "Types of vibrations - Natural frequency of single DoF systems, Newtons methods to find natural frequency"
+              },
+              {
+                "id": "5.2",
+                "text": "Damped vibration - damping factor, response of damped vibration,"
+              },
+              {
+                "id": "5.3",
+                "text": "Under damped, damped frequency, over damped and critically damped systems, logarithmic decrement."
+              },
+              {
+                "id": "5.4",
+                "text": "Problems on damped vibration based on logarithmic decrement."
+              },
+              {
+                "id": "5.5",
+                "text": "Forced damped vibration – Response of forced vibration, Transmissibility and vibration isolation"
+              },
+              {
+                "id": "5.6",
+                "text": "Problems on forced vibration."
+              }
+            ],
+            "pdf_page": 186,
+            "image_path": "./syllabus_images/24MET503_mod5.png"
+          }
+        },
+        "pdf_page": 181
+      },
+      "24MEP504": {
+        "slot": "D",
+        "code": "24MEP504",
+        "name": "Mechatronics, Robotics & Control",
+        "modules": {
+          "Module 1": {
+            "topics": [
+              {
+                "id": "1.1",
+                "text": "Introduction to mechatronics."
+              },
+              {
+                "id": "1.2",
+                "text": "Case studies- automobile engine management system, washing machine, ultrasonic probe. S"
+              },
+              {
+                "id": "1.3",
+                "text": "Transduction principle- microphone (resistance, capacitance and piezoelectric). Sensitivity, accuracy, range, resolution, noise sources."
+              },
+              {
+                "id": "1.4",
+                "text": "Sensors for common engineering measurements –proximity, force, velocity, temperature,"
+              },
+              {
+                "id": "1.5",
+                "text": "Introduction to Signal processing. Parameters for Selection of sensors."
+              }
+            ],
+            "pdf_page": 188,
+            "image_path": "./syllabus_images/24MEP504_mod1.png"
+          },
+          "Module 2": {
+            "topics": [
+              {
+                "id": "2.1",
+                "text": "Actuators: Types of actuators -Electric, pneumatic, hydraulic actuators. Motors including DC, AC, BLDC."
+              },
+              {
+                "id": "2.2",
+                "text": "Servo and stepper motors; Solenoids and relays."
+              },
+              {
+                "id": "2.3",
+                "text": "Hydraulic and pneumatic circuits."
+              },
+              {
+                "id": "2.4",
+                "text": "Machine vision, vidicon, CCD cameras, image processing and - histogram processing -"
+              },
+              {
+                "id": "2.5",
+                "text": "Equalization, stretching, thresholding and sliding"
+              }
+            ],
+            "pdf_page": 189,
+            "image_path": "./syllabus_images/24MEP504_mod2.png"
+          },
+          "Module 3": {
+            "topics": [
+              {
+                "id": "3.1",
+                "text": "Microprocessors and their architecture."
+              },
+              {
+                "id": "3.2",
+                "text": "Programmable Logic Controllers"
+              },
+              {
+                "id": "3.3",
+                "text": "PLC principle and operation."
+              },
+              {
+                "id": "3.4",
+                "text": "Ladder programming-Internal relays, latch."
+              },
+              {
+                "id": "3.5",
+                "text": "Timers and counters."
+              }
+            ],
+            "pdf_page": 190,
+            "image_path": "./syllabus_images/24MEP504_mod3.png"
+          },
+          "Module 4": {
+            "topics": [
+              {
+                "id": "4.1",
+                "text": "Control Theory and Systems: Basic control concepts;"
+              },
+              {
+                "id": "4.2",
+                "text": "Feedback; Open and closed loop control"
+              },
+              {
+                "id": "4.3",
+                "text": "System modeling -Mechanical.simple problems."
+              },
+              {
+                "id": "4.4",
+                "text": "System modeling- Electrical.simple problems."
+              },
+              {
+                "id": "4.5",
+                "text": "System modeling -Thermal and fluid, simple problems."
+              }
+            ],
+            "pdf_page": 191,
+            "image_path": "./syllabus_images/24MEP504_mod4.png"
+          },
+          "Module 5": {
+            "topics": [
+              {
+                "id": "5.1",
+                "text": "Robotics: Introduction to Robot. Types: serial and parallel;Denavit– Hartenberg parameters."
+              },
+              {
+                "id": "5.2",
+                "text": "Manipulators kinematics. Rotation matrix, Homogeneous transformation matrix."
+              },
+              {
+                "id": "5.3",
+                "text": "Direct and inverse Kinematics for robot position and orientation."
+              },
+              {
+                "id": "5.4",
+                "text": "Workspace analysis and path planning;"
+              },
+              {
+                "id": "5.5",
+                "text": "Motion tracking; Robot Programming and control"
+              }
+            ],
+            "pdf_page": 192,
+            "image_path": "./syllabus_images/24MEP504_mod5.png"
+          }
+        },
+        "pdf_page": 187
+      },
+      "24HUT515": {
+        "slot": "E",
+        "code": "24HUT515",
+        "name": "Operations Research",
+        "modules": {
+          "Module 1": {
+            "topics": [
+              {
+                "id": "1.1",
+                "text": "Introduction to Operations Research - Scope, objectives, phases, models and limitations ==="
+              },
+              {
+                "id": "1.2",
+                "text": "Linear programming – Applications-formulation of LPP"
+              },
+              {
+                "id": "1.3",
+                "text": "Graphical method"
+              },
+              {
+                "id": "1.4",
+                "text": "Simplex algorithm- Artificial variables"
+              },
+              {
+                "id": "1.5",
+                "text": "Big M method"
+              },
+              {
+                "id": "1.6",
+                "text": "Two phase method"
+              }
+            ],
+            "pdf_page": 194,
+            "image_path": "./syllabus_images/24HUT515_mod1.png"
+          },
+          "Module 2": {
+            "topics": [
+              {
+                "id": "2.1",
+                "text": "Special cases in simplex method application: Degeneracy and alternative optima"
+              },
+              {
+                "id": "2.2",
+                "text": "Special cases in simplex method application: unbounded solutions and infeasible solutions"
+              },
+              {
+                "id": "2.3",
+                "text": "Duality in Linear Programming"
+              },
+              {
+                "id": "2.4",
+                "text": "Primal-dual relationships"
+              },
+              {
+                "id": "2.5",
+                "text": "Sensitivity analysis"
+              },
+              {
+                "id": "2.6",
+                "text": "Economic interpretation of duality"
+              },
+              {
+                "id": "2.7",
+                "text": "Dual Simplex method"
+              },
+              {
+                "id": "2.8",
+                "text": "Sensitivity analysis of LPP using suitable software packages"
+              }
+            ],
+            "pdf_page": 195,
+            "image_path": "./syllabus_images/24HUT515_mod2.png"
+          },
+          "Module 3": {
+            "topics": [
+              {
+                "id": "3.1",
+                "text": "Transportation model- Balanced and unbalanced transportation problems -Applications"
+              },
+              {
+                "id": "3.2",
+                "text": "North west corner method, Least cost Method, Vogel’s Approximation Method"
+              },
+              {
+                "id": "3.3",
+                "text": "MODI Method"
+              },
+              {
+                "id": "3.4",
+                "text": "Assignment Problem- Hungarian Assignment Method"
+              },
+              {
+                "id": "3.5",
+                "text": "Traveling Salesman problem."
+              }
+            ],
+            "pdf_page": 196,
+            "image_path": "./syllabus_images/24HUT515_mod3.png"
+          },
+          "Module 4": {
+            "topics": [
+              {
+                "id": "4.1",
+                "text": "Introduction, Definition and Characteristics of Game Theory"
+              },
+              {
+                "id": "4.2",
+                "text": "Two Person zero-sum game with saddle point"
+              },
+              {
+                "id": "4.3",
+                "text": "Dominance theory with example"
+              },
+              {
+                "id": "4.4",
+                "text": "Mixed strategies 2x2 Games"
+              },
+              {
+                "id": "4.5",
+                "text": "Mixed strategies 2x n or mx2 Games"
+              },
+              {
+                "id": "4.6",
+                "text": "Graphical method for 2x n Games or mx2 Games"
+              }
+            ],
+            "pdf_page": 197,
+            "image_path": "./syllabus_images/24HUT515_mod4.png"
+          },
+          "Module 5": {
+            "topics": [
+              {
+                "id": "5.1",
+                "text": "Basis of Queuing theory, elements of queuing theory"
+              },
+              {
+                "id": "5.2",
+                "text": "Kendall’s Notation, Operating characteristics of a queuing system and Classification of Queuing models"
+              },
+              {
+                "id": "5.3",
+                "text": "Characteristics of (M/M/1):(∞/FCFA) model with examples"
+              },
+              {
+                "id": "5.4",
+                "text": "Characteristics of (M/M/S):(∞/FCFA) model with examples"
+              },
+              {
+                "id": "5.5",
+                "text": "Simulation – Introduction, Monte Carlo simulation"
+              },
+              {
+                "id": "5.6",
+                "text": "Inventory simulation model"
+              },
+              {
+                "id": "5.7",
+                "text": "Queuing simulation model ((M/M/1):(∞/FCFA)"
+              }
+            ],
+            "pdf_page": 198,
+            "image_path": "./syllabus_images/24HUT515_mod5.png"
+          }
+        },
+        "pdf_page": 193
+      },
+      "24MCT506": {
+        "slot": "F",
+        "code": "24MCT506",
+        "name": "Constitution of India",
+        "modules": {
+          "Module 1": {
+            "topics": [
+              {
+                "id": "1.1",
+                "text": "Definition of Constitution- Historical back-ground"
+              },
+              {
+                "id": "1.2",
+                "text": "Salient features of the Constitution"
+              },
+              {
+                "id": "1.3",
+                "text": "Preamble of the Constitution-Union and its territory."
+              },
+              {
+                "id": "1.4",
+                "text": "Meaning of Citizenship-types- termination of citizenship"
+              }
+            ],
+            "pdf_page": 201,
+            "image_path": "./syllabus_images/24MCT506_mod1.png"
+          },
+          "Module 2": {
+            "topics": [
+              {
+                "id": "2.1",
+                "text": "Definition of state, fundamental rights,"
+              },
+              {
+                "id": "2.2",
+                "text": "General nature, classification, right to equality."
+              },
+              {
+                "id": "2.3",
+                "text": "Right to freedom, right against exploitation."
+              },
+              {
+                "id": "2.4",
+                "text": "Right to freedom of religion."
+              },
+              {
+                "id": "2.5",
+                "text": "Cultural and educational rights, right to constitutional remedies"
+              },
+              {
+                "id": "2.6",
+                "text": "Protection in respect of conviction for offences."
+              },
+              {
+                "id": "2.7",
+                "text": "Directive principles of state policy,"
+              },
+              {
+                "id": "2.8",
+                "text": "Classification of directives, fundamental duties."
+              }
+            ],
+            "pdf_page": 202,
+            "image_path": "./syllabus_images/24MCT506_mod2.png"
+          },
+          "Module 3": {
+            "topics": [
+              {
+                "id": "3.1",
+                "text": "The Union executive, The President."
+              },
+              {
+                "id": "3.2",
+                "text": "The Union executive, The Vice President."
+              },
+              {
+                "id": "3.3",
+                "text": "The council of ministers, the Prime minister, Attorney -General, functions."
+              },
+              {
+                "id": "3.4",
+                "text": "The Parliament, composition, Rajya Sabha, Lok Sabha."
+              },
+              {
+                "id": "3.5",
+                "text": "Qualification and disqualification of membership,"
+              },
+              {
+                "id": "3.6",
+                "text": "Functions of parliament."
+              },
+              {
+                "id": "3.7",
+                "text": "Union judiciary, the Supreme court."
+              },
+              {
+                "id": "3.8",
+                "text": "Jurisdiction, appeal by special leave."
+              }
+            ],
+            "pdf_page": 203,
+            "image_path": "./syllabus_images/24MCT506_mod3.png"
+          },
+          "Module 4": {
+            "topics": [
+              {
+                "id": "4.1",
+                "text": "The state executive, the Governor, the council of ministers."
+              },
+              {
+                "id": "4.2",
+                "text": "The Chief minister, advocate general, union territories."
+              },
+              {
+                "id": "4.3",
+                "text": "The state Legislature, composition,"
+              },
+              {
+                "id": "4.4",
+                "text": "Qualification and disqualification of membership, functions."
+              },
+              {
+                "id": "4.5",
+                "text": "The state judiciary, the high court,"
+              },
+              {
+                "id": "4.6",
+                "text": "Jurisdiction, writ jurisdiction."
+              },
+              {
+                "id": "4.7",
+                "text": "Local government, Panchayat raj system-with special reference to 73rd and 74th amendment."
+              }
+            ],
+            "pdf_page": 204,
+            "image_path": "./syllabus_images/24MCT506_mod4.png"
+          },
+          "Module 5": {
+            "topics": [
+              {
+                "id": "5.1",
+                "text": "Relation between the union and the states, legislative relation, administrative relation."
+              },
+              {
+                "id": "5.2",
+                "text": "Financial relations, Inter -State council, finance commission."
+              },
+              {
+                "id": "5.3",
+                "text": "Emergency provision, freedom of trade and commerce."
+              },
+              {
+                "id": "5.4",
+                "text": "Comptroller and Auditor General of India, public services,"
+              },
+              {
+                "id": "5.5",
+                "text": "Public service commission, administrative tribunals."
+              },
+              {
+                "id": "5.6",
+                "text": "Amendment of the constitution -meaning, procedure and limitations."
+              },
+              {
+                "id": "5.7",
+                "text": "Election provisions and electoral process."
+              }
+            ],
+            "pdf_page": 205,
+            "image_path": "./syllabus_images/24MCT506_mod5.png"
+          }
+        },
+        "pdf_page": 200
+      },
+      "24ESP507": {
+        "slot": "I",
+        "code": "24ESP507",
+        "name": "Introduction to MEP",
+        "modules": {
+          "Module 1": {
+            "topics": [
+              {
+                "id": "1.1",
+                "text": "Introduction to MEP (Mechanical, Electrical. Plumbing), Overview of various services (HVAC, Firefighting, Plumbing, Electrical, Fire alarm),"
+              },
+              {
+                "id": "1.2",
+                "text": "Window A/C, Split AC -HVAC, HVAC System, Familiar with HVAC equipment & Legends (Symbols) - (Duct, Diffuser, Grill,  PAGE  Register, Volume Damper, Fire Damper. VAV, CAV. Thermostat, FCU (Fan Coil Unit), AHU (Air Handling Unit), Chiller Unit, Various types of Supports, etc.)"
+              }
+            ],
+            "pdf_page": 205,
+            "image_path": "./syllabus_images/24ESP507_mod1.png"
+          },
+          "Module 2": {
+            "topics": [
+              {
+                "id": "2.1",
+                "text": "Fundamentals of electrical, Types or electricity, Source of electricity – Single & 3 phase connections (R,Y,B), Power & Lighting,"
+              },
+              {
+                "id": "2.2",
+                "text": "Function and working of MCB, ELCB, DP Switch, UPS/Inverter & Battery banks - Conduit, Trunking, Cable tray, Ladder Load Calculations. DB Schedule. -Earthing or Grounding, Lightning arrestor, MATV.CCTV. PAS, Fire Alarm."
+              }
+            ],
+            "pdf_page": 206,
+            "image_path": "./syllabus_images/24ESP507_mod2.png"
+          },
+          "Module 3": {
+            "topics": [
+              {
+                "id": "3.1",
+                "text": "Plumbing - Water Supply - Cold Water Supply, Hot water supply, Hot water return, Mixed water supply (Big Toilets), Potable water supply, Chilled water Plumbing"
+              },
+              {
+                "id": "3.2",
+                "text": "Drainage - Waste Pipe, Sort Pipe, Rain water/Storm water drainage, condensate drain, Irrigation Water. Vent pipe. Water Hammer Arrester,"
+              },
+              {
+                "id": "3.3",
+                "text": "Valves (Gate Valve, Butterfly Valve, NRV etc.) Strainer -Single Stack & Double Stack - Space & Cost. (Stack means Vertical), Slope need in drainage Only, FD (Floor Drain),"
+              },
+              {
+                "id": "3.4",
+                "text": "Insulation for Pipe (condensate pipe & HW supply) - vent pipe to avoid air particles & remove bad smells."
+              }
+            ],
+            "pdf_page": 207,
+            "image_path": "./syllabus_images/24ESP507_mod3.png"
+          },
+          "Module 4": {
+            "topics": [
+              {
+                "id": "4.1",
+                "text": "Fire Fighting Fundamentals: Core principles of fire prevention, suppression, and safety measures. Fire Protection System: Components, functions, and roles."
+              },
+              {
+                "id": "4.2",
+                "text": "Fire Fighting system types - Sprinkler System, Deluge System. Selection criteria, FHC - Fire Hose cabinet, Fire rated Cables, Walls, FM 200 etc."
+              }
+            ],
+            "pdf_page": 208,
+            "image_path": "./syllabus_images/24ESP507_mod4.png"
+          },
+          "Module 5": {
+            "topics": [
+              {
+                "id": "5.1",
+                "text": "The Role of MEP Drawings, Types Of MEP Drawing, Detailed Shop Drawings: Annotations, Dimensioning, Elevations, ==="
+              },
+              {
+                "id": "5.2",
+                "text": "As-Built Drawings: The Post-Development Drawings, Coordination Drawings: Detecting Obstructions,"
+              }
+            ],
+            "pdf_page": 209,
+            "image_path": "./syllabus_images/24ESP507_mod5.png"
+          }
+        },
+        "pdf_page": 204
+      }
+    }
+  },
+  "S6": {
+    "title": "Semester 6 (2024 Scheme)",
+    "subjects": {
+      "24MET601": {
+        "slot": "A",
+        "code": "24MET601",
+        "name": "Industrial Safety",
+        "modules": {
+          "Module 1": {
+            "topics": [
+              {
+                "id": "1.1",
+                "text": "Industrial safety- Need for safety -Safety and productivity. Hazards – Classifications, Industrial accidents- Direct and Indirect costs of accidents- Effect on workers"
+              },
+              {
+                "id": "1.2",
+                "text": "Cost to society . Accident causes-Technical and human causes, Source of accidents, Accident control"
+              },
+              {
+                "id": "1.3",
+                "text": "Accident prevention. Environmental causes and corrective action, Behavioristic causes and corrective action"
+              }
+            ],
+            "pdf_page": 250,
+            "image_path": "./syllabus_images/24MET601_mod1.png"
+          },
+          "Module 2": {
+            "topics": [
+              {
+                "id": "2.1",
+                "text": "Safety administration – Safety education and training , Safety committee, Safety Council"
+              },
+              {
+                "id": "2.2",
+                "text": "Job Safety Analysis, Safety programme - Objectives and activities. Safety Organisation– Objectives."
+              },
+              {
+                "id": "2.3",
+                "text": "Organization Setup. Duties of PlantSafety officers. Investigation and analysis of accidents."
+              }
+            ],
+            "pdf_page": 251,
+            "image_path": "./syllabus_images/24MET601_mod2.png"
+          },
+          "Module 3": {
+            "topics": [
+              {
+                "id": "3.1",
+                "text": "Precautions to be taken to protect against electric shocks-methods of recovery."
+              },
+              {
+                "id": "3.2",
+                "text": "Plant layout for safety, Safe working conditions – illumination- lighting and ventilation"
+              },
+              {
+                "id": "3.3",
+                "text": "Housekeeping, colour schemes and safety colour codes. Noise and its control-effec of noise on human beings-solutions. Safety devices in machines. HIRA, Pollution and environmental safety. ==="
+              }
+            ],
+            "pdf_page": 252,
+            "image_path": "./syllabus_images/24MET601_mod3.png"
+          },
+          "Module 4": {
+            "topics": [
+              {
+                "id": "4.1",
+                "text": "Principles of health and safety -industrial hygiene, Housekeeping, maintenance for plant safety. OSHA"
+              },
+              {
+                "id": "4.2",
+                "text": "Personal protective devices - Respiratory protective devices, non- respiratory protective devices."
+              },
+              {
+                "id": "4.3",
+                "text": "First aid-Principles and methods, First aid training"
+              }
+            ],
+            "pdf_page": 253,
+            "image_path": "./syllabus_images/24MET601_mod4.png"
+          },
+          "Module 5": {
+            "topics": [
+              {
+                "id": "5.1",
+                "text": "Fire prevention and protection -sources of fire, classification of fires, types of fire extinguishers"
+              },
+              {
+                "id": "5.2",
+                "text": "Pressure vessels- Storage, handling and transportation, storage of liquids and gases under high pressure."
+              },
+              {
+                "id": "5.3",
+                "text": "Safety precautions, selection of materials, explosive chemicals- handling and storage"
+              }
+            ],
+            "pdf_page": 254,
+            "image_path": "./syllabus_images/24MET601_mod5.png"
+          }
+        },
+        "pdf_page": 249
+      },
+      "24MEP602": {
+        "slot": "B",
+        "code": "24MEP602",
+        "name": "Computer Aided Design & Analysis",
+        "modules": {
+          "Module 1": {
+            "topics": [
+              {
+                "id": "1.1",
+                "text": "Introduction: Role of computers in design process; Computer  PAGE  aided design, analysis and manufacturing; CAD software used in industry; Input and output devices"
+              },
+              {
+                "id": "1.2",
+                "text": "Matrix representation of points, lines and planes; 2D transformation for translation, scaling, rotation and reflection"
+              },
+              {
+                "id": "1.3",
+                "text": "Homogeneous representation & concatenation"
+              }
+            ],
+            "pdf_page": 254,
+            "image_path": "./syllabus_images/24MEP602_mod1.png"
+          },
+          "Module 2": {
+            "topics": [
+              {
+                "id": "2.1",
+                "text": "Representation of curves; Hermite curves, Bezier curves, B- spline curves"
+              },
+              {
+                "id": "2.2",
+                "text": "Surface modelling – parametric representation, planar surface, surface of revolution"
+              },
+              {
+                "id": "2.3",
+                "text": "Bezier surfaces (Use computational tool - evaluation through assignment only)"
+              }
+            ],
+            "pdf_page": 255,
+            "image_path": "./syllabus_images/24MEP602_mod2.png"
+          },
+          "Module 3": {
+            "topics": [
+              {
+                "id": "3.1",
+                "text": "Solid modelling techniques – sweep (linear and curved), Boolean (constructive solid geometry) and other techniques"
+              },
+              {
+                "id": "3.2",
+                "text": "Solid model representation (Boundary and Constructive Solid Geometry)"
+              },
+              {
+                "id": "3.3",
+                "text": "Medical modelling (pixels, scans and voxels); Exchange standards (IGES, DXF, STEP, STL etc.)"
+              }
+            ],
+            "pdf_page": 256,
+            "image_path": "./syllabus_images/24MEP602_mod3.png"
+          },
+          "Module 4": {
+            "topics": [
+              {
+                "id": "4.1",
+                "text": "Introduction to finite element method; Principle of potential energy; FE analysis of 1D element problems (bar element); Development of element stiffness equation and their assembly,"
+              },
+              {
+                "id": "4.2",
+                "text": "Domain discretization, pre-processing and post-processing"
+              },
+              {
+                "id": "4.3",
+                "text": "Verification and validation; Popular CAE software used in industry"
+              }
+            ],
+            "pdf_page": 257,
+            "image_path": "./syllabus_images/24MEP602_mod4.png"
+          },
+          "Module 5": {
+            "topics": [
+              {
+                "id": "5.1",
+                "text": "Introduction to CFD : Basic theoretical framework, Boundary conditions, Application Examples: thermal and fluid machines"
+              },
+              {
+                "id": "5.2",
+                "text": "Purpose and application of optimum design, Computer-aided design optimization, topology optimisation, generative design"
+              }
+            ],
+            "pdf_page": 258,
+            "image_path": "./syllabus_images/24MEP602_mod5.png"
+          }
+        },
+        "pdf_page": 253
+      },
+      "24MEP603": {
+        "slot": "C",
+        "code": "24MEP603",
+        "name": "Manufacturing Automation",
+        "modules": {
+          "Module 1": {
+            "topics": [
+              {
+                "id": "1.1",
+                "text": "Definition;Reasons For Automating"
+              },
+              {
+                "id": "1.2",
+                "text": "Strategies; Types of automation"
+              },
+              {
+                "id": "1.3",
+                "text": "Numerical Control(NC,CNC,DNC)"
+              },
+              {
+                "id": "1.4",
+                "text": "computer-aided process planning"
+              },
+              {
+                "id": "1.5",
+                "text": "Automated Flowlines(types,selection), Workpart transport and transfer mechanisms"
+              }
+            ],
+            "pdf_page": 260,
+            "image_path": "./syllabus_images/24MEP603_mod1.png"
+          },
+          "Module 2": {
+            "topics": [
+              {
+                "id": "2.1",
+                "text": "Automation scalability (fixed, programmable, flexible)Design and analysis of automated flow lines;"
+              },
+              {
+                "id": "2.2",
+                "text": "Average production time, production rate, line efficiency"
+              },
+              {
+                "id": "2.2",
+                "text": "CIM architecture and components"
+              },
+              {
+                "id": "2.3",
+                "text": "Computer-aided design (CAD)&Computer-aided design (CAD)"
+              },
+              {
+                "id": "2.4",
+                "text": "Product lifecycle management (PLM)"
+              }
+            ],
+            "pdf_page": 261,
+            "image_path": "./syllabus_images/24MEP603_mod2.png"
+          },
+          "Module 3": {
+            "topics": [
+              {
+                "id": "3.1",
+                "text": "Mechanical, electro -mechanical, pneumatic and hydraulic systems"
+              },
+              {
+                "id": "3.2",
+                "text": "Sensors integration, Process monitoring, data analysis and control using actuators"
+              },
+              {
+                "id": "3.3",
+                "text": "Automated inspection and measurement (CMM)"
+              },
+              {
+                "id": "3.4",
+                "text": "Machine vision"
+              },
+              {
+                "id": "3.5",
+                "text": "Human-machine interfaces"
+              }
+            ],
+            "pdf_page": 262,
+            "image_path": "./syllabus_images/24MEP603_mod3.png"
+          },
+          "Module 4": {
+            "topics": [
+              {
+                "id": "4.1",
+                "text": "Conveyors"
+              },
+              {
+                "id": "4.2",
+                "text": "Automated guided vehicles, Pick and place robots"
+              },
+              {
+                "id": "4.3",
+                "text": "Automated storage and retrieval system"
+              },
+              {
+                "id": "4.4",
+                "text": "Testing and sorting based systems"
+              },
+              {
+                "id": "4.4",
+                "text": "Orientation of parts: in-bowl and out-of-bowl tooling"
+              }
+            ],
+            "pdf_page": 263,
+            "image_path": "./syllabus_images/24MEP603_mod4.png"
+          },
+          "Module 5": {
+            "topics": [
+              {
+                "id": "5.1",
+                "text": "Digital transformations in shop-floors (CIM to Smart factory)"
+              },
+              {
+                "id": "5.2",
+                "text": "Intelligent machines to SmartMachines"
+              },
+              {
+                "id": "5.3",
+                "text": "IOT in manufacturing"
+              },
+              {
+                "id": "5.4",
+                "text": "Artificial Intelligence and Machine learning in manufacturing"
+              }
+            ],
+            "pdf_page": 264,
+            "image_path": "./syllabus_images/24MEP603_mod5.png"
+          }
+        },
+        "pdf_page": 259
+      }
+    }
+  },
+  "S7": {
+    "title": "Semester 7 (2024 Scheme)",
+    "subjects": {
+      "24MEP701": {
+        "slot": "A",
+        "code": "24MEP701",
+        "name": "Refrigeration and Air Conditioning",
+        "modules": {
+          "Module 1": {
+            "topics": [
+              {
+                "id": "1.1",
+                "text": "Introduction: Basic Definitions of Refrigeration and Air- Conditioning; History of Refrigeration; Natural and Artificial Refrigeration Methods; Techniques to produce low temperatures; Applications of Refrigeration;"
+              },
+              {
+                "id": "1.2",
+                "text": "Refrigerants- Classification, Nomenclature, Desirable"
+              },
+              {
+                "id": "1.3",
+                "text": "Properties, Selection, industrial refrigerants"
+              },
+              {
+                "id": "1.4",
+                "text": "Air Refrigeration Cycles - reversed Carnot cycle;"
+              },
+              {
+                "id": "1.5",
+                "text": "Bell-Coleman cycle analysis;"
+              },
+              {
+                "id": "1.6",
+                "text": "Aircraft Refrigeration: Types"
+              },
+              {
+                "id": "1.7",
+                "text": "Analysis of aircraft refrigeration systems ,"
+              },
+              {
+                "id": "1.8",
+                "text": "Merits and demerits (S)"
+              }
+            ],
+            "pdf_page": 440,
+            "image_path": "./syllabus_images/24MEP701_mod1.png"
+          },
+          "Module 2": {
+            "topics": [
+              {
+                "id": "2.1",
+                "text": "Vapor Compression Refrigeration System: Ideal VCR cycle (Working, Analysis and Limitations)"
+              },
+              {
+                "id": "2.2",
+                "text": "Actual VCRs : Working"
+              },
+              {
+                "id": "2.3",
+                "text": "Analysis of Actual VCRs"
+              },
+              {
+                "id": "2.4",
+                "text": "Methods to improve performance of VCR"
+              },
+              {
+                "id": "2.5",
+                "text": "Multi-Stage VCRS"
+              },
+              {
+                "id": "2.6",
+                "text": "Numerical on Multi-Stage VCRS"
+              },
+              {
+                "id": "2.6",
+                "text": "Components of Refrigeration Systems: Compressors: Positive Displacement (Reciprocating and Rotary); Dynamic (Centrifugal and Axial) Compressors;"
+              },
+              {
+                "id": "2.7",
+                "text": "Condensers and Evaporators (Both Natural and Forced Convection type); Expansion Devices and other components of the system. (S)"
+              }
+            ],
+            "pdf_page": 441,
+            "image_path": "./syllabus_images/24MEP701_mod2.png"
+          },
+          "Module 3": {
+            "topics": [
+              {
+                "id": "3.1",
+                "text": "Vapor Absorption Systems: Working and Analysis; Absorbent - Refrigerant combinations"
+              },
+              {
+                "id": "3.2",
+                "text": "Water Ammonia System"
+              },
+              {
+                "id": "3.3",
+                "text": "Water-Lithium Bromide System"
+              },
+              {
+                "id": "3.4",
+                "text": "Modified Aqua-Ammonia System with Rectifier and Analyzer Assembly"
+              },
+              {
+                "id": "3.5",
+                "text": "Other Refrigeration systems: Brief Discussion on (i) solar- powered refrigeration"
+              },
+              {
+                "id": "3.6",
+                "text": "(ii) Vortex tube refrigeration"
+              },
+              {
+                "id": "3.7",
+                "text": "(iii) Thermoelectric refrigeration system"
+              },
+              {
+                "id": "3.8",
+                "text": "Comparative study on different refrigeration systems (S)"
+              }
+            ],
+            "pdf_page": 442,
+            "image_path": "./syllabus_images/24MEP701_mod3.png"
+          },
+          "Module 4": {
+            "topics": [
+              {
+                "id": "4.1",
+                "text": "Psychrometry: Classification of Air-Conditioning Systems"
+              },
+              {
+                "id": "4.2",
+                "text": "ASHRAE Nomenclature"
+              },
+              {
+                "id": "4.3",
+                "text": "Applications of Air-Conditioning (S) ==="
+              },
+              {
+                "id": "4.4",
+                "text": "Psychrometry: Air-water vapor mixture, Psychrometric Properties"
+              },
+              {
+                "id": "4.5",
+                "text": "Psychrometric or Air-Conditioning processes"
+              },
+              {
+                "id": "4.6",
+                "text": "Numerical using Psychrometric Chart"
+              }
+            ],
+            "pdf_page": 443,
+            "image_path": "./syllabus_images/24MEP701_mod4.png"
+          },
+          "Module 5": {
+            "topics": [
+              {
+                "id": "5.1",
+                "text": "Air-Conditioning Systems: Classification of Air- Conditioning Systems"
+              },
+              {
+                "id": "5.2",
+                "text": "Psychrometry of Air Conditioning Systems"
+              },
+              {
+                "id": "5.3",
+                "text": "Thermal Comfort : Definition and Psychrometric Properties for Thermal Comfort"
+              },
+              {
+                "id": "5.4",
+                "text": "Analysis of Air-Conditioning Systems"
+              },
+              {
+                "id": "5.5",
+                "text": "Cooling and Heating: Load Estimation"
+              },
+              {
+                "id": "5.6",
+                "text": "Ventilation - brief discussion (S)"
+              }
+            ],
+            "pdf_page": 444,
+            "image_path": "./syllabus_images/24MEP701_mod5.png"
+          }
+        },
+        "pdf_page": 439
+      },
+      "24MEP702": {
+        "slot": "B",
+        "code": "24MEP702",
+        "name": "Product Innovation & Entrepreneurship",
+        "modules": {
+          "Module 1": {
+            "topics": [
+              {
+                "id": "1.1",
+                "text": "Entrepreneurship: Role of entrepreneurship in economic development"
+              },
+              {
+                "id": "1.2",
+                "text": "Entrepreneurial mindset, motivation and competencies"
+              },
+              {
+                "id": "1.3",
+                "text": "Market pull and technology push factors"
+              },
+              {
+                "id": "1.4",
+                "text": "New product development lifecycle"
+              },
+              {
+                "id": "1.5",
+                "text": "Technology readiness levels; Product-market fit validation;"
+              },
+              {
+                "id": "1.6",
+                "text": "Commercialization pathways; Business vision & leadership;"
+              },
+              {
+                "id": "1.7",
+                "text": "Team composition & management."
+              }
+            ],
+            "pdf_page": 449,
+            "image_path": "./syllabus_images/24MEP702_mod1.png"
+          },
+          "Module 2": {
+            "topics": [
+              {
+                "id": "2.1",
+                "text": "Product Innovation: Innovative design process - Opportunity scanning, market survey, need identification and problem definition;"
+              },
+              {
+                "id": "2.2",
+                "text": "Setting Design Objectives, constraints and product specification."
+              },
+              {
+                "id": "2.3",
+                "text": "Creative design thinking for concept generation – selection of best concept"
+              },
+              {
+                "id": "2.4",
+                "text": "Design evaluation – Embodiment design"
+              },
+              {
+                "id": "2.5",
+                "text": "Prototyping and modeling"
+              },
+              {
+                "id": "2.6",
+                "text": "Product testing & quality assurance;"
+              },
+              {
+                "id": "2.7",
+                "text": "Intellectual property rights management."
+              }
+            ],
+            "pdf_page": 450,
+            "image_path": "./syllabus_images/24MEP702_mod2.png"
+          },
+          "Module 3": {
+            "topics": [
+              {
+                "id": "3.1",
+                "text": "Functionality & manufacturability;"
+              },
+              {
+                "id": "3.2",
+                "text": "Design for manufacturing and assembly, Manufacturing & assembly plan;"
+              },
+              {
+                "id": "3.3",
+                "text": "Design for ergonomics -anthropometry,"
+              },
+              {
+                "id": "3.4",
+                "text": "man machine interactions, Psychological & Physiological"
+              },
+              {
+                "id": "3.5",
+                "text": "Psychological & Physiological considerations"
+              },
+              {
+                "id": "3.6",
+                "text": "Bill of materials & components supply chain."
+              }
+            ],
+            "pdf_page": 451,
+            "image_path": "./syllabus_images/24MEP702_mod3.png"
+          },
+          "Module 4": {
+            "topics": [
+              {
+                "id": "4.1",
+                "text": "Marketing ; Market segmentation & market sizing"
+              },
+              {
+                "id": "4.2",
+                "text": "Customer persona & value proposition;"
+              },
+              {
+                "id": "4.3",
+                "text": "Marketing (Go-to-market) strategy;"
+              },
+              {
+                "id": "4.4",
+                "text": "Distribution channels and sales network;"
+              },
+              {
+                "id": "4.5",
+                "text": "Funding requirement (based on stage);."
+              },
+              {
+                "id": "4.6",
+                "text": "Source of funding for startup ventures;"
+              },
+              {
+                "id": "4.7",
+                "text": "Financial projections and accounting;"
+              },
+              {
+                "id": "4.8",
+                "text": "Startup to scale up financing"
+              }
+            ],
+            "pdf_page": 452,
+            "image_path": "./syllabus_images/24MEP702_mod4.png"
+          },
+          "Module 5": {
+            "topics": [
+              {
+                "id": "5.1",
+                "text": "Venture Creation: Sustainable business options & pathways"
+              },
+              {
+                "id": "5.2",
+                "text": "Business model & business canvas;"
+              },
+              {
+                "id": "5.3",
+                "text": "Startup team & business partners;"
+              },
+              {
+                "id": "5.4",
+                "text": "Startup ecosystem and stakeholders;"
+              },
+              {
+                "id": "5.5",
+                "text": "Technology business incubators & parks;"
+              },
+              {
+                "id": "5.6",
+                "text": "Proposal pitching & agreements;"
+              },
+              {
+                "id": "5.7",
+                "text": "Startup company incorporation; Social impact & responsibility."
+              }
+            ],
+            "pdf_page": 453,
+            "image_path": "./syllabus_images/24MEP702_mod5.png"
+          }
+        },
+        "pdf_page": 448
+      }
+    }
+  }
+}

@@ -1,35 +1,63 @@
-# VYAPAR SHIKSHA (സംരംഭക പാഠശാല | منصة رواد الأعمال)
-### The Ultimate India & Kerala Micro-Business Academy & Launchpad
-**Trilingual:** English | മലയാളം | العربية (Full RTL support)
+# TKMCE Mechanical Engineering Portal • 2024 Scheme Autonomous
 
-A complete, production-ready interactive business learning portal and launchpad for aspiring micro-entrepreneurs in Kerala, pan-India, and the GCC.
+[![100% Free](https://img.shields.io/badge/Access-100%25_Free_Forever-10b981?style=for-the-badge)](https://github.com/ibrahimihsaneng-bit/tkmce-mechanical-portal)
+[![Zero Ads](https://img.shields.io/badge/Experience-Zero_Advertisements-3b82f6?style=for-the-badge)](https://github.com/ibrahimihsaneng-bit/tkmce-mechanical-portal)
+[![Offline Ready](https://img.shields.io/badge/Offline-Signed_Android_APK-f59e0b?style=for-the-badge)](https://github.com/ibrahimihsaneng-bit/tkmce-mechanical-portal)
 
-## Features
-- **Curated Business Blueprints:**
-  - Attar & Artisanal Perfumes (80% - 250% margin)
-  - Dresses, Modest Wear & Instagram Boutiques (45% - 120% margin)
-  - Fashion Watches & Smartwatch Combos (60% - 150% margin)
-  - Aesthetic Canvas Totes & Leather Bags (60% - 180% margin)
-  - Anti-Tarnish Jewelry & Rings (100% - 300% margin)
-  - Kerala Organic Spices & Forest Honey (50% - 120% margin)
-- **Interactive Financial & Profit Calculator:**
-  - Real-time calculations of sourcing cost, packaging, courier delivery, and 2% payment gateway charges.
-  - Live GCC Currency Converter (AED, SAR, QAR, OMR, KWD).
-- **Verified Wholesaler & Supplier Directory:**
-  - Real market locations in Kozhikode (S.M. Street, Big Bazaar), Kochi (Broadway), Mumbai (Mohammad Ali Rd, Crawford Market, Manish Market), Surat (Millennium Market), Tirupur, Delhi, and Jaipur.
-  - Direct 1-click WhatsApp chat links with pre-filled inquiries.
-- **Interactive Business Idea Finder Quiz:**
-  - 30-second compatibility matcher based on capital, daily time, and audience.
-- **Copy-Paste WhatsApp & DM Scripts:**
-  - Supplier inquiries, customer order confirmations with UPI QR, tracking updates, and review requests.
-- **Legal & Compliance Guide:**
-  - Demystifying GST exemptions (under ₹40L), Udyam MSME free registration, zero-balance current accounts, and FSSAI basic licenses.
-- **Essential Starter Equipment Checklist:**
-  - The 5 home tools needed for professional packing under ₹1,500.
-- **Logistics & COD Safety Guide:**
-  - ST Courier, India Post Speed Post, Shiprocket, and Gulf air cargo rates, plus strategies to eliminate RTO losses.
-- **1-Page Business Plan Generator:**
-  - Personalized action plan with instant print/PDF export.
+An authentic, open, student-first study companion developed specifically for **B.Tech Mechanical Engineering** students of **TKM College of Engineering (TKMCE Autonomous, 2024 Scheme)**.
 
-## Deployment
-Deployed on Vercel and GitHub.
+---
+
+## 🌟 Why This Portal Exists (Our Mission)
+Existing study applications (such as *Vihaya*) impose severe barriers on engineering students:
+- 🚫 **Aggressive Ads:** Constant intrusive pop-ups and video ads disrupting revision.
+- 🚫 **Blocked Screenshots:** Artificial DRM flags blocking quick formula captures.
+- 🚫 **Locked Downloads:** Offline access restricted or gated behind paywalls.
+- 🚫 **Cluttered Navigation:** Difficult to pinpoint exact syllabus modules and exam questions.
+
+### ✨ Our Core Promise
+- **100% Free Forever:** No paywalls, no login barriers, no premium fees.
+- **Zero Ads & Zero Tracking:** Clean, distraction-free environment.
+- **Unrestricted Access:** Take screenshots, copy formulas, print cheat sheets, and download PDFs freely.
+- **1-Click Google & AI Search:** Search every syllabus topic and exam question with a single click.
+
+---
+
+## 🚀 Key Features
+
+1. **📋 Digital Syllabus Checklist (S3 to S7):**
+   - Exact official course codes, slot allocations, and topic breakdown from the 649-page curriculum.
+   - Interactive progress checkboxes persisting in your browser `localStorage`.
+   - 1-Click `🔍 Google` search button next to every topic.
+
+2. **🖼️ Official Syllabus Scans with Lightbox:**
+   - 131 high-resolution cropped module syllabus tables.
+   - Zoomable full-screen Lightbox viewer for crystal-clear table viewing.
+
+3. **🆔 AI Prepared Notes (S4, S5, S6, S7):**
+   - **85+ Comprehensive Modules** with real engineering SVG diagrams, Mohr's circle, stress-strain curves, psychrometric charts, and governing equations.
+   - **⚡ Short (2-Minute Exam Summary)** vs **📖 Detailed Notes** interactive toggle.
+
+4. **❓ Exam Questions & Step-by-Step Model Solutions:**
+   - Real past university & series test questions categorized module-wise.
+   - Expandable model solutions showing step-by-step mathematical working.
+
+5. **📂 Offline PYQ Vault & Faculty Notes:**
+   - Curated archive of 32 Previous Year Question papers and 6 full faculty lecture note sets.
+   - In-app PDF viewer with page navigation and download triggers.
+
+6. **📱 Offline Android APK:**
+   - Standalone signed Android APK (`tkm_mech_portal.apk`) with embedded curriculum and offline caching.
+
+---
+
+## 🏛️ Academic Coverage
+- **S3:** Transform Techniques & PDEs, Mechanics of Solids, Fluid Mechanics, Engineering Economics
+- **S4:** Mechanics of Deformable Solids, Measurements & Metrology, Manufacturing Processes, Heat Transfer, Finance & Accounting, Professional Ethics, Biology
+- **S5:** Design of Machine Elements, Thermal Engineering II, Kinematics & Dynamics, Operations Research, HRM, Constitution of India, Introduction to MEP
+- **S6:** Industrial Safety, Computer Aided Design & Analysis (CAD/FEM/CFD), Manufacturing Automation
+- **S7:** Refrigeration and Air Conditioning, Product Innovation & Entrepreneurship
+
+---
+
+*Department of Mechanical Engineering • TKM College of Engineering, Kollam (Autonomous 2024 Scheme)*

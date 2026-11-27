@@ -1,71 +1,29 @@
 {
   "cleanUrls": true,
   "rewrites": [
-    { "source": "/academy/(.*)", "destination": "/" },
-    { "source": "/plan", "destination": "/" },
-    { "source": "/suppliers", "destination": "/" },
-    { "source": "/tools", "destination": "/" },
-    { "source": "/calc", "destination": "/" },
-    { "source": "/kerala-intel", "destination": "/" },
-    { "source": "/kerala-intel/(.*)", "destination": "/" }
+    { "source": "/portal", "destination": "/index.html" },
+    { "source": "/tkm_portal", "destination": "/index.html" }
   ],
   "headers": [
     {
       "source": "/(.*)",
       "headers": [
         {
-          "key": "X-Frame-Options",
-          "value": "DENY"
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
         },
         {
           "key": "X-Content-Type-Options",
           "value": "nosniff"
-        },
-        {
-          "key": "Referrer-Policy",
-          "value": "strict-origin-when-cross-origin"
-        },
-        {
-          "key": "Strict-Transport-Security",
-          "value": "max-age=63072000; includeSubDomains; preload"
-        },
-        {
-          "key": "Permissions-Policy",
-          "value": "camera=(), microphone=(), geolocation=(), payment=()"
-        },
-        {
-          "key": "X-XSS-Protection",
-          "value": "1; mode=block"
-        },
-        {
-          "key": "X-Permitted-Cross-Domain-Policies",
-          "value": "none"
-        },
-        {
-          "key": "Cross-Origin-Opener-Policy",
-          "value": "same-origin"
-        },
-        {
-          "key": "Content-Security-Policy",
-          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: https:; connect-src 'self' https:; media-src 'self' blob:; frame-ancestors 'none';"
         }
       ]
     },
     {
-      "source": "/(style.css|app.js|data_.*\\.js)",
+      "source": "/(.*)\\.(png|jpg|jpeg|svg|pdf|apk|json)",
       "headers": [
         {
           "key": "Cache-Control",
-          "value": "public, max-age=86400, stale-while-revalidate=604800"
-        }
-      ]
-    },
-    {
-      "source": "/(sitemap.xml|robots.txt)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=3600"
+          "value": "public, max-age=31536000, immutable"
         }
       ]
     }
