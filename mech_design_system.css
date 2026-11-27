@@ -1406,3 +1406,125 @@ h1, h2, h3, h4, h5, h6 {
   padding: 24px;
   text-align: center;
 }
+
+/* ===================================================================
+   STUDENT SEMESTER PROFILE & ACTIVE FILTER STYLES
+   =================================================================== */
+.profile-semester-badge-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--color-surface-elevated);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-primary);
+  padding: 6px 14px;
+  border-radius: 9999px;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow-xs);
+}
+.profile-semester-badge-btn:hover {
+  border-color: var(--color-academic-blue);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-sm);
+  transform: translateY(-1px);
+}
+.profile-badge-tag {
+  background: var(--color-academic-blue);
+  color: #FFFFFF;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  padding: 2px 7px;
+  border-radius: 9999px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+.profile-badge-chevron {
+  font-size: 0.7rem;
+  color: var(--color-text-tertiary);
+}
+
+.sidebar-profile-card {
+  margin: 10px 14px 16px 14px;
+  padding: 10px 12px;
+  background: var(--color-surface-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.sidebar-profile-card:hover {
+  border-color: var(--color-academic-blue);
+  background: var(--color-surface);
+}
+.sidebar-profile-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: var(--radius-sm);
+  background: var(--color-academic-blue);
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.profile-sem-card {
+  padding: 16px 10px;
+  text-align: center;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+.profile-sem-card:hover {
+  border-color: var(--color-academic-blue);
+  background: var(--color-surface-elevated);
+  transform: translateY(-2px);
+}
+.profile-sem-card.active {
+  border-color: var(--color-academic-blue);
+  background: var(--color-academic-blue-subtle, rgba(29, 78, 216, 0.08));
+  box-shadow: 0 0 0 2px var(--color-academic-blue);
+}
+.profile-sem-card-title {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-bottom: 4px;
+}
+.profile-sem-card-sub {
+  font-size: 0.72rem;
+  color: var(--color-text-secondary);
+}
+
+.toast-msg {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: #101c30;
+  color: #FFFFFF;
+  padding: 10px 22px;
+  border-radius: 9999px;
+  font-size: 0.86rem;
+  font-weight: 600;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+  z-index: 999999;
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+.toast-msg.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+

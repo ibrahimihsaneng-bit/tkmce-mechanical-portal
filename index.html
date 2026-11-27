@@ -50,6 +50,20 @@
         </button>
       </div>
 
+      <!-- Active Semester Profile Quick Selector -->
+      <div class="sidebar-profile-card" onclick="openProfileModal()" title="Click to filter portal by your semester">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <div style="display:flex; align-items:center; gap:10px;">
+            <div id="sidebar-profile-avatar" class="sidebar-profile-avatar">S3</div>
+            <div>
+              <div style="font-size:0.75rem; font-weight:700; color:var(--color-text-primary);">Semester Profile</div>
+              <div id="sidebar-active-sem-name" style="font-size:0.7rem; color:var(--color-academic-blue); font-weight:600;">Semester 3 (S3)</div>
+            </div>
+          </div>
+          <span style="font-size:0.75rem; color:var(--color-text-tertiary); font-weight:600;">Switch ▾</span>
+        </div>
+      </div>
+
       <nav class="sidebar-scrollable">
         <div class="sidebar-section-label">WORKSPACE</div>
         <a href="#dashboard" class="nav-item active">
@@ -165,6 +179,14 @@
         </button>
 
         <div class="topbar-right">
+          <!-- Student Semester Profile Selector (Zero Personal Data) -->
+          <button id="profile-sem-btn" class="profile-semester-badge-btn" onclick="openProfileModal()" aria-label="Student Semester Profile" title="Switch your active semester">
+            <span style="font-size:1rem;">🎓</span>
+            <span style="font-size:0.8rem; opacity:0.85;">My Semester:</span>
+            <span id="topbar-active-sem-tag" class="profile-badge-tag">S3</span>
+            <span class="profile-badge-chevron">▾</span>
+          </button>
+
           <a href="./focus/" class="btn btn-secondary btn-sm" title="Launch Distraction-Free Focus Studio" style="display:flex; align-items:center; gap:6px;">
             <span>🎯 Focus Mode</span>
           </a>
@@ -323,6 +345,76 @@
       </div>
     </div>
   </div>
+
+  <!-- ===================================================================
+       STUDENT SEMESTER PROFILE MODAL (Zero Personal Data / 1-Click Filter)
+       =================================================================== -->
+  <div id="profileModal" class="modal-overlay" role="dialog" aria-modal="true" aria-label="Student Semester Profile">
+    <div class="card" style="max-width:680px; width:100%; max-height:90vh; overflow-y:auto; background:var(--color-surface); border:1px solid var(--color-border); box-shadow:var(--shadow-xl); padding:24px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--color-border); padding-bottom:14px; margin-bottom:18px;">
+        <div style="display:flex; align-items:center; gap:12px;">
+          <div style="width:40px; height:40px; border-radius:var(--radius-sm); background:var(--color-academic-blue); color:#FFFFFF; display:flex; align-items:center; justify-content:center; font-size:1.3rem;">🎓</div>
+          <div>
+            <h2 class="h3" style="margin:0; font-size:1.25rem;">Select Your Active Semester</h2>
+            <p class="text-secondary" style="font-size:0.8rem; margin:2px 0 0 0;">Zero sign-up or name required. Locks your portal to your semester's notes and PYQs.</p>
+          </div>
+        </div>
+        <button onclick="closeProfileModal()" style="background:none; border:none; color:var(--color-text-tertiary); font-size:1.4rem; cursor:pointer;" aria-label="Close dialog">✕</button>
+      </div>
+
+      <div style="font-size:0.84rem; color:var(--color-text-secondary); margin-bottom:16px; line-height:1.5;">
+        Choose your current semester below to personalize your dashboard, filter digital textbook notes, and show only relevant previous-year question papers:
+      </div>
+
+      <!-- Semester Selection Grid (S1 to S8) -->
+      <div style="display:grid; grid-template-columns:repeat(4, minmax(0, 1fr)); gap:12px; margin-bottom:20px;" id="profile-sem-modal-grid">
+        <div class="profile-sem-card" data-sem="S1" onclick="setUserSemester('S1')">
+          <div class="profile-sem-card-title">S1</div>
+          <div class="profile-sem-card-sub">Foundation & Physics</div>
+        </div>
+        <div class="profile-sem-card" data-sem="S2" onclick="setUserSemester('S2')">
+          <div class="profile-sem-card-title">S2</div>
+          <div class="profile-sem-card-sub">Engineering Mechanics</div>
+        </div>
+        <div class="profile-sem-card" data-sem="S3" onclick="setUserSemester('S3')">
+          <div class="profile-sem-card-title">S3</div>
+          <div class="profile-sem-card-sub">Core Math & Solids</div>
+        </div>
+        <div class="profile-sem-card" data-sem="S4" onclick="setUserSemester('S4')">
+          <div class="profile-sem-card-title">S4</div>
+          <div class="profile-sem-card-sub">Machinery & Materials</div>
+        </div>
+        <div class="profile-sem-card" data-sem="S5" onclick="setUserSemester('S5')">
+          <div class="profile-sem-card-title">S5</div>
+          <div class="profile-sem-card-sub">Thermal & Design</div>
+        </div>
+        <div class="profile-sem-card" data-sem="S6" onclick="setUserSemester('S6')">
+          <div class="profile-sem-card-title">S6</div>
+          <div class="profile-sem-card-sub">Dynamics & Metrology</div>
+        </div>
+        <div class="profile-sem-card" data-sem="S7" onclick="setUserSemester('S7')">
+          <div class="profile-sem-card-title">S7</div>
+          <div class="profile-sem-card-sub">CAD/CAM & Automation</div>
+        </div>
+        <div class="profile-sem-card" data-sem="S8" onclick="setUserSemester('S8')">
+          <div class="profile-sem-card-title">S8</div>
+          <div class="profile-sem-card-sub">Capstone & Electives</div>
+        </div>
+      </div>
+
+      <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--color-border); padding-top:16px;">
+        <button class="btn btn-secondary btn-sm" onclick="setUserSemester('All')" title="View all courses across all semesters">
+          🌐 View All Semesters (Reset Filter)
+        </button>
+        <button class="btn btn-primary btn-sm" onclick="closeProfileModal()">
+          Done
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Global Toast Notification Container -->
+  <div id="toastBox" class="toast-msg"></div>
 
   <!-- ===================================================================
        NOTES UPDATE & CONTRIBUTION MODAL

@@ -39,9 +39,11 @@
     },
     publishedResources: JSON.parse(localStorage.getItem('mech_published_resources') || '[]'),
 
+    userSemester: localStorage.getItem('mech_user_semester') || 'S3',
     currentView: 'dashboard',
-    selectedSemester: 'S4',
-    selectedSubject: '24MET401',
+    selectedSemester: localStorage.getItem('mech_user_semester') || 'S3',
+    selectedSubject: (localStorage.getItem('mech_user_semester') || 'S3') === 'S3' ? '24MAT301' : '24MET401',
+    pyqSemFilter: localStorage.getItem('mech_user_semester') || 'S3',
     selectedModule: 'Module 1',
     readingMode: 'textbook', // textbook, detailed, short, exam, formulas, numerical, questions
     fontSize: parseInt(localStorage.getItem('mech_font_size') || '16'),
@@ -86,6 +88,7 @@
     setupUniversalSearch();
     setupKeyboardShortcuts();
     renderParkingLotList();
+    updateProfileBadges();
     
     // Hash Routing
     window.addEventListener('hashchange', handleRoute);
@@ -286,11 +289,24 @@
         renderDashboard();
         break;
       case 'semesters':
-        if (parts[1]) AppState.selectedSemester = parts[1];
+        if (parts[1]) {
+          AppState.selectedSemester = parts[1];
+        } else if (AppState.userSemester && AppState.userSemester !== 'All') {
+          AppState.selectedSemester = AppState.userSemester;
+        }
         renderSemesters();
         break;
       case 'notes':
-        if (parts[1]) AppState.selectedSubject = parts[1];
+        if (parts[1]) {
+          AppState.selectedSubject = parts[1];
+        } else if (AppState.userSemester && AppState.userSemester !== 'All') {
+          const data = window.MECH_DATA || {};
+          const sNum = parseInt(AppState.userSemester.replace('S', ''));
+          const courses = (data.catalog_raw || []).filter(c => c.semester === sNum);
+          if (courses.length > 0 && (!AppState.selectedSubject || !courses.find(c => c.code === AppState.selectedSubject))) {
+            AppState.selectedSubject = courses[0].code;
+          }
+        }
         if (parts[2]) AppState.selectedModule = decodeURIComponent(parts[2]);
         renderStudyNotes();
         break;
@@ -346,6 +362,102 @@
         break;
     }
   }
+
+  // ===================================================================
+  // STUDENT SEMESTER PROFILE & 1-CLICK WORKSPACE FILTER (Zero Personal Data)
+  // ===================================================================
+  function openProfileModal() {
+    const modal = document.getElementById('profileModal');
+    if (modal) {
+      modal.classList.add('active');
+      const currentSem = AppState.userSemester || 'S3';
+      const cards = modal.querySelectorAll('.profile-sem-card');
+      cards.forEach(card => {
+        card.classList.toggle('active', card.getAttribute('data-sem') === currentSem);
+      });
+    }
+  }
+  window.openProfileModal = openProfileModal;
+
+  function closeProfileModal() {
+    const modal = document.getElementById('profileModal');
+    if (modal) {
+      modal.classList.remove('active');
+    }
+  }
+  window.closeProfileModal = closeProfileModal;
+
+  function setUserSemester(sem) {
+    AppState.userSemester = sem;
+    localStorage.setItem('mech_user_semester', sem);
+
+    if (sem !== 'All') {
+      AppState.selectedSemester = sem;
+      AppState.pyqSemFilter = sem;
+
+      const data = window.MECH_DATA || {};
+      const sNum = parseInt(sem.replace('S', ''));
+      const courses = (data.catalog_raw || []).filter(c => c.semester === sNum);
+      if (courses.length > 0) {
+        AppState.selectedSubject = courses[0].code;
+        AppState.selectedModule = 'Module 1';
+      }
+    } else {
+      AppState.pyqSemFilter = 'All';
+    }
+
+    updateProfileBadges();
+    closeProfileModal();
+
+    showToast(sem === 'All' ? '🌐 All Semesters accessible' : `🎓 Workspace filtered to Semester ${sem}`);
+
+    if (AppState.currentView === 'dashboard') {
+      renderDashboard();
+    } else if (AppState.currentView === 'semesters') {
+      renderSemesters();
+    } else if (AppState.currentView === 'pyqs') {
+      renderPYQVault();
+    } else if (AppState.currentView === 'notes') {
+      renderStudyNotes();
+    } else {
+      renderView(AppState.currentView, [AppState.currentView, sem !== 'All' ? sem : '']);
+    }
+  }
+  window.setUserSemester = setUserSemester;
+
+  function updateProfileBadges() {
+    const sem = AppState.userSemester || 'S3';
+    const topBadge = document.getElementById('topbar-active-sem-tag');
+    if (topBadge) {
+      topBadge.textContent = sem;
+    }
+    const sideAvatar = document.getElementById('sidebar-profile-avatar');
+    if (sideAvatar) {
+      sideAvatar.textContent = sem;
+    }
+    const sideName = document.getElementById('sidebar-active-sem-name');
+    if (sideName) {
+      sideName.textContent = sem === 'All' ? 'All Semesters' : `Semester ${sem.replace('S', '')} (${sem})`;
+    }
+  }
+  window.updateProfileBadges = updateProfileBadges;
+
+  function showToast(msg) {
+    let toast = document.getElementById('toastBox');
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.id = 'toastBox';
+      toast.className = 'toast-msg';
+      document.body.appendChild(toast);
+    }
+    toast.textContent = msg;
+    toast.classList.add('show');
+    clearTimeout(window._toastTimer);
+    window._toastTimer = setTimeout(() => {
+      toast.classList.remove('show');
+    }, 2800);
+  }
+  window.showToast = showToast;
 
   // ===================================================================
   // 1. DASHBOARD (Matches User Reference Screenshot With 100% Precision)
@@ -439,11 +551,11 @@
 
         <div class="grid-cols-4" style="gap:14px;">
           <!-- 1. Study Notes -->
-          <a href="#notes/24MET401" class="workspace-action-card">
+          <a href="#notes/${AppState.userSemester === 'S3' ? '24MAT301' : (AppState.selectedSubject || '24MAT301')}" class="workspace-action-card">
             <div class="action-icon-circle">📖</div>
             <div>
               <div style="font-weight:700; font-size:0.95rem;">Study notes</div>
-              <div class="text-secondary" style="font-size:0.8rem;">Browse modules</div>
+              <div class="text-secondary" style="font-size:0.8rem;">Browse ${AppState.userSemester || 'S3'} modules</div>
             </div>
           </a>
 
@@ -489,40 +601,79 @@
         </div>
 
         <div style="display:grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap:10px;" id="dashboard-sem-grid">
-          <a href="#semesters/S1" class="semester-pill-card">
-            <div class="semester-pill-title">S1</div>
-            <div class="semester-pill-sub">5 verified notes</div>
-          </a>
-          <a href="#semesters/S2" class="semester-pill-card">
-            <div class="semester-pill-title">S2</div>
-            <div class="semester-pill-sub">3 verified notes</div>
-          </a>
-          <a href="#semesters/S3" class="semester-pill-card">
-            <div class="semester-pill-title">S3</div>
-            <div class="semester-pill-sub">5 verified notes</div>
-          </a>
-          <a href="#semesters/S4" class="semester-pill-card active" style="border-color:var(--color-academic-blue); background:var(--color-surface-elevated);">
-            <div class="semester-pill-title">S4</div>
-            <div class="semester-pill-sub" style="color:var(--color-academic-blue); font-weight:600;">7 core notes</div>
-          </a>
-          <a href="#semesters/S5" class="semester-pill-card">
-            <div class="semester-pill-title">S5</div>
-            <div class="semester-pill-sub">7 core notes</div>
-          </a>
-          <a href="#semesters/S6" class="semester-pill-card">
-            <div class="semester-pill-title">S6</div>
-            <div class="semester-pill-sub">3 verified notes</div>
-          </a>
-          <a href="#semesters/S7" class="semester-pill-card">
-            <div class="semester-pill-title">S7</div>
-            <div class="semester-pill-sub">2 verified notes</div>
-          </a>
-          <a href="#semesters/S8" class="semester-pill-card">
-            <div class="semester-pill-title">S8</div>
-            <div class="semester-pill-sub">2 verified notes</div>
-          </a>
+          ${['S1', 'S2', 'S3', 'S4', 'S5', 'S6', 'S7', 'S8'].map(s => {
+            const isActive = AppState.userSemester === s;
+            const sNum = parseInt(s.replace('S', ''));
+            const data = window.MECH_DATA || {};
+            const count = (data.catalog_raw || []).filter(c => c.semester === sNum).length || 5;
+            return `
+              <div onclick="setUserSemester('${s}')" class="semester-pill-card ${isActive ? 'active' : ''}" style="cursor:pointer; ${isActive ? 'border-color:var(--color-academic-blue); background:var(--color-surface-elevated); box-shadow:0 0 0 1.5px var(--color-academic-blue);' : ''}">
+                <div class="semester-pill-title">${s}</div>
+                <div class="semester-pill-sub" style="${isActive ? 'color:var(--color-academic-blue); font-weight:700;' : ''}">${count} courses ${isActive ? '✓' : ''}</div>
+              </div>
+            `;
+          }).join('')}
         </div>
       </div>
+
+      <!-- Focused Active Semester Study Hub -->
+      ${(() => {
+        const activeSem = AppState.userSemester && AppState.userSemester !== 'All' ? AppState.userSemester : 'S3';
+        const sNum = parseInt(activeSem.replace('S', ''));
+        const data = window.MECH_DATA || {};
+        const semCourses = (data.catalog_raw || []).filter(c => c.semester === sNum);
+        const semCurriculum = (data.curriculum && data.curriculum[activeSem]) ? data.curriculum[activeSem] : null;
+
+        return `
+          <div style="margin-bottom:var(--space-8); background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-lg); padding:24px; box-shadow:var(--shadow-sm);">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:14px; margin-bottom:18px; border-bottom:1px solid var(--color-border); padding-bottom:16px;">
+              <div>
+                <div style="display:flex; align-items:center; gap:8px; margin-bottom:4px;">
+                  <span style="font-size:1.4rem;">🎯</span>
+                  <h2 class="h3" style="font-size:1.25rem; margin:0;">${activeSem} Focused Study Hub</h2>
+                  <span class="badge badge-blue text-mono" style="font-weight:700;">Active Semester</span>
+                </div>
+                <p class="text-secondary" style="font-size:0.86rem; margin:0;">
+                  ${semCurriculum ? semCurriculum.title : 'Autonomous 2024 Scheme Curricula'} • Verified Digital Textbook Notes, Formulas &amp; University PYQs
+                </p>
+              </div>
+              <div style="display:flex; gap:8px;">
+                <button class="btn btn-secondary btn-sm" onclick="openProfileModal()">
+                  Switch Semester ▾
+                </button>
+                <a href="#semesters/${activeSem}" class="btn btn-primary btn-sm">
+                  Full ${activeSem} Catalog &rarr;
+                </a>
+              </div>
+            </div>
+
+            <div class="grid-cols-2" style="gap:14px;">
+              ${semCourses.map(c => `
+                <div style="background:var(--color-surface-elevated); border:1px solid var(--color-border); border-radius:var(--radius-md); padding:16px; display:flex; flex-direction:column; justify-content:space-between; transition:transform 0.2s ease;">
+                  <div>
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                      <span class="badge badge-blue text-mono" style="font-weight:700;">${c.code}</span>
+                      <span class="badge badge-teal">${c.type || 'Theory'}</span>
+                    </div>
+                    <h3 style="font-size:0.98rem; font-weight:700; margin:0 0 6px 0; color:var(--color-text-primary); line-height:1.35;">${c.title}</h3>
+                    <div style="font-size:0.8rem; color:var(--color-text-secondary); margin-bottom:14px;">
+                      5 Modules • University ESE: ${c.ese ? c.ese + ' Marks' : 'Continuous Assessment'}
+                    </div>
+                  </div>
+                  <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                    <a href="#notes/${c.code}" class="btn btn-primary btn-sm" style="flex:1; text-align:center; text-decoration:none;">
+                      📖 Read Notes
+                    </a>
+                    <a href="#pyqs" onclick="AppState.pyqSemFilter='${activeSem}'; AppState.pyqSearchQuery='${c.code}';" class="btn btn-secondary btn-sm" style="text-decoration:none;">
+                      📄 PYQs
+                    </a>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `;
+      })()}
 
       <!-- Continue Learning: Dynamic Local State -->
       <div style="margin-bottom:var(--space-8);">
@@ -2642,8 +2793,15 @@
 
     container.innerHTML = `
       <div style="margin-bottom:var(--space-6);">
-        <h1 class="h1">${currentSem} • TKMCE Autonomous Scheme</h1>
-        <p class="text-secondary">${semInfo ? semInfo.title : 'Autonomous Mechanical Engineering Curriculum'}</p>
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:12px;">
+          <div>
+            <h1 class="h1">${currentSem} • TKMCE Autonomous Scheme</h1>
+            <p class="text-secondary">${semInfo ? semInfo.title : 'Autonomous Mechanical Engineering Curriculum'}</p>
+          </div>
+          <button class="btn btn-secondary btn-sm" onclick="openProfileModal()">
+            🎓 Active Profile: ${AppState.userSemester || 'S3'} (Switch ▾)
+          </button>
+        </div>
       </div>
 
       <!-- Semester Tabs -->
@@ -2689,7 +2847,10 @@
 
     const data = window.MECH_DATA || {};
     const pyqs = data.pyqs || [];
-    const activeSem = AppState.pyqSemFilter || 'All';
+    if (!AppState.pyqSemFilter) {
+      AppState.pyqSemFilter = AppState.userSemester || 'S3';
+    }
+    const activeSem = AppState.pyqSemFilter;
     const searchQuery = (AppState.pyqSearchQuery || '').toLowerCase();
 
     const filtered = pyqs.filter(p => {
