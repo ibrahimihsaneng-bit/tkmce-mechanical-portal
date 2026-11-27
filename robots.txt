@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://vyapar-shiksha.vercel.app/sitemap.xml
+Sitemap: https://mechtkmce.vercel.app/sitemap.xml
