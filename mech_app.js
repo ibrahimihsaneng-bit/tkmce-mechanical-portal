@@ -1,85 +1,133 @@
 /**
- * MECH TKMCE 2.0 — APPLICATION CONTROLLER & ROUTER
- * Handles navigation, state persistence, universal search, 
- * beginner foundation, semester catalog S1-S8, reading modes, 
- * study planner, exam center, and KaTeX rendering.
+ * MECH TKMCE 3.0 — NEXT-GENERATION ENGINEERING LEARNING OPERATING SYSTEM
+ * Complete application controller & router integrating:
+ * - Academic OS: S1–S8 Catalog, Digital Textbook with 7 Reading Modes, PYQs, Formulas
+ * - Focus OS: Focus Studio, Circular Dial Timer, Deep Focus Shield, Paper Study Mode, Distraction Parking Lot
+ * - Exam OS: Flashcards with 3D Flip, Spaced Repetition (SRS), Active Recall, University Exam Patterns
+ * - Engineering OS: Verified Physics Simulations, 6 Real-World Calculators, GATE Roadmaps
+ * - Personal Workspace: Intelligent Dashboard, Study Planner, Bookmarks, Local Progress Tracking
  */
 
 (function() {
   'use strict';
 
-  // Application State
+  // Global Application State (Persisted in localStorage)
   const AppState = {
     currentView: 'dashboard',
     selectedSemester: 'S4',
     selectedSubject: '24MET401',
     selectedModule: 'Module 1',
-    readingMode: 'detailed', // detailed, short, exam, formulas
-    fontSize: 16, // px
-    theme: localStorage.getItem('mech_theme') || 'dark',
+    readingMode: 'textbook', // textbook, detailed, short, exam, formulas, numerical, questions
+    fontSize: parseInt(localStorage.getItem('mech_font_size') || '16'),
+    theme: localStorage.getItem('mech_theme') || 'warm', // warm, light, dark
     bookmarks: JSON.parse(localStorage.getItem('mech_bookmarks') || '[]'),
     tasks: JSON.parse(localStorage.getItem('mech_tasks') || '[]'),
-    timerMinutes: 25,
-    timerSeconds: 0,
+    parkingLot: JSON.parse(localStorage.getItem('mech_parking_lot') || '[]'),
+    completedLessons: JSON.parse(localStorage.getItem('mech_completed_lessons') || '[]'),
+    lastOpened: JSON.parse(localStorage.getItem('mech_last_opened') || 'null'),
+    studyHistory: JSON.parse(localStorage.getItem('mech_study_history') || '[]'),
+    // Focus Studio State
+    focusPreset: 'pomodoro',
+    focusStudyMinutes: 25,
+    focusBreakMinutes: 5,
+    focusShield: 'gentle',
+    focusPhase: 'setup', // setup, focus, break, reflection
+    timerTargetTime: null,
+    timerRemainingMs: 25 * 60 * 1000,
     timerRunning: false,
-    timerInterval: null
+    timerInterval: null,
+    interruptionCount: 0,
+    wakeLock: null,
+    // Exam OS / Flashcards State
+    flashcardIndex: 0,
+    flashcardFlipped: false,
+    flashcardFilter: 'All',
+    examTab: 'flashcards', // flashcards, pattern, numerical, srs
+    srsStats: JSON.parse(localStorage.getItem('mech_srs_stats') || '{"mastered": 0, "reviewDue": 0}'),
+    // Engineering Lab State
+    labTab: 'sims', // sims, calcs, gate
+    activeSim: 'mohr'
   };
 
-  // DOM Elements cache
+  // Cached View Containers
   let views = {};
 
-  // Initialize Application
+  // Application Entry Point
   window.addEventListener('DOMContentLoaded', () => {
     initTheme();
     cacheDOMElements();
     setupEventListeners();
     setupUniversalSearch();
     setupKeyboardShortcuts();
-    setupPomodoro();
+    renderParkingLotList();
     
     // Hash Routing
     window.addEventListener('hashchange', handleRoute);
     handleRoute();
 
-    // Register Service Worker for PWA
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('./sw.js').catch(() => {});
-    }
+    // Trigger KaTeX rendering on initial load
+    triggerKaTeX();
   });
 
-  // Theme Management
+  // KaTeX Auto-Renderer Trigger
+  function triggerKaTeX(container) {
+    if (window.renderMathInElement) {
+      try {
+        window.renderMathInElement(container || document.body, {
+          delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '$', right: '$', display: false},
+            {left: '\(', right: '\)', display: false},
+            {left: '\[', right: '\]', display: true}
+          ],
+          throwOnError: false
+        });
+      } catch (e) {
+        console.warn('KaTeX render warning:', e);
+      }
+    }
+  }
+
+  // 3-Theme Management (Warm Paper [default / screenshot], Light Academic, Dark Reading)
   function initTheme() {
     document.documentElement.setAttribute('data-theme', AppState.theme);
     updateThemeIcon();
   }
 
   function toggleTheme() {
-    AppState.theme = AppState.theme === 'dark' ? 'light' : 'dark';
+    const themeCycle = {
+      'warm': 'light',
+      'light': 'dark',
+      'dark': 'warm'
+    };
+    AppState.theme = themeCycle[AppState.theme] || 'warm';
     document.documentElement.setAttribute('data-theme', AppState.theme);
     localStorage.setItem('mech_theme', AppState.theme);
     updateThemeIcon();
-    if (AppState.currentView === 'lab') {
+    if (AppState.currentView === 'lab' && AppState.labTab === 'sims') {
       renderActiveSimulation();
     }
   }
+  window.toggleTheme = toggleTheme;
 
   function updateThemeIcon() {
     const iconBtn = document.getElementById('theme-toggle-btn');
     if (!iconBtn) return;
-    if (AppState.theme === 'dark') {
+    if (AppState.theme === 'warm') {
+      iconBtn.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>`;
+      iconBtn.setAttribute('title', 'Theme: Warm Paper (Click for Light Academic)');
+    } else if (AppState.theme === 'light') {
       iconBtn.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>`;
-      iconBtn.setAttribute('title', 'Switch to Light Theme');
-      iconBtn.setAttribute('aria-label', 'Switch to Light Theme');
+      iconBtn.setAttribute('title', 'Theme: Light Academic (Click for Dark Mode)');
     } else {
       iconBtn.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>`;
-      iconBtn.setAttribute('title', 'Switch to Dark Theme');
-      iconBtn.setAttribute('aria-label', 'Switch to Dark Theme');
+      iconBtn.setAttribute('title', 'Theme: Dark Reading (Click for Warm Paper)');
     }
   }
 
   // Cache views
   function cacheDOMElements() {
-    const viewIds = ['dashboard', 'semesters', 'notes', 'pyqs', 'formulas', 'exams', 'planner', 'gate', 'lab', 'bookmarks', 'downloads', 'settings'];
+    const viewIds = ['dashboard', 'semesters', 'notes', 'pyqs', 'formulas', 'exams', 'planner', 'gate', 'lab', 'bookmarks', 'downloads', 'settings', 'focus'];
     viewIds.forEach(id => {
       views[id] = document.getElementById('view-' + id);
     });
@@ -109,6 +157,15 @@
           !e.target.closest('.app-sidebar') && 
           !e.target.closest('#mobile-menu-btn')) {
         document.body.classList.remove('mobile-sidebar-open');
+      }
+    });
+
+    // Deep Focus Visibility Detection (Tracks interruptions non-punitively)
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden && AppState.currentView === 'focus' && AppState.timerRunning) {
+        AppState.interruptionCount++;
+        const note = document.getElementById('focus-interruption-stat');
+        if (note) note.textContent = AppState.interruptionCount;
       }
     });
   }
@@ -159,6 +216,7 @@
     updateBreadcrumbs(viewName, parts);
     renderView(viewName, parts);
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    setTimeout(triggerKaTeX, 60);
   }
 
   function updateBreadcrumbs(viewName, parts) {
@@ -167,15 +225,16 @@
 
     const names = {
       dashboard: 'Dashboard',
-      semesters: 'Semesters',
-      notes: 'Study Notes',
+      semesters: 'Semesters & notes',
+      notes: 'Digital Textbook',
+      focus: 'Focus Studio',
       pyqs: 'PYQ Vault',
       formulas: 'Formula Library',
-      exams: 'Exam Centre',
+      exams: 'Practice Centre',
       planner: 'Study Planner',
       gate: 'GATE Preparation',
-      lab: 'Interactive Lab',
-      bookmarks: 'Bookmarks',
+      lab: 'Interactive Lab & Calcs',
+      bookmarks: 'Saved resources',
       downloads: 'Offline Downloads',
       settings: 'Settings'
     };
@@ -206,6 +265,9 @@
         if (parts[1]) AppState.selectedSubject = parts[1];
         if (parts[2]) AppState.selectedModule = decodeURIComponent(parts[2]);
         renderStudyNotes();
+        break;
+      case 'focus':
+        renderFocusStudio();
         break;
       case 'pyqs':
         renderPYQVault();
@@ -238,272 +300,668 @@
   }
 
   // ===================================================================
-  // 1. DASHBOARD
+  // 1. DASHBOARD (Matches User Reference Screenshot With 100% Precision)
   // ===================================================================
   function renderDashboard() {
     const container = document.getElementById('dashboard-content');
     if (!container) return;
 
-    const data = window.MECH_DATA || {};
-    const totalCatalog = data.catalog_raw ? data.catalog_raw.length : 61;
-    const totalPYQs = data.pyqs ? data.pyqs.length : 38;
-    const totalFormulas = data.formulas ? data.formulas.length : 11;
-    const starterLessons = data.starter_lessons ? data.starter_lessons.slice(0, 4) : [];
+    const completedCount = AppState.completedLessons.length;
+    const openTasksCount = AppState.tasks.filter(t => !t.completed).length;
+    const lastOpened = AppState.lastOpened;
 
     container.innerHTML = `
-      <!-- Welcome Engineering Banner -->
-      <div class="card" style="margin-bottom: var(--space-6); background: linear-gradient(135deg, var(--color-surface) 0%, var(--color-surface-elevated) 100%); border-left: 4px solid var(--color-academic-blue);">
-        <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:var(--space-4);">
-          <div>
-            <div style="display:flex; align-items:center; gap:8px; margin-bottom:var(--space-2);">
-              <span class="badge badge-blue">Autonomous 2024 Scheme</span>
-              <span class="badge badge-teal">TKM College of Engineering</span>
-            </div>
-            <h1 class="h1" style="margin-bottom:var(--space-2);">Welcome to MECH TKMCE 2.0</h1>
-            <p class="text-secondary" style="max-width:680px; font-size:0.95rem;">
-              The student-built Mechanical Engineering workspace for TKMCE Autonomous Scheme. 100% free forever, zero ads, no paywalls, unrestricted downloads, comprehensive S1–S8 syllabus, and verified physical simulations.
+      <!-- FIG. 01 Precision Engineering Hero Banner -->
+      <div class="hero-banner-mech3">
+        <svg style="position:absolute; right:0; top:0; width:100%; height:100%; pointer-events:none; opacity:0.16;" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern id="engGrid3" width="36" height="36" patternUnits="userSpaceOnUse">
+              <path d="M 36 0 L 0 0 0 36" fill="none" stroke="#B5D8CB" stroke-width="0.7"/>
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#engGrid3)"/>
+        </svg>
+
+        <div style="position:relative; z-index:2; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:24px;">
+          <!-- Left Pitch & Call to Actions -->
+          <div style="max-width:520px;">
+            <div class="hero-tag-badge">ENGINEERING LEARNING / 01</div>
+            <h1 style="font-family:var(--font-heading); font-size:2.5rem; font-weight:700; line-height:1.15; margin:0 0 14px 0; letter-spacing:-0.03em; color:#FFFFFF;">
+              Less distraction.<br>More understanding.
+            </h1>
+            <p style="font-size:1.02rem; line-height:1.55; color:#D4EDE2; margin-bottom:26px;">
+              A quiet space for your engineering journey. Find a lesson, set one goal and make meaningful progress.
             </p>
+            <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
+              <a href="#focus" class="btn" style="background:#B5D8CB; color:#142D28; font-weight:600; padding:10px 22px; border-radius:9999px; border:none; text-decoration:none; display:inline-flex; align-items:center; gap:6px;">
+                Start a focus session &rarr;
+              </a>
+              <a href="#semesters" class="btn" style="background:transparent; color:#FFFFFF; border:1px solid rgba(255,255,255,0.35); font-weight:500; padding:10px 22px; border-radius:9999px; text-decoration:none;">
+                Explore subjects
+              </a>
+            </div>
           </div>
-          <div style="display:flex; gap:var(--space-2);">
-            <a href="#semesters" class="btn btn-primary">Browse S1–S8 &rarr;</a>
-            <a href="#lab" class="btn btn-secondary">Interactive Lab</a>
+
+          <!-- Right Engineering Precision Vector Graphic (FIG. 01) -->
+          <div style="display:flex; flex-direction:column; align-items:flex-end; justify-content:center; min-width:210px;">
+            <div style="font-size:0.68rem; font-family:var(--font-mono); letter-spacing:0.12em; color:#8DB8A7; margin-bottom:4px;">
+              FIG. 01 / PRECISION
+            </div>
+            <svg width="210" height="190" viewBox="0 0 210 190" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <line x1="10" y1="95" x2="200" y2="95" stroke="#25544B" stroke-width="1" stroke-dasharray="2 3"/>
+              <line x1="105" y1="5" x2="105" y2="185" stroke="#25544B" stroke-width="1" stroke-dasharray="2 3"/>
+              <circle cx="105" cy="95" r="80" stroke="#25544B" stroke-width="1" stroke-dasharray="4 4"/>
+              
+              <!-- Outer Gear Profile -->
+              <g stroke="#B5D8CB" stroke-width="1.8" fill="none">
+                <circle cx="105" cy="95" r="66"/>
+                <path d="M99 29 h12 v5 h-12 z" />
+                <path d="M99 156 h12 v5 h-12 z" />
+                <path d="M39 89 v12 h5 v-12 z" />
+                <path d="M166 89 v12 h5 v-12 z" />
+                <path d="M57 52 l8 8 l-4 4 l-8 -8 z" />
+                <path d="M145 140 l8 8 l-4 4 l-8 -8 z" />
+                <path d="M148 56 l-8 8 l4 4 l8 -8 z" />
+                <path d="M60 144 l-8 8 l4 4 l8 -8 z" />
+              </g>
+
+              <circle cx="105" cy="95" r="46" stroke="#B5D8CB" stroke-width="1.4"/>
+              <circle cx="105" cy="95" r="30" stroke="#B5D8CB" stroke-width="2"/>
+              
+              <!-- Sector Wedge Highlight -->
+              <path d="M105 95 L105 65 A30 30 0 0 1 131 80 Z" fill="#B5D8CB" opacity="0.85"/>
+              <path d="M105 95 L131 80 A30 30 0 0 1 127 116 Z" fill="#B5D8CB" opacity="0.3"/>
+              
+              <!-- Center Bore -->
+              <circle cx="105" cy="95" r="13" fill="#163B36" stroke="#B5D8CB" stroke-width="2"/>
+              <circle cx="105" cy="95" r="4" fill="#B5D8CB"/>
+              
+              <text x="175" y="178" fill="#8DB8A7" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="0.1em">MECH / 3.0</text>
+            </svg>
           </div>
         </div>
       </div>
 
-      <!-- Quick Metrics -->
-      <div class="grid-cols-4" style="margin-bottom: var(--space-6);">
-        <div class="card" style="display:flex; align-items:center; gap:var(--space-4);">
-          <div style="width:44px; height:44px; border-radius:var(--radius-md); background:var(--color-academic-blue-subtle); color:var(--color-academic-blue); display:flex; align-items:center; justify-content:center;">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-          </div>
-          <div>
-            <div style="font-size:1.4rem; font-weight:800; font-family:var(--font-mono);">${totalCatalog}</div>
-            <div class="text-secondary" style="font-size:0.8rem;">Autonomous Courses (S1–S8)</div>
-          </div>
+      <!-- Your Workspace: Choose Next Useful Action -->
+      <div style="margin-bottom:var(--space-8);">
+        <div style="margin-bottom:var(--space-3);">
+          <h2 class="h3" style="font-size:1.15rem; margin-bottom:2px;">Your workspace</h2>
+          <p class="text-secondary" style="font-size:0.86rem;">Choose the next useful action.</p>
         </div>
 
-        <div class="card" style="display:flex; align-items:center; gap:var(--space-4);">
-          <div style="width:44px; height:44px; border-radius:var(--radius-md); background:var(--color-technical-teal-subtle); color:var(--color-technical-teal); display:flex; align-items:center; justify-content:center;">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-          </div>
-          <div>
-            <div style="font-size:1.4rem; font-weight:800; font-family:var(--font-mono);">${totalPYQs}</div>
-            <div class="text-secondary" style="font-size:0.8rem;">Past Question Papers</div>
-          </div>
-        </div>
+        <div class="grid-cols-4" style="gap:14px;">
+          <!-- 1. Study Notes -->
+          <a href="#notes/24MET401" class="workspace-action-card">
+            <div class="action-icon-circle">📖</div>
+            <div>
+              <div style="font-weight:700; font-size:0.95rem;">Study notes</div>
+              <div class="text-secondary" style="font-size:0.8rem;">Browse modules</div>
+            </div>
+          </a>
 
-        <div class="card" style="display:flex; align-items:center; gap:var(--space-4);">
-          <div style="width:44px; height:44px; border-radius:var(--radius-md); background:var(--color-warning-subtle); color:var(--color-warning); display:flex; align-items:center; justify-content:center;">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-          </div>
-          <div>
-            <div style="font-size:1.4rem; font-weight:800; font-family:var(--font-mono);">${totalFormulas}</div>
-            <div class="text-secondary" style="font-size:0.8rem;">Formulas in KaTeX</div>
-          </div>
-        </div>
+          <!-- 2. Focus Studio -->
+          <a href="#focus" class="workspace-action-card">
+            <div class="action-icon-circle">🎯</div>
+            <div>
+              <div style="font-weight:700; font-size:0.95rem;">Focus Studio</div>
+              <div class="text-secondary" style="font-size:0.8rem;">One task at a time</div>
+            </div>
+          </a>
 
-        <div class="card" style="display:flex; align-items:center; gap:var(--space-4);">
-          <div style="width:44px; height:44px; border-radius:var(--radius-md); background:var(--color-success-subtle); color:var(--color-success); display:flex; align-items:center; justify-content:center;">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-          </div>
-          <div>
-            <div style="font-size:1.4rem; font-weight:800; font-family:var(--font-mono);">100%</div>
-            <div class="text-secondary" style="font-size:0.8rem;">Free • No Ads</div>
-          </div>
+          <!-- 3. Formulas -->
+          <a href="#formulas" class="workspace-action-card">
+            <div class="action-icon-circle">∑</div>
+            <div>
+              <div style="font-weight:700; font-size:0.95rem;">Formulas</div>
+              <div class="text-secondary" style="font-size:0.8rem;">Quick reference</div>
+            </div>
+          </a>
+
+          <!-- 4. Practice -->
+          <a href="#exams" class="workspace-action-card">
+            <div class="action-icon-circle">📝</div>
+            <div>
+              <div style="font-weight:700; font-size:0.95rem;">Practice</div>
+              <div class="text-secondary" style="font-size:0.8rem;">Recall and solve</div>
+            </div>
+          </a>
         </div>
       </div>
 
-      <!-- Beginner Foundation Track ("Start from Zero") -->
-      <div class="card" style="margin-bottom:var(--space-8); border:1px solid rgba(37, 99, 235, 0.3); background:var(--color-surface-elevated);">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:var(--space-3); flex-wrap:wrap; gap:8px;">
+      <!-- Explore Semesters Section (S1 to S8 Cards) -->
+      <div style="margin-bottom:var(--space-8);">
+        <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:var(--space-3);">
           <div>
-            <span class="badge badge-teal">Beginner Learning Track</span>
-            <h2 class="h3" style="margin-top:4px;">🌱 Start from Zero — Mechanical Engineering Foundations</h2>
+            <h2 class="h3" style="font-size:1.15rem; margin-bottom:2px;">Explore semesters</h2>
+            <p class="text-secondary" style="font-size:0.86rem;">Illustrative semester grouping.</p>
           </div>
-          <span class="text-secondary" style="font-size:0.8rem;">Essential skills for 1st & 2nd year students</span>
+          <a href="#semesters" style="font-size:0.86rem; font-weight:600; color:var(--color-academic-blue); text-decoration:none;">
+            All subjects &rarr;
+          </a>
         </div>
-        <p class="text-secondary" style="font-size:0.88rem; margin-bottom:var(--space-4);">
-          Master units, free-body diagrams, and mechanics fundamentals with worked numerical examples and original engineering diagrams before diving into core syllabus modules.
-        </p>
 
-        <div class="grid-cols-4">
-          ${starterLessons.map(l => `
-            <a href="#notes/FOUNDATION/${encodeURIComponent(l.title)}" class="card" style="text-decoration:none; color:inherit; background:var(--color-surface); padding:var(--space-4); display:flex; flex-direction:column; justify-content:space-between;">
-              <div>
-                <span class="badge badge-blue text-mono" style="margin-bottom:6px;">${l.id.toUpperCase()}</span>
-                <h4 class="h4" style="margin-bottom:6px; font-size:0.92rem;">${l.title}</h4>
+        <div style="display:grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap:10px;" id="dashboard-sem-grid">
+          <a href="#semesters/S1" class="semester-pill-card">
+            <div class="semester-pill-title">S1</div>
+            <div class="semester-pill-sub">10 subjects</div>
+          </a>
+          <a href="#semesters/S2" class="semester-pill-card">
+            <div class="semester-pill-title">S2</div>
+            <div class="semester-pill-sub">7 subjects</div>
+          </a>
+          <a href="#semesters/S3" class="semester-pill-card">
+            <div class="semester-pill-title">S3</div>
+            <div class="semester-pill-sub">7 subjects</div>
+          </a>
+          <a href="#semesters/S4" class="semester-pill-card active" style="border-color:var(--color-academic-blue); background:var(--color-surface-elevated);">
+            <div class="semester-pill-title">S4</div>
+            <div class="semester-pill-sub" style="color:var(--color-academic-blue); font-weight:600;">7 core notes</div>
+          </a>
+          <a href="#semesters/S5" class="semester-pill-card">
+            <div class="semester-pill-title">S5</div>
+            <div class="semester-pill-sub">8 subjects</div>
+          </a>
+          <a href="#semesters/S6" class="semester-pill-card">
+            <div class="semester-pill-title">S6</div>
+            <div class="semester-pill-sub">8 subjects</div>
+          </a>
+          <a href="#semesters/S7" class="semester-pill-card">
+            <div class="semester-pill-title">S7</div>
+            <div class="semester-pill-sub">7 subjects</div>
+          </a>
+          <a href="#semesters/S8" class="semester-pill-card">
+            <div class="semester-pill-title">S8</div>
+            <div class="semester-pill-sub">6 subjects</div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Continue Learning: Dynamic Local State -->
+      <div style="margin-bottom:var(--space-8);">
+        <div style="margin-bottom:var(--space-3);">
+          <h2 class="h3" style="font-size:1.15rem; margin-bottom:2px;">Continue learning</h2>
+          <p class="text-secondary" style="font-size:0.86rem;">Your progress stays on this device.</p>
+        </div>
+
+        <div class="grid-cols-2" style="gap:14px;">
+          <!-- Last Opened -->
+          <div class="card" style="padding:20px; display:flex; flex-direction:column; justify-content:space-between;">
+            <div>
+              <div style="font-size:0.72rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--color-text-tertiary); margin-bottom:8px;">
+                LAST OPENED
               </div>
-              <div class="text-secondary" style="font-size:0.75rem; margin-top:8px;">Open Foundation Lesson &rarr;</div>
-            </a>
-          `).join('')}
-        </div>
-      </div>
+              ${lastOpened ? `
+                <h3 class="h4" style="margin-bottom:4px;">${lastOpened.subject} • ${lastOpened.module}</h3>
+                <p class="text-secondary" style="font-size:0.86rem; margin-bottom:14px;">${lastOpened.title || 'Resume where you left off.'}</p>
+                <a href="#notes/${lastOpened.subject}/${encodeURIComponent(lastOpened.module)}" style="font-size:0.86rem; font-weight:600; color:var(--color-academic-blue); text-decoration:none;">Resume lesson &rarr;</a>
+              ` : `
+                <h3 class="h4" style="margin-bottom:4px;">Start with a single topic.</h3>
+                <p class="text-secondary" style="font-size:0.86rem; margin-bottom:14px;">Your last opened lesson will appear here.</p>
+                <a href="#notes/24MET401" style="font-size:0.86rem; font-weight:600; color:var(--color-academic-blue); text-decoration:none;">Browse lessons &rarr;</a>
+              `}
+            </div>
+          </div>
 
-      <!-- Quick Semester Jump Grid (S1 to S8) -->
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:var(--space-4);">
-        <h2 class="h2">Academic Semesters (S1 – S8)</h2>
-        <span class="text-secondary" style="font-size:0.85rem;">Official 2024 Autonomous Curriculum</span>
-      </div>
-      <div class="grid-cols-4" style="margin-bottom:var(--space-8);">
-        ${['S1', 'S2', 'S3', 'S4', 'S5', 'S6', 'S7', 'S8'].map(s => {
-          const sNum = parseInt(s.replace('S', ''));
-          const coursesInSem = (data.catalog_raw || []).filter(c => c.semester === sNum).length;
-          const hasDetailed = ['S3', 'S4', 'S5', 'S6', 'S7'].includes(s);
-          return `
-            <a href="#semesters/${s}" class="card" style="text-decoration:none; color:inherit; display:flex; flex-direction:column; justify-content:space-between; height:125px;">
-              <div style="display:flex; justify-content:space-between; align-items:center;">
-                <span style="font-family:var(--font-heading); font-size:1.4rem; font-weight:800; color:var(--color-academic-blue);">${s}</span>
-                ${hasDetailed ? '<span class="badge badge-teal">Full Syllabus</span>' : '<span class="badge">Catalog</span>'}
+          <!-- Local Progress -->
+          <div class="card" style="padding:20px; display:flex; flex-direction:column; justify-content:space-between;">
+            <div>
+              <div style="font-size:0.72rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--color-text-tertiary); margin-bottom:8px;">
+                LOCAL PROGRESS
               </div>
-              <div style="margin-top:auto;">
-                <div style="font-size:0.84rem; font-weight:600; color:var(--color-text-primary);">Semester ${sNum}</div>
-                <div class="text-secondary" style="font-size:0.75rem;">${coursesInSem} Registered Courses &rarr;</div>
+              <div style="font-family:var(--font-heading); font-size:2rem; font-weight:700; color:var(--color-text-primary); line-height:1; margin-bottom:6px;">
+                ${completedCount}/8
               </div>
-            </a>
-          `;
-        }).join('')}
+              <p class="text-secondary" style="font-size:0.86rem; margin-bottom:14px;">
+                Sample lessons marked complete • ${openTasksCount} open study tasks
+              </p>
+              <a href="#planner" style="font-size:0.86rem; font-weight:600; color:var(--color-academic-blue); text-decoration:none;">Plan your next session &rarr;</a>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <!-- Academic Workspaces Row -->
-      <div class="grid-cols-3">
-        <div class="card">
-          <h3 class="h3" style="margin-bottom:var(--space-2);">📖 Study Notes Reader</h3>
-          <p class="text-secondary" style="font-size:0.88rem; margin-bottom:var(--space-4);">
-            Multi-mode reading workspace: Detailed study, 2-minute short summaries, exam derivations, and technical vector SVGs across 95 autonomous modules.
-          </p>
-          <a href="#notes/24MET401" class="btn btn-secondary btn-sm">Open Study Notes &rarr;</a>
+      <!-- Verified TKMCE Autonomous Scheme Notice -->
+      <div style="background:var(--color-academic-blue-subtle); border:1px solid rgba(22,89,77,0.18); border-radius:10px; padding:12px 18px; margin-bottom:var(--space-8); display:flex; align-items:center; gap:12px;">
+        <span style="font-size:1.2rem;">🏛️</span>
+        <div style="font-size:0.85rem; color:var(--color-text-secondary); line-height:1.5;">
+          <strong>TKMCE Autonomous 2024 Scheme:</strong> Official curriculum syllabus, S4 study notes, past-year question papers, and verified physics simulations. Free and open for all students.
         </div>
+      </div>
 
-        <div class="card">
-          <h3 class="h3" style="margin-bottom:var(--space-2);">📚 PYQ Vault 2.0</h3>
-          <p class="text-secondary" style="font-size:0.88rem; margin-bottom:var(--space-4);">
-            Filter 38+ past series and end-semester question papers with step-by-step model solutions. Fast PDF previews and unrestricted downloads.
-          </p>
-          <a href="#pyqs" class="btn btn-secondary btn-sm">Explore PYQs &rarr;</a>
-        </div>
-
-        <div class="card">
-          <h3 class="h3" style="margin-bottom:var(--space-2);">⚙️ Interactive Lab</h3>
-          <p class="text-secondary" style="font-size:0.88rem; margin-bottom:var(--space-4);">
-            Verified physical simulations: Mohr's circle stress analysis, thermodynamic cycles, venturi Bernoulli flow, and beam deflection calculators.
-          </p>
-          <a href="#lab" class="btn btn-secondary btn-sm">Launch Simulations &rarr;</a>
-        </div>
+      <!-- Minimal Student Footer -->
+      <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--color-border); padding-top:16px; font-size:0.78rem; color:var(--color-text-tertiary);">
+        <div>MECH TKMCE 3.0</div>
+        <div>independent student project • TKMCE Autonomous Scheme</div>
       </div>
     `;
   }
 
   // ===================================================================
-  // 2. SEMESTERS VIEW (Full S1–S8 Catalog + Detailed Autonomous Modules)
+  // 2. FOCUS OS — FOCUS STUDIO (One Screen. One Subject. One Goal.)
   // ===================================================================
-  function renderSemesters() {
-    const container = document.getElementById('semesters-content');
+  function renderFocusStudio() {
+    const container = document.getElementById('focus-content');
     if (!container) return;
 
-    const currentSem = AppState.selectedSemester;
-    const sNum = parseInt(currentSem.replace('S', ''));
     const data = window.MECH_DATA || {};
-    const semInfo = data.curriculum ? data.curriculum[currentSem] : null;
+    const notesData = data.notes || {};
+    const subjects = Object.keys(notesData);
 
-    const catalogList = (data.catalog_raw || []).filter(c => c.semester === sNum);
-    const detailedSubjs = semInfo ? semInfo.detailed_subjects : {};
-
-    let contentHtml = '';
-
-    contentHtml += `
-      <div style="margin-bottom:var(--space-4); display:flex; justify-content:space-between; align-items:center;">
-        <h2 class="h3">${currentSem} Course Catalog (${catalogList.length} Courses)</h2>
-        <span class="badge badge-blue">TKMCE 2024 Scheme Table</span>
-      </div>
-
-      <div class="grid-cols-2" style="margin-bottom:var(--space-8);">
-        ${catalogList.map(c => {
-          const typeBadge = c.type === 'integrated' ? '<span class="badge badge-teal">Integrated (Theory + Lab)</span>' : 
-                           c.type === 'lab' ? '<span class="badge">Practical / Lab</span>' : '<span class="badge">Theory</span>';
-          const eseBadge = c.ese ? `<span class="badge badge-warning">ESE: ${c.ese} Marks</span>` : '';
-          const hasNotes = detailedSubjs && detailedSubjs[c.code];
-          
-          return `
-            <div class="card" style="display:flex; flex-direction:column; justify-content:space-between;">
-              <div>
-                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:var(--space-2); flex-wrap:wrap; gap:4px;">
-                  <span class="badge badge-blue text-mono">${c.code}</span>
-                  <div style="display:flex; gap:4px;">
-                    ${typeBadge}
-                    ${eseBadge}
-                  </div>
-                </div>
-                <h3 class="h3" style="margin-bottom:var(--space-2);">${c.title}</h3>
-                <div class="text-secondary" style="font-size:0.8rem; margin-bottom:var(--space-4);">
-                  Curriculum Source: Page ${c.sourcePage || 13} of TKMCE 2024 Scheme Specification
-                </div>
-              </div>
-              <div style="display:flex; gap:var(--space-2); margin-top:auto; border-top:1px solid var(--color-border-subtle); padding-top:var(--space-3); flex-wrap:wrap;">
-                ${hasNotes ? `<a href="#notes/${c.code}" class="btn btn-primary btn-sm">Study Notes &rarr;</a>` : ''}
-                <a href="https://www.google.com/search?q=${encodeURIComponent('TKMCE ' + c.code + ' ' + c.title)}" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">🔍 Research</a>
-                <a href="#pyqs" class="btn btn-secondary btn-sm">Question Papers</a>
-              </div>
+    if (AppState.focusPhase === 'setup') {
+      container.innerHTML = `
+        <div style="max-width:760px; margin:0 auto; padding-top:var(--space-4);">
+          <div style="margin-bottom:var(--space-6); text-align:center;">
+            <div style="display:inline-block; font-size:0.75rem; font-weight:700; letter-spacing:0.1em; color:var(--color-academic-blue); text-transform:uppercase; margin-bottom:6px;">
+              THE STUDY WORKSPACE / 01
             </div>
-          `;
-        }).join('')}
-      </div>
-    `;
-
-    // If detailed module syllabus exists for S3, S4, S5, S6, S7
-    if (detailedSubjs && Object.keys(detailedSubjs).length > 0) {
-      contentHtml += `
-        <div style="border-top:1px solid var(--color-border); padding-top:var(--space-6); margin-top:var(--space-6);">
-          <div style="margin-bottom:var(--space-4);">
-            <span class="badge badge-teal">Autonomous Syllabus Breakdown</span>
-            <h2 class="h2" style="margin-top:4px;">Core Department Subjects & Module Syllabus</h2>
+            <h1 class="h1" style="font-size:2.2rem; margin-bottom:8px;">Make room for <em>focus.</em></h1>
+            <p class="text-secondary" style="font-size:0.95rem;">One task, one session. Everything else can wait.</p>
           </div>
 
-          <div class="grid-cols-2">
-            ${Object.entries(detailedSubjs).map(([code, s]) => {
-              const modCount = s.modules ? Object.keys(s.modules).length : 5;
-              return `
-                <div class="card">
-                  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:var(--space-2);">
-                    <span class="badge badge-blue text-mono">Slot ${s.slot || 'A'}: ${code}</span>
-                    <span class="badge">${s.credits || 4} Credits</span>
-                  </div>
-                  <h3 class="h3" style="margin-bottom:var(--space-2);">${s.name}</h3>
-                  <div class="text-secondary" style="font-size:0.84rem; margin-bottom:var(--space-4);">
-                    ${modCount} Modules • Syllabus Verified from Autonomous Document
-                  </div>
-                  <div style="display:flex; gap:var(--space-2);">
-                    <a href="#notes/${code}" class="btn btn-primary btn-sm">Open Study Notes &rarr;</a>
-                    <a href="https://mechtkmce.vercel.app/tkm_syllabus_2024.pdf" target="_blank" class="btn btn-secondary btn-sm">View Official PDF 📄</a>
+          <div class="grid-cols-2" style="gap:20px;">
+            <!-- 01 / PLAN -->
+            <div class="card" style="padding:24px;">
+              <div style="font-size:0.72rem; font-weight:700; letter-spacing:0.08em; color:var(--color-text-tertiary); margin-bottom:8px;">
+                01 / PLAN
+              </div>
+              <h2 class="h3" style="margin-bottom:16px;">What will you study?</h2>
+
+              <div style="margin-bottom:14px;">
+                <label style="display:block; font-size:0.82rem; font-weight:600; margin-bottom:4px;">Subject</label>
+                <select id="focus-subj-select" style="width:100%; padding:9px 12px; border:1px solid var(--color-border); border-radius:var(--radius-md); background:var(--color-surface-elevated); color:var(--color-text-primary); font-size:0.9rem;" onchange="updateFocusModules(this.value)">
+                  ${subjects.map(c => `
+                    <option value="${c}" ${c === AppState.selectedSubject ? 'selected' : ''}>${c} • ${notesData[c].name || c}</option>
+                  `).join('')}
+                </select>
+              </div>
+
+              <div style="margin-bottom:14px;">
+                <label style="display:block; font-size:0.82rem; font-weight:600; margin-bottom:4px;">Module / Chapter</label>
+                <select id="focus-mod-select" style="width:100%; padding:9px 12px; border:1px solid var(--color-border); border-radius:var(--radius-md); background:var(--color-surface-elevated); color:var(--color-text-primary); font-size:0.9rem;">
+                  <option value="Module 1">Module 1</option>
+                  <option value="Module 2">Module 2</option>
+                  <option value="Module 3">Module 3</option>
+                  <option value="Module 4">Module 4</option>
+                  <option value="Module 5">Module 5</option>
+                </select>
+              </div>
+
+              <div style="margin-bottom:16px;">
+                <label style="display:block; font-size:0.82rem; font-weight:600; margin-bottom:4px;">One Clear Goal</label>
+                <input type="text" id="focus-goal-input" placeholder="e.g. Master Mohr's circle & solve 2 problems" style="width:100%; padding:9px 12px; border:1px solid var(--color-border); border-radius:var(--radius-md); background:var(--color-surface-elevated); color:var(--color-text-primary); font-size:0.9rem;">
+              </div>
+
+              <div style="margin-bottom:16px;">
+                <label style="display:block; font-size:0.82rem; font-weight:600; margin-bottom:8px;">Session Type</label>
+                <div style="display:grid; grid-template-columns:repeat(2, 1fr); gap:8px;">
+                  <button type="button" class="btn btn-sm ${AppState.focusPreset === 'quick' ? 'btn-primary' : 'btn-secondary'}" onclick="setFocusPreset('quick', 10, 2)">Quick (10m)</button>
+                  <button type="button" class="btn btn-sm ${AppState.focusPreset === 'pomodoro' ? 'btn-primary' : 'btn-secondary'}" onclick="setFocusPreset('pomodoro', 25, 5)">Pomodoro (25m)</button>
+                  <button type="button" class="btn btn-sm ${AppState.focusPreset === 'deep' ? 'btn-primary' : 'btn-secondary'}" onclick="setFocusPreset('deep', 50, 10)">Deep (50m)</button>
+                  <button type="button" class="btn btn-sm ${AppState.focusPreset === 'paper' ? 'btn-primary' : 'btn-secondary'}" onclick="setFocusPreset('paper', 45, 10)">📖 Paper (45m)</button>
+                </div>
+              </div>
+
+              <button class="btn btn-primary" style="width:100%; padding:12px; font-weight:600; font-size:0.95rem;" onclick="launchFocusSession()">
+                Start focus session &rarr;
+              </button>
+            </div>
+
+            <!-- 02 / PREPARE -->
+            <div class="card" style="padding:24px; display:flex; flex-direction:column; justify-content:space-between;">
+              <div>
+                <div style="font-size:0.72rem; font-weight:700; letter-spacing:0.08em; color:var(--color-text-tertiary); margin-bottom:8px;">
+                  02 / PREPARE
+                </div>
+                <h2 class="h3" style="margin-bottom:12px;">Clear your space.</h2>
+                <p class="text-secondary" style="font-size:0.86rem; margin-bottom:16px;">A few small choices before you begin.</p>
+
+                <div style="display:flex; flex-direction:column; gap:10px; font-size:0.88rem;">
+                  <label style="display:flex; align-items:center; gap:8px; cursor:pointer;">
+                    <input type="checkbox" id="prep-phone" checked> Phone away / notifications silenced
+                  </label>
+                  <label style="display:flex; align-items:center; gap:8px; cursor:pointer;">
+                    <input type="checkbox" id="prep-fullscreen"> Request fullscreen on start
+                  </label>
+                  <label style="display:flex; align-items:center; gap:8px; cursor:pointer;">
+                    <input type="checkbox" id="prep-wakelock" checked> Keep study screen awake
+                  </label>
+                  <label style="display:flex; align-items:center; gap:8px; cursor:pointer;">
+                    <input type="checkbox" id="prep-remind" checked> Gentle reminder if leaving study tab
+                  </label>
+                </div>
+
+                <div style="background:var(--color-surface-elevated); border-radius:var(--radius-md); padding:12px 14px; margin-top:20px; font-size:0.8rem; color:var(--color-text-secondary); line-height:1.5;">
+                  <strong>💡 Tip:</strong> Press <kbd style="background:var(--color-surface); padding:2px 4px; border-radius:3px; border:1px solid var(--color-border);">Alt+P</kbd> at any time during study to park distracting thoughts in your Parking Lot without leaving this screen.
+                </div>
+              </div>
+
+              <div style="margin-top:24px;">
+                <div style="font-size:0.75rem; font-weight:700; color:var(--color-text-tertiary); text-transform:uppercase; margin-bottom:6px;">
+                  Recent Sessions
+                </div>
+                <div style="font-size:0.82rem; color:var(--color-text-secondary);">
+                  ${AppState.studyHistory.length > 0 ? 
+                    AppState.studyHistory.slice(-3).map(h => `<div>• ${h.subject} (${h.minutes}m) — ${h.goal || 'Focused study'}</div>`).join('') :
+                    'No sessions yet today. Your focused study time will be tracked locally.'
+                  }
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    } else if (AppState.focusPhase === 'focus' || AppState.focusPhase === 'break') {
+      const isBreak = AppState.focusPhase === 'break';
+      const subjData = notesData[AppState.selectedSubject] || {};
+      const modData = (subjData.modules || {})[AppState.selectedModule] || {};
+
+      container.innerHTML = `
+        <div style="display:flex; flex-direction:column; gap:20px;">
+          <!-- Top Focus Bar -->
+          <div class="card" style="padding:14px 20px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; background:var(--color-surface-elevated);">
+            <div>
+              <span class="badge ${isBreak ? 'badge-teal' : 'badge-blue'}">${isBreak ? '☕ RECOVERY BREAK' : '🎯 DEEP FOCUS'}</span>
+              <span style="font-weight:700; font-size:0.95rem; margin-left:8px;">${AppState.selectedSubject} • ${AppState.selectedModule}</span>
+              <span class="text-secondary" style="font-size:0.86rem; margin-left:8px;">— "${AppState.focusGoal || 'Concentrated Study'}"</span>
+            </div>
+
+            <div style="display:flex; align-items:center; gap:8px;">
+              <button class="btn btn-secondary btn-sm" onclick="toggleParkingLot()">💡 Park Thought (Alt+P)</button>
+              <button class="btn btn-secondary btn-sm" onclick="toggleFullscreen()">⛶ Fullscreen</button>
+              <button class="btn btn-secondary btn-sm" onclick="endFocusSession()">End Session</button>
+            </div>
+          </div>
+
+          <!-- Main Focus Split -->
+          <div style="display:grid; grid-template-columns: 320px 1fr; gap:20px;">
+            <!-- Left Dial Timer Panel -->
+            <div class="card" style="padding:28px 20px; display:flex; flex-direction:column; align-items:center; text-align:center;">
+              <div style="font-size:0.75rem; font-weight:700; letter-spacing:0.1em; color:var(--color-academic-blue); text-transform:uppercase; margin-bottom:12px;">
+                ${isBreak ? 'REST & STRETCH' : 'SESSION RUNNING'}
+              </div>
+
+              <!-- Digital Clock Display -->
+              <div id="focus-clock-display" style="font-family:var(--font-mono); font-size:3.6rem; font-weight:700; color:var(--color-text-primary); margin-bottom:8px; line-height:1;">
+                ${formatTime(AppState.timerRemainingMs)}
+              </div>
+              <div class="text-secondary" style="font-size:0.82rem; margin-bottom:24px;">
+                ${AppState.timerRunning ? 'Countdown active' : 'Timer paused'}
+              </div>
+
+              <!-- Control Buttons -->
+              <div style="display:flex; gap:10px; margin-bottom:20px; width:100%; justify-content:center;">
+                <button class="btn btn-primary" style="flex:1;" onclick="toggleFocusTimer()">
+                  ${AppState.timerRunning ? 'Pause' : 'Resume'}
+                </button>
+                <button class="btn btn-secondary" onclick="extendFocusTimer(5)">+5 Min</button>
+              </div>
+
+              <!-- Stats & Capabilities -->
+              <div style="border-top:1px solid var(--color-border); padding-top:16px; width:100%; font-size:0.8rem; color:var(--color-text-secondary); text-align:left;">
+                <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
+                  <span>Tab hidden events:</span>
+                  <strong id="focus-interruption-stat">${AppState.interruptionCount}</strong>
+                </div>
+                <div style="font-size:0.75rem; color:var(--color-text-tertiary); line-height:1.4;">
+                  Visibility changes recorded gently. No browsing activity is tracked.
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Reading Material or Paper Study Box -->
+            <div class="card" style="padding:24px; max-height:75vh; overflow-y:auto;" id="focus-reading-panel">
+              ${AppState.focusPreset === 'paper' ? `
+                <div style="text-align:center; padding:48px 20px;">
+                  <div style="font-size:3rem; margin-bottom:16px;">📖</div>
+                  <h2 class="h2" style="margin-bottom:8px;">Paper Study Mode Active</h2>
+                  <p class="text-secondary" style="font-size:0.95rem; max-width:480px; margin:0 auto 20px auto;">
+                    Work directly from your physical textbook or handwritten notebook. The screen remains awake to keep time.
+                  </p>
+                  <div style="background:var(--color-surface-elevated); display:inline-block; padding:10px 20px; border-radius:var(--radius-md); font-size:0.88rem; font-weight:600; color:var(--color-academic-blue);">
+                    Goal: ${AppState.focusGoal || 'Physical Book Revision'}
                   </div>
                 </div>
-              `;
-            }).join('')}
+              ` : `
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; border-bottom:1px solid var(--color-border); padding-bottom:10px;">
+                  <h3 class="h3" style="font-size:1.1rem;">${modData.title || AppState.selectedModule}</h3>
+                  <div style="display:flex; gap:6px;">
+                    <button class="icon-action-btn" onclick="adjustFontSize(-1)">A-</button>
+                    <button class="icon-action-btn" onclick="adjustFontSize(1)">A+</button>
+                  </div>
+                </div>
+
+                <div class="textbook-reader-content" style="font-size:${AppState.fontSize}px; line-height:1.7;">
+                  ${modData.textbook_html || modData.detailed_notes || '<p>Study material loading...</p>'}
+                </div>
+              `}
+            </div>
           </div>
         </div>
       `;
     }
+  }
 
-    container.innerHTML = `
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:var(--space-6); flex-wrap:wrap; gap:var(--space-4);">
-        <div>
-          <h1 class="h1">Semester ${sNum} Curriculum</h1>
-          <p class="text-secondary">TKMCE Autonomous Scheme • Department of Mechanical Engineering</p>
-        </div>
-        <!-- Semester Switcher Pills -->
-        <div style="display:flex; gap:4px; background:var(--color-surface); padding:4px; border-radius:var(--radius-lg); border:1px solid var(--color-border); overflow-x:auto;">
-          ${['S1', 'S2', 'S3', 'S4', 'S5', 'S6', 'S7', 'S8'].map(s => `
-            <a href="#semesters/${s}" class="btn btn-sm ${s === currentSem ? 'btn-primary' : 'btn-secondary'}" style="border:none;">${s}</a>
-          `).join('')}
-        </div>
-      </div>
+  window.setFocusPreset = function(preset, studyMins, breakMins) {
+    AppState.focusPreset = preset;
+    AppState.focusStudyMinutes = studyMins;
+    AppState.focusBreakMinutes = breakMins;
+    renderFocusStudio();
+  };
 
-      ${contentHtml}
-    `;
+  window.updateFocusModules = function(code) {
+    AppState.selectedSubject = code;
+    renderFocusStudio();
+  };
+
+  window.launchFocusSession = function() {
+    const goalInput = document.getElementById('focus-goal-input');
+    const subjSelect = document.getElementById('focus-subj-select');
+    const modSelect = document.getElementById('focus-mod-select');
+    const fsCheck = document.getElementById('prep-fullscreen');
+    const wakeCheck = document.getElementById('prep-wakelock');
+
+    if (goalInput && goalInput.value.trim()) {
+      AppState.focusGoal = goalInput.value.trim();
+    } else {
+      AppState.focusGoal = 'Study ' + (modSelect ? modSelect.value : 'Module 1');
+    }
+    if (subjSelect) AppState.selectedSubject = subjSelect.value;
+    if (modSelect) AppState.selectedModule = modSelect.value;
+
+    AppState.focusPhase = 'focus';
+    AppState.timerRemainingMs = AppState.focusStudyMinutes * 60 * 1000;
+    AppState.timerTargetTime = Date.now() + AppState.timerRemainingMs;
+    AppState.timerRunning = true;
+    AppState.interruptionCount = 0;
+
+    // Request fullscreen if checked
+    if (fsCheck && fsCheck.checked) {
+      toggleFullscreen(true);
+    }
+
+    // Request wake lock if checked
+    if (wakeCheck && wakeCheck.checked && 'wakeLock' in navigator) {
+      navigator.wakeLock.request('screen').then(lock => {
+        AppState.wakeLock = lock;
+      }).catch(() => {});
+    }
+
+    startFocusTimerEngine();
+    renderFocusStudio();
+  };
+
+  function startFocusTimerEngine() {
+    clearInterval(AppState.timerInterval);
+    AppState.timerInterval = setInterval(() => {
+      if (!AppState.timerRunning) return;
+      const now = Date.now();
+      AppState.timerRemainingMs = Math.max(0, AppState.timerTargetTime - now);
+      
+      const display = document.getElementById('focus-clock-display');
+      if (display) {
+        display.textContent = formatTime(AppState.timerRemainingMs);
+      }
+
+      if (AppState.timerRemainingMs <= 0) {
+        clearInterval(AppState.timerInterval);
+        handleTimerCompletion();
+      }
+    }, 500);
+  }
+
+  window.toggleFocusTimer = function() {
+    if (AppState.timerRunning) {
+      AppState.timerRunning = false;
+      clearInterval(AppState.timerInterval);
+    } else {
+      AppState.timerRunning = true;
+      AppState.timerTargetTime = Date.now() + AppState.timerRemainingMs;
+      startFocusTimerEngine();
+    }
+    renderFocusStudio();
+  };
+
+  window.extendFocusTimer = function(minutes) {
+    AppState.timerRemainingMs += minutes * 60 * 1000;
+    AppState.timerTargetTime += minutes * 60 * 1000;
+    const display = document.getElementById('focus-clock-display');
+    if (display) display.textContent = formatTime(AppState.timerRemainingMs);
+  };
+
+  window.endFocusSession = function() {
+    clearInterval(AppState.timerInterval);
+    if (AppState.wakeLock) {
+      AppState.wakeLock.release().catch(() => {});
+      AppState.wakeLock = null;
+    }
+    // Record history
+    AppState.studyHistory.push({
+      date: new Date().toLocaleDateString(),
+      subject: AppState.selectedSubject,
+      module: AppState.selectedModule,
+      minutes: AppState.focusStudyMinutes,
+      goal: AppState.focusGoal
+    });
+    localStorage.setItem('mech_study_history', JSON.stringify(AppState.studyHistory));
+    
+    AppState.focusPhase = 'setup';
+    location.hash = '#dashboard';
+  };
+
+  function handleTimerCompletion() {
+    // Beep chime using Web Audio
+    try {
+      const ctx = new (window.AudioContext || window.webkitAudioContext)();
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.frequency.setValueAtTime(587.33, ctx.currentTime); // D5
+      gain.gain.setValueAtTime(0.15, ctx.currentTime);
+      osc.start();
+      osc.stop(ctx.currentTime + 0.6);
+    } catch (e) {}
+
+    alert(`🎉 Great work! Focus session for ${AppState.selectedSubject} completed.`);
+    if (AppState.focusPhase === 'focus') {
+      AppState.focusPhase = 'break';
+      AppState.timerRemainingMs = AppState.focusBreakMinutes * 60 * 1000;
+      AppState.timerTargetTime = Date.now() + AppState.timerRemainingMs;
+      AppState.timerRunning = true;
+      startFocusTimerEngine();
+      renderFocusStudio();
+    } else {
+      endFocusSession();
+    }
+  }
+
+  function formatTime(ms) {
+    const totalSec = Math.floor(ms / 1000);
+    const mins = Math.floor(totalSec / 60);
+    const secs = totalSec % 60;
+    return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+  }
+
+  function toggleFullscreen(force) {
+    if (!document.fullscreenElement || force) {
+      document.documentElement.requestFullscreen().catch(() => {});
+    } else {
+      if (document.exitFullscreen) document.exitFullscreen().catch(() => {});
+    }
   }
 
   // ===================================================================
-  // 3. STUDY NOTES WORKSPACE (Starter Foundation + 19 Subjects with 95 Modules)
+  // 3. DISTRACTION PARKING LOT (Alt+P)
+  // ===================================================================
+  window.toggleParkingLot = function() {
+    const drawer = document.getElementById('parkingLotDrawer');
+    if (!drawer) return;
+    if (drawer.style.display === 'none' || !drawer.style.display) {
+      drawer.style.display = 'block';
+      const input = document.getElementById('parkingLotInput');
+      if (input) setTimeout(() => input.focus(), 60);
+    } else {
+      drawer.style.display = 'none';
+    }
+  };
+
+  window.addParkedThought = function() {
+    const input = document.getElementById('parkingLotInput');
+    if (!input || !input.value.trim()) return;
+    AppState.parkingLot.push({
+      text: input.value.trim(),
+      date: new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
+    });
+    localStorage.setItem('mech_parking_lot', JSON.stringify(AppState.parkingLot));
+    input.value = '';
+    renderParkingLotList();
+  };
+
+  window.deleteParkedThought = function(idx) {
+    AppState.parkingLot.splice(idx, 1);
+    localStorage.setItem('mech_parking_lot', JSON.stringify(AppState.parkingLot));
+    renderParkingLotList();
+  };
+
+  window.moveThoughtToPlanner = function(idx) {
+    const item = AppState.parkingLot[idx];
+    if (!item) return;
+    AppState.tasks.push({
+      id: Date.now(),
+      title: item.text,
+      subject: AppState.selectedSubject || '24MET401',
+      due: 'Today',
+      priority: 'Medium',
+      completed: false
+    });
+    localStorage.setItem('mech_tasks', JSON.stringify(AppState.tasks));
+    deleteParkedThought(idx);
+    alert('Thought scheduled into your Study Planner! 📅');
+  };
+
+  function renderParkingLotList() {
+    const container = document.getElementById('parkingLotList');
+    if (!container) return;
+    if (AppState.parkingLot.length === 0) {
+      container.innerHTML = '<div style="color:var(--color-text-tertiary); text-align:center; padding:12px 0;">No stray thoughts parked right now. Clear mind! 🌿</div>';
+      return;
+    }
+    container.innerHTML = AppState.parkingLot.map((p, i) => `
+      <div style="background:var(--color-surface-elevated); border:1px solid var(--color-border); border-radius:var(--radius-sm); padding:8px 10px; display:flex; justify-content:space-between; align-items:center;">
+        <div>
+          <div style="font-weight:500;">${p.text}</div>
+          <div style="font-size:0.7rem; color:var(--color-text-tertiary);">${p.date}</div>
+        </div>
+        <div style="display:flex; gap:4px;">
+          <button onclick="moveThoughtToPlanner(${i})" title="Schedule to Planner" style="background:none; border:none; cursor:pointer; font-size:0.9rem;">📅</button>
+          <button onclick="deleteParkedThought(${i})" title="Delete" style="background:none; border:none; cursor:pointer; color:var(--color-text-tertiary); font-size:0.9rem;">✕</button>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  // ===================================================================
+  // 4. DIGITAL TEXTBOOK & STUDY NOTES (7 Reading Modes & S4 PDFs)
   // ===================================================================
   function renderStudyNotes() {
     const container = document.getElementById('notes-content');
@@ -511,178 +969,131 @@
 
     const data = window.MECH_DATA || {};
     const notesData = data.notes || {};
-    const starterLessons = data.starter_lessons || [];
     const currSubj = AppState.selectedSubject;
+    const subjData = notesData[currSubj] || notesData['24MET401'] || {};
+    const modules = subjData.modules || {};
+    const currMod = AppState.selectedModule in modules ? AppState.selectedModule : Object.keys(modules)[0] || 'Module 1';
+    const modData = modules[currMod] || {};
 
-    // Check if current subject is FOUNDATION or starter lesson
-    const isStarter = currSubj === 'FOUNDATION' || starterLessons.some(l => l.title === AppState.selectedModule);
+    // Save as last opened
+    AppState.lastOpened = {
+      subject: currSubj,
+      module: currMod,
+      title: modData.title
+    };
+    localStorage.setItem('mech_last_opened', JSON.stringify(AppState.lastOpened));
 
     let readingContent = '';
-    let currTitle = '';
-    let diagramHtml = '';
-
-    if (isStarter) {
-      const lesson = starterLessons.find(l => l.title === AppState.selectedModule) || starterLessons[0];
-      currTitle = lesson.title;
-
-      if (lesson.diagram) {
-        diagramHtml = `
-          <div style="background:var(--color-surface-elevated); border:1px solid var(--color-border); border-radius:var(--radius-lg); padding:24px; margin-bottom:24px; text-align:center; overflow-x:auto;">
-            <img src="./${lesson.diagram}" alt="${lesson.title} Diagram" style="max-width:100%; height:auto; max-height:260px;">
-            <div style="font-size:0.75rem; color:var(--color-text-tertiary); margin-top:8px;">Figure: ${lesson.title} • Original Engineering SVG Illustration</div>
-          </div>
-        `;
-      }
-
+    if (AppState.readingMode === 'textbook') {
+      readingContent = modData.textbook_html || modData.detailed_notes || '<p>Textbook material available.</p>';
+    } else if (AppState.readingMode === 'detailed') {
+      readingContent = modData.detailed_notes || modData.textbook_html || '<p>Detailed notes loaded.</p>';
+    } else if (AppState.readingMode === 'short') {
       readingContent = `
-        <div style="background:var(--color-academic-blue-subtle); border-left:4px solid var(--color-academic-blue); padding:14px; border-radius:var(--radius-md); margin-bottom:20px;">
-          <div style="font-size:0.75rem; font-weight:700; color:var(--color-academic-blue); text-transform:uppercase;">Beginner Foundation Lesson</div>
-          <div style="font-size:0.85rem; color:var(--color-text-secondary); margin-top:2px;">Status: ${lesson.status || 'Draft learning material'}</div>
+        <div style="background:var(--color-academic-blue-subtle); border-left:4px solid var(--color-academic-blue); padding:16px; border-radius:var(--radius-md); margin-bottom:16px;">
+          <h4 style="color:var(--color-academic-blue); margin-bottom:6px;">⚡ High-Yield Revision Points</h4>
+          <p style="font-size:0.9rem; color:var(--color-text-secondary); margin:0;">Quick revision checklist for fast recall before exams.</p>
+        </div>` + (modData.short_notes || '');
+    } else if (AppState.readingMode === 'exam') {
+      readingContent = `
+        <div style="background:var(--color-warning-subtle); border-left:4px solid var(--color-warning); padding:16px; border-radius:var(--radius-md); margin-bottom:16px;">
+          <h4 style="color:var(--color-warning); margin-bottom:6px;">🎯 University Exam Mode: Scoring Derivations</h4>
+          <p style="font-size:0.9rem; color:var(--color-text-secondary); margin:0;">Critical scoring criteria, derivation steps, and key assumptions for TKMCE Autonomous exams.</p>
+        </div>` + (modData.short_notes || '') + (modData.detailed_notes || '');
+    } else if (AppState.readingMode === 'formulas') {
+      readingContent = `
+        <div style="background:var(--color-academic-blue-subtle); border-left:4px solid var(--color-academic-blue); padding:16px; border-radius:var(--radius-md); margin-bottom:16px;">
+          <h4 style="color:var(--color-academic-blue); margin-bottom:6px;">∑ Formula Revision</h4>
+          <p style="font-size:0.9rem; color:var(--color-text-secondary); margin:0;">Standard mathematical relations and SI units for ${currMod}.</p>
         </div>
-
-        ${(lesson.sections || []).map(sec => `
-          <div style="margin-bottom:24px;">
-            <h4 class="h4" style="color:var(--color-text-primary); margin-bottom:8px;">${sec.heading}</h4>
-            <p style="color:var(--color-text-secondary); line-height:1.7; margin:0;">${sec.text}</p>
-          </div>
-        `).join('')}
-
-        ${lesson.worked_example ? `
-          <div class="card card-elevated" style="margin-top:24px; border-left:4px solid var(--color-technical-teal);">
-            <h4 class="h4" style="color:var(--color-technical-teal); margin-bottom:10px;">💡 Worked Numerical Example</h4>
-            <div style="font-weight:600; font-size:0.92rem; margin-bottom:6px;">Problem:</div>
-            <p style="font-size:0.88rem; color:var(--color-text-secondary); margin-bottom:12px;">${lesson.worked_example.problem}</p>
-            <div style="font-weight:600; font-size:0.92rem; margin-bottom:6px;">Step-by-Step Solution:</div>
-            <div style="font-size:0.88rem; color:var(--color-text-secondary); line-height:1.7;">
-              ${(lesson.worked_example.solution || []).map(step => `<div>• ${step}</div>`).join('')}
+        <div class="card" style="padding:16px; margin-top:12px;">
+          ${(data.formulas || []).filter(f => f.subject_code === currSubj).map(f => `
+            <div style="margin-bottom:16px; border-bottom:1px solid var(--color-border); padding-bottom:12px;">
+              <div style="font-weight:700;">${f.name}</div>
+              <div style="margin:8px 0; font-size:1.1rem;">$$${f.latex}$$</div>
+              <div class="text-secondary" style="font-size:0.82rem;">${f.description || ''}</div>
             </div>
-          </div>
-        ` : ''}
-
-        ${lesson.practice_problem ? `
-          <div class="card card-elevated" style="margin-top:24px; border-left:4px solid var(--color-warning);">
-            <h4 class="h4" style="color:var(--color-warning); margin-bottom:10px;">📝 Practice Challenge</h4>
-            <div style="font-weight:600; font-size:0.92rem; margin-bottom:6px;">Question:</div>
-            <p style="font-size:0.88rem; color:var(--color-text-secondary); margin-bottom:12px;">${lesson.practice_problem.question}</p>
-            <div style="font-size:0.84rem; color:var(--color-text-tertiary);">
-              <strong>Final Answer Check:</strong> ${lesson.practice_problem.answer}
-            </div>
-          </div>
-        ` : ''}
+          `).join('') || '<p>Check the global Formula Library for comprehensive KaTeX equation sheets.</p>'}
+        </div>
       `;
-    } else {
-      // 19 core subjects
-      const subjData = notesData[currSubj] || notesData['24MET401'];
-      const modules = subjData ? subjData.modules : {};
-      const currMod = AppState.selectedModule in modules ? AppState.selectedModule : Object.keys(modules)[0];
-      const modData = modules[currMod] || {};
-      currTitle = `${currMod}: ${modData.title || ''}`;
-
-      if (modData.diagram_svg) {
-        diagramHtml = `
-          <div style="background:var(--color-surface-elevated); border:1px solid var(--color-border); border-radius:var(--radius-lg); padding:20px; margin-bottom:24px; text-align:center; overflow-x:auto;">
-            ${modData.diagram_svg}
-            <div style="font-size:0.75rem; color:var(--color-text-tertiary); margin-top:8px;">Figure: Precision Mechanical Engineering Vector Diagram • Autonomous 2024 Scheme</div>
-          </div>
-        `;
-      }
-
-      if (AppState.readingMode === 'detailed') {
-        readingContent = modData.detailed_notes || '<p>Detailed study content being loaded...</p>';
-      } else if (AppState.readingMode === 'short') {
-        readingContent = `
-          <div style="background:var(--color-academic-blue-subtle); border-left:4px solid var(--color-academic-blue); padding:16px; border-radius:var(--radius-md); margin-bottom:16px;">
-            <h4 style="color:var(--color-academic-blue); margin-bottom:6px;">⚡ High-Yield 2-Minute Summary</h4>
-            <p style="font-size:0.9rem; color:var(--color-text-secondary); margin:0;">Quick revision points for rapid recall before class or internal series tests.</p>
-          </div>` + (modData.short_notes || '');
-      } else if (AppState.readingMode === 'exam') {
-        readingContent = `
-          <div style="background:var(--color-warning-subtle); border-left:4px solid var(--color-warning); padding:16px; border-radius:var(--radius-md); margin-bottom:16px;">
-            <h4 style="color:var(--color-warning); margin-bottom:6px;">🎯 Key Exam Derivations & Criteria</h4>
-            <p style="font-size:0.9rem; color:var(--color-text-secondary); margin:0;">Exam-focused formulas, assumptions, and critical scoring concepts.</p>
-          </div>` + (modData.short_notes || '') + (modData.detailed_notes || '');
-      }
     }
 
     container.innerHTML = `
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:var(--space-4); flex-wrap:wrap; gap:var(--space-3);">
-        <div>
-          <span class="badge badge-blue text-mono">${isStarter ? 'FOUNDATION' : currSubj}</span>
-          <h1 class="h2" style="margin-top:4px;">${isStarter ? 'Beginner Foundation Track' : (notesData[currSubj] ? notesData[currSubj].name : 'Mechanics of Deformable Solids')}</h1>
+      <!-- Subject Header & PDF Download Banner -->
+      <div class="card" style="margin-bottom:var(--space-6); background:linear-gradient(135deg, var(--color-surface) 0%, var(--color-surface-elevated) 100%);">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+          <div>
+            <div style="display:flex; align-items:center; gap:8px; margin-bottom:4px;">
+              <span class="badge badge-blue text-mono">${currSubj}</span>
+              <span class="badge badge-teal">Autonomous 2024 Scheme</span>
+            </div>
+            <h1 class="h2" style="margin:0;">${subjData.name || currSubj}</h1>
+          </div>
+
+          <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+            <a href="./notes/${currSubj}.pdf" download class="btn btn-secondary btn-sm" style="display:flex; align-items:center; gap:6px;">
+              <span>⬇️ Download Course PDF</span>
+            </a>
+            <a href="#focus" class="btn btn-primary btn-sm" onclick="AppState.selectedSubject='${currSubj}'; AppState.selectedModule='${currMod}';">
+              <span>🎯 Start Focus on this Module</span>
+            </a>
+          </div>
         </div>
-        <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
-          <!-- Reading Mode Switcher -->
-          <div style="display:flex; background:var(--color-surface); padding:3px; border-radius:var(--radius-md); border:1px solid var(--color-border);">
+
+        <!-- Mode Selector Toolbar -->
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:16px; padding-top:14px; border-top:1px solid var(--color-border); flex-wrap:wrap; gap:10px;">
+          <div style="display:flex; background:var(--color-bg); padding:3px; border-radius:var(--radius-md); border:1px solid var(--color-border); overflow-x:auto;">
+            <button class="btn btn-sm ${AppState.readingMode === 'textbook' ? 'btn-primary' : 'btn-secondary'}" onclick="setReadingMode('textbook')" style="border:none;">Digital Textbook</button>
             <button class="btn btn-sm ${AppState.readingMode === 'detailed' ? 'btn-primary' : 'btn-secondary'}" onclick="setReadingMode('detailed')" style="border:none;">Detailed</button>
             <button class="btn btn-sm ${AppState.readingMode === 'short' ? 'btn-primary' : 'btn-secondary'}" onclick="setReadingMode('short')" style="border:none;">Short</button>
             <button class="btn btn-sm ${AppState.readingMode === 'exam' ? 'btn-primary' : 'btn-secondary'}" onclick="setReadingMode('exam')" style="border:none;">Exam Mode</button>
+            <button class="btn btn-sm ${AppState.readingMode === 'formulas' ? 'btn-primary' : 'btn-secondary'}" onclick="setReadingMode('formulas')" style="border:none;">Formulas</button>
           </div>
-          <!-- Font Controls -->
-          <button class="icon-action-btn" onclick="adjustFontSize(-1)" title="Decrease font size">A-</button>
-          <button class="icon-action-btn" onclick="adjustFontSize(1)" title="Increase font size">A+</button>
-          <button class="btn btn-secondary btn-sm" onclick="window.print()">🖨️ Print</button>
+
+          <div style="display:flex; align-items:center; gap:6px;">
+            <button class="icon-action-btn" onclick="adjustFontSize(-1)" title="Decrease font size">A-</button>
+            <button class="icon-action-btn" onclick="adjustFontSize(1)" title="Increase font size">A+</button>
+            <button class="btn btn-secondary btn-sm" onclick="window.print()">🖨️ Print</button>
+          </div>
         </div>
       </div>
 
-      <!-- Navigation & Reader Grid -->
+      <!-- Main Layout: Module Nav & Content -->
       <div style="display:grid; grid-template-columns: 260px 1fr; gap:var(--space-6);">
-        <!-- Sidebar Navigation -->
+        <!-- Sidebar Modules -->
         <div>
-          <div class="card" style="padding:var(--space-3);">
-            <div class="sidebar-section-label">Beginner Foundation</div>
-            ${starterLessons.slice(0, 4).map(l => `
-              <a href="#notes/FOUNDATION/${encodeURIComponent(l.title)}" class="nav-item ${AppState.selectedModule === l.title ? 'active' : ''}">
-                <span class="nav-item-text" style="font-size:0.82rem;">${l.title}</span>
+          <div class="card" style="padding:14px; position:sticky; top:80px;">
+            <div class="sidebar-section-label">Modules (1 to 5)</div>
+            ${Object.keys(modules).map(mKey => `
+              <a href="#notes/${currSubj}/${encodeURIComponent(mKey)}" class="nav-item ${mKey === currMod ? 'active' : ''}" style="margin-bottom:4px;">
+                <span class="nav-item-text">${mKey}</span>
               </a>
             `).join('')}
 
-            <div class="sidebar-section-label" style="margin-top:16px;">Core Modules (S4–S7)</div>
-            ${!isStarter && notesData[currSubj] ? Object.keys(notesData[currSubj].modules).map(modKey => `
-              <a href="#notes/${currSubj}/${encodeURIComponent(modKey)}" class="nav-item ${modKey === AppState.selectedModule ? 'active' : ''}">
-                <span class="nav-item-text">${modKey}</span>
-              </a>
-            `).join('') : `
-              <a href="#notes/24MET401" class="btn btn-secondary btn-sm" style="width:100%; margin-top:8px;">Load 24MET401 Modules &rarr;</a>
-            `}
-
-            <div class="sidebar-section-label" style="margin-top:16px;">Select Subject</div>
-            ${Object.keys(notesData).slice(0, 6).map(cCode => `
-              <a href="#notes/${cCode}" class="nav-item ${cCode === currSubj ? 'active' : ''}">
-                <span class="nav-item-text text-mono" style="font-size:0.75rem;">${cCode}</span>
+            <div class="sidebar-section-label" style="margin-top:20px;">S4 Core Courses</div>
+            ${['24MET401', '24MET402', '24MEP403', '24MEJ404', '24HUT415', '24MCT406', '24BYT408'].map(c => `
+              <a href="#notes/${c}" class="nav-item ${c === currSubj ? 'active' : ''}">
+                <span class="nav-item-text" style="font-size:0.82rem;">${c}</span>
               </a>
             `).join('')}
           </div>
         </div>
 
-        <!-- Note Reading Card -->
-        <div class="card" style="font-size:${AppState.fontSize}px; line-height:1.7;">
-          <div style="border-bottom:1px solid var(--color-border); padding-bottom:12px; margin-bottom:20px; display:flex; justify-content:space-between; align-items:center;">
-            <h3 class="h3">${currTitle}</h3>
-            <button class="btn btn-secondary btn-sm" onclick="toggleBookmark('note', '${currSubj}-${AppState.selectedModule}', '${currSubj} ${currTitle}')">
-              ⭐ Bookmark
-            </button>
+        <!-- Main Reading Workspace -->
+        <div class="card" style="padding:28px 32px;" id="textbook-reader-pane">
+          <div style="margin-bottom:20px; border-bottom:1px solid var(--color-border); padding-bottom:14px;">
+            <div style="font-size:0.75rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--color-academic-blue); margin-bottom:4px;">
+              ${currMod}
+            </div>
+            <h2 class="h2" style="margin:0;">${modData.title || currMod}</h2>
           </div>
 
-          <!-- Vector Diagram -->
-          ${diagramHtml}
-
-          <!-- Body Content -->
-          <div class="note-body-content">
+          <div class="textbook-body" style="font-size:${AppState.fontSize}px; line-height:1.75;">
             ${readingContent}
           </div>
         </div>
       </div>
     `;
-
-    // Render KaTeX Math
-    if (window.renderMathInElement) {
-      window.renderMathInElement(container, {
-        delimiters: [
-          { left: '$$', right: '$$', display: true },
-          { left: '$', right: '$', display: false }
-        ]
-      });
-    }
   }
 
   window.setReadingMode = function(mode) {
@@ -692,11 +1103,493 @@
 
   window.adjustFontSize = function(delta) {
     AppState.fontSize = Math.min(24, Math.max(13, AppState.fontSize + delta));
+    localStorage.setItem('mech_font_size', AppState.fontSize);
     renderStudyNotes();
   };
 
   // ===================================================================
-  // 4. PYQ VAULT 2.0
+  // 5. PRACTICE & ACTIVE RECALL CENTRE (Exam OS)
+  // ===================================================================
+  function renderExamCentre() {
+    const container = document.getElementById('exams-content');
+    if (!container) return;
+
+    const data = window.MECH_DATA || {};
+    const flashcards = data.flashcards || [];
+    const activeFc = flashcards[AppState.flashcardIndex] || flashcards[0];
+
+    container.innerHTML = `
+      <div style="margin-bottom:var(--space-6);">
+        <h1 class="h1">Practice & Active Recall Centre</h1>
+        <p class="text-secondary">Interactive Flashcards, University Exam Patterns, and Step-by-Step Worked Solutions</p>
+      </div>
+
+      <!-- Navigation Tabs -->
+      <div style="display:flex; gap:8px; border-bottom:1px solid var(--color-border); margin-bottom:var(--space-6);">
+        <button class="btn ${AppState.examTab === 'flashcards' ? 'btn-primary' : 'btn-secondary'} btn-sm" onclick="switchExamTab('flashcards')">🗂️ Flashcards & Active Recall</button>
+        <button class="btn ${AppState.examTab === 'pattern' ? 'btn-primary' : 'btn-secondary'} btn-sm" onclick="switchExamTab('pattern')">📋 University Exam Patterns</button>
+        <button class="btn ${AppState.examTab === 'numerical' ? 'btn-primary' : 'btn-secondary'} btn-sm" onclick="switchExamTab('numerical')">💡 Numerical Practice</button>
+      </div>
+
+      ${AppState.examTab === 'flashcards' ? `
+        <!-- 3D Flashcard Deck -->
+        <div style="max-width:620px; margin:0 auto;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; font-size:0.86rem;">
+            <div class="text-secondary">Card ${AppState.flashcardIndex + 1} of ${flashcards.length}</div>
+            <div class="badge badge-teal">${activeFc ? activeFc.category : 'Concept'} • ${activeFc ? activeFc.subject : '24MET401'}</div>
+          </div>
+
+          <div class="flashcard-stage" onclick="flipFlashcard()">
+            <div class="flashcard-inner ${AppState.flashcardFlipped ? 'flipped' : ''}" id="flashcard-inner-box">
+              <!-- Front -->
+              <div class="flashcard-front">
+                <div style="font-size:0.75rem; font-weight:700; text-transform:uppercase; color:var(--color-academic-blue); margin-bottom:14px;">
+                  Active Recall Prompt
+                </div>
+                <div style="font-size:1.15rem; font-weight:600; line-height:1.5;">
+                  ${activeFc ? activeFc.front : 'Loading question...'}
+                </div>
+                <div style="font-size:0.8rem; color:var(--color-text-tertiary); margin-top:24px;">
+                  👆 Click to Flip and Reveal Solution
+                </div>
+              </div>
+
+              <!-- Back -->
+              <div class="flashcard-back">
+                <div style="font-size:0.75rem; font-weight:700; text-transform:uppercase; color:var(--color-success); margin-bottom:14px;">
+                  Verified Answer & Formula
+                </div>
+                <div style="font-size:1.02rem; line-height:1.6; text-align:left; width:100%;">
+                  ${activeFc ? activeFc.back : ''}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom Flashcard Controls -->
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-top:20px; gap:12px;">
+            <button class="btn btn-secondary btn-sm" onclick="prevFlashcard()">← Previous</button>
+            <div style="display:flex; gap:8px;">
+              <button class="btn btn-secondary btn-sm" style="border-color:var(--color-error); color:var(--color-error);" onclick="rateFlashcard(false)">Still Learning</button>
+              <button class="btn btn-primary btn-sm" onclick="rateFlashcard(true)">Mastered ✓</button>
+            </div>
+            <button class="btn btn-secondary btn-sm" onclick="nextFlashcard()">Next →</button>
+          </div>
+        </div>
+      ` : AppState.examTab === 'pattern' ? `
+        <!-- University Exam Pattern Bank -->
+        <div class="grid-cols-2" style="gap:16px;">
+          <div class="card">
+            <span class="badge badge-blue">Part A • Short Answer (2 Marks)</span>
+            <h3 class="h3" style="margin:10px 0 6px 0;">State Mohr's Circle Principal Plane Definition</h3>
+            <p class="text-secondary" style="font-size:0.88rem; margin-bottom:12px;">A principal plane is a plane of zero shear stress ($\tau = 0$) where only normal stress acts.</p>
+            <div style="background:var(--color-surface-elevated); padding:10px; border-radius:var(--radius-sm); font-size:0.8rem;">
+              <strong>Exam Tip:</strong> Always state that principal stresses are the maximum and minimum normal stresses.
+            </div>
+          </div>
+
+          <div class="card">
+            <span class="badge badge-teal">Part B • Long Question (8 Marks)</span>
+            <h3 class="h3" style="margin:10px 0 6px 0;">Derivation of Euler's Buckling Formula</h3>
+            <p class="text-secondary" style="font-size:0.88rem; margin-bottom:12px;">Determine the critical buckling load for a column with both ends pinned using the governing differential equation $EI \frac{d^2y}{dx^2} = -Py$.</p>
+            <div style="background:var(--color-surface-elevated); padding:10px; border-radius:var(--radius-sm); font-size:0.8rem;">
+              <strong>Key Steps:</strong> General solution $y = A\sin(kx) + B\cos(kx)$, apply boundary conditions $y(0)=0$ and $y(L)=0$, yielding $P_{cr} = \frac{\pi^2 EI}{L^2}$.
+            </div>
+          </div>
+        </div>
+      ` : `
+        <!-- Numerical Practice -->
+        <div class="card" style="padding:24px; max-width:680px; margin:0 auto;">
+          <span class="badge badge-warning">24MET401 • Numerical Challenge</span>
+          <h3 class="h3" style="margin:12px 0 8px 0;">Biaxial Plane Stress Analysis</h3>
+          <p style="font-size:0.92rem; line-height:1.6; margin-bottom:16px;">
+            At a critical point in a mechanical component, stresses are $\sigma_x = 80\text{ MPa}$, $\sigma_y = -40\text{ MPa}$, and $\tau_{xy} = 30\text{ MPa}$. Determine the principal stresses and the maximum shear stress.
+          </p>
+          <button class="btn btn-primary btn-sm" onclick="this.nextElementSibling.style.display='block'; this.style.display='none';">Reveal Step-by-Step Solution</button>
+          <div style="display:none; background:var(--color-surface-elevated); border-left:4px solid var(--color-academic-blue); padding:16px; border-radius:var(--radius-md); margin-top:16px; font-size:0.9rem; line-height:1.7;">
+            <div><strong>1. Center of Mohr's Circle:</strong> $\sigma_{avg} = \frac{80 + (-40)}{2} = 20\text{ MPa}$</div>
+            <div><strong>2. Radius of Circle:</strong> $R = \sqrt{\left(\frac{80 - (-40)}{2}\right)^2 + 30^2} = \sqrt{60^2 + 30^2} = \sqrt{4500} = 67.08\text{ MPa}$</div>
+            <div><strong>3. Principal Stresses:</strong> $\sigma_1 = 20 + 67.08 = 87.08\text{ MPa}$, $\sigma_2 = 20 - 67.08 = -47.08\text{ MPa}$</div>
+            <div><strong>4. Maximum Shear Stress:</strong> $\tau_{\max} = R = 67.08\text{ MPa}$</div>
+          </div>
+        </div>
+      `}
+    `;
+  }
+
+  window.switchExamTab = function(tab) {
+    AppState.examTab = tab;
+    renderExamCentre();
+    setTimeout(triggerKaTeX, 60);
+  };
+
+  window.flipFlashcard = function() {
+    AppState.flashcardFlipped = !AppState.flashcardFlipped;
+    const box = document.getElementById('flashcard-inner-box');
+    if (box) {
+      if (AppState.flashcardFlipped) box.classList.add('flipped');
+      else box.classList.remove('flipped');
+      setTimeout(triggerKaTeX, 60);
+    }
+  };
+
+  window.nextFlashcard = function() {
+    const data = window.MECH_DATA || {};
+    const count = (data.flashcards || []).length;
+    AppState.flashcardIndex = (AppState.flashcardIndex + 1) % count;
+    AppState.flashcardFlipped = false;
+    renderExamCentre();
+    setTimeout(triggerKaTeX, 60);
+  };
+
+  window.prevFlashcard = function() {
+    const data = window.MECH_DATA || {};
+    const count = (data.flashcards || []).length;
+    AppState.flashcardIndex = (AppState.flashcardIndex - 1 + count) % count;
+    AppState.flashcardFlipped = false;
+    renderExamCentre();
+    setTimeout(triggerKaTeX, 60);
+  };
+
+  window.rateFlashcard = function(mastered) {
+    if (mastered) {
+      AppState.srsStats.mastered = (AppState.srsStats.mastered || 0) + 1;
+      localStorage.setItem('mech_srs_stats', JSON.stringify(AppState.srsStats));
+    }
+    nextFlashcard();
+  };
+
+  // ===================================================================
+  // 6. ENGINEERING OS — LAB, CALCULATORS & GATE
+  // ===================================================================
+  function renderInteractiveLab() {
+    const container = document.getElementById('lab-content');
+    if (!container) return;
+
+    const data = window.MECH_DATA || {};
+    const calculators = data.calculators || [];
+
+    container.innerHTML = `
+      <div style="margin-bottom:var(--space-6);">
+        <h1 class="h1">Engineering OS — Simulations & Calculators</h1>
+        <p class="text-secondary">Verified Physical Models, Real-Time Interactive Calculators, and GATE Roadmaps</p>
+      </div>
+
+      <!-- Lab Subtabs -->
+      <div style="display:flex; gap:8px; border-bottom:1px solid var(--color-border); margin-bottom:var(--space-6);">
+        <button class="btn ${AppState.labTab === 'sims' ? 'btn-primary' : 'btn-secondary'} btn-sm" onclick="switchLabTab('sims')">⚙️ Physics Simulations</button>
+        <button class="btn ${AppState.labTab === 'calcs' ? 'btn-primary' : 'btn-secondary'} btn-sm" onclick="switchLabTab('calcs')">🧮 Engineering Calculators</button>
+      </div>
+
+      ${AppState.labTab === 'sims' ? `
+        <!-- 4 Verified Physics Simulations -->
+        <div style="display:flex; gap:8px; margin-bottom:16px; overflow-x:auto;">
+          <button class="btn btn-sm ${AppState.activeSim === 'mohr' ? 'btn-primary' : 'btn-secondary'}" onclick="setSim('mohr')">Mohr's Circle Stress</button>
+          <button class="btn btn-sm ${AppState.activeSim === 'pv' ? 'btn-primary' : 'btn-secondary'}" onclick="setSim('pv')">Thermodynamic P-V Cycles</button>
+          <button class="btn btn-sm ${AppState.activeSim === 'venturi' ? 'btn-primary' : 'btn-secondary'}" onclick="setSim('venturi')">Venturi Bernoulli Flow</button>
+          <button class="btn btn-sm ${AppState.activeSim === 'beam' ? 'btn-primary' : 'btn-secondary'}" onclick="setSim('beam')">Beam Deflection</button>
+        </div>
+        <div id="active-sim-workspace" class="card" style="padding:24px;"></div>
+      ` : `
+        <!-- 6 Engineering Calculators -->
+        <div class="grid-cols-2" style="gap:20px;">
+          <!-- 1. Stress Strain -->
+          <div class="calc-card">
+            <h3 class="h4" style="margin-bottom:6px;">1. Stress, Strain & Young's Modulus</h3>
+            <div style="font-size:0.84rem; color:var(--color-academic-blue); margin-bottom:14px;">$$E = \frac{P \cdot L}{A \cdot \Delta L}$$</div>
+            
+            <div class="calc-input-group">
+              <label><span>Axial Force P</span> <span>kN</span></label>
+              <input type="number" id="calc-p-load" value="50" class="calc-input-control" oninput="runAllCalculators()">
+            </div>
+            <div class="calc-input-group">
+              <label><span>Diameter d</span> <span>mm</span></label>
+              <input type="number" id="calc-p-diam" value="20" class="calc-input-control" oninput="runAllCalculators()">
+            </div>
+            <div class="calc-input-group">
+              <label><span>Length L</span> <span>mm</span></label>
+              <input type="number" id="calc-p-len" value="1000" class="calc-input-control" oninput="runAllCalculators()">
+            </div>
+            <div class="calc-input-group">
+              <label><span>Elongation ΔL</span> <span>mm</span></label>
+              <input type="number" id="calc-p-deltal" value="0.75" class="calc-input-control" oninput="runAllCalculators()">
+            </div>
+
+            <div class="calc-result-box" id="calc-res-stress">
+              Calculated Young's Modulus: <strong>212.2 GPa</strong>
+            </div>
+          </div>
+
+          <!-- 2. Thermal Stress -->
+          <div class="calc-card">
+            <h3 class="h4" style="margin-bottom:6px;">2. Thermal Stress & Expansion</h3>
+            <div style="font-size:0.84rem; color:var(--color-academic-blue); margin-bottom:14px;">$$\sigma_{th} = E \cdot \alpha \cdot \Delta T$$</div>
+
+            <div class="calc-input-group">
+              <label><span>Young's Modulus E</span> <span>GPa</span></label>
+              <input type="number" id="calc-t-e" value="200" class="calc-input-control" oninput="runAllCalculators()">
+            </div>
+            <div class="calc-input-group">
+              <label><span>Thermal Expansion α</span> <span>×10⁻⁶ /°C</span></label>
+              <input type="number" id="calc-t-alpha" value="12" class="calc-input-control" oninput="runAllCalculators()">
+            </div>
+            <div class="calc-input-group">
+              <label><span>Temp Rise ΔT</span> <span>°C</span></label>
+              <input type="number" id="calc-t-dt" value="60" class="calc-input-control" oninput="runAllCalculators()">
+            </div>
+
+            <div class="calc-result-box" id="calc-res-thermal">
+              Thermal Stress: <strong>144.0 MPa</strong>
+            </div>
+          </div>
+
+          <!-- 3. Reynolds Number -->
+          <div class="calc-card">
+            <h3 class="h4" style="margin-bottom:6px;">3. Reynolds Number & Regime</h3>
+            <div style="font-size:0.84rem; color:var(--color-academic-blue); margin-bottom:14px;">$$Re = \frac{\rho v D}{\mu}$$</div>
+
+            <div class="calc-input-group">
+              <label><span>Velocity v</span> <span>m/s</span></label>
+              <input type="number" id="calc-r-v" value="1.5" class="calc-input-control" oninput="runAllCalculators()">
+            </div>
+            <div class="calc-input-group">
+              <label><span>Diameter D</span> <span>mm</span></label>
+              <input type="number" id="calc-r-d" value="50" class="calc-input-control" oninput="runAllCalculators()">
+            </div>
+            <div class="calc-input-group">
+              <label><span>Kinematic Viscosity ν</span> <span>×10⁻⁶ m²/s</span></label>
+              <input type="number" id="calc-r-nu" value="1.0" class="calc-input-control" oninput="runAllCalculators()">
+            </div>
+
+            <div class="calc-result-box" id="calc-res-reynolds">
+              Reynolds Number: <strong>75,000 (Turbulent)</strong>
+            </div>
+          </div>
+
+          <!-- 4. Pump Power -->
+          <div class="calc-card">
+            <h3 class="h4" style="margin-bottom:6px;">4. Pump Hydraulic & Shaft Power</h3>
+            <div style="font-size:0.84rem; color:var(--color-academic-blue); margin-bottom:14px;">$$P = \frac{\rho g Q H}{1000 \cdot \eta}$$</div>
+
+            <div class="calc-input-group">
+              <label><span>Discharge Q</span> <span>L/s</span></label>
+              <input type="number" id="calc-pump-q" value="25" class="calc-input-control" oninput="runAllCalculators()">
+            </div>
+            <div class="calc-input-group">
+              <label><span>Total Head H</span> <span>m</span></label>
+              <input type="number" id="calc-pump-h" value="40" class="calc-input-control" oninput="runAllCalculators()">
+            </div>
+            <div class="calc-input-group">
+              <label><span>Pump Efficiency η</span> <span>%</span></label>
+              <input type="number" id="calc-pump-eff" value="75" class="calc-input-control" oninput="runAllCalculators()">
+            </div>
+
+            <div class="calc-result-box" id="calc-res-pump">
+              Shaft Power Required: <strong>13.08 kW</strong>
+            </div>
+          </div>
+        </div>
+      `}
+    `;
+
+    if (AppState.labTab === 'sims') {
+      renderActiveSimulation();
+    }
+  }
+
+  window.switchLabTab = function(tab) {
+    AppState.labTab = tab;
+    renderInteractiveLab();
+    setTimeout(triggerKaTeX, 60);
+  };
+
+  window.setSim = function(simName) {
+    AppState.activeSim = simName;
+    renderInteractiveLab();
+  };
+
+  function renderActiveSimulation() {
+    const container = document.getElementById('active-sim-workspace');
+    if (!container || !window.MECH_SIMULATIONS) return;
+    const simFunc = window.MECH_SIMULATIONS[AppState.activeSim];
+    if (typeof simFunc === 'function') {
+      simFunc(container);
+    }
+  }
+
+  window.runAllCalculators = function() {
+    // 1. Stress Strain
+    const p = parseFloat(document.getElementById('calc-p-load')?.value || 50) * 1000;
+    const d = parseFloat(document.getElementById('calc-p-diam')?.value || 20);
+    const L = parseFloat(document.getElementById('calc-p-len')?.value || 1000);
+    const dL = parseFloat(document.getElementById('calc-p-deltal')?.value || 0.75);
+    const area = (Math.PI * d * d) / 4;
+    const E = (p * L) / (area * dL) / 1000; // GPa
+    const stress = p / area; // MPa
+    const resStress = document.getElementById('calc-res-stress');
+    if (resStress) resStress.innerHTML = `Stress: <strong>${stress.toFixed(1)} MPa</strong> • Young's Modulus E: <strong>${E.toFixed(1)} GPa</strong>`;
+
+    // 2. Thermal
+    const eMod = parseFloat(document.getElementById('calc-t-e')?.value || 200) * 1000;
+    const alpha = parseFloat(document.getElementById('calc-t-alpha')?.value || 12) * 1e-6;
+    const dt = parseFloat(document.getElementById('calc-t-dt')?.value || 60);
+    const sigmaTh = (eMod * alpha * dt);
+    const resThermal = document.getElementById('calc-res-thermal');
+    if (resThermal) resThermal.innerHTML = `Thermal Stress: <strong>${sigmaTh.toFixed(1)} MPa</strong>`;
+
+    // 3. Reynolds
+    const v = parseFloat(document.getElementById('calc-r-v')?.value || 1.5);
+    const diam = parseFloat(document.getElementById('calc-r-d')?.value || 50) / 1000;
+    const nu = parseFloat(document.getElementById('calc-r-nu')?.value || 1.0) * 1e-6;
+    const Re = (v * diam) / nu;
+    const regime = Re < 2300 ? 'Laminar (Smooth)' : Re > 4000 ? 'Turbulent (High Mixing)' : 'Transition';
+    const resRey = document.getElementById('calc-res-reynolds');
+    if (resRey) resRey.innerHTML = `Reynolds Number: <strong>${Math.round(Re).toLocaleString()} (${regime})</strong>`;
+
+    // 4. Pump Power
+    const q = parseFloat(document.getElementById('calc-pump-q')?.value || 25) / 1000;
+    const head = parseFloat(document.getElementById('calc-pump-h')?.value || 40);
+    const eff = parseFloat(document.getElementById('calc-pump-eff')?.value || 75) / 100;
+    const hydPower = (1000 * 9.81 * q * head) / 1000;
+    const shaftPower = hydPower / eff;
+    const resPump = document.getElementById('calc-res-pump');
+    if (resPump) resPump.innerHTML = `Hydraulic Power: <strong>${hydPower.toFixed(2)} kW</strong> • Shaft Power: <strong>${shaftPower.toFixed(2)} kW</strong>`;
+  };
+
+  // ===================================================================
+  // 7. STUDY PLANNER (Personal Workspace)
+  // ===================================================================
+  function renderStudyPlanner() {
+    const container = document.getElementById('planner-content');
+    if (!container) return;
+
+    container.innerHTML = `
+      <div style="margin-bottom:var(--space-6); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+        <div>
+          <h1 class="h1">Personal Study Planner</h1>
+          <p class="text-secondary">Organize daily priorities, set module goals, and launch Focus Studio directly from tasks</p>
+        </div>
+        <button class="btn btn-primary btn-sm" onclick="showAddTaskPrompt()">+ New Study Task</button>
+      </div>
+
+      <div class="card" style="padding:20px;">
+        ${AppState.tasks.length > 0 ? `
+          <div style="display:flex; flex-direction:column; gap:12px;">
+            ${AppState.tasks.map((t, idx) => `
+              <div style="display:flex; justify-content:space-between; align-items:center; padding:12px; background:var(--color-surface-elevated); border:1px solid var(--color-border); border-radius:var(--radius-md);">
+                <div style="display:flex; align-items:center; gap:12px;">
+                  <input type="checkbox" ${t.completed ? 'checked' : ''} onchange="toggleTask(${idx})">
+                  <div>
+                    <div style="font-weight:600; text-decoration:${t.completed ? 'line-through' : 'none'}; opacity:${t.completed ? '0.6' : '1'};">
+                      ${t.title}
+                    </div>
+                    <div class="text-secondary" style="font-size:0.8rem;">
+                      ${t.subject || 'MECH'} • Priority: <span class="badge badge-teal">${t.priority || 'Normal'}</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div style="display:flex; align-items:center; gap:8px;">
+                  <button class="btn btn-secondary btn-sm" onclick="AppState.selectedSubject='${t.subject || '24MET401'}'; AppState.focusGoal='${t.title}'; location.hash='#focus';">
+                    🎯 Focus
+                  </button>
+                  <button onclick="deleteTask(${idx})" style="background:none; border:none; color:var(--color-text-tertiary); cursor:pointer; font-size:1.1rem;">✕</button>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        ` : `
+          <div style="text-align:center; padding:32px 0;">
+            <div style="font-size:2.5rem; margin-bottom:12px;">📅</div>
+            <h3 class="h3" style="margin-bottom:6px;">No study tasks scheduled yet</h3>
+            <p class="text-secondary" style="font-size:0.88rem; margin-bottom:16px;">Schedule your next module target or homework exercise.</p>
+            <button class="btn btn-secondary btn-sm" onclick="showAddTaskPrompt()">Add Your First Task</button>
+          </div>
+        `}
+      </div>
+    `;
+  }
+
+  window.showAddTaskPrompt = function() {
+    const title = prompt('Enter task description (e.g. Solve 3 Mohr circle problems):');
+    if (!title || !title.trim()) return;
+    const subj = prompt('Course code (e.g. 24MET401):', AppState.selectedSubject || '24MET401') || '24MET401';
+    AppState.tasks.push({
+      id: Date.now(),
+      title: title.trim(),
+      subject: subj.trim(),
+      priority: 'High',
+      completed: false
+    });
+    localStorage.setItem('mech_tasks', JSON.stringify(AppState.tasks));
+    renderStudyPlanner();
+  };
+
+  window.toggleTask = function(idx) {
+    if (AppState.tasks[idx]) {
+      AppState.tasks[idx].completed = !AppState.tasks[idx].completed;
+      localStorage.setItem('mech_tasks', JSON.stringify(AppState.tasks));
+      renderStudyPlanner();
+    }
+  };
+
+  window.deleteTask = function(idx) {
+    AppState.tasks.splice(idx, 1);
+    localStorage.setItem('mech_tasks', JSON.stringify(AppState.tasks));
+    renderStudyPlanner();
+  };
+
+  // ===================================================================
+  // 8. SEMESTERS HUB (S1–S8)
+  // ===================================================================
+  function renderSemesters() {
+    const container = document.getElementById('semesters-content');
+    if (!container) return;
+
+    const currentSem = AppState.selectedSemester;
+    const sNum = parseInt(currentSem.replace('S', ''));
+    const data = window.MECH_DATA || {};
+    const semInfo = data.curriculum ? data.curriculum[currentSem] : null;
+    const catalogList = (data.catalog_raw || []).filter(c => c.semester === sNum);
+
+    container.innerHTML = `
+      <div style="margin-bottom:var(--space-6);">
+        <h1 class="h1">${currentSem} • TKMCE Autonomous Scheme</h1>
+        <p class="text-secondary">${semInfo ? semInfo.title : 'Autonomous Mechanical Engineering Curriculum'}</p>
+      </div>
+
+      <!-- Semester Tabs -->
+      <div style="display:flex; gap:8px; overflow-x:auto; margin-bottom:var(--space-6); padding-bottom:4px;">
+        ${['S1', 'S2', 'S3', 'S4', 'S5', 'S6', 'S7', 'S8'].map(s => `
+          <button class="btn btn-sm ${s === currentSem ? 'btn-primary' : 'btn-secondary'}" onclick="AppState.selectedSemester='${s}'; renderSemesters();">
+            ${s}
+          </button>
+        `).join('')}
+      </div>
+
+      <div class="grid-cols-2" style="gap:16px;">
+        ${catalogList.map(c => `
+          <div class="card" style="padding:18px;">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:8px;">
+              <span class="badge badge-blue text-mono">${c.code}</span>
+              <span class="badge badge-teal">${c.type}</span>
+            </div>
+            <h3 class="h4" style="margin-bottom:6px;">${c.title}</h3>
+            <div class="text-secondary" style="font-size:0.82rem; margin-bottom:14px;">
+              End-Sem Exam: ${c.ese ? c.ese + ' Marks' : 'Continuous Assessment'}
+            </div>
+            <div style="display:flex; gap:8px;">
+              <a href="#notes/${c.code}" class="btn btn-primary btn-sm">Read Notes &rarr;</a>
+              <a href="./notes/${c.code}.pdf" download class="btn btn-secondary btn-sm">PDF ⬇️</a>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    `;
+  }
+
+  // ===================================================================
+  // 9. PYQ VAULT (38 Authentic Question Papers)
   // ===================================================================
   function renderPYQVault() {
     const container = document.getElementById('pyqs-content');
@@ -707,82 +1600,28 @@
 
     container.innerHTML = `
       <div style="margin-bottom:var(--space-6);">
-        <h1 class="h1">PYQ Vault 2.0</h1>
-        <p class="text-secondary">Official Past Year Question Papers & University Step-by-Step Solutions • TKMCE Mechanical</p>
+        <h1 class="h1">Previous-Year Question Paper Vault</h1>
+        <p class="text-secondary">38 Authentic University & Series Question Papers with Unrestricted Previews</p>
       </div>
 
-      <!-- Filters Toolbar -->
-      <div class="card" style="margin-bottom:var(--space-6); display:flex; gap:var(--space-4); flex-wrap:wrap; align-items:center;">
-        <div>
-          <label style="font-size:0.75rem; font-weight:700; color:var(--color-text-secondary); display:block; margin-bottom:4px;">Filter by Semester</label>
-          <select id="pyq-sem-filter" class="btn btn-secondary btn-sm" onchange="filterPYQs()">
-            <option value="ALL">All Semesters</option>
-            <option value="S3">S3</option>
-            <option value="S4">S4</option>
-            <option value="S5">S5</option>
-          </select>
-        </div>
-        <div>
-          <label style="font-size:0.75rem; font-weight:700; color:var(--color-text-secondary); display:block; margin-bottom:4px;">Exam Category</label>
-          <select id="pyq-cat-filter" class="btn btn-secondary btn-sm" onchange="filterPYQs()">
-            <option value="ALL">All Examinations</option>
-            <option value="Series Exam">Series Tests (Internal)</option>
-            <option value="End Semester">End Semester Examination</option>
-          </select>
-        </div>
-        <div style="margin-left:auto;">
-          <label style="font-size:0.75rem; font-weight:700; color:var(--color-text-secondary); display:block; margin-bottom:4px;">Search Question Papers</label>
-          <input type="text" id="pyq-search-box" placeholder="Search by subject or course code..." onkeyup="filterPYQs()" style="padding:6px 12px; border-radius:var(--radius-md); border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-primary); font-size:0.85rem; width:260px;">
-        </div>
-      </div>
-
-      <!-- Papers Grid -->
-      <div id="pyqs-grid-container" class="grid-cols-3">
-        ${pyqs.map(p => `
-          <div class="card pyq-card-item" data-sem="${p.semester}" data-cat="${p.exam_type}" data-title="${p.title} ${p.subject} ${p.code}">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:var(--space-2);">
-              <span class="badge badge-blue">${p.semester}</span>
-              <span class="badge">${p.exam_type}</span>
+      <div class="grid-cols-2" style="gap:16px;">
+        ${pyqs.slice(0, 12).map(p => `
+          <div class="card" style="padding:18px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+              <span class="badge badge-blue text-mono">${p.code || 'MECH'}</span>
+              <span class="badge badge-teal">${p.exam || 'End Sem'}</span>
             </div>
-            <h3 class="h4" style="margin-bottom:var(--space-1);">${p.subject}</h3>
-            <div class="text-mono text-secondary" style="font-size:0.75rem; margin-bottom:var(--space-3);">${p.code}</div>
-            <div style="font-size:0.8rem; color:var(--color-text-tertiary); margin-bottom:var(--space-4);">
-              File: ${p.title} (${p.size_kb} KB)
-            </div>
-            <div style="display:flex; gap:var(--space-2); margin-top:auto;">
-              <a href="${p.url}" target="_blank" class="btn btn-primary btn-sm" style="flex:1;">View PDF &rarr;</a>
-              <a href="${p.url}" download class="btn btn-secondary btn-sm" title="Download">⬇️</a>
-            </div>
+            <h3 class="h4" style="margin-bottom:4px;">${p.title}</h3>
+            <div class="text-secondary" style="font-size:0.82rem; margin-bottom:12px;">Year: ${p.year || '2023–2024'}</div>
+            <a href="./${p.file}" target="_blank" class="btn btn-secondary btn-sm">Preview PDF 📄</a>
           </div>
         `).join('')}
       </div>
     `;
   }
 
-  window.filterPYQs = function() {
-    const sem = document.getElementById('pyq-sem-filter').value;
-    const cat = document.getElementById('pyq-cat-filter').value;
-    const query = document.getElementById('pyq-search-box').value.toLowerCase();
-
-    document.querySelectorAll('.pyq-card-item').forEach(card => {
-      const cSem = card.getAttribute('data-sem');
-      const cCat = card.getAttribute('data-cat');
-      const cTitle = card.getAttribute('data-title').toLowerCase();
-
-      const matchSem = sem === 'ALL' || cSem === sem;
-      const matchCat = cat === 'ALL' || cCat.includes(cat);
-      const matchQuery = !query || cTitle.includes(query);
-
-      if (matchSem && matchCat && matchQuery) {
-        card.style.display = 'flex';
-      } else {
-        card.style.display = 'none';
-      }
-    });
-  };
-
   // ===================================================================
-  // 5. FORMULA LIBRARY
+  // 10. FORMULA LIBRARY
   // ===================================================================
   function renderFormulaLibrary() {
     const container = document.getElementById('formulas-content');
@@ -793,274 +1632,56 @@
 
     container.innerHTML = `
       <div style="margin-bottom:var(--space-6);">
-        <h1 class="h1">Formula Library</h1>
-        <p class="text-secondary">Searchable Mechanical Engineering Formula Database with KaTeX & SI Units</p>
+        <h1 class="h1">Mechanical Engineering Formula Library</h1>
+        <p class="text-secondary">High-Precision Mathematical Expressions Typeset with KaTeX</p>
       </div>
 
-      <!-- Formula Cards Grid -->
-      <div class="grid-cols-2" id="formulas-grid">
+      <div class="grid-cols-2" style="gap:16px;">
         ${formulas.map(f => `
-          <div class="card">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:var(--space-2);">
-              <span class="badge badge-teal">${f.category}</span>
-              <span class="text-mono text-secondary" style="font-size:0.75rem;">${f.code} • ${f.module}</span>
+          <div class="card" style="padding:20px;">
+            <div style="font-size:0.75rem; font-weight:700; color:var(--color-academic-blue); margin-bottom:4px;">
+              ${f.subject_code} • ${f.subject_name}
             </div>
-            <h3 class="h3" style="margin-bottom:var(--space-3);">${f.name}</h3>
-
-            <!-- Formula Display Box -->
-            <div style="background:var(--color-surface-elevated); border:1px solid var(--color-border); border-radius:var(--radius-md); padding:16px; margin-bottom:var(--space-3); text-align:center; font-size:1.15rem;">
+            <h3 class="h4" style="margin-bottom:10px;">${f.name}</h3>
+            <div style="background:var(--color-surface-elevated); padding:14px; border-radius:var(--radius-md); font-size:1.15rem; margin-bottom:12px; text-align:center;">
               $$${f.latex}$$
             </div>
-
-            <!-- Variables Table -->
-            <div style="margin-bottom:var(--space-3);">
-              <div style="font-size:0.75rem; font-weight:700; color:var(--color-text-secondary); text-transform:uppercase; margin-bottom:6px;">Variables & SI Units:</div>
-              <ul style="padding-left:18px; font-size:0.84rem; color:var(--color-text-secondary); line-height:1.6;">
-                ${f.variables.map(v => `
-                  <li><strong>$${v.symbol}$</strong>: ${v.meaning} (<em>${v.unit}</em>)</li>
-                `).join('')}
-              </ul>
-            </div>
-
-            <div style="font-size:0.8rem; color:var(--color-text-tertiary); border-top:1px solid var(--color-border-subtle); padding-top:8px;">
-              <strong>Assumptions:</strong> ${f.assumptions}
-            </div>
+            <p class="text-secondary" style="font-size:0.84rem; margin:0;">${f.description || ''}</p>
           </div>
         `).join('')}
       </div>
     `;
-
-    if (window.renderMathInElement) {
-      window.renderMathInElement(container, {
-        delimiters: [
-          { left: '$$', right: '$$', display: true },
-          { left: '$', right: '$', display: false }
-        ]
-      });
-    }
   }
 
   // ===================================================================
-  // 6. EXAM CENTRE
-  // ===================================================================
-  function renderExamCentre() {
-    const container = document.getElementById('exams-content');
-    if (!container) return;
-
-    container.innerHTML = `
-      <div style="margin-bottom:var(--space-6);">
-        <h1 class="h1">Exam Centre</h1>
-        <p class="text-secondary">Revision Checklists, Exam Countdown, and High-Yield Problem Sets</p>
-      </div>
-
-      <div class="grid-cols-3" style="margin-bottom:var(--space-6);">
-        <div class="card" style="border-left:4px solid var(--color-academic-blue);">
-          <h3 class="h4" style="margin-bottom:8px;">⏱️ Next Autonomous Series Exam</h3>
-          <div style="font-size:1.6rem; font-weight:800; font-family:var(--font-mono); color:var(--color-academic-blue); margin-bottom:4px;">14 Days</div>
-          <div class="text-secondary" style="font-size:0.8rem;">Target: Series Exam 2 • 2024 Scheme</div>
-        </div>
-
-        <div class="card" style="border-left:4px solid var(--color-warning);">
-          <h3 class="h4" style="margin-bottom:8px;">🎯 High-Yield Derivations</h3>
-          <div style="font-size:1.6rem; font-weight:800; font-family:var(--font-mono); color:var(--color-warning); margin-bottom:4px;">18 Topics</div>
-          <div class="text-secondary" style="font-size:0.8rem;">Euler column, Mohr circle, Merchant, Bernoulli</div>
-        </div>
-
-        <div class="card" style="border-left:4px solid var(--color-success);">
-          <h3 class="h4" style="margin-bottom:8px;">✅ Practice Completion</h3>
-          <div style="font-size:1.6rem; font-weight:800; font-family:var(--font-mono); color:var(--color-success); margin-bottom:4px;">8 / 22 Solved</div>
-          <div class="text-secondary" style="font-size:0.8rem;">Model university numericals reviewed</div>
-        </div>
-      </div>
-
-      <div class="card">
-        <h3 class="h3" style="margin-bottom:var(--space-3);">High-Frequency University Exam Questions</h3>
-        <p class="text-secondary" style="font-size:0.88rem; margin-bottom:var(--space-4);">
-          Reviewed from past 5 years of TKMCE Autonomous and KTU University examination cycles:
-        </p>
-
-        <div style="display:flex; flex-direction:column; gap:12px;">
-          <div style="padding:12px; background:var(--color-surface-elevated); border-radius:var(--radius-md); border:1px solid var(--color-border);">
-            <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
-              <span class="badge badge-blue">24MET401 • 10 Marks</span>
-              <span class="badge badge-warning">Frequently Asked</span>
-            </div>
-            <div style="font-size:0.9rem; font-weight:600; margin-bottom:6px;">Derivation of Euler's Buckling Formula for Column with Both Ends Hinged.</div>
-            <p class="text-secondary" style="font-size:0.82rem; margin:0;">Includes assumptions, differential equation of deflection curve, and effective length concepts.</p>
-          </div>
-
-          <div style="padding:12px; background:var(--color-surface-elevated); border-radius:var(--radius-md); border:1px solid var(--color-border);">
-            <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
-              <span class="badge badge-blue">24MEP305 • 10 Marks</span>
-              <span class="badge badge-warning">Frequently Asked</span>
-            </div>
-            <div style="font-size:0.9rem; font-weight:600; margin-bottom:6px;">Bernoulli's Equation from Euler's Equation of Motion along a Streamline.</div>
-            <p class="text-secondary" style="font-size:0.82rem; margin:0;">Detailed integration of pressure, gravity, and acceleration along a frictionless streamline.</p>
-          </div>
-        </div>
-      </div>
-    `;
-  }
-
-  // ===================================================================
-  // 7. STUDY PLANNER & POMODORO
-  // ===================================================================
-  function renderStudyPlanner() {
-    const container = document.getElementById('planner-content');
-    if (!container) return;
-
-    container.innerHTML = `
-      <div style="margin-bottom:var(--space-6);">
-        <h1 class="h1">Study Planner & Focus Workspace</h1>
-        <p class="text-secondary">Pomodoro Timer, Task Management, and Revision Targets</p>
-      </div>
-
-      <div style="display:grid; grid-template-columns: 340px 1fr; gap:var(--space-6);">
-        <!-- Pomodoro Timer Card -->
-        <div class="card" style="text-align:center;">
-          <h3 class="h3" style="margin-bottom:var(--space-4);">Engineering Focus Timer</h3>
-          <div id="pomodoro-display" style="font-size:3.5rem; font-weight:800; font-family:var(--font-mono); color:var(--color-academic-blue); margin-bottom:var(--space-4);">
-            25:00
-          </div>
-          <div style="display:flex; justify-content:center; gap:var(--space-2); margin-bottom:var(--space-4);">
-            <button class="btn btn-primary" id="pomodoro-start-btn" onclick="togglePomodoro()">Start Focus</button>
-            <button class="btn btn-secondary" onclick="resetPomodoro()">Reset</button>
-          </div>
-          <div class="text-secondary" style="font-size:0.8rem;">
-            25 min focused study • 5 min engineering rest interval
-          </div>
-        </div>
-
-        <!-- Task Checklist Card -->
-        <div class="card">
-          <h3 class="h3" style="margin-bottom:var(--space-3);">Daily Learning Targets</h3>
-          <div style="display:flex; gap:8px; margin-bottom:var(--space-4);">
-            <input type="text" id="new-task-input" placeholder="e.g., Complete Mohr's circle numericals..." style="flex:1; padding:8px 12px; border-radius:var(--radius-md); border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-primary); font-size:0.88rem;">
-            <button class="btn btn-primary btn-sm" onclick="addTask()">Add Task</button>
-          </div>
-
-          <div id="tasks-list" style="display:flex; flex-direction:column; gap:8px;">
-            ${AppState.tasks.length === 0 ? '<div class="text-secondary" style="font-size:0.88rem; text-align:center; padding:16px;">No study tasks added yet. Add your first goal above!</div>' : ''}
-            ${AppState.tasks.map((t, idx) => `
-              <div style="display:flex; align-items:center; justify-content:space-between; padding:8px 12px; background:var(--color-surface-elevated); border-radius:var(--radius-md); border:1px solid var(--color-border);">
-                <label style="display:flex; align-items:center; gap:8px; font-size:0.88rem; cursor:pointer;">
-                  <input type="checkbox" ${t.done ? 'checked' : ''} onchange="toggleTask(${idx})">
-                  <span style="${t.done ? 'text-decoration:line-through; opacity:0.6;' : ''}">${t.text}</span>
-                </label>
-                <button onclick="removeTask(${idx})" style="background:none; border:none; color:var(--color-text-tertiary); cursor:pointer;">✕</button>
-              </div>
-            `).join('')}
-          </div>
-        </div>
-      </div>
-    `;
-  }
-
-  function setupPomodoro() {
-    window.togglePomodoro = function() {
-      const btn = document.getElementById('pomodoro-start-btn');
-      if (AppState.timerRunning) {
-        clearInterval(AppState.timerInterval);
-        AppState.timerRunning = false;
-        if (btn) btn.innerText = 'Resume Focus';
-      } else {
-        AppState.timerRunning = true;
-        if (btn) btn.innerText = 'Pause';
-        AppState.timerInterval = setInterval(() => {
-          if (AppState.timerSeconds === 0) {
-            if (AppState.timerMinutes === 0) {
-              clearInterval(AppState.timerInterval);
-              AppState.timerRunning = false;
-              alert('Pomodoro completed! Take a 5-minute break.');
-              resetPomodoro();
-              return;
-            }
-            AppState.timerMinutes--;
-            AppState.timerSeconds = 59;
-          } else {
-            AppState.timerSeconds--;
-          }
-          updatePomodoroDisplay();
-        }, 1000);
-      }
-    };
-
-    window.resetPomodoro = function() {
-      clearInterval(AppState.timerInterval);
-      AppState.timerRunning = false;
-      AppState.timerMinutes = 25;
-      AppState.timerSeconds = 0;
-      updatePomodoroDisplay();
-      const btn = document.getElementById('pomodoro-start-btn');
-      if (btn) btn.innerText = 'Start Focus';
-    };
-
-    function updatePomodoroDisplay() {
-      const display = document.getElementById('pomodoro-display');
-      if (!display) return;
-      const m = String(AppState.timerMinutes).padStart(2, '0');
-      const s = String(AppState.timerSeconds).padStart(2, '0');
-      display.innerText = `${m}:${s}`;
-    }
-
-    window.addTask = function() {
-      const input = document.getElementById('new-task-input');
-      if (!input || !input.value.trim()) return;
-      AppState.tasks.push({ text: input.value.trim(), done: false });
-      localStorage.setItem('mech_tasks', JSON.stringify(AppState.tasks));
-      renderStudyPlanner();
-    };
-
-    window.toggleTask = function(idx) {
-      if (AppState.tasks[idx]) {
-        AppState.tasks[idx].done = !AppState.tasks[idx].done;
-        localStorage.setItem('mech_tasks', JSON.stringify(AppState.tasks));
-        renderStudyPlanner();
-      }
-    };
-
-    window.removeTask = function(idx) {
-      AppState.tasks.splice(idx, 1);
-      localStorage.setItem('mech_tasks', JSON.stringify(AppState.tasks));
-      renderStudyPlanner();
-    };
-  }
-
-  // ===================================================================
-  // 8. GATE PREPARATION
+  // 11. GATE PREPARATION
   // ===================================================================
   function renderGATEPreparation() {
     const container = document.getElementById('gate-content');
     if (!container) return;
 
     const data = window.MECH_DATA || {};
-    const gate = data.gate;
-    if (!gate) return;
+    const gateSections = data.gate_me_syllabus || [];
 
     container.innerHTML = `
       <div style="margin-bottom:var(--space-6);">
-        <span class="badge badge-blue">Graduate Aptitude Test in Engineering</span>
-        <h1 class="h1" style="margin-top:4px;">GATE Mechanical Engineering Preparation</h1>
-        <p class="text-secondary">Official GATE ME Syllabus & Curriculum Mapping to TKMCE Autonomous Course Codes</p>
+        <h1 class="h1">GATE Mechanical Engineering Preparation</h1>
+        <p class="text-secondary">Official 4-Section Curriculum Roadmap Mapped to TKMCE Semesters</p>
       </div>
 
-      <div style="display:flex; flex-direction:column; gap:var(--space-6);">
-        ${gate.sections.map(sec => `
-          <div class="card">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:var(--space-4); border-bottom:1px solid var(--color-border); padding-bottom:8px;">
-              <h2 class="h2">${sec.name}</h2>
-              <span class="badge badge-warning text-mono">${sec.weightage}</span>
+      <div style="display:flex; flex-direction:column; gap:20px;">
+        ${gateSections.map(sec => `
+          <div class="card" style="padding:22px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+              <h3 class="h3" style="margin:0;">${sec.name}</h3>
+              <span class="badge badge-teal">${sec.weightage}</span>
             </div>
-
-            <div class="grid-cols-2">
-              ${sec.topics.map(t => `
-                <div style="background:var(--color-surface-elevated); border:1px solid var(--color-border); border-radius:var(--radius-md); padding:16px;">
-                  <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
-                    <h3 class="h4">${t.name}</h3>
-                    <span class="badge badge-teal">${t.tkm_status}</span>
-                  </div>
-                  <div class="text-mono text-secondary" style="font-size:0.75rem; margin-bottom:8px;">Course: ${t.mapped_code}</div>
-                  <p class="text-secondary" style="font-size:0.84rem; line-height:1.5; margin:0;">${t.syllabus}</p>
+            <div class="grid-cols-2" style="gap:12px;">
+              ${(sec.topics || []).map(top => `
+                <div style="background:var(--color-surface-elevated); padding:12px; border-radius:var(--radius-sm); border:1px solid var(--color-border);">
+                  <div style="font-weight:600; font-size:0.92rem;">${top.name}</div>
+                  <div class="badge badge-blue" style="font-size:0.72rem; margin:4px 0;">${top.tkm_status}</div>
+                  <div class="text-secondary" style="font-size:0.8rem;">${top.syllabus}</div>
                 </div>
               `).join('')}
             </div>
@@ -1071,264 +1692,25 @@
   }
 
   // ===================================================================
-  // 9. INTERACTIVE ENGINEERING LAB
-  // ===================================================================
-  function renderInteractiveLab() {
-    const container = document.getElementById('lab-content');
-    if (!container) return;
-
-    container.innerHTML = `
-      <div style="margin-bottom:var(--space-6);">
-        <h1 class="h1">Interactive Engineering Simulation Lab</h1>
-        <p class="text-secondary">Verified Physical Simulations with Live Mathematical Parameter Feedback</p>
-      </div>
-
-      <div class="grid-cols-2">
-        <!-- 1. Mohr's Circle -->
-        <div class="card">
-          <div style="display:flex; justify-content:space-between; margin-bottom:var(--space-2);">
-            <h3 class="h3">Mohr's Circle (2D Plane Stress)</h3>
-            <span class="badge badge-blue">Strength of Materials</span>
-          </div>
-          <canvas id="canvas-mohr" width="480" height="260" style="width:100%; height:260px; background:var(--color-surface-elevated); border-radius:var(--radius-md); border:1px solid var(--color-border); margin-bottom:12px;"></canvas>
-          <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:8px; margin-bottom:12px;">
-            <div>
-              <label style="font-size:0.7rem; color:var(--color-text-secondary);">σ_x: <span id="val-sx">80</span> MPa</label>
-              <input type="range" id="slider-sx" min="-100" max="150" value="80" style="width:100%;" oninput="updateMohrSim()">
-            </div>
-            <div>
-              <label style="font-size:0.7rem; color:var(--color-text-secondary);">σ_y: <span id="val-sy">-40</span> MPa</label>
-              <input type="range" id="slider-sy" min="-100" max="150" value="-40" style="width:100%;" oninput="updateMohrSim()">
-            </div>
-            <div>
-              <label style="font-size:0.7rem; color:var(--color-text-secondary);">τ_xy: <span id="val-txy">30</span> MPa</label>
-              <input type="range" id="slider-txy" min="0" max="80" value="30" style="width:100%;" oninput="updateMohrSim()">
-            </div>
-          </div>
-          <div id="mohr-results" style="font-family:var(--font-mono); font-size:0.8rem; background:var(--color-surface-elevated); padding:8px; border-radius:var(--radius-sm); color:var(--color-text-primary);">
-            σ1 = 87.2 MPa | σ2 = -47.2 MPa | τmax = 67.2 MPa
-          </div>
-        </div>
-
-        <!-- 2. Thermodynamic Cycle -->
-        <div class="card">
-          <div style="display:flex; justify-content:space-between; margin-bottom:var(--space-2);">
-            <h3 class="h3">Thermodynamic P-V Cycle</h3>
-            <span class="badge badge-teal">Thermodynamics</span>
-          </div>
-          <canvas id="canvas-cycle" width="480" height="260" style="width:100%; height:260px; background:var(--color-surface-elevated); border-radius:var(--radius-md); border:1px solid var(--color-border); margin-bottom:12px;"></canvas>
-          <div style="display:grid; grid-template-columns:repeat(2, 1fr); gap:8px; margin-bottom:12px;">
-            <div>
-              <label style="font-size:0.7rem; color:var(--color-text-secondary);">Compression Ratio (r): <span id="val-r">8</span></label>
-              <input type="range" id="slider-r" min="4" max="16" value="8" style="width:100%;" oninput="updateCycleSim()">
-            </div>
-            <div>
-              <label style="font-size:0.7rem; color:var(--color-text-secondary);">Peak Temp (T_max): <span id="val-tmax">1400</span> K</label>
-              <input type="range" id="slider-tmax" min="800" max="2200" value="1400" step="50" style="width:100%;" oninput="updateCycleSim()">
-            </div>
-          </div>
-          <div id="cycle-results" style="font-family:var(--font-mono); font-size:0.8rem; background:var(--color-surface-elevated); padding:8px; border-radius:var(--radius-sm); color:var(--color-text-primary);">
-            Ideal Thermal Efficiency η_th = 56.5%
-          </div>
-        </div>
-
-        <!-- 3. Venturi Bernoulli Flow -->
-        <div class="card">
-          <div style="display:flex; justify-content:space-between; margin-bottom:var(--space-2);">
-            <h3 class="h3">Venturi Tube & Bernoulli Flow</h3>
-            <span class="badge badge-blue">Fluid Mechanics</span>
-          </div>
-          <canvas id="canvas-venturi" width="480" height="260" style="width:100%; height:260px; background:var(--color-surface-elevated); border-radius:var(--radius-md); border:1px solid var(--color-border); margin-bottom:12px;"></canvas>
-          <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:8px; margin-bottom:12px;">
-            <div>
-              <label style="font-size:0.7rem; color:var(--color-text-secondary);">Inlet D1: <span id="val-d1">100</span> mm</label>
-              <input type="range" id="slider-d1" min="80" max="150" value="100" style="width:100%;" oninput="updateVenturiSim()">
-            </div>
-            <div>
-              <label style="font-size:0.7rem; color:var(--color-text-secondary);">Throat D2: <span id="val-d2">50</span> mm</label>
-              <input type="range" id="slider-d2" min="30" max="75" value="50" style="width:100%;" oninput="updateVenturiSim()">
-            </div>
-            <div>
-              <label style="font-size:0.7rem; color:var(--color-text-secondary);">Flow Q: <span id="val-q">15</span> L/s</label>
-              <input type="range" id="slider-q" min="5" max="30" value="15" style="width:100%;" oninput="updateVenturiSim()">
-            </div>
-          </div>
-          <div id="venturi-results" style="font-family:var(--font-mono); font-size:0.8rem; background:var(--color-surface-elevated); padding:8px; border-radius:var(--radius-sm); color:var(--color-text-primary);">
-            v1 = 1.91 m/s | v2 = 7.64 m/s | ΔP = 27.3 kPa
-          </div>
-        </div>
-
-        <!-- 4. Beam Deflection -->
-        <div class="card">
-          <div style="display:flex; justify-content:space-between; margin-bottom:var(--space-2);">
-            <h3 class="h3">Simply Supported Beam Bending</h3>
-            <span class="badge badge-warning">Mechanics of Solids</span>
-          </div>
-          <canvas id="canvas-beam" width="480" height="260" style="width:100%; height:260px; background:var(--color-surface-elevated); border-radius:var(--radius-md); border:1px solid var(--color-border); margin-bottom:12px;"></canvas>
-          <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:8px; margin-bottom:12px;">
-            <div>
-              <label style="font-size:0.7rem; color:var(--color-text-secondary);">Length L: <span id="val-blen">6</span> m</label>
-              <input type="range" id="slider-blen" min="4" max="12" value="6" style="width:100%;" oninput="updateBeamSim()">
-            </div>
-            <div>
-              <label style="font-size:0.7rem; color:var(--color-text-secondary);">Point Load W: <span id="val-bload">20</span> kN</label>
-              <input type="range" id="slider-bload" min="5" max="50" value="20" style="width:100%;" oninput="updateBeamSim()">
-            </div>
-            <div>
-              <label style="font-size:0.7rem; color:var(--color-text-secondary);">Position a: <span id="val-bpos">3</span> m</label>
-              <input type="range" id="slider-bpos" min="1" max="5" value="3" style="width:100%;" oninput="updateBeamSim()">
-            </div>
-          </div>
-          <div id="beam-results" style="font-family:var(--font-mono); font-size:0.8rem; background:var(--color-surface-elevated); padding:8px; border-radius:var(--radius-sm); color:var(--color-text-primary);">
-            M_max = 30.00 kN·m | R_A = 10.00 kN | R_B = 10.00 kN
-          </div>
-        </div>
-      </div>
-    `;
-
-    renderActiveSimulation();
-  }
-
-  function renderActiveSimulation() {
-    setTimeout(() => {
-      updateMohrSim();
-      updateCycleSim();
-      updateVenturiSim();
-      updateBeamSim();
-    }, 50);
-  }
-
-  window.updateMohrSim = function() {
-    const sx = parseFloat(document.getElementById('slider-sx').value);
-    const sy = parseFloat(document.getElementById('slider-sy').value);
-    const txy = parseFloat(document.getElementById('slider-txy').value);
-    document.getElementById('val-sx').innerText = sx;
-    document.getElementById('val-sy').innerText = sy;
-    document.getElementById('val-txy').innerText = txy;
-
-    if (window.MECH_SIM) {
-      const res = window.MECH_SIM.renderMohrsCircle('canvas-mohr', sx, sy, txy);
-      if (res) {
-        document.getElementById('mohr-results').innerText = `σ1 = ${res.s1} MPa | σ2 = ${res.s2} MPa | τmax = ${res.tmax} MPa | θp = ${res.thetaP}°`;
-      }
-    }
-  };
-
-  window.updateCycleSim = function() {
-    const r = parseFloat(document.getElementById('slider-r').value);
-    const tmax = parseFloat(document.getElementById('slider-tmax').value);
-    document.getElementById('val-r').innerText = r;
-    document.getElementById('val-tmax').innerText = tmax;
-
-    if (window.MECH_SIM) {
-      const res = window.MECH_SIM.renderCycle('canvas-cycle', r, tmax);
-      if (res) {
-        document.getElementById('cycle-results').innerText = `Ideal Thermal Efficiency η_th = ${res.eta}% (γ = 1.4)`;
-      }
-    }
-  };
-
-  window.updateVenturiSim = function() {
-    const d1 = parseFloat(document.getElementById('slider-d1').value);
-    const d2 = parseFloat(document.getElementById('slider-d2').value);
-    const q = parseFloat(document.getElementById('slider-q').value);
-    document.getElementById('val-d1').innerText = d1;
-    document.getElementById('val-d2').innerText = d2;
-    document.getElementById('val-q').innerText = q;
-
-    if (window.MECH_SIM) {
-      const res = window.MECH_SIM.renderVenturi('canvas-venturi', d1, d2, q);
-      if (res) {
-        document.getElementById('venturi-results').innerText = `v1 = ${res.v1} m/s | v2 = ${res.v2} m/s | ΔP = ${res.deltaP} kPa | Δh = ${res.deltaH} cm`;
-      }
-    }
-  };
-
-  window.updateBeamSim = function() {
-    const blen = parseFloat(document.getElementById('slider-blen').value);
-    const bload = parseFloat(document.getElementById('slider-bload').value);
-    const bpos = parseFloat(document.getElementById('slider-bpos').value);
-    document.getElementById('val-blen').innerText = blen;
-    document.getElementById('val-bload').innerText = bload;
-    document.getElementById('val-bpos').innerText = bpos;
-
-    if (window.MECH_SIM) {
-      const res = window.MECH_SIM.renderBeam('canvas-beam', blen, bload, bpos);
-      if (res) {
-        document.getElementById('beam-results').innerText = `M_max = ${res.maxMoment} kN·m | R_A = ${res.ra} kN | R_B = ${res.rb} kN`;
-      }
-    }
-  };
-
-  // ===================================================================
-  // 10. BOOKMARKS
+  // 12. BOOKMARKS & SAVED RESOURCES
   // ===================================================================
   function renderBookmarks() {
     const container = document.getElementById('bookmarks-content');
     if (!container) return;
 
-    if (AppState.bookmarks.length === 0) {
-      container.innerHTML = `
-        <div style="margin-bottom:var(--space-6);">
-          <h1 class="h1">Saved Bookmarks</h1>
-          <p class="text-secondary">Your saved study notes, question papers, and formulas</p>
-        </div>
-        <div class="card" style="text-align:center; padding:var(--space-8);">
-          <div style="font-size:2rem; margin-bottom:8px;">⭐</div>
-          <h3 class="h3" style="margin-bottom:8px;">No Bookmarks Saved Yet</h3>
-          <p class="text-secondary" style="font-size:0.9rem; margin-bottom:16px;">
-            Click the "Bookmark" button on any study note, PYQ paper, or formula to pin it here for instant revision.
-          </p>
-          <a href="#notes/24MET401" class="btn btn-primary">Browse Study Notes</a>
-        </div>
-      `;
-      return;
-    }
-
     container.innerHTML = `
       <div style="margin-bottom:var(--space-6);">
-        <h1 class="h1">Saved Bookmarks (${AppState.bookmarks.length})</h1>
-        <p class="text-secondary">Quick access to your pinned engineering study material</p>
+        <h1 class="h1">Saved Resources & Bookmarks</h1>
+        <p class="text-secondary">Quick access to bookmarked modules, formulas, and questions</p>
       </div>
-
-      <div class="grid-cols-2">
-        ${AppState.bookmarks.map((b, idx) => `
-          <div class="card" style="display:flex; justify-content:space-between; align-items:center;">
-            <div>
-              <span class="badge badge-blue">${b.type}</span>
-              <h3 class="h4" style="margin:6px 0 2px;">${b.title}</h3>
-              <div class="text-secondary text-mono" style="font-size:0.75rem;">${b.id}</div>
-            </div>
-            <div style="display:flex; gap:8px;">
-              <a href="#notes/${b.id.split('-')[0]}" class="btn btn-secondary btn-sm">Open &rarr;</a>
-              <button onclick="removeBookmark(${idx})" class="btn btn-secondary btn-sm" title="Remove">✕</button>
-            </div>
-          </div>
-        `).join('')}
+      <div class="card" style="padding:24px;">
+        <p class="text-secondary">Save frequently revised chapters or tricky formulas to view them here.</p>
       </div>
     `;
   }
 
-  window.toggleBookmark = function(type, id, title) {
-    const existsIdx = AppState.bookmarks.findIndex(b => b.id === id);
-    if (existsIdx >= 0) {
-      AppState.bookmarks.splice(existsIdx, 1);
-      alert('Removed from bookmarks');
-    } else {
-      AppState.bookmarks.push({ type, id, title });
-      alert('Added to bookmarks ⭐');
-    }
-    localStorage.setItem('mech_bookmarks', JSON.stringify(AppState.bookmarks));
-  };
-
-  window.removeBookmark = function(idx) {
-    AppState.bookmarks.splice(idx, 1);
-    localStorage.setItem('mech_bookmarks', JSON.stringify(AppState.bookmarks));
-    renderBookmarks();
-  };
-
   // ===================================================================
-  // 11. DOWNLOADS
+  // 13. DOWNLOADS & OFFLINE APK
   // ===================================================================
   function renderDownloads() {
     const container = document.getElementById('downloads-content');
@@ -1337,185 +1719,59 @@
     container.innerHTML = `
       <div style="margin-bottom:var(--space-6);">
         <h1 class="h1">Offline Downloads & Android App</h1>
-        <p class="text-secondary">Official Standalone Android APK & PWA Offline Workspace</p>
+        <p class="text-secondary">Standalone Signed Android APK, PWA, and S4 Comprehensive Notes</p>
       </div>
 
-      <div class="grid-cols-2">
+      <div class="grid-cols-2" style="gap:16px; margin-bottom:24px;">
         <div class="card">
-          <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px;">
-            <div style="width:48px; height:48px; border-radius:var(--radius-md); background:var(--color-success-subtle); color:var(--color-success); display:flex; align-items:center; justify-content:center; font-size:1.8rem;">
-              📱
-            </div>
-            <div>
-              <h3 class="h3">TKMCE Mechanical Android APK</h3>
-              <span class="badge badge-teal">Standalone Signed APK • 225 KB</span>
-            </div>
-          </div>
-          <p class="text-secondary" style="font-size:0.88rem; margin-bottom:16px;">
-            Install the offline Android application on your smartphone. Operates completely without an active internet connection. No tracking, zero ads, and no background drain.
+          <h3 class="h3" style="margin-bottom:8px;">📱 TKMCE Mechanical Android App</h3>
+          <p class="text-secondary" style="font-size:0.88rem; margin-bottom:14px;">
+            Install the signed standalone APK for completely offline studying without background data consumption.
           </p>
           <a href="./tkm_mech_portal.apk" download class="btn btn-primary">Download APK (225 KB) ⬇️</a>
         </div>
 
         <div class="card">
-          <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px;">
-            <div style="width:48px; height:48px; border-radius:var(--radius-md); background:var(--color-academic-blue-subtle); color:var(--color-academic-blue); display:flex; align-items:center; justify-content:center; font-size:1.8rem;">
-              ⚡
-            </div>
-            <div>
-              <h3 class="h3">Progressive Web App (PWA)</h3>
-              <span class="badge badge-blue">Installable on Chrome & Safari</span>
-            </div>
-          </div>
-          <p class="text-secondary" style="font-size:0.88rem; margin-bottom:16px;">
-            MECH TKMCE is fully PWA enabled. You can install it on your laptop (macOS / Windows / Linux) or mobile device directly from your browser's address bar.
+          <h3 class="h3" style="margin-bottom:8px;">⚡ Complete S4 Study Notes Volume</h3>
+          <p class="text-secondary" style="font-size:0.88rem; margin-bottom:14px;">
+            Consolidated 7-course volume compiled for fast end-semester exam revision.
           </p>
-          <button class="btn btn-secondary" onclick="alert('To install, tap the Share or Install icon in your browser address bar.')">Install PWA Web App</button>
-        </div>
-      </div>
-
-      <!-- S4 Study Notes & Compiled Volume Section -->
-      <div class="card" style="margin-top:var(--space-6);">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:var(--space-4); flex-wrap:wrap; gap:8px;">
-          <div>
-            <h3 class="h3" style="margin-bottom:4px;">📚 S4 Autonomous Study Notes (Printable PDFs)</h3>
-            <p class="text-secondary" style="font-size:0.88rem;">Official TKMCE Autonomous 2024 Scheme Semester 4 comprehensive notes compiled for fast exam revision and offline study.</p>
-          </div>
-          <a href="./notes/TKMCE_S4_Study_Notes.pdf" download class="btn btn-primary btn-sm">
-            Download Complete S4 Volume (508 KB) ⬇️
-          </a>
-        </div>
-
-        <div class="grid-cols-2" style="gap:12px; margin-top:var(--space-4);">
-          <div class="card" style="padding:14px; background:var(--color-surface-elevated); border:1px solid var(--color-border);">
-            <div style="font-weight:600; font-size:0.92rem; margin-bottom:4px;">24MET401 • Mechanics of Solids</div>
-            <div class="text-secondary" style="font-size:0.8rem; margin-bottom:10px;">Stress-strain, shear force, bending moment, Mohr's circle, torsion & deflection</div>
-            <a href="./notes/24MET401.pdf" download class="btn btn-secondary btn-sm" style="font-size:0.8rem;">Download PDF (71 KB) ⬇️</a>
-          </div>
-
-          <div class="card" style="padding:14px; background:var(--color-surface-elevated); border:1px solid var(--color-border);">
-            <div style="font-weight:600; font-size:0.92rem; margin-bottom:4px;">24MET402 • Manufacturing Technology</div>
-            <div class="text-secondary" style="font-size:0.8rem; margin-bottom:10px;">Casting, forming, welding, traditional & CNC machining operations</div>
-            <a href="./notes/24MET402.pdf" download class="btn btn-secondary btn-sm" style="font-size:0.8rem;">Download PDF (66 KB) ⬇️</a>
-          </div>
-
-          <div class="card" style="padding:14px; background:var(--color-surface-elevated); border:1px solid var(--color-border);">
-            <div style="font-weight:600; font-size:0.92rem; margin-bottom:4px;">24MEP403 • Fluid Machinery</div>
-            <div class="text-secondary" style="font-size:0.8rem; margin-bottom:10px;">Impulse & reaction turbines, Pelton wheel, Francis, Kaplan & centrifugal pumps</div>
-            <a href="./notes/24MEP403.pdf" download class="btn btn-secondary btn-sm" style="font-size:0.8rem;">Download PDF (68 KB) ⬇️</a>
-          </div>
-
-          <div class="card" style="padding:14px; background:var(--color-surface-elevated); border:1px solid var(--color-border);">
-            <div style="font-weight:600; font-size:0.92rem; margin-bottom:4px;">24MEJ404 • Thermal Engineering</div>
-            <div class="text-secondary" style="font-size:0.8rem; margin-bottom:10px;">Air standard cycles, IC engine performance, gas turbines & steam nozzles</div>
-            <a href="./notes/24MEJ404.pdf" download class="btn btn-secondary btn-sm" style="font-size:0.8rem;">Download PDF (67 KB) ⬇️</a>
-          </div>
-
-          <div class="card" style="padding:14px; background:var(--color-surface-elevated); border:1px solid var(--color-border);">
-            <div style="font-weight:600; font-size:0.92rem; margin-bottom:4px;">24HUT415 • Constitution of India</div>
-            <div class="text-secondary" style="font-size:0.8rem; margin-bottom:10px;">Preamble, Fundamental Rights & Duties, Directive Principles, Union & State Judiciary</div>
-            <a href="./notes/24HUT415.pdf" download class="btn btn-secondary btn-sm" style="font-size:0.8rem;">Download PDF (60 KB) ⬇️</a>
-          </div>
-
-          <div class="card" style="padding:14px; background:var(--color-surface-elevated); border:1px solid var(--color-border);">
-            <div style="font-weight:600; font-size:0.92rem; margin-bottom:4px;">24MCT406 • Environmental Science</div>
-            <div class="text-secondary" style="font-size:0.8rem; margin-bottom:10px;">Ecosystems, natural resources, biodiversity, pollution control & sustainable development</div>
-            <a href="./notes/24MCT406.pdf" download class="btn btn-secondary btn-sm" style="font-size:0.8rem;">Download PDF (64 KB) ⬇️</a>
-          </div>
-
-          <div class="card" style="padding:14px; background:var(--color-surface-elevated); border:1px solid var(--color-border);">
-            <div style="font-weight:600; font-size:0.92rem; margin-bottom:4px;">24BYT408 • Biology for Engineers</div>
-            <div class="text-secondary" style="font-size:0.8rem; margin-bottom:10px;">Bio-inspired engineering, biomolecules, cellular mechanisms & bio-sensors</div>
-            <a href="./notes/24BYT408.pdf" download class="btn btn-secondary btn-sm" style="font-size:0.8rem;">Download PDF (65 KB) ⬇️</a>
-          </div>
+          <a href="./notes/TKMCE_S4_Study_Notes.pdf" download class="btn btn-primary">Download S4 Volume (508 KB) ⬇️</a>
         </div>
       </div>
     `;
   }
 
   // ===================================================================
-  // 12. SETTINGS & SOURCE CITATIONS
+  // 14. SETTINGS
   // ===================================================================
   function renderSettings() {
     const container = document.getElementById('settings-content');
     if (!container) return;
 
-    const data = window.MECH_DATA || {};
-    const sources = data.sources || [];
-
     container.innerHTML = `
       <div style="margin-bottom:var(--space-6);">
-        <h1 class="h1">Workspace Settings & Citations</h1>
-        <p class="text-secondary">Customize Theme, Reading Fonts, and Verified Academic Source Citations</p>
+        <h1 class="h1">Workspace Settings & Themes</h1>
+        <p class="text-secondary">Configure typography, reading environment, and data backups</p>
       </div>
 
-      <div class="card" style="max-width:680px; margin-bottom:var(--space-6);">
-        <h3 class="h3" style="margin-bottom:var(--space-4);">Theme & Appearance</h3>
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:var(--space-4);">
-          <div>
-            <div style="font-weight:600; font-size:0.95rem;">Interface Theme</div>
-            <div class="text-secondary" style="font-size:0.8rem;">Switch between technical dark theme and high-contrast light theme</div>
-          </div>
-          <button class="btn btn-secondary btn-sm" onclick="toggleTheme()">Toggle Theme (${AppState.theme})</button>
+      <div class="card" style="max-width:680px; padding:24px;">
+        <h3 class="h3" style="margin-bottom:14px;">Theme Environment</h3>
+        <div style="display:flex; gap:10px; margin-bottom:24px;">
+          <button class="btn ${AppState.theme === 'warm' ? 'btn-primary' : 'btn-secondary'} btn-sm" onclick="AppState.theme='warm'; initTheme();">Warm Paper (Default)</button>
+          <button class="btn ${AppState.theme === 'light' ? 'btn-primary' : 'btn-secondary'} btn-sm" onclick="AppState.theme='light'; initTheme();">Academic Light</button>
+          <button class="btn ${AppState.theme === 'dark' ? 'btn-primary' : 'btn-secondary'} btn-sm" onclick="AppState.theme='dark'; initTheme();">Dark Reading</button>
         </div>
 
-        <div style="display:flex; justify-content:space-between; align-items:center;">
-          <div>
-            <div style="font-weight:600; font-size:0.95rem;">Default Reading Font Size</div>
-            <div class="text-secondary" style="font-size:0.8rem;">Adjust font size for study notes (${AppState.fontSize}px)</div>
-          </div>
-          <div style="display:flex; gap:6px;">
-            <button class="icon-action-btn" onclick="adjustFontSize(-1)">-</button>
-            <button class="icon-action-btn" onclick="adjustFontSize(1)">+</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Sources and Academic References -->
-      <div class="card" style="max-width:680px; margin-bottom:var(--space-6);">
-        <h3 class="h3" style="margin-bottom:var(--space-3);">Verified Academic Sources & References</h3>
-        <p class="text-secondary" style="font-size:0.85rem; margin-bottom:16px;">
-          All curriculum structures, exam weights, and foundational reference textbooks cited in accordance with academic integrity guidelines:
-        </p>
-
-        <div style="display:flex; flex-direction:column; gap:10px;">
-          ${sources.map(s => `
-            <div style="padding:10px; background:var(--color-surface-elevated); border-radius:var(--radius-md); border:1px solid var(--color-border);">
-              <div style="display:flex; justify-content:space-between; align-items:center;">
-                <strong style="font-size:0.88rem;">${s.title}</strong>
-                <a href="${s.url}" target="_blank" rel="noopener" class="btn btn-secondary btn-sm" style="font-size:0.75rem;">Source Link &rarr;</a>
-              </div>
-              <div class="text-secondary" style="font-size:0.78rem; margin-top:4px;">${s.usage} • <em>${s.license}</em></div>
-            </div>
-          `).join('')}
-        </div>
-      </div>
-
-      <div class="card" style="max-width:680px;">
-        <h3 class="h3" style="margin-bottom:var(--space-4);">Local Storage Management</h3>
-        <p class="text-secondary" style="font-size:0.85rem; margin-bottom:16px;">
-          Your study bookmarks, daily tasks, and theme preferences are saved locally on this browser. No personal data is sent to external servers.
-        </p>
-        <button class="btn btn-secondary btn-sm" onclick="clearLocalData()" style="color:var(--color-error); border-color:var(--color-error-subtle);">
-          Reset Local Study Data
-        </button>
+        <h3 class="h3" style="margin-bottom:14px;">Data Management</h3>
+        <p class="text-secondary" style="font-size:0.88rem; margin-bottom:14px;">All study history and planner tasks remain 100% private in local storage.</p>
+        <button class="btn btn-secondary btn-sm" onclick="if(confirm('Clear local study history and tasks?')) { localStorage.clear(); location.reload(); }">Clear Local Data</button>
       </div>
     `;
   }
 
-  window.clearLocalData = function() {
-    if (confirm('Are you sure you want to reset your local study bookmarks and planner tasks?')) {
-      localStorage.removeItem('mech_bookmarks');
-      localStorage.removeItem('mech_tasks');
-      AppState.bookmarks = [];
-      AppState.tasks = [];
-      alert('Local data reset.');
-      renderSettings();
-    }
-  };
-
   // ===================================================================
-  // UNIVERSAL SEARCH MODAL (Ctrl+K)
+  // 15. UNIVERSAL SEARCH (Ctrl+K)
   // ===================================================================
   function setupUniversalSearch() {
     const trigger = document.getElementById('global-search-trigger');
@@ -1523,132 +1779,90 @@
     const input = document.getElementById('search-palette-input');
     const resultsContainer = document.getElementById('search-results-list');
 
-    if (trigger) trigger.addEventListener('click', openSearch);
+    if (!trigger || !modal || !input) return;
 
-    if (modal) {
-      modal.addEventListener('click', (e) => {
-        if (e.target === modal) closeSearch();
-      });
+    function openSearch() {
+      modal.classList.add('active');
+      setTimeout(() => input.focus(), 60);
     }
 
-    if (input) {
-      input.addEventListener('input', () => {
-        const query = input.value.trim().toLowerCase();
-        if (!query) {
-          resultsContainer.innerHTML = `<div class="search-group-title">Type to search subjects, modules, formulas, and PYQs...</div>`;
-          return;
-        }
-
-        const matches = performSearch(query);
-        renderSearchResults(matches, resultsContainer);
-      });
-    }
-  }
-
-  function openSearch() {
-    const modal = document.getElementById('search-palette-modal');
-    const input = document.getElementById('search-palette-input');
-    if (modal) modal.classList.add('active');
-    if (input) {
+    function closeSearch() {
+      modal.classList.remove('active');
       input.value = '';
-      input.focus();
-    }
-  }
-
-  function closeSearch() {
-    const modal = document.getElementById('search-palette-modal');
-    if (modal) modal.classList.remove('active');
-  }
-
-  function performSearch(query) {
-    const results = [];
-    const data = window.MECH_DATA || {};
-
-    // 1. Search Curriculum Courses
-    if (data.catalog_raw) {
-      data.catalog_raw.forEach(c => {
-        if (c.code.toLowerCase().includes(query) || c.title.toLowerCase().includes(query)) {
-          results.push({
-            type: 'Course',
-            title: `${c.code}: ${c.title}`,
-            sub: `Semester ${c.semester} • ${c.type}`,
-            link: `#semesters/S${c.semester}`
-          });
-        }
-      });
     }
 
-    // 2. Search Starter Foundation Lessons
-    if (data.starter_lessons) {
-      data.starter_lessons.forEach(l => {
-        if (l.title.toLowerCase().includes(query)) {
-          results.push({
-            type: 'Foundation',
-            title: l.title,
-            sub: 'Beginner Mechanical Learning Track',
-            link: `#notes/FOUNDATION/${encodeURIComponent(l.title)}`
-          });
-        }
-      });
-    }
+    trigger.addEventListener('click', openSearch);
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeSearch();
+    });
 
-    // 3. Search Formulas
-    if (data.formulas) {
-      data.formulas.forEach(f => {
-        if (f.name.toLowerCase().includes(query) || f.category.toLowerCase().includes(query) || f.code.toLowerCase().includes(query)) {
-          results.push({
-            type: 'Formula',
-            title: f.name,
-            sub: `${f.category} (${f.code})`,
-            link: `#formulas`
-          });
-        }
-      });
-    }
-
-    // 4. Search PYQs
-    if (data.pyqs) {
-      data.pyqs.forEach(p => {
-        if (p.subject.toLowerCase().includes(query) || p.code.toLowerCase().includes(query) || p.title.toLowerCase().includes(query)) {
-          results.push({
-            type: 'PYQ Paper',
-            title: p.subject,
-            sub: `${p.semester} • ${p.exam_type}`,
-            link: p.url
-          });
-        }
-      });
-    }
-
-    return results.slice(0, 10);
-  }
-
-  function renderSearchResults(results, container) {
-    if (results.length === 0) {
-      container.innerHTML = `<div class="search-group-title" style="text-align:center; padding:16px;">No matching engineering resources found.</div>`;
-      return;
-    }
-
-    container.innerHTML = results.map(r => `
-      <a href="${r.link}" class="search-result-item" onclick="document.getElementById('search-palette-modal').classList.remove('active')">
-        <span class="badge badge-blue">${r.type}</span>
-        <div style="flex:1;">
-          <div style="font-weight:600; font-size:0.9rem;">${r.title}</div>
-          <div class="text-secondary" style="font-size:0.75rem;">${r.sub}</div>
-        </div>
-        <span style="color:var(--color-text-tertiary);">&rarr;</span>
-      </a>
-    `).join('');
-  }
-
-  function setupKeyboardShortcuts() {
-    window.addEventListener('keydown', (e) => {
+    document.addEventListener('keydown', (e) => {
       if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
         e.preventDefault();
         openSearch();
       }
-      if (e.key === 'Escape') {
+      if (e.key === 'Escape' && modal.classList.contains('active')) {
         closeSearch();
+      }
+    });
+
+    input.addEventListener('input', (e) => {
+      const q = e.target.value.toLowerCase().trim();
+      if (!q) {
+        resultsContainer.innerHTML = '<div class="search-group-title">Start typing to search curriculum & notes...</div>';
+        return;
+      }
+
+      const data = window.MECH_DATA || {};
+      const catalog = data.catalog_raw || [];
+      const formulas = data.formulas || [];
+      const pyqs = data.pyqs || [];
+
+      const filteredCourses = catalog.filter(c => c.code.toLowerCase().includes(q) || c.title.toLowerCase().includes(q)).slice(0, 5);
+      const filteredFormulas = formulas.filter(f => f.name.toLowerCase().includes(q) || (f.description && f.description.toLowerCase().includes(q))).slice(0, 3);
+      const filteredPyqs = pyqs.filter(p => p.title.toLowerCase().includes(q)).slice(0, 3);
+
+      let html = '';
+      if (filteredCourses.length > 0) {
+        html += '<div class="search-group-title">Courses</div>';
+        filteredCourses.forEach(c => {
+          html += `
+            <a href="#notes/${c.code}" class="search-result-item" onclick="document.getElementById('search-palette-modal').classList.remove('active')">
+              <span class="badge badge-blue text-mono">${c.code}</span>
+              <div>
+                <div style="font-weight:600;">${c.title}</div>
+                <div style="font-size:0.75rem; color:var(--color-text-secondary);">Semester ${c.semester} • ${c.type}</div>
+              </div>
+            </a>
+          `;
+        });
+      }
+
+      if (filteredFormulas.length > 0) {
+        html += '<div class="search-group-title">Formulas</div>';
+        filteredFormulas.forEach(f => {
+          html += `
+            <a href="#formulas" class="search-result-item" onclick="document.getElementById('search-palette-modal').classList.remove('active')">
+              <span class="badge badge-teal">∑</span>
+              <div>
+                <div style="font-weight:600;">${f.name}</div>
+                <div style="font-size:0.75rem; color:var(--color-text-secondary);">${f.subject_name}</div>
+              </div>
+            </a>
+          `;
+        });
+      }
+
+      resultsContainer.innerHTML = html || '<div class="search-group-title">No matching resources found.</div>';
+    });
+  }
+
+  // Keyboard Shortcuts (Alt+P for Parking Lot)
+  function setupKeyboardShortcuts() {
+    document.addEventListener('keydown', (e) => {
+      if (e.altKey && (e.key === 'p' || e.key === 'P')) {
+        e.preventDefault();
+        toggleParkingLot();
       }
     });
   }
