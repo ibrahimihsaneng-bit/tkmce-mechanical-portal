@@ -1,4 +1,4 @@
-const CACHE_NAME = 'mech-tkmce-v3.3-s1-s8-textbook';
+const CACHE_NAME = 'mech-tkmce-v3.4-unified-focus-and-resources';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
