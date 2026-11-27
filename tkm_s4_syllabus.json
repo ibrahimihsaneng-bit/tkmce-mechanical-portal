@@ -1,0 +1,981 @@
+{
+  "24MET401": {
+    "slot": "A",
+    "code": "24MET401",
+    "name": "Mechanics of Deformable Solids",
+    "modules": {
+      "Module 1": [
+        {
+          "id": "1.1",
+          "text": "Deformation behaviour of elastic solids in equilibrium under the action of a system of forces, method of sections."
+        },
+        {
+          "id": "1.2",
+          "text": "Stress vectors on Cartesian coordinate planes passing through a point, stress at a point in the form of a matrix."
+        },
+        {
+          "id": "1.3",
+          "text": "Equality of cross shear, Cauchy's equation."
+        },
+        {
+          "id": "1.4",
+          "text": "Displacement, gradient of displacement, Cartesian strain matrix"
+        },
+        {
+          "id": "1.5",
+          "text": "Strain- displacement relations (small-strain only), Simple problems to find strain matrix."
+        },
+        {
+          "id": "1.6",
+          "text": "Tutorial Session"
+        },
+        {
+          "id": "1.7",
+          "text": "Stress tensor and strain tensor for plane stress and plane strain conditions."
+        },
+        {
+          "id": "1.8",
+          "text": "Principal planes and principal stress, meaning of stress invariants, maximum shear stress"
+        },
+        {
+          "id": "1.9",
+          "text": "Mohr’s circle construction"
+        },
+        {
+          "id": "1.10",
+          "text": "Problems for 2D case using Mohr circle"
+        },
+        {
+          "id": "1.11",
+          "text": "Determination of Principal Stresses using Computational Tool"
+        }
+      ],
+      "Module 2": [
+        {
+          "id": "2.1",
+          "text": "Stress–Strain curves of Ductile and Brittle Materials, Poisson’s ratio."
+        },
+        {
+          "id": "2.2",
+          "text": "Constitutive equations-generalized Hooke’s law, equations for linear elastic isotropic solids in terms of Young’s Modulus and Poisson’s ratio,"
+        },
+        {
+          "id": "2.3",
+          "text": "Hooke’s law for Plane stress and plane strain conditions. Relations between elastic constants E, G, ν and K."
+        },
+        {
+          "id": "2.4",
+          "text": "Calculation of stress and strain in axially loaded members"
+        },
+        {
+          "id": "2.5",
+          "text": "Calculation of deformation in axially loaded members"
+        },
+        {
+          "id": "2.6",
+          "text": "Thermal stress and thermal strain."
+        },
+        {
+          "id": "2.7",
+          "text": "Tutorial Problems from thermal stresses and strains"
+        },
+        {
+          "id": "2.8",
+          "text": "Statically indeterminate problems."
+        },
+        {
+          "id": "2.9",
+          "text": "Statically indeterminate problems"
+        }
+      ],
+      "Module 3": [
+        {
+          "id": "3.1",
+          "text": "Torsional deformation of circular shafts, assumptions for shafts subjected to torsion within elastic deformation range,"
+        },
+        {
+          "id": "3.2",
+          "text": "Derivation of torsion formula, Torsional rigidity, Polar moment of inertia,"
+        },
+        {
+          "id": "3.3",
+          "text": "Basic design of transmission shafts."
+        },
+        {
+          "id": "3.4",
+          "text": "Simple problems to estimate the stress in solid and hollow shafts."
+        },
+        {
+          "id": "3.5",
+          "text": "Shear force and bending moment diagrams for cantilever"
+        },
+        {
+          "id": "3.6",
+          "text": "Tutorial problems based on loading of cantilever."
+        },
+        {
+          "id": "3.7",
+          "text": "Shear force and bending moment diagrams for simply supported beams."
+        },
+        {
+          "id": "3.8",
+          "text": "Shear force and bending moment diagrams for simply supported beams."
+        },
+        {
+          "id": "3.9",
+          "text": "Differential equations between load, shear force and bending moment."
+        },
+        {
+          "id": "3.10",
+          "text": "Use of computational tools for drawing shear force and bending moment diagrams (Group work)"
+        }
+      ],
+      "Module 4": [
+        {
+          "id": "4.1",
+          "text": "Normal and shear stress in beams: Derivation of flexural formula, section modulus, flexural rigidity"
+        },
+        {
+          "id": "4.2",
+          "text": "Numerical problems to evaluate bending stress"
+        },
+        {
+          "id": "4.3",
+          "text": "Economic sections"
+        },
+        {
+          "id": "4.4",
+          "text": "Shear stress formula for beams, shear stress distribution for a rectangular section."
+        },
+        {
+          "id": "4.5",
+          "text": "Tutorial on shear stress distribution"
+        },
+        {
+          "id": "4.6",
+          "text": "Deflection of beams: Differential equation for elastic curve, Concept of double integration method"
+        },
+        {
+          "id": "4.7",
+          "text": "Deflection of beams using Macauley’s method (concentrated or uniformly distributed load)"
+        },
+        {
+          "id": "4.8",
+          "text": "Deflection of beams using Macauley’s method (combined concentrated and uniformly distributed load)"
+        },
+        {
+          "id": "4.9",
+          "text": "Tutorial problems to find deflection"
+        },
+        {
+          "id": "4.10",
+          "text": "Design of beams for a given loading"
+        }
+      ],
+      "Module 5": [
+        {
+          "id": "5.1",
+          "text": "Fundamentals of buckling and stability, critical load, equilibrium diagram for buckling of an idealized structure"
+        },
+        {
+          "id": "5.2",
+          "text": "Buckling of columns with pinned ends"
+        },
+        {
+          "id": "5.3",
+          "text": "Euler’s buckling theory for long columns,Effect of end conditions"
+        },
+        {
+          "id": "5.4",
+          "text": "Critical stress, slenderness ratio, Rankine’s formula for short columns."
+        },
+        {
+          "id": "5.5",
+          "text": "Tutorial problems on column buckling"
+        },
+        {
+          "id": "5.6",
+          "text": "Stresses due to combined loads (axial, bending and torsion)"
+        },
+        {
+          "id": "5.7",
+          "text": "Stresses due to combined loads (axial, bending and torsion)"
+        },
+        {
+          "id": "5.8",
+          "text": "Practical problems involving combined loading - Case study report submission (Group work)"
+        }
+      ]
+    }
+  },
+  "24MET402": {
+    "slot": "B",
+    "code": "24MET402",
+    "name": "Measurements and Metrology",
+    "modules": {
+      "Module 1": [
+        {
+          "id": "1.1",
+          "text": "Measurement Purpose and Parameters: Purposes of measurements – Introductory session on Metrology."
+        },
+        {
+          "id": "1.2",
+          "text": "Parameters and Definitions: Accuracy, precision, range, resolution, Errors in Measurement, types of errors. Abbe’s Principle, uncertainty and error sources; Calibration principles."
+        },
+        {
+          "id": "1.3",
+          "text": "Measurement Principles: Linear and angular measurements – Slip gauges, Angle gauges, Angle Dekkor; Clinometer – Features and use of these for measurements."
+        },
+        {
+          "id": "1.4",
+          "text": "Comparators – Mechanical, Electrical, Optical and Pneumatic types – Features and use of these for measurements. (Self-study topic, based on overall discussion)"
+        },
+        {
+          "id": "1.5",
+          "text": "Mechanical Measurements with equipment such as Vernier calipers, micrometers, bevel protractor and sine bar (Demonstration in lab/class)"
+        }
+      ],
+      "Module 2": [
+        {
+          "id": "2.1",
+          "text": "Limits, Fit and Tolerances: Definitions – Limits, fits, tolerance, fundamental deviation. Tolerance zone and grades. Hole and shaft based systems."
+        },
+        {
+          "id": "2.2",
+          "text": "Limit gauges – Features and use of Plug, ring, snap, position and feeler gauges for applications. Gauge design - Taylor's principle of gauging."
+        },
+        {
+          "id": "2.3",
+          "text": "Geometric tolerances and representation. Design of tolerances for various applications. Tolerance analysis in manufacturing and assembly."
+        },
+        {
+          "id": "2.4",
+          "text": "Numerical problems on tolerance, fits, gauge design and GD&T (Assignment shall be given based on this topic.)"
+        },
+        {
+          "id": "2.5",
+          "text": "Role of metrology in Design for Manufacturing (Self-study topic)."
+        }
+      ],
+      "Module 3": [
+        {
+          "id": "3.1",
+          "text": "Form and Surface Metrology: Form metrology – Form Measurement – Straightness, flatness, roundness – Measurement method and presenting the error."
+        },
+        {
+          "id": "3.2",
+          "text": "Features of CMM, 3D scanning, Autocollimator (Demonstration of measurement with these instruments in lab)"
+        },
+        {
+          "id": "3.3",
+          "text": "Interferometer – Principle, uses in measurement and calibration."
+        },
+        {
+          "id": "3.4",
+          "text": "Surface metrology – Surface profiler, Roughness parameters: Ra, Rq, Rt, Rz and the method of computation."
+        },
+        {
+          "id": "3.5",
+          "text": "Principles and Features of Optical microscopes, Laser scanning microscopes, Scanning Electron Microscopy (SEM), Raman spectroscopy for measurements. (Overview discussion, Self -study topic)"
+        }
+      ],
+      "Module 4": [
+        {
+          "id": "4.1",
+          "text": "Electrical Measurements and Instruments: Transducers – Types, characteristics. Strain gages – Principle, types, applications."
+        },
+        {
+          "id": "4.2",
+          "text": "Displacement transducers, LVDT. Instrumentation amplifier; Isolation amplifier – basic principles only."
+        },
+        {
+          "id": "4.3",
+          "text": "Digital data acquisition system - Interfacing transducers to electronics control and measuring system (Shall be demonstrated in lab.)"
+        },
+        {
+          "id": "4.4",
+          "text": "Thermal and Flow Measurement: Measurement of temperature - Thermocouple; Resistance Temperature Detectors (RTD); Thermistors; Pyrometers."
+        },
+        {
+          "id": "4.5",
+          "text": "Flow obstruction methods; Magnetic flow meters."
+        }
+      ],
+      "Module 5": [
+        {
+          "id": "5.1",
+          "text": "Design of Experiments and Statistical Analysis: Design of Experiments (DOE) techniques; Taguchi orthogonal arrays."
+        },
+        {
+          "id": "5.2",
+          "text": "Error probability density function of a system of non-ideal elements; Error reduction techniques."
+        },
+        {
+          "id": "5.3",
+          "text": "Response equations, Regression models – linear model, examples."
+        },
+        {
+          "id": "5.4",
+          "text": "Error probability density function of a system of non-ideal elements; Error reduction techniques."
+        }
+      ]
+    }
+  },
+  "24MEP403": {
+    "slot": "C",
+    "code": "24MEP403",
+    "name": "Manufacturing Processes",
+    "modules": {
+      "Module 1": [
+        {
+          "id": "1.1",
+          "text": "Manufacturing Processes and Classification: Introduction, manufacturing processes, Basic classification, Relative advantages and limitations"
+        },
+        {
+          "id": "1.2",
+          "text": "Material Shaping Processes: Metal casting (sand casting, die and investment casting: Basic steps, Advantages, Disadvantages, Industrial applications) Preparation of pattern and mould"
+        },
+        {
+          "id": "1.3",
+          "text": "Engineering analysis of casting: (Heating molten metal, Pouring of molten metal- Application of Bernoullis theorem and Continuity law, Mould filling time, Volume flow rate, Solidification time-Chvorinov’s rule)"
+        },
+        {
+          "id": "1.4",
+          "text": "Riser design, Casting defects, Product design considerations in metal casting"
+        },
+        {
+          "id": "1.5",
+          "text": "Thermoplastic and thermosetting plastic processes (injection molding process and blow molding process- Process and equipment, industrial applications)"
+        }
+      ],
+      "Module 2": [
+        {
+          "id": "2.1",
+          "text": "Bulk metal forming (forging, rolling, extrusion, wire drawing- Process, features, industrial applications)"
+        },
+        {
+          "id": "2.2",
+          "text": "Analysis of open die forging, Analysis of flat rolling process- (Force and power calculation)"
+        },
+        {
+          "id": "2.3",
+          "text": "Sheet metal forming (shearing, deep drawing, bending- Process, features, industrial applications)"
+        },
+        {
+          "id": "2.4",
+          "text": "Other (non-conventional) Manufacturing Processes: Electrical Discharge Machining & Wire EDM - Principle, Process, Advantages, Disadvantages, industrial applications"
+        },
+        {
+          "id": "2.5",
+          "text": "Abrasive Water Jet Machining - Principle, Process, Advantages, Disadvantages, industrial applications Electro-Chemical Machining- Principle, Process, Feed rate and machining time estimation based on Faradays Law, Advantages, Disadvantages, industrial applications"
+        },
+        {
+          "id": "2.6",
+          "text": "Ultrasonic Machining- - Principle, Process, Advantages, Disadvantages, industrial applications Electron Beam Machining- Principle, Process, Advantages, Disadvantages, industrial applications"
+        },
+        {
+          "id": "2.7",
+          "text": "Laser Beam Machining & Plasma Arc Machining- Principle, Process, Advantages, Disadvantages, industrial applications"
+        }
+      ],
+      "Module 3": [
+        {
+          "id": "3.1",
+          "text": "Material Removal Processes: Classification of material removal processes, Turning, cutting conditions in turning- cutting time, Material removal rate"
+        },
+        {
+          "id": "3.2",
+          "text": "Drilling, cutting conditions in drilling- - cutting time, Material removal rate, cost computation"
+        },
+        {
+          "id": "3.3",
+          "text": "Milling, types of milling, Cutting conditions in milling- machining time, material removal rate Grinding and other finishing processes"
+        },
+        {
+          "id": "3.4",
+          "text": "Single and multi-point cutting tools, Single point cutting tool nomenclature, cutting tool materials, Cutting fluid properties, machinability Types of chips, ASA system"
+        },
+        {
+          "id": "3.5",
+          "text": "Types of tool wear, Tool life and Taylors tool life equation"
+        },
+        {
+          "id": "3.6",
+          "text": "Machining process modeling (including simulation and industrial case study): Orthogonal cutting, various force components; Chip formation, Tool wear and tool life, Economics of machining"
+        }
+      ],
+      "Module 4": [
+        {
+          "id": "4.1",
+          "text": "Joining and Fastening Processes: Welding: Types of welding processes, types of weld joint configurations Arc welding: Process, Estimation of Power consumption and rate of heat generation"
+        },
+        {
+          "id": "4.2",
+          "text": "Arc welding using consumable electrodes: Shielded metal arc welding and GMAW (MIG)- Process, industrial applications"
+        },
+        {
+          "id": "4.3",
+          "text": "GTAW (TIG)- Process, industrial applications"
+        },
+        {
+          "id": "4.4",
+          "text": "Solid state joining- Process, types"
+        },
+        {
+          "id": "4.5",
+          "text": "Brazing and soldering, Adhesive bonding - Process, types"
+        },
+        {
+          "id": "4.6",
+          "text": "Weld defects, Weld inspection and testing, Design considerations in welding"
+        },
+        {
+          "id": "4.7",
+          "text": "Welding process modeling (including simulation and industrial case study): Process simulation; Parametric variation study"
+        }
+      ],
+      "Module 5": [
+        {
+          "id": "5.1",
+          "text": "Powder metallurgy: Basics processing steps, advantages, disadvantages, industrial applications"
+        },
+        {
+          "id": "5.2",
+          "text": "Additive Manufacturing Processes: Classification, Extrusion & vat polymerization, Powder bed fusion - Process, Advantages, disadvantages, industrial applications"
+        },
+        {
+          "id": "5.3",
+          "text": "Direct energy deposition, binder jetting process, lamination processes- Process, Advantages, disadvantages, industrial applications"
+        },
+        {
+          "id": "5.4",
+          "text": "Modelling of layer-by-layer manufacturing approach- Cycle time, cost estimation"
+        },
+        {
+          "id": "5.5",
+          "text": "Additive manufacturing process modeling (including industrial case study): Part modeling, cycle time and cost estimation, Defects in 3-D printed products [S] LESSON PLAN FOR LAB COMPONENT (24 Hrs) Hours Experiment 1 Metal casting 4 • Preparation of green sand mould and cast a given object. • Conduct experiments to determine the shear, compressive and tensile strength of moulding sand 2 Forging 4 • Exercise on forging machine including estimation of size of the raw material required to forge the given component from mild steel in hydraulic forging machine (square prism) • Exercise on forging machine including estimation of size of the raw material required to forge the given component from mild steel in hydraulic forging machine (hexagonal bolt) Wire-EDM, Abrasive water jet machining • Make an object as per the given drawing using wire-EDM. • Investigate the effect of pulse current on surface roughness in wire-EDM • Investigate the effect of abrasive particle size on material removal rate/ surface roughness in Abrasive Water Jet Machining 4 Lathe, milling machine 4 • Investigate the effect of cutting parameters on cutting forces in lathe using a tool dynamometer • Exercise on Milling machine- Make a spur gear as per the design (DP/Module Cutter) using indexing mechanism Weld quality inspection, TIG welding • Conduct a suitable test for finding the defects in welded joints with the help of any of the following test methods. 1. Liquid penetrant test 2. Ultrasound flaw detector test 3. Magnetic crack detector test 4. X-Ray radiography inspection • Investigate the effect of welding parameters on weld quality in TIG welding 6 Additive manufacturing 4 • Exercise on 3D printing - Make a 3D model of given component using any modeling software and print its prototype using FDM 3D printer"
+        }
+      ]
+    }
+  },
+  "24MEJ404": {
+    "slot": "D",
+    "code": "24MEJ404",
+    "name": "Heat Transfer and Thermal Machines",
+    "modules": {
+      "Module 1": [
+        {
+          "id": "1.1",
+          "text": "Introduction: Modes of heat transfer; Examples of equipment (like air conditioner and air cooler) involving heat transfer"
+        },
+        {
+          "id": "1.2",
+          "text": "Conduction Heat Transfer: General heat conduction equation- Cartesian co-ordinate system."
+        },
+        {
+          "id": "1.3",
+          "text": "Steady 1D solution for conduction heat transfer in Cartesian co-ordinate system. (with and without heat generation)"
+        },
+        {
+          "id": "1.4",
+          "text": "General heat conduction equation - cylindrical co-ordinate system. Steady 1D solution for conduction heat transfer in cylindrical; (without heat generation)"
+        },
+        {
+          "id": "1.5",
+          "text": "General heat conduction equation - cylindrical co-ordinate system. Steady 1D solution for conduction heat transfer in cylindrical geometry; (with heat generation) Self-study"
+        },
+        {
+          "id": "1.6",
+          "text": "Concept of conduction and film resistances; Critical insulation thickness"
+        }
+      ],
+      "Module 2": [
+        {
+          "id": "2.1",
+          "text": "Convection Heat Transfer: Basic equations; Boundary layers; Forced convection; External and internal flows; Self-study"
+        },
+        {
+          "id": "2.2",
+          "text": "Natural convective heat transfer; Dimensionless parameters for forced and free convection heat transfer;"
+        },
+        {
+          "id": "2.3",
+          "text": "Correlations for forced convection Correlations for free convection"
+        },
+        {
+          "id": "2.4",
+          "text": "Estimating heat transfer rates in laminar and turbulent flow situations using appropriate correlations for free convection."
+        },
+        {
+          "id": "2.5",
+          "text": "Estimating heat transfer rates in laminar and turbulent flow situations using appropriate correlations for forced convection."
+        }
+      ],
+      "Module 3": [
+        {
+          "id": "3.1",
+          "text": "Radiation Heat Transfer : Interaction of radiation with materials; Definitions of radiative properties; Stefan Boltzmann’s law; Black and grey body radiation; Self study"
+        },
+        {
+          "id": "3.2",
+          "text": "Calculation of radiation heat transfer between surfaces using radiative properties (black body) 2 Calculation of radiation heat transfer between surfaces using radiative properties (black body)"
+        },
+        {
+          "id": "3.3",
+          "text": "View factor - computation for simple geometries, the radiosity method for different"
+        },
+        {
+          "id": "3.4",
+          "text": "Concept of Radiation shield"
+        },
+        {
+          "id": "3.5",
+          "text": "Effect of Radiation shield on heat transfer"
+        }
+      ],
+      "Module 4": [
+        {
+          "id": "4.1",
+          "text": "Heat Exchanger Design: Function, classification and configuration of heat exchangers Self study"
+        },
+        {
+          "id": "4.2",
+          "text": "Evaluation of mean temperature difference, Heat exchanger effectiveness"
+        },
+        {
+          "id": "4.3",
+          "text": "Analysis of heat exchangers"
+        },
+        {
+          "id": "4.4",
+          "text": "Design - Determination of number of passes, geometrical parameter and configuration - selection of heat exchangers."
+        },
+        {
+          "id": "4.5",
+          "text": "Boiling: Pool boiling; Flow boiling"
+        },
+        {
+          "id": "4.6",
+          "text": "Condensation: Film and drop wise condensation"
+        }
+      ],
+      "Module 5": [
+        {
+          "id": "5.1",
+          "text": "Introduction to mass transfer - Molecular diffusion in fluids - Steady state molecular diffusion in fluids under stagnant and laminar flow conditions - Fick’s law of diffusion"
+        },
+        {
+          "id": "5.2",
+          "text": "Types of solid diffusion- Equimolar counter-diffusion- Self study"
+        },
+        {
+          "id": "5.3",
+          "text": "Mass transfer coefficients in laminar and turbulent flows-"
+        },
+        {
+          "id": "5.4",
+          "text": "Correlation for convective mass transfer coefficient- Correlation of mass transfer coefficients for single cylinder- 1 LESSON PLAN FOR LAB COMPONENT The concepts in the syllabus that can be illustrated through laboratory experiment should be included in the lab component part to ensure comprehensive coverage of the course. Hours [24] Experiment 1 Conduction 6 1. Determine of thermal conductivity of different solids and make comparison. 2. Examine the variation of thermal conductivity and specific heat of different materials by T history method for different heat inputs 3. Estimate the thermal conductivity of different liquids 2 Convection 4 4. Determine the steady state heat transfer coefficients in free convection. 5. Determine of heat transfer coefficients in forced convection for different flow velocity and make the inference 6. Estimation of sensible and latent heat of different materials 7. Experiment on lumped heat capacity analysis 3 Radiation 6 8. Obtain the Stefan Boltzman constant in black body radiation 9. Compare the emissivity of given specimens. 10. Carry out the measurement of solar radiation 4 Heat exchanger/Boiling 2 11. Evaluate the performance of parallel flow and Counter flow heat exchangers 12. Boiling heat transfer 13. Heat transfer through agitated vessel 14. Heat transfer through vertical condenser 5 I C Engines 2 15. Prepare Heat balance sheet of given IC engine 6 Thermal analysis 4 16. Conduct thermal Simulation studies using commercial software 17. Conduct Experiment on Cooling tower A minimum of twelve experiments should be conducted in the lab. LESSON PLAN FOR PROJECT COMPONENT The concepts in the syllabus that can be covered through the project shall be included in the project component part to ensure comprehensive coverage of the course through theory, lab and project sessions. Total No. of Class Hours: 24 12 Hours of self-study hours also should be utilized for the development of the complete project. Class Hours [24] 1 Preliminary Design of the Project 4 2 Zeroth presentation (4th week) 2 3 Project work - First Phase 4 4 Interim Presentation (7th and 8th weeks) 4 5 Project work - Final Phase & Report writing (discussions in class during project hours) 6 6 Final Evaluation and Presentation (11th and 12th weeks) 4 Sample project topics for students to work on: 1 Evaluate critical radius of insulation for sphere and validate with numerical model. Perform analysis for different insulating materials 2 Obtain the temperature distribution along the length for different fin materials and geometry. Compare with numerical results 3 Carry out heat exchanger analysis and optimize the design for given inputs 4 Conduct thermal analysis of an IC Engine part Note:- Projects need not be restricted to the above topics. Students are encouraged to choose any application problems, in the course domain, which they desire to work on."
+        }
+      ]
+    }
+  },
+  "24HUT415": {
+    "slot": "E",
+    "code": "24HUT415",
+    "name": "Management I – Finance and Accounting",
+    "modules": {
+      "Module 1": [
+        {
+          "id": "1.1",
+          "text": "Introduction to Book-keeping and Accounting"
+        },
+        {
+          "id": "1.2",
+          "text": "Accounting Process – Purpose of accounting, accounting standards."
+        },
+        {
+          "id": "1.3",
+          "text": "Classification of accounting, Double entry system of accounting"
+        },
+        {
+          "id": "1.4",
+          "text": "Concepts and Conventions"
+        },
+        {
+          "id": "1.5",
+          "text": "Preparation of Journal, Ledger and Trial Balance."
+        }
+      ],
+      "Module 2": [
+        {
+          "id": "2.1",
+          "text": "Introduction of Financial statements"
+        },
+        {
+          "id": "2.2",
+          "text": "Preparation of Profit & Loss Account, Cash flow statement and types-operating, investing and financing."
+        },
+        {
+          "id": "2.3",
+          "text": "Balance Sheet (Simple problems)."
+        },
+        {
+          "id": "2.4",
+          "text": "Introduction to Accounting Software."
+        },
+        {
+          "id": "2.5",
+          "text": "Simple problems based on accounting software."
+        }
+      ],
+      "Module 3": [
+        {
+          "id": "3.1",
+          "text": "Introduction to Financial Management and functions, financial goals, financial planning and control."
+        },
+        {
+          "id": "3.2",
+          "text": "Financial ratios - Liquidity ratios , Leverage ratios , Efficiency ratios, Profitability ratios. Market value ratios."
+        },
+        {
+          "id": "3.3",
+          "text": "Profit and Wealth Maximization, Portfolio Management"
+        },
+        {
+          "id": "3.4",
+          "text": "Investment plan – Long-term investment –Gold, stocks, bonds, real estate, investments made in other companies. PPF, NPS Trademarks and patents"
+        },
+        {
+          "id": "3.5",
+          "text": "Short-term investment- money market accounts, high -yield savings accounts, government bonds, and Treasury bills."
+        },
+        {
+          "id": "3.6",
+          "text": "Portfolio Management Financing and Dividend Decisions"
+        },
+        {
+          "id": "3.7",
+          "text": "Case study: Abakkus Fund - Sunil Singhania an Indian investor."
+        }
+      ],
+      "Module 4": [
+        {
+          "id": "4.1",
+          "text": "Introduction to Banking Systems-Functions –Structure of Banking System – Types"
+        },
+        {
+          "id": "4.2",
+          "text": "Rural Financing – Banker and Customer Relationship – customer satisfaction Legal and Ethical aspects."
+        },
+        {
+          "id": "4.3",
+          "text": "Deposit Mobilization – Loans and Advances – Assets and Liabilities."
+        },
+        {
+          "id": "4.4",
+          "text": "Fund transfer- Endorsement and Crossing of Cheque, Electronic fund transfer."
+        },
+        {
+          "id": "4.5",
+          "text": "Case study: Washington Mutual Bank- Failure on Sept"
+        }
+      ],
+      "Module 5": [
+        {
+          "id": "5.1",
+          "text": "Introduction to Budget- Expenditure, Deficit, Fiscal deficit, Revenue deficit"
+        },
+        {
+          "id": "5.2",
+          "text": "Types- Master Budget, Operating Budget, Financial Budget, Cash Budget, Static Budget, Flexible Budget, Capital Expenditure Budget, Program Budgets, Zero-Based Budgeting"
+        },
+        {
+          "id": "5.3",
+          "text": "Classifications- Activity-Based Budget, Add -On Budget, Bracket Budget, Rolling Budget, Rolling Forecast, Incremental Budget, Strategic Budget, Stretch Budget, Supplemental Budget, Target Budget"
+        },
+        {
+          "id": "5.4",
+          "text": "Financial Budget – Types – Balanced budget, Surplus budget, Deficit budget , Union budget and State budget . Budget analysis- Frequency, Variance, forecast and required changes."
+        }
+      ]
+    }
+  },
+  "24MCT406": {
+    "slot": "F",
+    "code": "24MCT406",
+    "name": "Environmental Sciences",
+    "modules": {
+      "Module 1": [
+        {
+          "id": "1.1",
+          "text": "Introduction- Definition and scope of environmental science - Interdisciplinary nature of the field"
+        },
+        {
+          "id": "1.2",
+          "text": "Ecosystem structure and function - Biodiversity and its importance"
+        },
+        {
+          "id": "1.3",
+          "text": "Threats to biodiversity (habitat loss, invasive species, overexploitation)"
+        },
+        {
+          "id": "1.4",
+          "text": "Man and Environment – Health and Environment – Environmental Ethics"
+        },
+        {
+          "id": "1.5",
+          "text": "Sustainable development – Social, economic and environmental dimensions – Need for Sustainable development, Sustainable Development Goals (SDGs)"
+        }
+      ],
+      "Module 2": [
+        {
+          "id": "2.1",
+          "text": "Air pollutants – classification, sources and impacts -"
+        },
+        {
+          "id": "2.2",
+          "text": "Clean air act and national ambient air quality standards (NAAQS) - Air quality index"
+        },
+        {
+          "id": "2.3",
+          "text": "Emission reduction strategies - Understanding and improving indoor air quality"
+        },
+        {
+          "id": "2.4",
+          "text": "Ground level ozone and photochemical smog"
+        },
+        {
+          "id": "2.5",
+          "text": "Ozone layer depletion and the Montreal Protocol, Global warming"
+        },
+        {
+          "id": "2.6",
+          "text": "Noise Pollution: Sources and effects of noise; quantification of noise pollution (Leq, LAeq, etc.)"
+        },
+        {
+          "id": "2.7",
+          "text": "Control and regulation rules in India"
+        }
+      ],
+      "Module 3": [
+        {
+          "id": "3.1",
+          "text": "Sources and availability of freshwater - Water conservation strategies."
+        },
+        {
+          "id": "3.2",
+          "text": "Water pollution and its impacts – Water Quality Standards (IS 10500)"
+        },
+        {
+          "id": "3.3",
+          "text": "Water quality index; Overview of water treatment plant"
+        },
+        {
+          "id": "3.4",
+          "text": "Sustainable water use and conflicts over water resources"
+        },
+        {
+          "id": "3.5",
+          "text": "Wastewater sources and quality"
+        },
+        {
+          "id": "3.6",
+          "text": "Wastewater disposal – Oxygen sag curve"
+        },
+        {
+          "id": "3.7",
+          "text": "Applicable wastewater discharge standards and typical flow schemes for sewage treatment plant"
+        },
+        {
+          "id": "3.8",
+          "text": "Decentralized wastewater treatment"
+        },
+        {
+          "id": "3.9",
+          "text": "Natural methods of wastewater treatment"
+        }
+      ],
+      "Module 4": [
+        {
+          "id": "4.1",
+          "text": "Waste Management: Consumerism and our throw -away culture"
+        },
+        {
+          "id": "4.2",
+          "text": "Characteristics of municipal solid waste; CPHEEO guidelines for solid waste management (overview only);"
+        },
+        {
+          "id": "4.3",
+          "text": "Waste disposal methods (landfill, incineration, recycling)"
+        },
+        {
+          "id": "4.4",
+          "text": "Sustainable practices in waste management - Transition to zero waste lifestyle – Circular Economy"
+        },
+        {
+          "id": "4.5",
+          "text": "Hazardous and e -waste identification and management - Recycling"
+        },
+        {
+          "id": "4.6",
+          "text": "Waste-to-energy technologies – regulations for hazardous waste management in India (overview only)"
+        },
+        {
+          "id": "4.7",
+          "text": "Biomedical waste and its management"
+        }
+      ],
+      "Module 5": [
+        {
+          "id": "5.1",
+          "text": "Climate Change: Evidence, causes and effects, Carbon footprint, Global warming potential"
+        },
+        {
+          "id": "5.2",
+          "text": "Role of IPCC in the understanding of climate change"
+        },
+        {
+          "id": "5.3",
+          "text": "Global climate agreements – The United Nations Framework Convention on Climate Change, the Kyoto Protocol, and the Paris Agreement"
+        },
+        {
+          "id": "5.4",
+          "text": "Mitigation strategies – carbon capture, utilization and storage"
+        },
+        {
+          "id": "5.5",
+          "text": "Adapting to climate change"
+        },
+        {
+          "id": "5.6",
+          "text": "Renewable Energy- Solar energy"
+        },
+        {
+          "id": "5.7",
+          "text": "Biomass, Wind energy"
+        },
+        {
+          "id": "5.8",
+          "text": "New Energy sources"
+        }
+      ]
+    }
+  },
+  "24BYT408": {
+    "slot": "I",
+    "code": "24BYT408",
+    "name": "Biology for Engineers",
+    "modules": {
+      "Module 1": [
+        {
+          "id": "1.1",
+          "text": "Introduction to Biological Concepts, relevance of biology in mechanical engineering,"
+        },
+        {
+          "id": "1.2",
+          "text": "Role of Biology in Next Generation Technology Development, Basic principles of cell biology– Cell Structure – Cell Potential"
+        },
+        {
+          "id": "1.3",
+          "text": "Introduction to nervous system components and function"
+        },
+        {
+          "id": "1.4",
+          "text": "Potassium channels – Neuron function – Central Nervous Systems"
+        },
+        {
+          "id": "1.5",
+          "text": "Evolution of Artificial Neural Networks, Machine Learning techniques. (dicussion topic)"
+        }
+      ],
+      "Module 2": [
+        {
+          "id": "2.1",
+          "text": "Circulatory system-Components and function. Heart as a pump system -Structure."
+        },
+        {
+          "id": "2.2",
+          "text": "Heart as a pump system - electrical signaling – ECG monitoring and heart related issues,"
+        },
+        {
+          "id": "2.3",
+          "text": "Blood- Mechanical properties, Blood flow mechanics, Blockages of blood vessels, role of blood as Biological Heat Exchangers"
+        },
+        {
+          "id": "2.4",
+          "text": "Respiratory system, components and function."
+        },
+        {
+          "id": "2.5",
+          "text": "Lungs as purification system (Structure, gas exchange mechanisms,"
+        },
+        {
+          "id": "2.6",
+          "text": "Biomechanical devices -spirometry, Ventilators, Heart -lung machine."
+        }
+      ],
+      "Module 3": [
+        {
+          "id": "3.1",
+          "text": "Urinary System, components and function. Kidney as a filtration system (Structure, mechanism of filtration, Dialysis systems)."
+        },
+        {
+          "id": "3.2",
+          "text": "Heat balance in a biological system -Source of heat generation in body. Biological Mechanisms to control heat balance of body"
+        },
+        {
+          "id": "3.3",
+          "text": "Sensing Techniques: – Understanding of Sense organs working."
+        },
+        {
+          "id": "3.4",
+          "text": "Sensing mechanisms – Sensor Development issues"
+        },
+        {
+          "id": "3.5",
+          "text": "Digital Camera – Eye Comparison, (Discussion topic)"
+        }
+      ],
+      "Module 4": [
+        {
+          "id": "4.1",
+          "text": "Musculoskeletal System (Structure, mechanisms,"
+        },
+        {
+          "id": "4.2",
+          "text": "Engineering solutions to musculoskeletal disorders - assistive devices, exoskeletons."
+        },
+        {
+          "id": "4.3",
+          "text": "Mechanics of bones, muscles and joints, Application of biomechanics in the design of prosthetics and orthopedic devices."
+        },
+        {
+          "id": "4.4",
+          "text": "Introduction to biomaterials, properties of biomaterials"
+        },
+        {
+          "id": "4.5",
+          "text": "Biomaterials in medical devices and implants."
+        }
+      ],
+      "Module 5": [
+        {
+          "id": "5.1",
+          "text": "Nature optimization of biological systems: Evolutionary Optimization Biomimicry ."
+        },
+        {
+          "id": "5.2",
+          "text": "Bioinspired Design -Gecko-Inspired Adhesives, Spider Silk - Inspired Fibers."
+        },
+        {
+          "id": "5.3",
+          "text": "Bone-Inspired Materials, Leaf Vein -Inspired NBird Wing - Inspired Aircraft Wingsetworks,"
+        },
+        {
+          "id": "5.4",
+          "text": "Genetics: Concepts of recessiveness and dominance. Concept of mapping of phenotype to genes, The principles of natural selection-engineering application (genetic algorithm)"
+        }
+      ]
+    }
+  }
+}

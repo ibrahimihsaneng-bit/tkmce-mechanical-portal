@@ -1373,6 +1373,63 @@
           <button class="btn btn-secondary" onclick="alert('To install, tap the Share or Install icon in your browser address bar.')">Install PWA Web App</button>
         </div>
       </div>
+
+      <!-- S4 Study Notes & Compiled Volume Section -->
+      <div class="card" style="margin-top:var(--space-6);">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:var(--space-4); flex-wrap:wrap; gap:8px;">
+          <div>
+            <h3 class="h3" style="margin-bottom:4px;">📚 S4 Autonomous Study Notes (Printable PDFs)</h3>
+            <p class="text-secondary" style="font-size:0.88rem;">Official TKMCE Autonomous 2024 Scheme Semester 4 comprehensive notes compiled for fast exam revision and offline study.</p>
+          </div>
+          <a href="./notes/TKMCE_S4_Study_Notes.pdf" download class="btn btn-primary btn-sm">
+            Download Complete S4 Volume (508 KB) ⬇️
+          </a>
+        </div>
+
+        <div class="grid-cols-2" style="gap:12px; margin-top:var(--space-4);">
+          <div class="card" style="padding:14px; background:var(--color-surface-elevated); border:1px solid var(--color-border);">
+            <div style="font-weight:600; font-size:0.92rem; margin-bottom:4px;">24MET401 • Mechanics of Solids</div>
+            <div class="text-secondary" style="font-size:0.8rem; margin-bottom:10px;">Stress-strain, shear force, bending moment, Mohr's circle, torsion & deflection</div>
+            <a href="./notes/24MET401.pdf" download class="btn btn-secondary btn-sm" style="font-size:0.8rem;">Download PDF (71 KB) ⬇️</a>
+          </div>
+
+          <div class="card" style="padding:14px; background:var(--color-surface-elevated); border:1px solid var(--color-border);">
+            <div style="font-weight:600; font-size:0.92rem; margin-bottom:4px;">24MET402 • Manufacturing Technology</div>
+            <div class="text-secondary" style="font-size:0.8rem; margin-bottom:10px;">Casting, forming, welding, traditional & CNC machining operations</div>
+            <a href="./notes/24MET402.pdf" download class="btn btn-secondary btn-sm" style="font-size:0.8rem;">Download PDF (66 KB) ⬇️</a>
+          </div>
+
+          <div class="card" style="padding:14px; background:var(--color-surface-elevated); border:1px solid var(--color-border);">
+            <div style="font-weight:600; font-size:0.92rem; margin-bottom:4px;">24MEP403 • Fluid Machinery</div>
+            <div class="text-secondary" style="font-size:0.8rem; margin-bottom:10px;">Impulse & reaction turbines, Pelton wheel, Francis, Kaplan & centrifugal pumps</div>
+            <a href="./notes/24MEP403.pdf" download class="btn btn-secondary btn-sm" style="font-size:0.8rem;">Download PDF (68 KB) ⬇️</a>
+          </div>
+
+          <div class="card" style="padding:14px; background:var(--color-surface-elevated); border:1px solid var(--color-border);">
+            <div style="font-weight:600; font-size:0.92rem; margin-bottom:4px;">24MEJ404 • Thermal Engineering</div>
+            <div class="text-secondary" style="font-size:0.8rem; margin-bottom:10px;">Air standard cycles, IC engine performance, gas turbines & steam nozzles</div>
+            <a href="./notes/24MEJ404.pdf" download class="btn btn-secondary btn-sm" style="font-size:0.8rem;">Download PDF (67 KB) ⬇️</a>
+          </div>
+
+          <div class="card" style="padding:14px; background:var(--color-surface-elevated); border:1px solid var(--color-border);">
+            <div style="font-weight:600; font-size:0.92rem; margin-bottom:4px;">24HUT415 • Constitution of India</div>
+            <div class="text-secondary" style="font-size:0.8rem; margin-bottom:10px;">Preamble, Fundamental Rights & Duties, Directive Principles, Union & State Judiciary</div>
+            <a href="./notes/24HUT415.pdf" download class="btn btn-secondary btn-sm" style="font-size:0.8rem;">Download PDF (60 KB) ⬇️</a>
+          </div>
+
+          <div class="card" style="padding:14px; background:var(--color-surface-elevated); border:1px solid var(--color-border);">
+            <div style="font-weight:600; font-size:0.92rem; margin-bottom:4px;">24MCT406 • Environmental Science</div>
+            <div class="text-secondary" style="font-size:0.8rem; margin-bottom:10px;">Ecosystems, natural resources, biodiversity, pollution control & sustainable development</div>
+            <a href="./notes/24MCT406.pdf" download class="btn btn-secondary btn-sm" style="font-size:0.8rem;">Download PDF (64 KB) ⬇️</a>
+          </div>
+
+          <div class="card" style="padding:14px; background:var(--color-surface-elevated); border:1px solid var(--color-border);">
+            <div style="font-weight:600; font-size:0.92rem; margin-bottom:4px;">24BYT408 • Biology for Engineers</div>
+            <div class="text-secondary" style="font-size:0.8rem; margin-bottom:10px;">Bio-inspired engineering, biomolecules, cellular mechanisms & bio-sensors</div>
+            <a href="./notes/24BYT408.pdf" download class="btn btn-secondary btn-sm" style="font-size:0.8rem;">Download PDF (65 KB) ⬇️</a>
+          </div>
+        </div>
+      </div>
     `;
   }
 

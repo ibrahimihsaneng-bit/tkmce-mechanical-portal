@@ -1,8 +1,18 @@
 {
   "cleanUrls": true,
   "rewrites": [
-    { "source": "/portal", "destination": "/index.html" },
-    { "source": "/tkm_portal", "destination": "/index.html" }
+    {
+      "source": "/focus",
+      "destination": "/focus/index.html"
+    },
+    {
+      "source": "/portal",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/tkm_portal",
+      "destination": "/index.html"
+    }
   ],
   "headers": [
     {
