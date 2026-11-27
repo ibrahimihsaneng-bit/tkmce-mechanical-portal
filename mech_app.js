@@ -433,7 +433,7 @@
         <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:var(--space-3);">
           <div>
             <h2 class="h3" style="font-size:1.15rem; margin-bottom:2px;">Explore semesters</h2>
-            <p class="text-secondary" style="font-size:0.86rem;">Illustrative semester grouping.</p>
+            <p class="text-secondary" style="font-size:0.86rem;">TKMCE Autonomous 2024 Scheme Curricula (S1 to S8)</p>
           </div>
           <a href="#semesters" style="font-size:0.86rem; font-weight:600; color:var(--color-academic-blue); text-decoration:none;">
             All subjects &rarr;
@@ -443,15 +443,15 @@
         <div style="display:grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap:10px;" id="dashboard-sem-grid">
           <a href="#semesters/S1" class="semester-pill-card">
             <div class="semester-pill-title">S1</div>
-            <div class="semester-pill-sub">10 subjects</div>
+            <div class="semester-pill-sub">5 verified notes</div>
           </a>
           <a href="#semesters/S2" class="semester-pill-card">
             <div class="semester-pill-title">S2</div>
-            <div class="semester-pill-sub">7 subjects</div>
+            <div class="semester-pill-sub">3 verified notes</div>
           </a>
           <a href="#semesters/S3" class="semester-pill-card">
             <div class="semester-pill-title">S3</div>
-            <div class="semester-pill-sub">7 subjects</div>
+            <div class="semester-pill-sub">5 verified notes</div>
           </a>
           <a href="#semesters/S4" class="semester-pill-card active" style="border-color:var(--color-academic-blue); background:var(--color-surface-elevated);">
             <div class="semester-pill-title">S4</div>
@@ -459,19 +459,19 @@
           </a>
           <a href="#semesters/S5" class="semester-pill-card">
             <div class="semester-pill-title">S5</div>
-            <div class="semester-pill-sub">8 subjects</div>
+            <div class="semester-pill-sub">7 core notes</div>
           </a>
           <a href="#semesters/S6" class="semester-pill-card">
             <div class="semester-pill-title">S6</div>
-            <div class="semester-pill-sub">8 subjects</div>
+            <div class="semester-pill-sub">3 verified notes</div>
           </a>
           <a href="#semesters/S7" class="semester-pill-card">
             <div class="semester-pill-title">S7</div>
-            <div class="semester-pill-sub">7 subjects</div>
+            <div class="semester-pill-sub">2 verified notes</div>
           </a>
           <a href="#semesters/S8" class="semester-pill-card">
             <div class="semester-pill-title">S8</div>
-            <div class="semester-pill-sub">6 subjects</div>
+            <div class="semester-pill-sub">2 verified notes</div>
           </a>
         </div>
       </div>
@@ -509,10 +509,10 @@
                 LOCAL PROGRESS
               </div>
               <div style="font-family:var(--font-heading); font-size:2rem; font-weight:700; color:var(--color-text-primary); line-height:1; margin-bottom:6px;">
-                ${completedCount}/8
+                ${completedCount}/34
               </div>
               <p class="text-secondary" style="font-size:0.86rem; margin-bottom:14px;">
-                Sample lessons marked complete • ${openTasksCount} open study tasks
+                Digital textbook courses tracked • ${openTasksCount} open study tasks
               </p>
               <a href="#planner" style="font-size:0.86rem; font-weight:600; color:var(--color-academic-blue); text-decoration:none;">Plan your next session &rarr;</a>
             </div>
@@ -524,14 +524,14 @@
       <div style="background:var(--color-academic-blue-subtle); border:1px solid rgba(22,89,77,0.18); border-radius:10px; padding:12px 18px; margin-bottom:var(--space-8); display:flex; align-items:center; gap:12px;">
         <span style="font-size:1.2rem;">🏛️</span>
         <div style="font-size:0.85rem; color:var(--color-text-secondary); line-height:1.5;">
-          <strong>TKMCE Autonomous 2024 Scheme:</strong> Official curriculum syllabus, S4 study notes, past-year question papers, and verified physics simulations. Free and open for all students.
+          <strong>TKMCE Autonomous 2024 Scheme:</strong> Official institutional curriculum, S1–S8 verified digital textbook notes, KaTeX mathematical derivations, past question papers, and authentic engineering visual references. 100% free and open for all students.
         </div>
       </div>
 
       <!-- Minimal Student Footer -->
       <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--color-border); padding-top:16px; font-size:0.78rem; color:var(--color-text-tertiary);">
         <div>MECH TKMCE 3.0</div>
-        <div>independent student project • TKMCE Autonomous Scheme</div>
+        <div>TKMCE Mechanical Engineering Learning Portal • Autonomous 2024 Scheme</div>
       </div>
     `;
   }
@@ -1116,6 +1116,8 @@
       currentSem = 'S6';
     } else if (currSubj.startsWith('24MEP7') || currSubj.startsWith('24MEE7')) {
       currentSem = 'S7';
+    } else if (currSubj.startsWith('24MEE8') || currSubj.startsWith('24MED8') || currSubj.startsWith('24MEN8') || currSubj.startsWith('24MEO8') || currSubj.startsWith('24MEH8')) {
+      currentSem = 'S8';
     }
 
     const sNum = parseInt(currentSem.replace('S', ''));
@@ -1812,7 +1814,11 @@
             </div>
             <div style="display:flex; gap:8px;">
               <a href="#notes/${c.code}" class="btn btn-primary btn-sm">Read Notes &rarr;</a>
-              <a href="./notes/${c.code}.pdf" download class="btn btn-secondary btn-sm">PDF ⬇️</a>
+              ${['24BYT408', '24HUT415', '24MCT406', '24MEJ404', '24MEP403', '24MET401', '24MET402'].includes(c.code) ? `
+                <a href="./notes/${c.code}.pdf" download class="btn btn-secondary btn-sm">PDF ⬇️</a>
+              ` : `
+                <a href="#notes/${c.code}" class="btn btn-secondary btn-sm" onclick="setTimeout(()=>window.print(), 500);">Save PDF 🖨️</a>
+              `}
             </div>
           </div>
         `).join('')}

@@ -1,0 +1,30 @@
+{
+  "code": "24MED804",
+  "name": "Capstone Project Phase II & Technical Documentation",
+  "semester": "S8",
+  "credits": 4,
+  "category": "Core Project",
+  "overview": "Final-year capstone design execution, prototype fabrication, numerical CFD/FEA validation, patent/IP filing, engineering ethics, and international IEEE/ASME publication standards.",
+  "modules": {
+    "Module 1": {
+      "title": "Design Realization, Rapid Prototyping & Fabrication",
+      "textbook_html": "\n<div class=\"academic-textbook-chapter\">\n  <div class=\"chapter-hero\">\n    <div class=\"chapter-badge\">MODULE 01 • S8 CORE CAPSTONE</div>\n    <h2 class=\"chapter-title\">Engineering Design Realization & Prototyping</h2>\n    <p class=\"chapter-desc\">Translating CAD design specifications into physical prototypes using CNC machining, metal 3D printing (DMLS/SLM), and composite fabrication.</p>\n  </div>\n  <section class=\"content-block\">\n    <h3>1. Prototyping Methodology</h3>\n    <p>Modern mechanical capstone projects follow Design for Manufacturing and Assembly (DFMA) guidelines, reducing part counts and optimizing tolerances for CNC subtractive and additive manufacturing workflows.</p>\n  </section>\n</div>\n            "
+    },
+    "Module 2": {
+      "title": "Experimental Rig Design & Sensor Instrumentation",
+      "textbook_html": "\n<div class=\"academic-textbook-chapter\">\n  <div class=\"chapter-hero\">\n    <div class=\"chapter-badge\">MODULE 02 • S8 CORE CAPSTONE</div>\n    <h2 class=\"chapter-title\">Experimental Setup & Data Acquisition (DAQ)</h2>\n    <p class=\"chapter-desc\">Selecting load cells, piezoelectric accelerometers, RTDs, thermocouples, pressure transducers, and NI LabVIEW DAQ interfaces for high-fidelity testing.</p>\n  </div>\n  <section class=\"content-block\">\n    <h3>1. Uncertainty Analysis (Kline-McClintock Method)</h3>\n    <div class=\"formula-box\">\n      <div class=\"formula-title\">Experimental Uncertainty Propagation</div>\n      $$w_R = \\sqrt{ \\sum_{i=1}^n \\left( \\frac{\\partial R}{\\partial x_i} w_{x_i} \\right)^2 }$$\n      <div class=\"formula-note\">Where $R = f(x_1, x_2, \\dots, x_n)$ and $w_{x_i}$ is the uncertainty of each independent measured variable.</div>\n    </div>\n  </section>\n</div>\n            "
+    },
+    "Module 3": {
+      "title": "Numerical Validation & Discrepancy Reconciliation",
+      "textbook_html": "\n<div class=\"academic-textbook-chapter\">\n  <div class=\"chapter-hero\">\n    <div class=\"chapter-badge\">MODULE 03 • S8 CORE CAPSTONE</div>\n    <h2 class=\"chapter-title\">Numerical Validation (FEA & CFD)</h2>\n    <p class=\"chapter-desc\">Mesh convergence studies using Grid Convergence Index (GCI), comparing numerical predictions against experimental telemetry.</p>\n  </div>\n  <section class=\"content-block\">\n    <h3>1. Grid Convergence Index (Roache Method)</h3>\n    <p>Verifying spatial discretization independence in ANSYS/OpenFOAM CFD simulations by calculating relative errors between fine, medium, and coarse mesh solutions.</p>\n  </section>\n</div>\n            "
+    },
+    "Module 4": {
+      "title": "Engineering Ethics, Safety Standards & IP Protection",
+      "textbook_html": "\n<div class=\"academic-textbook-chapter\">\n  <div class=\"chapter-hero\">\n    <div class=\"chapter-badge\">MODULE 04 • S8 CORE CAPSTONE</div>\n    <h2 class=\"chapter-title\">Engineering Ethics, Safety & Intellectual Property</h2>\n    <p class=\"chapter-desc\">NSPE Code of Ethics, ISO 9001/14001, OSHA risk assessment, patent search, Indian Patent Office (IPO) claims drafting, and trademark law.</p>\n  </div>\n  <section class=\"content-block\">\n    <h3>1. NSPE Code of Ethics Fundamental Canons</h3>\n    <ol>\n      <li>Hold paramount the safety, health, and welfare of the public.</li>\n      <li>Perform services only in areas of their competence.</li>\n      <li>Issue public statements only in an objective and truthful manner.</li>\n      <li>Act for each employer or client as faithful agents or trustees.</li>\n      <li>Avoid deceptive acts and uphold honor and dignity of the engineering profession.</li>\n    </ol>\n  </section>\n</div>\n            "
+    },
+    "Module 5": {
+      "title": "Technical Thesis Writing & Academic Publication",
+      "textbook_html": "\n<div class=\"academic-textbook-chapter\">\n  <div class=\"chapter-hero\">\n    <div class=\"chapter-badge\">MODULE 05 • S8 CORE CAPSTONE</div>\n    <h2 class=\"chapter-title\">Thesis Structure, LaTeX & IEEE Standards</h2>\n    <p class=\"chapter-desc\">Writing high-impact research manuscripts, BibTeX citation hygiene, plagiarism avoidance, executive summaries, and viva voce defense preparation.</p>\n  </div>\n  <section class=\"content-block\">\n    <h3>1. Autonomous Project Report Standards</h3>\n    <p>Formatting guidelines for TKMCE Autonomous Mechanical Engineering Capstone thesis: 1.5 line spacing, 12pt Times New Roman, standard chapter sequence (Introduction &rarr; Literature Survey &rarr; Methodology &rarr; Design & Analysis &rarr; Experimental Testing &rarr; Results & Discussion &rarr; Conclusion & Future Scope).</p>\n  </section>\n</div>\n            "
+    }
+  }
+}
