@@ -1,12 +1,18 @@
-const CACHE_NAME = 'tkmce-portal-v1';
+const CACHE_NAME = 'mech-tkmce-v2.0';
 const ASSETS_TO_CACHE = [
   './',
-  './tkm_portal.html',
-  './tkm_curriculum.json',
-  './tkm_s4_syllabus.json',
+  './index.html',
+  './mech_design_system.css',
+  './mech_core_data.js',
+  './mech_simulations.js',
+  './mech_app.js',
   './manifest.json',
   './icon-192.png',
-  './icon-512.png'
+  './icon-512.png',
+  './assets/rod.svg',
+  './assets/beam.svg',
+  './assets/mohr.svg',
+  './assets/column.svg'
 ];
 
 self.addEventListener('install', (event) => {
@@ -39,12 +45,9 @@ self.addEventListener('fetch', (event) => {
       if (cachedResponse) {
         return cachedResponse;
       }
-      return fetch(event.request).then((networkResponse) => {
-        return networkResponse;
-      }).catch(() => {
-        // Fallback to cached portal html if offline
-        if (event.request.headers.get('accept').includes('text/html')) {
-          return caches.match('./tkm_portal.html');
+      return fetch(event.request).catch(() => {
+        if (event.request.headers.get('accept') && event.request.headers.get('accept').includes('text/html')) {
+          return caches.match('./index.html');
         }
       });
     })
