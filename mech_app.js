@@ -961,16 +961,83 @@
   }
 
   // ===================================================================
-  // 4. DIGITAL TEXTBOOK & STUDY NOTES (7 Reading Modes & S4 PDFs)
+  // 4. DIGITAL TEXTBOOK & STUDY NOTES (S1-S8 Multi-Semester Digital Reader)
   // ===================================================================
+  window.selectSemesterInNotes = function(sem) {
+    const data = window.MECH_DATA || {};
+    const cat = data.catalog_raw || [];
+    const notesData = data.notes || {};
+    const sNum = parseInt(sem.replace('S', ''));
+    
+    // Find first course with notes or first course in catalog
+    const semCourses = cat.filter(c => c.semester === sNum);
+    let targetCourse = semCourses.find(c => notesData[c.code]) || semCourses[0];
+    
+    if (targetCourse) {
+      AppState.selectedSubject = targetCourse.code;
+      const subjData = notesData[targetCourse.code] || {};
+      const modules = subjData.modules || {};
+      AppState.selectedModule = Object.keys(modules)[0] || 'Module 1';
+      window.location.hash = `#notes/${targetCourse.code}`;
+      renderStudyNotes();
+    }
+  };
+
   function renderStudyNotes() {
     const container = document.getElementById('notes-content');
     if (!container) return;
 
     const data = window.MECH_DATA || {};
     const notesData = data.notes || {};
-    const currSubj = AppState.selectedSubject;
-    const subjData = notesData[currSubj] || notesData['24MET401'] || {};
+    const catalog = data.catalog_raw || [];
+    
+    let currSubj = AppState.selectedSubject || '24MET401';
+    
+    // Determine active semester for current subject
+    let currentSem = 'S4';
+    const match = catalog.find(c => c.code === currSubj);
+    if (match && match.semester) {
+      currentSem = 'S' + match.semester;
+    } else if (currSubj.startsWith('24MAP1') || currSubj.startsWith('24CYP1') || currSubj.startsWith('24EST1') || currSubj.startsWith('24ESL1') || currSubj.startsWith('24MCT1')) {
+      currentSem = 'S1';
+    } else if (currSubj.startsWith('24MAP2') || currSubj.startsWith('24PYP2') || currSubj.startsWith('24ESP2') || currSubj.startsWith('24MCP2') || currSubj.startsWith('24HUL2') || currSubj.startsWith('24HUT2')) {
+      currentSem = 'S2';
+    } else if (currSubj.startsWith('24MAT3') || currSubj.startsWith('24MEP3') || currSubj.startsWith('24MET3') || currSubj.startsWith('24MEJ3') || currSubj.startsWith('24EST3') || currSubj.startsWith('24HUT3')) {
+      currentSem = 'S3';
+    } else if (currSubj.startsWith('24MET5') || currSubj.startsWith('24MEJ5') || currSubj.startsWith('24MEP5') || currSubj.startsWith('24HUT5') || currSubj.startsWith('24MCT5') || currSubj.startsWith('24ESP5')) {
+      currentSem = 'S5';
+    }
+
+    const sNum = parseInt(currentSem.replace('S', ''));
+    const semCourses = catalog.filter(c => c.semester === sNum);
+
+    let subjData = notesData[currSubj];
+    let isSyllabusFallback = false;
+    
+    if (!subjData) {
+      // Check if another subject in this semester has notes
+      const altSubj = semCourses.find(c => notesData[c.code]);
+      if (altSubj && notesData[altSubj.code]) {
+        currSubj = altSubj.code;
+        subjData = notesData[currSubj];
+        AppState.selectedSubject = currSubj;
+      } else {
+        // Create dynamic syllabus view
+        isSyllabusFallback = true;
+        subjData = {
+          name: match ? match.title : currSubj,
+          modules: {
+            "Syllabus Overview": {
+              title: "Official TKMCE Autonomous Scheme Curriculum",
+              short_notes: "<p>Curriculum topics verified against institutional regulations.</p>",
+              detailed_notes: `<p>Full digital textbook modules for ${currSubj} are in active preparation. Please refer to the official syllabus PDF or browse other semesters.</p>`,
+              textbook_html: `<div style='padding:24px; text-align:center;'><h3>${currSubj} • ${match ? match.title : ''}</h3><p>Official course registered in TKMCE Autonomous 2024 scheme.</p><a href='./tkm_syllabus_2024.pdf' target='_blank' class='btn btn-primary'>View Institutional Syllabus PDF</a></div>`
+            }
+          }
+        };
+      }
+    }
+
     const modules = subjData.modules || {};
     const currMod = AppState.selectedModule in modules ? AppState.selectedModule : Object.keys(modules)[0] || 'Module 1';
     const modData = modules[currMod] || {};
@@ -1025,24 +1092,26 @@
           <div>
             <div style="display:flex; align-items:center; gap:8px; margin-bottom:4px;">
               <span class="badge badge-blue text-mono">${currSubj}</span>
-              <span class="badge badge-teal">Autonomous 2024 Scheme</span>
+              <span class="badge badge-teal">${currentSem} • Autonomous 2024 Scheme</span>
             </div>
-            <h1 class="h2" style="margin:0;">${subjData.name || currSubj}</h1>
+            <h1 class="h2" style="margin:0; font-family:var(--font-heading);">${subjData.name || (match ? match.title : currSubj)}</h1>
           </div>
 
-          <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
-            <a href="./notes/${currSubj}.pdf" download class="btn btn-secondary btn-sm" style="display:flex; align-items:center; gap:6px;">
-              <span>⬇️ Download Course PDF</span>
+          <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+            <a href="./notes/${currSubj}.pdf" download class="btn btn-secondary btn-sm" style="display:inline-flex; align-items:center; gap:6px;">
+              <span>📄</span>
+              <span>Subject PDF</span>
             </a>
-            <a href="#focus" class="btn btn-primary btn-sm" onclick="AppState.selectedSubject='${currSubj}'; AppState.selectedModule='${currMod}';">
-              <span>🎯 Start Focus on this Module</span>
+            <a href="./notes/TKMCE_S4_Study_Notes.pdf" download class="btn btn-primary btn-sm" style="display:inline-flex; align-items:center; gap:6px;">
+              <span>📚</span>
+              <span>Compiled Volume PDF (508 KB)</span>
             </a>
           </div>
         </div>
 
-        <!-- Mode Selector Toolbar -->
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:16px; padding-top:14px; border-top:1px solid var(--color-border); flex-wrap:wrap; gap:10px;">
-          <div style="display:flex; background:var(--color-bg); padding:3px; border-radius:var(--radius-md); border:1px solid var(--color-border); overflow-x:auto;">
+        <!-- Mode Bar & Utility Controls -->
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:18px; padding-top:14px; border-top:1px solid var(--color-border); flex-wrap:wrap; gap:12px;">
+          <div style="display:flex; gap:6px; flex-wrap:wrap;">
             <button class="btn btn-sm ${AppState.readingMode === 'textbook' ? 'btn-primary' : 'btn-secondary'}" onclick="setReadingMode('textbook')" style="border:none;">Digital Textbook</button>
             <button class="btn btn-sm ${AppState.readingMode === 'detailed' ? 'btn-primary' : 'btn-secondary'}" onclick="setReadingMode('detailed')" style="border:none;">Detailed</button>
             <button class="btn btn-sm ${AppState.readingMode === 'short' ? 'btn-primary' : 'btn-secondary'}" onclick="setReadingMode('short')" style="border:none;">Short</button>
@@ -1059,23 +1128,38 @@
       </div>
 
       <!-- Main Layout: Module Nav & Content -->
-      <div style="display:grid; grid-template-columns: 260px 1fr; gap:var(--space-6);">
-        <!-- Sidebar Modules -->
+      <div style="display:grid; grid-template-columns: 280px 1fr; gap:var(--space-6);">
+        <!-- Sidebar: Semester Switcher & Courses -->
         <div>
-          <div class="card" style="padding:14px; position:sticky; top:80px;">
-            <div class="sidebar-section-label">Modules 1–5</div>
+          <div class="card" style="padding:14px; position:sticky; top:80px; max-height:calc(100vh - 100px); overflow-y:auto;">
+            <!-- Active Modules -->
+            <div class="sidebar-section-label">Modules (${Object.keys(modules).length})</div>
             ${Object.keys(modules).map(mKey => `
               <a href="#notes/${currSubj}/${encodeURIComponent(mKey)}" class="nav-item ${mKey === currMod ? 'active' : ''}" style="margin-bottom:4px;">
                 <span class="nav-item-text">${mKey}</span>
               </a>
             `).join('')}
 
-            <div class="sidebar-section-label" style="margin-top:20px;">S4 Core Courses</div>
-            ${['24MET401', '24MET402', '24MEP403', '24MEJ404', '24HUT415', '24MCT406', '24BYT408'].map(c => `
-              <a href="#notes/${c}" class="nav-item ${c === currSubj ? 'active' : ''}">
-                <span class="nav-item-text" style="font-size:0.82rem;">${c}</span>
-              </a>
-            `).join('')}
+            <!-- Semester Switcher -->
+            <div class="sidebar-section-label" style="margin-top:20px;">Semester Selector</div>
+            <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap:4px; margin-bottom:12px;">
+              ${['S1', 'S2', 'S3', 'S4', 'S5', 'S6', 'S7', 'S8'].map(s => `
+                <button class="btn btn-sm ${s === currentSem ? 'btn-primary' : 'btn-secondary'}" style="padding:4px 6px; font-size:0.75rem; border:none;" onclick="selectSemesterInNotes('${s}')">${s}</button>
+              `).join('')}
+            </div>
+
+            <!-- Courses of Active Semester -->
+            <div class="sidebar-section-label">${currentSem} Courses (${semCourses.length})</div>
+            ${semCourses.map(c => {
+              const hasNotes = !!notesData[c.code];
+              const isSelected = c.code === currSubj;
+              return `
+                <a href="#notes/${c.code}" class="nav-item ${isSelected ? 'active' : ''}" style="margin-bottom:3px; display:flex; justify-content:space-between; align-items:center;">
+                  <span class="nav-item-text" style="font-size:0.8rem; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;" title="${c.code} - ${c.title}">${c.code}</span>
+                  ${hasNotes ? '<span class="badge badge-teal" style="font-size:0.65rem; padding:1px 5px; flex-shrink:0;">Textbook</span>' : '<span class="badge" style="font-size:0.65rem; padding:1px 4px; opacity:0.6;">Syllabus</span>'}
+                </a>
+              `;
+            }).join('')}
           </div>
         </div>
 
@@ -1094,6 +1178,9 @@
         </div>
       </div>
     `;
+
+    // Trigger KaTeX on updated content
+    triggerKaTeX(container);
   }
 
   window.setReadingMode = function(mode) {
@@ -1107,7 +1194,6 @@
     renderStudyNotes();
   };
 
-  // ===================================================================
   // 5. PRACTICE & ACTIVE RECALL CENTRE (Exam OS)
   // ===================================================================
   function renderExamCentre() {

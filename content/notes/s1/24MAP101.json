@@ -1,0 +1,38 @@
+{
+  "name": "Calculus and Linear Algebra",
+  "semester": 1,
+  "credits": 4,
+  "ese": 60,
+  "modules": {
+    "Module 1": {
+      "title": "Single Variable Calculus and Infinite Series",
+      "short_notes": "<div class=\"short-notes-box\"><div class=\"sn-headline\">⚡ High-Yield Exam Summary: Calculus & Series</div><ul><li><strong>Rolle's & Mean Value Theorems:</strong> If $f$ is continuous on $[a,b]$ and differentiable on $(a,b)$, $\\exists c \\in (a,b)$ such that $f'(c) = \\frac{f(b) - f(a)}{b - a}$.</li><li><strong>Taylor & Maclaurin Series:</strong> $f(x) = \\sum_{n=0}^\\infty \\frac{f^{(n)}(a)}{n!} (x - a)^n$.</li><li><strong>Series Convergence Tests:</strong> Ratio test ($\\lim |a_{n+1}/a_n| < 1$), Integral test, Alternating series Leibniz test.</li></ul></div>",
+      "detailed_notes": "<div class=\"detailed-notes-content\"><h3 class=\"detailed-module-title\">Module 1 Reference: Calculus</h3><p>Indeterminate forms evaluated using L'Hôpital's rule.</p></div>",
+      "textbook_html": "<h4 class=\"textbook-h4\">1.1 Differential Calculus & Series Convergence</h4><p class=\"textbook-p\">Calculus establishes the foundational mathematical language of engineering modeling.</p>"
+    },
+    "Module 2": {
+      "title": "Multivariable Differential Calculus and Optimization",
+      "short_notes": "<div class=\"short-notes-box\"><div class=\"sn-headline\">⚡ High-Yield Exam Summary: Multivariable Calculus</div><ul><li><strong>Partial Derivatives:</strong> Euler's theorem for homogeneous functions of degree $n$: $x u_x + y u_y = n u$.</li><li><strong>Jacobian:</strong> $J = \\frac{\\partial(u,v)}{\\partial(x,y)} = u_x v_y - u_y v_x$.</li><li><strong>Maxima & Minima of Two Variables:</strong> $r = f_{xx}, s = f_{xy}, t = f_{yy}$. If $rt - s^2 > 0$ and $r < 0$ (Local Maxima); if $rt - s^2 > 0$ and $r > 0$ (Local Minima); if $rt - s^2 < 0$ (Saddle point).</li><li><strong>Lagrange Multipliers:</strong> $\\nabla f = \\lambda \\nabla g$ for constrained optimization.</li></ul></div>",
+      "detailed_notes": "<div class=\"detailed-notes-content\"><h3 class=\"detailed-module-title\">Module 2 Reference: Multivariable</h3><p>Gradient vector $\\nabla f$ points in the direction of maximum directional rate of increase.</p></div>",
+      "textbook_html": "<h4 class=\"textbook-h4\">2.1 Partial Derivatives and Constrained Optimization</h4><p class=\"textbook-p\">Engineering optimization requires maximizing performance functions subject to geometric and material constraints.</p>"
+    },
+    "Module 3": {
+      "title": "Multiple Integrals and Coordinate Transformations",
+      "short_notes": "<div class=\"short-notes-box\"><div class=\"sn-headline\">⚡ High-Yield Exam Summary: Double & Triple Integrals</div><ul><li><strong>Change of Variables (Cartesian to Polar):</strong> $dx dy = r dr d\\theta$.</li><li><strong>Area via Double Integration:</strong> $A = \\iint_R dx dy = \\iint_R r dr d\\theta$.</li><li><strong>Volume via Triple Integration:</strong> $V = \\iiint_V dx dy dz$. In cylindrical coordinates: $r dr d\\theta dz$. In spherical coordinates: $\\rho^2 \\sin \\phi d\\rho d\\phi d\\theta$.</li></ul></div>",
+      "detailed_notes": "<div class=\"detailed-notes-content\"><h3 class=\"detailed-module-title\">Module 3 Reference: Multiple Integrals</h3><p>Beta and Gamma functions: $\\Gamma(n) = \\int_0^\\infty x^{n-1} e^{-x} dx$. $\\Gamma(1/2) = \\sqrt{\\pi}$.</p></div>",
+      "textbook_html": "<h4 class=\"textbook-h4\">3.1 Double and Triple Integration in Engineering Fields</h4><p class=\"textbook-p\">Multiple integrals compute physical masses, centroids, moments of inertia, and volumetric flux fields.</p>"
+    },
+    "Module 4": {
+      "title": "Vector Differential and Integral Calculus (Green, Stokes, Gauss)",
+      "short_notes": "<div class=\"short-notes-box\"><div class=\"sn-headline\">⚡ High-Yield Exam Summary: Vector Theorems</div><ul><li><strong>Gradient, Divergence & Curl:</strong> $\\text{grad } \\phi = \\nabla \\phi$, $\\text{div } \\vec{F} = \\nabla \\cdot \\vec{F}$, $\\text{curl } \\vec{F} = \\nabla \\times \\vec{F}$. Irrotational field: $\\nabla \\times \\vec{F} = 0$. Solenoidal field: $\\nabla \\cdot \\vec{F} = 0$.</li><li><strong>Green's Theorem in Plane:</strong> $\\oint_C (M dx + N dy) = \\iint_R \\left( \\frac{\\partial N}{\\partial x} - \\frac{\\partial M}{\\partial y} \\right) dx dy$.</li><li><strong>Stokes' Theorem:</strong> $\\oint_C \\vec{F} \\cdot d\\vec{r} = \\iint_S (\\nabla \\times \\vec{F}) \\cdot \\hat{n} dS$.</li><li><strong>Gauss Divergence Theorem:</strong> $\\iint_S \\vec{F} \\cdot \\hat{n} dS = \\iiint_V (\\nabla \\cdot \\vec{F}) dV$.</li></ul></div>",
+      "detailed_notes": "<div class=\"detailed-notes-content\"><h3 class=\"detailed-module-title\">Module 4 Reference: Vector Calculus</h3><p>Fundamental bridge connecting line, surface, and volume flux integrals in continuum physics.</p></div>",
+      "textbook_html": "<h4 class=\"textbook-h4\">4.1 Vector Field Theorems and Integral Transforms</h4><p class=\"textbook-p\">Vector integral theorems govern mass conservation, electromagnetic fields, and fluid circulation.</p>"
+    },
+    "Module 5": {
+      "title": "Linear Algebra: Matrices, Eigenvalues and Diagonalization",
+      "short_notes": "<div class=\"short-notes-box\"><div class=\"sn-headline\">⚡ High-Yield Exam Summary: Matrices & Eigenvalues</div><ul><li><strong>Rank of Matrix:</strong> Number of non-zero rows in row-echelon form. System $A X = B$ is consistent iff $\\text{rank}(A) = \\text{rank}(A|B)$.</li><li><strong>Eigenvalues & Eigenvectors:</strong> Characteristic equation $|A - \\lambda I| = 0$. Sum of eigenvalues equals Trace($A$); Product of eigenvalues equals $\\det(A)$.</li><li><strong>Cayley-Hamilton Theorem:</strong> Every square matrix satisfies its own characteristic equation: $A^n + c_{n-1}A^{n-1} + \\dots + c_0 I = 0$. Used to compute $A^{-1}$ and high powers $A^m$.</li><li><strong>Diagonalization:</strong> If $A$ has $n$ linearly independent eigenvectors, $P^{-1} A P = D$ (diagonal matrix of eigenvalues).</li></ul></div>",
+      "detailed_notes": "<div class=\"detailed-notes-content\"><h3 class=\"detailed-module-title\">Module 5 Reference: Linear Algebra</h3><p>Quadratic forms $Q = X^T A X$ classified via eigenvalue signs (Positive definite: all $\\lambda_i > 0$).</p></div>",
+      "textbook_html": "<h4 class=\"textbook-h4\">5.1 Eigenvalue Analysis and Matrix Spectral Decomposition</h4><p class=\"textbook-p\">Modal analysis, principal stress transformations, and multi-body dynamics rely fundamentally on matrix diagonalization.</p>"
+    }
+  }
+}

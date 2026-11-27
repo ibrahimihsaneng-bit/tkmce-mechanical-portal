@@ -1,4 +1,4 @@
-const CACHE_NAME = 'mech-tkmce-v3.0';
+const CACHE_NAME = 'mech-tkmce-v3.1-academic';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',

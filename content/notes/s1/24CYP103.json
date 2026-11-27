@@ -1,0 +1,38 @@
+{
+  "name": "Engineering Chemistry",
+  "semester": 1,
+  "credits": 4,
+  "ese": 60,
+  "modules": {
+    "Module 1": {
+      "title": "Electrochemistry and Corrosion Science",
+      "short_notes": "<div class=\"short-notes-box\"><div class=\"sn-headline\">⚡ High-Yield Exam Summary: Electrochemistry</div><ul><li><strong>Nernst Equation:</strong> $E = E^0 - \\frac{2.303 RT}{n F} \\log Q = E^0 - \\frac{0.0591}{n} \\log Q$ at $298\\,\\text{K}$.</li><li><strong>Electrochemical Corrosion:</strong> Anode oxidation ($M \\to M^{n+} + n e^-$). Cathode reduction in acidic medium ($2H^+ + 2e^- \\to H_2$) and neutral/alkaline aerated medium ($O_2 + 2H_2O + 4e^- \\to 4OH^-$).</li><li><strong>Corrosion Control:</strong> Sacrificial anode cathodic protection (Zn/Mg attached to steel), Impressed current cathodic protection, Galvanizing (Zn coating on Fe), Tinning.</li></ul></div>",
+      "detailed_notes": "<div class=\"detailed-notes-content\"><h3 class=\"detailed-module-title\">Module 1 Reference: Electrochemistry</h3><p>Electrochemical series, reference electrodes (Calomel electrode, Glass electrode for pH measurement), and Pourbaix potential-pH diagrams.</p></div>",
+      "textbook_html": "<h4 class=\"textbook-h4\">1.1 Electrochemical Thermodynamics & Nernst Equation</h4><p class=\"textbook-p\">Electrochemical reactions govern energy storage in batteries, fuel cells, and metallic degradation via corrosion.</p>"
+    },
+    "Module 2": {
+      "title": "Spectroscopic Techniques and Analytical Chemistry",
+      "short_notes": "<div class=\"short-notes-box\"><div class=\"sn-headline\">⚡ High-Yield Exam Summary: Spectroscopy</div><ul><li><strong>Beer-Lambert Law:</strong> $A = \\log(I_0 / I) = \\epsilon \\cdot c \\cdot l$, where $\\epsilon$ is molar absorptivity.</li><li><strong>UV-Visible Spectroscopy:</strong> Electronic transitions ($\\sigma \\to \\sigma^*, n \\to \\pi^*, \\pi \\to \\pi^*$). Chromophores and auxochromes.</li><li><strong>IR Spectroscopy:</strong> Molecular vibrational modes (stretching and bending). Characteristic functional group frequencies ($-OH$ at $3200-3600\\,\\text{cm}^{-1}$, $>C=O$ at $1700\\,\\text{cm}^{-1}$).</li><li><strong>NMR Spectroscopy:</strong> Proton chemical shift $\\delta$ in ppm relative to TMS (tetramethylsilane).</li></ul></div>",
+      "detailed_notes": "<div class=\"detailed-notes-content\"><h3 class=\"detailed-module-title\">Module 2 Reference: Spectroscopy</h3><p>Selection rules: UV-vis requires electronic dipole change; IR requires fluctuating dipole moment during vibration.</p></div>",
+      "textbook_html": "<h4 class=\"textbook-h4\">2.1 Molecular Spectroscopy and Chemical Characterization</h4><p class=\"textbook-p\">Spectroscopic analytical techniques elucidate molecular architectures and chemical compositions of engineering materials.</p>"
+    },
+    "Module 3": {
+      "title": "Polymer Chemistry, Nanomaterials and Composites",
+      "short_notes": "<div class=\"short-notes-box\"><div class=\"sn-headline\">⚡ High-Yield Exam Summary: Polymers & Nanomaterials</div><ul><li><strong>Classification:</strong> Thermoplastics (linear/branched, melt upon heating e.g. PE, PVC, PTFE) vs Thermosets (cross-linked 3D networks, decompose upon heating e.g. Bakelite, Epoxy).</li><li><strong>Conducting Polymers:</strong> Conjugated $\\pi$-electron backbones doped with charge carriers (e.g. polyaniline, polypyrrole).</li><li><strong>Nanomaterials:</strong> Quantum confinement effects when dimensions $< 100\\,\\text{nm}$. Carbon nanotubes (CNT), Graphene (exceptional tensile strength $>100\\,\\text{GPa}$ and thermal conductivity).</li></ul></div>",
+      "detailed_notes": "<div class=\"detailed-notes-content\"><h3 class=\"detailed-module-title\">Module 3 Reference: Polymers</h3><p>Glass transition temperature ($T_g$) marks transition from glassy brittle state to rubbery flexible state.</p></div>",
+      "textbook_html": "<h4 class=\"textbook-h4\">3.1 Advanced Engineering Polymers and Nanostructured Materials</h4><p class=\"textbook-p\">Macromolecular polymers and nanoscale reinforcements deliver lightweight, high-strength structural composites.</p>"
+    },
+    "Module 4": {
+      "title": "Water Technology and Environmental Chemistry",
+      "short_notes": "<div class=\"short-notes-box\"><div class=\"sn-headline\">⚡ High-Yield Exam Summary: Water Treatment</div><ul><li><strong>Hardness of Water:</strong> Temporary ($Ca(HCO_3)_2, Mg(HCO_3)_2$, removed by boiling) vs Permanent ($CaCl_2, MgSO_4$, requires chemical softening). Expressed in ppm of $CaCO_3$ equivalent.</li><li><strong>EDTA Titration:</strong> Hardness determined via complexometric titration using EDTA at pH 10 with Eriochrome Black-T (EBT) indicator (wine-red to blue end point).</li><li><strong>Boiler Troubles:</strong> Scale and sludge formation, Priming and foaming, Caustic embrittlement ($NaOH$ attack at stressed boiler crevices).</li><li><strong>Reverse Osmosis (RO):</strong> Applied hydraulic pressure exceeds osmotic pressure ($\\Delta P > \\Delta \\pi$), driving pure water through semipermeable polyamide membrane.</li></ul></div>",
+      "detailed_notes": "<div class=\"detailed-notes-content\"><h3 class=\"detailed-module-title\">Module 4 Reference: Water Treatment</h3><p>Demineralization using ion-exchange resin columns (cation exchanger $R-H$ and anion exchanger $R-OH$).</p></div>",
+      "textbook_html": "<h4 class=\"textbook-h4\">4.1 Boiler Feedwater Conditioning and Desalination</h4><p class=\"textbook-p\">Industrial steam generation requires strict water quality control to prevent catastrophic tube ruptures and thermal efficiency decay.</p>"
+    },
+    "Module 5": {
+      "title": "Fuels, Combustion and Energy Storage Devices",
+      "short_notes": "<div class=\"short-notes-box\"><div class=\"sn-headline\">⚡ High-Yield Exam Summary: Fuels & Batteries</div><ul><li><strong>Calorific Value:</strong> Gross Calorific Value (HCV) vs Net Calorific Value (LCV): $LCV = HCV - 0.09 H \\times 2442\\,\\text{kJ/kg}$.</li><li><strong>Dulong's Formula:</strong> $HCV = \\frac{1}{100}\\left[ 33800 C + 144000\\left(H - \\frac{O}{8}\\right) + 9270 S \\right]\\,\\text{kJ/kg}$.</li><li><strong>Knocking & Octane/Cetane Ratings:</strong> Petrol: Octane Number (isooctane = 100, n-heptane = 0). Diesel: Cetane Number (cetane = 100, $\\alpha$-methylnaphthalene = 0).</li><li><strong>Lithium-ion Batteries:</strong> Cathode: $LiCoO_2$, Anode: Graphite ($Li_x C_6$), Electrolyte: $LiPF_6$ in organic carbonates. High energy density ($>250\\,\\text{Wh/kg}$).</li></ul></div>",
+      "detailed_notes": "<div class=\"detailed-notes-content\"><h3 class=\"detailed-module-title\">Module 5 Reference: Fuels</h3><p>Proximate analysis (Moisture, Volatile matter, Ash, Fixed carbon) vs Ultimate analysis (Elemental C, H, N, S, O).</p></div>",
+      "textbook_html": "<h4 class=\"textbook-h4\">5.1 Combustion Thermodynamics and Electrochemical Energy Storage</h4><p class=\"textbook-p\">Chemical fuels provide primary thermal energy, while electrochemical lithium-ion cells power modern electric mobility.</p>"
+    }
+  }
+}
