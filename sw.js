@@ -1,4 +1,4 @@
-const CACHE_NAME = 'mech-tkmce-v3.1-academic';
+const CACHE_NAME = 'mech-tkmce-v3.2-interactive-notes';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',

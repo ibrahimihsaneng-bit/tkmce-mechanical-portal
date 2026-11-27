@@ -983,6 +983,112 @@
     }
   };
 
+  // Interactive Notes Update & Personalization Controller
+  let editingSubject = '';
+  let editingModule = '';
+
+  window.openNotesUpdateModal = function(subj, mod) {
+    editingSubject = subj || AppState.selectedSubject;
+    editingModule = mod || AppState.selectedModule;
+
+    const data = window.MECH_DATA || {};
+    const notesData = data.notes || {};
+    const subjData = notesData[editingSubject] || {};
+    const modules = subjData.modules || {};
+    const modData = modules[editingModule] || {};
+
+    const customKey = `mech_custom_${editingSubject}_${editingModule}`;
+    const initialText = localStorage.getItem(customKey) || modData.textbook_html || modData.detailed_notes || '';
+
+    const titleEl = document.getElementById('note-update-modal-title');
+    if (titleEl) {
+      titleEl.innerText = `Edit & Personalize: ${editingSubject} • ${editingModule}`;
+    }
+
+    const textarea = document.getElementById('note-update-textarea');
+    if (textarea) {
+      textarea.value = initialText;
+    }
+
+    const previewBox = document.getElementById('note-update-preview-box');
+    if (previewBox) {
+      previewBox.style.display = 'none';
+      previewBox.innerHTML = '';
+    }
+
+    const modal = document.getElementById('noteUpdateModal');
+    if (modal) {
+      modal.classList.add('active');
+    }
+  };
+
+  window.closeNoteUpdateModal = function() {
+    const modal = document.getElementById('noteUpdateModal');
+    if (modal) {
+      modal.classList.remove('active');
+    }
+  };
+
+  window.toggleNotePreview = function() {
+    const textarea = document.getElementById('note-update-textarea');
+    const previewBox = document.getElementById('note-update-preview-box');
+    if (!textarea || !previewBox) return;
+
+    if (previewBox.style.display === 'none') {
+      previewBox.style.display = 'block';
+      previewBox.innerHTML = textarea.value;
+      triggerKaTeX(previewBox);
+    } else {
+      previewBox.style.display = 'none';
+    }
+  };
+
+  window.saveCustomNote = function() {
+    const textarea = document.getElementById('note-update-textarea');
+    if (!textarea || !editingSubject || !editingModule) return;
+
+    const customKey = `mech_custom_${editingSubject}_${editingModule}`;
+    localStorage.setItem(customKey, textarea.value);
+    closeNoteUpdateModal();
+    renderStudyNotes();
+    alert(`Personalized notes for ${editingSubject} (${editingModule}) saved to this device!`);
+  };
+
+  window.resetNoteToOfficial = function(subj, mod) {
+    const targetSubj = subj || editingSubject || AppState.selectedSubject;
+    const targetMod = mod || editingModule || AppState.selectedModule;
+    const customKey = `mech_custom_${targetSubj}_${targetMod}`;
+    
+    if (confirm(`Reset ${targetSubj} (${targetMod}) back to official verified institutional notes?`)) {
+      localStorage.removeItem(customKey);
+      closeNoteUpdateModal();
+      renderStudyNotes();
+    }
+  };
+
+  window.exportNoteJSON = function() {
+    const textarea = document.getElementById('note-update-textarea');
+    if (!textarea) return;
+
+    const exportObj = {
+      subject: editingSubject,
+      module: editingModule,
+      content: textarea.value,
+      exportedAt: new Date().toISOString()
+    };
+
+    const jsonStr = JSON.stringify(exportObj, null, 2);
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(jsonStr).then(() => {
+        alert('Module JSON copied to clipboard! You can submit this as a Pull Request on GitHub.');
+      }).catch(() => {
+        prompt('Copy your updated module JSON below:', jsonStr);
+      });
+    } else {
+      prompt('Copy your updated module JSON below:', jsonStr);
+    }
+  };
+
   function renderStudyNotes() {
     const container = document.getElementById('notes-content');
     if (!container) return;
@@ -1006,13 +1112,16 @@
       currentSem = 'S3';
     } else if (currSubj.startsWith('24MET5') || currSubj.startsWith('24MEJ5') || currSubj.startsWith('24MEP5') || currSubj.startsWith('24HUT5') || currSubj.startsWith('24MCT5') || currSubj.startsWith('24ESP5')) {
       currentSem = 'S5';
+    } else if (currSubj.startsWith('24MET6') || currSubj.startsWith('24MEP6') || currSubj.startsWith('24MEE6')) {
+      currentSem = 'S6';
+    } else if (currSubj.startsWith('24MEP7') || currSubj.startsWith('24MEE7')) {
+      currentSem = 'S7';
     }
 
     const sNum = parseInt(currentSem.replace('S', ''));
     const semCourses = catalog.filter(c => c.semester === sNum);
 
     let subjData = notesData[currSubj];
-    let isSyllabusFallback = false;
     
     if (!subjData) {
       // Check if another subject in this semester has notes
@@ -1022,8 +1131,6 @@
         subjData = notesData[currSubj];
         AppState.selectedSubject = currSubj;
       } else {
-        // Create dynamic syllabus view
-        isSyllabusFallback = true;
         subjData = {
           name: match ? match.title : currSubj,
           modules: {
@@ -1042,6 +1149,11 @@
     const currMod = AppState.selectedModule in modules ? AppState.selectedModule : Object.keys(modules)[0] || 'Module 1';
     const modData = modules[currMod] || {};
 
+    // Check for custom personalized notes in local storage
+    const customKey = `mech_custom_${currSubj}_${currMod}`;
+    const customContent = localStorage.getItem(customKey);
+    const hasCustomNotes = !!customContent;
+
     // Save as last opened
     AppState.lastOpened = {
       subject: currSubj,
@@ -1051,7 +1163,9 @@
     localStorage.setItem('mech_last_opened', JSON.stringify(AppState.lastOpened));
 
     let readingContent = '';
-    if (AppState.readingMode === 'textbook') {
+    if (hasCustomNotes) {
+      readingContent = customContent;
+    } else if (AppState.readingMode === 'textbook') {
       readingContent = modData.textbook_html || modData.detailed_notes || '<p>Textbook material available.</p>';
     } else if (AppState.readingMode === 'detailed') {
       readingContent = modData.detailed_notes || modData.textbook_html || '<p>Detailed notes loaded.</p>';
@@ -1085,6 +1199,10 @@
       `;
     }
 
+    // Direct PDF existence check
+    const s4Pdfs = ['24BYT408', '24HUT415', '24MCT406', '24MEJ404', '24MEP403', '24MET401', '24MET402'];
+    const hasDirectPdf = s4Pdfs.includes(currSubj);
+
     container.innerHTML = `
       <!-- Subject Header & PDF Download Banner -->
       <div class="card" style="margin-bottom:var(--space-6); background:linear-gradient(135deg, var(--color-surface) 0%, var(--color-surface-elevated) 100%);">
@@ -1098,14 +1216,29 @@
           </div>
 
           <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
-            <a href="./notes/${currSubj}.pdf" download class="btn btn-secondary btn-sm" style="display:inline-flex; align-items:center; gap:6px;">
-              <span>📄</span>
-              <span>Subject PDF</span>
-            </a>
-            <a href="./notes/TKMCE_S4_Study_Notes.pdf" download class="btn btn-primary btn-sm" style="display:inline-flex; align-items:center; gap:6px;">
-              <span>📚</span>
-              <span>Compiled Volume PDF (508 KB)</span>
-            </a>
+            ${hasDirectPdf ? `
+              <a href="./notes/${currSubj}.pdf" download class="btn btn-secondary btn-sm" style="display:inline-flex; align-items:center; gap:6px;">
+                <span>📄</span>
+                <span>Subject PDF</span>
+              </a>
+            ` : `
+              <button class="btn btn-secondary btn-sm" onclick="window.print()" style="display:inline-flex; align-items:center; gap:6px;" title="Print/Save full notes to PDF">
+                <span>🖨️</span>
+                <span>Save PDF</span>
+              </button>
+            `}
+
+            ${currentSem === 'S4' ? `
+              <a href="./notes/TKMCE_S4_Study_Notes.pdf" download class="btn btn-primary btn-sm" style="display:inline-flex; align-items:center; gap:6px;">
+                <span>📚</span>
+                <span>Compiled S4 PDF (508 KB)</span>
+              </a>
+            ` : `
+              <a href="./tkm_syllabus_2024.pdf" target="_blank" class="btn btn-primary btn-sm" style="display:inline-flex; align-items:center; gap:6px;">
+                <span>📋</span>
+                <span>Syllabus PDF</span>
+              </a>
+            `}
           </div>
         </div>
 
@@ -1120,6 +1253,10 @@
           </div>
 
           <div style="display:flex; align-items:center; gap:6px;">
+            <button class="btn btn-sm btn-secondary" onclick="openNotesUpdateModal('${currSubj}', '${currMod}')" style="display:inline-flex; align-items:center; gap:5px;" title="Personalize or contribute updates to these notes">
+              <span>✏️</span>
+              <span>Edit Notes</span>
+            </button>
             <button class="icon-action-btn" onclick="adjustFontSize(-1)" title="Decrease font size">A-</button>
             <button class="icon-action-btn" onclick="adjustFontSize(1)" title="Increase font size">A+</button>
             <button class="btn btn-secondary btn-sm" onclick="window.print()">🖨️ Print</button>
@@ -1166,10 +1303,20 @@
         <!-- Main Reading Workspace -->
         <div class="card" style="padding:28px 32px;" id="textbook-reader-pane">
           <div style="margin-bottom:20px; border-bottom:1px solid var(--color-border); padding-bottom:14px;">
-            <div style="font-size:0.75rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--color-academic-blue); margin-bottom:4px;">
-              ${currMod}
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <div>
+                <div style="font-size:0.75rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--color-academic-blue); margin-bottom:4px;">
+                  ${currMod}
+                </div>
+                <h2 class="h2" style="margin:0;">${modData.title || currMod}</h2>
+              </div>
+              ${hasCustomNotes ? `
+                <div style="display:inline-flex; align-items:center; gap:8px; padding:4px 12px; background:var(--color-teal-subtle, #e6f4f1); border:1px solid var(--color-teal, #0d9488); border-radius:9999px; font-size:0.75rem; font-weight:600; color:#0f766e;">
+                  <span>✏️ Local Edits Active</span>
+                  <button onclick="resetNoteToOfficial('${currSubj}', '${currMod}')" style="background:none; border:none; text-decoration:underline; cursor:pointer; color:#0f766e; font-size:0.75rem;">Reset</button>
+                </div>
+              ` : ''}
             </div>
-            <h2 class="h2" style="margin:0;">${modData.title || currMod}</h2>
           </div>
 
           <div class="textbook-body" style="font-size:${AppState.fontSize}px; line-height:1.75;">
@@ -1193,7 +1340,6 @@
     localStorage.setItem('mech_font_size', AppState.fontSize);
     renderStudyNotes();
   };
-
   // 5. PRACTICE & ACTIVE RECALL CENTRE (Exam OS)
   // ===================================================================
   function renderExamCentre() {

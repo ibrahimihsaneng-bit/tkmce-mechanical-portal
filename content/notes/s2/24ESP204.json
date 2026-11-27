@@ -1,0 +1,38 @@
+{
+  "name": "Problem Solving and Programming",
+  "semester": 2,
+  "credits": 4,
+  "ese": 60,
+  "modules": {
+    "Module 1": {
+      "title": "Problem Solving Concepts, Algorithms and Flowcharts",
+      "short_notes": "<div class=\"short-notes-box\"><div class=\"sn-headline\">⚡ High-Yield Exam Summary: Algorithms & Flowcharts</div><ul><li><strong>Algorithm Properties:</strong> Finiteness, Definiteness, Input, Output, Effectiveness.</li><li><strong>Flowchart Symbols:</strong> Oval (Start/End), Parallelogram (Input/Output), Rectangle (Process), Diamond (Decision), Circle (Connector).</li><li><strong>Control Structures:</strong> Sequence, Selection (if-else, switch), Iteration (for, while, do-while).</li></ul></div>",
+      "detailed_notes": "<div class=\"detailed-notes-content\"><h3 class=\"detailed-module-title\">Module 1 Reference: Logic Design</h3><p>Top-down modular design and structured pseudocode conventions.</p></div>",
+      "textbook_html": "<h4 class=\"textbook-h4\">1.1 Computational Problem Solving and Algorithm Design</h4><p class=\"textbook-p\">Translating engineering physical equations into executable procedural algorithms.</p>"
+    },
+    "Module 2": {
+      "title": "C Fundamentals: Data Types, Operators and Control Structures",
+      "short_notes": "<div class=\"short-notes-box\"><div class=\"sn-headline\">⚡ High-Yield Exam Summary: C Basics</div><ul><li><strong>Data Types & Sizes:</strong> char (1 byte), int (4 bytes), float (4 bytes), double (8 bytes).</li><li><strong>Operators:</strong> Arithmetic, Relational, Logical ($&&, ||, !$), Bitwise ($\\&, |, \\^, \\sim, <<, >>$), Ternary ($?:$).</li><li><strong>Branching:</strong> if-else ladder, switch-case (integral expressions only, break statement prevents fallthrough).</li><li><strong>Loops:</strong> Entry-controlled (for, while) vs Exit-controlled (do-while: executes at least once).</li></ul></div>",
+      "detailed_notes": "<div class=\"detailed-notes-content\"><h3 class=\"detailed-module-title\">Module 2 Reference: C Control</h3><p>Operator precedence and associativity (type casting and implicit promotion).</p></div>",
+      "textbook_html": "<h4 class=\"textbook-h4\">2.1 C Syntax, Memory Representation and Execution Flow</h4><p class=\"textbook-p\">C remains the primary programming language for embedded mechanical microcontrollers, automotive ECUs, and robotics hardware interfaces.</p>"
+    },
+    "Module 3": {
+      "title": "Arrays, Strings and Modular Functions",
+      "short_notes": "<div class=\"short-notes-box\"><div class=\"sn-headline\">⚡ High-Yield Exam Summary: Arrays & Functions</div><ul><li><strong>Array Memory:</strong> Contiguous memory allocation. 1D: base address $+ i \\times \\text{size}$. 2D: Row-major order ($base + [i \\times N + j] \\times size$).</li><li><strong>Functions:</strong> Pass by value (copies actual parameter) vs Pass by reference (passes address using pointers).</li><li><strong>Recursion:</strong> Function calling itself; requires base stopping condition to prevent stack overflow.</li><li><strong>Strings:</strong> Null-terminated character arrays (`'\\0'`). Standard functions: `strlen()`, `strcpy()`, `strcat()`, `strcmp()`.</li></ul></div>",
+      "detailed_notes": "<div class=\"detailed-notes-content\"><h3 class=\"detailed-module-title\">Module 3 Reference: Modular Functions</h3><p>Storage classes in C: auto (stack), register (CPU registers), static (persistent across calls), extern (global linkage).</p></div>",
+      "textbook_html": "<h4 class=\"textbook-h4\">3.1 Data Structures: Arrays, Strings and Call Stacks</h4><p class=\"textbook-p\">Matrix manipulation algorithms for structural finite element stiffness matrices and coordinate rotations.</p>"
+    },
+    "Module 4": {
+      "title": "Pointers and Dynamic Memory Allocation",
+      "short_notes": "<div class=\"short-notes-box\"><div class=\"sn-headline\">⚡ High-Yield Exam Summary: Pointers</div><ul><li><strong>Pointer Concept:</strong> Variable storing memory address (`int *p = &var;`). Dereferencing: `*p` accesses value.</li><li><strong>Pointer Arithmetic:</strong> `p + 1` increments address by `sizeof(*p)` bytes. Array name acts as constant pointer to first element (`arr == &arr[0]`).</li><li><strong>Dynamic Memory Functions (stdlib.h):</strong>\n      <ul>\n        <li>`malloc(n * sizeof(int))`: Allocates uninitialized contiguous heap memory.</li>\n        <li>`calloc(n, sizeof(int))`: Allocates and initializes heap memory to zero.</li>\n        <li>`realloc(ptr, new_size)`: Resizes allocated memory block.</li>\n        <li>`free(ptr)`: Releases heap block, prevents memory leaks.</li>\n      </ul>\n    </li></ul></div>",
+      "detailed_notes": "<div class=\"detailed-notes-content\"><h3 class=\"detailed-module-title\">Module 4 Reference: Heap Management</h3><p>Dangling pointers, memory leaks, and pointer-to-pointer structures.</p></div>",
+      "textbook_html": "<h4 class=\"textbook-h4\">4.1 Low-Level Memory Addressing and Dynamic Allocations</h4><p class=\"textbook-p\">Direct hardware register manipulation and heap management in real-time robotic operating systems.</p>"
+    },
+    "Module 5": {
+      "title": "Structures, Unions and File Input/Output",
+      "short_notes": "<div class=\"short-notes-box\"><div class=\"sn-headline\">⚡ High-Yield Exam Summary: Structures & File I/O</div><ul><li><strong>Structure (`struct`):</strong> User-defined type grouping variables of different data types. Memory size $\\ge$ sum of members (due to padding/alignment). Access via dot operator (`s.name`) or arrow (`ptr->name`).</li><li><strong>Union (`union`):</strong> Members share the exact same memory space. Size equals size of largest member.</li><li><strong>File Operations:</strong> `fopen()`, `fclose()`, `fprintf()`, `fscanf()`, `fread()`, `fwrite()`. Modes: `\"r\"` (read), `\"w\"` (write/truncate), `\"a\"` (append), `\"rb\"/\"wb\"` (binary).</li></ul></div>",
+      "detailed_notes": "<div class=\"detailed-notes-content\"><h3 class=\"detailed-module-title\">Module 5 Reference: File Systems</h3><p>Sequential vs random file access using `fseek(fp, offset, SEEK_SET)` and `ftell(fp)`.</p></div>",
+      "textbook_html": "<h4 class=\"textbook-h4\">5.1 Data Persistence, Composite Structures and File Streams</h4><p class=\"textbook-p\">Logging sensor telemetry, telemetry parsing, and exporting numerical simulation outputs.</p>"
+    }
+  }
+}

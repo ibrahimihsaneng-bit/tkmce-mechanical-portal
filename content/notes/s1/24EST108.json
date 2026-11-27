@@ -1,0 +1,38 @@
+{
+  "name": "Engineering Graphics",
+  "semester": 1,
+  "credits": 3,
+  "ese": 60,
+  "modules": {
+    "Module 1": {
+      "title": "Introduction to Engineering Drawing and Conic Sections",
+      "short_notes": "<div class=\"short-notes-box\"><div class=\"sn-headline\">⚡ High-Yield Exam Summary: Conics & Scales</div><ul><li><strong>Eccentricity ($e = VF / VD$):</strong> Ellipse ($e < 1$), Parabola ($e = 1$), Hyperbola ($e > 1$).</li><li><strong>Representative Fraction (RF):</strong> $\\text{RF} = \\frac{\\text{Dimension on drawing}}{\\text{Actual physical dimension}}$. (Enlarging $\\text{RF} > 1$, Full size $\\text{RF} = 1$, Reducing $\\text{RF} < 1$).</li><li><strong>Special Curves:</strong> Involute of circle (unwinding string trajectory, basis of gear tooth profiles), Cycloid (rolling circle on straight line), Epicycloid / Hypocycloid (rolling circle outside/inside generating circle).</li></ul></div>",
+      "detailed_notes": "<div class=\"detailed-notes-content\"><h3 class=\"detailed-module-title\">Module 1 Reference: Graphics</h3><p>BIS SP 46:2003 drawing standards, Title block conventions, First Angle ($Object$ between Observer and Plane) vs Third Angle projection.</p></div>",
+      "textbook_html": "<h4 class=\"textbook-h4\">1.1 Drawing Conventions and Geometric Conics</h4><p class=\"textbook-p\">Engineering Graphics is the universal visual language of design engineers, standardizing 2D projections of 3D spatial geometry according to ISO and Bureau of Indian Standards (BIS).</p>"
+    },
+    "Module 2": {
+      "title": "Orthographic Projections of Points, Lines and Traces",
+      "short_notes": "<div class=\"short-notes-box\"><div class=\"sn-headline\">⚡ High-Yield Exam Summary: Lines & Traces</div><ul><li><strong>Quadrant Conventions (First Angle):</strong> Point above HP ($y > 0$) appears above reference line $xy$ in Front View ($a'$); Point in front of VP ($x > 0$) appears below $xy$ in Top View ($a$).</li><li><strong>True Length (TL) and Apparent Angles:</strong> True length $\\theta$ with HP, $\\phi$ with VP. Apparent angles $\\alpha$ (elevation), $\\beta$ (plan).</li><li><strong>Rotating Line Method:</strong> Rotate elevation line about $a'$ to horizontal to project plan view true length, and vice versa. $TL = \\sqrt{x^2 + y^2 + z^2}$.</li><li><strong>Traces:</strong> Horizontal Trace (HT) where line intersects HP ($y=0$); Vertical Trace (VT) where line intersects VP ($x=0$).</li></ul></div>",
+      "detailed_notes": "<div class=\"detailed-notes-content\"><h3 class=\"detailed-module-title\">Module 2 Reference: Orthographic Projections</h3><p>Trapezoid method and projection lines verification.</p></div>",
+      "textbook_html": "<h4 class=\"textbook-h4\">2.1 Spatial Kinematics of Straight Lines</h4><p class=\"textbook-p\">Determining true lengths and inclinations of oblique piping and structural struts from orthogonal 2D projections.</p>"
+    },
+    "Module 3": {
+      "title": "Projections of Regular Planes and Solids",
+      "short_notes": "<div class=\"short-notes-box\"><div class=\"sn-headline\">⚡ High-Yield Exam Summary: Planes & Solids</div><ul><li><strong>Projections of Planes:</strong> Three-stage method: (1) Assume plane parallel to reference plane; (2) Tilt to surface inclination; (3) Tilt edge/axis to secondary inclination.</li><li><strong>Solids Classification:</strong> Polyhedra (Prisms, Pyramids, Tetrahedron, Octahedron) vs Solids of Revolution (Cylinder, Cone, Sphere).</li><li><strong>Axis Inclined to One Plane:</strong> Draw initial position with axis perpendicular to plane of true base shape, then rotate front or top view.</li></ul></div>",
+      "detailed_notes": "<div class=\"detailed-notes-content\"><h3 class=\"detailed-module-title\">Module 3 Reference: Solids</h3><p>Auxiliary projection planes (AIP, AVP) for single-step true shape visualization.</p></div>",
+      "textbook_html": "<h4 class=\"textbook-h4\">3.1 Spatial Solid Orientation and Boundary Visibility</h4><p class=\"textbook-p\">Determining visible solid contours and hidden dashed lines of machine castings.</p>"
+    },
+    "Module 4": {
+      "title": "Sections of Solids and Development of Lateral Surfaces",
+      "short_notes": "<div class=\"short-notes-box\"><div class=\"sn-headline\">⚡ High-Yield Exam Summary: Sections & Developments</div><ul><li><strong>Section Plane:</strong> Cutting plane represented by long thin chain line with thick ends. Hatching lines drawn at $45^\\circ$ spaced $1-3\\,\\text{mm}$.</li><li><strong>True Shape of Section:</strong> Obtained by projecting onto an auxiliary plane parallel to the cutting section plane.</li><li><strong>Development Methods:</strong>\n      <ul>\n        <li>Parallel Line Method (Prisms and Cylinders, perimeter $P = \\pi D$ or $\\sum b_i$).</li>\n        <li>Radial Line Method (Pyramids and Cones, sector angle $\\theta = \\frac{R}{L} \\times 360^\\circ$).</li>\n        <li>Triangulation Method (Transition pieces, hoppers, duct transitions).</li>\n      </ul>\n    </li></ul></div>",
+      "detailed_notes": "<div class=\"detailed-notes-content\"><h3 class=\"detailed-module-title\">Module 4 Reference: Surface Development</h3><p>Sheet metal fabrication layout for HVAC ducts and pressure vessel nozzles.</p></div>",
+      "textbook_html": "<h4 class=\"textbook-h4\">4.1 Sectioning and Sheet Metal Development</h4><p class=\"textbook-p\">Pattern drafting and surface flattening for industrial metal stamping and ducting.</p>"
+    },
+    "Module 5": {
+      "title": "Isometric Projection, Perspective Projection and CAD Overview",
+      "short_notes": "<div class=\"short-notes-box\"><div class=\"sn-headline\">⚡ High-Yield Exam Summary: Isometric & CAD</div><ul><li><strong>Isometric Scale:</strong> $\\text{Isometric Length} = \\sqrt{2/3} \\times \\text{True Length} \\approx 0.816 \\times TL$.</li><li><strong>Isometric Axes:</strong> Three mutually perpendicular axes receding at $120^\\circ$ to each other ($30^\\circ$ to horizontal).</li><li><strong>Four-Center Method:</strong> Used to draw isometric ellipses representing circles on isometric planes.</li><li><strong>Perspective Projection:</strong> Visual ray method / Vanishing point method showing objects as seen by the human eye from station point $S$.</li></ul></div>",
+      "detailed_notes": "<div class=\"detailed-notes-content\"><h3 class=\"detailed-module-title\">Module 5 Reference: 3D Visualization</h3><p>Introduction to parametric 3D CAD solid modeling (extrusion, revolution, loft, sweep).</p></div>",
+      "textbook_html": "<h4 class=\"textbook-h4\">5.1 Isometric Pictorial Drawings and Spatial Transformation</h4><p class=\"textbook-p\">Pictorial 3D isometric representation conveys instant spatial understanding of complex assemblies.</p>"
+    }
+  }
+}

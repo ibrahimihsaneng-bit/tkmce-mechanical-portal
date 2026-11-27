@@ -306,6 +306,47 @@
   </div>
 
   <!-- ===================================================================
+       NOTES UPDATE & CONTRIBUTION MODAL
+       =================================================================== -->
+  <div id="noteUpdateModal" class="modal-overlay" role="dialog" aria-modal="true" aria-label="Update Notes">
+    <div class="card" style="max-width:760px; width:100%; max-height:90vh; overflow-y:auto; background:var(--color-surface); border:1px solid var(--color-border); box-shadow:var(--shadow-xl);">
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--color-border); padding-bottom:12px; margin-bottom:16px;">
+        <div style="display:flex; align-items:center; gap:10px;">
+          <span style="font-size:1.6rem;">✏️</span>
+          <div>
+            <h2 class="h3" style="margin:0;" id="note-update-modal-title">Update & Personalize Module Notes</h2>
+            <span class="badge badge-teal" style="font-size:0.75rem;">Interactive Notes Editor • Local Offline Sync & Git Export</span>
+          </div>
+        </div>
+        <button onclick="closeNoteUpdateModal()" style="background:none; border:none; color:var(--color-text-tertiary); font-size:1.4rem; cursor:pointer;" aria-label="Close dialog">✕</button>
+      </div>
+
+      <div style="font-size:0.88rem; line-height:1.6; color:var(--color-text-secondary); margin-bottom:16px;">
+        <p style="margin:0 0 10px 0;">
+          Customize these notes directly for your own study or prepare updates for the official TKMCE repository. You can use standard Markdown, HTML, and KaTeX math formulas (<code>$...$</code> for inline, <code>$$...$$</code> for display equations).
+        </p>
+        <div style="margin-bottom:12px;">
+          <label style="font-weight:600; display:block; margin-bottom:6px; color:var(--color-text-primary);">Module Content (Markdown / HTML / KaTeX):</label>
+          <textarea id="note-update-textarea" style="width:100%; height:260px; padding:12px; font-family:var(--font-mono); font-size:0.85rem; border:1px solid var(--color-border); border-radius:var(--radius-sm); background:var(--color-surface-elevated); color:var(--color-text-primary); resize:vertical;"></textarea>
+        </div>
+        <div id="note-update-preview-box" style="display:none; padding:16px; border:1px solid var(--color-border); border-radius:var(--radius-sm); background:var(--color-surface); margin-bottom:14px; max-height:200px; overflow-y:auto;"></div>
+      </div>
+
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; border-top:1px solid var(--color-border); padding-top:14px;">
+        <div style="display:flex; gap:8px;">
+          <button class="btn btn-secondary btn-sm" onclick="toggleNotePreview()">👁️ Preview KaTeX</button>
+          <button class="btn btn-secondary btn-sm" onclick="resetNoteToOfficial()">🔄 Reset to Official</button>
+          <button class="btn btn-secondary btn-sm" onclick="exportNoteJSON()">📋 Copy JSON</button>
+        </div>
+        <div style="display:flex; gap:8px;">
+          <button class="btn btn-secondary btn-sm" onclick="closeNoteUpdateModal()">Cancel</button>
+          <button class="btn btn-primary btn-sm" onclick="saveCustomNote()">💾 Save to Device</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================================================================
        MOBILE BOTTOM NAVIGATION BAR
        =================================================================== -->
   <nav class="mobile-bottom-nav" aria-label="Mobile Navigation">
