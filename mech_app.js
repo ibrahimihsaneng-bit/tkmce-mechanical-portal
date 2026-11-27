@@ -1063,7 +1063,7 @@
         <!-- Sidebar Modules -->
         <div>
           <div class="card" style="padding:14px; position:sticky; top:80px;">
-            <div class="sidebar-section-label">Modules (1 to 5)</div>
+            <div class="sidebar-section-label">Modules 1–5</div>
             ${Object.keys(modules).map(mKey => `
               <a href="#notes/${currSubj}/${encodeURIComponent(mKey)}" class="nav-item ${mKey === currMod ? 'active' : ''}" style="margin-bottom:4px;">
                 <span class="nav-item-text">${mKey}</span>
